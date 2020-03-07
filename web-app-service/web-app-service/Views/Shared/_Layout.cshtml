@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>@ViewData["Title"] - web_app_service</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap4/bootstrap.min.css">
+    <link href="~/lib/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="~/css/main_styles.css">
+    <link rel="stylesheet" type="text/css" href="~/css/responsive.css">>
+</head>
+<body>
+    <header>
+        <div class="header_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                            <div class="logo"><a href="#">Sneaker.</a></div>
+                            <nav class="main_nav">
+                                <ul>
+                                    <li><a asp-area="" asp-page="/Index">Home</a></li>
+                                    <li><a asp-area="" asp-page="/Index">Profile</a></li>
+                                    <li><a asp-area="" asp-page="/Index">Shop</a></li>
+                                    <li class="hassubs">
+                                        <a asp-area="" asp-page="/Index">Sell</a>
+                                        <ul>
+                                            <li><a asp-area="" asp-page="/Index">Create new product</a></li>
+                                            <li><a asp-area="" asp-page="/Index">My products</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a asp-area="" asp-page="/Index">About</a></li>
+                                    <li><a asp-area="" asp-page="/Index">Contacts</a></li>
+                                </ul>
+                            </nav>
+                            <div class="search">
+                                <div class="search_icon">
+                                    <img src="~/images/search.svg" x="0px" y="0px" width="13" , height="13" alt="" />
+                                </div>
+                            </div>
+                            <div class="header_extra ml-auto">
+                                <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+<!-- Search Panel -->
+<div class="search_panel trans_300 active">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="search_panel_content d-flex flex-row align-items-center justify-content-end">
+                    <form action="#">
+                        <input type="text" class="search_input" placeholder="Search" required="required">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- Menu -->
+
+    <div class="menu menu_item trans_300">
+        <div class="menu_container menu_item">
+            <div class="page_menu_content menu_item">
+                <div class="page_menu_search menu_item">
+                    <form action="#">
+                        <input type="search" required="required" class="page_menu_search_input menu_item" placeholder="Search for products...">
+                    </form>
+                </div>
+                <ul class="page_menu_nav menu_item">
+                    <li class="page_menu_item menu_item"><a asp-area="" asp-page="/Index">Home</a></li>
+                    <li class="page_menu_item menu_item"><a asp-area="" asp-page="/Index">Profile</a></li>
+                    <li class="page_menu_item menu_item"><a asp-area="" asp-page="/Index">Shop</a></li>
+                    <li class="page_menu_item menu_item"><a asp-area="" asp-page="/Index">Sell</a></li>
+                    <li class="page_menu_item menu_item"><a asp-area="" asp-page="/Index">About</a></li>
+                    <li class="page_menu_item menu_item"><a asp-area="" asp-page="/Index">Contacts</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+
+        <div class="menu_social">
+            <ul>
+                <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - web_app_service - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    @RenderSection("Scripts", required: false)
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/css/bootstrap4/popper.js"></script>
+    <script src="~/css/bootstrap4/bootstrap.min.js"></script>
+    <script src="~/js/layout.js"></script>
+</body>
+</html>
