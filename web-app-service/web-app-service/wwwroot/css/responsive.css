@@ -201,6 +201,8 @@
         padding-left: 15px;
         padding-right: 15px;
     }
+	.header-button,
+	.header-button-strong,
     .main_nav,
     .header_social {
         display: none;

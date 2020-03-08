@@ -1,0 +1,145 @@
+﻿@model web_app_service.Models.SneakerProduct
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var images = Model.Images.Select(image => "/images/" + image).ToList();
+    var relatedProducts = ViewBag.RelatedProducts as List<SneakerProduct>;
+}
+
+@section Styles
+{
+    <link href="~/css/product_item.css" rel="stylesheet" />
+    <link href="~/css/product_item_responsive.css" rel="stylesheet" />
+}
+
+<!-- Product Details -->
+<div class="product_details">
+    <div class="container">
+        <div class="row details_row">
+            <!-- Product Image -->
+            <div class="col-lg-6">
+                <div class="details_image">
+                    <div class="details_image_large">
+                        <img src=@images.ElementAtOrDefault(0) alt="">
+                        @if (DateTime.Today.Subtract(Model.AddedAt).Days < 5)
+                        {
+                            <div class="product_extra product_new"><a>New</a></div>
+                        }
+                    </div>
+                    <div class="details_image_thumbnails d-flex flex-row align-items-start justify-content-between">
+                        @foreach (var image in images)
+                        {
+                            <div class="details_image_thumbnail" data-image=@image><img src=@image alt=""></div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Content -->
+            <div class="col-lg-6">
+                <div class="details_content">
+                    <div class="details_name">@Html.DisplayFor(model => Model.BrandName)</div>
+                    <div class="details_name">@Html.DisplayFor(model => Model.ModelName)</div>
+                    <div class="details_price">@Html.DisplayFor(model => Model.Price)</div>
+
+                    <!-- In Stock -->
+                    <div class="in_stock_container">
+                        <div class="availability">Availability:</div>
+                        <span>In Stock</span>
+                    </div>
+                    <div class="details_text">
+                        <p>@Model.Description</p>
+                    </div>
+
+                    <!-- Product Quantity -->
+                    <div class="product_quantity_container">
+                        <div class="product_quantity clearfix">
+                            <span>Qty</span>
+                            <input id="quantity_input" type="text" pattern="[0-9]*" value="1">
+                            <div class="quantity_buttons">
+                                <div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
+                                <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+                            </div>
+                        </div>
+                        <div class="button cart_button"><a href="#">Add to cart</a></div>
+                    </div>
+
+                    <!-- Share -->
+                    <div class="details_share">
+                        <span>Share:</span>
+                        <ul>
+                            <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row description_row">
+            <div class="col">
+                <div class="description_title_container">
+                    <div class="description_title">Description</div>
+                    <div class="reviews_title"><a href="#">Reviews <span>(1)</span></a></div>
+                </div>
+                <div class="description_text">
+                    <p>@Model.Description</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Related Products -->
+@if (relatedProducts != null && relatedProducts.Any())
+{
+    <div class="products">
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <div class="products_title">Related Products</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="product_grid">
+                        @for (var y = 0; y < @relatedProducts.Count; y++)
+                        {
+                            <div class="row">
+                                @for (var x = 0; x <= 4; x++)
+                                {
+                                    if (y >= @relatedProducts.Count)
+                                    {
+                                        break;
+                                    }
+                                    var product = @relatedProducts[y++];
+                                    var image = "/images/" + product.Images.FirstOrDefault() ?? string.Empty;
+                                    var price = $"{product.Price}$";
+                                    <!-- Product -->
+                                    <div class="col-sm product">
+                                        <div class="product_image"><img src=@image alt=""></div>
+                                        @if (DateTime.Today.Subtract(product.AddedAt).Days < 5)
+                                        {
+                                            <div class="product_extra product_new"><a>New</a></div>
+                                        }
+                                        <div class="product_content">
+                                            <div class="product_title"><a asp-area="" asp-controller="Shop" asp-action="ProductItem" asp-route-productId=@product.Id>@Html.DisplayFor(modelItem => product.ModelName)</a></div>
+                                            <div class="product_price">@price</div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts
+{
+    <script src="~/js/productItem.js"></script>
+}

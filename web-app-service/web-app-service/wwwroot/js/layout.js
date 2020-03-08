@@ -6,11 +6,8 @@
 
 1. Vars and Inits
 2. Set Header
-3. Init Home Slider
 4. Init Search
 5. Init Menu
-6. Init Isotope
-
 
 ******************************/
 
@@ -37,16 +34,14 @@ $(document).ready(function () {
 		setHeader();
 	});
 
-	initHomeSlider();
 	initSearch();
 	initMenu();
-	initIsotope();
 
-	/* 
+    /* 
 
-	2. Set Header
+    2. Set Header
 
-	*/
+    */
 
 	function setHeader() {
 		if ($(window).scrollTop() > 100) {
@@ -57,81 +52,11 @@ $(document).ready(function () {
 		}
 	}
 
-	/* 
+    /* 
 
-	3. Init Home Slider
+    4. Init Search
 
-	*/
-
-    function setAnimation(elem, inOut) {
-        // Store all animationend event name in a string.
-        // cf animate.css documentation
-        var animationEndEvent = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-
-        elem.each(function () {
-            var $elem = $(this);
-            var $animationType = 'animated ' + $elem.data('animation-' + inOut);
-
-            $elem.addClass($animationType).one(animationEndEvent, function () {
-                $elem.removeClass($animationType); // remove animate.css Class at the end of the animations
-            });
-        });
-    }
-
-	function initHomeSlider() {
-		if ($('.home_slider').length) {
-			var homeSlider = $('.home_slider');
-			homeSlider.owlCarousel(
-				{
-					items: 1,
-					autoplay: true,
-					autoplayTimeout: 10000,
-					loop: true,
-					nav: false,
-					smartSpeed: 1200,
-					dotsSpeed: 1200,
-					fluidSpeed: 1200
-				});
-
-			/* Custom dots events */
-			if ($('.home_slider_custom_dot').length) {
-				$('.home_slider_custom_dot').on('click', function () {
-					$('.home_slider_custom_dot').removeClass('active');
-					$(this).addClass('active');
-					homeSlider.trigger('to.owl.carousel', [$(this).index(), 1200]);
-				});
-			}
-
-			/* Change active class for dots when slide changes by nav or touch */
-			homeSlider.on('changed.owl.carousel', function (event) {
-				$('.home_slider_custom_dot').removeClass('active');
-				$('.home_slider_custom_dots li').eq(event.page.index).addClass('active');
-			});
-
-			// add animate.css class(es) to the elements to be animated
-		
-
-			// Fired before current slide change
-			homeSlider.on('change.owl.carousel', function (event) {
-				var $currentItem = $('.home_slider_item', homeSlider).eq(event.item.index);
-				var $elemsToanim = $currentItem.find("[data-animation-out]");
-				setAnimation($elemsToanim, 'out');
-			});
-
-			// Fired after current slide has been changed
-			homeSlider.on('changed.owl.carousel', function (event) {
-				var $currentItem = $('.home_slider_item', homeSlider).eq(event.item.index);
-				var $elemsToanim = $currentItem.find("[data-animation-in]");
-				setAnimation($elemsToanim, 'in');
-			})
-		}
-	}
-
-	/* 
-
-	4. Init Search
-
-	*/
+    */
 
 	function initSearch() {
 		if ($('.search').length && $('.search_panel').length) {
@@ -143,6 +68,41 @@ $(document).ready(function () {
             });
 		}
 	}
+
+	/*
+
+	5. Login | Sing Up
+
+	*/
+
+    $("#login-btn").click(function () {
+		$("#loginModal").modal("show");
+    });
+
+    $("#sign-up-btn").click(function () {
+		$("#loginModal").modal("show");
+    });
+
+    function isDescendant(parent, child) {
+        var node = child.parentNode;
+        while (node != null) {
+            if (node == parent) {
+                return true;
+            }
+            node = node.parentNode;
+        }
+        return false;
+	}
+
+    window.onclick = function(event) {
+        var modal = $("#loginModal");
+		if (modal.is(':visible') && !isDescendant(modal[0], event.target)) {
+			modal.fadeOut("slow");
+            modal.modal("hide");
+        }
+	};
+
+
 
 	/* 
 
@@ -218,40 +178,4 @@ $(document).ready(function () {
 		hambActive = false;
 		menuActive = false;
 	}
-
-    function initIsotope() {
-		var sortingButtons = $('.product_sorting_btn');
-		var sortNums = $('.num_sorting_btn');
-
-		if ($('.product_grid').length) {
-			var grid = $('.product_grid').isotope({
-				itemSelector: '.product',
-				layoutMode: 'fitRows',
-				fitRows:
-				{
-					gutter: 30
-				},
-				getSortData:
-				{
-					price: function (itemElement) {
-						var priceEle = $(itemElement).find('.product_price').text().replace('$', '');
-						return parseFloat(priceEle);
-					},
-					name: '.product_name',
-					stars: function (itemElement) {
-						var starsEle = $(itemElement).find('.rating');
-						var stars = starsEle.attr("data-rating");
-						return stars;
-					}
-				},
-				animationOptions:
-				{
-					duration: 750,
-					easing: 'linear',
-					queue: false
-				}
-			});
-		}
-	}
-
 });

@@ -11,108 +11,166 @@
     <link rel="stylesheet" type="text/css" href="~/css/bootstrap4/bootstrap.min.css">
     <link href="~/lib/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="~/css/main_styles.css">
-    <link rel="stylesheet" type="text/css" href="~/css/responsive.css">>
+    <link rel="stylesheet" type="text/css" href="~/css/responsive.css">
+    @RenderSection("Styles", required: false)
 </head>
 <body>
-    <header>
-        <div class="header_container">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="header_content d-flex flex-row align-items-center justify-content-start">
-                            <div class="logo"><a href="#">Sneaker.</a></div>
-                            <nav class="main_nav">
-                                <ul>
-                                    <li><a asp-area="" asp-page="/Index">Home</a></li>
-                                    <li><a asp-area="" asp-page="/Index">Profile</a></li>
-                                    <li><a asp-area="" asp-page="/Index">Shop</a></li>
-                                    <li class="hassubs">
-                                        <a asp-area="" asp-page="/Index">Sell</a>
-                                        <ul>
-                                            <li><a asp-area="" asp-page="/Index">Create new product</a></li>
-                                            <li><a asp-area="" asp-page="/Index">My products</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a asp-area="" asp-page="/Index">About</a></li>
-                                    <li><a asp-area="" asp-page="/Index">Contacts</a></li>
-                                </ul>
-                            </nav>
-                            <div class="search">
-                                <div class="search_icon">
-                                    <img src="~/images/search.svg" x="0px" y="0px" width="13" , height="13" alt="" />
+    <div class="super_container">
+        <header class="header">
+            <div class="header_container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                                <div class="logo"><a asp-area="" asp-controller="Home" asp-action="Index">Sneaker.</a></div>
+                                <nav class="main_nav">
+                                    <ul>
+                                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Profile</a></li>
+                                        <li><a asp-area="" asp-controller="Shop" asp-action="Products">Shop</a></li>
+                                        <li class="hassubs">
+                                            <a asp-area="" asp-controller="Sell" asp-action="AddProduct">Sell</a>
+                                            <ul>
+                                                <li><a asp-area="" asp-controller="Sell" asp-action="AddProduct">Create new product</a></li>
+                                                <li><a asp-area="" asp-controller="Sell" asp-action="MyProducts">My products</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a asp-area="" asp-controller="About" asp-action="About">About</a></li>
+                                        <li><a asp-area="" asp-controller="Contact" asp-action="Contact">Contacts</a></li>
+                                    </ul>
+                                </nav>
+                                <button class="button header-button" id="login-btn">
+                                    <span>Login</span>
+                                </button>
+                                <button class="button header-button-strong" id="sign-up-btn">
+                                    <span>Sing Up</span>
+                                </button>
+                                <div class="search">
+                                    <img class="search_icon" src="~/images/search.svg" alt="" />
                                 </div>
-                            </div>
-                            <div class="header_extra ml-auto">
-                                <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
+                                <div class="header_extra ml-auto">
+                                    <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </header>
-<!-- Search Panel -->
-<div class="search_panel trans_300 active">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="search_panel_content d-flex flex-row align-items-center justify-content-end">
-                    <form action="#">
-                        <input type="text" class="search_input" placeholder="Search" required="required">
-                    </form>
+
+            <!-- Search Panel -->
+            <div class="search_panel trans_300">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="search_panel_content d-flex flex-row align-items-center justify-content-end">
+                                <form action="#">
+                                    <input type="text" class="search_input" placeholder="Search" required="required">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-    <!-- Menu -->
+        </header>
 
-    <div class="menu menu_item trans_300">
-        <div class="menu_container menu_item">
-            <div class="page_menu_content menu_item">
-                <div class="page_menu_search menu_item">
-                    <form action="#">
-                        <input type="search" required="required" class="page_menu_search_input menu_item" placeholder="Search for products...">
-                    </form>
+        <!-- Menu -->
+        <div class="menu menu_item trans_300">
+            <div class="menu_container menu_item">
+                <div class="page_menu_content menu_item">
+                    <div class="page_menu_search menu_item">
+                        <form action="#">
+                            <input type="search" required="required" class="page_menu_search_input menu_item" placeholder="Search for products...">
+                        </form>
+                    </div>
+                    <ul class="page_menu_nav menu_item">
+                        <li class="page_menu_item menu_item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="page_menu_item menu_item"><a asp-area="" asp-controller="Home" asp-action="Index">Profile</a></li>
+                        <li class="page_menu_item menu_item"><a asp-area="" asp-controller="Shop" asp-action="Products">Shop</a></li>
+                        <li class="page_menu_item menu_item"><a asp-area="" asp-controller="Sell" asp-action="AddProduct">Sell</a></li>
+                        <li class="page_menu_item menu_item"><a asp-area="" asp-controller="Home" asp-action="Index">About</a></li>
+                        <li class="page_menu_item menu_item"><a asp-area="" asp-controller="Contact" asp-action="Contact">Contacts</a></li>
+                    </ul>
                 </div>
-                <ul class="page_menu_nav menu_item">
-                    <li class="page_menu_item menu_item"><a asp-area="" asp-page="/Index">Home</a></li>
-                    <li class="page_menu_item menu_item"><a asp-area="" asp-page="/Index">Profile</a></li>
-                    <li class="page_menu_item menu_item"><a asp-area="" asp-page="/Index">Shop</a></li>
-                    <li class="page_menu_item menu_item"><a asp-area="" asp-page="/Index">Sell</a></li>
-                    <li class="page_menu_item menu_item"><a asp-area="" asp-page="/Index">About</a></li>
-                    <li class="page_menu_item menu_item"><a asp-area="" asp-page="/Index">Contacts</a></li>
+            </div>
+
+            <div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+
+            <div class="menu_social">
+                <ul>
+                    <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                 </ul>
             </div>
         </div>
 
-        <div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
-
-        <div class="menu_social">
-            <ul>
-                <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-            </ul>
+        <div class="modal fade" tabindex="-1" id="loginModal" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-lg login-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">x</button>
+                        <p class="login-title">Create an Account</p>
+                        <p class="login-message">By creating an account you'll be able to buy, sell, comment, and more</p>
+                    </div>
+                    <div class="modal-body">
+                        <button class="button login-button facebook" id="facebook-btn"><span>Sign up with Facebook</span></button>
+                        <button class="button login-button google" id="google-btn"><span>Sign up with Google</span></button>
+                        <hr>
+                        <button class="button login-button" id="email-btn"><span>Sign up with Email</span></button>
+                    </div>
+                    <div class="modal-footer">
+                        <p class="login-message">
+                            Already have an account? <a>Log in</a>
+                        </p>
+                        <p class="login-privacy">
+                            By creating an account, I accept Sneaker's
+                            <a asp-controller="Home" asp-action="Privacy">Terms of Services</a>
+                            and <a asp-controller="Home" asp-action="Privacy">Privacy Policy</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        @RenderBody()
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - web_app_service - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    @RenderSection("Scripts", required: false)
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/css/bootstrap4/popper.js"></script>
     <script src="~/css/bootstrap4/bootstrap.min.js"></script>
+    <script src="~/lib/greensock/TweenMax.min.js"></script>
+    <script src="~/lib/greensock/TimelineMax.min.js"></script>
+    <script src="~/lib/greensock/animation.gsap.min.js"></script>>
+    <script src="~/lib/Isotope/isotope.pkgd.min.js"></script>
+    <script src="~/lib/easing/easing.js"></script>
+    <script src="~/lib/parallax-js-master/parallax.min.js"></script>
     <script src="~/js/layout.js"></script>
+    @RenderSection("Scripts", required: false)
+
+    <div class="footer_overlay"></div>
+    <footer class="footer">
+        @*<div class="footer_background" style="background-image: url(/images/footer.jpeg)"></div>*@
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="footer_content d-flex flex-lg-row flex-column align-items-center justify-content-lg-start justify-content-center">
+                        <div class="footer_logo"><a href="#">Sneaker.</a></div>
+                        <div class="copyright ml-auto mr-auto">
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved
+                        </div>
+                        <div class="footer_social ml-lg-auto">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

@@ -1,0 +1,61 @@
+﻿@model web_app_service.Models.SneakerProduct
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles
+{
+    <link href="~/css/sell.css" rel="stylesheet" />
+    <link href="~/css/sell_responsive.css" rel="stylesheet" />
+}
+
+<div class="sell">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 sell_col">
+                <div class="section_title">Sell your sneakers</div>
+                <div class="section_subtitle">Better be good one...</div>
+                <div class="sell_form_container">
+                    <form asp-action="Post" id="sell_form" class="sell_form">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <!-- Brand -->
+                                <label asp-for="BrandName" for="brand_name">Brand*</label>
+                                <input asp-for="BrandName" type="text" id="brand_name" class="sell_input" required="required">
+                                <span asp-validation-for="BrandName" class="text-danger"></span>
+                            </div>
+                            <div class="col-xl-6 last_name_col">
+                                <!-- Model -->
+                                <label asp-for="ModelName" for="model_name">Model*</label>
+                                <input asp-for="ModelName" type="text" id="model_name" class="sell_input" required="required">
+                                <span asp-validation-for="ModelName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <!-- Price -->
+                            <label asp-for="Price" for="price">Price*</label>
+                            <input asp-for="Price" type="number" id="price" class="sell_input" required="required">
+                            <span asp-validation-for="ModelName" class="text-danger"></span>
+                        </div>
+                        <div>
+                            <!-- Description -->
+                            <label asp-for="Description" for="description">Description</label>
+                            <textarea asp-for="Description" id="description" class="sell_input sell_textarea"></textarea>
+                            <span asp-validation-for="ModelName" class="text-danger"></span>
+                        </div>
+                        <button class="button sell_button"><span>Post product</span></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/sell.js"></script>
+}
+

@@ -7,6 +7,7 @@ type SneakerProduct struct {
 	URL       string
 	BrandName string
 	ModelName string
+	Price float32
 	Owner     string
 	Images    []string
 	StateIndex float32
