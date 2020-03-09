@@ -18,7 +18,7 @@ namespace web_app_service.Controllers
 				ModelName = "Air Max 720 Ispa",
 				Description = "Crazy ones love them AF. My gf gave me these, I ll never sell them!",
 				Price = 999m,
-				StateIndex = 99.9m,
+				ConditionIndex = 99.9m,
 				Images = {"Nike-ISPA-Air-Max-720.jpg"},
 				AddedAt = new DateTime(2020, 2, 6)
 			},
@@ -29,7 +29,7 @@ namespace web_app_service.Controllers
 				ModelName = "Jordan OG",
 				Description = "Nike Jordan OG",
 				Price = 200m,
-				StateIndex = 89m,
+				ConditionIndex = 89m,
 				Images = {"Nike_Jordan_OG.jpg"},
 				AddedAt = new DateTime(2019, 12, 30)
 			},
@@ -40,7 +40,7 @@ namespace web_app_service.Controllers
 				ModelName = "Air Force 1",
 				Description = "Nike Air Force 1 Blue Wight Green",
 				Price = 150m,
-				StateIndex = 77m,
+				ConditionIndex = 77m,
 				Images = {"Nike-Af1-Blue-Wight-Green.jpg"},
 				AddedAt = new DateTime(2020, 2, 1)
 			},
@@ -51,7 +51,7 @@ namespace web_app_service.Controllers
 				ModelName = "Jordan Proto Max",
 				Description = "Nike Jordan Proto Max 720",
 				Price = 240m,
-				StateIndex = 100m,
+				ConditionIndex = 100m,
 				Images = {"Nike-Jordan-Proto-Max-720.jpg"},
 				AddedAt = new DateTime(2020, 1, 7)
 			},
