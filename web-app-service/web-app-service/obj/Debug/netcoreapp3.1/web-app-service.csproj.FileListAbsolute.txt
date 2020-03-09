@@ -186,11 +186,13 @@ C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\bin\Debu
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\web-app-service.MvcApplicationPartsAssemblyInfo.cs
-C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\web-app-service.MvcApplicationPartsAssemblyInfo.cache
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Contact\Contact.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Sell\AddProduct.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Shop\Products.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Shop\ProductItem.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\About\About.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Shop\Checkout.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Facebook.dll
+C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Google.dll
+C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\web-app-service.MvcApplicationPartsAssemblyInfo.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\web-app-service.MvcApplicationPartsAssemblyInfo.cache

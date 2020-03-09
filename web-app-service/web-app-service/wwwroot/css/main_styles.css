@@ -231,7 +231,7 @@ section
 	height: 61px;
 	background: none;
 	text-align: center;
-	border: solid 2px #1b1b1b;
+	border: 3px solid #1b1b1b;
 	overflow: hidden;
 	cursor: pointer;
 }
@@ -259,7 +259,7 @@ section
     left: 0;
     width: 150%;
     height: 100%;
-    background: #FFFFFF;
+    background: #1b1b1b;
     z-index: 0;
     opacity: 0;
     -webkit-transform: rotate3d(0, 0, 1, -45deg) translate3d(0, -3em, 0);
@@ -277,18 +277,28 @@ section
     -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
     transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
+.button:hover a {
+	color: #FFFFFF;
+}
 .button_light
 {
-	border: solid 2px #FFFFFF;
+	border: solid 2px white;
 }
 .button_light a
 {
 	color: #FFFFFF;
 }
-.button:hover a
+.button_light:after
 {
+	background: white
+}
+.button_light {
+	border: solid 2px #FFFFFF;
+}
+.button:hover a {
 	color: #FFFFFF;
 }
+
 .button_light:hover a
 {
 	color: #1b1b1b;
@@ -656,6 +666,7 @@ button span {
 	padding-top: 2px;
 	font-size: 12px;
 	font-weight: 700;
+	border: 2px solid #1b1b1b;
 }
 
 .header-button:hover span {
@@ -675,7 +686,7 @@ button span {
 	cursor: pointer;
 	right: 0;
 	width: auto;
-	height: 26px;
+	height: 25px;
 	margin-left: 10px;
 	margin-right: 10px;
 	padding-left: 5px;
@@ -684,10 +695,16 @@ button span {
 	padding-top: 2px;
 	font-size: 12px;
 	font-weight: 700;
+	border: 2px solid #1b1b1b;
 }
 
 .header-button-strong:hover span {
 	color: #1b1b1b;
+}
+
+.header-button-strong:after {
+	content: '';
+	background: white;
 }
 
 .login-dialog {
@@ -740,12 +757,22 @@ button span {
 	color: white;
 	background-color: #1b1b1b;
 	display: inline-block;
-	position: inherit;
+	position: relative;
 	cursor: pointer;
 	width: auto;
 	font-size: 16px;
 	font-weight: 700;
 	height: 40px;
+}
+
+.login-button:after {
+	background: white;
+}
+
+.login-button span {
+	position: relative;
+	top: 20%;
+	z-index: 1;
 }
 
 .login-button:hover span {
@@ -755,6 +782,7 @@ button span {
 .login-button.facebook {
 	color: white;
 	background: #4267B2;
+	border: solid 2px #4267B2;
 	margin-bottom: 10px;
 }
 
@@ -764,31 +792,111 @@ button span {
 
 .login-button.google {
 	color: #de5246;
+	border: solid 2px #de5246;
 	background-color: white;
 }
 
 .login-button.google:after {
-	background-color: #de5246;
+	background: #de5246;
 }
 
 .login-button.google:hover span {
 	color: white;
 }
 
+.google-logo {
+	position: relative;
+	z-index: 1;
+	margin-right: 5px;
+	top: 25%;
+}
+
+.login-button.google:hover svg path {
+	fill: white;
+}
+
+.facebook-logo {
+	position: relative;
+	z-index: 1;
+	margin-right: 5px;
+	top: 25%;
+}
+
+.login-button.facebook:hover svg path {
+	fill: #4267B2;
+}
+
+.auth-form {
+	display: flex;
+	flex-direction: column;
+}
+
+.auth-input {
+	margin-bottom: 5px;
+}
+
+.auth-button {
+	margin
+}
+
+.email-input, .password-input {
+	width: 100%;
+	height: 40px;
+	background: #f2f4f8;
+	border: none;
+	outline: none;
+	padding-left: 15px;
+}
+
+.notify-input {
+	margin-top: 15px;
+}
+
+input[type="checkbox"] {
+	display: none;
+}
+
+input[type="checkbox"] + label {
+	display: block;
+	position: relative;
+	padding-left: 30px;
+	margin-bottom: 20px;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+input[type="checkbox"] + label:hover:after {
+	content: '';
+	width: 12px;
+	height: 12px;
+	background: #1b1b1b;
+	position: absolute;
+	left: 4px;
+	top: 4px;
+	z-index: 0;
+}
 
 
+input[type="checkbox"] + label:before {
+	content: '';
+	width: 20px;
+	height: 20px;
+	border: 3px solid #1b1b1b;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
 
-
-
+input[type="checkbox"]:checked + label:before {
+	background: #1b1b1b;
+}
 
 
 
 /*********************************
 5. Menu
 *********************************/
-
-.menu
-{
+.menu {
 	position: fixed;
 	top: 0;
 	right: -400px;

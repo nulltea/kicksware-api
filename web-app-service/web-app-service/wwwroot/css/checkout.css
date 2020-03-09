@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 
 /******************************
@@ -231,7 +231,7 @@ section
 	height: 61px;
 	background: none;
 	text-align: center;
-	border: solid 2px #1b1b1b;
+	border: 3px solid #1b1b1b;
 	overflow: hidden;
 	cursor: pointer;
 }

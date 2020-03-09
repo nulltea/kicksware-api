@@ -66,7 +66,7 @@
 	width: 100%;
 	height: 52px;
 	background: #f2f4f8;
-	border: none;
+	border: 3px solid #1b1b1b;
 	outline: none;
 	padding-left: 15px;
 }
@@ -96,52 +96,210 @@
 {
 	color: #FFFFFF;
 }
-.contact_info_section:not(:first-child)
-{
-	margin-top: 74px;
-}
-.contact_info_title
-{
-	font-size: 18px;
-	font-weight: 500;
-	color: #1b1b1b;
-}
-.contact_info_section ul
-{
-	margin-top: 46px;
-}
-.contact_info_section ul li
-{
-	font-size: 14px;
-	font-weight: 400;
-	color: #1b1b1b;
-}
-.contact_info_section ul li:not(:last-child)
-{
-	margin-bottom: 7px;
-}
-.contact_info_section ul li span
-{
-	color: #6c6a74;
-	margin-left: 8px;
-}
-.map_row
-{
-	margin-top: 98px;
-}
-.google_map
-{
+
+/* The container must be positioned relative: */
+.custom-select {
+	position: inherit;
 	width: 100%;
-	height: 577px;
+	height: auto;
+	background: #f2f4f8;
+	outline: none;
+	border: 3px solid #1b1b1b;
+	border-radius: 0;
+	padding: 0;
 }
-.map_container
-{
+
+.custom-select-items {
+	position: inherit;
+	width: 100%;
+	height: auto;
+	background: #f2f4f8;
+	outline: none;
+	border: 3px solid #1b1b1b;
+	border-radius: 0;
+	padding: 0;
+}
+
+.custom-select select {
+	display: none; /*hide original SELECT element: */
+}
+
+.select-selected {
+	
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+	position: absolute;
+    content: "";
+    top: 15px;
+    right: 15px;
+    width: 0;
+    height: 0;
+	border: 3px solid #1b1b1b;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 6px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+	transition: .5s all ease;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+	border-color: #1b1b1b;
+	transform: rotate(-135deg);
+	-webkit-transform: rotate(-135deg);
+	top: 20px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div, .select-selected {
+	color: #1b1b1b;
+	padding: 10px;
+	cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+	background-color: white;
+	z-index: 99;
+	border-top: 3px solid #1b1b1b; 
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+	display: none;
+}
+
+
+.autocomplete-input {
+
+}
+
+.autocomplete-items {
+	position: initial;
+	border: 3px solid #1b1b1b;
+	border-top: none;
+	z-index: 99;
+	/*position the autocomplete items to be the same width as the container:*/
+	top: 100%;
+	left: 0;
+	right: 0;
+	position: absolute;
+	margin-left: 15px;
+	background: white;
+}
+
+.autocomplete-items div {
+	padding: 10px;
+	cursor: pointer;
+	color: #1b1b1b;
+	opacity: 0.75;
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+	background-color: #e9e9e9;
+}
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+	background-color: DodgerBlue !important;
+	color: #ffffff;
+}
+
+
+.drag-and-drop {
+	width: 200px;
+	height: 100px;
+	border: 3px dashed #1b1b1b;
+	z-index: 1;
+	overflow: hidden;
+	cursor: pointer;
+	background: #f2f4f8;
+}
+
+.drag-and-drop.filled {
+	border: 3px solid #1b1b1b;
+	background: mediumaquamarine;
+}
+
+.drag-and-drop svg {
+	position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 100px;
+    color: #1b1b1b;
+    font-weight: 600;
+    font-size: 15px;
+	z-index: 1
+}
+
+.drag-and-drop #sneaker-logo-other {
+	width: 100%;
+	height: 90px;
+	text-align: center;
+	line-height: 100px;
+	color: #ffffff;
+	padding-top: 5px;
+}
+
+.drag-and-drop input[type="file"] {
+	position: absolute;
+	margin: 0;
+	padding: 0;
 	width: 100%;
 	height: 100%;
-	overflow: hidden;
+	outline: none;
+	opacity: 0;
+	z-index: 2;
 }
-#map
-{
+
+.drag-and-drop:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
 	width: 100%;
-	height: calc(100% + 30px);
+	height: 100%;
+	background: #1b1b1b;
+	z-index: 0;
+	opacity: 0;
+	-webkit-transform: rotate3d(0, 0, 1, -45deg) translate3d(0, -3em, 0);
+	transform: rotate3d(0, 0, 1, -45deg) translate3d(0, -3em, 0);
+	-webkit-transform-origin: 0% 100%;
+	transform-origin: 0% 100%;
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s, background-color 0.3s;
+	transition: transform 0.3s, opacity 0.3s, background-color 0.3s;
+}
+
+.drag-and-drop:hover::after {
+	opacity: 1;
+	-webkit-transform: rotate3d(0, 0, 1, 0deg);
+	transform: rotate3d(0, 0, 1, 0deg);
+	-webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.drag-and-drop path {
+	fill: #1b1b1b;
+}
+
+.drag-and-drop:hover path {
+	fill: #FFFFFF;
+}
+
+.drag-and-drop.filled:hover path {
+	fill: mediumaquamarine;
+}
+
+.sneaker-logo {
+
+}
+
+.images-container {
+	display: flex;
+	justify-content: space-between;
 }

@@ -37,11 +37,11 @@ $(document).ready(function () {
 	initSearch();
 	initMenu();
 
-    /* 
+	/* 
 
-    2. Set Header
+	2. Set Header
 
-    */
+	*/
 
 	function setHeader() {
 		if ($(window).scrollTop() > 100) {
@@ -52,11 +52,11 @@ $(document).ready(function () {
 		}
 	}
 
-    /* 
+	/* 
 
-    4. Init Search
+	4. Init Search
 
-    */
+	*/
 
 	function initSearch() {
 		if ($('.search').length && $('.search_panel').length) {
@@ -64,8 +64,8 @@ $(document).ready(function () {
 			var panel = $('.search_panel');
 
 			search.on('click', function () {
-                panel.toggleClass('active');
-            });
+				panel.toggleClass('active');
+			});
 		}
 	}
 
@@ -75,31 +75,89 @@ $(document).ready(function () {
 
 	*/
 
-    $("#login-btn").click(function () {
-		$("#loginModal").modal("show");
-    });
-
-    $("#sign-up-btn").click(function () {
-		$("#loginModal").modal("show");
-    });
-
-    function isDescendant(parent, child) {
-        var node = child.parentNode;
-        while (node != null) {
-            if (node == parent) {
-                return true;
-            }
-            node = node.parentNode;
-        }
-        return false;
+	function loginShow() {
+		$("#auth-content").hide();
+		$("#login-content").show();
+		$("#login-title").text("Log in");
+		$("#login-header-msg").text("Log in to your account to buy, sell, comment, and more.");
+		$("#facebook-btn-caption").text("Continue with Facebook");
+		$("#google-btn-caption").text("Continue with Google");
+		$("#email-btn-caption").text("Log in with Email");
+		$("#login-footer-msg").html("Don't have an account? <a id='sing-up'>Sing Up</a>");
+		$("#sing-up").css("cursor", "pointer");
+		$("#sing-up").on("click", singUpShow);
+		$("#login-privacy").hide();
+		$("#email-btn").on("click", authLoginShow);
+		if (!$("#loginModal").is(':visible')) {
+			$("#loginModal").modal("show");
+		}
 	}
 
-    window.onclick = function(event) {
-        var modal = $("#loginModal");
+	function singUpShow() {
+		$("#auth-content").hide();
+		$("#login-content").show();
+		$("#login-title").text("Create an Account");
+		$("#login-header-msg").text("By creating an account you'll be able to buy, sell, comment, and more");
+		$("#facebook-btn-caption").text("Sign up with Facebook");
+		$("#google-btn-caption").text("Sign up with Google");
+		$("#email-btn-caption").text("Sign up with Email");
+		$("#login-footer-msg").html("Already have an account? <a id='login'>Log in</a>");
+		$("#login").css("cursor", "pointer");
+		$("#login").on("click", loginShow);
+		$("#email-btn").on("click", authSingUpShow);
+		$("#login-privacy").show();
+		if (!$("#loginModal").is(':visible')) {
+			$("#loginModal").modal("show");
+		}
+	}
+
+	function authSingUpShow() {
+		$("#auth-title").text("Create an Account");
+		$("#auth-btn-caption").text("Sing Up");
+		$("#auth-footer-msg").hide();
+		$("#notify-footer-msg").show();
+		$("#auth").css("cursor", "pointer");
+		$("#auth").on("click", loginShow);
+		$("#auth-privacy").show();
+		$("#login-content").hide();
+		$("#auth-content").show();
+	}
+
+	function authLoginShow() {
+		$("#auth-title").text("Log in");
+		$("#auth-btn-caption").text("Log in");
+		$("#auth-footer-msg").show();
+		$("#notify-footer-msg").hide();
+		$("#sing-up").css("cursor", "pointer");
+		$("#auth-privacy").hide();
+		$("#login-content").hide();
+		$("#auth-content").show();
+	}
+
+	$("#login-btn").click(loginShow);
+
+	$("#sign-up-btn").click(singUpShow);
+
+	function isDescendant(parent, child) {
+
+		if (child.id == "login" || child.id == "sing-up") return true;
+
+		var node = child.parentNode;
+		while (node != null) {
+			if (node == parent) {
+				return true;
+			}
+			node = node.parentNode;
+		}
+		return false;
+	}
+
+	window.onclick = function(event) {
+		var modal = $("#loginModal");
 		if (modal.is(':visible') && !isDescendant(modal[0], event.target)) {
 			modal.fadeOut("slow");
-            modal.modal("hide");
-        }
+			modal.modal("hide");
+		}
 	};
 
 

@@ -9,9 +9,32 @@ namespace web_app_service.Controllers
 {
 	public class SellController : Controller
 	{
+		public static string[] BrandsList =
+		{
+			"Nike",
+			"NikeSB",
+			"Air Jordan",
+			"Adidas",
+			"Reebok",
+			"Puma",
+			"Asics",
+			"Yeezy",
+			"Addidas Y-3",
+			"Converse",
+			"Vans",
+			"New Balance",
+			"Fila",
+			"Bape",
+			"Supra",
+			"Lacoste",
+			"Yeezy",
+			"Kappa"
+		};
+
 		// GET: Sell
 		public ActionResult AddProduct()
 		{
+			ViewBag.BrandsList = BrandsList;
 			return View();
 		}
 

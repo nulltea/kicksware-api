@@ -34,6 +34,18 @@ namespace web_app_service
 				.AddEntityFrameworkStores<ApplicationDbContext>();
 			services.AddControllersWithViews();
 			services.AddRazorPages();
+
+			services.AddAuthentication()
+				.AddFacebook(facebookOptions =>
+				{
+					facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+					facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+				})
+				.AddGoogle(options =>
+				{
+					options.ClientId = Configuration["Authentication:Google:ClientId"];
+					options.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+				});
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

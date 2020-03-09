@@ -61,7 +61,7 @@
 }
 
 .home_slider_content {
-	max-width: 580px;
+	max-width: 80%;
 }
 
 .home_slider_title {
@@ -429,7 +429,7 @@
 	position: relative;
 	width: 178px;
 	height: 61px;
-	border: solid 2px #1b1b1b;
+	border: 3px solid #1b1b1b;
 	background: #FFFFFF;
 	cursor: pointer;
 	margin-top: 55px;

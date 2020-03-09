@@ -39,7 +39,7 @@
                             <label for="contact_textarea">Message*</label>
                             <textarea id="contact_textarea" class="contact_input contact_textarea" required="required"></textarea>
                         </div>
-                        <button class="button contact_button"><span>Send Message</span></button>
+                        <div class="button contact_button"><a asp-action="Contact">Send Message</a></div>
                     </form>
                 </div>
             </div>
@@ -55,7 +55,7 @@
                         </ul>
                     </div>
                     <div class="contact_info_section">
-                        <div class="contact_info_title">Shippiing & Returns</div>
+                        <div class="contact_info_title">Shipping & Returns</div>
                         <ul>
                             <li>Phone: <span>+53 345 7953 3245</span></li>
                             <li>Email: <span>yourmail@gmail.com</span></li>
@@ -69,20 +69,6 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row map_row">
-            <div class="col">
-
-                <!-- Google Map -->
-                <div class="map">
-                    <div id="google_map" class="google_map">
-                        <div class="map_container">
-                            <div id="map"></div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
