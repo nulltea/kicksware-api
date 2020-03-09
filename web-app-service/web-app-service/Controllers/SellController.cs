@@ -1,40 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using web_app_service.Data.Reference_Data;
 
 namespace web_app_service.Controllers
 {
 	public class SellController : Controller
 	{
-		public static string[] BrandsList =
-		{
-			"Nike",
-			"NikeSB",
-			"Air Jordan",
-			"Adidas",
-			"Reebok",
-			"Puma",
-			"Asics",
-			"Yeezy",
-			"Addidas Y-3",
-			"Converse",
-			"Vans",
-			"New Balance",
-			"Fila",
-			"Bape",
-			"Supra",
-			"Lacoste",
-			"Yeezy",
-			"Kappa"
-		};
-
 		// GET: Sell
 		public ActionResult AddProduct()
 		{
-			ViewBag.BrandsList = BrandsList;
 			return View();
 		}
 

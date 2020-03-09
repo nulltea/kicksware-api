@@ -1,4 +1,5 @@
-﻿@using Newtonsoft.Json
+﻿@using System.Drawing
+@using Newtonsoft.Json
 @using web_app_service.Data.Reference_Data
 @model web_app_service.Models.SneakerProduct
 
@@ -52,8 +53,8 @@
                                     <label asp-for="Size" for="price">Size</label>
                                     <div class="custom-select">
                                         <select asp-for="Size" id="size-input" class="dropdown_item_select sell_input" placeholder="Size" required="required">
-                                            <option disabled="">Size</option>
-                                            @foreach (var sneakerSize in ReferenceData.SneakerSizesList)
+                                            <option value="0" disabled>Size</option>
+                                            @foreach (var sneakerSize in Catalog.SneakerSizesList)
                                             {
                                                 <option value=@sneakerSize>@sneakerSize</option>
                                             }
@@ -72,7 +73,7 @@
                                     <!-- Condition -->
                                     <label asp-for="Condition" for="price">Condition</label>
                                     <div class="custom-select">
-                                        <select asp-for="Condition" id="condition-input" asp-items=@Html.GetEnumSelectList(typeof(SneakerCondition)) class="dropdown_item_select sell_input" placeholder="Size" required="required">
+                                        <select asp-for="Condition" id="condition-input" asp-items="@Html.GetEnumSelectList(typeof(SneakerCondition))" class="dropdown_item_select sell_input" placeholder="Size" required="required">
                                             <option disabled="">Type</option>
                                         </select>
                                     </div>
@@ -124,7 +125,8 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="~/js/sell.js"></script>
     <script type="text/javascript">
-        autocompleteInit($("#brand_name").get(0), @Html.Raw(JsonConvert.SerializeObject(ViewBag.BrandsList)));
+        autocompleteInit($("#brand_name").get(0), @Html.Raw(JsonConvert.SerializeObject(Catalog.SneakerBrandsList)));
+        autocompleteInit($("#color-input").get(0), @Html.Raw(JsonConvert.SerializeObject(Catalog.ColorsList)));
         initCustomDropDown();
     </script>
 }

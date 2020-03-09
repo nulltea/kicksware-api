@@ -1,0 +1,92 @@
+﻿[
+  {
+    "Europe": 38.0,
+    "UnitedStates": 6.0,
+    "UnitedKingdom": 5.0,
+    "Centimeters": 24.0
+  },
+  {
+    "Europe": 39.0,
+    "UnitedStates": 6.5,
+    "UnitedKingdom": 5.5,
+    "Centimeters": 24.5
+  },
+  {
+    "Europe": 39.5,
+    "UnitedStates": 7.0,
+    "UnitedKingdom": 6.0,
+    "Centimeters": 25.0
+  },
+  {
+    "Europe": 40.0,
+    "UnitedStates": 7.5,
+    "UnitedKingdom": 6.5,
+    "Centimeters": 25.5
+  },
+  {
+    "Europe": 41.0,
+    "UnitedStates": 8.0,
+    "UnitedKingdom": 7.0,
+    "Centimeters": 26.0
+  },
+  {
+    "Europe": 41.5,
+    "UnitedStates": 8.5,
+    "UnitedKingdom": 7.5,
+    "Centimeters": 26.5
+  },
+  {
+    "Europe": 42.0,
+    "UnitedStates": 9.0,
+    "UnitedKingdom": 8.0,
+    "Centimeters": 27.0
+  },
+  {
+    "Europe": 42.5,
+    "UnitedStates": 9.5,
+    "UnitedKingdom": 8.5,
+    "Centimeters": 27.5
+  },
+  {
+    "Europe": 43.0,
+    "UnitedStates": 10.0,
+    "UnitedKingdom": 9.0,
+    "Centimeters": 28.0
+  },
+  {
+    "Europe": 44.0,
+    "UnitedStates": 10.5,
+    "UnitedKingdom": 9.5,
+    "Centimeters": 28.5
+  },
+  {
+    "Europe": 44.5,
+    "UnitedStates": 11.0,
+    "UnitedKingdom": 10.0,
+    "Centimeters": 29.0
+  },
+  {
+    "Europe": 45.0,
+    "UnitedStates": 11.5,
+    "UnitedKingdom": 10.5,
+    "Centimeters": 29.5
+  },
+  {
+    "Europe": 46.0,
+    "UnitedStates": 12.0,
+    "UnitedKingdom": 11.0,
+    "Centimeters": 30.0
+  },
+  {
+    "Europe": 46.5,
+    "UnitedStates": 12.5,
+    "UnitedKingdom": 11.5,
+    "Centimeters": 30.5
+  },
+  {
+    "Europe": 47.0,
+    "UnitedStates": 13.0,
+    "UnitedKingdom": 12.0,
+    "Centimeters": 31.0
+  }
+]

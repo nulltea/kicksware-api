@@ -196,3 +196,6 @@ C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\bin\Debu
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Google.dll
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\web-app-service.MvcApplicationPartsAssemblyInfo.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\web-app-service.MvcApplicationPartsAssemblyInfo.cache
+C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\bin\Debug\netcoreapp3.1\Data\Json\colors.json
+C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\bin\Debug\netcoreapp3.1\Data\Json\sizes.json
+C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\bin\Debug\netcoreapp3.1\Data\Json\sneaker_brands.json

@@ -113,7 +113,7 @@ function initCustomDropDown() {
 		/* For each element, create a new DIV that will act as the selected item: */
 		var selectedItem = document.createElement("div");
 		selectedItem.setAttribute("class", "select-selected");
-		selectedItem.innerHTML = selectElements.options[selectElements.selectedIndex].innerHTML;
+		selectedItem.innerHTML = "";
 		customSelectors[i].appendChild(selectedItem);
 		/* For each element, create a new DIV that will contain the option list: */
 		var itemBox = document.createElement("div");
