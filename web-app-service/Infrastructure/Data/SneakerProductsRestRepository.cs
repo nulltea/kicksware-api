@@ -2,53 +2,18 @@
 using System.Threading.Tasks;
 using Core.Enitities.Products;
 using Core.Repositories;
-using Infrastructure.Communication.REST.Client;
-using Infrastructure.Communication.REST.ProductRequests.Sneakers;
+using Infrastructure.Gateway.REST.Client;
+using Infrastructure.Gateway.REST.ProductRequests.Sneakers;
 
 namespace Infrastructure.Data
 {
-
 	public class SneakerProductsRestRepository : ISneakerProductRepository
 	{
 		private readonly RestfulClient _client;
 
 		protected SneakerProductsRestRepository(RestfulClient client) => _client = client;
 
-
-		public Task<SneakerProduct> GetUniqueAsync(string sneakerId)
-		{
-			return _client.RequestAsync<SneakerProduct>(new GetSneakerProductRequest(sneakerId));
-		}
-
-		public Task<IReadOnlyList<SneakerProduct>> ListAllAsync()
-		{
-			return _client.RequestAsync<IReadOnlyList<SneakerProduct>>(new GetAllSneakersRequest());
-		}
-
-		public Task<IReadOnlyList<SneakerProduct>> ListAsync(IEnumerable<string> idList)
-		{
-			return _client.RequestAsync<IReadOnlyList<SneakerProduct>>(new GetQueriedSneakersRequest(idList));
-		}
-
-		public Task<SneakerProduct> AddAsync(SneakerProduct sneakerProduct)
-		{
-			return _client.RequestAsync<SneakerProduct>(new PostSneakerProductRequest(sneakerProduct));
-		}
-
-		public Task UpdateAsync(SneakerProduct entity)
-		{
-			return null;
-		}
-
-		public Task DeleteAsync(SneakerProduct entity)
-		{
-			return null;
-		}
-
-		public Task<int> CountAsync()
-		{
-			return null;
-		}
+		#region Sync
 
 		public SneakerProduct GetUnique(string sneakerId)
 		{
@@ -65,24 +30,85 @@ namespace Infrastructure.Data
 			return _client.Request<IReadOnlyList<SneakerProduct>>(new GetQueriedSneakersRequest(idList));
 		}
 
+		public IReadOnlyList<SneakerProduct> List(object queryObject)
+		{
+			return _client.Request<IReadOnlyList<SneakerProduct>>(new GetQueriedSneakersRequest(queryObject));
+		}
+
 		public SneakerProduct Post(SneakerProduct sneakerProduct)
 		{
 			return _client.Request<SneakerProduct>(new PostSneakerProductRequest(sneakerProduct));
 		}
 
-		public bool Update(SneakerProduct entity)
+		public bool Update(SneakerProduct sneakerProduct)
 		{
-			return true;
+			return _client.Request(new PutSneakerProductRequest(sneakerProduct));
 		}
 
-		public bool Delete(SneakerProduct entity)
+		public bool Delete(SneakerProduct sneakerProduct)
 		{
-			return true;
+			return _client.Request(new DeleteSneakerProductRequest(sneakerProduct));
 		}
 
-		public int Count()
+		public bool Delete(string sneakerId)
 		{
-			return 0;
+			return _client.Request(new DeleteSneakerProductRequest(sneakerId));
 		}
+
+		public int Count(object queryObject)
+		{
+			return _client.Request<int>(new CountSneakerProductsRequest(queryObject));
+		}
+
+		#endregion
+
+		#region Async
+
+		public Task<SneakerProduct> GetUniqueAsync(string sneakerId)
+		{
+			return _client.RequestAsync<SneakerProduct>(new GetSneakerProductRequest(sneakerId));
+		}
+
+		public Task<IReadOnlyList<SneakerProduct>> ListAllAsync()
+		{
+			return _client.RequestAsync<IReadOnlyList<SneakerProduct>>(new GetAllSneakersRequest());
+		}
+
+		public Task<IReadOnlyList<SneakerProduct>> ListAsync(IEnumerable<string> idList)
+		{
+			return _client.RequestAsync<IReadOnlyList<SneakerProduct>>(new GetQueriedSneakersRequest(idList));
+		}
+
+		public Task<IReadOnlyList<SneakerProduct>> ListAsync(object queryObject)
+		{
+			return _client.RequestAsync<IReadOnlyList<SneakerProduct>>(new GetQueriedSneakersRequest(queryObject));
+		}
+
+		public Task<SneakerProduct> AddAsync(SneakerProduct sneakerProduct)
+		{
+			return _client.RequestAsync<SneakerProduct>(new PostSneakerProductRequest(sneakerProduct));
+		}
+
+		public Task<bool> UpdateAsync(SneakerProduct sneakerProduct)
+		{
+			return _client.RequestAsync(new PostSneakerProductRequest(sneakerProduct));
+		}
+
+		public Task<bool> DeleteAsync(SneakerProduct sneakerProduct)
+		{
+			return _client.RequestAsync(new DeleteSneakerProductRequest(sneakerProduct));
+		}
+
+		public Task<bool> DeleteAsync(string sneakerId)
+		{
+			return _client.RequestAsync(new DeleteSneakerProductRequest(sneakerId));
+		}
+
+		public Task<int> CountAsync(object queryObject)
+		{
+			return _client.RequestAsync<int>(new CountSneakerProductsRequest(queryObject));
+		}
+
+		#endregion
 	}
 }

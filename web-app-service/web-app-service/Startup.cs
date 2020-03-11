@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Repositories;
+using Infrastructure.Data;
+using Infrastructure.Gateway.REST.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -35,6 +38,15 @@ namespace web_app_service
 			services.AddControllersWithViews();
 			services.AddRazorPages();
 
+			#region Dependency injection
+
+			services.AddSingleton<RestfulClient, RestfulClient>();
+			services.AddSingleton<ISneakerProductRepository, SneakerProductsRestRepository>();
+
+			#endregion
+
+			#region Authentication
+
 			services.AddAuthentication()
 				.AddFacebook(facebookOptions =>
 				{
@@ -46,6 +58,8 @@ namespace web_app_service
 					options.ClientId = Configuration["Authentication:Google:ClientId"];
 					options.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
 				});
+
+			#endregion
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

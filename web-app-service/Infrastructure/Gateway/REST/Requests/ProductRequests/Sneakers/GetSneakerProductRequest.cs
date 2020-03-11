@@ -1,13 +1,12 @@
 ﻿using RestSharp;
 
-namespace Infrastructure.Communication.REST.ProductRequests.Sneakers
+namespace Infrastructure.Gateway.REST.ProductRequests.Sneakers
 {
 	public class GetSneakerProductRequest : BaseSneakerProductRequest
 	{
-		public GetSneakerProductRequest(string sneakerId) : base("/{sneakerId}/")
+		public GetSneakerProductRequest(string sneakerId) : base("/{sneakerId}")
 		{
 			AddParameter("sneakerId", sneakerId, ParameterType.UrlSegment);
-
 		}
 	}
 }

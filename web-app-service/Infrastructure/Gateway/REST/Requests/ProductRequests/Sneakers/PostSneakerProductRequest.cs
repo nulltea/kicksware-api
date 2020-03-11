@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using Core.Enitities.Products;
+﻿using Core.Enitities.Products;
 using RestSharp;
 
-namespace Infrastructure.Communication.REST.ProductRequests.Sneakers
+namespace Infrastructure.Gateway.REST.ProductRequests.Sneakers
 {
 	public class PostSneakerProductRequest : BaseSneakerProductRequest 
 	{

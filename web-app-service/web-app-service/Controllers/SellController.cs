@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using web_app_service.Data.Reference_Data;
@@ -11,6 +12,8 @@ namespace web_app_service.Controllers
 {
 	public class SellController : Controller
 	{
+		public SellController(ISneakerProductRepository repository) {}
+
 		// GET: Sell
 		public ActionResult AddProduct()
 		{
@@ -41,7 +44,7 @@ namespace web_app_service.Controllers
 		}
 
 		// GET: Sell/Edit/5
-		public ActionResult Edit(int id)
+		public ActionResult Edit(string id)
 		{
 			return View();
 		}
@@ -49,7 +52,7 @@ namespace web_app_service.Controllers
 		// POST: Sell/Edit/5
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit(int id, IFormCollection collection)
+		public ActionResult Edit(string id, IFormCollection collection)
 		{
 			try
 			{
@@ -64,7 +67,7 @@ namespace web_app_service.Controllers
 		}
 
 		// GET: Sell/Delete/5
-		public ActionResult Delete(int id)
+		public ActionResult Delete(string id)
 		{
 			return View();
 		}
@@ -72,7 +75,7 @@ namespace web_app_service.Controllers
 		// POST: Sell/Delete/5
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Delete(int id, IFormCollection collection)
+		public ActionResult Delete(string id, IFormCollection collection)
 		{
 			try
 			{

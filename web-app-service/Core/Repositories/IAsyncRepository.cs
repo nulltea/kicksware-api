@@ -10,14 +10,18 @@ namespace Core.Repositories
 
 		Task<IReadOnlyList<T>> ListAllAsync();
 
-		Task<IReadOnlyList<T>> ListAsync(IEnumerable<string> idList); //todo condition
+		Task<IReadOnlyList<T>> ListAsync(IEnumerable<string> idList);
+
+		Task<IReadOnlyList<T>> ListAsync(object queryObject);
 
 		Task<T> AddAsync(T entity);
 
-		Task UpdateAsync(T entity);
+		Task<bool> UpdateAsync(T entity);
 
-		Task DeleteAsync(T entity);
+		Task<bool> DeleteAsync(T entity);
 
-		Task<int> CountAsync(); //todo condition
+		Task<bool> DeleteAsync(string uniqueId);
+
+		Task<int> CountAsync(object queryObject); //todo condition
 	}
 }

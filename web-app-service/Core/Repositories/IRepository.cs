@@ -10,7 +10,9 @@ namespace Core.Repositories
 
 		IReadOnlyList<T> ListAll();
 
-		IReadOnlyList<T> List(IEnumerable<string> idList); //todo condition
+		IReadOnlyList<T> List(IEnumerable<string> idList);
+
+		IReadOnlyList<T> List(object queryObject);
 
 		T Post(T entity);
 
@@ -18,6 +20,8 @@ namespace Core.Repositories
 
 		bool Delete(T entity);
 
-		int Count(); //todo condition
+		bool Delete(string uniqueId);
+
+		int Count(object queryObject);
 	}
 }

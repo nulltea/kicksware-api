@@ -1,9 +1,9 @@
-﻿using Core.Communication;
+﻿using Core.Gateway;
 using RestSharp;
 
-namespace Infrastructure.Communication.REST.ProductRequests
+namespace Infrastructure.Gateway.REST.ProductRequests
 {
-	public class ProductRequest : RestRequest, ICommunicationRequest
+	public class ProductRequest : RestRequest, IGatewayRestRequest
 	{
 		public ProductRequest(string productClass, string resource, Method method = Method.GET)
 			: base("products/{productClass}" + resource, method)

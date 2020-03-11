@@ -1,9 +1,8 @@
-﻿using Core.Communication;
-using RestSharp;
+﻿using RestSharp;
 
-namespace Infrastructure.Communication.REST.ProductRequests
+namespace Infrastructure.Gateway.REST.ProductRequests
 {
-	public class ProductsListRequest : ProductRequest, ICommunicationRequest
+	public class ProductsListRequest : ProductRequest
 	{
 		public ProductsListRequest(string productClass, string productsQuery, Method method = Method.GET)
 			: base(productClass, productsQuery, method)

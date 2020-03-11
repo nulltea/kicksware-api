@@ -9,8 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Communication\gRPC\" />
-    <Folder Include="Communication\REST\RequestEntities\UserRequests\" />
+    <Folder Include="Gateway\gRPC\" />
+    <Folder Include="Gateway\GraphQL\" />
+    <Folder Include="Gateway\REST\Requests\UserRequests\" />
   </ItemGroup>
 
   <ItemGroup>

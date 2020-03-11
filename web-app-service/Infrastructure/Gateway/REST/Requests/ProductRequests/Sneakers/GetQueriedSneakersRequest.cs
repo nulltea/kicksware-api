@@ -1,12 +1,11 @@
 ﻿using System.Collections;
-using System.Linq;
 using RestSharp;
 
-namespace Infrastructure.Communication.REST.ProductRequests.Sneakers
+namespace Infrastructure.Gateway.REST.ProductRequests.Sneakers
 {
 	public class GetQueriedSneakersRequest : BaseSneakersListRequest
 	{
-		public GetQueriedSneakersRequest(object queryObject) : base("")
+		public GetQueriedSneakersRequest(object queryObject) : base(string.Empty)
 		{
 			if (queryObject is IEnumerable)
 			{
