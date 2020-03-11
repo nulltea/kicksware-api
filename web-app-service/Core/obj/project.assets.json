@@ -8,25 +8,25 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\yalugin\\.nuget\\packages\\": {},
+    "C:\\Users\\tyalu\\.nuget\\packages\\": {},
     "C:\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\yalugin\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\Core.csproj",
+      "projectUniqueName": "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\Core.csproj",
       "projectName": "Core",
-      "projectPath": "C:\\Users\\yalugin\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\Core.csproj",
-      "packagesPath": "C:\\Users\\yalugin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\yalugin\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\obj\\",
+      "projectPath": "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\Core.csproj",
+      "packagesPath": "C:\\Users\\tyalu\\.nuget\\packages\\",
+      "outputPath": "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\yalugin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\tyalu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -65,7 +65,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

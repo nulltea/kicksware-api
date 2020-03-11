@@ -815,7 +815,7 @@ button span {
 .login-button.facebook {
 	color: white;
 	background: #4267B2;
-	border: solid 2px #4267B2;
+	border: solid 3px #4267B2;
 	margin-bottom: 10px;
 }
 
@@ -825,7 +825,7 @@ button span {
 
 .login-button.google {
 	color: #de5246;
-	border: solid 2px #de5246;
+	border: solid 3px #de5246;
 	background-color: white;
 }
 
@@ -877,7 +877,6 @@ button span {
 	height: 40px;
 	background: #f2f4f8;
 	border: 3px solid #1b1b1b;
-	border: none;
 	outline: none;
 	padding-left: 15px;
 }
