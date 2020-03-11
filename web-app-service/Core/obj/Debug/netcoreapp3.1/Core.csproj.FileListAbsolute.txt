@@ -6,3 +6,11 @@ C:\Users\yalugin\source\repos\sneaker-resale-platform\web-app-service\Core\obj\D
 C:\Users\yalugin\source\repos\sneaker-resale-platform\web-app-service\Core\obj\Debug\netcoreapp3.1\Core.AssemblyInfo.cs
 C:\Users\yalugin\source\repos\sneaker-resale-platform\web-app-service\Core\obj\Debug\netcoreapp3.1\Core.dll
 C:\Users\yalugin\source\repos\sneaker-resale-platform\web-app-service\Core\obj\Debug\netcoreapp3.1\Core.pdb
+C:\source\repos\sneaker-resale-platform\web-app-service\Core\bin\Debug\netcoreapp3.1\Core.deps.json
+C:\source\repos\sneaker-resale-platform\web-app-service\Core\bin\Debug\netcoreapp3.1\Core.dll
+C:\source\repos\sneaker-resale-platform\web-app-service\Core\bin\Debug\netcoreapp3.1\Core.pdb
+C:\source\repos\sneaker-resale-platform\web-app-service\Core\obj\Debug\netcoreapp3.1\Core.csprojAssemblyReference.cache
+C:\source\repos\sneaker-resale-platform\web-app-service\Core\obj\Debug\netcoreapp3.1\Core.AssemblyInfoInputs.cache
+C:\source\repos\sneaker-resale-platform\web-app-service\Core\obj\Debug\netcoreapp3.1\Core.AssemblyInfo.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\Core\obj\Debug\netcoreapp3.1\Core.dll
+C:\source\repos\sneaker-resale-platform\web-app-service\Core\obj\Debug\netcoreapp3.1\Core.pdb
