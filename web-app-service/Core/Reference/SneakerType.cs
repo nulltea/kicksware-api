@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace web_app_service.Data.Reference_Data
+namespace Core.Reference
 {
 	public enum SneakerType
 	{

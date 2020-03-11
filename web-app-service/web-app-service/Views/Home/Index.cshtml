@@ -1,7 +1,7 @@
 ﻿@model List<web_app_service.Models.HomePageInfo>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var featuredProducts = ViewBag.FeaturedProducts as List<SneakerProduct>;
+    var featuredProducts = ViewBag.FeaturedProducts as List<SneakerProductViewModel>;
 }
 
 @section Styles
@@ -92,7 +92,7 @@
                                             <div class="product_extra product_new"><a>New</a></div>
                                         }
                                         <div class="product_content">
-                                            <div class="product_title"><a asp-area="" asp-controller="Shop" asp-action="ProductItem" asp-route-productId=@product.Id>@Html.DisplayFor(modelItem => product.ModelName)</a></div>
+                                            <div class="product_title"><a asp-area="" asp-controller="Shop" asp-action="ProductItem" asp-route-productId=@product.UniqueId>@Html.DisplayFor(modelItem => product.ModelName)</a></div>
                                             <div class="product_price">@price</div>
                                         </div>
                                     </div>
