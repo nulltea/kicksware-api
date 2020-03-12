@@ -2,6 +2,6 @@
 {
 	public static class Constants
 	{
-		public const string GatewayBaseUrl = "localhost:8420";
+		public const string GatewayBaseUrl = "http://localhost:8420";
 	}
 }

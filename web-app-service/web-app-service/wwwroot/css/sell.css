@@ -79,8 +79,24 @@
 	outline: none;
 	padding-left: 15px;
 }
-.sell_textarea
-{
+input[type="number"].sell_input::-webkit-outer-spin-button,
+input[type="number"].sell_input::-webkit-inner-spin-button {
+	margin-right: 10px;
+}
+.currency {
+	position: absolute;
+	bottom: 8px;
+	left: 15px;
+	font-weight: 700;
+	font-size: 23px;
+	color: #1b1b1b;
+}
+
+input[type="number"].sell_input {
+	padding-left: 40px;
+}
+
+.sell_textarea {
 	height: 197px;
 	padding-top: 15px;
 }

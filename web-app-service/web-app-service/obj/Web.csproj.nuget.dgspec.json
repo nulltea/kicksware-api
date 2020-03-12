@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\yalugin\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Web.csproj": {}
+    "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\yalugin\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\Core.csproj": {
+    "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yalugin\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\yalugin\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\Core.csproj",
-        "packagesPath": "C:\\Users\\yalugin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yalugin\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\obj\\",
+        "projectPath": "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\Core.csproj",
+        "packagesPath": "C:\\Users\\tyalu\\.nuget\\packages\\",
+        "outputPath": "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\yalugin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tyalu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -42,6 +42,12 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -57,25 +63,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\yalugin\\source\\repos\\sneaker-resale-platform\\web-app-service\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yalugin\\source\\repos\\sneaker-resale-platform\\web-app-service\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\yalugin\\source\\repos\\sneaker-resale-platform\\web-app-service\\Infrastructure\\Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\yalugin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yalugin\\source\\repos\\sneaker-resale-platform\\web-app-service\\Infrastructure\\obj\\",
+        "projectPath": "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Infrastructure\\Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\tyalu\\.nuget\\packages\\",
+        "outputPath": "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\yalugin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tyalu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -89,8 +95,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\yalugin\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\yalugin\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\Core.csproj"
+              "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\Core.csproj": {
+                "projectPath": "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\Core.csproj"
               }
             }
           }
@@ -104,6 +110,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            },
             "RestSharp": {
               "target": "Package",
               "version": "[106.10.1, )"
@@ -124,25 +134,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\yalugin\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Web.csproj": {
+    "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yalugin\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Web.csproj",
+        "projectUniqueName": "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Web.csproj",
         "projectName": "Web",
-        "projectPath": "C:\\Users\\yalugin\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Web.csproj",
-        "packagesPath": "C:\\Users\\yalugin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yalugin\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\obj\\",
+        "projectPath": "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Web.csproj",
+        "packagesPath": "C:\\Users\\tyalu\\.nuget\\packages\\",
+        "outputPath": "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\yalugin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tyalu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -156,11 +166,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\yalugin\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\yalugin\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\Core.csproj"
+              "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\Core.csproj": {
+                "projectPath": "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\Core.csproj"
               },
-              "C:\\Users\\yalugin\\source\\repos\\sneaker-resale-platform\\web-app-service\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\yalugin\\source\\repos\\sneaker-resale-platform\\web-app-service\\Infrastructure\\Infrastructure.csproj"
+              "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
@@ -233,7 +243,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

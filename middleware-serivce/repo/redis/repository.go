@@ -54,27 +54,25 @@ func (r *redisRepository) Find(id string) (*model.SneakerProduct, error) {
 	if err != nil {
 		return nil, errors.Wrap(err, "repository.SneakerProduct.Find")
 	}
-	sneakerProduct.Id = data["Id"]
+	sneakerProduct.UniqueId = data["UniqueId"]
 	sneakerProduct.BrandName = data["BrandName"]
 	sneakerProduct.ModelName = data["ModelName"]
 	sneakerProduct.Owner = data["Owner"]
-	sneakerProduct.URL = data["URL"]
-	if stateIndex, err := strconv.ParseFloat(data["StateIndex"], 32); err == nil {
-		sneakerProduct.StateIndex = float32(stateIndex)
+	if stateIndex, err := strconv.ParseFloat(data["ConditionIndex"], 64); err == nil {
+		sneakerProduct.ConditionIndex = stateIndex
 	}
 	sneakerProduct.AddedAt = createdAt
 	return sneakerProduct, nil
 }
 
 func (r *redisRepository) Store(sneakerProduct *model.SneakerProduct) error {
-	key := r.generateKey(sneakerProduct.Id)
+	key := r.generateKey(sneakerProduct.UniqueId)
 	data := map[string]interface{} {
-		"Id":        sneakerProduct.Id,
+		"UniqueId":        sneakerProduct.UniqueId,
 		"ModelName": sneakerProduct.BrandName,
 		"BrandName": sneakerProduct.ModelName,
 		"Owner":     sneakerProduct.Owner,
-		"StateIndex": sneakerProduct.StateIndex,
-		"URL":       sneakerProduct.URL,
+		"ConditionIndex": sneakerProduct.ConditionIndex,
 		"AddedAt":   sneakerProduct.AddedAt,
 	}
 	_, err := r.client.HMSet(key, data).Result()

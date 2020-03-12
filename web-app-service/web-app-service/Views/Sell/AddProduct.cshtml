@@ -74,7 +74,7 @@
                                     <!-- Condition -->
                                     <label asp-for="Condition" for="price">Condition</label>
                                     <div class="custom-select">
-                                        <select asp-for="Condition" id="condition-input" asp-items="@Html.GetEnumSelectList(typeof(SneakerCondition))" class="dropdown_item_select sell_input" placeholder="Size" required="required">
+                                        <select asp-for="Condition" id="condition-input" asp-items="@Html.GetEnumSelectList(typeof(SneakerCondition))" class="dropdown_item_select sell_input" placeholder="Type" required="required">
                                             <option disabled="">Type</option>
                                         </select>
                                     </div>
@@ -91,10 +91,40 @@
                     <div class="row">
                         <div class="row section_title">Payment</div>
                         <div class="container">
-                            <!-- Price -->
-                            <label asp-for="Price" for="price">Price*</label>
-                            <input asp-for="Price" type="number" id="price" class="sell_input" required="required">
-                            <span asp-validation-for="ModelName" class="text-danger"></span>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <div>
+                                        <!-- Price -->
+                                        <label asp-for="Price" for="price">Price</label>
+                                        <span class="currency">$</span>
+                                        <input asp-for="Price" type="number" id="price" class="sell_input" required="required">
+                                        <span asp-validation-for="ModelName" class="text-danger"></span>
+                                    </div>
+                                    <div>
+                                        <label for="price">Currency</label>
+                                        <div class="custom-select">
+                                            <select class="dropdown_item_select sell_input" id="currency" placeholder="Currency">
+                                                <option value="USD">U.S. Dollar</option>
+                                                <option value="EUR">Euro</option>
+                                                <option value="GBP">Pound Sterling</option>
+                                                <option value="UAH">Ukrainian Hryvnia</option>
+                                                <option value="RUB">Russian ruble</option>
+                                                <option value="PLN">Poland Zloty</option>
+                                                <option value="CAD">Canadian Dollar</option>
+                                                <option value="HKD">Hong-Kong Dollar</option>
+                                                <option value="JPY">Japanese Yen</option>
+                                                <option value="SGD">Singapore Dollar</option>
+                                                <option value="AUD">Australian Dollar</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="price-recommendation">
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row">

@@ -1,5 +1,4 @@
-﻿using Core.Gateway;
-using RestSharp;
+﻿using RestSharp;
 
 namespace Infrastructure.Gateway.REST.ProductRequests
 {

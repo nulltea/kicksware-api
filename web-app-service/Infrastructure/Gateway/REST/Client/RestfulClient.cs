@@ -4,13 +4,17 @@ using System.Security.Authentication;
 using System.Threading.Tasks;
 using Core.Constants;
 using Core.Gateway;
+using Infrastructure.Serialization;
 using RestSharp;
 
 namespace Infrastructure.Gateway.REST.Client
 {
 	public class RestfulClient : RestClient, IGatewayClient<IGatewayRestRequest>
 	{
-		internal RestfulClient() : base(Constants.GatewayBaseUrl) { }
+		public RestfulClient() : base(Constants.GatewayBaseUrl)
+		{
+			UseSerializer(() => new JsonRestSerializer());
+		}
 		
 		public void Authenticate() { }
 
@@ -45,7 +49,7 @@ namespace Infrastructure.Gateway.REST.Client
 			return response.Data;
 		}
 
-		private void GuardUnsuccessfulRequest(IGatewayRestRequest request, IRestResponse response)
+		private void GuardUnsuccessfulRequest(IRestRequest request, IRestResponse response)
 		{
 			if (request.Method == Method.GET && response.StatusCode == HttpStatusCode.NotFound) return;
 			if (response.StatusCode == HttpStatusCode.Unauthorized) throw new AuthenticationException(response.Content);

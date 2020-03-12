@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using Core.Enitities.Products;
-
-namespace Core.Enitities.Users
+﻿namespace Core.Entities.Users
 {
 	public class User : IBaseEntity
 	{

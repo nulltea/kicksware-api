@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Core.Enitities.Products;
+using Core.Entities.Products;
 using Core.Repositories;
 using Infrastructure.Gateway.REST.Client;
 using Infrastructure.Gateway.REST.ProductRequests.Sneakers;
@@ -11,7 +11,7 @@ namespace Infrastructure.Data
 	{
 		private readonly RestfulClient _client;
 
-		protected SneakerProductsRestRepository(RestfulClient client) => _client = client;
+		public SneakerProductsRestRepository(RestfulClient client) => _client = client;
 
 		#region Sync
 
@@ -20,19 +20,19 @@ namespace Infrastructure.Data
 			return _client.Request<SneakerProduct>(new GetSneakerProductRequest(sneakerId));
 		}
 
-		public IReadOnlyList<SneakerProduct> ListAll()
+		public List<SneakerProduct> GetAll()
 		{
-			return _client.Request<IReadOnlyList<SneakerProduct>>(new GetAllSneakersRequest());
+			return _client.Request<List<SneakerProduct>>(new GetAllSneakersRequest());
 		}
 
-		public IReadOnlyList<SneakerProduct> List(IEnumerable<string> idList)
+		public List<SneakerProduct> Get(IEnumerable<string> idList)
 		{
-			return _client.Request<IReadOnlyList<SneakerProduct>>(new GetQueriedSneakersRequest(idList));
+			return _client.Request<List<SneakerProduct>>(new GetQueriedSneakersRequest(idList));
 		}
 
-		public IReadOnlyList<SneakerProduct> List(object queryObject)
+		public List<SneakerProduct> Get(object queryObject)
 		{
-			return _client.Request<IReadOnlyList<SneakerProduct>>(new GetQueriedSneakersRequest(queryObject));
+			return _client.Request<List<SneakerProduct>>(new GetQueriedSneakersRequest(queryObject));
 		}
 
 		public SneakerProduct Post(SneakerProduct sneakerProduct)
@@ -69,22 +69,22 @@ namespace Infrastructure.Data
 			return _client.RequestAsync<SneakerProduct>(new GetSneakerProductRequest(sneakerId));
 		}
 
-		public Task<IReadOnlyList<SneakerProduct>> ListAllAsync()
+		public Task<List<SneakerProduct>> GetAllAsync()
 		{
-			return _client.RequestAsync<IReadOnlyList<SneakerProduct>>(new GetAllSneakersRequest());
+			return _client.RequestAsync<List<SneakerProduct>>(new GetAllSneakersRequest());
 		}
 
-		public Task<IReadOnlyList<SneakerProduct>> ListAsync(IEnumerable<string> idList)
+		public Task<List<SneakerProduct>> GetAsync(IEnumerable<string> idList)
 		{
-			return _client.RequestAsync<IReadOnlyList<SneakerProduct>>(new GetQueriedSneakersRequest(idList));
+			return _client.RequestAsync<List<SneakerProduct>>(new GetQueriedSneakersRequest(idList));
 		}
 
-		public Task<IReadOnlyList<SneakerProduct>> ListAsync(object queryObject)
+		public Task<List<SneakerProduct>> GetAsync(object queryObject)
 		{
-			return _client.RequestAsync<IReadOnlyList<SneakerProduct>>(new GetQueriedSneakersRequest(queryObject));
+			return _client.RequestAsync<List<SneakerProduct>>(new GetQueriedSneakersRequest(queryObject));
 		}
 
-		public Task<SneakerProduct> AddAsync(SneakerProduct sneakerProduct)
+		public Task<SneakerProduct> PostAsync(SneakerProduct sneakerProduct)
 		{
 			return _client.RequestAsync<SneakerProduct>(new PostSneakerProductRequest(sneakerProduct));
 		}

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Core.Enitities;
+using Core.Entities;
 
 namespace Core.Repositories
 {
@@ -8,13 +8,13 @@ namespace Core.Repositories
 	{
 		Task<T> GetUniqueAsync(string uniqueId);
 
-		Task<IReadOnlyList<T>> ListAllAsync();
+		Task<List<T>> GetAllAsync();
 
-		Task<IReadOnlyList<T>> ListAsync(IEnumerable<string> idList);
+		Task<List<T>> GetAsync(IEnumerable<string> idList);
 
-		Task<IReadOnlyList<T>> ListAsync(object queryObject);
+		Task<List<T>> GetAsync(object queryObject);
 
-		Task<T> AddAsync(T entity);
+		Task<T> PostAsync(T entity);
 
 		Task<bool> UpdateAsync(T entity);
 

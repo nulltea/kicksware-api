@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Core.Enitities.Products;
+﻿using Core.Entities.Products;
 
 namespace Core.Repositories
 {

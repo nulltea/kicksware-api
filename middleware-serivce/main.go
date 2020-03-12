@@ -32,12 +32,12 @@ func main() {
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
 
-	r.Get("/{code}", handler.Get)
-	r.Post("/", handler.Post)
+	r.Get("/products/sneakers/{code}", handler.Get)
+	r.Post("/products/sneakers", handler.Post)
 
 	errs := make(chan error, 2)
 	go func() {
-		fmt.Println("Listening on port :8000")
+		fmt.Println("Listening on port :8420")
 		errs <- http.ListenAndServe(httpPort(), r)
 
 	}()
@@ -53,7 +53,7 @@ func main() {
 }
 
 func httpPort() string {
-	port := "8000"
+	port := "8420"
 	if os.Getenv("PORT") != "" {
 		port = os.Getenv("PORT")
 	}

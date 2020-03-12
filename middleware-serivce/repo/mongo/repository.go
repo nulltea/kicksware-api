@@ -51,7 +51,7 @@ func (r *mongoRepository) Find(id string) (*model.SneakerProduct, error) {
 	defer cancel()
 	sneakerProduct := &model.SneakerProduct{}
 	collection := r.client.Database(r.database).Collection(r.collection)
-	filter := bson.M{"Id": id}
+	filter := bson.M{"UniqueId": id}
 	err := collection.FindOne(ctx, filter).Decode(&sneakerProduct)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -69,12 +69,16 @@ func (r *mongoRepository) Store(sneakerProduct *model.SneakerProduct) error {
 	_, err := collection.InsertOne(
 		ctx,
 		bson.M{
-			"Id":        sneakerProduct.Id,
+			"UniqueId":        sneakerProduct.UniqueId,
 			"ModelName": sneakerProduct.BrandName,
 			"BrandName": sneakerProduct.ModelName,
+			"Price": sneakerProduct.Price,
+			"Type": sneakerProduct.Type,
+			"Color": sneakerProduct.Color,
+			"Condition": sneakerProduct.Condition,
+			"Description": sneakerProduct.Description,
 			"Owner":     sneakerProduct.Owner,
-			"StateIndex": sneakerProduct.StateIndex,
-			"URL":       sneakerProduct.URL,
+			"ConditionIndex": sneakerProduct.ConditionIndex,
 			"AddedAt":   sneakerProduct.AddedAt,
 		},
 	)

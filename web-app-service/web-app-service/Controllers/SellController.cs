@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
-using Core.Repositories;
+﻿using Core.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using web_app_service.Data.Reference_Data;
+using web_app_service.Models;
 
 namespace web_app_service.Controllers
 {
 	public class SellController : Controller
 	{
-		public SellController(ISneakerProductRepository repository) {}
+		private readonly ISneakerProductRepository _repository;
+
+		public SellController(ISneakerProductRepository repository) => _repository = repository;
 
 		// GET: Sell
 		public ActionResult AddProduct()
@@ -29,22 +26,17 @@ namespace web_app_service.Controllers
 		// POST: Sell/Post
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Post(IFormCollection collection)
+		public ActionResult Post([FromForm]SneakerProductViewModel sneakerProduct)
 		{
-			try
-			{
-				// TODO: Add insert logic here
+			var response = _repository.Post(sneakerProduct);
 
-				return RedirectToAction(nameof(AddProduct));
-			}
-			catch
-			{
-				return View();
-			}
+			if (response == null) return Problem();
+
+			return RedirectToAction("Index", "Home");
 		}
 
 		// GET: Sell/Edit/5
-		public ActionResult Edit(string id)
+		public ActionResult Edit(string productId)
 		{
 			return View();
 		}
@@ -67,7 +59,7 @@ namespace web_app_service.Controllers
 		}
 
 		// GET: Sell/Delete/5
-		public ActionResult Delete(string id)
+		public ActionResult Delete(string productId)
 		{
 			return View();
 		}
@@ -75,7 +67,7 @@ namespace web_app_service.Controllers
 		// POST: Sell/Delete/5
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Delete(string id, IFormCollection collection)
+		public ActionResult Delete(string productId, IFormCollection collection)
 		{
 			try
 			{

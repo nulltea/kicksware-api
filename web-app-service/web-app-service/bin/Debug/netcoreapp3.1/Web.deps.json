@@ -2151,6 +2151,9 @@
         }
       },
       "Core/1.0.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3"
+        },
         "runtime": {
           "Core.dll": {}
         },
@@ -2161,6 +2164,7 @@
       "Infrastructure/1.0.0": {
         "dependencies": {
           "Core": "1.0.0",
+          "Newtonsoft.Json": "12.0.3",
           "RestSharp": "106.10.1"
         },
         "runtime": {

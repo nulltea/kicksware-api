@@ -31,7 +31,7 @@ func (r *sneakerProductService) Store(sneakerProduct *SneakerProduct) error {
 	if err := validate.Validate(sneakerProduct); err != nil {
 		return errs.Wrap(ErrProductInvalid, "service.sneakerProductRepo.Store")
 	}
-	sneakerProduct.Id = xid.New().String()
+	sneakerProduct.UniqueId = xid.New().String()
 	sneakerProduct.AddedAt = time.Now()
 	return r.sneakerProductRepo.Store(sneakerProduct)
 }

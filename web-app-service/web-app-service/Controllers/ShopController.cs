@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Core.Enitities.Products;
+using Core.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using web_app_service.Models;
 
@@ -10,6 +9,8 @@ namespace web_app_service.Controllers
 {
 	public class ShopController : Controller
 	{
+		private readonly ISneakerProductRepository _repository;
+
 		public static List<SneakerProductViewModel> ProductsList => new List<SneakerProductViewModel>
 		{
 			new SneakerProductViewModel
@@ -58,8 +59,14 @@ namespace web_app_service.Controllers
 			},
 		};
 
+		public ShopController(ISneakerProductRepository repository) => _repository = repository;
+
 		public IActionResult Products()
 		{
+			//var products = _repository.GetAll();
+
+			//ProductsList.AddRange(products.Cast<SneakerProductViewModel>());
+
 			return View(ProductsList);
 		}
 

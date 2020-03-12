@@ -2,14 +2,25 @@ package model
 
 import "time"
 
+type SneakerSize struct {
+	Europe        float64
+	UnitedStates  float64
+	UnitedKingdom float64
+	Centimeters   float64
+}
+
 type SneakerProduct struct {
-	Id        string
-	URL       string
-	BrandName string
-	ModelName string
-	Price float32
-	Owner     string
-	Images    []string
-	StateIndex float32
-	AddedAt   time.Time
+	UniqueId       string
+	BrandName      string
+	ModelName      string
+	Price          float64
+	Type           string
+	Size           SneakerSize
+	Color          string
+	Condition      string
+	Description    string
+	Owner          string
+	Images         []string
+	ConditionIndex float64
+	AddedAt        time.Time
 }

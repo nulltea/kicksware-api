@@ -87,5 +87,6 @@ func (h *handler) Post(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		return
 	}
-	setupResponse(w, contentType, responseBody, http.StatusCreated)
+	setupResponse(w, contentType, responseBody, http.StatusOK)
 }
+

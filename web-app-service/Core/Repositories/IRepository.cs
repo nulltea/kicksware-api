@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Core.Enitities;
+using Core.Entities;
 
 namespace Core.Repositories
 {
@@ -8,11 +7,11 @@ namespace Core.Repositories
 	{
 		T GetUnique(string id);
 
-		IReadOnlyList<T> ListAll();
+		List<T> GetAll();
 
-		IReadOnlyList<T> List(IEnumerable<string> idList);
+		List<T> Get(IEnumerable<string> idList);
 
-		IReadOnlyList<T> List(object queryObject);
+		List<T> Get(object queryObject);
 
 		T Post(T entity);
 

@@ -1,4 +1,4 @@
-﻿using Core.Enitities.Products;
+﻿using Core.Entities.Products;
 using RestSharp;
 
 namespace Infrastructure.Gateway.REST.ProductRequests.Sneakers
