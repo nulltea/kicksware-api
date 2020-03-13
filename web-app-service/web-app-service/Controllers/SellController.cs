@@ -1,5 +1,4 @@
-﻿using Core.Repositories;
-using Microsoft.AspNetCore.Http;
+﻿using Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using web_app_service.Models;
 
@@ -7,17 +6,17 @@ namespace web_app_service.Controllers
 {
 	public class SellController : Controller
 	{
-		private readonly ISneakerProductRepository _repository;
+		private readonly ISneakerProductService _service;
 
-		public SellController(ISneakerProductRepository repository) => _repository = repository;
+		public SellController(ISneakerProductService service) => _service = service;
 
-		// GET: Sell
+		[HttpGet]
 		public ActionResult AddProduct()
 		{
 			return View();
 		}
 
-		// GET: Sell
+		[HttpGet]
 		public ActionResult MyProducts()
 		{
 			return View();
@@ -28,57 +27,38 @@ namespace web_app_service.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult Post([FromForm]SneakerProductViewModel sneakerProduct)
 		{
-			var response = _repository.Post(sneakerProduct);
+			var response = _service.Store(sneakerProduct);
 
 			if (response == null) return Problem();
 
 			return RedirectToAction("Index", "Home");
 		}
 
-		// GET: Sell/Edit/5
-		public ActionResult Edit(string productId)
+		[HttpGet]
+		public ActionResult Modify(string productId)
 		{
 			return View();
 		}
 
-		// POST: Sell/Edit/5
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit(string id, IFormCollection collection)
+		public ActionResult Modify([FromForm]SneakerProductViewModel sneakerProduct)
 		{
-			try
-			{
-				// TODO: Add update logic here
+			var response = _service.Store(sneakerProduct);
 
-				return RedirectToAction(nameof(AddProduct));
-			}
-			catch
-			{
-				return View();
-			}
+			if (response == null) return Problem();
+
+			return RedirectToAction("Index", "Home");
 		}
 
-		// GET: Sell/Delete/5
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public ActionResult Delete(string productId)
 		{
-			return View();
-		}
+			if (!_service.Remove(productId)) return Problem();
 
-		// POST: Sell/Delete/5
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult Delete(string productId, IFormCollection collection)
-		{
-			try
-			{
-				// TODO: Add delete logic here
-
-				return RedirectToAction(nameof(AddProduct));
-			}
-			catch
-			{
-				return View();
-			}
+			return RedirectToAction("Index", "Home");
 		}
 	}
 }

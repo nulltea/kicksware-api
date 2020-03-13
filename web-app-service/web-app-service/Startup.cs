@@ -1,6 +1,8 @@
 using Core.Repositories;
+using Core.Services;
 using Infrastructure.Data;
 using Infrastructure.Gateway.REST.Client;
+using Infrastructure.Usecase;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
@@ -36,6 +38,7 @@ namespace web_app_service
 
 			services.AddSingleton<RestfulClient, RestfulClient>();
 			services.AddSingleton<ISneakerProductRepository, SneakerProductsRestRepository>();
+			services.AddSingleton<ISneakerProductService, SneakerProductService>();
 
 			#endregion
 

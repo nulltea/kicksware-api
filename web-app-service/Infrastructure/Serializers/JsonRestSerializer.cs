@@ -2,7 +2,7 @@
 using RestSharp;
 using RestSharp.Serialization;
 
-namespace Infrastructure.Serialization
+namespace Infrastructure.Serializers
 {
 	public class JsonRestSerializer : IRestSerializer
 	{

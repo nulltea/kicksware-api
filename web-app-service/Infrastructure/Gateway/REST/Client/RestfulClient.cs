@@ -4,7 +4,7 @@ using System.Security.Authentication;
 using System.Threading.Tasks;
 using Core.Constants;
 using Core.Gateway;
-using Infrastructure.Serialization;
+using Infrastructure.Serializers;
 using RestSharp;
 
 namespace Infrastructure.Gateway.REST.Client
