@@ -10,7 +10,7 @@ import (
 	"product-service/core/model"
 	"product-service/core/repo"
 	"product-service/scenario/business"
-	"product-service/tool"
+	"product-service/util"
 	"time"
 )
 
@@ -35,16 +35,16 @@ func newMongoClient(mongoURL string, mongoTimeout int) (*mongo.Client, error) {
 	return client, nil
 }
 
-func NewMongoRepository(mongoURL, mongoDB, collection string, mongoTimeout int) (repo.SneakerProductRepository, error) {
+func NewMongoRepository(url, db, collection string, mongoTimeout int) (repo.SneakerProductRepository, error) {
 	repo := &Repository{
 		timeout:  time.Duration(mongoTimeout) * time.Second,
 	}
-	client, err := newMongoClient(mongoURL, mongoTimeout)
+	client, err := newMongoClient(url, mongoTimeout)
 	if err != nil {
 		return nil, errors.Wrap(err, "repository.NewMongoRepo")
 	}
 	repo.client = client
-	database := client.Database(mongoDB)
+	database := client.Database(db)
 	repo.database = database
 	repo.collection = database.Collection(collection)
 	return repo, nil
@@ -71,19 +71,22 @@ func (r *Repository) Retrieve(codes []string) ([]*model.SneakerProduct, error) {
 	filter := bson.M{"UniqueId": bson.M{"$in": codes}}
 
 	cursor, err := r.collection.Find(ctx, filter)
-	defer cursor.Close(ctx)
-
-	var sneakerProduct []*model.SneakerProduct
-	if err = cursor.All(ctx, &sneakerProduct); err != nil {
+	if err != nil  {
 		return nil, errors.Wrap(err, "repository.SneakerProduct.Retrieve")
 	}
-	if err != nil {
+	defer cursor.Close(ctx)
+
+	var sneakerProducts []*model.SneakerProduct
+	if err = cursor.All(ctx, &sneakerProducts); err != nil {
+		return nil, errors.Wrap(err, "repository.SneakerProduct.Retrieve")
+	}
+	if sneakerProducts == nil || len(sneakerProducts) == 0 {
 		if err == mongo.ErrNoDocuments {
 			return nil, errors.Wrap(business.ErrProductNotFound, "repository.SneakerProduct.Retrieve")
 		}
 		return nil, errors.Wrap(err, "repository.SneakerProduct.Retrieve")
 	}
-	return sneakerProduct, nil
+	return sneakerProducts, nil
 }
 
 func (r *Repository) RetrieveAll() ([]*model.SneakerProduct, error) {
@@ -91,6 +94,9 @@ func (r *Repository) RetrieveAll() ([]*model.SneakerProduct, error) {
 	defer cancel()
 
 	cursor, err := r.collection.Find(ctx, bson.D{})
+	if err != nil  {
+		return nil, errors.Wrap(err, "repository.SneakerProduct.RetrieveAll")
+	}
 	defer cursor.Close(ctx)
 
 	var sneakerProduct []*model.SneakerProduct
@@ -107,24 +113,27 @@ func (r *Repository) RetrieveQuery(query interface{}) ([]*model.SneakerProduct, 
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 
-	filter, err := tool.ToBsonMap(query)
+	filter, err := util.ToBsonMap(query)
 	if err != nil {
 		return nil, errors.Wrap(err, "repository.SneakerProduct.RetrieveQuery")
 	}
 	cursor, err := r.collection.Find(ctx, filter)
-	defer cursor.Close(ctx)
-
-	var sneakerProduct []*model.SneakerProduct
-	if err = cursor.All(ctx, &sneakerProduct); err != nil {
+	if err != nil  {
 		return nil, errors.Wrap(err, "repository.SneakerProduct.RetrieveQuery")
 	}
-	if err != nil {
+	defer cursor.Close(ctx)
+
+	var sneakerProducts []*model.SneakerProduct
+	if err = cursor.All(ctx, &sneakerProducts); err != nil {
+		return nil, errors.Wrap(err, "repository.SneakerProduct.RetrieveQuery")
+	}
+	if sneakerProducts == nil || len(sneakerProducts) == 0 {
 		if err == mongo.ErrNoDocuments {
 			return nil, errors.Wrap(business.ErrProductNotFound, "repository.SneakerProduct.RetrieveQuery")
 		}
 		return nil, errors.Wrap(err, "repository.SneakerProduct.RetrieveQuery")
 	}
-	return sneakerProduct, nil
+	return sneakerProducts, nil
 }
 
 func (r *Repository) Store(sneakerProduct *model.SneakerProduct) error {
@@ -140,7 +149,7 @@ func (r *Repository) Store(sneakerProduct *model.SneakerProduct) error {
 func (r *Repository) Modify(sneakerProduct *model.SneakerProduct) error {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
-	doc, err := tool.ToBsonMap(sneakerProduct)
+	doc, err := util.ToBsonMap(sneakerProduct)
 	if err != nil {
 		return errors.Wrap(err, "repository.SneakerProduct.Modify")
 	}
@@ -175,10 +184,7 @@ func (r *Repository) Remove(code string) error {
 }
 
 func (r *Repository) RemoveObj(sneakerProduct *model.SneakerProduct) error {
-	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
-	defer cancel()
-	filter := bson.M{"UniqueId": sneakerProduct.UniqueId}
-	if _, err := r.collection.DeleteOne(ctx, filter); err != nil {
+	if err := r.Remove(sneakerProduct.UniqueId); err != nil {
 		return errors.Wrap(err, "repository.SneakerProduct.RemoveObj")
 	}
 	return nil
@@ -188,7 +194,7 @@ func (r *Repository) Count(query interface{}) (int64, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 
-	filter, err := tool.ToBsonMap(query)
+	filter, err := util.ToBsonMap(query)
 	if err != nil {
 		return 0, errors.Wrap(err, "repository.SneakerProduct.Count")
 	}

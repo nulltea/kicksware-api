@@ -29,17 +29,17 @@ func newRedisClient(redisURL string) (*redis.Client, error) {
 }
 
 func NewRedisRepository(redisURL string) (repo.SneakerProductRepository, error) {
-	repo := &Repository{}
+	rep := &Repository{}
 	client, err := newRedisClient(redisURL)
 	if err != nil {
 		return nil, errors.Wrap(err, "repository.NewRedisRepository")
 	}
-	repo.client = client
-	return repo, nil
+	rep.client = client
+	return rep, nil
 }
 
 func (r *Repository) generateKey(code  string) string {
-	return fmt.Sprintf("sneakerProduct[%s]", id)
+	return fmt.Sprintf("sneakerProduct[%s]", code)
 }
 
 func (r *Repository) RetrieveOne(code string) (*model.SneakerProduct, error) {
@@ -110,11 +110,17 @@ func (r *Repository) Store(sneakerProduct *model.SneakerProduct) error {
 }
 
 func (r *Repository) Modify(sneakerProduct *model.SneakerProduct) error {
-	return r.Store(sneakerProduct)
+	if err := r.Store(sneakerProduct); err != nil {
+		return errors.Wrap(err, "repository.SneakerProduct.Modify")
+	}
+	return nil
 }
 
 func (r *Repository) Replace(sneakerProduct *model.SneakerProduct) error {
-	return r.Store(sneakerProduct)
+	if err := r.Store(sneakerProduct); err != nil {
+		return errors.Wrap(err, "repository.SneakerProduct.Replace")
+	}
+	return nil
 }
 
 func (r *Repository) Remove(code string) error {
@@ -126,7 +132,10 @@ func (r *Repository) Remove(code string) error {
 }
 
 func (r *Repository) RemoveObj(sneakerProduct *model.SneakerProduct) error {
-	return r.Remove(sneakerProduct.UniqueId)
+	if err := r.Remove(sneakerProduct.UniqueId); err != nil {
+		return errors.Wrap(err, "repository.SneakerProduct.RemoveObj")
+	}
+	return nil
 }
 
 func (r *Repository) Count(query interface{}) (int64, error) {
