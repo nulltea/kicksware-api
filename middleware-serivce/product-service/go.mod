@@ -9,6 +9,7 @@ require (
 	github.com/onsi/gomega v1.9.0 // indirect
 	github.com/pkg/errors v0.9.1
 	github.com/rs/xid v1.2.1
+	github.com/thoas/go-funk v0.6.0
 	github.com/vmihailenco/msgpack v3.3.3+incompatible
 	go.mongodb.org/mongo-driver v1.3.1
 	google.golang.org/appengine v1.6.5 // indirect

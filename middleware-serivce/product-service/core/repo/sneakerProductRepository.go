@@ -10,5 +10,8 @@ type SneakerProductRepository interface {
 	RetrieveQuery(query interface{}) ([]*model.SneakerProduct, error)
 	Store(sneakerProduct *model.SneakerProduct) error
 	Modify(sneakerProduct *model.SneakerProduct) error
-	Remove(sneakerProduct *model.SneakerProduct) error
+	Replace(sneakerProduct *model.SneakerProduct) error
+	Remove(code string) error
+	RemoveObj(sneakerProduct *model.SneakerProduct) error
+	Count(query interface{}) (int64, error)
 }
