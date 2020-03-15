@@ -15,16 +15,6 @@ import (
 	"strconv"
 )
 
-/*
-const (
-	mongoURL = "mongodb://localhost:27017"
-	mongoDB = "sneaker-resale-platform"
-	mongoCollection = "SneakerProducts"
-	mongoTimeout=30
-	contentType="application/json"
-)
-*/
-
 func main() {
 	loadEnv()
 	repo := getRepository()
