@@ -8,10 +8,10 @@ import (
 	"github.com/thoas/go-funk"
 	"product-service/core/model"
 	"product-service/core/repo"
-	"product-service/scenario/business"
+	"product-service/middleware/business"
 )
 
-type Repository struct {
+type repository struct {
 	client *redis.Client
 }
 
@@ -29,7 +29,7 @@ func newRedisClient(redisURL string) (*redis.Client, error) {
 }
 
 func NewRedisRepository(redisURL string) (repo.SneakerProductRepository, error) {
-	rep := &Repository{}
+	rep := &repository{}
 	client, err := newRedisClient(redisURL)
 	if err != nil {
 		return nil, errors.Wrap(err, "repository.NewRedisRepository")
@@ -38,18 +38,18 @@ func NewRedisRepository(redisURL string) (repo.SneakerProductRepository, error) 
 	return rep, nil
 }
 
-func (r *Repository) generateKey(code  string) string {
+func (r *repository) generateKey(code  string) string {
 	return fmt.Sprintf("sneakerProduct[%s]", code)
 }
 
-func (r *Repository) RetrieveOne(code string) (*model.SneakerProduct, error) {
+func (r *repository) FetchOne(code string) (*model.SneakerProduct, error) {
 	key := r.generateKey(code)
 	data, err := r.client.Get(key).Bytes()
 	if err != nil {
-		return nil, errors.Wrap(err, "repository.SneakerProduct.Retrieve")
+		return nil, errors.Wrap(err, "repository.SneakerProduct.Fetch")
 	}
 	if data == nil {
-		return nil, errors.Wrap(business.ErrProductNotFound, "repository.SneakerProduct.Retrieve")
+		return nil, errors.Wrap(business.ErrProductNotFound, "repository.SneakerProduct.Fetch")
 	}
 	sneakerProduct := &model.SneakerProduct{}
 	if err = json.Unmarshal(data, sneakerProduct); err != nil{
@@ -58,14 +58,14 @@ func (r *Repository) RetrieveOne(code string) (*model.SneakerProduct, error) {
 	return sneakerProduct, nil
 }
 
-func (r *Repository) Retrieve(codes []string) ([]*model.SneakerProduct, error) {
+func (r *repository) Fetch(codes []string) ([]*model.SneakerProduct, error) {
 	keys := funk.Map(codes, r.generateKey).([]string)
 	data, err := r.client.MGet(keys...).Result()
 	if err != nil {
-		return nil, errors.Wrap(err, "repository.SneakerProduct.Retrieve")
+		return nil, errors.Wrap(err, "repository.SneakerProduct.Fetch")
 	}
 	if len(data) == 0 {
-		return nil, errors.Wrap(business.ErrProductNotFound, "repository.SneakerProduct.Retrieve")
+		return nil, errors.Wrap(business.ErrProductNotFound, "repository.SneakerProduct.Fetch")
 	}
 	sneakerProducts := funk.Map(data, func(val interface{}) (s *model.SneakerProduct) {
 		json.Unmarshal([]byte(val.(string)), s)
@@ -74,17 +74,17 @@ func (r *Repository) Retrieve(codes []string) ([]*model.SneakerProduct, error) {
 	return sneakerProducts, nil
 }
 
-func (r *Repository) RetrieveAll() ([]*model.SneakerProduct, error) {
+func (r *repository) FetchAll() ([]*model.SneakerProduct, error) {
 	keys := r.client.Keys("sneakerProduct*").Val()
 	if len(keys) == 0 {
-		return nil, errors.Wrap(business.ErrProductNotFound, "repository.SneakerProduct.RetrieveAll")
+		return nil, errors.Wrap(business.ErrProductNotFound, "repository.SneakerProduct.FetchAll")
 	}
 	data, err := r.client.MGet(keys...).Result()
 	if err != nil {
-		return nil, errors.Wrap(err, "repository.SneakerProduct.RetrieveAll")
+		return nil, errors.Wrap(err, "repository.SneakerProduct.FetchAll")
 	}
 	if len(data) == 0 {
-		return nil, errors.Wrap(business.ErrProductNotFound, "repository.SneakerProduct.RetrieveAll")
+		return nil, errors.Wrap(business.ErrProductNotFound, "repository.SneakerProduct.FetchAll")
 	}
 	sneakerProducts := funk.Map(data, func(val interface{}) (s *model.SneakerProduct) {
 		json.Unmarshal([]byte(val.(string)), s)
@@ -93,11 +93,11 @@ func (r *Repository) RetrieveAll() ([]*model.SneakerProduct, error) {
 	return sneakerProducts, nil
 }
 
-func (r *Repository) RetrieveQuery(query interface{}) ([]*model.SneakerProduct, error) {
-	return r.RetrieveAll() //todo querying
+func (r *repository) FetchQuery(query interface{}) ([]*model.SneakerProduct, error) {
+	return r.FetchAll() //todo querying
 }
 
-func (r *Repository) Store(sneakerProduct *model.SneakerProduct) error {
+func (r *repository) Store(sneakerProduct *model.SneakerProduct) error {
 	key := r.generateKey(sneakerProduct.UniqueId)
 	data, err := json.Marshal(sneakerProduct)
 	if err != nil {
@@ -109,21 +109,21 @@ func (r *Repository) Store(sneakerProduct *model.SneakerProduct) error {
 	return nil
 }
 
-func (r *Repository) Modify(sneakerProduct *model.SneakerProduct) error {
+func (r *repository) Modify(sneakerProduct *model.SneakerProduct) error {
 	if err := r.Store(sneakerProduct); err != nil {
 		return errors.Wrap(err, "repository.SneakerProduct.Modify")
 	}
 	return nil
 }
 
-func (r *Repository) Replace(sneakerProduct *model.SneakerProduct) error {
+func (r *repository) Replace(sneakerProduct *model.SneakerProduct) error {
 	if err := r.Store(sneakerProduct); err != nil {
 		return errors.Wrap(err, "repository.SneakerProduct.Replace")
 	}
 	return nil
 }
 
-func (r *Repository) Remove(code string) error {
+func (r *repository) Remove(code string) error {
 	key := r.generateKey(code)
 	if err := r.client.Del(key).Err(); err != nil {
 		return errors.Wrap(err, "repository.SneakerProduct.Remove")
@@ -131,14 +131,14 @@ func (r *Repository) Remove(code string) error {
 	return nil
 }
 
-func (r *Repository) RemoveObj(sneakerProduct *model.SneakerProduct) error {
+func (r *repository) RemoveObj(sneakerProduct *model.SneakerProduct) error {
 	if err := r.Remove(sneakerProduct.UniqueId); err != nil {
 		return errors.Wrap(err, "repository.SneakerProduct.RemoveObj")
 	}
 	return nil
 }
 
-func (r *Repository) Count(query interface{}) (int64, error) {
+func (r *repository) Count(query interface{}) (int64, error) {
 	keys := r.client.Keys("sneakerProduct*").Val()
 	return int64(len(keys)), nil
 }

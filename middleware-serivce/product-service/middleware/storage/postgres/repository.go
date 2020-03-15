@@ -8,11 +8,11 @@ import (
 	"github.com/pkg/errors"
 	"product-service/core/model"
 	"product-service/core/repo"
-	"product-service/scenario/business"
+	"product-service/middleware/business"
 	"product-service/util"
 )
 
-type Repository struct {
+type repository struct {
 	db *sqlx.DB
 	table string
 }
@@ -35,64 +35,64 @@ func NewPostgresRepository(connection, table string) (repo.SneakerProductReposit
 	if err != nil {
 		return nil, errors.Wrap(err, "repository.NewPostgresRepo")
 	}
-	repo := &Repository{
+	repo := &repository{
 		db: db,
 		table:  table,
 	}
 	return repo, nil
 }
 
-func (r *Repository) RetrieveOne(code string) (*model.SneakerProduct, error) {
+func (r *repository) FetchOne(code string) (*model.SneakerProduct, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	sneakerProduct := &model.SneakerProduct{}
 	cmd, args, err := sqb.Select("*").From(r.table).
 		Where(sqb.Eq{"UniqueId":code}).PlaceholderFormat(sqb.Dollar).ToSql()
 	if err != nil {
-		return nil, errors.Wrap(err, "repository.SneakerProduct.RetrieveOne")
+		return nil, errors.Wrap(err, "repository.SneakerProduct.FetchOne")
 	}
 	if err = r.db.GetContext(ctx, sneakerProduct, cmd, args); err != nil {
-		return nil, errors.Wrap(err, "repository.SneakerProduct.RetrieveOne")
+		return nil, errors.Wrap(err, "repository.SneakerProduct.FetchOne")
 	}
 	return sneakerProduct, nil
 }
 
-func (r *Repository) Retrieve(codes []string) ([]*model.SneakerProduct, error) {
+func (r *repository) Fetch(codes []string) ([]*model.SneakerProduct, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	sneakerProducts := make([]*model.SneakerProduct, 0)
 	cmd, args, err := sqb.Select("*").From(r.table).
 		Where(sqb.Eq{"UniqueId":codes}).PlaceholderFormat(sqb.Dollar).ToSql()
 	if err != nil {
-		return nil, errors.Wrap(err, "repository.SneakerProduct.Retrieve")
+		return nil, errors.Wrap(err, "repository.SneakerProduct.Fetch")
 	}
 	if err = r.db.SelectContext(ctx, &sneakerProducts, cmd, args); err != nil {
-		return nil, errors.Wrap(err, "repository.SneakerProduct.Retrieve")
+		return nil, errors.Wrap(err, "repository.SneakerProduct.Fetch")
 	}
 	if sneakerProducts == nil || len(sneakerProducts) == 0 {
-		return nil, errors.Wrap(business.ErrProductNotFound, "repository.SneakerProduct.Retrieve")
+		return nil, errors.Wrap(business.ErrProductNotFound, "repository.SneakerProduct.Fetch")
 	}
 	return sneakerProducts, nil
 }
 
-func (r *Repository) RetrieveAll() ([]*model.SneakerProduct, error) {
+func (r *repository) FetchAll() ([]*model.SneakerProduct, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	sneakerProducts := make([]*model.SneakerProduct, 0)
 	cmd, args, err := sqb.Select("*").From(r.table).PlaceholderFormat(sqb.Dollar).ToSql()
 	if err != nil {
-		return nil, errors.Wrap(err, "repository.SneakerProduct.RetrieveAll")
+		return nil, errors.Wrap(err, "repository.SneakerProduct.FetchAll")
 	}
 	if err = r.db.SelectContext(ctx, &sneakerProducts, cmd, args); err != nil {
-		return nil, errors.Wrap(err, "repository.SneakerProduct.RetrieveAll")
+		return nil, errors.Wrap(err, "repository.SneakerProduct.FetchAll")
 	}
 	if sneakerProducts == nil || len(sneakerProducts) == 0 {
-		return nil, errors.Wrap(business.ErrProductNotFound, "repository.SneakerProduct.RetrieveAll")
+		return nil, errors.Wrap(business.ErrProductNotFound, "repository.SneakerProduct.FetchAll")
 	}
 	return sneakerProducts, nil
 }
 
-func (r *Repository) RetrieveQuery(query interface{}) ([]*model.SneakerProduct, error) {
+func (r *repository) FetchQuery(query interface{}) ([]*model.SneakerProduct, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	sneakerProducts := make([]*model.SneakerProduct, 0)
@@ -100,18 +100,18 @@ func (r *Repository) RetrieveQuery(query interface{}) ([]*model.SneakerProduct, 
 	cmd, args, err := sqb.Select("*").From(r.table).
 		Where(where).PlaceholderFormat(sqb.Dollar).ToSql()
 	if err != nil {
-		return nil, errors.Wrap(err, "repository.SneakerProduct.RetrieveQuery")
+		return nil, errors.Wrap(err, "repository.SneakerProduct.FetchQuery")
 	}
 	if err = r.db.SelectContext(ctx, &sneakerProducts, cmd, args); err != nil {
-		return nil, errors.Wrap(err, "repository.SneakerProduct.RetrieveQuery")
+		return nil, errors.Wrap(err, "repository.SneakerProduct.FetchQuery")
 	}
 	if sneakerProducts == nil || len(sneakerProducts) == 0 {
-		return nil, errors.Wrap(business.ErrProductNotFound, "repository.SneakerProduct.RetrieveQuery")
+		return nil, errors.Wrap(business.ErrProductNotFound, "repository.SneakerProduct.FetchQuery")
 	}
 	return sneakerProducts, nil
 }
 
-func (r *Repository) Store(sneakerProduct *model.SneakerProduct) error {
+func (r *repository) Store(sneakerProduct *model.SneakerProduct) error {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	cmd, args, err := sqb.Insert(r.table).SetMap(util.ToMap(sneakerProduct)).PlaceholderFormat(sqb.Dollar).ToSql()
@@ -124,7 +124,7 @@ func (r *Repository) Store(sneakerProduct *model.SneakerProduct) error {
 	return nil
 }
 
-func (r *Repository) Modify(sneakerProduct *model.SneakerProduct) error {
+func (r *repository) Modify(sneakerProduct *model.SneakerProduct) error {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	cmd, args, err := sqb.Update(r.table).SetMap(util.ToMap(sneakerProduct)).
@@ -138,14 +138,14 @@ func (r *Repository) Modify(sneakerProduct *model.SneakerProduct) error {
 	return nil
 }
 
-func (r *Repository) Replace(sneakerProduct *model.SneakerProduct) error {
+func (r *repository) Replace(sneakerProduct *model.SneakerProduct) error {
 	if err := r.Modify(sneakerProduct); err != nil {
 		return errors.Wrap(err, "repository.SneakerProduct.Replace")
 	}
 	return nil
 }
 
-func (r *Repository) Remove(code string) error {
+func (r *repository) Remove(code string) error {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	cmd, args, err := sqb.Delete(r.table).Where(sqb.Eq{"UniqueId":code}).PlaceholderFormat(sqb.Dollar).ToSql()
@@ -158,24 +158,24 @@ func (r *Repository) Remove(code string) error {
 	return nil
 }
 
-func (r *Repository) RemoveObj(sneakerProduct *model.SneakerProduct) error {
+func (r *repository) RemoveObj(sneakerProduct *model.SneakerProduct) error {
 	if err := r.Remove(sneakerProduct.UniqueId); err != nil {
 		return errors.Wrap(err, "repository.SneakerProduct.RemoveObj")
 	}
 	return nil
 }
 
-func (r *Repository) Count(query interface{}) (count int64, err error) {
+func (r *repository) Count(query interface{}) (count int64, err error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	where := util.ToSqlWhere(query)
 	cmd, args, err := sqb.Select("COUNT(*)").From(r.table).
 		Where(where).PlaceholderFormat(sqb.Dollar).ToSql()
 	if err != nil {
-		return 0, errors.Wrap(err, "repository.SneakerProduct.RetrieveQuery")
+		return 0, errors.Wrap(err, "repository.SneakerProduct.FetchQuery")
 	}
 	if err = r.db.SelectContext(ctx, &count, cmd, args); err != nil {
-		return 0, errors.Wrap(err, "repository.SneakerProduct.RetrieveQuery")
+		return 0, errors.Wrap(err, "repository.SneakerProduct.FetchQuery")
 	}
 	return
 }

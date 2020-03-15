@@ -1,19 +1,18 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using RestSharp;
 
 namespace Infrastructure.Gateway.REST.ProductRequests.Sneakers
 {
 	public class GetQueriedSneakersRequest : BaseSneakersListRequest
 	{
-		public GetQueriedSneakersRequest(object queryObject) : base(string.Empty)
+		public GetQueriedSneakersRequest(IEnumerable<string> idCodes) : base("/query")
 		{
-			if (queryObject is IEnumerable)
+			foreach (var obj in codes)
 			{
-				Resource += "/{sneakerId}/";
-				AddParameter("sneakerId", queryObject, ParameterType.QueryString);
-				return;
+				AddParameter("sneakerId", obj, ParameterType.QueryString);
 			}
-			AddObject(queryObject);
+			AddJsonBody(queryObject);
 		}
 	}
 }

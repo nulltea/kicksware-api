@@ -4,11 +4,16 @@ import (
 	"github.com/pkg/errors"
 	"github.com/vmihailenco/msgpack"
 	"product-service/core/model"
+	"product-service/core/service"
 )
 
-type SneakerProduct struct{}
+type serializer struct{}
 
-func (r *SneakerProduct) Decode(input []byte) (*model.SneakerProduct, error) {
+func NewSerializer() service.SneakerProductSerializer {
+	return &serializer{}
+}
+
+func (r *serializer) Decode(input []byte) (*model.SneakerProduct, error) {
 	sneakerProduct := &model.SneakerProduct{}
 	if err := msgpack.Unmarshal(input, sneakerProduct); err != nil {
 		return nil, errors.Wrap(err, "serializer.SneakerProduct.Decode")
@@ -16,7 +21,7 @@ func (r *SneakerProduct) Decode(input []byte) (*model.SneakerProduct, error) {
 	return sneakerProduct, nil
 }
 
-func (r *SneakerProduct) Encode(input *model.SneakerProduct) ([]byte, error) {
+func (r *serializer) Encode(input interface{}) ([]byte, error) {
 	rawMsg, err := msgpack.Marshal(input)
 	if err != nil {
 		return nil, errors.Wrap(err, "serializer.SneakerProduct.Encode")

@@ -25,14 +25,14 @@ namespace Infrastructure.Data
 			return _client.Request<List<SneakerProduct>>(new GetAllSneakersRequest());
 		}
 
-		public List<SneakerProduct> Get(IEnumerable<string> idList)
+		public List<SneakerProduct> Get(IEnumerable<string> idCodes)
 		{
-			return _client.Request<List<SneakerProduct>>(new GetQueriedSneakersRequest(idList));
+			return _client.Request<List<SneakerProduct>>(new GetQueriedSneakersRequest(idCodes));
 		}
 
 		public List<SneakerProduct> Get(object queryObject)
 		{
-			return _client.Request<List<SneakerProduct>>(new GetQueriedSneakersRequest(queryObject));
+			return _client.Request<List<SneakerProduct>>(new GetMapSneakersRequest(queryObject));
 		}
 
 		public SneakerProduct Post(SneakerProduct sneakerProduct)

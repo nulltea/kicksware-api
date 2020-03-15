@@ -2,55 +2,48 @@ package main
 
 import (
 	"fmt"
-	"github.com/go-chi/chi"
-	"github.com/go-chi/chi/middleware"
+	env "github.com/joho/godotenv"
 	"log"
-	"net/http"
 	"os"
-	"os/signal"
-	"product-service/api"
+	"product-service/api/rest"
 	"product-service/core/repo"
-	"product-service/scenario/business"
-	"product-service/storage/mongo"
-	"syscall"
+	"product-service/middleware/business"
+	"product-service/middleware/storage/mongo"
+	"product-service/middleware/storage/postgres"
+	"product-service/middleware/storage/redis"
+	"product-service/server"
+	"strconv"
 )
 
+/*
 const (
 	mongoURL = "mongodb://localhost:27017"
 	mongoDB = "sneaker-resale-platform"
 	mongoCollection = "SneakerProducts"
 	mongoTimeout=30
+	contentType="application/json"
 )
+*/
 
 func main() {
-	repo := getRepo()
+	loadEnv()
+	repo := getRepository()
+	if repo == nil {
+		return
+	}
 	service := business.NewSneakerProductService(repo)
-	handler := api.NewHandler(service)
+	handler := rest.NewHandler(service, os.Getenv("CONTENT_TYPE"))
+	routes := rest.ProvideRoutes(handler)
+	srv := server.NewInstance(os.Getenv("ADDRESS"), os.Getenv("HOST"))
+	srv.SetupRouter(routes)
+	srv.Start()
+}
 
-	r := chi.NewRouter()
-	r.Use(middleware.RequestID)
-	r.Use(middleware.RealIP)
-	r.Use(middleware.Logger)
-	r.Use(middleware.Recoverer)
-
-	r.Get("/products/products/{code}", handler.Get)
-	r.Post("/products/products", handler.Post)
-
-	errs := make(chan error, 2)
-	go func() {
-		fmt.Println("Listening on port :8420")
-		errs <- http.ListenAndServe(httpPort(), r)
-
-	}()
-
-	go func() {
-		c := make(chan os.Signal, 1)
-		signal.Notify(c, syscall.SIGINT)
-		errs <- fmt.Errorf("%s", <-c)
-	}()
-
-	fmt.Printf("Terminated %s", <-errs)
-
+func loadEnv() {
+	err := env.Load("env/.env")
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func httpPort() string {
@@ -61,17 +54,8 @@ func httpPort() string {
 	return fmt.Sprintf(":%s", port)
 }
 
-func getRepo() repo.SneakerProductRepository {
-	repo, err := mongo.NewMongoRepository(mongoURL, mongoDB, mongoCollection, mongoTimeout)
-	if err != nil {
-		log.Fatal(err)
-	}
-	return repo
-}
-
-/*
-func chooseRepoByEnv() model.SneakerProductRepository {
-	switch os.Getenv("URL_DB") {
+func getRepository() repo.SneakerProductRepository {
+	switch os.Getenv("USE_DB") {
 	case "redis":
 		redisURL := os.Getenv("REDIS_URL")
 		repo, err := redis.NewRedisRepository(redisURL)
@@ -83,7 +67,21 @@ func chooseRepoByEnv() model.SneakerProductRepository {
 		mongoURL := os.Getenv("MONGO_URL")
 		mongodb := os.Getenv("MONGO_DB")
 		mongoTimeout, _ := strconv.Atoi(os.Getenv("MONGO_TIMEOUT"))
-		repo, err := mongo.NewMongoRepository(mongoURL, mongodb, mongoTimeout)
+		mongoCollection := os.Getenv("MONGO_COLLECTION")
+		repo, err := mongo.NewMongoRepository(
+			mongoURL,
+			mongodb,
+			mongoCollection,
+			mongoTimeout,
+		)
+		if err != nil {
+			log.Fatal(err)
+		}
+		return repo
+	case "postgres":
+		postgresUrl := os.Getenv("POSTGRES_URL")
+		postgresTable := os.Getenv("POSTGRES_TABLE")
+		repo, err := postgres.NewPostgresRepository(postgresUrl, postgresTable)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -91,4 +89,4 @@ func chooseRepoByEnv() model.SneakerProductRepository {
 	}
 	return nil
 }
-*/
+
