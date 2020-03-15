@@ -34,7 +34,7 @@ func main() {
 	service := business.NewSneakerProductService(repo)
 	handler := rest.NewHandler(service, os.Getenv("CONTENT_TYPE"))
 	routes := rest.ProvideRoutes(handler)
-	srv := server.NewInstance(os.Getenv("ADDRESS"), os.Getenv("HOST"))
+	srv := server.NewInstance(os.Getenv("HOST"))
 	srv.SetupRouter(routes)
 	srv.Start()
 }

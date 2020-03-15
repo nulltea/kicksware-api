@@ -726,6 +726,7 @@ button span {
 	opacity: 0.3;
 	border: none;
 	margin: -50px;
+	background: transparent;
 }
 
 .close-button:hover {

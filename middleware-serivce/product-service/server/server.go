@@ -5,35 +5,23 @@ import (
 	"fmt"
 	"github.com/go-chi/chi"
 	"github.com/pkg/errors"
-	"golang.org/x/crypto/acme/autocert"
 	"net/http"
 	"os"
 	"os/signal"
-	"path/filepath"
 	"time"
 )
 
 type instance struct {
 	Server *http.Server
 	Address string
-	Host string
-	CertManager *autocert.Manager
 }
 
-func NewInstance(addr, host string) *instance {
-	cert := &autocert.Manager{
-		Prompt:     autocert.AcceptTOS,
-		Cache:      autocert.DirCache(cacheDir()),
-		HostPolicy: autocert.HostWhitelist(host),
-	}
+func NewInstance(addr string) *instance {
 	return &instance{
 		Server: &http.Server{
 			Addr:      addr,
-			TLSConfig: cert.TLSConfig(),
 		},
-		Address:     addr,
-		Host:        host,
-		CertManager: cert,
+		Address: addr,
 	}
 }
 
@@ -43,20 +31,17 @@ func (s *instance) SetupRouter(router chi.Router) {
 
 func (s *instance) Start() {
 	errs := make(chan error, 2)
-	fmt.Println(fmt.Sprintf("Listening on port http/https://%v:%v", s.Address, s.Host))
-	go func() {
-		h := s.CertManager.HTTPHandler(nil)
-		errs <- http.ListenAndServe(":http", h)
-	}()
+	fmt.Println(fmt.Sprintf("Listening on port http://%v", s.Address))
 
 	go func() {
-		errs <- s.Server.ListenAndServeTLS("", "")
+		errs <- s.Server.ListenAndServe()
 	}()
 
 	go func() {
 		c := make(chan os.Signal, 1)
 		signal.Notify(c, os.Interrupt)
 		errs <- fmt.Errorf("%s", <-c)
+		s.Shutdown()
 	}()
 
 	fmt.Printf("Terminated %s", <-errs)
@@ -71,12 +56,4 @@ func (s *instance) Shutdown() {
 			errors.Wrap(err, "Failed to shutdown rest server gracefully")
 		}
 	}
-}
-
-func cacheDir() (dir string) {
-	dir = filepath.Join(os.TempDir(), "cache-golang-autocert")
-	if err := os.MkdirAll(dir, 0700); err == nil {
-		return dir
-	}
-	return ""
 }

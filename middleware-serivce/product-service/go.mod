@@ -17,6 +17,7 @@ require (
 	github.com/thoas/go-funk v0.6.0
 	github.com/vmihailenco/msgpack v3.3.3+incompatible
 	go.mongodb.org/mongo-driver v1.3.1
+	golang.org/x/crypto v0.0.0-20190911031432-227b76d455e7
 	google.golang.org/appengine v1.6.5 // indirect
 	gopkg.in/dealancer/validate.v2 v2.1.0
 )

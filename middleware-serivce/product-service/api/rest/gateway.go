@@ -7,15 +7,13 @@ import (
 
 func ProvideRoutes(rest RestfulHandler) *chi.Mux {
 	router := chi.NewRouter()
-	router.Group(func(r chi.Router) {
-		r.Use(
-			middleware.Logger,
-			middleware.Recoverer,
-			middleware.RequestID,
-			middleware.RealIP,
-		)
-		r.Mount("/products/sneakers", restRoutes(rest))
-	})
+	router.Use(
+		middleware.Logger,
+		middleware.Recoverer,
+		middleware.RequestID,
+		middleware.RealIP,
+	)
+	router.Mount("/products/sneakers", restRoutes(rest))
 	return router
 }
 
@@ -29,4 +27,5 @@ func restRoutes(rest RestfulHandler) (r *chi.Mux) {
 	r.Put("/", rest.Put)
 	r.Patch("/", rest.Patch)
 	r.Delete("/{sneakerId}", rest.Delete)
+	return
 }

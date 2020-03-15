@@ -8,11 +8,10 @@ namespace Infrastructure.Gateway.REST.ProductRequests.Sneakers
 	{
 		public GetQueriedSneakersRequest(IEnumerable<string> idCodes) : base("/query")
 		{
-			foreach (var obj in codes)
+			foreach (var id in idCodes)
 			{
-				AddParameter("sneakerId", obj, ParameterType.QueryString);
+				AddParameter("sneakerId", id, ParameterType.QueryString);
 			}
-			AddJsonBody(queryObject);
 		}
 	}
 }

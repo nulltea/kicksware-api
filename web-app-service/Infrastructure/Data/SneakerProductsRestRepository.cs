@@ -81,7 +81,7 @@ namespace Infrastructure.Data
 
 		public Task<List<SneakerProduct>> GetAsync(object queryObject)
 		{
-			return _client.RequestAsync<List<SneakerProduct>>(new GetQueriedSneakersRequest(queryObject));
+			return _client.RequestAsync<List<SneakerProduct>>(new GetMapSneakersRequest(queryObject));
 		}
 
 		public Task<SneakerProduct> PostAsync(SneakerProduct sneakerProduct)
