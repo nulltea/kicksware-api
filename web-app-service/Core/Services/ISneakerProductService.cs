@@ -9,39 +9,43 @@ namespace Core.Services
 	{
 		#region CRUD Sync
 
-		SneakerProduct RetrieveOne(string uniqueId);
+		SneakerProduct FetchOne(string uniqueId);
 
-		List<SneakerProduct> RetrieveAll();
+		List<SneakerProduct> FetchAll();
 
-		List<SneakerProduct> Retrieve(IEnumerable<string> idList);
+		List<SneakerProduct> Fetch(IEnumerable<string> idList);
 
-		List<SneakerProduct> Retrieve(object queryObject);
+		List<SneakerProduct> Fetch(object queryObject);
 
 		SneakerProduct Store(SneakerProduct sneakerProduct);
 
 		bool Modify(SneakerProduct sneakerProduct);
 
+		bool Replace(SneakerProduct sneakerProduct);
+
 		bool Remove(SneakerProduct sneakerProduct);
 
 		bool Remove(string uniqueId);
 
-		int Count(object queryObject); //todo condition
+		int Count(object queryObject);
 
 		#endregion
 
 		#region CRUD Async
 
-		Task<SneakerProduct> RetrieveOneAsync(string uniqueId);
+		Task<SneakerProduct> FetchOneAsync(string uniqueId);
 
-		Task<List<SneakerProduct>> RetrieveAllAsync();
+		Task<List<SneakerProduct>> FetchAllAsync();
 
-		Task<List<SneakerProduct>> RetrieveAsync(IEnumerable<string> idList);
+		Task<List<SneakerProduct>> FetchAsync(IEnumerable<string> idList);
 
-		Task<List<SneakerProduct>> RetrieveAsync(object queryObject);
+		Task<List<SneakerProduct>> FetchAsync(object queryObject);
 
 		Task<SneakerProduct> StoreAsync(SneakerProduct sneakerProduct);
 
 		Task<bool> ModifyAsync(SneakerProduct sneakerProduct);
+
+		Task<bool> ReplaceAsync(SneakerProduct sneakerProduct);
 
 		Task<bool> RemoveAsync(SneakerProduct sneakerProduct);
 
@@ -52,6 +56,10 @@ namespace Core.Services
 		#endregion
 
 		#region Usecases
+
+		bool AttachImages(SneakerProduct sneaker);
+
+		Task<bool> AttachImagesAsync(SneakerProduct sneaker);
 
 		Task<decimal> RequestConditionAnalysis(SneakerProduct sneaker);
 

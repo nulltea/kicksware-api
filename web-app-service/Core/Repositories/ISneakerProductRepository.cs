@@ -2,5 +2,8 @@
 
 namespace Core.Repositories
 {
-	public interface ISneakerProductRepository : IAsyncRepository<SneakerProduct>, IRepository<SneakerProduct> { }
+	public interface ISneakerProductRepository : IAsyncRepository<SneakerProduct>, IRepository<SneakerProduct>
+	{
+
+	}
 }

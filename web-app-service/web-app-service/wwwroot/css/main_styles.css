@@ -366,7 +366,7 @@ section
 {
 	color: #1b1b1b;
 }
-.main_nav ul li.hassubs::after
+/*.main_nav ul li.hassubs::after
 {
 	position: absolute;
 	top: 50%;
@@ -380,7 +380,7 @@ section
 	font-size: 10px;
 	content: '\f078';
 	color: #767676;
-}
+}*/
 .main_nav ul li:hover::after,
 .main_nav ul li.active::after
 {
@@ -390,8 +390,9 @@ section
 	position: absolute;
 	right: -15px;
 	top: calc(100% + 20px);
+	width: 250px;
 	text-align: right;
-	background: #FFFFFF;
+	background: transparent;
 	padding-right: 25px;
 	padding-left: 35px;
 	padding-top: 25px;

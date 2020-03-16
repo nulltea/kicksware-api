@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using web_app_service.Models;
@@ -11,9 +9,9 @@ namespace web_app_service.Controllers
 {
 	public class HomeController : Controller
 	{
-		public List<HomePageInfo> HomeInfo => new List<HomePageInfo>
+		public List<HomePageInfoViewModel> HomeInfo => new List<HomePageInfoViewModel>
 		{
-			new HomePageInfo
+			new HomePageInfoViewModel
 			{
 				Title = "Nike ISPA’s Newest Round Of Releases Is Futurist Perfection",
 				Image = "home_nike_ispa_envelope.jpeg",
@@ -22,7 +20,7 @@ namespace web_app_service.Controllers
 				ButtonCaption = "Shop Now",
 				ButtonAction = Url.Action("Products", "Shop")
 			},
-			new HomePageInfo
+			new HomePageInfoViewModel
 			{
 				Title = "A Closer Look at adidas Consortium's EVO 4D F&F for Paris Fashion Week",
 				Image = "home_addidas_4d.jpg",
@@ -31,7 +29,7 @@ namespace web_app_service.Controllers
 				ButtonCaption = "Sell Now",
 				ButtonAction = Url.Action("Products", "Shop")
 			},
-			new HomePageInfo
+			new HomePageInfoViewModel
 			{
 				Title = "Nike ISPA Armors The Air Max 720 With Rivets From The React Element Soles",
 				Image = "home_nike_ispa_720.jpeg",
@@ -51,7 +49,7 @@ namespace web_app_service.Controllers
 
 		public IActionResult Index()
 		{
-			ViewBag.FeaturedProducts = ShopController.ProductsList; //TODO
+			ViewBag.FeaturedProducts = ShopController.ProductsList.Take(4).ToList(); //TODO
 			return View(HomeInfo);
 		}
 

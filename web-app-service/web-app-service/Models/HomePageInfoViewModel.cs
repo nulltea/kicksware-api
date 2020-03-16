@@ -1,6 +1,6 @@
 ﻿namespace web_app_service.Models
 {
-	public class HomePageInfo
+	public class HomePageInfoViewModel
 	{
 		public string Image { get; set; }
 		public string Title { get; set; }

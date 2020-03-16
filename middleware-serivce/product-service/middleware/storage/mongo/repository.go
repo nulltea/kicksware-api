@@ -54,7 +54,7 @@ func (r *repository) FetchOne(code string) (*model.SneakerProduct, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 	sneakerProduct := &model.SneakerProduct{}
-	filter := bson.M{"UniqueId": code}
+	filter := bson.M{"uniqueid": code}
 	err := r.collection.FindOne(ctx, filter).Decode(&sneakerProduct)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -68,7 +68,7 @@ func (r *repository) FetchOne(code string) (*model.SneakerProduct, error) {
 func (r *repository) Fetch(codes []string) ([]*model.SneakerProduct, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
-	filter := bson.M{"UniqueId": bson.M{"$in": codes}}
+	filter := bson.M{"uniqueid": bson.M{"$in": codes}}
 
 	cursor, err := r.collection.Find(ctx, filter)
 	if err != nil  {
@@ -156,7 +156,7 @@ func (r *repository) Modify(sneakerProduct *model.SneakerProduct) error {
 	update := bson.D{
 		{"$set", doc},
 	}
-	filter := bson.M{"UniqueId": sneakerProduct.UniqueId}
+	filter := bson.M{"uniqueid": sneakerProduct.UniqueId}
 	if _, err = r.collection.UpdateOne(ctx, filter, update); err != nil {
 		return errors.Wrap(err, "repository.SneakerProduct.Modify")
 	}
@@ -166,7 +166,7 @@ func (r *repository) Modify(sneakerProduct *model.SneakerProduct) error {
 func (r *repository) Replace(sneakerProduct *model.SneakerProduct) error {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
-	filter := bson.M{"UniqueId": sneakerProduct.UniqueId}
+	filter := bson.M{"uniqueid": sneakerProduct.UniqueId}
 	if _, err := r.collection.ReplaceOne(ctx, filter, sneakerProduct); err != nil {
 		return errors.Wrap(err, "repository.SneakerProduct.Replace")
 	}
@@ -176,7 +176,7 @@ func (r *repository) Replace(sneakerProduct *model.SneakerProduct) error {
 func (r *repository) Remove(code string) error {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
-	filter := bson.M{"UniqueId": code}
+	filter := bson.M{"uniqueid": code}
 	if _, err := r.collection.DeleteOne(ctx, filter); err != nil {
 		return errors.Wrap(err, "repository.SneakerProduct.Remove")
 	}

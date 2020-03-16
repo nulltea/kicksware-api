@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
+using System.Linq;
+using System.Runtime.Serialization;
 using Core.Entities.Users;
 using Core.Reference;
 using Newtonsoft.Json;
@@ -37,14 +40,28 @@ namespace Core.Entities.Products
 
 		public User Owner { get; set; }
 
-		public List<string> Images => _images ??= new List<string>();
+		[JsonIgnore]
+		public List<string> Photos { get; set; } = new List<string>();
+
+		[JsonProperty("Images")]
+		internal Dictionary<string, byte[]> Images = new Dictionary<string, byte[]>();
 
 		public decimal ConditionIndex { get; set; }
 
 		[JsonIgnore]
 		public DateTime AddedAt { get; set; }
 
-		private List<string> _images = new List<string>();
+		[JsonIgnore]
+		private List<string> _photos = new List<string>();
 
+		[OnDeserialized]
+		internal void OnDeserialized(StreamingContext context)
+		{
+			foreach (var image in Images.Keys.Reverse())
+			{
+				File.WriteAllBytes(Path.Combine(Constants.Constants.FileStoragePath, image), Images[image]);
+				Photos.Add(image);
+			}
+		}
 	}
 }

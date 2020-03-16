@@ -1,4 +1,4 @@
-﻿@model List<web_app_service.Models.HomePageInfo>
+﻿@model List<web_app_service.Models.HomePageInfoViewModel>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var featuredProducts = ViewBag.FeaturedProducts as List<SneakerProductViewModel>;
@@ -82,7 +82,7 @@
                                         break;
                                     }
                                     var product = featuredProducts[y++];
-                                    var image = "/images/" + product.Images.FirstOrDefault() ?? string.Empty;
+                                    var image = "/files/" + product.Photos.FirstOrDefault() ?? string.Empty;
                                     var price = $"{product.Price}$";
                                     <!-- Product -->
                                     <div class="col-sm product">

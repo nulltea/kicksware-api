@@ -304,3 +304,5 @@ C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debu
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Web.dll
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Web.pdb
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Checkout\Checkout.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Sell\MyProducts.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Sell\ModifyProduct.cshtml.g.cs

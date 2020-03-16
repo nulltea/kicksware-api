@@ -39,32 +39,36 @@
         <div class="row">
             <div class="col">
                 <div class="product_grid">
-                    @for (var y = 0; y < Model.Count; y++)
+                    @for (var y = 0; y <= Model.Count;)
                     {
                         <div class="row">
-                        @for (var x = 0; x <= 4; x++)
-                        {
-                            if (y >= Model.Count)
+                            @for (var x = 0; x < 4; x++)
                             {
-                                break;
-                            }
-                            var product = Model[y++];
-                            var image = "/images/" + product.Images.FirstOrDefault() ?? string.Empty;
-                            var price = $"{product.Price}$";
-                            <!-- Product -->
-                            <div class="col-sm product">
-                                <div class="product_image"><img src=@image alt=""></div>
-                                @if (DateTime.Today.Subtract(product.AddedAt).Days < 5)
+                                if (y >= Model.Count)
                                 {
-                                    <div class="product_extra product_new"><a>New</a></div>
+                                    break;
                                 }
-                                <div class="product_content">
-                                    <div class="product_title"><a asp-area="" asp-controller="Shop" asp-action="ProductItem" asp-route-productId=@product.UniqueId>@Html.DisplayFor(modelItem => product.ModelName)</a></div>
-                                    <div class="product_price">@price</div>
+                                var product = Model[y++];
+                                var image = "/files/" + product.Photos.FirstOrDefault() ?? string.Empty;
+                                var price = $"{product.Price}$";
+                                <!-- Product -->
+                                <div class="col-sm-3 product">
+                                    <div class="product_image"><img src=@image alt=""></div>
+                                    @if (DateTime.Today.Subtract(product.AddedAt).Days < 5)
+                                    {
+                                        <div class="product_extra product_new"><a>New</a></div>
+                                    }
+                                    <div class="product_content">
+                                        <div class="product_title"><a asp-area="" asp-controller="Shop" asp-action="ProductItem" asp-route-productId=@product.UniqueId>@Html.DisplayFor(modelItem => product.ModelName)</a></div>
+                                        <div class="product_price">@price</div>
+                                    </div>
                                 </div>
-                            </div>
-                        }
+                            }
                         </div>
+                        if (y >= Model.Count)
+                        {
+                            break;
+                        }
                     }
                     <div class="product_pagination">
                         <ul>

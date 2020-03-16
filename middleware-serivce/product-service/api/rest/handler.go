@@ -20,6 +20,7 @@ type RestfulHandler interface {
 	GetAll(http.ResponseWriter, *http.Request)
 	GetQuery(http.ResponseWriter, *http.Request)
 	Post(http.ResponseWriter, *http.Request)
+	PutImages(http.ResponseWriter, *http.Request)
 	Patch(http.ResponseWriter, *http.Request)
 	Put(http.ResponseWriter, *http.Request)
 	Delete(http.ResponseWriter, *http.Request)
@@ -110,6 +111,27 @@ func (h *handler) Post(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, sneakerProduct, http.StatusOK)
 }
 
+func (h *handler) PutImages(w http.ResponseWriter, r *http.Request) {
+	files, err := h.getRequestFiles(r)
+	if err != nil || len(files) == 0 {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	code := chi.URLParam(r,"sneakerId")
+	sneakerProduct, err := h.Service.FetchOne(code)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	sneakerProduct.Images = files;
+	if err = h.Service.Modify(sneakerProduct); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	h.setupResponse(w, nil, http.StatusOK)
+}
+
 func (h *handler) Patch(w http.ResponseWriter, r *http.Request) {
 	sneakerProduct, err := h.getRequestBody(r)
 	if err != nil {
@@ -186,6 +208,28 @@ func (h *handler) getRequestBody(r *http.Request) (*model.SneakerProduct, error)
 		return nil, err
 	}
 	return body, nil
+}
+
+func (h *handler) getRequestFiles(r *http.Request) (files map[string][]byte, err error) {
+	files = map[string][]byte{}
+	if err := r.ParseMultipartForm(32 << 20 ); err != nil {
+		return nil, err
+	}
+	filesMap := r.MultipartForm.File
+	for _, fh := range filesMap {
+		for _, h := range fh {
+			f, err := h.Open()
+			if err != nil {
+				continue
+			}
+			bytes, err := ioutil.ReadAll(f)
+			if err != nil {
+				continue
+			}
+			files[h.Filename] = bytes
+		}
+	}
+	return
 }
 
 func (h *handler) serializer(contentType string) service.SneakerProductSerializer {

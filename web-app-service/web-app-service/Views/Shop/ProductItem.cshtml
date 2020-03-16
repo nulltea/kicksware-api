@@ -1,7 +1,7 @@
 ﻿@model web_app_service.Models.SneakerProductViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var images = Model.Images.Select(image => "/images/" + image).ToList();
+    var images = Model.Photos.Select(image => "/files/" + image).ToList();
     var relatedProducts = ViewBag.RelatedProducts as List<SneakerProductViewModel>;
 }
 
@@ -114,7 +114,7 @@
                                         break;
                                     }
                                     var product = @relatedProducts[y++];
-                                    var image = "/images/" + product.Images.FirstOrDefault() ?? string.Empty;
+                                    var image = "/files/" + product.Photos.FirstOrDefault() ?? string.Empty;
                                     var price = $"{product.Price}$";
                                     <!-- Product -->
                                     <div class="col-sm product">

@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core.Repositories;
+using Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using web_app_service.Models;
+using web_app_service.Utils;
 
 namespace web_app_service.Controllers
 {
 	public class ShopController : Controller
 	{
-		private readonly ISneakerProductRepository _repository;
+		private readonly ISneakerProductService _service;
 
-		public static List<SneakerProductViewModel> ProductsList => new List<SneakerProductViewModel>
+		public static SneakerProductViewModel[] ProductsList =
 		{
 			new SneakerProductViewModel
 			{
@@ -21,7 +22,7 @@ namespace web_app_service.Controllers
 				Description = "Crazy ones love them AF. My gf gave me these, I ll never sell them!",
 				Price = 999m,
 				ConditionIndex = 99.9m,
-				Images = {"Nike-ISPA-Air-Max-720.jpg"},
+				Photos = {"Nike-ISPA-Air-Max-720.jpg"},
 				AddedAt = new DateTime(2020, 2, 6)
 			},
 			new SneakerProductViewModel
@@ -32,7 +33,7 @@ namespace web_app_service.Controllers
 				Description = "Nike Jordan OG",
 				Price = 200m,
 				ConditionIndex = 89m,
-				Images = {"Nike_Jordan_OG.jpg"},
+				Photos = {"Nike_Jordan_OG.jpg"},
 				AddedAt = new DateTime(2019, 12, 30)
 			},
 			new SneakerProductViewModel
@@ -43,7 +44,7 @@ namespace web_app_service.Controllers
 				Description = "Nike Air Force 1 Blue Wight Green",
 				Price = 150m,
 				ConditionIndex = 77m,
-				Images = {"Nike-Af1-Blue-Wight-Green.jpg"},
+				Photos = {"Nike-Af1-Blue-Wight-Green.jpg"},
 				AddedAt = new DateTime(2020, 2, 1)
 			},
 			new SneakerProductViewModel
@@ -54,26 +55,34 @@ namespace web_app_service.Controllers
 				Description = "Nike Jordan Proto Max 720",
 				Price = 240m,
 				ConditionIndex = 100m,
-				Images = {"Nike-Jordan-Proto-Max-720.jpg"},
+				Photos = {"Nike-Jordan-Proto-Max-720.jpg"},
 				AddedAt = new DateTime(2020, 1, 7)
 			},
 		};
 
-		public ShopController(ISneakerProductRepository repository) => _repository = repository;
+		public ShopController(ISneakerProductService service) => _service = service;
 
+		[HttpGet]
 		public IActionResult Products()
 		{
-			//var products = _repository.GetAll();
-
-			//ProductsList.AddRange(products.Cast<SneakerProductViewModel>());
-
-			return View(ProductsList);
+			var products = _service.FetchAll().ToViewModel();
+#if DEBUG
+			products.AddRange(ProductsList);
+#endif
+			return View(products);
 		}
 
+		[HttpGet]
 		public IActionResult ProductItem(string productId)
 		{
-			var product = ProductsList.FirstOrDefault(p => p.UniqueId == productId);
-			if (product == null) return null;
+			var product = _service.FetchOne(productId)?.ToViewModel();
+#if DEBUG
+			if (product == null)
+			{
+				product = ProductsList.FirstOrDefault(p => p.UniqueId == productId);
+			}
+#endif
+			if (product == null) return NotFound();
 			ViewBag.RelatedProducts = ProductsList;
 			return View(product);
 		}

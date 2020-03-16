@@ -1,4 +1,6 @@
-﻿using Core.Services;
+﻿using System.IO;
+using Core.Services;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using web_app_service.Models;
 
@@ -8,7 +10,9 @@ namespace web_app_service.Controllers
 	{
 		private readonly ISneakerProductService _service;
 
-		public SellController(ISneakerProductService service) => _service = service;
+		private readonly IWebHostEnvironment _environment;
+
+		public SellController(ISneakerProductService service, IWebHostEnvironment environment) => (_service, _environment) = (service, environment);
 
 		[HttpGet]
 		public ActionResult AddProduct()
@@ -22,11 +26,20 @@ namespace web_app_service.Controllers
 			return View();
 		}
 
-		// POST: Sell/Post
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Post([FromForm]SneakerProductViewModel sneakerProduct)
+		public ActionResult Store([FromForm]SneakerProductViewModel sneakerProduct)
 		{
+			foreach (var formFile in sneakerProduct.FormFiles)
+			{
+				if (formFile.Length <= 0) continue;
+				var fileName = Path.ChangeExtension(Path.GetRandomFileName(), Path.GetExtension(formFile.FileName));
+				var filePath = Path.Combine(_environment.WebRootPath, "files", fileName);
+				
+				using var stream = System.IO.File.Create(filePath);
+				formFile.CopyTo(stream);
+				sneakerProduct.Photos.Add(filePath);
+			}
 			var response = _service.Store(sneakerProduct);
 
 			if (response == null) return Problem();
@@ -35,7 +48,7 @@ namespace web_app_service.Controllers
 		}
 
 		[HttpGet]
-		public ActionResult Modify(string productId)
+		public ActionResult ModifyProduct(string productId)
 		{
 			return View();
 		}
@@ -44,9 +57,8 @@ namespace web_app_service.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult Modify([FromForm]SneakerProductViewModel sneakerProduct)
 		{
-			var response = _service.Store(sneakerProduct);
+			if (!_service.Modify(sneakerProduct)) return Problem();
 
-			if (response == null) return Problem();
 
 			return RedirectToAction("Index", "Home");
 		}

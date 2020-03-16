@@ -13,7 +13,7 @@ type SneakerProduct struct {
 	Condition      string
 	Description    string
 	Owner          string
-	Images         []string
+	Images         map[string][]byte
 	ConditionIndex float64
 	AddedAt        time.Time
 }

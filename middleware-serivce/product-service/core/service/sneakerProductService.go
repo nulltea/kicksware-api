@@ -1,7 +1,6 @@
 package service
 
-import model "product-service/core/model"
-
+import "product-service/core/model"
 
 type SneakerProductService interface {
 	FetchOne(code string) (*model.SneakerProduct, error)
