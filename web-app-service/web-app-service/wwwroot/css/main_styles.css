@@ -421,11 +421,12 @@ section
 {
 	margin-bottom: 11px;
 }
-.hassubs ul li a
-{
+.hassubs ul li a {
 	font-size: 18px;
 	font-weight: 600;
 	color: #767676;
+	background: white;
+	padding: 0 5px 2px 5px;
 	-webkit-transition: all 200ms ease;
 	-moz-transition: all 200ms ease;
 	-ms-transition: all 200ms ease;
