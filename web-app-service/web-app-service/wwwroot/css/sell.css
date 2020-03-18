@@ -406,7 +406,7 @@ select-selected:hover {
 
 /* Checked State */
 .input_wrapper input[type="checkbox"]:checked {
-	background: #23da87;
+	background: mediumaquamarine;
 }
 
 .input_wrapper input[type="checkbox"]:checked:after {
@@ -427,12 +427,14 @@ select-selected:hover {
 }
 
 .toggle-box {
-	justify-content: space-between;
+	justify-content: flex-end;
 	font-size: 20px;
 	color: #1b1b1b;
 	font-weight: 500;
 }
 
 .toggle-box span {
-	padding: 10px 0 0 0;
+	padding-right: 15px;
+	display: inline-flex;
+	align-items: center;
 }
