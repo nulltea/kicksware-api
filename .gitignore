@@ -1,3 +1,4 @@
 *.env
 web-app-service/web-app-service/obj
 web-app-service/.vs/
+web-app-service/web-app-service/bin/Debug/

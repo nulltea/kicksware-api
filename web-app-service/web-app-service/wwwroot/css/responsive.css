@@ -87,7 +87,7 @@
 	.main_nav {
 		display: none;
 	}
-	.hamburger {
+	#hamButton {
 		display: inline-block;
 	}
 }
@@ -185,18 +185,6 @@
     .header_container {
         padding-left: 15px;
         padding-right: 15px;
-    }
-	.header-button,
-	.header-button-strong,
-    .main_nav,
-    .header_social {
-        display: none;
-    }
-    .search {
-        display: none;
-    }
-    .hamburger {
-        display: inline-block;
     }
 	.logo {
         margin-left: auto;

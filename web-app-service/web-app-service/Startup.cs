@@ -16,10 +16,9 @@ namespace web_app_service
 {
 	public class Startup
 	{
-		public Startup(IConfiguration configuration)
-		{
-			Configuration = configuration;
-		}
+		public IWebHostEnvironment Environment { get; set; }
+
+		public Startup(IConfiguration configuration, IWebHostEnvironment env) => (Configuration, Environment) = (configuration, env);
 
 		public IConfiguration Configuration { get; }
 
@@ -32,7 +31,10 @@ namespace web_app_service
 			services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
 				.AddEntityFrameworkStores<ApplicationDbContext>();
 			services.AddControllersWithViews();
-			services.AddRazorPages();
+			var builder = services.AddRazorPages();
+#if DEBUG
+			if (Environment.IsDevelopment()) builder.AddRazorRuntimeCompilation();
+#endif
 
 			#region Dependency injection
 
