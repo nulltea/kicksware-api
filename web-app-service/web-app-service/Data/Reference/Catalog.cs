@@ -1,4 +1,10 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Serialization;
 using Core.Reference;
 using Newtonsoft.Json;
 
@@ -20,5 +26,14 @@ namespace web_app_service.Data.Reference_Data
 		/// 
 		/// </summary>
 		public static readonly string[] ColorsList = JsonConvert.DeserializeObject<string[]>(File.ReadAllText(@"Data\Json\colors.json"));
+
+		public static Dictionary<string, string> CurrencySigns { get; } = Enum.GetValues(typeof(Currency)).OfType<Currency>().Select(value =>
+		{
+			var member = value.GetType().GetMember(value.ToString()).First();
+			var code = Convert.ToString((int)value);
+			var sign = member.GetCustomAttribute<DisplayAttribute>()?.ShortName;
+			return (code, sign);
+		}).Where(attr => !string.IsNullOrEmpty(attr.code) && !string.IsNullOrEmpty(attr.sign))
+			.ToDictionary(attr => attr.code, attr => attr.sign);
 	}
 }

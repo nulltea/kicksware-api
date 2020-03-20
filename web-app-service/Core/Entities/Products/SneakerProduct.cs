@@ -27,6 +27,9 @@ namespace Core.Entities.Products
 		public decimal Price { get; set; }
 
 		[JsonConverter(typeof(StringEnumConverter))]
+		public Currency Currency { get; set; } = Currency.UsDollar;
+
+		[JsonConverter(typeof(StringEnumConverter))]
 		public SneakerType Type { get; set; }
 
 		public SneakerSize Size { get; set; }

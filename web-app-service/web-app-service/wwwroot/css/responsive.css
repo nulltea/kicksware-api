@@ -87,7 +87,10 @@
 	.main_nav {
 		display: none;
 	}
-	#hamButton {
+	.icon-nav {
+		right: 124px;
+	}
+	.hamburger {
 		display: inline-block;
 	}
 }
@@ -182,13 +185,7 @@
 
 @media only screen and (max-width: 870px)
 {
-    .header_container {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-	.logo {
-        margin-left: auto;
-	}
+
 }
 
 /************
@@ -246,11 +243,11 @@
 		width: 100vw;
 		right: -100vw;
 	}
-	.menu_container
+	.menu-container
 	{
 		padding-top: 80px;
 	}
-	.page_menu_item > a,
+	.slider-menu-item > a,
 	.page_menu_selection li a
 	{
 		font-size: 13px;

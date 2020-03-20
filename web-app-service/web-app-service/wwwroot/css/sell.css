@@ -83,14 +83,6 @@ input[type="number"].sell_input::-webkit-outer-spin-button,
 input[type="number"].sell_input::-webkit-inner-spin-button {
 	margin-right: 10px;
 }
-.currency {
-	position: absolute;
-	bottom: 22px;
-	left: 15px;
-	font-weight: 700;
-	font-size: 23px;
-	color: #1b1b1b;
-}
 
 input[type="number"].sell_input {
 	padding-left: 40px;
@@ -104,6 +96,7 @@ input[type="number"].sell_input {
 	position: relative;
 	margin-top: 10px;
 	width: 100%;
+	height: 50px;
 	margin-top: 30px;
 	font-weight: 600;
 }
@@ -127,7 +120,7 @@ input[type="number"].sell_input {
 .custom-select {
 	position: inherit;
 	width: 100%;
-	height: auto;
+	height: 50px;
 	background: #f2f4f8;
 	outline: none;
 	border: 3px solid #1b1b1b;
@@ -204,6 +197,7 @@ select-selected:hover {
 	left: -3px;
 	right: -3px;
 	background: white;
+	box-shadow: 3px 5px 10px -1px #6c6a74;
 	z-index: 99;
 	opacity: .95;
 	overflow: auto;
@@ -255,8 +249,11 @@ select-selected:hover {
 .drag-and-drop {
 	width: 200px;
 	height: 100px;
-	border: 3px dashed #1b1b1b;
 	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 3px dashed #1b1b1b;
 	overflow: hidden;
 	cursor: pointer;
 	background: #f2f4f8;
@@ -269,23 +266,12 @@ select-selected:hover {
 
 .drag-and-drop svg {
 	position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
+	text-align: center;
     line-height: 100px;
     color: #1b1b1b;
     font-weight: 600;
     font-size: 15px;
 	z-index: 1
-}
-
-.drag-and-drop #sneaker-logo-other {
-	width: 100%;
-	height: 90px;
-	text-align: center;
-	line-height: 100px;
-	color: #ffffff;
-	padding-top: 5px;
 }
 
 .drag-and-drop input[type="file"] {
@@ -339,6 +325,70 @@ select-selected:hover {
 
 .sneaker-logo {
 
+}
+
+.price-range {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.currency {
+	font-weight: 700;
+	font-size: 23px;
+	color: #1b1b1b;
+}
+
+.price-display {
+	width: 60px;
+	text-align: end;
+	color: #1b1b1b;
+	font-weight: 600;
+}
+
+.price-slider {
+	-webkit-appearance: none;
+	width: 80%;
+	height: 4px;
+	border-radius: 0;
+	background: #1b1b1b;
+	outline: none;
+	opacity: 1;
+	-webkit-transition: all 200ms ease;
+	transition: all 200ms ease;
+	flex: 1;
+}
+
+.price-slider:hover::-webkit-slider-thumb {
+	background: mediumaquamarine;
+}
+
+.price-slider:focus {
+	background: mediumaquamarine;
+}
+
+.price-slider:focus::-webkit-slider-thumb {
+	background: mediumaquamarine;
+}
+
+.price-slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 30px;
+	height: 30px;
+	box-shadow: -3px 3px 3px -2px #6c6a74;
+	background: white;
+	border: 3px solid #1b1b1b;
+	cursor: pointer;
+}
+
+
+.price-slider::-moz-range-thumb {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	border: 3px solid #1b1b1b;
+	cursor: pointer;
 }
 
 .input_wrapper {
