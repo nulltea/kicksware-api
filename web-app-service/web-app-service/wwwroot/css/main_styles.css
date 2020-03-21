@@ -220,7 +220,7 @@ section
 	height: 61px;
 	background: none;
 	text-align: center;
-	border: 3px solid #1b1b1b;
+	border: 2.8px solid #1b1b1b;
 	overflow: hidden;
 	cursor: pointer;
 }
@@ -269,13 +269,14 @@ section
 .button:hover a {
 	color: #FFFFFF;
 }
-.button_light
-{
-	border: solid 3px white;
+.button_light {
+	border: 3px solid white;
 }
 .button_light a
 {
 	color: #FFFFFF;
+	position: relative;
+	z-index: 1;
 }
 .button_light:after
 {
@@ -788,7 +789,7 @@ section
 	position: relative;
 	color: white;
 	background: #1b1b1b;
-	border: 2px solid #1b1b1b;
+	border: 2.2px solid #1b1b1b;
 	display: block;
 	cursor: pointer;
 	right: 0;
@@ -926,7 +927,7 @@ button:focus {
 .login-button.facebook {
 	color: white;
 	background: #4267B2;
-	border: solid 3px #4267B2;
+	border: 2.8px solid #4267B2;
 	margin-bottom: 10px;
 }
 
@@ -936,7 +937,7 @@ button:focus {
 
 .login-button.google {
 	color: #de5246;
-	border: solid 3px #de5246;
+	 border: 2.8px solid #de5246;
 	background-color: white;
 }
 
@@ -987,7 +988,7 @@ button:focus {
 	width: 100%;
 	height: 40px;
 	background: #f2f4f8;
-	border: 3px solid #1b1b1b;
+	border: 2.8px solid #1b1b1b;
 	outline: none;
 	padding-left: 15px;
 }
@@ -1025,7 +1026,7 @@ input[type="checkbox"] + label:before {
 	content: '';
 	width: 20px;
 	height: 20px;
-	border: 3px solid #1b1b1b;
+	border: 2.8px solid #1b1b1b;
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -1034,8 +1035,6 @@ input[type="checkbox"] + label:before {
 input[type="checkbox"]:checked + label:before {
 	background: #1b1b1b;
 }
-
-
 
 /*********************************
 5. Menu

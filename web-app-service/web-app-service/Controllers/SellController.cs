@@ -10,6 +10,7 @@ using Core.Reference;
 using Core.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using web_app_service.Data.Reference_Data;
 using web_app_service.Models;
 
 namespace web_app_service.Controllers
@@ -25,7 +26,11 @@ namespace web_app_service.Controllers
 		[HttpGet]
 		public ActionResult AddProduct()
 		{
-			return View();
+			var sneakerProduct = new SneakerProductViewModel
+			{
+				ShippingInfo = Catalog.DefaultShippingInfo
+			};
+			return View(sneakerProduct);
 		}
 
 		[HttpGet]
@@ -70,7 +75,6 @@ namespace web_app_service.Controllers
 
 			return RedirectToAction("Index", "Home");
 		}
-
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]

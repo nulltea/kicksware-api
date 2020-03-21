@@ -35,5 +35,18 @@ namespace web_app_service.Data.Reference_Data
 			return (code, sign);
 		}).Where(attr => !string.IsNullOrEmpty(attr.code) && !string.IsNullOrEmpty(attr.sign))
 			.ToDictionary(attr => attr.code, attr => attr.sign);
+
+		public static Dictionary<string, ShippingInfo> DefaultShippingInfo { get; } =
+			new Dictionary<string, ShippingInfo>
+			{
+				{"United States",  new ShippingInfo(true, 30m)},
+				{"United Kingdom", new ShippingInfo(true, 30m)},
+				{"Europe",         new ShippingInfo(true, 30m)},
+				{"Russia",         new ShippingInfo(true, 15m)},
+				{"Canada",         new ShippingInfo(true, 30m)},
+				{"Australia / NZ", new ShippingInfo(true, 30m)},
+				{"Asia",           new ShippingInfo(true, 30m)},
+				{"Other",          new ShippingInfo(true, 30m)},
+			};
 	}
 }

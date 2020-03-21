@@ -51,11 +51,10 @@ namespace Core.Entities.Products
 
 		public decimal ConditionIndex { get; set; }
 
-		[JsonIgnore]
-		public DateTime AddedAt { get; set; }
+		public Dictionary<string, ShippingInfo> ShippingInfo { get; set; }
 
 		[JsonIgnore]
-		private List<string> _photos = new List<string>();
+		public DateTime AddedAt { get; set; }
 
 		[OnDeserialized]
 		internal void OnDeserialized(StreamingContext context)

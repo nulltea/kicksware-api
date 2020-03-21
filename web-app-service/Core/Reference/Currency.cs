@@ -32,6 +32,10 @@ namespace Core.Reference
 		[EnumMember(Value = "JPY")]
 		[Display(Name = "Japanese Yen", ShortName = "¥")]
 		JapanYen,
+
+		[EnumMember(Value = "KRW")]
+		[Display(Name = "South Korean won", ShortName = "₩")]
+		KoreaWon
 	}
 
 	//<option value = "USD" > U.S.Dollar </ option >
