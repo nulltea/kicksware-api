@@ -286,7 +286,6 @@ C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debu
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Contact\Contact.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
-C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Sell\AddProduct.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
@@ -591,3 +590,10 @@ C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\bin\Debu
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\bin\Debug\netcoreapp3.1\System.Text.Json.dll
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Web.MvcApplicationPartsAssemblyInfo.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Web.MvcApplicationPartsAssemblyInfo.cache
+C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Sell\New\Details.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Sell\New\Payment.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Sell\New\Photos.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Sell\New\Search.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Sell\New\Shipping.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Sell\NewProduct.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Sell\New\Preview.cshtml.g.cs

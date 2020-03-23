@@ -1,12 +1,6 @@
-﻿$(document).ready(function() {
+﻿$(document).ready(function () {
 	"use strict";
-
-	$(".drag-and-drop input").on("change", function (event) {
-		event.target.parentElement.classList.add("filled");
-	});
-
-
-
+	
 	var displayMax = $(".max-price-display");
 	var displayMin = $(".min-price-display");
 	var maxRangeSlider = $("#price-max");
@@ -30,6 +24,13 @@
 		$(".shipping-info span").each(function() {
 			$(this).text(sign);
 		});
+	}
+
+	function offsetEnabled() {
+		if (offerSign.get(0).checked) {
+			minRangeSlider.addClass("active");
+			displayMin.addClass("active");
+		}
 	}
 
 	function round(num) {
@@ -92,4 +93,5 @@
 
 	displayMaxPrice();
 	displayMinPrice();
+	offsetEnabled();
 });

@@ -22,32 +22,98 @@
 
 @import url('https://fonts.googleapis.com/css?family=Oxanium:300,400,500,600,700,800,900');
 
+
+
+/*********************************
+6. Step progress
+*********************************/
+
+.step-progress-panel {
+	display: flex;
+	justify-content: center;
+	height: 80px;
+	margin-bottom: 60px;
+}
+
+.step-progress-panel ul {
+	width: 90%;
+	height: inherit;
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.step-progress-panel li {
+	display: inline-block;
+	display: flex;
+	align-items: center;
+}
+.step-progress-panel span {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	background: white;
+	border: 3px solid #1b1b1b;
+	box-shadow: 3px 3px 6px -2px gray;
+}
+
+.step-progress-panel svg {
+	width: 25px;
+	height: 25px;
+}
+
+.step-progress-panel li.active span, .step-progress-panel li.passed span {
+	background: #1b1b1b;
+	cursor: pointer;
+}
+
+.step-progress-panel li.active svg, .step-progress-panel li.passed svg {
+	fill: white;
+}
+
+.step-progress-panel li:not(:last-child) {
+	flex: 1;
+}
+
+.step-progress-panel li:not(:last-child):after {
+	content: "";
+	background: white;
+	outline: 3px solid #1b1b1b;
+	box-shadow: 3px 5px 6px 0 grey;
+	height: 3px;
+	width: calc(100% - 50px);
+}
+
+.step-progress-panel li.passed:after {
+	background: #1b1b1b;
+}
+
 /*********************************
 6. Sell
 *********************************/
-
-.sell
-{
+.sell {
 	width: 100%;
 	background: #FFFFFF;
 	z-index: 2;
-    padding-bottom: 97px;
+	padding-bottom: 97px;
 }
 .page_title
 {
 	font-size: 30px;
-	font-weight: 700;
+	font-weight: 600;
 	color: #1b1b1b;
-	margin-left: 14px;
+	margin-left: 0;
 }
 
 .section_title
 {
-	font-size: 25px;
+	font-size: 30px;
 	font-weight: 600;
 	color: black;
-	margin-left: 14px;
 	margin-top: 30px;
+	margin-left: 0;
 }
 .section_subtitle {
 	font-size: 14px;
@@ -59,6 +125,9 @@
 .sell_form_container
 {
 	width: 100%;
+	/*display: flex;
+    flex-direction: column;
+    align-items: center;*/
 }
 .sell_form > div:not(:last-child)
 {
@@ -89,15 +158,20 @@ input[type="number"]::-webkit-inner-spin-button {
 	height: 197px;
 	padding-top: 15px;
 }
-.sell_button {
+
+.sell .button 
+{
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	position: relative;
 	margin-top: 10px;
-	width: 100%;
+	width: 200px;
 	height: 50px;
 	margin-top: 30px;
 	font-weight: 700;
 }
-.sell_button span
+.sell .button span
 {
 	display: block;
 	position: relative;
@@ -109,9 +183,51 @@ input[type="number"]::-webkit-inner-spin-button {
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
-.sell_button:hover span
+.sell .button:hover span
 {
 	color: white;
+}
+
+.sell .button svg
+{
+	position: absolute;
+	fill: #1b1b1b;
+	width: 23px;
+	height: 23px;
+}
+
+.sell .button:hover svg
+{
+	z-index: 1;
+	fill: white;
+}
+
+.form-actions {
+	display: flow-root;
+}
+
+.form-actions button.next {
+	float: right;
+}
+
+.form-actions button.prev {
+	float: left;
+}
+
+.form-actions button.next svg
+{
+	right: 15px;
+}
+
+.form-actions button.prev svg
+{
+	left: 15px;
+	transform: scale(-1, 1);
+}
+
+.form-actions button.prev path
+{
+	transform: translate(2000) scale(-1, 1);
 }
 
 .custom-select {
@@ -427,7 +543,7 @@ select-selected:hover {
 	justify-content: space-between;
 }
 
-.price-button {
+.button.price-button {
 	position: relative;
 	margin-top: 10px;
 	height: 40px;
@@ -436,30 +552,36 @@ select-selected:hover {
 	font-weight: 600;
 	overflow: hidden;
 }
-.price-button span {
+
+.button.price-button span 
+{
 	position: relative;
 	z-index: 1;
 }
 
-.price-button:hover span {
+.button.price-button:hover span
+{
 	color: white;
 }
 
-.price-button:nth-child(1) {
+.button.price-button:nth-child(1) 
+{
 	width: 50px;
 }
 
-.price-button:nth-child(1) span, .price-button:nth-child(3) span {
+.button .price-button:nth-child(1) span, .price-button:nth-child(3) span 
+{
 	font-size: 24px;
 	font-weight: bold;
 }
 
-.price-button:nth-child(2) {
+.button.price-button:nth-child(2) {
 	padding-left: 10px;
 	padding-right: 10px;
 }
 
-.price-button:nth-child(3) {
+.button.price-button:nth-child(3)
+{
 	width: 50px;
 }
 
@@ -536,7 +658,7 @@ select-selected:hover {
 	background: #1b1b1b;
 }
 
-.checkbox-wrapper input[type="checkbox"]:checked + .is-checked {
+.checkbox-wrapper input[type="checkbox"]:checked ~ .is-checked {
 	-webkit-transform: translateX(0) translateY(-30%) scale(1);
 	transform: translateX(0) translateY(-30%) scale(1);
 	fill: #1b1b1b;
@@ -595,4 +717,34 @@ select-selected:hover {
 	left: 15px;
 	color: #1b1b1b;
 	font-weight: 500;
+}
+
+/****************SEARCH*****************/
+
+.search-content {
+	width: 100%;
+}
+
+.search-content input
+{
+	width: 100%;
+	border: none;
+	border-bottom: 3px solid #1b1b1b;
+	background: inherit;
+	border-radius: 0;
+	font-size: 25px;
+}
+
+.search-content button
+{
+	position: absolute;
+	right: 0;
+	background: transparent;
+}
+
+.search-content svg
+{
+	left: 0;
+	width: 28px;
+	height: 28px;
 }

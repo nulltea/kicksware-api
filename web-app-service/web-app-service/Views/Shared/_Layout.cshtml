@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using web_app_service.Utils.Helpers
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,7 +13,7 @@
     <link href="~/lib/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="~/css/main_styles.css">
     <link rel="stylesheet" type="text/css" href="~/css/responsive.css">
-    @RenderSection("Styles", required: false)
+    @RenderSection("Styles", false)
 </head>
 <body>
     <div class="super_container">
@@ -26,9 +27,9 @@
                             <li><a asp-area="" asp-controller="Home" asp-action="Index">Profile</a></li>
                             <li><a asp-area="" asp-controller="Shop" asp-action="Products">Shop</a></li>
                             <li class="hassubs">
-                                <a asp-area="" asp-controller="Sell" asp-action="AddProduct">Sell</a>
+                                <a asp-area="" asp-controller="Sell" asp-action="NewProduct">Sell</a>
                                 <ul>
-                                    <li><a asp-area="" asp-controller="Sell" asp-action="AddProduct">Create new product</a></li>
+                                    <li><a asp-area="" asp-controller="Sell" asp-action="NewProduct">Create new product</a></li>
                                     <li><a asp-area="" asp-controller="Sell" asp-action="MyProducts">My products</a></li>
                                 </ul>
                             </li>
@@ -75,7 +76,7 @@
             <div class="search_panel trans_500">
                 <div class="search_panel_content">
                     <form action="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><use href="#search-path"/></svg>
+                        @Html.VectorIconRender("search.svg")
                         <input type="text" class="search_input" required="required">
                         <button type="button" class="close-button"></button>
                     </form>
@@ -92,7 +93,7 @@
                     <div class="slider-menu-content">
                         <div class="slider-menu-search">
                             <form action="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><use href="#search-path" /></svg>
+                                @Html.VectorIconRender("search.svg")
                                 <input type="search" required="required" class="menu-search-input">
                             </form>
                         </div>
@@ -100,7 +101,7 @@
                             <li class="slider-menu-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                             <li class="slider-menu-item"><a asp-area="" asp-controller="Home" asp-action="Index">Profile</a></li>
                             <li class="slider-menu-item"><a asp-area="" asp-controller="Shop" asp-action="Products">Shop</a></li>
-                            <li class="slider-menu-item"><a asp-area="" asp-controller="Sell" asp-action="AddProduct">Sell</a></li>
+                            <li class="slider-menu-item"><a asp-area="" asp-controller="Sell" asp-action="NewProduct">Sell</a></li>
                             <li class="slider-menu-item"><a asp-area="" asp-controller="Home" asp-action="Index">About</a></li>
                             <li class="slider-menu-item"><a asp-area="" asp-controller="Contact" asp-action="Contact">Contacts</a></li>
                         </ul>
@@ -131,7 +132,7 @@
                             <span id="facebook-btn-caption">Sign up with Facebook</span>
                         </a>
                         <a class="button login-button google" id="google-btn" asp-controller="Auth" asp-action="Google">
-                            <svg class="google-logo" aria-hidden="true" focusable="false" width="15" height="15" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8c-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C12.955 4 4 12.955 4 24s8.955 20 20 20s20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z" /><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C16.318 4 9.656 8.337 6.306 14.691z" /><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z" /><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002l6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+                            <svg class="google-logo" aria-hidden="true" focusable="false" width="15" height="15" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8c-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C12.955 4 4 12.955 4 24s8.955 20 20 20s20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z" /><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C16.318 4 9.656 8.337 6.306 14.691z" /><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z" /><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002l6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z" /></svg>
                             <span id="google-btn-caption">Sign up with Google</span>
                         </a>
                         <hr>
@@ -183,8 +184,36 @@
                 </div>
             </div>
         </div>
+        <div class="page-content">
+            @RenderBody()
+        </div>
+        
 
-        @RenderBody()
+        <div class="footer_overlay"></div>
+        <footer class="footer">
+            @*<div class="footer_background" style="background-image: url(/images/footer.jpeg)"></div>*@
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="footer_content d-flex flex-lg-row flex-column align-items-center justify-content-lg-start justify-content-center">
+                            <div class="footer_logo"><a href="#">HighTop</a></div>
+                            <div class="copyright ml-auto mr-auto">
+                                Copyright &copy;
+                                <script>document.write(new Date().getFullYear());</script> All rights reserved
+                            </div>
+                            <div class="footer_social ml-lg-auto">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/css/bootstrap4/popper.js"></script>
@@ -197,35 +226,9 @@
     <script src="~/lib/parallax-js-master/parallax.min.js"></script>
     <script src="~/js/layout.js"></script>
     <script src="~/js/service.js"></script>
-    @RenderSection("Scripts", required: false)
+    @RenderSection("Scripts", false)
     <script>
         $(".facebook-logo-svg").html('<path class="facebook" d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-92.4 233.5h-63.9c-50.1 0-59.8 23.8-59.8 58.8v77.1h119.6l-15.6 120.7h-104V912H539.2V602.2H434.9V481.4h104.3v-89c0-103.3 63.1-159.6 155.3-159.6c44.2 0 82.1 3.3 93.2 4.8v107.9z" fill="white"/>')
     </script>
-
-<div class="footer_overlay"></div>
-    <footer class="footer">
-        @*<div class="footer_background" style="background-image: url(/images/footer.jpeg)"></div>*@
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="footer_content d-flex flex-lg-row flex-column align-items-center justify-content-lg-start justify-content-center">
-                        <div class="footer_logo"><a href="#">HighTop</a></div>
-                        <div class="copyright ml-auto mr-auto">
-                            Copyright &copy;
-                            <script>document.write(new Date().getFullYear());</script> All rights reserved
-                        </div>
-                        <div class="footer_social ml-lg-auto">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
 </body>
 </html>

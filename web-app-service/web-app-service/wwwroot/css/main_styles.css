@@ -193,12 +193,19 @@ section
 	height: 100%;
 }
 .super_container {
+	display: flex;
+	flex-direction: column;
 	width: 100%;
 	overflow: hidden;
+	min-height: 100vh;
+}
+
+.page-content {
+	flex: 1;
 	box-shadow: 0 5px 20px -3px rgba(55, 55, 55, .7);
 }
-.prlx_parent
-{
+
+.prlx_parent {
 	overflow: hidden;
 }
 .prlx

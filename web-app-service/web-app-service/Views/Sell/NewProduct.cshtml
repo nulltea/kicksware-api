@@ -1,0 +1,67 @@
+﻿@using web_app_service.Utils.Helpers
+@using web_app_service.Wizards
+@model SneakerProductViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var steps = ViewBag.Steps as WizardSteps;
+}
+
+@section Styles
+{
+    <link href="~/css/sell.css" rel="stylesheet" />
+    <link href="~/css/sell_responsive.css" rel="stylesheet" />
+    @RenderSection("Styles", required: false)
+}
+
+
+<div class="sell">
+    <div class="container">
+        @*<div class="section_title">Sell your sneakers</div>
+            <div class="section_subtitle">Better be good one...</div>*@
+        <div class="sell_form_container">
+            <div class="step-progress-panel">
+                <ul>
+                    @if (steps != null)
+                    {
+                        foreach (var step in steps)
+                        {
+                            @step.RenderStep()
+                        }
+                    }
+                </ul>
+            </div>
+            <form asp-action="@steps?.ActiveStep.Name" id="sell_form" class="sell_form" autocomplete="off" enctype="multipart/form-data">
+                <div class="container">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row page_title"> @steps?.ActiveStep.Name.ToUpper()</div>
+                    <div class="row">
+                        @RenderBody()
+                        @foreach (var hidden in Html.HiddenForWizardStep(steps?.ActiveStep, model => model, ModelExpressionProvider))
+                        {
+                            @hidden
+                        }
+                    </div>
+                    <div class="form-actions">
+                        @if (steps != null)
+                        {
+                            var start = steps.ActiveStep.PreviousStep is null;
+                            var finish = steps.ActiveStep.NextStep is null;
+                            @if (!start)
+                            {
+                                <button type="submit" class="button cancel prev" CausesValidation="False" name="rollback" value="True"><span>@steps.ActiveStep.PreviousStep!.Name.ToUpper()</span>@Html.VectorIconRender("arrow.svg")</button>
+                            }
+                            <button type="submit" class="button next"><span>@(finish ? "SUBMIT" : steps.ActiveStep.NextStep?.Name.ToUpper())</span>@Html.VectorIconRender(finish ? "upload.svg" : "arrow.svg")</button>
+                        }
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/sell/sell.js"></script>
+    @RenderSection("Scripts", false)
+}
