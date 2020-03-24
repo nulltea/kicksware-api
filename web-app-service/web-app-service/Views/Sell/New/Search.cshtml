@@ -7,25 +7,42 @@
     Layout = "~/Views/Sell/NewProduct.cshtml";
 }
 
+@section Styles
+{
+    <link rel="stylesheet/less" type="text/css" href="~/css/sell/search.less" />
+}
 
-    <div class="container search-content">
-        <div class="row">
-            <div class="col-sm mx-3">
+
+<div class="container search-content">
+    <ul class="tabs-control" role="tablist">
+        <li>
+            <input type="radio" name="tabs" id="tab1" checked />
+            <label for="tab1" role="tab" aria-selected="true" aria-controls="panel1" tabindex="0">Search</label>
+            <div id="tab-content1" class="tab-content" role="tabpanel" aria-labelledby="description" aria-hidden="false">
                 <div class="row my-3">
                     <input type="text">
+                    <div class="list-select">
+                        <select asp-items="@Html.GetEnumSelectList<SearchType>()" class="dropdown_item_select" id="currency">
+                            <option disabled="">Category</option>
+                        </select>
+                    </div>
                     <button type="button">@Html.VectorIconRender("search.svg")</button>
                 </div>
-                <div class="row my-3">
+            </div>
+        </li>
+        <li>
+            <input type="radio" name="tabs" id="tab2" />
+            <label for="tab2" role="tab" aria-selected="false" aria-controls="panel2" tabindex="0">Photo</label>
+            <div id="tab-content2" class="tab-content" role="tabpanel" aria-labelledby="specification" aria-hidden="true">
+                @*TODO Image Search*@
+            </div>
+        </li>
+    </ul>
+</div>
 
-                </div>
-            </div>
-            <div class="col-sm mx-3">
-                <div class="row my-3">
-                   
-                </div>
-                <div class="row my-3">
-                    
-                </div>
-            </div>
-        </div>
-    </div>
+@section Scripts
+{
+    <script type="text/javascript">
+        initCustomDropDown();
+    </script>
+}

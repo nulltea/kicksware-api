@@ -1,0 +1,51 @@
+﻿body
+{
+	@main-color: #1b1b1b;
+	@backgroud-color: #ffffff;
+	@hint-color: #f2f4f8;
+	@active-color: mediumaquamarine;
+	@shadow-color: #6c6a74;
+
+	.sell
+	{
+		.shipping-row
+		{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			border-bottom: 3px solid @main-color;
+
+			span
+			{
+				color: @main-color;
+				font-weight: 600;
+			}
+
+			.shipping-info
+			{
+				display: flex;
+				width: 250px;
+				justify-content: space-between;
+
+				input[type="number"]
+				{
+					width: 150px;
+					height: 40px;
+					background: @hint-color;
+					border: 2.8px solid @main-color;
+					outline: none;
+					padding-left: 40px;
+				}
+
+				span
+				{
+					position: absolute;
+					top: 7px;
+					left: 15px;
+					color: @main-color;
+					font-weight: 500;
+				}
+			}
+		}
+	}
+}

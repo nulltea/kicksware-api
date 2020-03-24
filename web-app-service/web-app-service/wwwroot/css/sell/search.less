@@ -1,0 +1,169 @@
+﻿body
+{
+	@main-color: #1b1b1b;
+	@backgroud-color: #ffffff;
+	@hint-color: #f2f4f8;
+	@active-color: mediumaquamarine;
+	@disactive-color: #eff0f2;
+	@shadow-color: #6c6a74;
+
+	@tabs-base-color: #8e44ad;
+
+	.sell
+	{
+		.search-content
+		{
+			display: flex;
+			width: 100%;
+			margin-top: 30px;
+
+			.tabs-control
+			{
+				display: flex;
+				width: 100%;
+
+				li
+				{
+					display: flex;
+					width: 50%;
+					flex-direction: column;
+
+					&:last-child
+					{
+						& label
+						{
+							box-shadow: -3px 5px 5px 0 @shadow-color;
+						}
+
+						& :last-child
+						{
+							margin-left: -100%;
+						}
+					}
+
+					&:first-child
+					{
+						& label
+						{
+							box-shadow: 3px 5px 5px 0 @shadow-color;
+						}
+					}
+
+					input[type="radio"]
+					{
+						position: absolute;
+						-webkit-appearance: none;
+					}
+
+					label
+					{
+						display: block;
+						margin: 0;
+						padding: 14px 21px;
+						font-size: 20px;
+						font-weight: 600;
+						text-transform: uppercase;
+						color: @main-color;
+						background: @disactive-color;
+						cursor: pointer;
+						position: relative;
+						top: 4px;
+						.transition-properties(all 0.2s ease-in-out);
+
+						&:hover
+						{
+						}
+
+						&:focus
+						{
+							outline: none;
+						}
+					}
+
+					.tab-content
+					{
+						z-index: 2;
+						display: none;
+						overflow: hidden;
+						width: 200%;
+						font-size: 17px;
+						height: 350px;
+						padding: 25px;
+						left: 0;
+						background: @backgroud-color;
+						border-top: 3px solid @main-color;
+
+						.row
+						{
+							display: flex;
+							flex-direction: row;
+						}
+
+						input
+						{
+							width: calc(100% - 250px);
+							padding-left: 20px;
+							border: 3px solid @main-color;
+							border-radius: 0;
+							background: inherit;
+							outline: none;
+							font-size: 20px;
+						}
+
+						button
+						{
+							right: 0;
+							width: 50px;
+							background: transparent;
+							border: 3px solid @main-color;
+
+							svg
+							{
+								left: 0;
+								width: 28px;
+								height: 28px;
+							}
+						}
+
+						.list-select
+						{
+							width: 200px;
+							background: @backgroud-color;
+							border: none;
+							border-bottom: 3px solid @main-color;
+							border-top: 3px solid @main-color;
+
+							.select-selected
+							{
+								padding-left: 20px;
+							}
+						}
+					}
+					//The Magic
+					[id^="tab"]:checked + label
+					{
+						top: 0;
+						padding-top: 17px;
+						background: @main-color;
+						color: @backgroud-color;
+						z-index: 2;
+					}
+
+					[id^="tab"]:checked ~ [id^="tab-content"]
+					{
+						display: block;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+	.transition-properties(...)
+	{
+		-webkit-transition: @arguments;
+		-moz-transition: @arguments;
+		-o-transition: @arguments;
+		transition: @arguments;
+	}

@@ -6,6 +6,11 @@
     Layout = "~/Views/Sell/NewProduct.cshtml";
 }
 
+@section Styles
+{
+    <link rel="stylesheet/less" type="text/css" href="~/css/sell/shipping.less" />
+}
+
 @for (var col = 0; col < Model.ShippingInfo.Count / 4; col++)
 {
     <div class="col-sm mx-3">

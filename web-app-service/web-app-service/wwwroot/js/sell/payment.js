@@ -81,7 +81,7 @@
 		}
 		displayMinPrice();
 	});
-	$(".custom-select").on("click", function () {
+	$(".list-select").on("click", function () {
 		displayMaxPrice();
 		displayMinPrice();
 		setShippingCurrency();

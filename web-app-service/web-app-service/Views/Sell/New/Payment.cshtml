@@ -9,8 +9,8 @@
 }
 
 @section Styles
-{ 
-
+{
+    <link rel="stylesheet/less" type="text/css" href="~/css/sell/payment.less" />
 }
 
 <div class="container">
@@ -23,7 +23,7 @@
                     <span class="min-price-display">0</span>
                     <div class="multi-range">
                         <input asp-for="Price" type="range" id="price-max" class="price-slider" min="50" value="@Model.Price" max="1000" />
-                        <input asp-for="PriceOffset" type="range" id="price-min" class="price-slider" min="50" value="@Model.PriceOffset" max="1000"/>
+                        <input asp-for="PriceOffset" type="range" id="price-min" class="price-slider" min="50" value="@Model.PriceOffset" max="1000" />
                     </div>
                     <span class="max-price-display">0</span>
                 </div>
@@ -48,7 +48,7 @@
             </div>
             <div class="row py-3">
                 <label for="currency">Currency</label>
-                <div class="custom-select">
+                <div class="list-select">
                     <select asp-for="Currency" asp-items="@Html.GetEnumSelectList<Currency>()" class="dropdown_item_select sell_input" id="currency">
                         <option disabled="">Currency</option>
                     </select>

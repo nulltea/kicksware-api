@@ -1,3 +1,4 @@
+using System.IO;
 using Core.Repositories;
 using Core.Services;
 using Infrastructure.Data;
@@ -6,10 +7,12 @@ using Infrastructure.Usecase;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using web_app_service.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using web_app_service.Models;
 using web_app_service.Wizards;
@@ -91,6 +94,14 @@ namespace web_app_service
 					name: "default",
 					pattern: "{controller=Home}/{action=Index}/{id?}");
 				endpoints.MapRazorPages();
+			});
+
+			var provider = new FileExtensionContentTypeProvider();
+			provider.Mappings[".less"] = "plain/text";
+
+			app.UseStaticFiles(new StaticFileOptions
+			{
+				ContentTypeProvider = provider
 			});
 		}
 	}

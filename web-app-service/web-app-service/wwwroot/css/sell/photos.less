@@ -1,0 +1,101 @@
+﻿body
+{
+	@main-color: #1b1b1b;
+	@backgroud-color: #ffffff;
+	@hint-color: #f2f4f8;
+	@active-color: mediumaquamarine;
+	@shadow-color: #6c6a74;
+
+	.sell
+	{
+
+		.drag-and-drop
+		{
+			width: 200px;
+			height: 100px;
+			z-index: 1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border: 2.8px dashed @main-color;
+			overflow: hidden;
+			cursor: pointer;
+			background: @hint-color;
+
+			svg
+			{
+				position: relative;
+				text-align: center;
+				line-height: 100px;
+				color: @main-color;
+				font-weight: 600;
+				font-size: 15px;
+				z-index: 1
+			}
+
+			path
+			{
+				fill: @main-color;
+			}
+
+			input[type="file"]
+			{
+				position: absolute;
+				margin: 0;
+				padding: 0;
+				width: 100%;
+				height: 100%;
+				outline: none;
+				opacity: 0;
+				z-index: 2;
+			}
+
+			&.filled
+			{
+				border: 2.8px solid @main-color;
+				background: @active-color;
+
+				&:hover path
+				{
+					fill: @active-color;
+				}
+			}
+
+			&:after
+			{
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: @main-color;
+				z-index: 0;
+				opacity: 0;
+				-webkit-transform: rotate3d(0, 0, 1, -45deg) translate3d(0, -3em, 0);
+				transform: rotate3d(0, 0, 1, -45deg) translate3d(0, -3em, 0);
+				-webkit-transform-origin: 0% 100%;
+				transform-origin: 0% 100%;
+				-webkit-transition: -webkit-transform 0.3s, opacity 0.3s, background-color 0.3s;
+				transition: transform 0.3s, opacity 0.3s, background-color 0.3s;
+			}
+
+			&:hover
+			{
+				path
+				{
+					fill: @backgroud-color;
+				}
+			}
+
+			&:hover::after
+			{
+				opacity: 1;
+				-webkit-transform: rotate3d(0, 0, 1, 0deg);
+				transform: rotate3d(0, 0, 1, 0deg);
+				-webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+				transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+			}
+		}
+	}
+}

@@ -86,7 +86,7 @@
 }
 
 function initCustomDropDown() {
-	var customSelectors = document.getElementsByClassName("custom-select");
+	var customSelectors = document.getElementsByClassName("list-select");
 	for (var i = 0; i < customSelectors.length; i++) {
 		var selectElements = customSelectors[i].getElementsByTagName("select")[0];
 		/* For each element, create a new DIV that will act as the selected item: */

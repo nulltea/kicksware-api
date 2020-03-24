@@ -9,7 +9,7 @@
 
 @section Styles
 {
-    
+    <link rel="stylesheet/less" type="text/css" href="~/css/sell/details.less" />
 }
 
 <div class="container">
@@ -24,7 +24,7 @@
             <div class="row my-3">
                 <!-- Type -->
                 <label asp-for="Price" for="type-input">Type</label>
-                <div class="custom-select">
+                <div class="list-select">
                     <select asp-for="Type" id="type-input" asp-items="@Html.GetEnumSelectList<SneakerType>()" class="dropdown_item_select sell_input" placeholder="Type" required="required">
                         <option disabled="">Type</option>
                     </select>
@@ -41,7 +41,7 @@
             <div class="row my-3">
                 <!-- Size -->
                 <label asp-for="Size" for="size-input">Size</label>
-                <div class="custom-select">
+                <div class="list-select">
                     <select asp-for="Size" id="size-input" class="dropdown_item_select sell_input" placeholder="Size" required="required">
                         <option value="0" disabled>Size</option>
                         @foreach (var sneakerSize in Catalog.SneakerSizesList)
@@ -64,7 +64,7 @@
             <div class="row my-3">
                 <!-- Condition -->
                 <label asp-for="Condition" for="condition-input">Condition</label>
-                <div class="custom-select">
+                <div class="list-select">
                     <select asp-for="Condition" id="condition-input" asp-items="@Html.GetEnumSelectList<SneakerCondition>()" class="dropdown_item_select sell_input" placeholder="Condition" required="required">
                         <option disabled="">Type</option>
                     </select>
