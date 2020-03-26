@@ -54,7 +54,7 @@ func (r *repository) FetchOne(code string) (*model.SneakerReference, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 	sneakerProduct := &model.SneakerReference{}
-	filter := bson.M{"uniqueid": code}
+	filter := bson.M{"UniqueId": code}
 	err := r.collection.FindOne(ctx, filter).Decode(&sneakerProduct)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -68,7 +68,7 @@ func (r *repository) FetchOne(code string) (*model.SneakerReference, error) {
 func (r *repository) Fetch(codes []string) ([]*model.SneakerReference, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
-	filter := bson.M{"uniqueid": bson.M{"$in": codes}}
+	filter := bson.M{"UniqueId": bson.M{"$in": codes}}
 
 	cursor, err := r.collection.Find(ctx, filter)
 	if err != nil  {

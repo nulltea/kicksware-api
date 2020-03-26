@@ -1,0 +1,4 @@
+GET http://localhost:9200/sneaker_reference/_search
+
+
+###

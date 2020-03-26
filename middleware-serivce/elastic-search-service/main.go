@@ -6,7 +6,6 @@ import (
 	"elastic-search-service/middleware/business"
 	"elastic-search-service/middleware/storage/mongo"
 	"elastic-search-service/middleware/storage/postgres"
-	"elastic-search-service/middleware/storage/redis"
 	"elastic-search-service/server"
 	"fmt"
 	env "github.com/joho/godotenv"
@@ -46,13 +45,6 @@ func httpPort() string {
 
 func getRepository() repo.SneakerReferenceRepository {
 	switch os.Getenv("USE_DB") {
-	case "redis":
-		redisURL := os.Getenv("REDIS_URL")
-		repo, err := redis.NewRedisRepository(redisURL)
-		if err != nil {
-			log.Fatal(err)
-		}
-		return repo
 	case "mongo":
 		mongoURL := os.Getenv("MONGO_URL")
 		mongodb := os.Getenv("MONGO_DB")
