@@ -57,9 +57,10 @@
 
 					label
 					{
-						display: block;
+						display: flex;
+						align-items: center;
 						margin: 0;
-						padding: 10px 15px;
+						padding: 15px 15px 10px 15px;
 						font-size: 20px;
 						font-weight: 600;
 						text-transform: uppercase;
@@ -67,17 +68,34 @@
 						background: @disactive-color;
 						cursor: pointer;
 						position: relative;
-						top: 4px;
+						bottom: -5px;
 						.transition-properties(all 0.2s ease-in-out);
-
-						&:hover
-						{
-						}
 
 						&:focus
 						{
+							top: 0;
 							outline: none;
 						}
+					}
+
+					[id^="tab"]:checked + label
+					{
+						bottom: 0;
+						background: @main-color;
+						color: @backgroud-color;
+						z-index: 2;
+					}
+
+					[id^="tab"]:not(:checked) ~ label:hover
+					{
+						bottom: 0;
+						transition: bottom 0.25s;
+					}
+
+					[id^="tab"]:checked ~ [id^="tab-content"]
+					{
+						bottom: 0;
+						display: block;
 					}
 
 					.tab-content
@@ -99,58 +117,75 @@
 							flex-direction: row;
 						}
 
-						input
+						.row:first-child //search panel
 						{
-							width: calc(100% - 250px);
-							padding-left: 20px;
-							border: 3px solid @main-color;
-							border-radius: 0;
-							background: inherit;
-							outline: none;
-							font-size: 20px;
-						}
-
-						button
-						{
-							right: 0;
-							width: 50px;
-							background: transparent;
-							border: 3px solid @main-color;
-
-							svg
+							input
 							{
-								left: 0;
-								width: 28px;
-								height: 28px;
-							}
-						}
-
-						.list-select
-						{
-							width: 200px;
-							background: @backgroud-color;
-							border: none;
-							border-bottom: 3px solid @main-color;
-							border-top: 3px solid @main-color;
-
-							.select-selected
-							{
+								width: calc(100% - 250px);
 								padding-left: 20px;
+								border: none;
+								border-bottom: 3px solid @main-color;
+								border-top: 3px solid @main-color;
+								border-radius: 0;
+								background: inherit;
+								outline: none;
+								font-size: 20px;
+							}
+
+							span
+							{
+								display: flex;
+								align-items: center;
+								justify-content: center;
+								width: 50px;
+								margin: 0;
+								background: transparent;
+								border: 3px solid @main-color;
+								border-right: none;
+
+								svg
+								{
+									width: 28px;
+									height: 28px;
+								}
+
+								&:hover path
+								{
+									fill: @backgroud-color;
+								}
+							}
+
+							.list-select
+							{
+								width: 200px;
+								background: @backgroud-color;
+								border: 3px solid @main-color;
+
+								.select-selected
+								{
+									padding-left: 20px;
+								}
 							}
 						}
-					}
 
-					[id^="tab"]:checked + label
-					{
-						top: 0;
-						background: @main-color;
-						color: @backgroud-color;
-						z-index: 2;
-					}
+						.row:last-child //result table
+						{
+							.search-container
+							{
+								width: 100%;
+								display: grid;
+								grid-template-columns: auto auto auto;
 
-					[id^="tab"]:checked ~ [id^="tab-content"]
-					{
-						display: block;
+								.search-item
+								{
+									background-color: rgba(255, 255, 255, 0.8);
+									border: 1px solid rgba(0, 0, 0, 0.8);
+									padding: 20px;
+									font-size: 30px;
+									text-align: center;
+								}
+							}
+						}
 					}
 				}
 			}

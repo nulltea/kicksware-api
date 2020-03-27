@@ -1,4 +1,3 @@
-using System.IO;
 using Core.Repositories;
 using Core.Services;
 using Infrastructure.Data;
@@ -12,10 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using web_app_service.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using web_app_service.Models;
-using web_app_service.Wizards;
 
 namespace web_app_service
 {
@@ -46,6 +42,7 @@ namespace web_app_service
 			services.AddSingleton<RestfulClient, RestfulClient>();
 			services.AddSingleton<ISneakerProductRepository, SneakerProductsRestRepository>();
 			services.AddSingleton<ISneakerProductService, SneakerProductService>();
+			services.AddSingleton<IReferenceSearchService, ReferenceSearchService>();
 
 			#endregion
 

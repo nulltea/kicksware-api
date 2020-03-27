@@ -1,7 +1,5 @@
 ﻿@using Core.Reference
-@using web_app_service.Data.Reference_Data
 @using web_app_service.Utils.Helpers
-@model SneakerProductViewModel
 
 @{
     Layout = "~/Views/Sell/NewProduct.cshtml";
@@ -18,15 +16,25 @@
         <li>
             <input type="radio" name="tabs" id="tab1" checked />
             <label for="tab1" role="tab" aria-selected="true" aria-controls="panel1" tabindex="0">Search</label>
-            <div id="tab-content1" class="tab-content" role="tabpanel" aria-labelledby="description" aria-hidden="false">
+            <div id="tab-content1" class="tab-content" role="tabpanel" aria-hidden="false">
                 <div class="row my-3">
-                    <input type="text">
-                    <div class="list-select">
-                        <select asp-items="@Html.GetEnumSelectList<SearchType>()" class="dropdown_item_select" id="currency">
-                            <option disabled="">Category</option>
-                        </select>
+                    <form asp-controller="Sell" asp-action="SearchIn">
+                        <span>@Html.VectorIconRender("search.svg")</span>
+                        <input type="text" name="query">
+                        <div class="list-select">
+                            <select asp-items="@Html.GetEnumSelectList<SearchType>()" class="dropdown_item_select" id="currency">
+                                <option disabled="">Category</option>
+                            </select>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="row my-3">
+                    <div class="search-container">
+                        <div class="search-item">
+
+                        </div>
                     </div>
-                    <button type="button">@Html.VectorIconRender("search.svg")</button>
                 </div>
             </div>
         </li>
@@ -44,5 +52,13 @@
 {
     <script type="text/javascript">
         initCustomDropDown();
+            $("form input").keypress(function(e) {
+                if ((e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) {
+                    $("form").submit();
+                    return false;
+                } else {
+                    return true;
+                }
+            });
     </script>
 }

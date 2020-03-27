@@ -34,9 +34,12 @@
                     <div class="row page_title"> @steps?.ActiveStep.Name.ToUpper()</div>
                     <div class="row">
                         @RenderBody()
-                        @foreach (var hidden in Html.HiddenForWizardStep(steps?.ActiveStep, model => model, ModelExpressionProvider))
+                        @if (Model != null)
                         {
-                            @hidden
+                            @foreach (var hidden in Html.HiddenForWizardStep(steps?.ActiveStep, model => model, ModelExpressionProvider))
+                            {
+                                @hidden
+                            }
                         }
                     </div>
                     <div class="form-actions">
