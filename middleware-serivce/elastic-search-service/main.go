@@ -21,6 +21,7 @@ func main() {
 		return
 	}
 	service := business.NewSneakerReferenceService(repo)
+	//service.SyncAll();
 	handler := rest.NewHandler(service, os.Getenv("CONTENT_TYPE"))
 	routes := rest.ProvideRoutes(handler)
 	srv := server.NewInstance(os.Getenv("HOST"))

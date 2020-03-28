@@ -105,7 +105,6 @@
 						overflow: hidden;
 						width: 200%;
 						font-size: 17px;
-						height: 350px;
 						padding: 25px;
 						left: 0;
 						background: @backgroud-color;
@@ -170,19 +169,96 @@
 
 						.row:last-child //result table
 						{
-							.search-container
+							.search-grid
 							{
 								width: 100%;
 								display: grid;
+								border-top: 3px solid @main-color;
+								border-left: 3px solid @main-color;
 								grid-template-columns: auto auto auto;
-
-								.search-item
+								//grid-gap: 20px;
+								.search-cell
 								{
-									background-color: rgba(255, 255, 255, 0.8);
-									border: 1px solid rgba(0, 0, 0, 0.8);
+									display: flex;
+									flex-direction: column;
+									justify-content: space-between;
 									padding: 20px;
-									font-size: 30px;
-									text-align: center;
+									border-bottom: 3px solid @main-color;
+									border-right: 3px solid @main-color;
+
+									&:hover
+									{
+										position: relative;
+										
+										z-index: 0;
+										background: @backgroud-color;
+										box-shadow: 4px 4px 5px -1px @main-color;
+									}
+
+									&:hover:before
+									{
+										position: absolute;
+										content: "";
+										z-index: 1;
+										width: calc(100% + 15px);
+										height: calc(100% + 15px);
+										top: -9px;
+										left: -9px;
+										background: @backgroud-color;
+										border: 3px solid @main-color;
+									}
+
+									&:hover *
+									{
+										z-index: 2;
+									}
+
+									.thumb
+									{
+										display: flex;
+										justify-content: center;
+										align-content: center;
+
+										img
+										{
+											width: 70%;
+										}
+									}
+
+
+									.info
+									{
+										display: flex;
+										flex-direction: column;
+										height: 60px;
+										padding-top: 5px;
+										border-top: 2px solid @main-color;
+
+										span
+										{
+											text-align: start;
+
+											&.brand-title
+											{
+												font-size: 12px;
+												color: @main-color;
+											}
+
+											&.model-title
+											{
+												font-size: 16px;
+												font-weight: 600;
+												color: @main-color;
+											}
+
+											&.sku-code
+											{
+												font-size: 12px;
+												font-weight: 600;
+												color: @main-color;
+											}
+										}
+									}
 								}
 							}
 						}

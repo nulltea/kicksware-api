@@ -1,4 +1,5 @@
-﻿using Core.Entities.Reference;
+﻿using System.Linq;
+using Core.Entities.Reference;
 using Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using web_app_service.Data.Reference_Data;
@@ -9,10 +10,11 @@ namespace web_app_service.Controllers
 {
 	public partial class SellController
 	{
-		public ActionResult SearchIn(string query)
+		[HttpGet]
+		public JsonResult SearchAuto([FromServices] IReferenceSearchService service, [FromQuery]string prefix)
 		{
-			//var references = service.Search(query);
-			return View("New/Search");
+			var references = service.Search(prefix);
+			return Json(references.ToArray());
 		}
 
 		public ActionResult Search(SneakerReference model)

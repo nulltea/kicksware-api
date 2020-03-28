@@ -18,22 +18,16 @@
             <label for="tab1" role="tab" aria-selected="true" aria-controls="panel1" tabindex="0">Search</label>
             <div id="tab-content1" class="tab-content" role="tabpanel" aria-hidden="false">
                 <div class="row my-3">
-                    <form asp-controller="Sell" asp-action="SearchIn">
-                        <span>@Html.VectorIconRender("search.svg")</span>
-                        <input type="text" name="query">
-                        <div class="list-select">
-                            <select asp-items="@Html.GetEnumSelectList<SearchType>()" class="dropdown_item_select" id="currency">
-                                <option disabled="">Category</option>
-                            </select>
-                        </div>
-
-                    </form>
+                    <span>@Html.VectorIconRender("search.svg")</span>
+                    <input id="auto-search" type="text" name="prefix">
+                    <div class="list-select">
+                        <select asp-items="@Html.GetEnumSelectList<SearchType>()" class="dropdown_item_select" id="currency">
+                            <option disabled="">Category</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="row my-3">
-                    <div class="search-container">
-                        <div class="search-item">
-
-                        </div>
+                    <div class="search-grid">
                     </div>
                 </div>
             </div>
@@ -50,15 +44,10 @@
 
 @section Scripts
 {
+    <script src="~/lib/jqueryui/jquery-ui.min.js"></script>
+    <script src="~/js/sell/search.js"></script>
     <script type="text/javascript">
         initCustomDropDown();
-            $("form input").keypress(function(e) {
-                if ((e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) {
-                    $("form").submit();
-                    return false;
-                } else {
-                    return true;
-                }
-            });
+        initAutoSearch("@Url.Action("SearchAuto")");
     </script>
 }

@@ -20,7 +20,7 @@ namespace web_app_service.Controllers
 		public ActionResult NewProduct([FromServices] IReferenceSearchService service)
 		{
 			//todo set most relevant references
-			return View("New/Search");
+			return this.ViewStep(0, null);
 		}
 
 		[HttpGet]

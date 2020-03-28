@@ -4,6 +4,9 @@ namespace Core.Entities.Reference
 {
 	public enum Gender
 	{
+		[EnumMember(Value = "")]
+		None,
+
 		[EnumMember(Value = "Mens")]
 		Mens,
 

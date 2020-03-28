@@ -588,8 +588,6 @@ C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\bin\Debu
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\bin\Debug\netcoreapp3.1\System.Text.Json.dll
-C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Web.MvcApplicationPartsAssemblyInfo.cs
-C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Web.MvcApplicationPartsAssemblyInfo.cache
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Sell\New\Details.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Sell\New\Payment.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Sell\New\Photos.cshtml.g.cs
@@ -597,3 +595,6 @@ C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debu
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Sell\New\Shipping.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Sell\NewProduct.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Razor\Views\Sell\New\Preview.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\bin\Debug\netcoreapp3.1\libman.json
+C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Web.MvcApplicationPartsAssemblyInfo.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\web-app-service\obj\Debug\netcoreapp3.1\Web.MvcApplicationPartsAssemblyInfo.cache
