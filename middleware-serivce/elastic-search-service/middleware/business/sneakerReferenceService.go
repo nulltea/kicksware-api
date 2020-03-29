@@ -133,6 +133,7 @@ func (s *searchService) Search(query string) ([]*model.SneakerReference, error) 
 		From(0).
 		Size(10).
 		Do(ctx)
+
 	if err != nil {
 		return nil, errors.Wrap(err, "service.Search")
 	}

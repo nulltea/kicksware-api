@@ -147,11 +147,6 @@
 									width: 28px;
 									height: 28px;
 								}
-
-								&:hover path
-								{
-									fill: @backgroud-color;
-								}
 							}
 
 							.list-select
@@ -175,8 +170,9 @@
 								display: grid;
 								border-top: 3px solid @main-color;
 								border-left: 3px solid @main-color;
-								grid-template-columns: auto auto auto;
-								//grid-gap: 20px;
+								grid-template-columns: repeat(3, 1fr);
+								grid-auto-rows: 1fr;
+
 								.search-cell
 								{
 									display: flex;
@@ -185,30 +181,40 @@
 									padding: 20px;
 									border-bottom: 3px solid @main-color;
 									border-right: 3px solid @main-color;
+									z-index: 0;
+									cursor: pointer;
 
-									&:hover
+									&:hover,
+									&.selected
 									{
-										position: relative;
-										
-										z-index: 0;
+										z-index: 1;
+										padding: 11px;
+										outline: none;
 										background: @backgroud-color;
 										box-shadow: 4px 4px 5px -1px @main-color;
 									}
 
-									&:hover:before
+									&:hover:before,
+									&.selected:before
 									{
 										position: absolute;
 										content: "";
-										z-index: 1;
-										width: calc(100% + 15px);
-										height: calc(100% + 15px);
+										z-index: 2;
+										width: calc(100% + 18px);
+										height: calc(100% + 18px);
 										top: -9px;
 										left: -9px;
 										background: @backgroud-color;
 										border: 3px solid @main-color;
 									}
 
-									&:hover *
+									&:hover *,
+									&.selected *
+									{
+										z-index: 3;
+									}
+
+									&.selected
 									{
 										z-index: 2;
 									}
@@ -258,13 +264,133 @@
 												color: @main-color;
 											}
 										}
+
+										.button
+										{
+											position: absolute;
+											margin: 0;
+											top: 15px;
+											right: 0;
+											width: 80px;
+											height: 30px;
+											border-width: 2px;
+
+											& span
+											{
+												display: inherit;
+												align-items: center;
+												font-size: 13px;
+												height: 28px;
+											}
+
+											& svg
+											{
+												position: relative;
+												width: 18px;
+												height: 18px;
+											}
+										}
 									}
+
+									&.selected .button
+									{
+										display: flex;
+										justify-content: space-evenly;
+										align-items: center;
+									}
+								}
+							}
+
+							.loading-overlay
+							{
+								position: absolute;
+								z-index: 10;
+								width: 100%;
+								top: 100%;
+								bottom: 0;
+								background: @backgroud-color;
+								transition: top 1s ease-in-out;
+
+								.line-loader
+								{
+									display: none;
+									width: 100%;
+									height: 4px;
+									margin-top: -4px;
+									background: #1b1b1b;
+									overflow: hidden;
+
+									.loader-line
+									{
+										height: 4px;
+										background: #AEAEAE;
+										border-left: 6px solid #fff;
+										border-right: 6px solid #fff;
+										box-sizing: border-box;
+									}
+
+									.a-loop
+									{
+										animation: 1.7s infinite loop cubic-bezier(0.420, 0.000, 0.580, 1.000);
+									}
+
+									@keyframes loop
+									{
+										0%
+										{
+											width: 0%;
+											transform: translateX(0%);
+										}
+
+										7%
+										{
+											width: 10%;
+											transform: translateX(0%);
+										}
+
+										40%
+										{
+											width: 60%;
+										}
+
+										50%
+										{
+											transform: translateX(85%);
+										}
+
+										75%
+										{
+											width: 100%;
+										}
+
+										100%
+										{
+											transform: translateX(100%);
+										}
+									}
+								}
+							}
+
+							.loading-overlay.load
+							{
+								top: 0;
+								bottom: 0;
+
+								& .line-loader
+								{
+									display: block;
+									transition: none;
 								}
 							}
 						}
 					}
 				}
 			}
+		}
+
+		& .button
+		{
+			display: none;
 		}
 	}
 }

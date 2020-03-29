@@ -23,6 +23,10 @@ namespace Core.Entities.Products
 
 		public string ModelName { get; set; }
 
+		public string ModelSKU { get; set; }
+
+		public string ModelRefId { get; set; }
+
 		[DataType(DataType.Currency)]
 		public decimal Price { get; set; }
 

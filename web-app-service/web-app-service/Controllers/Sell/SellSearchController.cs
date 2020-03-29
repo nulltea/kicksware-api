@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Core.Entities.Reference;
+using Core.Reference;
 using Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using web_app_service.Data.Reference_Data;
@@ -17,10 +18,21 @@ namespace web_app_service.Controllers
 			return Json(references.ToArray());
 		}
 
-		public ActionResult Search(SneakerReference model)
+		public ActionResult Search(SneakerReference reference)
 		{
-			var sneakerProduct = new SneakerProductViewModel {Size = Catalog.SneakerSizesList[11]};
-			return this.ViewStep(1, sneakerProduct);
+			var sneakerProduct = new SneakerProductViewModel
+			{
+				ModelRefId = reference.UniqueId,
+				ModelSKU = reference.ManufactureSku,
+				ModelName = reference.ModelName,
+				BrandName = reference.BrandName,
+				Description = reference.Description,
+				Color = reference.Color,
+				Price = reference.Price,
+				Size = Catalog.SneakerSizesList[11]
+			};
+			
+			return new JsonResult(new {redirectUrl = Url.Action("SetDetails", sneakerProduct)});
 		}
 	}
 }

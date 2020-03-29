@@ -29,6 +29,11 @@
                 <div class="row my-3">
                     <div class="search-grid">
                     </div>
+                    <div class="loading-overlay">
+                        <div class='line-loader'>
+                            <div class='loader-line a-loop'></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </li>
@@ -44,10 +49,9 @@
 
 @section Scripts
 {
-    <script src="~/lib/jqueryui/jquery-ui.min.js"></script>
     <script src="~/js/sell/search.js"></script>
     <script type="text/javascript">
         initCustomDropDown();
-        initAutoSearch("@Url.Action("SearchAuto")");
+        initAutoSearch("@Url.Action("SearchAuto")")
     </script>
 }
