@@ -16,205 +16,206 @@
     @RenderSection("Styles", false)
 </head>
 <body>
-    <div class="super_container">
-        <header class="header">
-            <div class="header_container">
-                <div class="header_content">
-                    <div class="logo"><a asp-area="" asp-controller="Home" asp-action="Index">HighTop</a></div>
-                    <nav class="main_nav">
-                        <ul>
-                            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                            <li><a asp-area="" asp-controller="Home" asp-action="Index">Profile</a></li>
-                            <li><a asp-area="" asp-controller="Shop" asp-action="Products">Shop</a></li>
-                            <li class="hassubs">
-                                <a asp-area="" asp-controller="Sell" asp-action="NewProduct">Sell</a>
-                                <ul>
-                                    <li><a asp-area="" asp-controller="Sell" asp-action="NewProduct">Create new product</a></li>
-                                    <li><a asp-area="" asp-controller="Sell" asp-action="MyProducts">My products</a></li>
-                                </ul>
-                            </li>
-                            <li><a asp-area="" asp-controller="About" asp-action="About">About</a></li>
-                            <li><a asp-area="" asp-controller="Contact" asp-action="Contact">Contacts</a></li>
-                        </ul>
-                    </nav>
-                    <nav class="icon-nav">
-                        <ul>
-                            <li class="account hassubs">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <g><path d="M12 2c2.757 0 5 2.243 5 5.001 0 2.756-2.243 5-5 5s-5-2.244-5-5c0-2.758 2.243-5.001 5-5.001zm0-2c-3.866 0-7 3.134-7 7.001 0 3.865 3.134 7 7 7s7-3.135 7-7c0-3.867-3.134-7.001-7-7.001zm6.369 13.353c-.497.498-1.057.931-1.658 1.302 2.872 1.874 4.378 5.083 4.972 7.346h-19.387c.572-2.29 2.058-5.503 4.973-7.358-.603-.374-1.162-.811-1.658-1.312-4.258 3.072-5.611 8.506-5.611 10.669h24c0-2.142-1.44-7.557-5.631-10.647z" /></g>
-                                    <g><path d="M19 7.001c0 3.865-3.134 7-7 7s-7-3.135-7-7c0-3.867 3.134-7.001 7-7.001s7 3.134 7 7.001zm-1.598 7.18c-1.506 1.137-3.374 1.82-5.402 1.82-2.03 0-3.899-.685-5.407-1.822-4.072 1.793-6.593 7.376-6.593 9.821h24c0-2.423-2.6-8.006-6.598-9.819z" /></g>
-                                </svg>
-                                <ul>
-                                    <li class="button header-button" id="login-btn">
-                                        <span>Login</span>
-                                    </li>
-                                    <li class="button header-button-strong" id="sign-up-btn">
-                                        <span>Sing Up</span>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="favorite">
-                                <a asp-area="" asp-controller="Home" asp-action="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <g><path d="M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z" /></g>
-                                        <g><path d="M12 9.229c.234-1.12 1.547-6.229 5.382-6.229 2.22 0 4.618 1.551 4.618 5.003 0 3.907-3.627 8.47-10 12.629-6.373-4.159-10-8.722-10-12.629 0-3.484 2.369-5.005 4.577-5.005 3.923 0 5.145 5.126 5.423 6.231zm-12-1.226c0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-7.962-9.648-9.028-12-3.737-2.338-5.262-12-4.27-12 3.737z" /></g>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li class="search">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <g id="search-path"><path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396l1.414-1.414l-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8s3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6s-6-2.691-6-6s2.691-6 6-6z" fill="#1b1b1b" /><path d="M11.412 8.586c.379.38.588.882.588 1.414h2a3.977 3.977 0 0 0-1.174-2.828c-1.514-1.512-4.139-1.512-5.652 0l1.412 1.416c.76-.758 2.07-.756 2.826-.002z" fill="#1b1b1b" /></g>
-                                    <g><path d="M10 2c-4.411 0-8 3.589-8 8s3.589 8 8 8a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396l1.414-1.414l-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8z" /></g>
-                                </svg>
-                            </li>
-                        </ul>
-                    </nav>
-
-                </div>
-            </div>
-            <!-- Search Panel -->
-            <div class="search_panel trans_500">
-                <div class="search_panel_content">
-                    <form action="#">
-                        @Html.VectorIconRender("search.svg")
-                        <input type="text" class="search_input" required="required">
-                        <button type="button" class="close-button"></button>
-                    </form>
-                </div>
-            </div>
-            <!-- Slider Menu -->
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <div class="menu trans_400">
-                <div class="menu-container">
-                    <div class="slider-menu-content">
-                        <div class="slider-menu-search">
-                            <form action="#">
-                                @Html.VectorIconRender("search.svg")
-                                <input type="search" required="required" class="menu-search-input">
-                            </form>
-                        </div>
-                        <ul class="slider-menu-nav">
-                            <li class="slider-menu-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                            <li class="slider-menu-item"><a asp-area="" asp-controller="Home" asp-action="Index">Profile</a></li>
-                            <li class="slider-menu-item"><a asp-area="" asp-controller="Shop" asp-action="Products">Shop</a></li>
-                            <li class="slider-menu-item"><a asp-area="" asp-controller="Sell" asp-action="NewProduct">Sell</a></li>
-                            <li class="slider-menu-item"><a asp-area="" asp-controller="Home" asp-action="Index">About</a></li>
-                            <li class="slider-menu-item"><a asp-area="" asp-controller="Contact" asp-action="Contact">Contacts</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="menu_social">
+<div class="super_container">
+    <div class="header-spacer"></div>
+    <header class="header">
+        <div class="header_container">
+            <div class="header_content">
+                <div class="logo"><a asp-area="" asp-controller="Home" asp-action="Index">HighTop</a></div>
+                <nav class="main_nav">
                     <ul>
-                        <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Profile</a></li>
+                        <li><a asp-area="" asp-controller="Shop" asp-action="Products">Shop</a></li>
+                        <li class="hassubs">
+                            <a asp-area="" asp-controller="Sell" asp-action="NewProduct">Sell</a>
+                            <ul>
+                                <li><a asp-area="" asp-controller="Sell" asp-action="NewProduct">Create new product</a></li>
+                                <li><a asp-area="" asp-controller="Sell" asp-action="MyProducts">My products</a></li>
+                            </ul>
+                        </li>
+                        <li><a asp-area="" asp-controller="About" asp-action="About">About</a></li>
+                        <li><a asp-area="" asp-controller="Contact" asp-action="Contact">Contacts</a></li>
+                    </ul>
+                </nav>
+                <nav class="icon-nav">
+                    <ul>
+                        <li class="account hassubs">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <g><path d="M12 2c2.757 0 5 2.243 5 5.001 0 2.756-2.243 5-5 5s-5-2.244-5-5c0-2.758 2.243-5.001 5-5.001zm0-2c-3.866 0-7 3.134-7 7.001 0 3.865 3.134 7 7 7s7-3.135 7-7c0-3.867-3.134-7.001-7-7.001zm6.369 13.353c-.497.498-1.057.931-1.658 1.302 2.872 1.874 4.378 5.083 4.972 7.346h-19.387c.572-2.29 2.058-5.503 4.973-7.358-.603-.374-1.162-.811-1.658-1.312-4.258 3.072-5.611 8.506-5.611 10.669h24c0-2.142-1.44-7.557-5.631-10.647z"/></g>
+                                <g><path d="M19 7.001c0 3.865-3.134 7-7 7s-7-3.135-7-7c0-3.867 3.134-7.001 7-7.001s7 3.134 7 7.001zm-1.598 7.18c-1.506 1.137-3.374 1.82-5.402 1.82-2.03 0-3.899-.685-5.407-1.822-4.072 1.793-6.593 7.376-6.593 9.821h24c0-2.423-2.6-8.006-6.598-9.819z"/></g>
+                            </svg>
+                            <ul>
+                                <li class="button header-button" id="login-btn">
+                                    <span>Login</span>
+                                </li>
+                                <li class="button header-button-strong" id="sign-up-btn">
+                                    <span>Sing Up</span>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="favorite">
+                            <a asp-area="" asp-controller="Home" asp-action="">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <g><path d="M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"/></g>
+                                    <g><path d="M12 9.229c.234-1.12 1.547-6.229 5.382-6.229 2.22 0 4.618 1.551 4.618 5.003 0 3.907-3.627 8.47-10 12.629-6.373-4.159-10-8.722-10-12.629 0-3.484 2.369-5.005 4.577-5.005 3.923 0 5.145 5.126 5.423 6.231zm-12-1.226c0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-7.962-9.648-9.028-12-3.737-2.338-5.262-12-4.27-12 3.737z"/></g>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="search">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <g id="search-path"><path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396l1.414-1.414l-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8s3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6s-6-2.691-6-6s2.691-6 6-6z" fill="#1b1b1b"/><path d="M11.412 8.586c.379.38.588.882.588 1.414h2a3.977 3.977 0 0 0-1.174-2.828c-1.514-1.512-4.139-1.512-5.652 0l1.412 1.416c.76-.758 2.07-.756 2.826-.002z" fill="#1b1b1b"/></g>
+                                <g><path d="M10 2c-4.411 0-8 3.589-8 8s3.589 8 8 8a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396l1.414-1.414l-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8z"/></g>
+                            </svg>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+        <!-- Search Panel -->
+        <div class="search_panel trans_500">
+            <div class="search_panel_content">
+                <form action="#">
+                    @Html.VectorIconRender("search.svg")
+                    <input type="text" class="search_input" required="required">
+                    <button type="button" class="close-button"></button>
+                </form>
+            </div>
+        </div>
+        <!-- Slider Menu -->
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="menu trans_400">
+            <div class="menu-container">
+                <div class="slider-menu-content">
+                    <div class="slider-menu-search">
+                        <form action="#">
+                            @Html.VectorIconRender("search.svg")
+                            <input type="search" required="required" class="menu-search-input">
+                        </form>
+                    </div>
+                    <ul class="slider-menu-nav">
+                        <li class="slider-menu-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="slider-menu-item"><a asp-area="" asp-controller="Home" asp-action="Index">Profile</a></li>
+                        <li class="slider-menu-item"><a asp-area="" asp-controller="Shop" asp-action="Products">Shop</a></li>
+                        <li class="slider-menu-item"><a asp-area="" asp-controller="Sell" asp-action="NewProduct">Sell</a></li>
+                        <li class="slider-menu-item"><a asp-area="" asp-controller="Home" asp-action="Index">About</a></li>
+                        <li class="slider-menu-item"><a asp-area="" asp-controller="Contact" asp-action="Contact">Contacts</a></li>
                     </ul>
                 </div>
             </div>
-        </header>
+            <div class="menu_social">
+                <ul>
+                    <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
 
-        <div class="modal fade" tabindex="-1" id="loginModal" data-keyboard="false" data-backdrop="static">
-            <div class="modal-dialog modal-lg login-dialog">
-                <div id="login-content" class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close-button" data-dismiss="modal"></button>
-                        <p class="login-title" id="login-title">Create an Account</p>
-                        <p class="login-message" id="login-header-msg">By creating an account you'll be able to buy, sell, comment, and more</p>
-                    </div>
-                    <div class="modal-body">
-                        <a class="button login-button facebook" id="facebook-btn" asp-controller="Auth" asp-action="Facebook">
-                            <svg class="facebook-logo" focusable="false" width="15" height="15" viewBox="0 0 1024 1024"><path d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-92.4 233.5h-63.9c-50.1 0-59.8 23.8-59.8 58.8v77.1h119.6l-15.6 120.7h-104V912H539.2V602.2H434.9V481.4h104.3v-89c0-103.3 63.1-159.6 155.3-159.6c44.2 0 82.1 3.3 93.2 4.8v107.9z" fill="white" /></svg>
-                            <span id="facebook-btn-caption">Sign up with Facebook</span>
-                        </a>
-                        <a class="button login-button google" id="google-btn" asp-controller="Auth" asp-action="Google">
-                            <svg class="google-logo" aria-hidden="true" focusable="false" width="15" height="15" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8c-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C12.955 4 4 12.955 4 24s8.955 20 20 20s20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z" /><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C16.318 4 9.656 8.337 6.306 14.691z" /><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z" /><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002l6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z" /></svg>
-                            <span id="google-btn-caption">Sign up with Google</span>
-                        </a>
-                        <hr>
-                        <button class="button login-button" id="email-btn"><span id="email-btn-caption">Sign up with Email</span></button>
-                    </div>
-                    <div class="modal-footer">
-                        <p class="login-message" id="login-footer-msg">
-                            Already have an account? <a>Log in</a>
-                        </p>
-                        <p class="login-privacy" id="login-privacy">
-                            By creating an account, I accept Sneaker's
-                            <a asp-controller="Home" asp-action="Privacy">Terms of Services</a>
-                            and <a asp-controller="Home" asp-action="Privacy">Privacy Policy</a>.
-                        </p>
-                    </div>
+    <div class="modal fade" tabindex="-1" id="loginModal" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-lg login-dialog">
+            <div id="login-content" class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close-button" data-dismiss="modal"></button>
+                    <p class="login-title" id="login-title">Create an Account</p>
+                    <p class="login-message" id="login-header-msg">By creating an account you'll be able to buy, sell, comment, and more</p>
                 </div>
-                <div id="auth-content" class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">x</button>
-                        <p class="login-title" id="auth-title">Create an Account</p>
-                    </div>
-                    <div class="modal-body">
-                        <form id="auth-form" class="auth-form">
-                            <div class="auth-input">
-                                <label for="email-input">Email Address</label>
-                                <input type="email" id="email-input" class="email-input" required="required">
-                            </div>
-                            <div class="auth-input">
-                                <label for="password-input">Password</label>
-                                <input type="password" id="password-input" class="password-input" required="required">
-                            </div>
-                            <div class="notify-input" id="notify-footer-msg">
-                                <input type="checkbox" id="notification-checkbox" name="regular_checkbox" class="regular_checkbox">
-                                <label for="notification-checkbox" class="checkbox_title">Sign up for emails from Sneaker.</label>
-                            </div>
-                            <button class="button login-button auth-button" id="auth-btn"><span id="auth-btn-caption">Sign up</span></button>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <p class="login-message" id="auth-footer-msg">
-                            <a>Forgot your password?</a>
-                        </p>
-                        <p class="login-privacy" id="auth-privacy">
-                            By creating an account, I accept Sneaker's
-                            <a asp-controller="Home" asp-action="Privacy">Terms of Services</a>
-                            and <a asp-controller="Home" asp-action="Privacy">Privacy Policy</a>.
-                        </p>
-                    </div>
+                <div class="modal-body">
+                    <a class="button login-button facebook" id="facebook-btn" asp-controller="Auth" asp-action="Facebook">
+                        <svg class="facebook-logo" focusable="false" width="15" height="15" viewBox="0 0 1024 1024"><path d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-92.4 233.5h-63.9c-50.1 0-59.8 23.8-59.8 58.8v77.1h119.6l-15.6 120.7h-104V912H539.2V602.2H434.9V481.4h104.3v-89c0-103.3 63.1-159.6 155.3-159.6c44.2 0 82.1 3.3 93.2 4.8v107.9z" fill="white"/></svg>
+                        <span id="facebook-btn-caption">Sign up with Facebook</span>
+                    </a>
+                    <a class="button login-button google" id="google-btn" asp-controller="Auth" asp-action="Google">
+                        <svg class="google-logo" aria-hidden="true" focusable="false" width="15" height="15" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8c-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C12.955 4 4 12.955 4 24s8.955 20 20 20s20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002l6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+                        <span id="google-btn-caption">Sign up with Google</span>
+                    </a>
+                    <hr>
+                    <button class="button login-button" id="email-btn"><span id="email-btn-caption">Sign up with Email</span></button>
+                </div>
+                <div class="modal-footer">
+                    <p class="login-message" id="login-footer-msg">
+                        Already have an account? <a>Log in</a>
+                    </p>
+                    <p class="login-privacy" id="login-privacy">
+                        By creating an account, I accept Sneaker's
+                        <a asp-controller="Home" asp-action="Privacy">Terms of Services</a>
+                        and <a asp-controller="Home" asp-action="Privacy">Privacy Policy</a>.
+                    </p>
+                </div>
+            </div>
+            <div id="auth-content" class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <p class="login-title" id="auth-title">Create an Account</p>
+                </div>
+                <div class="modal-body">
+                    <form id="auth-form" class="auth-form">
+                        <div class="auth-input">
+                            <label for="email-input">Email Address</label>
+                            <input type="email" id="email-input" class="email-input" required="required">
+                        </div>
+                        <div class="auth-input">
+                            <label for="password-input">Password</label>
+                            <input type="password" id="password-input" class="password-input" required="required">
+                        </div>
+                        <div class="notify-input" id="notify-footer-msg">
+                            <input type="checkbox" id="notification-checkbox" name="regular_checkbox" class="regular_checkbox">
+                            <label for="notification-checkbox" class="checkbox_title">Sign up for emails from Sneaker.</label>
+                        </div>
+                        <button class="button login-button auth-button" id="auth-btn"><span id="auth-btn-caption">Sign up</span></button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <p class="login-message" id="auth-footer-msg">
+                        <a>Forgot your password?</a>
+                    </p>
+                    <p class="login-privacy" id="auth-privacy">
+                        By creating an account, I accept Sneaker's
+                        <a asp-controller="Home" asp-action="Privacy">Terms of Services</a>
+                        and <a asp-controller="Home" asp-action="Privacy">Privacy Policy</a>.
+                    </p>
                 </div>
             </div>
         </div>
-        <div class="page-content">
-            @RenderBody()
-        </div>
-        
+    </div>
+    <div class="page-content">
+        @RenderBody()
+    </div>
 
-        <div class="footer_overlay"></div>
-        <footer class="footer">
-            @*<div class="footer_background" style="background-image: url(/images/footer.jpeg)"></div>*@
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="footer_content d-flex flex-lg-row flex-column align-items-center justify-content-lg-start justify-content-center">
-                            <div class="footer_logo"><a href="#">HighTop</a></div>
-                            <div class="copyright ml-auto mr-auto">
-                                Copyright &copy;
-                                <script>document.write(new Date().getFullYear());</script> All rights reserved
-                            </div>
-                            <div class="footer_social ml-lg-auto">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
+
+    <div class="footer_overlay"></div>
+    <footer class="footer">
+        @*<div class="footer_background" style="background-image: url(/images/footer.jpeg)"></div>*@
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="footer_content d-flex flex-lg-row flex-column align-items-center justify-content-lg-start justify-content-center">
+                        <div class="footer_logo"><a href="#">HighTop</a></div>
+                        <div class="copyright ml-auto mr-auto">
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved
+                        </div>
+                        <div class="footer_social ml-lg-auto">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
-        </footer>
-    </div>
+        </div>
+    </footer>
+</div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/css/bootstrap4/popper.js"></script>
     <script src="~/css/bootstrap4/bootstrap.min.js"></script>

@@ -11,9 +11,6 @@ namespace Core.Reference
 		[EnumMember(Value = "BrandModel")]
 		[Display(Name = "Brand & Model", ShortName = "Brand-Model")]
 		BrandModel,
-		[EnumMember(Value = "ModelId")]
-		[Display(Name = "Model Id", ShortName = "ModelId")]
-		ModelId,
 		[EnumMember(Value = "SKU")]
 		[Display(Name = "SKU code", ShortName = "SKU")]
 		SKU,

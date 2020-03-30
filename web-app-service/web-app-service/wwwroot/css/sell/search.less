@@ -96,6 +96,7 @@
 					{
 						bottom: 0;
 						display: block;
+						min-height: 300px;
 					}
 
 					.tab-content
@@ -382,6 +383,55 @@
 									transition: none;
 								}
 							}
+
+							.search-grid.no-results
+							{
+								display: none;
+							}
+
+							.no-result-content
+							{
+								display: none;
+								width: 100%;
+								flex-direction: column;
+								padding-top: 25px;
+
+								&.active
+								{
+									display: flex;
+									justify-content: center;
+									align-items: center;
+								}
+
+								svg
+								{
+									width: 250px;
+									height: 250px;
+									fill: @main-color;
+								}
+
+								.no-result-title
+								{
+									font-size: 28px;
+									font-weight: 600;
+									color: @main-color;
+									margin-left: 0;
+								}
+
+								.no-result-subtitle
+								{
+									font-size: 14px;
+									font-weight: 500;
+									color: @main-color;
+									margin-top: 3px;
+									margin-left: 14px;
+								}
+
+								.no-result-subtitle:last-child
+								{
+									font-weight: 700;
+								}
+							}
 						}
 					}
 				}
@@ -391,6 +441,11 @@
 		& .button
 		{
 			display: none;
+
+			&.active
+			{
+				display: flex;
+			}
 		}
 	}
 }

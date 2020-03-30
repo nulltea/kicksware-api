@@ -40,13 +40,13 @@ namespace web_app_service.Data.Reference_Data
 			new Dictionary<string, ShippingInfo>
 			{
 				{"United States",  new ShippingInfo(true, 30m)},
-				{"United Kingdom", new ShippingInfo(true, 30m)},
-				{"Europe",         new ShippingInfo(true, 30m)},
+				{"United Kingdom", new ShippingInfo(true, 15m)},
+				{"Europe",         new ShippingInfo(true, 15m)},
 				{"Russia",         new ShippingInfo(true, 15m)},
 				{"Canada",         new ShippingInfo(true, 30m)},
 				{"Australia / NZ", new ShippingInfo(true, 30m)},
-				{"Asia",           new ShippingInfo(true, 30m)},
-				{"Other",          new ShippingInfo(true, 30m)},
+				{"Asia",           new ShippingInfo(true, 25m)},
+				{"Other",          new ShippingInfo(true, 25m)},
 			};
 	}
 }

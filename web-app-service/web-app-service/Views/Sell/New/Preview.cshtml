@@ -1,22 +1,30 @@
-﻿@model SneakerProductViewModel
+﻿@using Core.Reference
+@using web_app_service.Data.Reference_Data
+@model SneakerProductViewModel
 
 @{
     ViewData["Title"] = "Preview";
     Layout = "~/Views/Sell/NewProduct.cshtml";
 }
 
-
-
 @section Styles
 {
-
+    <link rel="stylesheet/less" type="text/css" href="~/css/sell/preview.less"/>
 }
 
-<div>
+<div class="container search-content">
+    <div class="row">
+        <div class="col-sm mx-3">
+            <div class="image-carousel">
 
+            </div>
+        </div>
+        <div class="col-sm mx-3">
+        </div>
+    </div>
 </div>
 
 @section Scripts
 {
-    
+    <script src="~/js/sell/preview.js"></script>
 }

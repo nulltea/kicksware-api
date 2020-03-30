@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using Core.Entities.Reference;
-using Core.Reference;
+﻿using Core.Entities.Reference;
 using Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using web_app_service.Data.Reference_Data;
@@ -20,7 +18,9 @@ namespace web_app_service.Controllers
 
 		public ActionResult Search(SneakerReference reference)
 		{
-			var sneakerProduct = new SneakerProductViewModel
+			if (reference is null || string.IsNullOrWhiteSpace(reference.UniqueId)) return this.ViewStep(1, new SneakerProductViewModel());
+
+;			var sneakerProduct = new SneakerProductViewModel
 			{
 				ModelRefId = reference.UniqueId,
 				ModelSKU = reference.ManufactureSku,

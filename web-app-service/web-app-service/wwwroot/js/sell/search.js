@@ -15,8 +15,9 @@ function initAutoSearch(actionUrl) {
 }
 
 function submitSearch(actionUrl, prefix) {
+	if (isLoading()) return;
+	resetSearch();
 	$(".loading-overlay").toggleClass("load");
-	$(".selected").toggleClass("selected");
 	$.ajax({
 		url: `${actionUrl}?prefix=${prefix}`,
 		type: "GET",
@@ -30,6 +31,11 @@ function displayResults(data) {
 	$(".search-grid").empty();
 
 	let len = Object.keys(data).length;
+
+	if (len === 0) {
+		notFoundHandle();
+	}
+
 	let index = 0;
 	for (let item of data) {
 		addSearchResultCell(item, ++index === len);
@@ -73,6 +79,29 @@ function addSearchResultCell(item, last) {
 			$(".loading-overlay").toggleClass("load");
 		});
 	}
+}
+
+function resetSearch() {
+	$(".search-grid.no-results").removeClass("no-results");
+	$(".loading-overlay").css('display', 'block');
+	$(".loading-overlay.load").removeClass("load");
+	$(".no-result-content.active").removeClass("active");
+	$(".selected").removeClass("selected");
+	$(".form-actions button.next.active").removeClass("active");
+	$(".form-actions button.next span").text("DETAILS");
+}
+
+function isLoading() {
+	return $(".loading-overlay").hasClass("load");
+}
+
+function notFoundHandle() {
+	$(".search-grid").toggleClass("no-results");
+	$(".loading-overlay").hide();
+	$(".loading-overlay.load").removeClass("load");
+	$(".no-result-content").toggleClass("active");
+	$(".form-actions button.next").toggleClass("active");
+	$(".form-actions button.next span").text("START");
 }
 
 function select(item) {

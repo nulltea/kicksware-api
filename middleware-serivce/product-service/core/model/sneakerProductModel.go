@@ -6,6 +6,8 @@ type SneakerProduct struct {
 	UniqueId       string
 	BrandName      string
 	ModelName      string
+	ModelSKU       string
+	ReferenceId    string
 	Price          float64
 	Type           string
 	Size           SneakerSize
