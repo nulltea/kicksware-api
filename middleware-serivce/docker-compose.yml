@@ -1,0 +1,82 @@
+version: '3.7'
+services:
+  proxy:
+    image: traefik:1.7.4-alpine
+    command:
+      - "--api"
+      - "--docker"
+      - "--docker.watch"
+    labels:
+      - "traefik.frontend.rule=Host:monitor.local"
+      - "traefik.port=8080"
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+        mode: host
+
+  product-service:
+    build:
+      context: ./product-service
+      dockerfile: ./docker/Dockerfile
+      target: dev
+    image: product-service
+    env_file: ./product-service/env/.env
+    labels:
+      - "traefik.backend=product-service"
+      - "traefik.frontend.rule=Host:products.local"
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+
+  user-service:
+    build:
+      context: ./user-service
+      dockerfile: ./docker/Dockerfile
+      target: dev
+    image: user-service
+    env_file: ./user-service/env/.env
+    labels:
+      - "traefik.backend=user-service"
+      - "traefik.frontend.rule=Host:users.local"
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+
+  search-service:
+    build:
+      context: ./elastic-search-service
+      dockerfile: ./docker/Dockerfile
+      target: dev
+    image: search-service
+    env_file: ./elastic-search-service/env/.env
+    labels:
+      - "traefik.backend=elastic-search-service"
+      - "traefik.frontend.rule=Host:search.local"
+    links:
+      - mongodb
+      - elastic-search
+    depends_on:
+      - mongodb
+      - elastic-search
+
+  mongodb:
+    image: mongo:3.4.2
+    ports:
+      - "27017:27017"
+    volumes:
+      - type: bind
+        source: ./backup
+        target: /backup
+
+  elastic-search:
+    image: nshou/elasticsearch-kibana
+    ports:
+      - 9200:9200
+      - 5601:5601

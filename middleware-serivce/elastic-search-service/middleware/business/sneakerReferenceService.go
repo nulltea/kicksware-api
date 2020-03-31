@@ -137,8 +137,7 @@ func (s *searchService) Search(query string) ([]*model.SneakerReference, error) 
 	if err != nil {
 		return nil, errors.Wrap(err, "service.Search")
 	}
-	log.Printf(
-		"Query on %v took %d milliseconds\n found total %v",
+	log.Printf(		"Query on %v took %d milliseconds\n found total %v",
 		query, results.TotalHits(), results.TookInMillis,
 	)
 

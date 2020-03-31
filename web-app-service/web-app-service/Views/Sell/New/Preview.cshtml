@@ -15,11 +15,35 @@
 <div class="container search-content">
     <div class="row">
         <div class="col-sm mx-3">
-            <div class="image-carousel">
-
+            <div class="product-gallery">
+                @foreach (var image in Model.Photos)
+                 {
+                    <div class="product-gallery-image">
+                        <img src="@image" itemprop="image" alt="@Model.ModelName" title="@Model.ModelName">
+                    </div>
+                 }
             </div>
         </div>
         <div class="col-sm mx-3">
+            <div class="product-info">
+                @foreach (var image in Model.Photos)
+                 {
+                    <div class="product-top">
+                        <span class="brand-title">@Model.BrandName</span>
+                        <span class="model-title">@Model.ModelName</span>
+                        <span class="color-title">@Model.Color</span>
+                        <span class="color-title">@Model.Size</span>
+                    </div>
+                    <div class="product-details">
+                        <span class="brand-title">@Model.Description</span>
+                        <span class="model-title">@Model.Condition</span>
+                        <span class="color-title">@Model.ModelSKU</span>
+                    </div>
+                    <div class="product-price">
+                        <span>@Model.Price</span>
+                    </div>
+                 }
+            </div>
         </div>
     </div>
 </div>

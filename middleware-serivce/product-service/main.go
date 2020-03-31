@@ -16,7 +16,7 @@ import (
 )
 
 func main() {
-	loadEnv()
+	// loadEnv()
 	repo := getRepository()
 	if repo == nil {
 		return
@@ -30,7 +30,7 @@ func main() {
 }
 
 func loadEnv() {
-	err := env.Load("env/.env")
+	err := env.Load("./env/.env")
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -16,7 +16,7 @@ import (
 )
 
 func main() {
-	loadEnv()
+	// loadEnv()
 	repo := getRepository()
 	if repo == nil {
 		return
