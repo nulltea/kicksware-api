@@ -20,8 +20,15 @@ func main() {
 	if repo == nil {
 		return
 	}
-	service := business.NewSneakerReferenceService(repo)
-	service.SyncAll();
+	service := business.NewSneakerReferenceService(repo, os.Getenv("ELASTIC_URL"), os.Getenv("ELASTIC_INDEX"))
+
+	if err := service.SyncAll(); err != nil {
+		log.Println(err)
+		log.Println("sync unsuccessful")
+	} else {
+		log.Println("sync successful")
+	}
+
 	handler := rest.NewHandler(service, os.Getenv("CONTENT_TYPE"))
 	routes := rest.ProvideRoutes(handler)
 	srv := server.NewInstance(os.Getenv("HOST"))

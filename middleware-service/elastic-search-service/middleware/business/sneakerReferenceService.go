@@ -12,8 +12,6 @@ import (
 	"time"
 )
 
-const SneakerReferenceIndex = "sneaker_reference"
-
 var (
 	ErrReferenceNotFound = errors.New("sneaker reference Not Found")
 	ErrReferenceNotValid = errors.New("sneaker reference Not Valid")
@@ -23,21 +21,25 @@ type searchService struct {
 	sneakerProductRepo repo.SneakerReferenceRepository
 	client             *elastic.Client
 	serializer         service.SneakerReferenceSerializer
+	index              string
 }
 
-func NewSneakerReferenceService(sneakerProductRepo repo.SneakerReferenceRepository) service.SneakerReferenceService {
+func NewSneakerReferenceService(sneakerProductRepo repo.SneakerReferenceRepository, elasticURL, elasticIndex string) service.SneakerReferenceService {
 	client, err := elastic.NewClient(
+		elastic.SetURL(elasticURL),
+		elastic.SetMaxRetries(10),
+		elastic.SetHealthcheckTimeoutStartup(60*time.Second),
 		elastic.SetSniff(false),
-		elastic.SetURL("http://localhost:9200"),
-		elastic.SetHealthcheckInterval(5*time.Second),
 	)
 	if err != nil {
+		log.Println(err)
 		return nil
 	}
-	if exists, err := client.IndexExists(SneakerReferenceIndex).
+	if exists, err := client.IndexExists(elasticIndex).
 		Do(context.Background()); err != nil || !exists {
-		_, err = client.CreateIndex(SneakerReferenceIndex).Do(context.Background())
+		_, err = client.CreateIndex(elasticIndex).Do(context.Background())
 		if err != nil {
+			log.Println(err)
 			panic(err)
 		}
 	}
@@ -45,6 +47,7 @@ func NewSneakerReferenceService(sneakerProductRepo repo.SneakerReferenceReposito
 		sneakerProductRepo,
 		client,
 		json.NewSerializer(),
+		elasticIndex,
 	}
 }
 
@@ -58,7 +61,7 @@ func (s *searchService) SyncOne(code string) (err error) {
 	}
 
 	_, err = s.client.Index().
-		Index(SneakerReferenceIndex).
+		Index(s.index).
 		Id(ref.UniqueId).
 		BodyJson(ref).
 		Refresh("wait_for").
@@ -96,7 +99,7 @@ func (s *searchService) SyncQuery(query interface{}) (err error) {
 	for _, ref := range refs {
 		bulk.Add(
 			elastic.NewBulkIndexRequest().
-			Index(SneakerReferenceIndex).
+			Index(s.index).
 			Id(ref.UniqueId).
 			Doc(ref),
 		)
@@ -127,7 +130,7 @@ func (s *searchService) Search(query string) ([]*model.SneakerReference, error) 
 
 	matchQuery := elastic.NewMultiMatchQuery(query)
 	results, err := s.client.Search().
-		Index(SneakerReferenceIndex).
+		Index(s.index).
 		Query(matchQuery).
 		Sort("Price", false).
 		From(0).
@@ -159,7 +162,7 @@ func (s *searchService) SearchBy(field, value string) ([]*model.SneakerReference
 
 	matchQuery := elastic.NewMatchQuery(field, value)
 	results, err := s.client.Search().
-		Index(SneakerReferenceIndex).
+		Index(s.index).
 		Query(matchQuery).
 		Sort("Price", false).
 		Do(ctx)

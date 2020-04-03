@@ -38,7 +38,7 @@ COPY --from=dev /dist .
 # Service listens on port 8080.
 EXPOSE 8080
 # Run product service container when the container starts
-ENTRYPOINT ["./product"]
+ENTRYPOINT ["./search"]
 
 
 
