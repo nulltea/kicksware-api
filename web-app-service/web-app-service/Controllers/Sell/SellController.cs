@@ -53,21 +53,5 @@ namespace web_app_service.Controllers
 
 			return RedirectToAction("Index", "Home");
 		}
-
-		//foreach (var formFile in sneakerProduct.FormFiles)
-		//{
-		//	if (formFile.Length <= 0) continue;
-		//	var fileName = Path.ChangeExtension(Path.GetRandomFileName(), Path.GetExtension(formFile.FileName));
-		//	var filePath = Path.Combine(_environment.WebRootPath, "files", fileName);
-
-		//	using var stream = System.IO.File.Create(filePath);
-		//	formFile.CopyTo(stream);
-		//	sneakerProduct.Photos.Add(filePath);
-		//}
-		//var response = _service.Store(sneakerProduct);
-
-		//if (response == null) return Problem();
-
-		//return RedirectToAction("Index", "Home");
 	}
 }

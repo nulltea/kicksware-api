@@ -1,0 +1,144 @@
+version: '3.7'
+services:
+  proxy:
+    image: traefik:1.7.4-alpine
+    command:
+      - "--api"
+      - "--docker"
+      - "--docker.watch"
+    labels:
+      - "traefik.frontend.rule=Host:monitor.hightop"
+      - "traefik.docker.network=middleware-service_proxy"
+      - "traefik.port=8080"
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+        mode: host
+    networks:
+      - proxy
+
+  product-service:
+    build:
+      context: ./product-service
+      dockerfile: ./docker/Dockerfile
+      target: dev
+    image: product-service
+    env_file: ./product-service/env/.env
+    labels:
+      - "traefik.backend=product-service"
+      - "traefik.frontend.rule=Host:hightop.io;PathPrefix:/products"
+      - "traefik.docker.network=middleware-service_proxy"
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+    networks:
+      - proxy
+      - datanet
+
+  user-service:
+    build:
+      context: ./user-service
+      dockerfile: ./docker/Dockerfile
+      target: dev
+    image: user-service
+    env_file: ./user-service/env/.env
+    labels:
+      - "traefik.backend=user-service"
+      - "traefik.frontend.rule=Host:hightop.io;PathPrefix/users"
+      - "traefik.docker.network=middleware-service_proxy"
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+    networks:
+      - proxy
+      - datanet
+
+  search-service:
+    build:
+      context: ./elastic-search-service
+      dockerfile: ./docker/Dockerfile
+      target: dev
+    image: search-service
+    env_file: ./elastic-search-service/env/.env
+    labels:
+      - "traefik.backend=search-service"
+      - "traefik.frontend.rule=Host:hightop.io;PathPrefix:/search"
+      - "traefik.docker.network=middleware-service_proxy"
+    links:
+      - mongodb
+      - elasticsearch
+      - kibana
+    depends_on:
+      - mongodb
+      - elasticsearch
+      - kibana
+    networks:
+      - proxy
+      - elastic
+      - datanet
+
+
+  mongodb:
+    image: mongo:3.6.17
+    restart: always
+    ports:
+      - "27018:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=sneakerResaleDB
+    volumes:
+      - type: bind
+        source: ./backup/mongo
+        target: /backup/mongo
+      - ./backup/mongo/init.sh:/docker-entrypoint-initdb.d/init.sh
+    networks:
+      - datanet
+
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.1
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    environment:
+      - xpack.monitoring.enabled=true
+      - xpack.watcher.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - discovery.type=single-node
+    networks:
+      - elastic
+    logging:
+      driver: none
+
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:7.6.1
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    networks:
+      - elastic
+    logging:
+      driver: none
+
+networks:
+  elastic:
+    driver: bridge
+  datanet:
+    driver: bridge
+  proxy:
+    driver: bridge
+
+volumes:
+  elasticsearch-data:

@@ -13,7 +13,7 @@ namespace web_app_service.Controllers
 		public JsonResult SearchAuto([FromServices] IReferenceSearchService service, [FromQuery]string prefix)
 		{
 			var references = service.Search(prefix);
-			return Json(references.ToArray());
+			return Json(references);
 		}
 
 		public ActionResult Search(SneakerReference reference)

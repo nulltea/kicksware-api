@@ -65,7 +65,7 @@ namespace web_app_service.Controllers
 		[HttpGet]
 		public IActionResult Products()
 		{
-			var products = _service.FetchAll().ToViewModel();
+			var products = _service.FetchAll()?.ToViewModel() ?? new List<SneakerProductViewModel>();
 #if DEBUG
 			products.AddRange(ProductsList);
 #endif

@@ -4,7 +4,7 @@ namespace Core.Constants
 {
 	public static class Constants
 	{
-		public const string GatewayBaseUrl = "http://localhost:8420";
+		public const string GatewayBaseUrl = "http://hightop.io/";
 
 		public static readonly string WebRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
 

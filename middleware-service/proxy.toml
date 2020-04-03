@@ -1,0 +1,4 @@
+[entryPoints]
+  [entryPoints.web]
+    # Listen on port 8080 for incoming requests
+    address = ":8080"
