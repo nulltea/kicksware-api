@@ -11,8 +11,6 @@ ENV GO111MODULE=on \
 WORKDIR /build
 # Copy source code into the container
 ADD . /build
-
-
 # Copy & download dependency using go mod
 COPY go.mod .
 COPY go.sum .

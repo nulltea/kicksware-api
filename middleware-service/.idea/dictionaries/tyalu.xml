@@ -1,8 +1,15 @@
 <component name="ProjectDictionaryState">
   <dictionary name="tyalu">
     <words>
+      <w>basicauth</w>
+      <w>certresolver</w>
+      <w>digitalocean</w>
+      <w>entrypoints</w>
       <w>hightop</w>
+      <w>middlewares</w>
+      <w>redirectscheme</w>
       <w>traefik</w>
+      <w>websecure</w>
     </words>
   </dictionary>
 </component>
