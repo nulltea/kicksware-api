@@ -18,11 +18,11 @@ namespace web_app_service
 {
 	public class Startup
 	{
-		public IWebHostEnvironment HostEnvironment { get; set; }
+		private IWebHostEnvironment HostEnvironment { get; }
 
 		public Startup(IConfiguration configuration, IWebHostEnvironment env) => (Configuration, HostEnvironment) = (configuration, env);
 
-		public IConfiguration Configuration { get; }
+		private IConfiguration Configuration { get; }
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
@@ -52,13 +52,13 @@ namespace web_app_service
 			services.AddAuthentication()
 				.AddFacebook(facebookOptions =>
 				{
-					facebookOptions.AppId = Environment.GetEnvironmentVariable("Authentication:Facebook:AppId"); //Configuration["Authentication:Facebook:AppId"];
-					facebookOptions.AppSecret = Environment.GetEnvironmentVariable("Authentication:Facebook:AppSecret"); //Configuration["Authentication:Facebook:AppSecret"];
+					facebookOptions.AppId = Environment.GetEnvironmentVariable("Authentication:Facebook:AppId");
+					facebookOptions.AppSecret = Environment.GetEnvironmentVariable("Authentication:Facebook:AppSecret");
 				})
 				.AddGoogle(options =>
 				{
-					options.ClientId = Environment.GetEnvironmentVariable("Authentication:Google:ClientId");//Configuration["Authentication:Google:ClientId"];
-					options.ClientSecret = Environment.GetEnvironmentVariable("Authentication:Google:ClientSecret"); //Configuration["Authentication:Google:ClientSecret"];
+					options.ClientId = Environment.GetEnvironmentVariable("Authentication:Google:ClientId");
+					options.ClientSecret = Environment.GetEnvironmentVariable("Authentication:Google:ClientSecret");
 				});
 
 			#endregion

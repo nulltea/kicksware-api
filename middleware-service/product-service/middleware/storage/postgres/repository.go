@@ -2,10 +2,12 @@ package postgres
 
 import (
 	"context"
+
 	sqb "github.com/Masterminds/squirrel"
 	_ "github.com/jackc/pgx/v4/stdlib"
 	"github.com/jmoiron/sqlx"
 	"github.com/pkg/errors"
+
 	"product-service/core/model"
 	"product-service/core/repo"
 	"product-service/middleware/business"

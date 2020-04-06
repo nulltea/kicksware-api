@@ -1045,3 +1045,5 @@ C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Web.csproj.CopyComplete
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Web.dll
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Web.pdb
+C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Web.csproj.CoreCompileInputs.cache
+C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Web.genruntimeconfig.cache

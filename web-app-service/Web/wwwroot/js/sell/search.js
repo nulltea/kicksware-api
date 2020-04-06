@@ -112,7 +112,7 @@ function select(item) {
 function createButton(model) {
 	let submitButton = document.createElement("BUTTON");
 	submitButton.type = "submit";
-	submitButton.classList = "button";
+	submitButton.className = "button";
 
 	//custom submit action handler
 	$(submitButton).click(function (event) {
@@ -125,10 +125,10 @@ function createButton(model) {
 	let span = document.createElement("SPAN");
 	span.textContent = "NEXT";
 
-	var icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+	let icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 	icon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
 	icon.setAttribute("viewBox", "0 0 24 24");
-	var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+	let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 	path.setAttribute("d", "M16 8v-4l8 8-8 8v-4h-16l8-8h8z");
 	icon.append(path);
 

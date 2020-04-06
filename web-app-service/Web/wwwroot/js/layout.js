@@ -20,8 +20,8 @@ $(document).ready(function () {
 
 	*/
 
-	var header = $(".header");
-	var menuActive = false;
+	let header = $(".header");
+	let menuActive = false;
 
 	setHeader();
 

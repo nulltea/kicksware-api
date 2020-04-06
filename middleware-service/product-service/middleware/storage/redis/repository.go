@@ -3,9 +3,11 @@ package redis
 import (
 	"encoding/json"
 	"fmt"
+
 	"github.com/go-redis/redis"
 	"github.com/pkg/errors"
 	"github.com/thoas/go-funk"
+
 	"product-service/core/model"
 	"product-service/core/repo"
 	"product-service/middleware/business"

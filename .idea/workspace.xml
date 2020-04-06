@@ -2,454 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="acbe5ec9-5b25-43d4-9395-5f945a9e6c63" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/tyalu.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-service/.idea/dictionaries/tyalu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-service/.idea/dictionaries/tyalu.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-service/backup/mongo/backup.sh" beforeDir="false" afterPath="$PROJECT_DIR$/backup/mongo/backup.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-service/backup/mongo/init.sh" beforeDir="false" afterPath="$PROJECT_DIR$/backup/mongo/init.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-service/backup/mongo/sneakerResaleDB/references.bson" beforeDir="false" afterPath="$PROJECT_DIR$/backup/mongo/sneakerResaleDB/references.bson" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-service/backup/mongo/sneakerResaleDB/references.metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/backup/mongo/sneakerResaleDB/references.metadata.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-service/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backup/docker-compose-old.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-service/elastic-search-service/docker/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-service/elastic-search-service/docker/.dockerignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-service/elastic-search-service/docker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-service/elastic-search-service/docker/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-service/product-service/docker/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-service/product-service/docker/.dockerignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-service/product-service/docker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-service/product-service/docker/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-service/proxy.toml" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-service/proxy.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-service/user-service/docker/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-service/user-service/docker/.dockerignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware-service/user-service/docker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-service/user-service/docker/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/.vs/web-app-service/DesignTimeBuild/.dtbcache" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/.vs/web-app-service/DesignTimeBuild/.dtbcache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/.vs/web-app-service/config/applicationhost.config" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/.vs/web-app-service/config/applicationhost.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/.vs/web-app-service/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/.vs/web-app-service/v16/.suo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/.vs/web-app-service/v16/Server/sqlite3/storage.ide" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/.vs/web-app-service/v16/Server/sqlite3/storage.ide" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backup/docker-compose-old.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backup/mongo/backup.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backup/mongo/init.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backup/mongo/sneakerResaleDB/references.bson" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backup/mongo/sneakerResaleDB/references.metadata.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-service/cert/acme.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-service/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-service/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-service/elastic-search-service/api/rest/gateway.go" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-service/elastic-search-service/api/rest/gateway.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-service/elastic-search-service/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-service/elastic-search-service/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-service/product-service/api/rest/gateway.go" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-service/product-service/api/rest/gateway.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware-service/user-service/api/rest/gateway.go" beforeDir="false" afterPath="$PROJECT_DIR$/middleware-service/user-service/api/rest/gateway.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-app-service/Core/Constants/Constants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Core/Constants/Constants.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/Core/bin/Debug/netcoreapp3.1/Core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Core/bin/Debug/netcoreapp3.1/Core.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/Core/bin/Debug/netcoreapp3.1/Core.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Core/bin/Debug/netcoreapp3.1/Core.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app-service/Core/obj/Core.csproj.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Core/obj/Core.csproj.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app-service/Core/obj/Core.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Core/obj/Core.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app-service/Core/obj/Core.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Core/obj/Core.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app-service/Core/obj/Debug/netcoreapp3.1/Core.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Core/obj/Debug/netcoreapp3.1/Core.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-app-service/Core/obj/Debug/netcoreapp3.1/Core.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Core/obj/Debug/netcoreapp3.1/Core.csprojAssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/Core/obj/Debug/netcoreapp3.1/Core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Core/obj/Debug/netcoreapp3.1/Core.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/Core/obj/Debug/netcoreapp3.1/Core.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Core/obj/Debug/netcoreapp3.1/Core.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/Infrastructure/bin/Debug/netcoreapp3.1/Core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Infrastructure/bin/Debug/netcoreapp3.1/Core.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/Infrastructure/bin/Debug/netcoreapp3.1/Core.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Infrastructure/bin/Debug/netcoreapp3.1/Core.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/Infrastructure/bin/Debug/netcoreapp3.1/Infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Infrastructure/bin/Debug/netcoreapp3.1/Infrastructure.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app-service/Core/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Core/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app-service/Infrastructure/obj/Debug/netcoreapp3.1/Infrastructure.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Infrastructure/obj/Debug/netcoreapp3.1/Infrastructure.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-app-service/Infrastructure/obj/Debug/netcoreapp3.1/Infrastructure.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Infrastructure/obj/Debug/netcoreapp3.1/Infrastructure.csprojAssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/Infrastructure/obj/Debug/netcoreapp3.1/Infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Infrastructure/obj/Debug/netcoreapp3.1/Infrastructure.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service.sln" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/web-app-service.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Areas/Identity/Pages/_ViewStart.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Controllers/AboutController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Controllers/AuthController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Controllers/CheckOutController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Controllers/ContactController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Controllers/HomeController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Controllers/Sell/SellController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Controllers/Sell/SellDetailsController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Controllers/Sell/SellPaymentController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Controllers/Sell/SellPhotosController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Controllers/Sell/SellPreviewController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Controllers/Sell/SellSearchController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Controllers/Sell/SellShippingController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Controllers/ShopController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Data/ApplicationDbContext.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Data/Json/colors.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Data/Json/sizes.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Data/Json/sneaker_brands.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Data/Migrations/00000000000000_CreateIdentitySchema.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Data/Migrations/00000000000000_CreateIdentitySchema.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Data/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Data/Reference/Catalog.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Models/ErrorViewModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Models/HomePageInfoViewModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Models/SneakerProductViewModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Models/UserViewModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Program.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Properties/launchSettings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Startup.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Utils/Helpers/HiddenForWizardStep.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Utils/Helpers/VectorIconHelper.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Utils/Utils.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Views/About/About.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Views/Checkout/Checkout.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Views/Contact/Contact.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Views/Home/Index.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Views/Home/Privacy.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Views/Sell/ModifyProduct.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Views/Sell/MyProducts.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Views/Sell/New/Details.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Views/Sell/New/Payment.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Views/Sell/New/Photos.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Views/Sell/New/Preview.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Views/Sell/New/Search.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Views/Sell/New/Shipping.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Views/Sell/NewProduct.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Views/Shared/Error.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Views/Shared/_Layout.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Views/Shared/_LoginPartial.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Views/Shared/_ValidationScriptsPartial.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Views/Shop/ProductItem.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Views/Shop/Products.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Views/_ViewImports.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Views/_ViewStart.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Web.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Web.csproj.user" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Wizards/IEntityWizard.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Wizards/SneakerProductWizard.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Wizards/WizardStep.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/Wizards/WizardSteps.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/appsettings.Development.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/appsettings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Core.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Core.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Data/Json/colors.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Data/Json/sizes.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Data/Json/sneaker_brands.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Infrastructure.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Infrastructure.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Authentication.Facebook.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Authentication.Google.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Identity.UI.Views.V3.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Identity.UI.Views.V4.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Identity.UI.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Razor.Language.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.Bcl.AsyncInterfaces.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.Bcl.HashCode.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.CodeAnalysis.CSharp.Workspaces.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.CodeAnalysis.CSharp.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.CodeAnalysis.Razor.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.CodeAnalysis.Workspaces.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.CodeAnalysis.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.Data.SqlClient.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.EntityFrameworkCore.Abstractions.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.EntityFrameworkCore.Design.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.EntityFrameworkCore.Relational.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.EntityFrameworkCore.SqlServer.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.EntityFrameworkCore.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.Identity.Client.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.VisualStudio.Web.CodeGeneration.Core.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.VisualStudio.Web.CodeGeneration.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Newtonsoft.Json.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/NuGet.Frameworks.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Properties/launchSettings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/RestSharp.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/System.Composition.AttributedModel.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/System.Composition.Convention.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/System.Composition.Hosting.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/System.Composition.Runtime.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/System.Composition.TypedParts.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/System.Configuration.ConfigurationManager.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/System.Runtime.Caching.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/System.Security.Cryptography.ProtectedData.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Web.StaticWebAssets.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Web.Views.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Web.Views.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Web.deps.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Web.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Web.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Web.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Web.runtimeconfig.dev.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/Web.runtimeconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/appsettings.Development.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/appsettings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/cs/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/cs/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/cs/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/cs/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/de/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/de/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/de/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/de/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/dotnet-aspnet-codegenerator-design.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/es/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/es/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/es/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/es/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/fr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/fr/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/fr/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/fr/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/it/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/it/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/it/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/it/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/ja/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/ja/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/ja/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/ja/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/ko/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/ko/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/ko/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/ko/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/pl/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/pl/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/pl/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/pl/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/pt-BR/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/pt-BR/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/pt-BR/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/pt-BR/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/ru/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/ru/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/ru/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/ru/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/runtimes/unix/lib/netcoreapp2.0/System.Runtime.Caching.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/runtimes/unix/lib/netcoreapp2.1/Microsoft.Data.SqlClient.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/runtimes/win-arm64/native/sni.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/sni.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/sni.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/runtimes/win/lib/netcoreapp2.0/System.Runtime.Caching.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/runtimes/win/lib/netcoreapp2.1/Microsoft.Data.SqlClient.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/tr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/tr/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/tr/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/tr/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/web-app-service.StaticWebAssets.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/web-app-service.Views.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/web-app-service.Views.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/web-app-service.deps.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/web-app-service.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/web-app-service.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/web-app-service.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/web-app-service.runtimeconfig.dev.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/web-app-service.runtimeconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/zh-Hans/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/zh-Hans/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/zh-Hans/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/zh-Hans/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/zh-Hant/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/zh-Hant/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/bin/Debug/netcoreapp3.1/zh-Hant/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/libman.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Razor/Areas/Identity/Pages/_ViewStart.cshtml.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Razor/Views/About/About.cshtml.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Razor/Views/Checkout/Checkout.cshtml.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Razor/Views/Contact/Contact.cshtml.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Razor/Views/Home/Index.cshtml.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Razor/Views/Home/Privacy.cshtml.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Razor/Views/Sell/ModifyProduct.cshtml.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Razor/Views/Sell/MyProducts.cshtml.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Razor/Views/Shared/Error.cshtml.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_LoginPartial.cshtml.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_ValidationScriptsPartial.cshtml.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Razor/Views/Shop/ProductItem.cshtml.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Razor/Views/Shop/Products.cshtml.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Razor/Views/_ViewImports.cshtml.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Razor/Views/_ViewStart.cshtml.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Web.AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Web.AssemblyInfoInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Web.MvcApplicationPartsAssemblyInfo.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Web.MvcApplicationPartsAssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Web.RazorAssemblyInfo.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Web.RazorAssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Web.RazorCoreGenerate.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Web.RazorTargetAssemblyInfo.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Web.RazorTargetAssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Web.TagHelpers.input.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Web.TagHelpers.output.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Web.Views.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Web.Views.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Web.assets.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Web.csproj.CopyComplete" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Web.csproj.FileListAbsolute.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Web.csprojAssemblyReference.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Web.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Web.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/Web.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/staticwebassets/Web.StaticWebAssets.Manifest.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/staticwebassets/Web.StaticWebAssets.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/staticwebassets/web-app-service.StaticWebAssets.Manifest.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/staticwebassets/web-app-service.StaticWebAssets.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/web-app-service.AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/web-app-service.AssemblyInfoInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/web-app-service.MvcApplicationPartsAssemblyInfo.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/web-app-service.MvcApplicationPartsAssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/web-app-service.RazorAssemblyInfo.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/web-app-service.RazorAssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/web-app-service.RazorCoreGenerate.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/web-app-service.RazorTargetAssemblyInfo.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/web-app-service.RazorTargetAssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/web-app-service.TagHelpers.input.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/web-app-service.TagHelpers.output.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/web-app-service.Views.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/web-app-service.Views.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/web-app-service.assets.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/web-app-service.csproj.CopyComplete" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/web-app-service.csproj.FileListAbsolute.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/web-app-service.csprojAssemblyReference.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/web-app-service.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/web-app-service.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Debug/netcoreapp3.1/web-app-service.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Web.csproj.nuget.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Web.csproj.nuget.dgspec.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Web.csproj.nuget.g.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/Web.csproj.nuget.g.targets" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/project.assets.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/web-app-service.csproj.nuget.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/web-app-service.csproj.nuget.dgspec.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/web-app-service.csproj.nuget.g.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/obj/web-app-service.csproj.nuget.g.targets" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/web-app-service.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/bootstrap4/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/bootstrap4/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/bootstrap4/popper.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/checkout.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/checkout_responsive.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/contact.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/contact_responsive.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/home.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/main_styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/product_item.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/product_item_responsive.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/products.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/products_responsive.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/responsive.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/sell/details.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/sell/obsolete/sell.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/sell/obsolete/sell_responsive.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/sell/payment.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/sell/photos.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/sell/preview.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/sell/search.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/sell/sell.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/sell/sell_responsive.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/sell/shipping.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/css/site.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/fonts/icomoon/Read Me.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/fonts/icomoon/demo-files/demo.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/fonts/icomoon/demo-files/demo.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/fonts/icomoon/demo.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/fonts/icomoon/fonts/icomoon.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/fonts/icomoon/fonts/icomoon.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/fonts/icomoon/fonts/icomoon.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/fonts/icomoon/fonts/icomoon.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/fonts/icomoon/selection.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/fonts/icomoon/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/images/_photo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/images/arrow.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/images/cloud_search.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/images/details.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/images/facebook.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/images/footer.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/images/google.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/images/hightop_sneakers.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/images/home_addidas_4d.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/images/home_adidas-yzy-qntm.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/images/home_air_max_plus_3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/images/home_nike_ispa_720.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/images/home_nike_ispa_envelope.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/images/icon_1.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/images/icon_2.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/images/icon_3.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/images/payment.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/images/photo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/images/preview.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/images/search.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/images/shipping.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/images/sneaker_not_found.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/images/upload.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/js/home.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/js/layout.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/js/productItem.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/js/products.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/js/sell/payment.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/js/sell/preview.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/js/sell/search.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/js/sell/sell.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/js/service.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/js/site.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/Isotope/isotope.pkgd.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/OwlCarousel2-2.2.1/ajax-loader.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/OwlCarousel2-2.2.1/animate.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/OwlCarousel2-2.2.1/owl.carousel.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/OwlCarousel2-2.2.1/owl.carousel.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/OwlCarousel2-2.2.1/owl.theme.default.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/OwlCarousel2-2.2.1/owl.video.play.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/bootstrap/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/bootstrap/dist/css/bootstrap.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/bootstrap/dist/js/bootstrap.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/easing/easing.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/css/font-awesome.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/css/font-awesome.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/fonts/FontAwesome.otf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/fonts/fontawesome-webfont.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/fonts/fontawesome-webfont.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/fonts/fontawesome-webfont.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/fonts/fontawesome-webfont.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/fonts/fontawesome-webfont.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/less/animated.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/less/bordered-pulled.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/less/core.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/less/fixed-width.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/less/font-awesome.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/less/icons.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/less/larger.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/less/list.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/less/mixins.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/less/path.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/less/rotated-flipped.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/less/screen-reader.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/less/stacked.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/less/variables.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/scss/_animated.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/scss/_bordered-pulled.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/scss/_core.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/scss/_fixed-width.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/scss/_icons.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/scss/_larger.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/scss/_list.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/scss/_mixins.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/scss/_path.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/scss/_rotated-flipped.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/scss/_screen-reader.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/scss/_stacked.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/scss/_variables.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/font-awesome-4.7.0/scss/font-awesome.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/greensock/ScrollToPlugin.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/greensock/TimelineMax.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/greensock/TweenMax.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/greensock/animation.gsap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/jquery-validation/LICENSE.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/jquery-validation/dist/additional-methods.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/jquery-validation/dist/additional-methods.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/jquery-validation/dist/jquery.validate.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/jquery/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/jquery/dist/jquery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/jquery/dist/jquery.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/jquery/dist/jquery.min.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/less/less.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/parallax-js-master/parallax.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app-service/web-app-service/wwwroot/lib/scrollmagic/ScrollMagic.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app-service/Infrastructure/obj/Infrastructure.csproj.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Infrastructure/obj/Infrastructure.csproj.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app-service/Infrastructure/obj/Infrastructure.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Infrastructure/obj/Infrastructure.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app-service/Infrastructure/obj/Infrastructure.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Infrastructure/obj/Infrastructure.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app-service/Infrastructure/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Infrastructure/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app-service/Web/obj/Debug/netcoreapp3.1/Web.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Web/obj/Debug/netcoreapp3.1/Web.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app-service/Web/obj/Debug/netcoreapp3.1/Web.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Web/obj/Debug/netcoreapp3.1/Web.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app-service/Web/obj/Web.csproj.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Web/obj/Web.csproj.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app-service/Web/obj/Web.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Web/obj/Web.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app-service/Web/obj/Web.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Web/obj/Web.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app-service/Web/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/Web/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app-service/docker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/web-app-service/docker/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -480,25 +65,40 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\source\repos\sneaker-resale-platform\web-app-service" />
       <recent name="C:\source\repos\sneaker-resale-platform\middleware-service" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\source\repos\sneaker-resale-platform\computer-vision-service" />
-      <recent name="C:\source\repos\sneaker-resale-platform\web-app-service" />
       <recent name="C:\source\repos\sneaker-resale-platform" />
+      <recent name="C:\source\repos\sneaker-resale-platform\web-app-service" />
+      <recent name="C:\source\repos\sneaker-resale-platform\backup" />
+      <recent name="C:\source\repos\sneaker-resale-platform\web-app-service\Web" />
+      <recent name="C:\source\repos\sneaker-resale-platform\computer-vision-service" />
     </key>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="635" y="215" key="FileChooserDialogImpl" timestamp="1586055246420">
+    <state x="635" y="215" key="FileChooserDialogImpl" timestamp="1586114776879">
       <screen x="0" y="0" width="1707" height="920" />
     </state>
-    <state x="635" y="215" key="FileChooserDialogImpl/0.0.1707.920/3840.0.2048.1112/0.2160.2194.589@0.0.1707.920" timestamp="1586055246420" />
-    <state x="516" y="196" width="672" height="678" key="search.everywhere.popup" timestamp="1586055186030">
+    <state x="635" y="215" key="FileChooserDialogImpl/0.0.1707.920/3840.0.2048.1112/0.2160.2194.589@0.0.1707.920" timestamp="1586114776879" />
+    <state x="516" y="196" width="672" height="678" key="search.everywhere.popup" timestamp="1586100226665">
       <screen x="0" y="0" width="1707" height="920" />
     </state>
-    <state x="516" y="196" width="672" height="678" key="search.everywhere.popup/0.0.1707.920/3840.0.2048.1112/0.2160.2194.589@0.0.1707.920" timestamp="1586055186030" />
+    <state x="516" y="196" width="672" height="678" key="search.everywhere.popup/0.0.1707.920/3840.0.2048.1112/0.2160.2194.589@0.0.1707.920" timestamp="1586100226665" />
   </component>
 </project>

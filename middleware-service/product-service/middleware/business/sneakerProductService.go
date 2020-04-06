@@ -2,13 +2,15 @@ package business
 
 import (
 	"errors"
+	"time"
+
 	errs "github.com/pkg/errors"
 	"github.com/rs/xid"
 	"gopkg.in/dealancer/validate.v2"
+
 	"product-service/core/model"
 	"product-service/core/repo"
 	"product-service/core/service"
-	"time"
 )
 
 var (
@@ -66,4 +68,3 @@ func (r *productService) Remove(code string) error {
 func (r *productService) RemoveObj(sneakerProduct *model.SneakerProduct) error {
 	return r.sneakerProductRepo.RemoveObj(sneakerProduct)
 }
-

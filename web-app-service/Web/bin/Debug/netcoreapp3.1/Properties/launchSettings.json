@@ -12,6 +12,11 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
+        "Key": "Value",
+        "Authentication:Facebook:AppId": "832024310605849",
+        "Authentication:Google:ClientSecret": "dGOa9wDbL7WY984oseF37LVw",
+        "Authentication:Facebook:AppSecret": "eb484e9d8765f3bf54d47ff36a2a3e44",
+        "Authentication:Google:ClientId": "415074134957-t70e3cb6i51lcllrak0jddccr496ii0j.apps.googleusercontent.com",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },

@@ -1,11 +1,13 @@
 package rest
 
 import (
-	"github.com/go-chi/chi"
-	"github.com/pkg/errors"
 	"io/ioutil"
 	"log"
 	"net/http"
+
+	"github.com/go-chi/chi"
+	"github.com/pkg/errors"
+
 	"product-service/core/model"
 	"product-service/core/service"
 	"product-service/middleware/business"
@@ -123,7 +125,7 @@ func (h *handler) PutImages(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	sneakerProduct.Images = files;
+	sneakerProduct.Images = files
 	if err = h.Service.Modify(sneakerProduct); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return

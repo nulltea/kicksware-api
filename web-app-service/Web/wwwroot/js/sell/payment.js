@@ -1,26 +1,26 @@
 ﻿$(document).ready(function () {
 	"use strict";
-	
-	var displayMax = $(".max-price-display");
-	var displayMin = $(".min-price-display");
-	var maxRangeSlider = $("#price-max");
-	var minRangeSlider = $("#price-min");
-	var maxRangeElement = maxRangeSlider.get(0);
-	var minRangeElement = minRangeSlider.get(0);
-	var currency = $("#currency").get(0);
-	var offerSign = $("#offers-sign");
+
+	let displayMax = $(".max-price-display");
+	let displayMin = $(".min-price-display");
+	let maxRangeSlider = $("#price-max");
+	let minRangeSlider = $("#price-min");
+	let maxRangeElement = maxRangeSlider.get(0);
+	let minRangeElement = minRangeSlider.get(0);
+	let currency = $("#currency").get(0);
+	let offerSign = $("#offers-sign");
 
 	function displayMaxPrice() {
-		var sign = CurrencySigns[currency.value];
+		let sign = CurrencySigns[currency.value];
 		displayMax.text(`${maxRangeElement.value} ${sign}`);
 	}
 	function displayMinPrice() {
-		var sign = CurrencySigns[currency.value];
+		let sign = CurrencySigns[currency.value];
 		displayMin.text(`${minRangeElement.value} ${sign}`);
 	}
 
 	function setShippingCurrency() {
-		var sign = CurrencySigns[currency.value];
+		let sign = CurrencySigns[currency.value];
 		$(".shipping-info span").each(function() {
 			$(this).text(sign);
 		});
@@ -37,9 +37,9 @@
 		return parseInt(Math.round(num * 0.2, 0) * 5);
 	}
 
-	var minValue = parseInt(minRangeElement.value);
-	var maxValue = parseInt(maxRangeElement.value);
-	var offset = (maxRangeElement.max - maxRangeElement.min) * 4 / 50;
+	let minValue = parseInt(minRangeElement.value);
+	let maxValue = parseInt(maxRangeElement.value);
+	let offset = (maxRangeElement.max - maxRangeElement.min) * 4 / 50;
 
 	function handleCollisionMin() {
 		minValue = parseInt(minRangeElement.value);

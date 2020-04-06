@@ -1,135 +1,124 @@
-﻿function autocompleteInit(inp, arr) {
+﻿function autocompleteInit(input, dataValues) {
+	let currentFocus;
 
-	var currentFocus;
+	input.addEventListener("input", function() {
+		let value = this.value;
 
-	inp.addEventListener("input",
-		function(e) {
-			var b, i, val = this.value;
+		closeAllLists();
+		if (!value) {
+			return false;
+		}
+		currentFocus = -1;
 
-			closeAllLists();
-			if (!val) {
-				return false;
+		let autocompleteList = document.createElement("DIV");
+		autocompleteList.setAttribute("id", this.id + "autocomplete-list");
+		autocompleteList.setAttribute("class", "autocomplete-items");
+
+		this.parentNode.appendChild(autocompleteList);
+
+		for (let i = 0; i < dataValues.length; i++) {
+
+			if (dataValues[i].substr(0, value.length).toUpperCase() === value.toUpperCase()) {
+				let item = document.createElement("DIV");
+
+				item.innerHTML = `<strong>${dataValues[i].substr(0, value.length)}</strong>`;
+				item.innerHTML += dataValues[i].substr(value.length);
+				item.innerHTML += `<input type='hidden' value='${dataValues[i]}'>`;
+
+				item.addEventListener("click",
+					function() {
+						input.value = this.getElementsByTagName("input")[0].value;
+						closeAllLists();
+					});
+				autocompleteList.appendChild(item);
 			}
-			currentFocus = -1;
+		}
+	});
 
-			var a = document.createElement("DIV");
-			a.setAttribute("id", this.id + "autocomplete-list");
-			a.setAttribute("class", "autocomplete-items");
-
-			this.parentNode.appendChild(a);
-
-			for (i = 0; i < arr.length; i++) {
-	
-				if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-					b = document.createElement("DIV");
-
-					b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-					b.innerHTML += arr[i].substr(val.length);
-					b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-
-					b.addEventListener("click",
-						function() {
-							inp.value = this.getElementsByTagName("input")[0].value;
-							closeAllLists();
-						});
-					a.appendChild(b);
-				}
-			}
-		});
-
-	inp.addEventListener("keydown",
+	input.addEventListener("keydown",
 		function(e) {
-			var x = document.getElementById(this.id + "autocomplete-list");
-			if (x) x = x.getElementsByTagName("div");
-			if (e.keyCode == 40) {
+			let selectedList = document.getElementById(this.id + "autocomplete-list");
+			if (selectedList) selectedList = selectedList.getElementsByTagName("div");
+			if (e.keyCode === 40) {
 				currentFocus++;
-				addActive(x);
-			} else if (e.keyCode == 38) {
+				addActive(selectedList);
+			} else if (e.keyCode === 38) {
 				currentFocus--;
-				addActive(x);
-			} else if (e.keyCode == 13) {
+				addActive(selectedList);
+			} else if (e.keyCode === 13) {
 				e.preventDefault();
 				if (currentFocus > -1) {
-					if (x) x[currentFocus].click();
+					if (selectedList) selectedList[currentFocus].click();
 				}
 			}
 		});
 
-	function addActive(x) {
-		if (!x) return false;
-		removeActive(x);
-		if (currentFocus >= x.length) currentFocus = 0;
-		if (currentFocus < 0) currentFocus = (x.length - 1);
-		x[currentFocus].classList.add("autocomplete-active");
+	function addActive(item) {
+		if (!item) return false;
+		removeActive(item);
+		if (currentFocus >= item.length) currentFocus = 0;
+		if (currentFocus < 0) currentFocus = (item.length - 1);
+		item[currentFocus].classList.add("autocomplete-active");
 	}
 
-	function removeActive(x) {
-
-		for (var i = 0; i < x.length; i++) {
-			x[i].classList.remove("autocomplete-active");
+	function removeActive(item) {
+		for (let i = 0; i < item.length; i++) {
+			item[i].classList.remove("autocomplete-active");
 		}
 	}
 
 	function closeAllLists(element) {
-
-		var x = document.getElementsByClassName("autocomplete-items");
-		for (var i = 0; i < x.length; i++) {
-			if (element != x[i] && element != inp) {
+		let x = document.getElementsByClassName("autocomplete-items");
+		for (let i = 0; i < x.length; i++) {
+			if (element !== x[i] && element !== input) {
 				x[i].parentNode.removeChild(x[i]);
 			}
 		}
 	}
 	document.addEventListener("click",
-		function(e) {
-			closeAllLists(e.target);
-		});
+	function(e) {
+		closeAllLists(e.target);
+	});
 }
 
 function initCustomDropDown() {
-	var customSelectors = document.getElementsByClassName("list-select");
-	for (var i = 0; i < customSelectors.length; i++) {
-		var selectElements = customSelectors[i].getElementsByTagName("select")[0];
-		/* For each element, create a new DIV that will act as the selected item: */
-		var selectedItem = document.createElement("div");
+	let customSelectors = document.getElementsByClassName("list-select");
+	for (let i = 0; i < customSelectors.length; i++) {
+		let selectElements = customSelectors[i].getElementsByTagName("select")[0];
+
+		let selectedItem = document.createElement("div");
 		selectedItem.setAttribute("class", "select-selected");
 		selectedItem.innerHTML = "";
 		customSelectors[i].appendChild(selectedItem);
-		/* For each element, create a new DIV that will contain the option list: */
-		var itemBox = document.createElement("div");
+
+		let itemBox = document.createElement("div");
 		itemBox.setAttribute("class", "select-items select-hide");
-		for (var j = 1; j < selectElements.length; j++) {
-			/* For each option in the original select element,
-			create a new DIV that will act as an option item: */
-			var c = document.createElement("div");
-			c.innerHTML = selectElements.options[j].innerHTML;
-			c.addEventListener("click",
+		for (let j = 1; j < selectElements.length; j++) {
+			let option = document.createElement("div");
+			option.innerHTML = selectElements.options[j].innerHTML;
+			option.addEventListener("click",
 				function(e) {
-					/* When an item is clicked, update the original select box,
-					and the selected item: */
-					var y, i, k;
-					var originalSelect = this.parentNode.parentNode.getElementsByTagName("select")[0];
-					var h = this.parentNode.previousSibling;
-					for (i = 0; i < originalSelect.length; i++) {
-						if (originalSelect.options[i].innerHTML == this.innerHTML) {
+					let originalSelect = this.parentNode.parentNode.getElementsByTagName("select")[0];
+					let previousSibling = this.parentNode.previousSibling;
+					for (let i = 0; i < originalSelect.length; i++) {
+						if (originalSelect.options[i].innerHTML === this.innerHTML) {
 							originalSelect.selectedIndex = i;
-							h.innerHTML = this.innerHTML;
-							y = this.parentNode.getElementsByClassName("same-as-selected");
-							for (k = 0; k < y.length; k++) {
-								y[k].removeAttribute("class");
+							previousSibling.innerHTML = this.innerHTML;
+							let sameSelected = this.parentNode.getElementsByClassName("same-as-selected");
+							for (let k = 0; k < sameSelected.length; k++) {
+								sameSelected[k].removeAttribute("class");
 							}
 							this.setAttribute("class", "same-as-selected");
 							break;
 						}
 					}
-					h.click();
+					previousSibling.click();
 				});
-			itemBox.appendChild(c);
+			itemBox.appendChild(option);
 		}
 		customSelectors[i].appendChild(itemBox);
 		selectedItem.addEventListener("click",
 			function(e) {
-				/* When the select box is clicked, close any other select boxes,
-				and open/close the current select box: */
 				e.stopPropagation();
 				closeAllSelect(this);
 				this.nextSibling.classList.toggle("select-hide");
@@ -138,28 +127,25 @@ function initCustomDropDown() {
 		selectedItem.innerHTML = $("select option:selected", customSelectors[i]).text();
 	}
 
-	function closeAllSelect(elmnt) {
-		/* A function that will close all select boxes in the document,
-		except the current select box: */
-		var x, y, i, arrNo = [];
-		x = document.getElementsByClassName("select-items");
-		y = document.getElementsByClassName("select-selected");
-		for (i = 0; i < y.length; i++) {
-			if (elmnt == y[i]) {
-				arrNo.push(i)
+	function closeAllSelect(element) {
+		let numArray  = [];
+		let selectItems = document.getElementsByClassName("select-items");
+		let selectedItem = document.getElementsByClassName("select-selected");
+		for (let i = 0; i < selectedItem.length; i++) {
+			if (element === selectedItem[i]) {
+				numArray.push(i)
 			} else {
-				y[i].classList.remove("select-arrow-active");
+				selectedItem[i].classList.remove("select-arrow-active");
 			}
 		}
-		for (i = 0; i < x.length; i++) {
-			if (arrNo.indexOf(i)) {
-				x[i].classList.add("select-hide");
+		for (let i = 0; i < selectItems.length; i++) {
+			if (numArray.indexOf(i)) {
+				selectItems[i].classList.add("select-hide");
 			}
 		}
 	}
 
-	/* If the user clicks anywhere outside the select box,
-	then close all select boxes: */
+	// Handle outside the select box click
 	document.addEventListener("click", closeAllSelect);
 }
 

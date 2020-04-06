@@ -18,10 +18,9 @@
 1. Fonts
 ***********/
 
-@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900');
-@import url('https://fonts.googleapis.com/css?family=Oxanium:300,400,500,600,700,800,900');
-
-
+@import url("https://fonts.googleapis.com/css?family=Oxanium:300,400,500,600,700,800,900");
+@import url("https://fonts.googleapis.com/css?family=Orbitron:300,400,500,600,700,800,900");
+@import url("https://fonts.googleapis.com/css?family=Audiowide:300,400,500,600,700,800,900");
 /*********************************
 2. Body and some general stuff
 *********************************/
@@ -36,11 +35,11 @@
 }
 body
 {
-	font-family: 'Oxanium', sans-serif;
-	font-size: 18px;
+	font-family: "Oxanium", sans-serif;
+	font-size:   18px;
 	font-weight: 400;
-	background: #FFFFFF;
-	color: #a5a5a5;
+	background:  #FFFFFF;
+	color:       #a5a5a5;
 }
 div
 {
@@ -57,14 +56,14 @@ ul
 }
 p
 {
-	font-family: 'Oxanium', sans-serif;
-	font-size: 18px;
-    line-height: 2.14;
-	font-weight: 400;
-	color: #6c6a74;
+	font-family:            "Oxanium", sans-serif;
+	font-size:              18px;
+    line-height:            2.14;
+	font-weight:            400;
+	color:                  #6c6a74;
 	-webkit-font-smoothing: antialiased;
-	-webkit-text-shadow: rgba(0,0,0,.01) 0 0 1px;
-	text-shadow: rgba(0,0,0,.01) 0 0 1px;
+	-webkit-text-shadow:    rgba(0,0,0,.01) 0 0 1px;
+	text-shadow:            rgba(0,0,0,.01) 0 0 1px;
 }
 p a
 {
@@ -115,10 +114,10 @@ h4{font-size: 18px;}
 h5{font-size: 16px;}
 h1, h2, h3, h4, h5, h6
 {
-	font-family: 'Open Sans', sans-serif;
+	font-family:            "Open Sans", sans-serif;
 	-webkit-font-smoothing: antialiased;
-	-webkit-text-shadow: rgba(0,0,0,.01) 0 0 1px;
-	text-shadow: rgba(0,0,0,.01) 0 0 1px;
+	-webkit-text-shadow:    rgba(0,0,0,.01) 0 0 1px;
+	text-shadow:            rgba(0,0,0,.01) 0 0 1px;
 }
 
 .form-control
@@ -249,17 +248,17 @@ section
 }
 .button::after
 {
-	content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 150%;
-    height: 100%;
-    background: #1b1b1b;
-    z-index: 0;
-    opacity: 0;
+	content:           "";
+    position:          absolute;
+    top:               0;
+    left:              0;
+    width:             150%;
+    height:            100%;
+    background:        #1b1b1b;
+    z-index:           0;
+    opacity:           0;
     -webkit-transform: rotate3d(0, 0, 1, -45deg) translate3d(0, -3em, 0);
-    transform: rotate3d(0, 0, 1, -45deg) translate3d(0, -3em, 0);
+    transform:         rotate3d(0, 0, 1, -45deg) translate3d(0, -3em, 0);
     -webkit-transform-origin: 0% 100%;
     transform-origin: 0% 100%;
     -webkit-transition: -webkit-transform 0.3s, opacity 0.3s, background-color 0.3s;
@@ -346,7 +345,7 @@ section
 {
 	height: 70px;
 	background: rgb(255, 255, 255, .9);
-	box-shadow: 0px 1px 4px 0 #6c6a74;
+	box-shadow: 0 1px 4px 0 #6c6a74;
 }
 .logo
 {
@@ -356,8 +355,9 @@ section
 }
 .logo a
 {
+	font-family: Audiowide;
 	font-size: 30px;
-	font-weight: 700;
+	font-weight: 500;
 	color: #1b1b1b;
 	-webkit-transition: all 200ms ease;
 	-moz-transition: all 200ms ease;
@@ -365,6 +365,11 @@ section
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
+
+.logo:hover a {
+
+}
+
 .header.scrolled .logo a
 {
 	font-size: 24px;
@@ -379,7 +384,7 @@ section
 
 .main_nav ul
 {
-	width: inherit;
+	width:  inherit;
 	height: inherit;
 }
 
@@ -823,7 +828,7 @@ section
 }
 
 .header-button-strong:after {
-	content: '';
+	content:    "";
 	background: white;
 }
 
@@ -878,12 +883,12 @@ button:focus {
 }
 
 .close-button:before, .close-button:after {
-	content: ' ';
-	position: absolute;
-	height: 33px;
-	width: 2px;
+	content:          " ";
+	position:         absolute;
+	height:           33px;
+	width:            2px;
 	background-color: #333;
-	top: 0;
+	top:              0;
 }
 
 .close-button:before {
@@ -1028,25 +1033,25 @@ input[type="checkbox"] + label {
 }
 
 input[type="checkbox"] + label:hover:after {
-	content: '';
-	width: 12px;
-	height: 12px;
+	content:    "";
+	width:      12px;
+	height:     12px;
 	background: #1b1b1b;
-	position: absolute;
-	left: 4px;
-	top: 4px;
-	z-index: 0;
+	position:   absolute;
+	left:       4px;
+	top:        4px;
+	z-index:    0;
 }
 
 
 input[type="checkbox"] + label:before {
-	content: '';
-	width: 20px;
-	height: 20px;
-	border: 2.8px solid #1b1b1b;
+	content:  "";
+	width:    20px;
+	height:   20px;
+	border:   2.8px solid #1b1b1b;
 	position: absolute;
-	left: 0;
-	top: 0;
+	left:     0;
+	top:      0;
 }
 
 input[type="checkbox"]:checked + label:before {

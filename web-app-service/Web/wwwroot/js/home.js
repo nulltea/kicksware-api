@@ -28,8 +28,8 @@ $(document).ready(function () {
     */
 
 	function initHomeSlider() {
-		if ($('.home_slider').length) {
-			var homeSlider = $('.home_slider');
+		if ($(".home_slider").length) {
+			var homeSlider = $(".home_slider");
 			homeSlider.owlCarousel(
 				{
 					items: 1,
@@ -61,11 +61,11 @@ $(document).ready(function () {
 			function setAnimation(_elem, _InOut) {
 				// Store all animationend event name in a string.
 				// cf animate.css documentation
-				var animationEndEvent = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+				let animationEndEvent = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd o animationend animationend';
 
 				_elem.each(function () {
-					var $elem = $(this);
-					var $animationType = 'animated ' + $elem.data('animation-' + _InOut);
+					let $elem = $(this);
+					let $animationType = 'animated ' + $elem.data('animation-' + _InOut);
 
 					$elem.addClass($animationType).one(animationEndEvent, function () {
 						$elem.removeClass($animationType); // remove animate.css Class at the end of the animations

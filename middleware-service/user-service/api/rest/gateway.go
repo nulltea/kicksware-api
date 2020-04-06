@@ -13,7 +13,7 @@ func ProvideRoutes(rest RestfulHandler) *chi.Mux {
 		middleware.RequestID,
 		middleware.RealIP,
 	)
-	router.Mount("/users", restRoutes(rest))
+	router.Mount("/api/users", restRoutes(rest))
 	return router
 }
 

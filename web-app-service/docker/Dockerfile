@@ -31,4 +31,5 @@ RUN dotnet publish -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+EXPOSE 88
 ENTRYPOINT ["dotnet", "Web.dll"]

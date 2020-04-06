@@ -11,6 +11,7 @@ services:
       - --api.dashboard=true
       - --providers.docker=true
       - --entryPoints.web.address=:80
+      - --entryPoints.webapp.address=:88
       # - --entryPoints.websecure.address=:443
       # - --certificatesResolvers.le.acme.email=microservicego@gmail.com
       # - --certificatesResolvers.le.acme.storage=/cert/acme.json
@@ -26,7 +27,7 @@ services:
       # - traefik.http.middlewares.traefik-https-redirect.redirectscheme.permanent=true
       # - traefik.http.routers.traefik-secure.middlewares=traefik-auth
       # - traefik.http.middlewares.traefik-auth.basicauth.users=USER:PASSWORD
-      - traefik.docker.network=middleware-service_web
+      - traefik.docker.network=sneaker-resale-platform_web
     ports:
       - 80:80
       - 443:443
@@ -46,10 +47,10 @@ services:
     image: product-service
     restart: always
     labels:
-      - traefik.http.routers.product-service.rule=Host(`kicksware.com`) && PathPrefix(`/products`)
+      - traefik.http.routers.product-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/products`)
       # - traefik.http.routers.product-service.tls=true
       # - traefik.http.routers.product-service.tls.certresolver=le
-      - traefik.docker.network=middleware-service_web
+      - traefik.docker.network=sneaker-resale-platform_web
     networks:
       - web
       - data
@@ -67,10 +68,10 @@ services:
     image: user-service
     restart: always
     labels:
-      - traefik.http.routers.user-service.rule=Host(`kicksware.com`) && PathPrefix(`/users`)
+      - traefik.http.routers.user-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/users`)
       # - traefik.http.routers.user-service.tls=true
       # - traefik.http.routers.user-service.tls.certresolver=le
-      - traefik.docker.network=middleware-service_web
+      - traefik.docker.network=sneaker-resale-platform_web
     networks:
       - web
       - data
@@ -88,10 +89,10 @@ services:
     restart: always
     env_file: ./middleware-service/elastic-search-service/env/.env
     labels:
-      - traefik.http.routers.search-service.rule=Host(`kicksware.com`) && PathPrefix(`/search`)
+      - traefik.http.routers.search-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/search`)
       # - traefik.http.routers.search-service.tls=true
       # - traefik.http.routers.search-service.tls.certresolver=le
-      - traefik.docker.network=middleware-service_web
+      - traefik.docker.network=sneaker-resale-platform_web
     networks:
       - web
       - elastic
@@ -109,19 +110,16 @@ services:
     build:
       context: ./web-app-service
       dockerfile: ./docker/Dockerfile
-    image: search-service
+    image: web-app
     restart: always
     env_file: ./web-app-service/env/.env
-    links:
-      - product-service
-      - user-service
-      - search-service
-    depends_on:
-      - product-service
-      - user-service
-      - search-service
-    ports:
-      - 8420:80
+    labels:
+      - traefik.http.routers.web-app.rule=Host(`kicksware.com`)
+      # - traefik.http.routers.web-app.tls=true
+      # - traefik.http.routers.web-app.tls.certresolver=le
+      - traefik.docker.network=sneaker-resale-platform_web
+    networks:
+      - web
 
   mongodb:
     image: mongo:3.6.17
@@ -136,6 +134,8 @@ services:
       - ./backup/mongo/init.sh:/docker-entrypoint-initdb.d/init.sh
     networks:
       - data
+    logging:
+      driver: none
 
   elasticsearch:
     container_name: elasticsearch

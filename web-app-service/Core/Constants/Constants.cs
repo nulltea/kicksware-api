@@ -4,7 +4,7 @@ namespace Core.Constants
 {
 	public static class Constants
 	{
-		public const string GatewayBaseUrl = "http://kicksware.com/";
+		public const string GatewayBaseUrl = "http://kicksware.com/api";
 
 		public static readonly string WebRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
 

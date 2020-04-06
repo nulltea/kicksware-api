@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\source\repos\sneaker-resale-platform\web-app-service" t="IncludeFlat">
+      <e p=".dockerignore" t="Include" />
+      <e p="Core" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Constants" t="Include">
+          <e p="Constants.cs" t="Include" />
+        </e>
+        <e p="Core.csproj" t="IncludeRecursive" />
+        <e p="Entities" t="Include">
+          <e p="IBaseEntity.cs" t="Include" />
+          <e p="Products" t="Include">
+            <e p="IProduct.cs" t="Include" />
+            <e p="SneakerProduct.cs" t="Include" />
+          </e>
+          <e p="Reference" t="Include">
+            <e p="Gender.cs" t="Include" />
+            <e p="SneakerReference.cs" t="Include" />
+          </e>
+          <e p="Users" t="Include">
+            <e p="User.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Exceptions" t="Include" />
+        <e p="Gateway" t="Include">
+          <e p="IGatewayClient.cs" t="Include" />
+          <e p="IGatewayRequest.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Core.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Reference" t="Include">
+          <e p="Currency.cs" t="Include" />
+          <e p="SearchType.cs" t="Include" />
+          <e p="ShippingInfo.cs" t="Include" />
+          <e p="SneakerCondition.cs" t="Include" />
+          <e p="SneakerSize.cs" t="Include" />
+          <e p="SneakerType.cs" t="Include" />
+        </e>
+        <e p="Repositories" t="Include">
+          <e p="IAsyncRepository.cs" t="Include" />
+          <e p="IRepository.cs" t="Include" />
+          <e p="ISneakerProductRepository.cs" t="Include" />
+          <e p="IUserRepository.cs" t="Include" />
+        </e>
+        <e p="Services" t="Include">
+          <e p="ISneakerProductService.cs" t="Include" />
+          <e p="IUserService.cs" t="Include" />
+          <e p="Search" t="Include">
+            <e p="IAsyncSearchService.cs" t="Include" />
+            <e p="IReferenceSearchService.cs" t="Include" />
+            <e p="ISearchService.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="Infrastructure" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Data" t="Include">
+          <e p="SneakerProductsRestRepository.cs" t="Include" />
+        </e>
+        <e p="Gateway" t="Include">
+          <e p="GraphQL" t="Include" />
+          <e p="gRPC" t="Include" />
+          <e p="REST" t="Include">
+            <e p="Client" t="Include">
+              <e p="RestfulClient.cs" t="Include" />
+            </e>
+            <e p="Requests" t="Include">
+              <e p="IGatewayRestRequest.cs" t="Include" />
+              <e p="ProductRequests" t="Include">
+                <e p="ProductRequest.cs" t="Include" />
+                <e p="ProductsListRequest.cs" t="Include" />
+                <e p="Sneakers" t="Include">
+                  <e p="BaseSneakerProductRequest.cs" t="Include" />
+                  <e p="BaseSneakersListRequest.cs" t="Include" />
+                  <e p="CountSneakerProductsRequest.cs" t="Include" />
+                  <e p="DeleteSneakerProductRequest.cs" t="Include" />
+                  <e p="GetAllSneakersRequest.cs" t="Include" />
+                  <e p="GetMapSneakersRequest.cs" t="Include" />
+                  <e p="GetQueriedSneakersRequest.cs" t="Include" />
+                  <e p="GetSneakerProductRequest.cs" t="Include" />
+                  <e p="PostSneakerProductRequest.cs" t="Include" />
+                  <e p="PutSneakerImagesRequest.cs" t="Include" />
+                  <e p="PutSneakerProductRequest.cs" t="Include" />
+                </e>
+              </e>
+              <e p="Search" t="Include">
+                <e p="SearchRequest.cs" t="Include" />
+                <e p="SneakerReference" t="Include">
+                  <e p="SearchReferenceByBrandRequest.cs" t="Include" />
+                  <e p="SearchReferenceByModelRequest.cs" t="Include" />
+                  <e p="SearchReferenceByRequest.cs" t="Include" />
+                  <e p="SearchReferenceBySKU.cs" t="Include" />
+                  <e p="SearchReferenceRequest.cs" t="Include" />
+                  <e p="SearchReferenceRequestBase.cs" t="Include" />
+                </e>
+              </e>
+              <e p="UserRequests" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Infrastructure.csproj" t="IncludeRecursive" />
+        <e p="Infrastructure.csproj.DotSettings" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Infrastructure.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Serializers" t="Include">
+          <e p="JsonRestSerializer.cs" t="Include" />
+        </e>
+        <e p="Usecase" t="Include">
+          <e p="ReferenceSearchService.cs" t="Include" />
+          <e p="SneakerProductService.cs" t="Include" />
+        </e>
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Web" t="IncludeRecursive">
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="Areas" t="Include">
+          <e p="Identity" t="Include">
+            <e p="Pages" t="Include">
+              <e p="_ViewStart.cshtml" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Controllers" t="Include">
+          <e p="AboutController.cs" t="Include" />
+          <e p="AuthController.cs" t="Include" />
+          <e p="CheckOutController.cs" t="Include" />
+          <e p="ContactController.cs" t="Include" />
+          <e p="HomeController.cs" t="Include" />
+          <e p="Sell" t="Include">
+            <e p="SellController.cs" t="Include" />
+            <e p="SellDetailsController.cs" t="Include" />
+            <e p="SellPaymentController.cs" t="Include" />
+            <e p="SellPhotosController.cs" t="Include" />
+            <e p="SellPreviewController.cs" t="Include" />
+            <e p="SellSearchController.cs" t="Include" />
+            <e p="SellShippingController.cs" t="Include" />
+          </e>
+          <e p="ShopController.cs" t="Include" />
+        </e>
+        <e p="Data" t="Include">
+          <e p="ApplicationDbContext.cs" t="Include" />
+          <e p="Json" t="Include">
+            <e p="colors.json" t="Include" />
+            <e p="sizes.json" t="Include" />
+            <e p="sneaker_brands.json" t="Include" />
+          </e>
+          <e p="Migrations" t="Include">
+            <e p="00000000000000_CreateIdentitySchema.cs" t="Include" />
+            <e p="00000000000000_CreateIdentitySchema.Designer.cs" t="Include" />
+            <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
+          </e>
+          <e p="Reference" t="Include">
+            <e p="Catalog.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Dockerfile" t="Include" />
+        <e p="libman.json" t="Include" />
+        <e p="Models" t="Include">
+          <e p="ErrorViewModel.cs" t="Include" />
+          <e p="HomePageInfoViewModel.cs" t="Include" />
+          <e p="SneakerProductViewModel.cs" t="Include" />
+          <e p="UserViewModel.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Web.AssemblyInfo.cs" t="Include" />
+              <e p="Web.RazorAssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Startup.cs" t="Include" />
+        <e p="Utils" t="Include">
+          <e p="Helpers" t="Include">
+            <e p="HiddenForWizardStep.cs" t="Include" />
+            <e p="VectorIconHelper.cs" t="Include" />
+          </e>
+          <e p="Utils.cs" t="Include" />
+        </e>
+        <e p="Views" t="Include">
+          <e p="_ViewImports.cshtml" t="Include" />
+          <e p="_ViewStart.cshtml" t="Include" />
+          <e p="About" t="Include">
+            <e p="About.cshtml" t="Include" />
+          </e>
+          <e p="Checkout" t="Include">
+            <e p="Checkout.cshtml" t="Include" />
+          </e>
+          <e p="Contact" t="Include">
+            <e p="Contact.cshtml" t="Include" />
+          </e>
+          <e p="Home" t="Include">
+            <e p="Index.cshtml" t="Include" />
+            <e p="Privacy.cshtml" t="Include" />
+          </e>
+          <e p="Sell" t="Include">
+            <e p="ModifyProduct.cshtml" t="Include" />
+            <e p="MyProducts.cshtml" t="Include" />
+            <e p="New" t="Include">
+              <e p="Details.cshtml" t="Include" />
+              <e p="Payment.cshtml" t="Include" />
+              <e p="Photos.cshtml" t="Include" />
+              <e p="Preview.cshtml" t="Include" />
+              <e p="Search.cshtml" t="Include" />
+              <e p="Shipping.cshtml" t="Include" />
+            </e>
+            <e p="NewProduct.cshtml" t="Include" />
+          </e>
+          <e p="Shared" t="Include">
+            <e p="_Layout.cshtml" t="Include" />
+            <e p="_LoginPartial.cshtml" t="Include" />
+            <e p="_ValidationScriptsPartial.cshtml" t="Include" />
+            <e p="Error.cshtml" t="Include" />
+          </e>
+          <e p="Shop" t="Include">
+            <e p="ProductItem.cshtml" t="Include" />
+            <e p="Products.cshtml" t="Include" />
+          </e>
+        </e>
+        <e p="Web.csproj" t="IncludeRecursive" />
+        <e p="Wizards" t="Include">
+          <e p="IEntityWizard.cs" t="Include" />
+          <e p="SneakerProductWizard.cs" t="Include" />
+          <e p="WizardStep.cs" t="Include" />
+          <e p="WizardSteps.cs" t="Include" />
+        </e>
+        <e p="wwwroot" t="Include">
+          <e p="css" t="Include">
+            <e p="bootstrap4" t="Include">
+              <e p="bootstrap.min.css" t="Include" />
+              <e p="bootstrap.min.js" t="Include" />
+              <e p="popper.js" t="Include" />
+            </e>
+            <e p="checkout.css" t="Include" />
+            <e p="checkout_responsive.css" t="Include" />
+            <e p="contact.css" t="Include" />
+            <e p="contact_responsive.css" t="Include" />
+            <e p="home.css" t="Include" />
+            <e p="main_styles.css" t="Include" />
+            <e p="product_item.css" t="Include" />
+            <e p="product_item_responsive.css" t="Include" />
+            <e p="products.css" t="Include" />
+            <e p="products_responsive.css" t="Include" />
+            <e p="responsive.css" t="Include" />
+            <e p="Sell" t="Include">
+              <e p="details.less" t="Include" />
+              <e p="obsolete" t="Include">
+                <e p="sell.css" t="Include" />
+                <e p="sell_responsive.css" t="Include" />
+              </e>
+              <e p="payment.less" t="Include" />
+              <e p="photos.less" t="Include" />
+              <e p="preview.less" t="Include" />
+              <e p="search.less" t="Include" />
+              <e p="sell.less" t="Include" />
+              <e p="sell_responsive.less" t="Include" />
+              <e p="shipping.less" t="Include" />
+            </e>
+            <e p="site.css" t="Include" />
+          </e>
+          <e p="favicon.ico" t="Include" />
+          <e p="files" t="Include">
+            <e p="5cnorteb.jpg" t="Include" />
+            <e p="5x50uapm.jpeg" t="Include" />
+            <e p="5zzxnec5.jpg" t="Include" />
+            <e p="aagwowcc.jpg" t="Include" />
+            <e p="aapeh10f.jpeg" t="Include" />
+            <e p="ep1s1qpi.jpg" t="Include" />
+            <e p="etbqdduj.jpg" t="Include" />
+            <e p="fl4mpszy.jpeg" t="Include" />
+            <e p="fx2zpb2z.jpg" t="Include" />
+            <e p="hi5gwnld.jpg" t="Include" />
+            <e p="jx12vn3z.jpg" t="Include" />
+            <e p="ofmu1fbx.jpg" t="Include" />
+            <e p="ophkgzoa.jpg" t="Include" />
+            <e p="r4ufzifm.jpg" t="Include" />
+            <e p="rlm4tnni.jpg" t="Include" />
+          </e>
+          <e p="fonts" t="Include">
+            <e p="Orbitron" t="Include">
+              <e p="OFL.txt" t="Include" />
+              <e p="Orbitron-VariableFont_wght.ttf" t="Include" />
+              <e p="README.txt" t="Include" />
+              <e p="static" t="Include">
+                <e p="Orbitron-Black.ttf" t="Include" />
+                <e p="Orbitron-Bold.ttf" t="Include" />
+                <e p="Orbitron-ExtraBold.ttf" t="Include" />
+                <e p="Orbitron-Medium.ttf" t="Include" />
+                <e p="Orbitron-Regular.ttf" t="Include" />
+                <e p="Orbitron-SemiBold.ttf" t="Include" />
+              </e>
+            </e>
+            <e p="Oxanium" t="Include">
+              <e p="OFL.txt" t="Include" />
+              <e p="Oxanium-Bold.ttf" t="Include" />
+              <e p="Oxanium-ExtraBold.ttf" t="Include" />
+              <e p="Oxanium-ExtraLight.ttf" t="Include" />
+              <e p="Oxanium-Light.ttf" t="Include" />
+              <e p="Oxanium-Medium.ttf" t="Include" />
+              <e p="Oxanium-Regular.ttf" t="Include" />
+              <e p="Oxanium-SemiBold.ttf" t="Include" />
+            </e>
+          </e>
+          <e p="images" t="Include">
+            <e p="_photo.svg" t="Include" />
+            <e p="arrow.svg" t="Include" />
+            <e p="cloud_search.svg" t="Include" />
+            <e p="details.svg" t="Include" />
+            <e p="facebook.svg" t="Include" />
+            <e p="footer.jpeg" t="Include" />
+            <e p="google.svg" t="Include" />
+            <e p="hightop_sneakers.svg" t="Include" />
+            <e p="home_addidas_4d.jpg" t="Include" />
+            <e p="home_adidas-yzy-qntm.jpg" t="Include" />
+            <e p="home_air_max_plus_3.jpg" t="Include" />
+            <e p="home_nike_ispa_720.jpeg" t="Include" />
+            <e p="home_nike_ispa_envelope.jpeg" t="Include" />
+            <e p="icon_1.svg" t="Include" />
+            <e p="icon_2.svg" t="Include" />
+            <e p="icon_3.svg" t="Include" />
+            <e p="payment.svg" t="Include" />
+            <e p="photo.svg" t="Include" />
+            <e p="preview.svg" t="Include" />
+            <e p="search.svg" t="Include" />
+            <e p="shipping.svg" t="Include" />
+            <e p="sneaker_not_found.svg" t="Include" />
+            <e p="upload.svg" t="Include" />
+          </e>
+          <e p="js" t="Include">
+            <e p="home.js" t="Include" />
+            <e p="layout.js" t="Include" />
+            <e p="productItem.js" t="Include" />
+            <e p="products.js" t="Include" />
+            <e p="Sell" t="Include">
+              <e p="payment.js" t="Include" />
+              <e p="preview.js" t="Include" />
+              <e p="search.js" t="Include" />
+              <e p="sell.js" t="Include" />
+            </e>
+            <e p="service.js" t="Include" />
+            <e p="site.js" t="Include" />
+          </e>
+          <e p="lib" t="Include">
+            <e p="bootstrap" t="Include">
+              <e p="dist" t="Include">
+                <e p="css" t="Include">
+                  <e p="bootstrap-grid.css" t="Include" />
+                  <e p="bootstrap-grid.css.map" t="Include" />
+                  <e p="bootstrap-grid.min.css" t="Include" />
+                  <e p="bootstrap-grid.min.css.map" t="Include" />
+                  <e p="bootstrap-reboot.css" t="Include" />
+                  <e p="bootstrap-reboot.css.map" t="Include" />
+                  <e p="bootstrap-reboot.min.css" t="Include" />
+                  <e p="bootstrap-reboot.min.css.map" t="Include" />
+                  <e p="bootstrap.css" t="Include" />
+                  <e p="bootstrap.css.map" t="Include" />
+                  <e p="bootstrap.min.css" t="Include" />
+                  <e p="bootstrap.min.css.map" t="Include" />
+                </e>
+                <e p="js" t="Include">
+                  <e p="bootstrap.bundle.js" t="Include" />
+                  <e p="bootstrap.bundle.js.map" t="Include" />
+                  <e p="bootstrap.bundle.min.js" t="Include" />
+                  <e p="bootstrap.bundle.min.js.map" t="Include" />
+                  <e p="bootstrap.js" t="Include" />
+                  <e p="bootstrap.js.map" t="Include" />
+                  <e p="bootstrap.min.js" t="Include" />
+                  <e p="bootstrap.min.js.map" t="Include" />
+                </e>
+              </e>
+              <e p="LICENSE" t="Include" />
+            </e>
+            <e p="easing" t="Include">
+              <e p="easing.js" t="Include" />
+            </e>
+            <e p="font-awesome-4.7.0" t="Include">
+              <e p="css" t="Include">
+                <e p="font-awesome.css" t="Include" />
+                <e p="font-awesome.min.css" t="Include" />
+              </e>
+              <e p="fonts" t="Include">
+                <e p="fontawesome-webfont.eot" t="Include" />
+                <e p="fontawesome-webfont.svg" t="Include" />
+                <e p="fontawesome-webfont.ttf" t="Include" />
+                <e p="fontawesome-webfont.woff" t="Include" />
+                <e p="fontawesome-webfont.woff2" t="Include" />
+                <e p="FontAwesome.otf" t="Include" />
+              </e>
+              <e p="less" t="Include">
+                <e p="animated.less" t="Include" />
+                <e p="bordered-pulled.less" t="Include" />
+                <e p="core.less" t="Include" />
+                <e p="fixed-width.less" t="Include" />
+                <e p="font-awesome.less" t="Include" />
+                <e p="icons.less" t="Include" />
+                <e p="larger.less" t="Include" />
+                <e p="list.less" t="Include" />
+                <e p="mixins.less" t="Include" />
+                <e p="path.less" t="Include" />
+                <e p="rotated-flipped.less" t="Include" />
+                <e p="screen-reader.less" t="Include" />
+                <e p="stacked.less" t="Include" />
+                <e p="variables.less" t="Include" />
+              </e>
+              <e p="scss" t="Include">
+                <e p="_animated.scss" t="Include" />
+                <e p="_bordered-pulled.scss" t="Include" />
+                <e p="_core.scss" t="Include" />
+                <e p="_fixed-width.scss" t="Include" />
+                <e p="_icons.scss" t="Include" />
+                <e p="_larger.scss" t="Include" />
+                <e p="_list.scss" t="Include" />
+                <e p="_mixins.scss" t="Include" />
+                <e p="_path.scss" t="Include" />
+                <e p="_rotated-flipped.scss" t="Include" />
+                <e p="_screen-reader.scss" t="Include" />
+                <e p="_stacked.scss" t="Include" />
+                <e p="_variables.scss" t="Include" />
+                <e p="font-awesome.scss" t="Include" />
+              </e>
+            </e>
+            <e p="greensock" t="Include">
+              <e p="animation.gsap.min.js" t="Include" />
+              <e p="ScrollToPlugin.min.js" t="Include" />
+              <e p="TimelineMax.min.js" t="Include" />
+              <e p="TweenMax.min.js" t="Include" />
+            </e>
+            <e p="Isotope" t="Include">
+              <e p="isotope.pkgd.min.js" t="Include" />
+            </e>
+            <e p="jquery" t="Include">
+              <e p="dist" t="Include">
+                <e p="jquery.js" t="Include" />
+                <e p="jquery.min.js" t="Include" />
+                <e p="jquery.min.map" t="Include" />
+              </e>
+              <e p="LICENSE.txt" t="Include" />
+            </e>
+            <e p="jquery-validation" t="Include">
+              <e p="dist" t="Include">
+                <e p="additional-methods.js" t="Include" />
+                <e p="additional-methods.min.js" t="Include" />
+                <e p="jquery.validate.js" t="Include" />
+                <e p="jquery.validate.min.js" t="Include" />
+              </e>
+              <e p="LICENSE.md" t="Include" />
+            </e>
+            <e p="jquery-validation-unobtrusive" t="Include">
+              <e p="jquery.validate.unobtrusive.js" t="Include" />
+              <e p="jquery.validate.unobtrusive.min.js" t="Include" />
+              <e p="LICENSE.txt" t="Include" />
+            </e>
+            <e p="less" t="Include">
+              <e p="less.min.js" t="Include" />
+            </e>
+            <e p="OwlCarousel2-2.2.1" t="Include">
+              <e p="ajax-loader.gif" t="Include" />
+              <e p="animate.css" t="Include" />
+              <e p="owl.carousel.css" t="Include" />
+              <e p="owl.carousel.js" t="Include" />
+              <e p="owl.theme.default.css" t="Include" />
+              <e p="owl.video.play.png" t="Include" />
+            </e>
+            <e p="parallax-js-master" t="Include">
+              <e p="parallax.min.js" t="Include" />
+            </e>
+            <e p="scrollmagic" t="Include">
+              <e p="ScrollMagic.min.js" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="web-app-service.sln" t="IncludeFlat" />
+    </e>
+    <e p="C:\Users\tyalu\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\tyalu\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_web-app-service.-481469185.00" t="ExcludeRecursive" />
+  </component>
+</project>

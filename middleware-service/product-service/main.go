@@ -2,9 +2,12 @@ package main
 
 import (
 	"fmt"
-	env "github.com/joho/godotenv"
 	"log"
 	"os"
+	"strconv"
+
+	env "github.com/joho/godotenv"
+
 	"product-service/api/rest"
 	"product-service/core/repo"
 	"product-service/middleware/business"
@@ -12,7 +15,6 @@ import (
 	"product-service/middleware/storage/postgres"
 	"product-service/middleware/storage/redis"
 	"product-service/server"
-	"strconv"
 )
 
 func main() {

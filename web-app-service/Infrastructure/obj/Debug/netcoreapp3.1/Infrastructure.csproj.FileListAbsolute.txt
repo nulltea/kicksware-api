@@ -20,3 +20,4 @@ C:\source\repos\sneaker-resale-platform\web-app-service\Infrastructure\obj\Debug
 C:\source\repos\sneaker-resale-platform\web-app-service\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.csproj.CopyComplete
 C:\source\repos\sneaker-resale-platform\web-app-service\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.dll
 C:\source\repos\sneaker-resale-platform\web-app-service\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.pdb
+C:\source\repos\sneaker-resale-platform\web-app-service\Infrastructure\obj\Debug\netcoreapp3.1\Infrastructure.csproj.CoreCompileInputs.cache

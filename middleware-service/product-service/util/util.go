@@ -1,11 +1,12 @@
 package util
 
 import (
+	"net/url"
+
 	sqb "github.com/Masterminds/squirrel"
 	"github.com/fatih/structs"
 	"github.com/thoas/go-funk"
 	"go.mongodb.org/mongo-driver/bson"
-	"net/url"
 )
 
 func ToMap(v interface{}) map[string]interface{} {

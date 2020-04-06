@@ -3,6 +3,7 @@ package msg
 import (
 	"github.com/pkg/errors"
 	"github.com/vmihailenco/msgpack"
+
 	"product-service/core/model"
 	"product-service/core/service"
 )

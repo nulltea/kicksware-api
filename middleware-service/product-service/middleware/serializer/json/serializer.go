@@ -2,7 +2,9 @@ package json
 
 import (
 	"encoding/json"
+
 	"github.com/pkg/errors"
+
 	"product-service/core/model"
 	"product-service/core/service"
 )

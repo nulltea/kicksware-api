@@ -1,6 +1,6 @@
 package repo
 
-import model "product-service/core/model"
+import "product-service/core/model"
 
 
 type SneakerProductRepository interface {

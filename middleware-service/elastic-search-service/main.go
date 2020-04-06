@@ -21,7 +21,6 @@ func main() {
 		return
 	}
 	service := business.NewSneakerReferenceService(repo, os.Getenv("ELASTIC_URL"), os.Getenv("ELASTIC_INDEX"))
-
 	if err := service.SyncAll(); err != nil {
 		log.Println(err)
 		log.Println("sync unsuccessful")
