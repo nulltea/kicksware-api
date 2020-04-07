@@ -1,0 +1,274 @@
+﻿// COLORS //
+@import "../properties/colors";
+
+// MIXINS
+@import "../mixins/mixins";
+
+.header-spacer {
+	height: 130px;
+}
+
+.header {
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 130px;
+	z-index: 100;
+	background: @background-color;
+	.transition-properties(all 300ms ease);
+
+	.header_container {
+		width: 100%;
+		height: 100%;
+		z-index: 1;
+
+		&.container {
+			max-width: 100%;
+		}
+
+		.header_content {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			align-items: center;
+		}
+
+		.logo {
+			width: 130px;
+			position: absolute;
+			left: 57px;
+
+			a {
+				font-family: Audiowide, sans-serif;
+				font-size: 30px;
+				font-weight: 500;
+				color: @main-color;
+				.transition-properties(all 200ms ease);
+			}
+
+			&:hover a {
+				//TODO logo hover
+			}
+		}
+
+		&.scrolled {
+			height: 70px;
+			background: rgb(255, 255, 255, .9);
+			box-shadow: 0 1px 4px 0 @shadow-color;
+
+			.logo a {
+				font-size: 24px;
+			}
+		}
+
+		// MAIN NAVIGATION MENU //
+		.main_nav {
+			width: 580px;
+			height: 30px;
+			position: absolute;
+			left: calc(~"50% - 320px");
+
+			& > ul > li {
+				display: inline-block;
+				position: relative;
+			}
+
+			& > ul > li:not(:last-child) {
+				margin-right: 46px;
+			}
+
+			& > ul > li > a {
+				font-size: 18px;
+				font-weight: 600;
+				color: #767676;
+				.transition-properties(all 200ms ease);
+			}
+
+			& > ul > li > a:hover,
+			& > ul > li.active > a {
+				color: @main-color;
+			}
+
+			li.hassubs {
+				ul {
+					width: 230px;
+				}
+			}
+
+			& ul li:hover::after,
+			& ul li.active::after {
+				color: @main-color;
+			}
+		}
+
+		// ICON NAVIGATION MENU //
+		.icon-nav {
+			height: 30px;
+			position: absolute;
+			right: 60px;
+
+			ul {
+				width: inherit;
+				height: inherit;
+			}
+
+			& > ul > li {
+				display: inline-block;
+				position: relative;
+			}
+
+			& > ul > li:not(.search):not(.hamburger) {
+				margin-right: 40px;
+			}
+
+			.search {
+				cursor: pointer;
+				top: 2px;
+				svg {
+					width: 28px;
+					height: 28px;
+				}
+
+				g:nth-child(1) {
+					fill: @main-color;
+				}
+
+				g:nth-child(2) {
+					fill: transparent
+				}
+
+				&:hover g:nth-child(2) {
+					fill: @main-color;
+				}
+			}
+
+			.favorite {
+				cursor: pointer;
+				svg {
+					width: 24px;
+					height: 24px;
+				}
+
+				g:nth-child(2) {
+					fill: @main-color;
+				}
+
+				g:nth-child(1) {
+					fill: transparent
+				}
+
+				&:hover g:nth-child(1) {
+					fill: crimson;
+				}
+			}
+
+			.account {
+				background: transparent;
+				cursor: pointer;
+				bottom: 2px;
+				svg {
+					width: 23px;
+					height: 22px;
+				}
+
+				g:nth-child(1) {
+					fill: @main-color
+				}
+
+				g:nth-child(2) {
+					fill: transparent
+				}
+
+				&:hover g:nth-child(2) {
+					fill: @main-color
+				}
+
+				&.hassubs ul {
+					position: absolute;
+					right: -110px;
+					top: calc(~"100% + 20px");
+					width: 250px;
+					background: rgba(255, 255, 255, .7);
+					padding: 25px;
+					visibility: hidden;
+					opacity: 0;
+					.transition-properties(all 200ms ease)
+				}
+
+				&.hassubs:hover ul {
+					visibility: visible;
+					opacity: 1;
+					top: calc(~"100%");
+				}
+
+				.hassubs li {
+					opacity: 1;
+				}
+
+				.hassubs li span {
+					position: relative;
+					z-index: 1;
+				}
+
+				.header-button {
+					position: relative;
+					display: block;
+					cursor: pointer;
+					right: 0;
+					width: auto;
+					height: 25px;
+					padding-bottom: 2px;
+					padding-top: 3px;
+					font-size: 12px;
+					font-weight: 700;
+					color: @main-color;
+					background: @background-color;
+					border: 2px solid @main-color;
+
+					&:hover span {
+						position: relative;
+						z-index: 1;
+						color: @background-color;
+					}
+
+					&:after {
+						background: @main-color;
+					}
+				}
+
+				.header-button-strong {
+					position: relative;
+					color: @background-color;
+					background: @main-color;
+					border: 2.2px solid @main-color;
+					display: block;
+					cursor: pointer;
+					right: 0;
+					width: auto;
+					height: 25px;
+					padding-bottom: 2px;
+					padding-top: 3px;
+					font-size: 12px;
+					font-weight: 700;
+
+					&:hover span {
+						position: relative;
+						z-index: 1;
+						color: @main-color;
+					}
+
+					&:after {
+						content: "";
+						background: @background-color;
+					}
+				}
+			}
+
+			.theme{
+				//TODO theme
+			}
+		}
+	}
+}

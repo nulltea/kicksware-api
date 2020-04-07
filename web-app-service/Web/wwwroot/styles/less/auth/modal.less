@@ -1,0 +1,232 @@
+﻿// COLORS //
+@import "../properties/colors";
+
+// MIXINS
+@import "../mixins/mixins";
+
+.login-dialog {
+	width: 400px;
+	height: auto;
+
+	.modal-content{
+		padding: 35px;
+		border-radius: 0;
+		border: 2px solid @main-color;
+
+		.modal-header {
+			display: inline;
+			padding: 0;
+			border: none;
+
+			.login-title {
+				font-size: 30px;
+				font-weight: bold;
+				margin-bottom: auto;
+			}
+
+			.login-message {
+				font-size: 16px;
+			}
+
+			.close-button {
+				position: absolute;
+				right: 32px;
+				top: 32px;
+				width: 32px;
+				height: 32px;
+				opacity: 0.3;
+				border: none;
+				outline: none;
+				margin: -50px;
+				background: transparent;
+
+				&:hover {
+					opacity: 1;
+					background: none;
+				}
+
+				&:before, &:after {
+					content: " ";
+					position: absolute;
+					height: 33px;
+					width: 2px;
+					background-color: #333;
+					top: 0;
+				}
+
+				&:before {
+					transform: rotate(45deg);
+				}
+
+				&:after {
+					transform: rotate(-45deg);
+				}
+			}
+		}
+
+		.modal-body {
+			display: flex;
+			flex-direction: column;
+			justify-content: stretch;
+			padding: 0;
+			border: none;
+			margin-bottom: 25px;
+			margin-top: 25px;
+
+			.login-button {
+				color: @background-color;
+				background-color: @main-color;
+				display: inline-block;
+				position: relative;
+				cursor: pointer;
+				width: auto;
+				font-size: 16px;
+				font-weight: 700;
+				height: 40px;
+
+				&:after {
+					background: @background-color;
+				}
+
+				& span {
+					position: relative;
+					z-index: 1;
+				}
+
+				&:hover span {
+					color: @main-color;
+				}
+
+				&.facebook {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					color: @background-color;
+					background: @facebook-color;
+					border: 2.8px solid @facebook-color;
+					margin-bottom: 10px;
+
+					.facebook-logo {
+						position: relative;
+						z-index: 1;
+						margin-right: 5px;
+					}
+
+					&:hover span {
+						color: @facebook-color;
+					}
+
+					&:hover path {
+						fill: @facebook-color;
+					}
+				}
+
+				&.google {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					color: @google-red-color;
+					border: 2.8px solid @google-red-color;
+					background-color: @background-color;
+
+					.google-logo {
+						position: relative;
+						z-index: 1;
+						margin-right: 5px;
+					}
+
+					&:after {
+						background: @google-red-color;
+					}
+
+					&:hover span {
+						color: @background-color;
+					}
+
+					&:hover path {
+						fill: @background-color;
+					}
+				}
+			}
+
+			.auth-form {
+				display: flex;
+				flex-direction: column;
+
+				.auth-input {
+					margin-bottom: 5px;
+				}
+
+				.auth-button {
+					margin-top: 10px;
+				}
+
+				.email-input, .password-input {
+					width: 100%;
+					height: 40px;
+					background: @hint-color;
+					border: 2.8px solid @main-color;
+					outline: none;
+					padding-left: 15px;
+				}
+
+				.notify-input {
+					margin-top: 15px;
+				}
+
+				input[type="checkbox"] {
+					display: none;
+
+					& + label {
+						display: block;
+						position: relative;
+						padding-left: 30px;
+						margin-bottom: 20px;
+						cursor: pointer;
+						font-size: 14px;
+
+						&:hover:after {
+							content: "";
+							width: 12px;
+							height: 12px;
+							background: @main-color;
+							position: absolute;
+							left: 4px;
+							top: 4px;
+							z-index: 0;
+						}
+
+						&:before {
+							content: "";
+							width: 20px;
+							height: 20px;
+							border: 2.8px solid @main-color;
+							position: absolute;
+							left: 0;
+							top: 0;
+						}
+					}
+
+					&:checked + label:before {
+						background: @main-color;
+					}
+				}
+			}
+		}
+
+		.modal-footer {
+			display: inline;
+			padding: 0;
+			border: none;
+
+			.login-privacy {
+				font-size: 10px;
+				text-align: center;
+			}
+
+			.login-message {
+				font-size: 16px;
+			}
+		}
+	}
+}

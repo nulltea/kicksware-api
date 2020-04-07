@@ -39,6 +39,76 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\files\" />
+    <Folder Include="wwwroot\styles\css" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\styles\css\auth\modal.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\styles\css\auth\modal.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\styles\css\layout\social.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\styles\css\layout\social.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\css\font-awesome.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\animated.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\core.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\fixed-width.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\font-awesome.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\icons.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\larger.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\list.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\mixins.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\path.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\screen-reader.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\stacked.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\variables.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_animated.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_core.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_icons.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_larger.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_list.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_mixins.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_path.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_stacked.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_variables.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap4\bootstrap.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap4\bootstrap.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap4\popper.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\checkout.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\checkout_responsive.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\contact.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\contact_responsive.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\home.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\main_styles.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\products.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\products_responsive.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\product_item.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\product_item_responsive.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\responsive.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\sell\details.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\sell\obsolete\sell.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\sell\obsolete\sell_responsive.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\sell\payment.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\sell\photos.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\sell\preview.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\sell\search.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\sell\sell.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\sell\sell_responsive.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\sell\shipping.less" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\site.css" />
   </ItemGroup>
 
 </Project>

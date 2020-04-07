@@ -1,0 +1,164 @@
+﻿// COLORS //
+@import "../properties/colors";
+
+// MIXINS
+@import "../mixins/mixins";
+
+body
+{
+	.sell
+	{
+		.price-range
+		{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			.multi-range
+			{
+				width: 75%;
+				height: auto;
+				flex: 1;
+
+				.price-slider
+				{
+					-webkit-appearance: none;
+					height: 4px;
+					width: 100%;
+					border-radius: 0;
+					background: @main-color;
+					outline: none;
+					opacity: 1;
+					pointer-events: none;
+					position: absolute;
+				}
+
+				.price-slider::-webkit-slider-thumb
+				{
+					appearance: none;
+					-webkit-appearance: none;
+					-moz-appearance: none;
+					width: 30px;
+					height: 30px;
+					box-shadow: -3px 3px 3px -2px @shadow-color;
+					background: @background-color;
+					border: 2.8px solid @main-color;
+					cursor: pointer;
+					pointer-events: all;
+				}
+
+				price-slider:-moz-range-thumb
+				{
+					appearance: none;
+					-webkit-appearance: none;
+					-moz-appearance: none;
+					width: 30px;
+					height: 30px;
+					box-shadow: -3px 3px 3px -2px @shadow-color;
+					background: @background-color;
+					border: 2.8px solid @main-color;
+					cursor: pointer;
+					pointer-events: all;
+				}
+
+				.price-slider:hover::-webkit-slider-thumb
+				{
+					background: @active-color;
+				}
+
+				.price-slider:focus::-webkit-slider-thumb
+				{
+					background: @active-color;
+				}
+
+				#price-min
+				{
+					display: none;
+					background: none;
+				}
+
+				#price-min.active
+				{
+					display: block;
+				}
+			}
+
+			.max-price-display
+			{
+				width: 60px;
+				text-align: end;
+				color: @main-color;
+				font-weight: 600;
+			}
+
+			.min-price-display
+			{
+				display: none;
+				width: 60px;
+				text-align: start;
+				color: @main-color;
+				font-weight: 600;
+			}
+
+			.min-price-display.active
+			{
+				display: block;
+			}
+		}
+
+		.price-action-panel
+		{
+			display: flex;
+			align-content: center;
+			justify-content: space-between;
+
+			.price-button
+			{
+				position: relative;
+				margin-top: 10px;
+				height: 40px;
+				width: auto;
+				margin-top: 30px;
+				font-weight: 600;
+				overflow: hidden;
+			}
+
+			.price-button span
+			{
+				position: relative;
+				z-index: 1;
+			}
+
+			.price-button:hover span
+			{
+				color: @background-color;
+			}
+
+			.price-button:nth-child(1),
+			.price-button:nth-child(3)
+			{
+				width: 50px;
+			}
+
+			.price-button:nth-child(2)
+			{
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+
+			.price-button:nth-child(1) span,
+			.price-button:nth-child(3) span
+			{
+				font-size: 24px;
+				font-weight: bold;
+			}
+		}
+
+		.currency
+		{
+			font-weight: 700;
+			font-size: 23px;
+			color: @main-color;
+		}
+	}
+}

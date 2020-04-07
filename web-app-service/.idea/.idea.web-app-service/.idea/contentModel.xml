@@ -243,39 +243,6 @@
           <e p="WizardSteps.cs" t="Include" />
         </e>
         <e p="wwwroot" t="Include">
-          <e p="css" t="Include">
-            <e p="bootstrap4" t="Include">
-              <e p="bootstrap.min.css" t="Include" />
-              <e p="bootstrap.min.js" t="Include" />
-              <e p="popper.js" t="Include" />
-            </e>
-            <e p="checkout.css" t="Include" />
-            <e p="checkout_responsive.css" t="Include" />
-            <e p="contact.css" t="Include" />
-            <e p="contact_responsive.css" t="Include" />
-            <e p="home.css" t="Include" />
-            <e p="main_styles.css" t="Include" />
-            <e p="product_item.css" t="Include" />
-            <e p="product_item_responsive.css" t="Include" />
-            <e p="products.css" t="Include" />
-            <e p="products_responsive.css" t="Include" />
-            <e p="responsive.css" t="Include" />
-            <e p="Sell" t="Include">
-              <e p="details.less" t="Include" />
-              <e p="obsolete" t="Include">
-                <e p="sell.css" t="Include" />
-                <e p="sell_responsive.css" t="Include" />
-              </e>
-              <e p="payment.less" t="Include" />
-              <e p="photos.less" t="Include" />
-              <e p="preview.less" t="Include" />
-              <e p="search.less" t="Include" />
-              <e p="sell.less" t="Include" />
-              <e p="sell_responsive.less" t="Include" />
-              <e p="shipping.less" t="Include" />
-            </e>
-            <e p="site.css" t="Include" />
-          </e>
           <e p="favicon.ico" t="Include" />
           <e p="files" t="Include">
             <e p="5cnorteb.jpg" t="Include" />
@@ -342,6 +309,7 @@
             <e p="search.svg" t="Include" />
             <e p="shipping.svg" t="Include" />
             <e p="sneaker_not_found.svg" t="Include" />
+            <e p="theme.svg" t="Include" />
             <e p="upload.svg" t="Include" />
           </e>
           <e p="js" t="Include">
@@ -384,58 +352,13 @@
                   <e p="bootstrap.js.map" t="Include" />
                   <e p="bootstrap.min.js" t="Include" />
                   <e p="bootstrap.min.js.map" t="Include" />
+                  <e p="popper.js" t="Include" />
                 </e>
               </e>
               <e p="LICENSE" t="Include" />
             </e>
             <e p="easing" t="Include">
               <e p="easing.js" t="Include" />
-            </e>
-            <e p="font-awesome-4.7.0" t="Include">
-              <e p="css" t="Include">
-                <e p="font-awesome.css" t="Include" />
-                <e p="font-awesome.min.css" t="Include" />
-              </e>
-              <e p="fonts" t="Include">
-                <e p="fontawesome-webfont.eot" t="Include" />
-                <e p="fontawesome-webfont.svg" t="Include" />
-                <e p="fontawesome-webfont.ttf" t="Include" />
-                <e p="fontawesome-webfont.woff" t="Include" />
-                <e p="fontawesome-webfont.woff2" t="Include" />
-                <e p="FontAwesome.otf" t="Include" />
-              </e>
-              <e p="less" t="Include">
-                <e p="animated.less" t="Include" />
-                <e p="bordered-pulled.less" t="Include" />
-                <e p="core.less" t="Include" />
-                <e p="fixed-width.less" t="Include" />
-                <e p="font-awesome.less" t="Include" />
-                <e p="icons.less" t="Include" />
-                <e p="larger.less" t="Include" />
-                <e p="list.less" t="Include" />
-                <e p="mixins.less" t="Include" />
-                <e p="path.less" t="Include" />
-                <e p="rotated-flipped.less" t="Include" />
-                <e p="screen-reader.less" t="Include" />
-                <e p="stacked.less" t="Include" />
-                <e p="variables.less" t="Include" />
-              </e>
-              <e p="scss" t="Include">
-                <e p="_animated.scss" t="Include" />
-                <e p="_bordered-pulled.scss" t="Include" />
-                <e p="_core.scss" t="Include" />
-                <e p="_fixed-width.scss" t="Include" />
-                <e p="_icons.scss" t="Include" />
-                <e p="_larger.scss" t="Include" />
-                <e p="_list.scss" t="Include" />
-                <e p="_mixins.scss" t="Include" />
-                <e p="_path.scss" t="Include" />
-                <e p="_rotated-flipped.scss" t="Include" />
-                <e p="_screen-reader.scss" t="Include" />
-                <e p="_stacked.scss" t="Include" />
-                <e p="_variables.scss" t="Include" />
-                <e p="font-awesome.scss" t="Include" />
-              </e>
             </e>
             <e p="greensock" t="Include">
               <e p="animation.gsap.min.js" t="Include" />
@@ -444,7 +367,7 @@
               <e p="TweenMax.min.js" t="Include" />
             </e>
             <e p="Isotope" t="Include">
-              <e p="isotope.pkgd.min.js" t="Include" />
+              <e p="isotope.min.js" t="Include" />
             </e>
             <e p="jquery" t="Include">
               <e p="dist" t="Include">
@@ -486,10 +409,152 @@
               <e p="ScrollMagic.min.js" t="Include" />
             </e>
           </e>
+          <e p="styles" t="Include">
+            <e p="css" t="Include">
+              <e p="About" t="Include">
+                <e p="about.css" t="Include" />
+                <e p="about.css.map" t="Include" />
+              </e>
+              <e p="auth" t="Include">
+                <e p="modal.css" t="Include" />
+                <e p="modal.css.map" t="Include" />
+              </e>
+              <e p="Checkout" t="Include">
+                <e p="checkout.css" t="Include" />
+                <e p="checkout.css.map" t="Include" />
+              </e>
+              <e p="common" t="Include">
+                <e p="common.css" t="Include" />
+                <e p="common.css.map" t="Include" />
+              </e>
+              <e p="Contact" t="Include">
+                <e p="contact.css" t="Include" />
+                <e p="contact.css.map" t="Include" />
+              </e>
+              <e p="Home" t="Include">
+                <e p="home.css" t="Include" />
+                <e p="home.css.map" t="Include" />
+              </e>
+              <e p="layout" t="Include">
+                <e p="footer.css" t="Include" />
+                <e p="footer.css.map" t="Include" />
+                <e p="header.css" t="Include" />
+                <e p="header.css.map" t="Include" />
+                <e p="menu.css" t="Include" />
+                <e p="menu.css.map" t="Include" />
+                <e p="search.css" t="Include" />
+                <e p="search.css.map" t="Include" />
+                <e p="social.css" t="Include" />
+                <e p="social.css.map" t="Include" />
+              </e>
+              <e p="Products" t="Include">
+                <e p="products.css" t="Include" />
+                <e p="products.css.map" t="Include" />
+              </e>
+              <e p="products_item" t="Include">
+                <e p="product_item.css" t="Include" />
+                <e p="product_item.css.map" t="Include" />
+              </e>
+              <e p="responsive" t="Include">
+                <e p="about.responsive.css" t="Include" />
+                <e p="about.responsive.css.map" t="Include" />
+                <e p="checkout.responsive.css" t="Include" />
+                <e p="checkout.responsive.css.map" t="Include" />
+                <e p="contact.responsive.css" t="Include" />
+                <e p="contact.responsive.css.map" t="Include" />
+                <e p="home.responsive.css" t="Include" />
+                <e p="home.responsive.css.map" t="Include" />
+                <e p="layout.responsive.css" t="Include" />
+                <e p="layout.responsive.css.map" t="Include" />
+                <e p="product_item.responsive.css" t="Include" />
+                <e p="product_item.responsive.css.map" t="Include" />
+                <e p="products.responsive.css" t="Include" />
+                <e p="products.responsive.css.map" t="Include" />
+                <e p="sell.responsive.css" t="Include" />
+                <e p="sell.responsive.css.map" t="Include" />
+              </e>
+              <e p="Sell" t="Include">
+                <e p="details.css" t="Include" />
+                <e p="details.css.map" t="Include" />
+                <e p="payment.css" t="Include" />
+                <e p="payment.css.map" t="Include" />
+                <e p="photos.css" t="Include" />
+                <e p="photos.css.map" t="Include" />
+                <e p="preview.css" t="Include" />
+                <e p="preview.css.map" t="Include" />
+                <e p="search.css" t="Include" />
+                <e p="search.css.map" t="Include" />
+                <e p="sell.css" t="Include" />
+                <e p="sell.css.map" t="Include" />
+                <e p="shipping.css" t="Include" />
+                <e p="shipping.css.map" t="Include" />
+              </e>
+            </e>
+            <e p="less" t="Include">
+              <e p="About" t="Include">
+                <e p="about.less" t="Include" />
+              </e>
+              <e p="auth" t="Include">
+                <e p="modal.less" t="Include" />
+              </e>
+              <e p="Checkout" t="Include">
+                <e p="checkout.less" t="Include" />
+              </e>
+              <e p="common" t="Include">
+                <e p="common.less" t="Include" />
+              </e>
+              <e p="Contact" t="Include">
+                <e p="contact.less" t="Include" />
+              </e>
+              <e p="Home" t="Include">
+                <e p="home.less" t="Include" />
+              </e>
+              <e p="layout" t="Include">
+                <e p="footer.less" t="Include" />
+                <e p="header.less" t="Include" />
+                <e p="menu.less" t="Include" />
+                <e p="search.less" t="Include" />
+                <e p="social.less" t="Include" />
+              </e>
+              <e p="mixins" t="Include">
+                <e p="mixins.less" t="Include" />
+              </e>
+              <e p="Products" t="Include">
+                <e p="products.less" t="Include" />
+              </e>
+              <e p="products_item" t="Include">
+                <e p="product_item.less" t="Include" />
+              </e>
+              <e p="Properties" t="Include">
+                <e p="colors.less" t="Include" />
+                <e p="fonts.less" t="Include" />
+              </e>
+              <e p="responsive" t="Include">
+                <e p="about.responsive.less" t="Include" />
+                <e p="checkout.responsive.less" t="Include" />
+                <e p="contact.responsive.less" t="Include" />
+                <e p="home.responsive.less" t="Include" />
+                <e p="layout.responsive.less" t="Include" />
+                <e p="product_item.responsive.less" t="Include" />
+                <e p="products.responsive.less" t="Include" />
+                <e p="sell.responsive.less" t="Include" />
+              </e>
+              <e p="Sell" t="Include">
+                <e p="details.less" t="Include" />
+                <e p="payment.less" t="Include" />
+                <e p="photos.less" t="Include" />
+                <e p="preview.less" t="Include" />
+                <e p="search.less" t="Include" />
+                <e p="sell.less" t="Include" />
+                <e p="shipping.less" t="Include" />
+              </e>
+            </e>
+          </e>
         </e>
       </e>
       <e p="web-app-service.sln" t="IncludeFlat" />
     </e>
+    <e p="C:\Users\tyalu\.Rider2019.3\config\scratches" t="IncludeRecursive" />
     <e p="C:\Users\tyalu\.Rider2019.3\system\extResources" t="IncludeRecursive" />
     <e p="C:\Users\tyalu\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_web-app-service.-481469185.00" t="ExcludeRecursive" />
   </component>

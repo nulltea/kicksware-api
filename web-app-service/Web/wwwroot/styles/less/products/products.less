@@ -1,0 +1,246 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+/******************************
+
+[Table of Contents]
+
+1. Fonts
+2. Products
+
+******************************/
+
+/***********
+1. Fonts
+***********/
+
+@import url('https://fonts.googleapis.com/css?family=Oxanium:300,400,500,600,700,800,900');
+
+/*********************************
+2. Products
+*********************************/
+
+.products
+{
+	width: 100%;
+	background: #FFFFFF;
+	z-index: 2;
+}
+
+/* Sorting Bar */
+.sorting_bar
+{
+	width: 100%;
+	padding-top: 88px;
+	padding-bottom: 100px;
+}
+.results
+{
+	font-size: 14px;
+	font-weight: 400;
+	color: #6c6a74;
+}
+.item_sorting
+{
+	display: inline-block;
+}
+.item_sorting > li
+{
+	display: inline-block;
+	position: relative;
+	width: 191px;
+	height: 36px;
+	line-height: 32px;
+	cursor: pointer;
+	border: solid 2px #ececec;
+	padding-left: 26px;
+	padding-right: 19px;
+	margin-right: 8px;
+	font-size: 14px;
+	font-weight: 400;
+	color: #6c6a74;
+	margin-bottom: 10px;
+}
+.item_sorting > li:last-child
+{
+	margin-right: 0;
+}
+.num_sorting_text
+{
+	padding-right: 11px;
+}
+.item_sorting li i
+{
+	float: right;
+	line-height: 32px;
+	font-size: 10px;
+	color: #787878;
+}
+.item_sorting li ul
+{
+	display: block;
+	position: absolute;
+	right: 0;
+	top: 120%;
+	margin: 0;
+	width: 100%;
+	background: #FFFFFF;
+	visibility: hidden;
+	opacity: 0;
+	z-index: 1;
+	box-shadow: 0 15px 25px rgba(63, 78, 100, 0.15);
+	-webkit-transition: opacity 0.3s ease;
+	-moz-transition: opacity 0.3s ease;
+	-ms-transition: opacity 0.3s ease;
+	-o-transition: opacity 0.3s ease;
+	transition: all 0.3s ease;
+}
+.item_sorting > li:hover ul
+{
+	visibility: visible;
+	opacity: 1;
+	top: calc(~"100% + 1px");
+}
+.item_sorting li ul li
+{
+	display: block;
+	text-align: left;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.item_sorting li ul li span
+{
+	display: block;
+	height: 36px;
+	line-height: 36px;
+	border-bottom: solid 1px #dddddd;
+	color: #6c6a74;
+	text-align: right;
+	padding-right: 5px;
+	-webkit-transition: opacity 0.3s ease;
+	-moz-transition: opacity 0.3s ease;
+	-ms-transition: opacity 0.3s ease;
+	-o-transition: opacity 0.3s ease;
+	transition: all 0.3s ease;
+}
+.item_sorting li ul li span:hover
+{
+	color: #b5aec4;
+}
+.item_sorting li ul li:last-child span
+{
+	border-bottom: none;
+}
+.item_sorting li span:nth-child(2)
+{
+	margin-left: 63px;
+}
+
+/* Product */
+.product
+{
+	width: calc(~"(100% - 90px) / 4");
+	margin-bottom: 59px;
+}
+.product_image
+{
+	width: 100%;
+}
+.product_image img
+{
+	max-width: 100%;
+}
+.product_content
+{
+	width: 100%;
+	padding-top: 36px;
+	padding-bottom: 38px;
+}
+.product_title a
+{
+	font-size: 18px;
+	font-weight: 500;
+	color: #1b1b1b;
+	line-height: 1.1;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+.product_title a:hover
+{
+	color: #e95a5a;
+}
+.product_price
+{
+	font-size: 16px;
+	font-weight: 500;
+	color: #6c6a74;
+	line-height: 0.75;
+	margin-top: 13px;
+}
+.product_extra
+{
+	position: absolute;
+	top: 0;
+	left: 54px;
+	width: 66px;
+	height: 36px;
+	text-align: center;
+	-webkit-transform-origin: top left;
+	-moz-transform-origin: top left;
+	-ms-transform-origin: top left;
+	-o-transform-origin: top left;
+	transform-origin: top left;
+	transform: rotate(90deg);
+}
+.product_extra a
+{
+	display: block;
+	font-size: 16px;
+	font-weight: 500;
+	color: #FFFFFF;
+	line-height: 36px;
+}
+.product_new
+{
+	background: #6c6a74;
+}
+.product_sale
+{
+	background: #e95a5a;
+}
+.product_hot
+{
+	background: #1b1b1b;
+}
+.product_pagination
+{
+	width: 100%;
+	margin-top: 3px;
+}
+.product_pagination ul li
+{
+	display: inline-block;
+}
+.product_pagination ul li:not(:last-child)
+{
+	margin-right: 3px;
+}
+.product_pagination ul li a
+{
+	font-size: 14px;
+	font-weight: 400;
+	color: #6c6a74;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+.product_pagination ul li.active a,
+.product_pagination ul li:hover a
+{
+	color: #1b1b1b;
+}

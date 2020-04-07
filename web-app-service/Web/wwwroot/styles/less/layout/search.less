@@ -1,0 +1,56 @@
+﻿// COLORS //
+@import "../properties/colors";
+
+// MIXINS
+@import "../mixins/mixins";
+
+.search_panel {
+	position: absolute;
+	left: 100%;
+	bottom: 0;
+	width: 100%;
+	background: @background-color;
+	z-index: 3;
+
+
+	&.active {
+		left: 0;
+	}
+
+	.search_panel_content {
+		display: flex;
+		align-items: center;
+		height: 130px;
+		form {
+			position: absolute;
+			left: 60px;
+			right: 60px;
+		}
+
+		svg {
+			width: 30px;
+			height: 30px;
+			position: absolute;
+			left: -3px;
+		}
+
+		input {
+			height: 40px;
+			width: 100%;
+			background: inherit;
+			border: none;
+			border-bottom: 3px solid @main-color;
+			border-radius: 0;
+			outline: none;
+			padding-left: 35px;
+			font-size: 25px;
+		}
+
+		.close-button {
+			position: absolute;
+			margin: 0;
+			right: -3px;
+			top: 0;
+		}
+	}
+}
