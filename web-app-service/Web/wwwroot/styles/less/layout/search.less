@@ -9,7 +9,9 @@
 	left: 100%;
 	bottom: 0;
 	width: 100%;
-	background: @background-color;
+	.with-theme({
+		background: @primary;
+	});
 	z-index: 3;
 
 
@@ -21,6 +23,7 @@
 		display: flex;
 		align-items: center;
 		height: 130px;
+
 		form {
 			position: absolute;
 			left: 60px;
@@ -32,6 +35,16 @@
 			height: 30px;
 			position: absolute;
 			left: -3px;
+
+			g:nth-child(1) {
+				.with-theme({
+					fill: @secondary;
+				});
+			}
+
+			g:nth-child(2) {
+				fill: transparent
+			}
 		}
 
 		input {
@@ -39,7 +52,9 @@
 			width: 100%;
 			background: inherit;
 			border: none;
-			border-bottom: 3px solid @main-color;
+			.with-theme({
+	border-bottom: 3px solid @secondary;
+});
 			border-radius: 0;
 			outline: none;
 			padding-left: 35px;

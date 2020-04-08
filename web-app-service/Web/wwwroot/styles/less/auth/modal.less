@@ -8,10 +8,12 @@
 	width: 400px;
 	height: auto;
 
-	.modal-content{
+	.modal-content {
 		padding: 35px;
 		border-radius: 0;
-		border: 2px solid @main-color;
+		.with-theme({
+			border: 2px solid @secondary;
+		});
 
 		.modal-header {
 			display: inline;
@@ -27,41 +29,6 @@
 			.login-message {
 				font-size: 16px;
 			}
-
-			.close-button {
-				position: absolute;
-				right: 32px;
-				top: 32px;
-				width: 32px;
-				height: 32px;
-				opacity: 0.3;
-				border: none;
-				outline: none;
-				margin: -50px;
-				background: transparent;
-
-				&:hover {
-					opacity: 1;
-					background: none;
-				}
-
-				&:before, &:after {
-					content: " ";
-					position: absolute;
-					height: 33px;
-					width: 2px;
-					background-color: #333;
-					top: 0;
-				}
-
-				&:before {
-					transform: rotate(45deg);
-				}
-
-				&:after {
-					transform: rotate(-45deg);
-				}
-			}
 		}
 
 		.modal-body {
@@ -74,8 +41,12 @@
 			margin-top: 25px;
 
 			.login-button {
-				color: @background-color;
-				background-color: @main-color;
+				.with-theme({
+					color: @primary;
+				});
+				.with-theme({
+					background: @secondary;
+				});
 				display: inline-block;
 				position: relative;
 				cursor: pointer;
@@ -85,7 +56,9 @@
 				height: 40px;
 
 				&:after {
-					background: @background-color;
+					.with-theme({
+						background: @primary;
+					});
 				}
 
 				& span {
@@ -94,14 +67,18 @@
 				}
 
 				&:hover span {
-					color: @main-color;
+					.with-theme({
+						color: @secondary;
+					});
 				}
 
 				&.facebook {
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					color: @background-color;
+					.with-theme({
+						color: @primary;
+					});
 					background: @facebook-color;
 					border: 2.8px solid @facebook-color;
 					margin-bottom: 10px;
@@ -127,7 +104,9 @@
 					align-items: center;
 					color: @google-red-color;
 					border: 2.8px solid @google-red-color;
-					background-color: @background-color;
+					.with-theme({
+						background: @primary;
+					});
 
 					.google-logo {
 						position: relative;
@@ -140,11 +119,15 @@
 					}
 
 					&:hover span {
-						color: @background-color;
+						.with-theme({
+							color: @primary;
+						});
 					}
 
 					&:hover path {
-						fill: @background-color;
+						.with-theme({
+	fill: @primary;
+});
 					}
 				}
 			}
@@ -165,7 +148,9 @@
 					width: 100%;
 					height: 40px;
 					background: @hint-color;
-					border: 2.8px solid @main-color;
+					.with-theme({
+						border: 2.8px solid @secondary;
+					});
 					outline: none;
 					padding-left: 15px;
 				}
@@ -189,7 +174,9 @@
 							content: "";
 							width: 12px;
 							height: 12px;
-							background: @main-color;
+							.with-theme({
+								background: @secondary;
+							});
 							position: absolute;
 							left: 4px;
 							top: 4px;
@@ -200,7 +187,9 @@
 							content: "";
 							width: 20px;
 							height: 20px;
-							border: 2.8px solid @main-color;
+							.with-theme({
+								border: 2.8px solid @secondary;
+							});
 							position: absolute;
 							left: 0;
 							top: 0;
@@ -208,7 +197,9 @@
 					}
 
 					&:checked + label:before {
-						background: @main-color;
+						.with-theme({
+							background: @secondary;
+						});
 					}
 				}
 			}

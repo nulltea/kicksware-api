@@ -1,36 +1,19 @@
-﻿@charset "utf-8";
-/* CSS Document */
+﻿// COLORS //
+@import "../properties/colors";
 
-/******************************
+// FONTS //
+@import "../properties/fonts";
 
-[Table of Contents]
+// MIXINS
+@import "../mixins/mixins";
 
-1. Fonts
-5. Home
-6. Ads
-7. Products
-8. Ad Extra Large
-9. Icon Boxes
-10. Newsletter
-11. Footer
-
-
-******************************/
-
-/***********
-1. Fonts
-***********/
-
-@import url("https://fonts.googleapis.com/css?family=Oxanium:300,400,500,600,700,800,900");
-
-/*********************************
-5. Home
-*********************************/
 
 .home {
 	width: 100%;
 	height: 950px;
-	background: #FFFFFF;
+	.with-theme({
+		background: @primary;
+	});
 	z-index: 2;
 }
 
@@ -67,20 +50,29 @@
 .home_slider_title {
 	font-size: 60px;
 	font-weight: 600;
-	color: #FFFFFF;
+	.with-theme({
+		color: @primary;
+	});
 	line-height: 1.2;
 }
 
 .home_slider_subtitle {
 	font-size: 14px;
 	font-weight: 400;
-	color: #FFFFFF;
+	.with-theme({
+		color: @primary;
+	});
 	line-height: 2.14;
 	margin-top: 22px;
 }
 
-.home_button {
+#home-button {
 	margin-top: 40px;
+	border: 3px solid @background-color;
+}
+
+#home-button a {
+	color: @background-color;
 }
 
 .home_slider_dots_container {
@@ -106,7 +98,9 @@
 .home_slider_custom_dot {
 	display: inline-block;
 	position: relative;
-	color: #FFFFFF;
+	.with-theme({
+		color: @primary;
+	});
 	cursor: pointer;
 	font-size: 14px;
 	font-weight: 600;
@@ -139,7 +133,9 @@
 
 .avds {
 	width: 100%;
-	background: #FFFFFF;
+	.with-theme({
+		background: @primary;
+	});
 	z-index: 2;
 }
 
@@ -198,7 +194,9 @@
 .avds_discount div:first-child {
 	font-size: 60px;
 	font-weight: 700;
-	color: #1b1b1b;
+	.with-theme({
+		color: @secondary;
+	});
 	line-height: 0.75;
 }
 
@@ -211,7 +209,9 @@
 .avds_discount div:last-child {
 	font-size: 14px;
 	font-weight: 400;
-	color: #1b1b1b;
+	.with-theme({
+		color: @secondary;
+	});
 	margin-top: 1px;
 }
 
@@ -225,7 +225,9 @@
 .avds_title {
 	font-size: 48px;
 	font-weight: 600;
-	color: #FFFFFF;
+	.with-theme({
+		color: @primary;
+	});
 	line-height: 1.16;
 }
 
@@ -239,7 +241,9 @@
 	display: inline-block;
 	font-size: 14px;
 	font-weight: 400;
-	color: #FFFFFF;
+	.with-theme({
+		color: @primary;
+	});
 }
 
 .avds_link a::after {
@@ -249,7 +253,9 @@
 	bottom: 0;
 	width: 100%;
 	height: 1px;
-	background: #FFFFFF;
+	.with-theme({
+		background: @primary;
+	});
 	content: "";
 }
 
@@ -271,7 +277,7 @@
 .avds_large_content {
 	max-width: 567px;
 	height: 100%;
-	background: rgba(0,0,0,0.63);
+	background: rgba(0, 0, 0, 0.63);
 	padding-right: 130px;
 	padding-left: 30px;
 	padding-top: 51px;
@@ -281,7 +287,9 @@
 .avds_text {
 	font-size: 14px;
 	font-weight: 400;
-	color: #FFFFFF;
+	.with-theme({
+		color: @primary;
+	});
 	line-height: 2.14;
 	margin-top: 11px;
 	padding-left: 2px;
@@ -297,7 +305,9 @@
 
 .avds_xl {
 	width: 100%;
-	background: #FFFFFF;
+	.with-theme({
+		background: @primary;
+	});
 	z-index: 2;
 }
 
@@ -343,7 +353,9 @@
 	width: 100%;
 	padding-top: 99px;
 	padding-bottom: 99px;
-	background: #FFFFFF;
+	.with-theme({
+		background: @primary;
+	});
 	z-index: 2;
 }
 
@@ -369,7 +381,9 @@
 .icon_box_title {
 	font-size: 18px;
 	font-weight: 500;
-	color: #1b1b1b;
+	.with-theme({
+		color: @secondary;
+	});
 	margin-top: 33px;
 }
 
@@ -383,7 +397,9 @@
 
 .newsletter {
 	width: 100%;
-	background: #FFFFFF;
+	.with-theme({
+		background: @primary;
+	});
 	padding-bottom: 99px;
 	z-index: 2;
 }
@@ -400,7 +416,9 @@
 .newsletter_title {
 	font-size: 30px;
 	font-weight: 500;
-	color: #1b1b1b;
+	.with-theme({
+		color: @secondary;
+	});
 }
 
 .newsletter_text {
@@ -429,8 +447,12 @@
 	position: relative;
 	width: 178px;
 	height: 61px;
-	border: 2.8px solid #1b1b1b;
-	background: #FFFFFF;
+	.with-theme({
+	border: 2.8px solid @secondary;
+});
+	.with-theme({
+		background: @primary;
+	});
 	cursor: pointer;
 	margin-top: 55px;
 	overflow: hidden;
@@ -442,7 +464,9 @@
 	z-index: 10;
 	font-size: 16px;
 	font-weight: 600;
-	color: #1b1b1b;
+	.with-theme({
+		color: @secondary;
+	});
 	background: none;
 	-webkit-transition: all 200ms ease;
 	-moz-transition: all 200ms ease;
@@ -458,7 +482,9 @@
 	left: 0;
 	width: 150%;
 	height: 100%;
-	background: #1b1b1b;
+	.with-theme({
+		background: @secondary;
+	});
 	z-index: 0;
 	opacity: 0;
 	-webkit-transform: rotate3d(0, 0, 1, -45deg) translate3d(0, -3em, 0);
@@ -478,5 +504,7 @@
 }
 
 .newsletter_button:hover span {
-	color: #FFFFFF;
+	.with-theme({
+		color: @primary;
+	});
 }

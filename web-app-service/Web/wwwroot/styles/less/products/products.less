@@ -1,51 +1,39 @@
-﻿@charset "utf-8";
-/* CSS Document */
+﻿// COLORS //
+@import "../properties/colors";
 
-/******************************
+// FONTS //
+@import "../properties/fonts";
 
-[Table of Contents]
+// MIXINS
+@import "../mixins/mixins";
 
-1. Fonts
-2. Products
 
-******************************/
-
-/***********
-1. Fonts
-***********/
-
-@import url('https://fonts.googleapis.com/css?family=Oxanium:300,400,500,600,700,800,900');
-
-/*********************************
-2. Products
-*********************************/
-
-.products
-{
+.products {
 	width: 100%;
-	background: #FFFFFF;
+	.with-theme({
+		background: @primary;
+	});
 	z-index: 2;
 }
 
 /* Sorting Bar */
-.sorting_bar
-{
+.sorting_bar {
 	width: 100%;
 	padding-top: 88px;
 	padding-bottom: 100px;
 }
-.results
-{
+
+.results {
 	font-size: 14px;
 	font-weight: 400;
 	color: #6c6a74;
 }
-.item_sorting
-{
+
+.item_sorting {
 	display: inline-block;
 }
-.item_sorting > li
-{
+
+.item_sorting > li {
 	display: inline-block;
 	position: relative;
 	width: 191px;
@@ -61,30 +49,32 @@
 	color: #6c6a74;
 	margin-bottom: 10px;
 }
-.item_sorting > li:last-child
-{
+
+.item_sorting > li:last-child {
 	margin-right: 0;
 }
-.num_sorting_text
-{
+
+.num_sorting_text {
 	padding-right: 11px;
 }
-.item_sorting li i
-{
+
+.item_sorting li i {
 	float: right;
 	line-height: 32px;
 	font-size: 10px;
 	color: #787878;
 }
-.item_sorting li ul
-{
+
+.item_sorting li ul {
 	display: block;
 	position: absolute;
 	right: 0;
 	top: 120%;
 	margin: 0;
 	width: 100%;
-	background: #FFFFFF;
+	.with-theme({
+		background: @primary;
+	});
 	visibility: hidden;
 	opacity: 0;
 	z-index: 1;
@@ -95,21 +85,21 @@
 	-o-transition: opacity 0.3s ease;
 	transition: all 0.3s ease;
 }
-.item_sorting > li:hover ul
-{
+
+.item_sorting > li:hover ul {
 	visibility: visible;
 	opacity: 1;
 	top: calc(~"100% + 1px");
 }
-.item_sorting li ul li
-{
+
+.item_sorting li ul li {
 	display: block;
 	text-align: left;
 	padding-left: 15px;
 	padding-right: 15px;
 }
-.item_sorting li ul li span
-{
+
+.item_sorting li ul li span {
 	display: block;
 	height: 36px;
 	line-height: 36px;
@@ -123,44 +113,45 @@
 	-o-transition: opacity 0.3s ease;
 	transition: all 0.3s ease;
 }
-.item_sorting li ul li span:hover
-{
+
+.item_sorting li ul li span:hover {
 	color: #b5aec4;
 }
-.item_sorting li ul li:last-child span
-{
+
+.item_sorting li ul li:last-child span {
 	border-bottom: none;
 }
-.item_sorting li span:nth-child(2)
-{
+
+.item_sorting li span:nth-child(2) {
 	margin-left: 63px;
 }
 
 /* Product */
-.product
-{
+.product {
 	width: calc(~"(100% - 90px) / 4");
 	margin-bottom: 59px;
 }
-.product_image
-{
+
+.product_image {
 	width: 100%;
 }
-.product_image img
-{
+
+.product_image img {
 	max-width: 100%;
 }
-.product_content
-{
+
+.product_content {
 	width: 100%;
 	padding-top: 36px;
 	padding-bottom: 38px;
 }
-.product_title a
-{
+
+.product_title a {
 	font-size: 18px;
 	font-weight: 500;
-	color: #1b1b1b;
+	.with-theme({
+		color: @secondary;
+	});
 	line-height: 1.1;
 	-webkit-transition: all 200ms ease;
 	-moz-transition: all 200ms ease;
@@ -168,20 +159,20 @@
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
-.product_title a:hover
-{
+
+.product_title a:hover {
 	color: #e95a5a;
 }
-.product_price
-{
+
+.product_price {
 	font-size: 16px;
 	font-weight: 500;
 	color: #6c6a74;
 	line-height: 0.75;
 	margin-top: 13px;
 }
-.product_extra
-{
+
+.product_extra {
 	position: absolute;
 	top: 0;
 	left: 54px;
@@ -195,41 +186,45 @@
 	transform-origin: top left;
 	transform: rotate(90deg);
 }
-.product_extra a
-{
+
+.product_extra a {
 	display: block;
 	font-size: 16px;
 	font-weight: 500;
-	color: #FFFFFF;
+	.with-theme({
+		color: @primary;
+	});
 	line-height: 36px;
 }
-.product_new
-{
+
+.product_new {
 	background: #6c6a74;
 }
-.product_sale
-{
+
+.product_sale {
 	background: #e95a5a;
 }
-.product_hot
-{
-	background: #1b1b1b;
+
+.product_hot {
+	.with-theme({
+		background: @secondary;
+	});
 }
-.product_pagination
-{
+
+.product_pagination {
 	width: 100%;
 	margin-top: 3px;
 }
-.product_pagination ul li
-{
+
+.product_pagination ul li {
 	display: inline-block;
 }
-.product_pagination ul li:not(:last-child)
-{
+
+.product_pagination ul li:not(:last-child) {
 	margin-right: 3px;
 }
-.product_pagination ul li a
-{
+
+.product_pagination ul li a {
 	font-size: 14px;
 	font-weight: 400;
 	color: #6c6a74;
@@ -239,8 +234,10 @@
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
+
 .product_pagination ul li.active a,
-.product_pagination ul li:hover a
-{
-	color: #1b1b1b;
+.product_pagination ul li:hover a {
+	.with-theme({
+		color: @secondary;
+	});
 }

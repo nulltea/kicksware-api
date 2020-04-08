@@ -16,8 +16,11 @@
 	width: 100%;
 	height: 130px;
 	z-index: 100;
-	background: @background-color;
+	.with-theme({
+		background: @primary;
+	});
 	.transition-properties(all 300ms ease);
+	box-shadow: 0 5px 20px -3px rgba(55, 55, 55, 0.7);
 
 	.header_container {
 		width: 100%;
@@ -44,7 +47,9 @@
 				font-family: Audiowide, sans-serif;
 				font-size: 30px;
 				font-weight: 500;
-				color: @main-color;
+				.with-theme({
+					color: @secondary;
+				});
 				.transition-properties(all 200ms ease);
 			}
 
@@ -88,7 +93,9 @@
 
 			& > ul > li > a:hover,
 			& > ul > li.active > a {
-				color: @main-color;
+				.with-theme({
+					color: @secondary;
+				});
 			}
 
 			li.hassubs {
@@ -99,7 +106,9 @@
 
 			& ul li:hover::after,
 			& ul li.active::after {
-				color: @main-color;
+				.with-theme({
+					color: @secondary;
+				});
 			}
 		}
 
@@ -126,13 +135,20 @@
 			.search {
 				cursor: pointer;
 				top: 2px;
+
 				svg {
 					width: 28px;
 					height: 28px;
+
+					path {
+						transition: all 400ms ease;
+					}
 				}
 
 				g:nth-child(1) {
-					fill: @main-color;
+					.with-theme({
+	fill: @secondary;
+});
 				}
 
 				g:nth-child(2) {
@@ -140,19 +156,28 @@
 				}
 
 				&:hover g:nth-child(2) {
-					fill: @main-color;
+					.with-theme({
+	fill: @secondary;
+});
 				}
 			}
 
 			.favorite {
 				cursor: pointer;
+
 				svg {
 					width: 24px;
 					height: 24px;
+
+					path {
+						transition: all 400ms ease;
+					}
 				}
 
 				g:nth-child(2) {
-					fill: @main-color;
+					.with-theme({
+	fill: @secondary;
+});
 				}
 
 				g:nth-child(1) {
@@ -168,21 +193,30 @@
 				background: transparent;
 				cursor: pointer;
 				bottom: 2px;
+
 				svg {
 					width: 23px;
 					height: 22px;
+
+					path {
+						transition: all 400ms ease;
+					}
 				}
 
 				g:nth-child(1) {
-					fill: @main-color
+					.with-theme({
+	fill: @secondary;
+});
 				}
 
 				g:nth-child(2) {
-					fill: transparent
+					fill: transparent;
 				}
 
 				&:hover g:nth-child(2) {
-					fill: @main-color
+					.with-theme({
+	fill: @secondary;
+});
 				}
 
 				&.hassubs ul {
@@ -223,25 +257,39 @@
 					padding-top: 3px;
 					font-size: 12px;
 					font-weight: 700;
-					color: @main-color;
-					background: @background-color;
-					border: 2px solid @main-color;
+					.with-theme({
+						color: @secondary;
+					});
+					.with-theme({
+						background: @primary;
+					});
+					.with-theme({
+						border: 2px solid @secondary;
+					});
 
 					&:hover span {
 						position: relative;
 						z-index: 1;
-						color: @background-color;
+						.with-theme({
+							color: @primary;
+						});
 					}
 
 					&:after {
-						background: @main-color;
+						.with-theme({
+							background: @secondary;
+						});
 					}
 				}
 
 				.header-button-strong {
 					position: relative;
-					color: @background-color;
-					background: @main-color;
+					.with-theme({
+						color: @primary;
+					});
+					.with-theme({
+						background: @secondary;
+					});
 					border: 2.2px solid @main-color;
 					display: block;
 					cursor: pointer;
@@ -256,18 +304,91 @@
 					&:hover span {
 						position: relative;
 						z-index: 1;
-						color: @main-color;
+						.with-theme({
+							color: @secondary;
+						});
 					}
 
 					&:after {
 						content: "";
-						background: @background-color;
+						.with-theme({
+							background: @primary;
+						});
 					}
 				}
 			}
 
-			.theme{
-				//TODO theme
+			.theme {
+				cursor: pointer;
+
+				svg {
+					width: 25px;
+					height: 25px;
+
+					path, circle {
+						transition: all 400ms ease;
+					}
+				}
+
+				&.light svg {
+					path {
+						.with-theme({
+							fill: @secondary;
+						});
+					}
+
+					circle:first-of-type {
+						r: 155;
+						.with-theme({
+							fill: @primary;
+						});
+					}
+
+					circle:last-of-type {
+						r: 0;
+						cx: 150%;
+						cy: 0;
+						.with-theme({
+							fill: @primary;
+						});
+					}
+
+					&:hover circle {
+						fill: #F9D71C;
+					}
+
+					&:hover path {
+						fill: #FDB813;
+					}
+				}
+
+				&.dark {
+					path {
+						.with-theme({
+							fill: @primary;
+						});
+					}
+
+					circle:first-of-type {
+						r: 225;
+						.with-theme({
+							fill: @secondary;
+						});
+					}
+
+					circle:last-of-type {
+						r: 200;
+						cx: 80%;
+						cy: 40%;
+						.with-theme({
+							fill: @primary;
+						});
+					}
+
+					&:hover circle:first-of-type {
+						fill: #F4F164;
+					}
+				}
 			}
 		}
 	}

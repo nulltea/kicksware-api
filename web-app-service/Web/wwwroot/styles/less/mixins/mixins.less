@@ -1,8 +1,39 @@
-﻿// TRANSITIONS //
+﻿// COLORS //
+@import "../properties/colors";
+
+// TRANSITIONS //
 .transition-properties(...) {
 	-webkit-transition: all 200ms ease;
 	-moz-transition: all 200ms ease;
 	-ms-transition: all 200ms ease;
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
+}
+
+// THEME //
+
+@themes: "light", "dark";
+
+.with-theme(@rules) {
+	// Loop through theme list
+	.--(@i: length(@themes)) when (@i > 0) {
+		& {
+			@themeName: e(extract(@themes, @i));
+			// Call .theme-helper(...) mixin for a single css property
+			.theme-@{themeName} & {
+				@p: ~'theme-@{themeName}-primary';
+				@s: ~'theme-@{themeName}-secondary';
+
+				@primary: @@p;
+				@secondary: @@s;
+				//@active: @@p;
+				//@shadow-color: @@s;
+
+				@rules();
+			}
+
+			.--(@i: @i - 1);
+		}
+	}
+	.--;
 }

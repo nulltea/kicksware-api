@@ -4,116 +4,114 @@
 // MIXINS
 @import "../mixins/mixins";
 
-body
-{
-	.sell
-	{
-		.price-range
-		{
+body {
+	.sell {
+		.price-range {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
 
-			.multi-range
-			{
+			.multi-range {
 				width: 75%;
 				height: auto;
 				flex: 1;
 
-				.price-slider
-				{
+				.price-slider {
 					-webkit-appearance: none;
 					height: 4px;
 					width: 100%;
 					border-radius: 0;
-					background: @main-color;
+					.with-theme({
+						background: @secondary;
+					});
 					outline: none;
 					opacity: 1;
 					pointer-events: none;
 					position: absolute;
 				}
 
-				.price-slider::-webkit-slider-thumb
-				{
+				.price-slider::-webkit-slider-thumb {
 					appearance: none;
 					-webkit-appearance: none;
 					-moz-appearance: none;
 					width: 30px;
 					height: 30px;
 					box-shadow: -3px 3px 3px -2px @shadow-color;
-					background: @background-color;
-					border: 2.8px solid @main-color;
+					.with-theme({
+						background: @primary;
+					});
+					.with-theme({
+						border: 2.8px solid @secondary;
+					});
 					cursor: pointer;
 					pointer-events: all;
 				}
 
-				price-slider:-moz-range-thumb
-				{
+				price-slider:-moz-range-thumb {
 					appearance: none;
 					-webkit-appearance: none;
 					-moz-appearance: none;
 					width: 30px;
 					height: 30px;
 					box-shadow: -3px 3px 3px -2px @shadow-color;
-					background: @background-color;
-					border: 2.8px solid @main-color;
+					.with-theme({
+						background: @primary;
+					});
+					.with-theme({
+						border: 2.8px solid @secondary;
+					});
 					cursor: pointer;
 					pointer-events: all;
 				}
 
-				.price-slider:hover::-webkit-slider-thumb
-				{
+				.price-slider:hover::-webkit-slider-thumb {
 					background: @active-color;
 				}
 
-				.price-slider:focus::-webkit-slider-thumb
-				{
+				.price-slider:focus::-webkit-slider-thumb {
 					background: @active-color;
 				}
 
-				#price-min
-				{
+				#price-min {
 					display: none;
 					background: none;
 				}
 
-				#price-min.active
-				{
+				#price-min.active {
 					display: block;
 				}
 			}
 
-			.max-price-display
-			{
+			.max-price-display {
 				width: 60px;
 				text-align: end;
-				color: @main-color;
+				.with-theme({
+					color: @secondary;
+				});
 				font-weight: 600;
 			}
 
-			.min-price-display
-			{
+			.min-price-display {
 				display: none;
 				width: 60px;
 				text-align: start;
-				color: @main-color;
+				.with-theme({
+					color: @secondary;
+				});
 				font-weight: 600;
 			}
 
-			.min-price-display.active
-			{
+			.min-price-display.active {
 				display: block;
 			}
 		}
 
-		.price-action-panel
-		{
+		.price-action-panel {
 			display: flex;
 			align-content: center;
 			justify-content: space-between;
 
-			.price-button
-			{
+			.price-button {
 				position: relative;
 				margin-top: 10px;
 				height: 40px;
@@ -123,42 +121,40 @@ body
 				overflow: hidden;
 			}
 
-			.price-button span
-			{
+			.price-button span {
 				position: relative;
 				z-index: 1;
 			}
 
-			.price-button:hover span
-			{
-				color: @background-color;
+			.price-button:hover span {
+				.with-theme({
+					color: @primary;
+				});
 			}
 
 			.price-button:nth-child(1),
-			.price-button:nth-child(3)
-			{
+			.price-button:nth-child(3) {
 				width: 50px;
 			}
 
-			.price-button:nth-child(2)
-			{
+			.price-button:nth-child(2) {
 				padding-left: 10px;
 				padding-right: 10px;
 			}
 
 			.price-button:nth-child(1) span,
-			.price-button:nth-child(3) span
-			{
+			.price-button:nth-child(3) span {
 				font-size: 24px;
 				font-weight: bold;
 			}
 		}
 
-		.currency
-		{
+		.currency {
 			font-weight: 700;
 			font-size: 23px;
-			color: @main-color;
+			.with-theme({
+				color: @secondary;
+			});
 		}
 	}
 }

@@ -39,6 +39,8 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\files\" />
+    <Folder Include="wwwroot\js\products" />
+    <Folder Include="wwwroot\js\product_item" />
     <Folder Include="wwwroot\styles\css" />
   </ItemGroup>
 
