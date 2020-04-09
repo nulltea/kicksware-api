@@ -147,7 +147,9 @@
 				.email-input, .password-input {
 					width: 100%;
 					height: 40px;
-					background: @hint-color;
+					.with-theme({
+	background: @hint;
+});
 					.with-theme({
 						border: 2.8px solid @secondary;
 					});

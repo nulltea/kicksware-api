@@ -50,8 +50,9 @@
 					text-transform: uppercase;
 					.with-theme({
 						color: @secondary;
+						background: darken(@hint, 5%);
 					});
-					background: @detective-color;
+
 					cursor: pointer;
 					position: relative;
 					bottom: -5px;
@@ -95,8 +96,6 @@
 					left: 0;
 					.with-theme({
 						background: @primary;
-					});
-					.with-theme({
 						border-top: 3px solid @secondary;
 					});
 
@@ -107,14 +106,13 @@
 
 					.row:first-child //search panel
 					{
+						.with-theme({ background: @hint; });
 						input {
 							width: calc(~"100% - 250px");
 							padding-left: 20px;
 							border: none;
 							.with-theme({
 								border-bottom: 3px solid @secondary;
-							});
-							.with-theme({
 								border-top: 3px solid @secondary;
 							});
 							border-radius: 0;
@@ -138,15 +136,17 @@
 							svg {
 								width: 28px;
 								height: 28px;
+
+								.with-theme({
+									fill: @secondary;
+								});
 							}
 						}
 
 						.list-select {
 							width: 200px;
 							.with-theme({
-								background: @primary;
-							});
-							.with-theme({
+								background: @hint;
 								border: 3px solid @secondary;
 							});
 
@@ -161,8 +161,10 @@
 						.search-grid {
 							width: 100%;
 							display: grid;
-							border-top: 3px solid @main-color;
-							border-left: 3px solid @main-color;
+							.with-theme({
+								border-top: 3px solid @secondary;
+								border-left: 3px solid @secondary;
+							});
 							grid-template-columns: repeat(3, 1fr);
 							grid-auto-rows: 1fr;
 
@@ -172,9 +174,8 @@
 								justify-content: space-between;
 								padding: 20px;
 								.with-theme({
+									background: @hint;
 									border-bottom: 3px solid @secondary;
-								});
-								.with-theme({
 									border-right: 3px solid @secondary;
 								});
 								z-index: 0;
@@ -186,9 +187,9 @@
 									padding: 11px;
 									outline: none;
 									.with-theme({
-										background: @primary;
+										background: @hint;
+										box-shadow: 4px 4px 5px -1px @secondary;
 									});
-									box-shadow: 4px 4px 5px -1px @main-color;
 								}
 
 								&:hover:before,
@@ -201,9 +202,7 @@
 									top: -9px;
 									left: -9px;
 									.with-theme({
-										background: @primary;
-									});
-									.with-theme({
+										background: @hint;
 										border: 3px solid @secondary;
 									});
 								}
@@ -233,7 +232,9 @@
 									flex-direction: column;
 									height: 60px;
 									padding-top: 5px;
-									border-top: 2px solid @main-color;
+									.with-theme({
+										border-top: 2px solid @secondary;
+									});
 
 									span {
 										text-align: start;
@@ -318,8 +319,10 @@
 								.loader-line {
 									height: 4px;
 									background: #AEAEAE;
-									border-left: 6px solid #fff;
-									border-right: 6px solid #fff;
+									.with-theme({
+										border-left: 6px solid @primary;
+										border-right: 6px solid @primary;
+									});
 									box-sizing: border-box;
 								}
 

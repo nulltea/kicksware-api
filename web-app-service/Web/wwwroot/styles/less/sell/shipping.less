@@ -4,48 +4,46 @@
 // MIXINS
 @import "../mixins/mixins";
 
-body {
-	.sell {
-		.shipping-row {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
+.sell {
+	.shipping-row {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		.with-theme({
+			border-bottom: 3px solid @secondary;
+		});
+
+		span {
 			.with-theme({
-	border-bottom: 3px solid @secondary;
-});
+				color: @secondary;
+			});
+			font-weight: 600;
+		}
+
+		.shipping-info {
+			display: flex;
+			width: 250px;
+			justify-content: space-between;
+
+			input[type="number"] {
+				width: 150px;
+				height: 40px;
+				.with-theme({
+					background: @hint;
+					border: 2.8px solid @secondary;
+				});
+				outline: none;
+				padding-left: 40px;
+			}
 
 			span {
+				position: absolute;
+				top: 7px;
+				left: 15px;
 				.with-theme({
 					color: @secondary;
 				});
-				font-weight: 600;
-			}
-
-			.shipping-info {
-				display: flex;
-				width: 250px;
-				justify-content: space-between;
-
-				input[type="number"] {
-					width: 150px;
-					height: 40px;
-					background: @hint-color;
-					.with-theme({
-						border: 2.8px solid @secondary;
-					});
-					outline: none;
-					padding-left: 40px;
-				}
-
-				span {
-					position: absolute;
-					top: 7px;
-					left: 15px;
-					.with-theme({
-						color: @secondary;
-					});
-					font-weight: 500;
-				}
+				font-weight: 500;
 			}
 		}
 	}

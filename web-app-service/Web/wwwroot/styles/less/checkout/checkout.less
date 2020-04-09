@@ -58,7 +58,9 @@
 .checkout_input {
 	width: 100%;
 	height: 52px;
-	background: #f2f4f8;
+	.with-theme({
+	background: @hint;
+});
 	.with-theme({
 	border: 2.8px solid @secondary;
 });
@@ -120,7 +122,9 @@
 	appearance: none;
 	width: 13px;
 	height: 13px;
-	background: #f2f4f8;
+	.with-theme({
+	background: @hint;
+});
 	cursor: pointer;
 	vertical-align: middle;
 	margin-bottom: 0;
@@ -154,7 +158,9 @@
 .order {
 	width: 100%;
 	padding-left: 60px;
-	background: #f2f4f8;
+	.with-theme({
+	background: @hint;
+});
 	padding-bottom: 53px;
 	padding-right: 58px;
 }

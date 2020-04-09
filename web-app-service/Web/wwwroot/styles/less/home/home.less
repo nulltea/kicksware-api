@@ -51,7 +51,7 @@
 	font-size: 60px;
 	font-weight: 600;
 	.with-theme({
-		color: @primary;
+		color: @theme-light-primary;
 	});
 	line-height: 1.2;
 }
@@ -60,7 +60,7 @@
 	font-size: 14px;
 	font-weight: 400;
 	.with-theme({
-		color: @primary;
+		color: @theme-light-primary;
 	});
 	line-height: 2.14;
 	margin-top: 22px;
@@ -68,11 +68,11 @@
 
 #home-button {
 	margin-top: 40px;
-	border: 3px solid @background-color;
+	border: 3px solid @theme-light-primary;
 }
 
 #home-button a {
-	color: @background-color;
+	color: @theme-light-primary;
 }
 
 .home_slider_dots_container {
@@ -438,7 +438,10 @@
 	width: 100%;
 	height: 40px;
 	border: none;
-	border-bottom: solid 2px #787878;
+	.with-theme({
+		background: @primary;
+		border-bottom: solid 3px @secondary;
+	});
 	outline: none;
 	text-align: center;
 }
@@ -448,10 +451,8 @@
 	width: 178px;
 	height: 61px;
 	.with-theme({
-	border: 2.8px solid @secondary;
-});
-	.with-theme({
 		background: @primary;
+		border: 2.8px solid @secondary;
 	});
 	cursor: pointer;
 	margin-top: 55px;

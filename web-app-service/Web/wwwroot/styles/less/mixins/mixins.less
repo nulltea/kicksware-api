@@ -1,13 +1,44 @@
 ﻿// COLORS //
 @import "../properties/colors";
 
-// TRANSITIONS //
+// CROSS-BROWSER //
 .transition-properties(...) {
-	-webkit-transition: all 200ms ease;
-	-moz-transition: all 200ms ease;
-	-ms-transition: all 200ms ease;
-	-o-transition: all 200ms ease;
-	transition: all 200ms ease;
+	-webkit-transition: @arguments;
+	-moz-transition: @arguments;
+	-ms-transition: @arguments;
+	-o-transition: @arguments;
+	transition: @arguments;
+}
+
+.transform-properties(...) {
+	-webkit-transform: @arguments;
+	-moz-transform: @arguments;
+	-ms-transform: @arguments;
+	-o-transform: @arguments;
+	transform: @arguments;
+}
+
+.transfosition-properties(@transform, @transition) {
+	.transform-properties(@transform);
+	-webkit-transition: ~`"@{transition}".replace(/[\[\]]|\,\sX/g, '').replace('transform', '-webkit-transition')`;
+	-moz-transition: ~`"@{transition}".replace(/[\[\]]|\,\sX/g, '').replace('transform', '-moz-transform')`;
+	-ms-transition: ~`"@{transition}".replace(/[\[\]]|\,\sX/g, '').replace('transform', '-ms-transform')`;
+	-o-transition: ~`"@{transition}".replace(/[\[\]]|\,\sX/g, '').replace('transform', '-o-transform')`;
+	transition: ~`"@{transition}".replace(/[\[\]]|\,\sX/g, '')`;
+}
+
+.transform-origin-properties(...) {
+	-webkit-transform-origin: @arguments;
+	-moz-transform-origin: @arguments;
+	-ms-transform-origin: @arguments;
+	-o-transform-origin: @arguments;
+	transform-origin: @arguments;
+}
+
+.appearance-properties(...){
+	-webkit-appearance: @arguments;
+	-moz-appearance: @arguments;
+	appearance: @arguments;
 }
 
 // THEME //
@@ -21,13 +52,25 @@
 			@themeName: e(extract(@themes, @i));
 			// Call .theme-helper(...) mixin for a single css property
 			.theme-@{themeName} & {
-				@p: ~'theme-@{themeName}-primary';
-				@s: ~'theme-@{themeName}-secondary';
+				@prm: ~'theme-@{themeName}-primary';
+				@prv: ~'theme-@{themeName}-primary_variant';
+				@sec: ~'theme-@{themeName}-secondary';
+				@acc: ~'theme-@{themeName}-accent';
+				@psv: ~'theme-@{themeName}-passive';
+				@hnt: ~'theme-@{themeName}-hint';
+				@scs: ~'theme-@{themeName}-success';
+				@err: ~'theme-@{themeName}-error';
+				@sdw: ~'theme-@{themeName}-shadow';
 
-				@primary: @@p;
-				@secondary: @@s;
-				//@active: @@p;
-				//@shadow-color: @@s;
+				@primary: @@prm;
+				@primary_variant: @@prv;
+				@secondary: @@sec;
+				@accent: @@acc;
+				@passive: @@psv;
+				@hint: @@hnt;
+				@success: @@scs;
+				@error: @@err;
+				@shadow: @@sdw;
 
 				@rules();
 			}
