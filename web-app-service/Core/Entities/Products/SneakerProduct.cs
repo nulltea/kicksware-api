@@ -33,7 +33,7 @@ namespace Core.Entities.Products
 		[DataType(DataType.Currency)]
 		public decimal PriceOffset { get; set; }
 
-		public bool AcceptOffers { get; set; }
+		public bool AcceptOffers { get; set; } = false;
 
 		[JsonConverter(typeof(StringEnumConverter))]
 		public Currency Currency { get; set; } = Currency.UsDollar;

@@ -199,9 +199,10 @@ textarea {
 
 .page-content {
 	flex: 1;
+	border-radius: 15px;
 	.with-theme({
 		background: @primary;
-		box-shadow: 0 6px 15px -8px @shadow;
+		.elevation(6, @elevation);
 	});
 	z-index: 2;
 }
@@ -344,7 +345,7 @@ textarea {
 		.transition-properties(all 200ms ease);
 		.with-theme({
 			background: fade(@primary, 95%);
-			box-shadow: -1px 10px 10px -3px @shadow;
+			.elevation(8, @elevation);
 		});
 
 		li:not(:last-child) {

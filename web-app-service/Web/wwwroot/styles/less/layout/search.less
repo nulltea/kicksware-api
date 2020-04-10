@@ -4,25 +4,30 @@
 // MIXINS
 @import "../mixins/mixins";
 
+
 .search_panel {
 	position: absolute;
+	width: inherit;
+	height: inherit;
+	padding-left: inherit;
+	padding-right: inherit;
 	left: 100%;
 	bottom: 0;
-	width: 100%;
-	.with-theme({
-		background: @primary;
-	});
+	background: transparent;
 	z-index: 3;
 
 
 	&.active {
 		left: 0;
+		.with-theme({
+			background: @primary;
+		});
 	}
 
 	.search_panel_content {
 		display: flex;
 		align-items: center;
-		height: 130px;
+		height: inherit;
 
 		form {
 			position: absolute;

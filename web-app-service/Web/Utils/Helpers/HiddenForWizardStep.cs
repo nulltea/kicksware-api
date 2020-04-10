@@ -29,7 +29,7 @@ namespace web_app_service.Utils.Helpers
 				.ToDictionary(prop => prop.Name, prop => prop.GetValue(model, null));
 			foreach (var (property, value) in modelDictionary)
 			{
-				if (value is IEnumerable list)
+				if (value is IList list && value.GetType().IsGenericType)
 				{
 					foreach (var valueItem in list)
 					{

@@ -19,6 +19,7 @@
 			color: @secondary;
 		});
 		margin-left: 0;
+		margin-top: 5px;
 	}
 
 	.page_subtitle {
@@ -81,11 +82,10 @@
 				content: "";
 				.with-theme({
 					background: @primary;
-				});
-				.with-theme({
 					outline: 3px solid @secondary;
+					box-shadow: 3px 5px 6px 0 fade(@elevation, 40%);
 				});
-				box-shadow: 3px 5px 6px 0 grey;
+
 				height: 3px;
 				width: calc(~"100% - 50px");
 			}
@@ -106,7 +106,7 @@
 				.with-theme({
 					background: @primary;
 					border: 3px solid @secondary;
-					box-shadow: 3px 3px 6px -2px @shadow;
+					box-shadow: 3px 3px 9px -1px fade(@elevation, 30%);
 				});
 			}
 
@@ -115,8 +115,14 @@
 				height: 25px;
 			}
 		}
+		form {
+			border-radius: 10px;
+			padding: 20px 40px;
+			.with-theme({
+				background: @primary;
+				.elevation(6, @elevation);
+			});
 
-		.sell_form {
 			> div:not(:last-child) {
 				margin-bottom: 14px;
 			}
@@ -305,7 +311,7 @@
 			.with-theme({
 				background: @hint;
 				border: 2.8px solid @secondary;
-				box-shadow: 3px 5px 10px -1px @shadow;
+				.elevation(6, @elevation);
 			});
 			z-index: 99;
 			opacity: .95;
@@ -349,7 +355,7 @@
 			background: @primary;
 			border: 2.8px solid @secondary;
 			border-top: none;
-			box-shadow: 3px 5px 10px -1px @shadow;
+			.elevation(6, @elevation);
 		});
 		border-top: none;
 		z-index: 99;
@@ -417,13 +423,13 @@
 				border: 2.8px solid @secondary;
 			});
 
-			&:after {
+			&::after {
 				position: absolute;
 				content: "";
-				top: 3px;
-				left: 3px;
 				width: 30px;
-				bottom: 3px;
+				top: 3.5px;
+				left: 5px;
+				bottom: 4px;
 				z-index: 2;
 				.with-theme({ background: @primary; });
 				.transition-properties(all 350ms);
@@ -433,7 +439,7 @@
 				.with-theme({ background: @success; });
 			}
 
-			&:checked:after {
+			&:checked::after {
 				left: calc(~"100% - 33px");
 				.with-theme({ background: @secondary; });
 			}
@@ -446,6 +452,31 @@
 			&:checked ~ .is-unchecked {
 				.transform-properties(translateX(-190%) translateY(-30%) scale(0));
 				.with-theme({ fill: @primary; });
+			}
+
+			// Dark theme input colors overrides
+			.theme-dark & {
+				background: @theme-dark-hint;
+
+				&::after {
+					background: @theme-dark-secondary;
+				}
+
+				& ~ .is-unchecked {
+					fill: @theme-dark-secondary;
+				}
+			}
+
+			.theme-dark &:checked {
+				background: @theme-dark-secondary;
+
+				&::after {
+					background: @theme-dark-primary;
+				}
+
+				& ~ .is-checked {
+					fill: @theme-dark-primary;
+				}
 			}
 		}
 
@@ -471,6 +502,16 @@
 				bottom: 10px;
 				top: auto;
 			}
+
+			// Dark theme icon colors overrides
+			/*.theme-dark & {
+				&.is-checked {
+					fill:
+				}
+				&.is-unchecked {
+
+				}
+			}*/
 		}
 	}
 }

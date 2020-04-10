@@ -15,7 +15,6 @@
 			height: auto;
 			flex: 1;
 			.price-slider {
-				-webkit-appearance: none;
 				height: 4px;
 				width: 100%;
 				border-radius: 0;
@@ -24,33 +23,30 @@
 				opacity: 1;
 				pointer-events: none;
 				position: absolute;
+				.appearance-properties(none);
 			}
 
 			.price-slider::-webkit-slider-thumb {
-				appearance: none;
-				-webkit-appearance: none;
-				-moz-appearance: none;
 				width: 30px;
 				height: 30px;
 				.with-theme({
-					background: @primary;
+					background: @hint;
 					border: 2.8px solid @secondary;
-					box-shadow: -3px 3px 3px -2px @shadow;
+					.elevation(3, @elevation);
 				});
 				cursor: pointer;
 				pointer-events: all;
+				.appearance-properties(none);
 			}
 
 			.price-slider::-moz-range-thumb {
-				appearance: none;
-				-webkit-appearance: none;
-				-moz-appearance: none;
+				.appearance-properties(none);
 				width: 30px;
 				height: 30px;
 				.with-theme({
-					background: @primary;
+					background: @hint;
 					border: 2.8px solid @secondary;
-					box-shadow: -3px 3px 3px -2px @shadow;
+					.elevation(3, @elevation);
 				});
 				cursor: pointer;
 				pointer-events: all;
@@ -58,13 +54,16 @@
 
 			.price-slider:hover::-webkit-slider-thumb {
 				.with-theme({
-					background: @success;
+					background: @secondary;
 				});
+				position: relative;
+				bottom: 2px;
+				.transition-properties(all 300ms ease);
 			}
 
 			.price-slider:focus::-webkit-slider-thumb {
 				.with-theme({
-					background: @success;
+					background: @secondary;
 				});
 			}
 

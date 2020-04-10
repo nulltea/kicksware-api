@@ -11,9 +11,6 @@
 .home {
 	width: 100%;
 	height: 950px;
-	.with-theme({
-		background: @primary;
-	});
 	z-index: 2;
 }
 
@@ -75,6 +72,14 @@
 	color: @theme-light-primary;
 }
 
+#home-button:hover::after {
+	background: @theme-light-primary;
+}
+
+#home-button:hover a {
+	color: @theme-light-secondary;
+}
+
 .home_slider_dots_container {
 	display: inline-block;
 	position: absolute;
@@ -104,11 +109,7 @@
 	cursor: pointer;
 	font-size: 14px;
 	font-weight: 600;
-	-webkit-transition: all 200ms ease;
-	-moz-transition: all 200ms ease;
-	-ms-transition: all 200ms ease;
-	-o-transition: all 200ms ease;
-	transition: all 200ms ease;
+	.transition-properties(all 200ms ease)
 }
 
 .home_slider_custom_dot:hover {
@@ -133,9 +134,6 @@
 
 .avds {
 	width: 100%;
-	.with-theme({
-		background: @primary;
-	});
 	z-index: 2;
 }
 
@@ -168,7 +166,9 @@
 .avds_small_inner {
 	width: 100%;
 	height: 100%;
-	border: solid 2px #FFFFFF;
+	.with-theme({
+		border: solid 2px @primary;
+	})
 }
 
 .avds_discount_container {
@@ -353,9 +353,6 @@
 	width: 100%;
 	padding-top: 99px;
 	padding-bottom: 99px;
-	.with-theme({
-		background: @primary;
-	});
 	z-index: 2;
 }
 
@@ -397,16 +394,15 @@
 
 .newsletter {
 	width: 100%;
-	.with-theme({
-		background: @primary;
-	});
 	padding-bottom: 99px;
 	z-index: 2;
 }
 
 .newsletter_border {
 	width: 100%;
-	border-top: solid 2px #e3e3e3;
+	.with-theme({
+		border-top: solid 2px @secondary;
+	});
 }
 
 .newsletter_content {

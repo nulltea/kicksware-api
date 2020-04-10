@@ -18,11 +18,24 @@
 	z-index: 100;
 	.with-theme({
 		background: @primary_variant;
-		&.scrolled{
-			box-shadow: 0 6px 15px -8px @shadow;
-		}
 	});
 	.transition-properties(all 300ms ease);
+
+	&.scrolled {
+		height: 70px;
+		margin-left: 6px;
+		margin-right: 6px;
+		border-radius: 6px;
+		width: calc(~"100% - 12px");
+		.with-theme({
+			background: @primary_variant;
+			.elevation(4, @elevation);
+		});
+
+		.logo a {
+			font-size: 24px;
+		}
+	}
 
 
 	.header_container {
@@ -58,16 +71,6 @@
 
 			&:hover a {
 				//TODO logo hover
-			}
-		}
-
-		&.scrolled {
-			height: 70px;
-			background: rgb(255, 255, 255, .9);
-			box-shadow: 0 1px 4px 0 @shadow-color;
-
-			.logo a {
-				font-size: 24px;
 			}
 		}
 
@@ -137,11 +140,10 @@
 
 			.search {
 				cursor: pointer;
-				top: 2px;
 
 				svg {
-					width: 28px;
-					height: 28px;
+					width: 30px;
+					height: 30px;
 
 					path {
 						transition: all 400ms ease;
@@ -195,11 +197,10 @@
 			.account {
 				background: transparent;
 				cursor: pointer;
-				bottom: 2px;
 
 				svg {
 					width: 23px;
-					height: 22px;
+					height: 23px;
 
 					path {
 						transition: all 400ms ease;
