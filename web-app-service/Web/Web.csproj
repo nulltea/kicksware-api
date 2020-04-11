@@ -39,8 +39,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\files\" />
-    <Folder Include="wwwroot\js\products" />
-    <Folder Include="wwwroot\js\product_item" />
     <Folder Include="wwwroot\styles\css" />
   </ItemGroup>
 
@@ -111,6 +109,12 @@
     <_ContentIncludedByDefault Remove="wwwroot\css\sell\sell_responsive.less" />
     <_ContentIncludedByDefault Remove="wwwroot\css\sell\shipping.less" />
     <_ContentIncludedByDefault Remove="wwwroot\css\site.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\styles\css\products_item\product_item.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\styles\css\products_item\product_item.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\plugins\scrollmagic\plugins\animation.gsap.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\plugins\scrollmagic\plugins\animation.velocity.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\plugins\scrollmagic\plugins\debug.addIndicators.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\plugins\scrollmagic\plugins\jquery.ScrollMagic.min.js" />
   </ItemGroup>
 
 </Project>

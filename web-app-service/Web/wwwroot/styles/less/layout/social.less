@@ -7,10 +7,6 @@
 //TODO social
 
 .menu_social {
-	position: absolute;
-	right: 30px;
-	bottom: 15px;
-
 	ul li {
 		display: inline-block;
 
@@ -36,18 +32,10 @@
 header .menu_social {
 	position: absolute;
 	top: 50%;
-	-webkit-transform: translateY(-50%);
-	-moz-transform: translateY(-50%);
-	-ms-transform: translateY(-50%);
-	-o-transform: translateY(-50%);
-	transform: translateY(-50%);
 	right: 60px;
-	z-index: 1;
+	bottom: 15px;
 	margin-right: -5px;
-}
-
-footer .menu_social {
-	width: 30%;
-	text-align: right;
+	z-index: 1;
+	.transform-properties(translateY(-50%));
 }
 

@@ -4,6 +4,10 @@
 // MIXINS
 @import "../mixins/mixins";
 
+.modal {
+	margin: 2.75rem auto;
+}
+
 .login-dialog {
 	width: 400px;
 	height: auto;
@@ -59,7 +63,7 @@
 
 				&:after {
 					.with-theme({
-						background: @primary;
+						background: @hint;
 					});
 				}
 
@@ -79,7 +83,7 @@
 					justify-content: center;
 					align-items: center;
 					.with-theme({
-						color: @primary;
+						color: @theme-light-primary;
 					});
 					background: @facebook-color;
 					border: 2.8px solid @facebook-color;
@@ -107,7 +111,7 @@
 					color: @google-red-color;
 					border: 2.8px solid @google-red-color;
 					.with-theme({
-						background: @primary;
+						background:@hint;
 					});
 
 					.google-logo {
@@ -122,14 +126,14 @@
 
 					&:hover span {
 						.with-theme({
-							color: @primary;
+							color: @theme-light-primary;
 						});
 					}
 
 					&:hover path {
 						.with-theme({
-	fill: @primary;
-});
+							fill: @theme-light-primary;
+						});
 					}
 				}
 			}

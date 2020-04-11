@@ -300,8 +300,10 @@
             <e p="cloud_search.svg" t="Include" />
             <e p="details.svg" t="Include" />
             <e p="facebook.svg" t="Include" />
-            <e p="footer.jpeg" t="Include" />
             <e p="google.svg" t="Include" />
+            <e p="heroes" t="Include">
+              <e p="seller-hero.jpg" t="Include" />
+            </e>
             <e p="hightop_sneakers.svg" t="Include" />
             <e p="home_addidas_4d.jpg" t="Include" />
             <e p="home_adidas-yzy-qntm.jpg" t="Include" />
@@ -320,30 +322,7 @@
             <e p="theme.svg" t="Include" />
             <e p="upload.svg" t="Include" />
           </e>
-          <e p="js" t="Include">
-            <e p="common" t="Include">
-              <e p="common.js" t="Include" />
-            </e>
-            <e p="home.js" t="Include" />
-            <e p="layout" t="Include">
-              <e p="layout.js" t="Include" />
-            </e>
-            <e p="product_item" t="Include" />
-            <e p="productItem.js" t="Include" />
-            <e p="Products" t="Include" />
-            <e p="products.js" t="Include" />
-            <e p="Sell" t="Include">
-              <e p="payment.js" t="Include" />
-              <e p="preview.js" t="Include" />
-              <e p="search.js" t="Include" />
-              <e p="sell.js" t="Include" />
-            </e>
-            <e p="site.js" t="Include" />
-            <e p="user" t="Include">
-              <e p="auth.js" t="Include" />
-            </e>
-          </e>
-          <e p="lib" t="Include">
+          <e p="plugins" t="Include">
             <e p="bootstrap" t="Include">
               <e p="dist" t="Include">
                 <e p="css" t="Include">
@@ -379,6 +358,7 @@
             </e>
             <e p="greensock" t="Include">
               <e p="animation.gsap.min.js" t="Include" />
+              <e p="animation.velocity.min.js" t="Include" />
               <e p="ScrollToPlugin.min.js" t="Include" />
               <e p="TimelineMax.min.js" t="Include" />
               <e p="TweenMax.min.js" t="Include" />
@@ -419,11 +399,40 @@
               <e p="owl.theme.default.css" t="Include" />
               <e p="owl.video.play.png" t="Include" />
             </e>
-            <e p="parallax-js-master" t="Include">
+            <e p="parallax" t="Include">
               <e p="parallax.min.js" t="Include" />
             </e>
             <e p="scrollmagic" t="Include">
+              <e p="debug.addIndicators.min.js" t="Include" />
               <e p="ScrollMagic.min.js" t="Include" />
+            </e>
+          </e>
+          <e p="scripts" t="Include">
+            <e p="common" t="Include">
+              <e p="common.js" t="Include" />
+            </e>
+            <e p="Home" t="Include">
+              <e p="home.js" t="Include" />
+            </e>
+            <e p="layout" t="Include">
+              <e p="header.js" t="Include" />
+              <e p="menu.js" t="Include" />
+              <e p="search.js" t="Include" />
+            </e>
+            <e p="product-item" t="Include">
+              <e p="productItem.js" t="Include" />
+            </e>
+            <e p="Products" t="Include">
+              <e p="products.js" t="Include" />
+            </e>
+            <e p="Sell" t="Include">
+              <e p="payment.js" t="Include" />
+              <e p="preview.js" t="Include" />
+              <e p="search.js" t="Include" />
+              <e p="sell.js" t="Include" />
+            </e>
+            <e p="user" t="Include">
+              <e p="auth.js" t="Include" />
             </e>
           </e>
           <e p="styles" t="Include">
@@ -431,10 +440,6 @@
               <e p="About" t="Include">
                 <e p="about.css" t="Include" />
                 <e p="about.css.map" t="Include" />
-              </e>
-              <e p="auth" t="Include">
-                <e p="modal.css" t="Include" />
-                <e p="modal.css.map" t="Include" />
               </e>
               <e p="Checkout" t="Include">
                 <e p="checkout.css" t="Include" />
@@ -464,13 +469,13 @@
                 <e p="social.css" t="Include" />
                 <e p="social.css.map" t="Include" />
               </e>
+              <e p="product-item" t="Include">
+                <e p="product-item.css" t="Include" />
+                <e p="product-item.css.map" t="Include" />
+              </e>
               <e p="Products" t="Include">
                 <e p="products.css" t="Include" />
                 <e p="products.css.map" t="Include" />
-              </e>
-              <e p="products_item" t="Include">
-                <e p="product_item.css" t="Include" />
-                <e p="product_item.css.map" t="Include" />
               </e>
               <e p="responsive" t="Include">
                 <e p="about.responsive.css" t="Include" />
@@ -483,8 +488,8 @@
                 <e p="home.responsive.css.map" t="Include" />
                 <e p="layout.responsive.css" t="Include" />
                 <e p="layout.responsive.css.map" t="Include" />
-                <e p="product_item.responsive.css" t="Include" />
-                <e p="product_item.responsive.css.map" t="Include" />
+                <e p="product-item.responsive.css" t="Include" />
+                <e p="product-item.responsive.css.map" t="Include" />
                 <e p="products.responsive.css" t="Include" />
                 <e p="products.responsive.css.map" t="Include" />
                 <e p="sell.responsive.css" t="Include" />
@@ -506,13 +511,14 @@
                 <e p="shipping.css" t="Include" />
                 <e p="shipping.css.map" t="Include" />
               </e>
+              <e p="user" t="Include">
+                <e p="modal.css" t="Include" />
+                <e p="modal.css.map" t="Include" />
+              </e>
             </e>
             <e p="less" t="Include">
               <e p="About" t="Include">
                 <e p="about.less" t="Include" />
-              </e>
-              <e p="auth" t="Include">
-                <e p="modal.less" t="Include" />
               </e>
               <e p="Checkout" t="Include">
                 <e p="checkout.less" t="Include" />
@@ -536,11 +542,11 @@
               <e p="mixins" t="Include">
                 <e p="mixins.less" t="Include" />
               </e>
+              <e p="product-item" t="Include">
+                <e p="product-item.less" t="Include" />
+              </e>
               <e p="Products" t="Include">
                 <e p="products.less" t="Include" />
-              </e>
-              <e p="products_item" t="Include">
-                <e p="product_item.less" t="Include" />
               </e>
               <e p="Properties" t="Include">
                 <e p="colors.less" t="Include" />
@@ -552,7 +558,7 @@
                 <e p="contact.responsive.less" t="Include" />
                 <e p="home.responsive.less" t="Include" />
                 <e p="layout.responsive.less" t="Include" />
-                <e p="product_item.responsive.less" t="Include" />
+                <e p="product-item.responsive.less" t="Include" />
                 <e p="products.responsive.less" t="Include" />
                 <e p="sell.responsive.less" t="Include" />
               </e>
@@ -564,6 +570,9 @@
                 <e p="search.less" t="Include" />
                 <e p="sell.less" t="Include" />
                 <e p="shipping.less" t="Include" />
+              </e>
+              <e p="user" t="Include">
+                <e p="modal.less" t="Include" />
               </e>
             </e>
           </e>

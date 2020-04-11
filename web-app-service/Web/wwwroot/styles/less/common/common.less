@@ -208,7 +208,7 @@ textarea {
 }
 
 .parallax-window {
-	min-height: 400px;
+	min-height: 600px;
 	background: transparent;
 }
 
@@ -303,7 +303,7 @@ textarea {
 	top: 32px;
 	width: 32px;
 	height: 32px;
-	opacity: 0.3;
+	opacity: 0.5;
 	border: none;
 	outline: none;
 	margin: -50px;
@@ -312,9 +312,15 @@ textarea {
 	&:hover {
 		opacity: 1;
 		background: none;
+
+		&::before, &::after{
+			.with-theme({
+				background: @secondary;
+			});
+		}
 	}
 
-	&:before, &:after {
+	&::before, &::after {
 		content: " ";
 		position: absolute;
 		height: 33px;
@@ -342,6 +348,7 @@ textarea {
 		padding: 20px 25px;
 		visibility: hidden;
 		opacity: 0;
+		border-radius: 10px;
 		.transition-properties(all 200ms ease);
 		.with-theme({
 			background: fade(@primary, 95%);

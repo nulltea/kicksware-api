@@ -317,9 +317,9 @@
 						.loading-overlay {
 							position: absolute;
 							z-index: 10;
-							width: 100%;
+							width: calc(~"100% + 5px");
 							top: 100%;
-							bottom: 0;
+							bottom: -5px;
 							.with-theme({
 								background: @primary;
 							});

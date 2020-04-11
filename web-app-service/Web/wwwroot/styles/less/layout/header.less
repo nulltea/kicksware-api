@@ -5,7 +5,7 @@
 @import "../mixins/mixins";
 
 .header-spacer {
-	height: 130px;
+	height: 110px;
 }
 
 .header {
@@ -14,7 +14,7 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 130px;
+	height: 110px;
 	z-index: 100;
 	.with-theme({
 		background: @primary_variant;
@@ -24,9 +24,10 @@
 	&.scrolled {
 		height: 70px;
 		margin-left: 6px;
-		margin-right: 6px;
-		border-radius: 6px;
-		width: calc(~"100% - 12px");
+		margin-right: 8px;
+		border-bottom-left-radius: 10px;
+		border-bottom-right-radius: 10px;
+		width: calc(~"100% - 14px");
 		.with-theme({
 			background: @primary_variant;
 			.elevation(4, @elevation);
@@ -36,363 +37,419 @@
 			font-size: 24px;
 		}
 	}
+}
 
+.header_container {
+	width: 100%;
+	height: 100%;
+	z-index: 1;
 
-	.header_container {
+	&.container {
+		max-width: 100%;
+	}
+
+	.header_content {
 		width: 100%;
 		height: 100%;
-		z-index: 1;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-left: 60px;
+		padding-right: 60px;
+	}
 
-		&.container {
-			max-width: 100%;
+	.logo {
+
+		a {
+			font-family: Audiowide, sans-serif;
+			font-size: 30px;
+			font-weight: 500;
+			.with-theme({
+				color: @secondary;
+			});
+			.transition-properties(all 300ms ease-in-out);
 		}
 
-		.header_content {
-			width: 100%;
-			height: 100%;
+		&:hover a {
+			//TODO logo hover
+		}
+	}
+
+	// MAIN NAVIGATION MENU //
+	.main_nav {
+		width: 580px;
+		height: 100%;
+
+		& > ul {
 			display: flex;
-			align-items: center;
-		}
+			align-items: flex-start;
+			justify-content: space-between;
+			height: inherit;
 
-		.logo {
-			width: 130px;
-			position: absolute;
-			left: 57px;
-
-			a {
-				font-family: Audiowide, sans-serif;
-				font-size: 30px;
-				font-weight: 500;
-				.with-theme({
-					color: @secondary;
-				});
-				.transition-properties(all 200ms ease);
-			}
-
-			&:hover a {
-				//TODO logo hover
-			}
-		}
-
-		// MAIN NAVIGATION MENU //
-		.main_nav {
-			width: 580px;
-			height: 30px;
-			position: absolute;
-			left: calc(~"50% - 320px");
-
-			& > ul > li {
-				display: inline-block;
+			& > li {
 				position: relative;
-			}
-
-			& > ul > li:not(:last-child) {
-				margin-right: 46px;
-			}
-
-			& > ul > li > a {
-				font-size: 18px;
-				font-weight: 600;
-				color: #767676;
-				.transition-properties(all 200ms ease);
-			}
-
-			& > ul > li > a:hover,
-			& > ul > li.active > a {
+				display: flex;
+				align-items: flex-end;
+				justify-content: center;
+				height: calc(~"50% + 30px");
+				padding-bottom: 20px;
+				min-width: 12%;
+				padding-left: 5px;
+				padding-right: 5px;
+				border-bottom-left-radius: 10px;
+				border-bottom-right-radius: 10px;
 				.with-theme({
-					color: @secondary;
+					background: transparent;
+					color: @passive;
 				});
-			}
+				.transition-properties(all 300ms ease);
 
-			li.hassubs {
-				ul {
-					width: 230px;
-				}
-			}
-
-			& ul li:hover::after,
-			& ul li.active::after {
-				.with-theme({
-					color: @secondary;
-				});
-			}
-		}
-
-		// ICON NAVIGATION MENU //
-		.icon-nav {
-			height: 30px;
-			position: absolute;
-			right: 60px;
-
-			ul {
-				width: inherit;
-				height: inherit;
-			}
-
-			& > ul > li {
-				display: inline-block;
-				position: relative;
-			}
-
-			& > ul > li:not(.search):not(.hamburger) {
-				margin-right: 40px;
-			}
-
-			.search {
-				cursor: pointer;
-
-				svg {
-					width: 30px;
-					height: 30px;
-
-					path {
-						transition: all 400ms ease;
-					}
+				.scrolled & {
+					padding-bottom: 25px;
+					height: calc(~"100% + 5px");
 				}
 
-				g:nth-child(1) {
-					.with-theme({
-	fill: @secondary;
-});
+				a {
+					font-size: 18px;
+					font-weight: 600;
+					color: inherit;
 				}
 
-				g:nth-child(2) {
-					fill: transparent
-				}
-
-				&:hover g:nth-child(2) {
-					.with-theme({
-	fill: @secondary;
-});
-				}
-			}
-
-			.favorite {
-				cursor: pointer;
-
-				svg {
-					width: 24px;
-					height: 24px;
-
-					path {
-						transition: all 400ms ease;
-					}
-				}
-
-				g:nth-child(2) {
-					.with-theme({
-	fill: @secondary;
-});
-				}
-
-				g:nth-child(1) {
-					fill: transparent
-				}
-
-				&:hover g:nth-child(1) {
-					fill: crimson;
-				}
-			}
-
-			.account {
-				background: transparent;
-				cursor: pointer;
-
-				svg {
-					width: 23px;
-					height: 23px;
-
-					path {
-						transition: all 400ms ease;
-					}
-				}
-
-				g:nth-child(1) {
-					.with-theme({
-	fill: @secondary;
-});
-				}
-
-				g:nth-child(2) {
-					fill: transparent;
-				}
-
-				&:hover g:nth-child(2) {
-					.with-theme({
-	fill: @secondary;
-});
-				}
-
-				&.hassubs ul {
-					position: absolute;
-					right: -110px;
-					top: calc(~"100% + 20px");
-					width: 250px;
-					padding: 25px;
-					visibility: hidden;
-					opacity: 0;
-					.transition-properties(all 200ms ease)
-				}
-
-				&.hassubs:hover ul {
-					visibility: visible;
-					opacity: 1;
-					top: calc(~"100%");
-				}
-
-				.hassubs li {
-					opacity: 1;
-				}
-
-				.hassubs li span {
-					position: relative;
-					z-index: 1;
-				}
-
-				.header-button {
-					position: relative;
-					display: block;
-					cursor: pointer;
-					right: 0;
-					width: auto;
-					height: 25px;
-					padding-bottom: 2px;
-					padding-top: 3px;
-					font-size: 12px;
-					font-weight: 700;
+				&:hover {
 					.with-theme({
 						color: @secondary;
 					});
-					.with-theme({
-						background: @primary;
-					});
-					.with-theme({
-						border: 2px solid @secondary;
-					});
-
-					&:hover span {
-						position: relative;
-						z-index: 1;
-						.with-theme({
-							color: @primary;
-						});
-					}
-
-					&:after {
-						.with-theme({
-							background: @secondary;
-						});
-					}
 				}
 
-				.header-button-strong {
-					position: relative;
-					.with-theme({
-						color: @primary;
-					});
+				&.active {
 					.with-theme({
 						background: @secondary;
+						color: @primary;
+						.elevation(4, @elevation);
 					});
-					.with-theme({
-						border: 2px solid @secondary;
-					});
-					display: block;
-					cursor: pointer;
-					right: 0;
-					width: auto;
-					height: 25px;
-					padding-bottom: 2px;
-					padding-top: 3px;
-					font-size: 12px;
-					font-weight: 700;
 
-					&:hover span {
-						position: relative;
-						z-index: 1;
-						.with-theme({
-							color: @secondary;
-						});
+					&:hover {
+						height: calc(~"50% + 40px");
 					}
 
-					&:after {
-						content: "";
-						.with-theme({
-							background: @primary;
-						});
+					.scrolled &:hover {
+						height: calc(~"100% + 15px");
 					}
 				}
 			}
+		}
 
-			.theme {
+		li.hassubs {
+			ul {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: space-between;
+				width: max-content;
+				left:0;
+				right:0;
+				.with-theme({
+					color: @passive;
+				});
+				//border-top-left-radius: 0;
+				//border-top-right-radius: 0;
+
+				li {
+					margin: 0 10px;
+				}
+			}
+		}
+
+		& ul li:hover::after,
+		& ul li.active::after {
+			.with-theme({
+				color: @secondary;
+			});
+		}
+	}
+
+	// ICON NAVIGATION MENU //
+	.icon-nav {
+		height: 100%;
+		.transition-properties(height 300ms ease-in-out);
+
+		ul {
+			width: inherit;
+			height: inherit;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		& > ul > li {
+			display: inline-block;
+			position: relative;
+		}
+
+		& > ul > li:not(.search):not(.hamburger) {
+			margin-right: 40px;
+		}
+
+		.search {
+			cursor: pointer;
+
+			svg {
+				width: 30px;
+				height: 30px;
+
+				path {
+					transition: all 400ms ease;
+				}
+			}
+
+			g:nth-child(1) {
+				.with-theme({
+					fill: @secondary;
+				});
+			}
+
+			g:nth-child(2) {
+				fill: transparent
+			}
+
+			&:hover g:nth-child(2) {
+				.with-theme({
+					fill: @secondary;
+				});
+			}
+		}
+
+		.favorite {
+			cursor: pointer;
+
+			svg {
+				width: 24px;
+				height: 24px;
+
+				path {
+					transition: all 400ms ease;
+				}
+			}
+
+			g:nth-child(2) {
+				.with-theme({
+					fill: @secondary;
+				});
+			}
+
+			g:nth-child(1) {
+				fill: transparent
+			}
+
+			&:hover g:nth-child(1) {
+				fill: crimson;
+			}
+		}
+
+		.account {
+			background: transparent;
+			cursor: pointer;
+
+			svg {
+				width: 23px;
+				height: 23px;
+
+				path {
+					transition: all 400ms ease;
+				}
+			}
+
+			g:nth-child(1) {
+				.with-theme({
+					fill: @secondary;
+				});
+			}
+
+			g:nth-child(2) {
+				fill: transparent;
+			}
+
+			&:hover g:nth-child(2) {
+				.with-theme({
+					fill: @secondary;
+				});
+			}
+
+			&.hassubs ul {
+				display: flex;
+				flex-direction: column;
+				align-items: stretch;
+				position: absolute;
+				right: -110px;
+				top: 40px;
+				width: 250px;
+				padding: 25px;
+				visibility: hidden;
+				opacity: 0;
+				.transition-properties(all 200ms ease);
+
+				.scrolled & {
+					top: 53px;
+				}
+			}
+
+			&.hassubs:hover ul {
+				visibility: visible;
+				opacity: 1;
+			}
+
+			.hassubs li {
+				opacity: 1;
+			}
+
+			.hassubs li span {
+				position: relative;
+				z-index: 1;
+			}
+
+			.header-button {
+				position: relative;
+				display: block;
 				cursor: pointer;
+				right: 0;
+				width: auto;
+				height: 25px;
+				padding-bottom: 2px;
+				padding-top: 3px;
+				font-size: 12px;
+				font-weight: 700;
+				.with-theme({
+					color: @secondary;
+				});
+				.with-theme({
+					background: @primary;
+				});
+				.with-theme({
+					border: 2px solid @secondary;
+				});
 
-				svg {
-					width: 25px;
-					height: 25px;
-
-					path, circle {
-						transition: all 400ms ease;
-					}
+				&:hover span {
+					position: relative;
+					z-index: 1;
+					.with-theme({
+						color: @primary;
+					});
 				}
 
-				&.light svg {
-					path {
-						.with-theme({
-							fill: @secondary;
-						});
-					}
+				&:after {
+					.with-theme({
+						background: @secondary;
+					});
+				}
+			}
 
-					circle:first-of-type {
-						r: 155;
-						.with-theme({
-							fill: @primary;
-						});
-					}
+			.header-button-strong {
+				position: relative;
+				.with-theme({
+					color: @primary;
+				});
+				.with-theme({
+					background: @secondary;
+				});
+				.with-theme({
+					border: 2px solid @secondary;
+				});
+				display: block;
+				cursor: pointer;
+				right: 0;
+				width: auto;
+				height: 25px;
+				padding-bottom: 2px;
+				padding-top: 3px;
+				font-size: 12px;
+				font-weight: 700;
 
-					circle:last-of-type {
-						r: 0;
-						cx: 150%;
-						cy: 0;
-						.with-theme({
-							fill: @primary;
-						});
-					}
-
-					&:hover circle:first-of-type {
-						fill: #F9D71C;
-					}
-
-					&:hover path {
-						fill: #FDB813;
-					}
+				&:hover span {
+					position: relative;
+					z-index: 1;
+					.with-theme({
+						color: @secondary;
+					});
 				}
 
-				&.dark {
-					path {
-						.with-theme({
-							fill: @primary;
-						});
-					}
+				&:after {
+					content: "";
+					.with-theme({
+						background: @primary;
+					});
+				}
+			}
+		}
 
-					circle:first-of-type {
-						r: 225;
-						.with-theme({
-							fill: @secondary;
-						});
-					}
+		.theme {
+			cursor: pointer;
 
-					circle:last-of-type {
-						r: 200;
-						cx: 80%;
-						cy: 40%;
-						.with-theme({
-							fill: @primary;
-						});
-					}
+			svg {
+				width: 25px;
+				height: 25px;
 
-					&:hover circle:first-of-type {
-						fill: #F4F164;
-					}
+				path, circle {
+					transition: all 400ms ease;
+				}
+			}
+
+			&.light svg {
+				path {
+					.with-theme({
+						fill: @secondary;
+					});
+				}
+
+				circle:first-of-type {
+					r: 155;
+					.with-theme({
+						fill: @primary;
+					});
+				}
+
+				circle:last-of-type {
+					r: 0;
+					cx: 150%;
+					cy: 0;
+					.with-theme({
+						fill: @primary;
+					});
+				}
+
+				&:hover circle:first-of-type {
+					fill: #F9D71C;
+				}
+
+				&:hover path {
+					fill: #FDB813;
+				}
+			}
+
+			&.dark {
+				path {
+					.with-theme({
+						fill: @primary;
+					});
+				}
+
+				circle:first-of-type {
+					r: 225;
+					.with-theme({
+						fill: @secondary;
+					});
+				}
+
+				circle:last-of-type {
+					r: 200;
+					cx: 80%;
+					cy: 40%;
+					.with-theme({
+						fill: @primary;
+					});
+				}
+
+				&:hover circle:first-of-type {
+					fill: #F4F164;
 				}
 			}
 		}

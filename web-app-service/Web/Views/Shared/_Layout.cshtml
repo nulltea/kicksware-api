@@ -8,14 +8,14 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <title>@ViewData["Title"] - web_app_service</title>
-    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/plugins/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="~/styles/css/common/common.css">
     <link rel="stylesheet" type="text/css" href="~/styles/css/layout/header.css">
     <link rel="stylesheet" type="text/css" href="~/styles/css/layout/search.css">
     <link rel="stylesheet" type="text/css" href="~/styles/css/layout/menu.css">
     <link rel="stylesheet" type="text/css" href="~/styles/css/layout/footer.css">
     <link rel="stylesheet" type="text/css" href="~/styles/css/layout/social.css">
-    <link rel="stylesheet" type="text/css" href="~/styles/css/auth/modal.css">
+    <link rel="stylesheet" type="text/css" href="~/styles/css/user/modal.css">
     <link rel="stylesheet" type="text/css" href="~/styles/css/responsive/layout.responsive.css">
     @RenderSection("Styles", false)
 </head>
@@ -29,7 +29,7 @@
             <nav class="main_nav">
                 <ul>
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Profile</a></li>
+                    <li><a asp-area="" asp-controller="Auth" asp-action="Facebook">Profile</a></li>
                     <li><a asp-area="" asp-controller="Shop" asp-action="Products">Shop</a></li>
                     <li class="hassubs">
                         <a asp-area="" asp-controller="Sell" asp-action="NewProduct">Sell</a>
@@ -77,7 +77,6 @@
                     </li>
                 </ul>
             </nav>
-
         </div>
     </div>
     <!-- Search Panel -->
@@ -125,6 +124,7 @@
         </div>
     </div>
 </header>
+<div id="scroll-trigger"></div>
 
 <div class="modal fade" tabindex="-1" id="loginModal" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-lg login-dialog">
@@ -195,45 +195,44 @@
 <div class="page-content">
     @RenderBody()
 </div>
-
-
 <div class="footer_overlay"></div>
 <footer class="footer">
-    @*<div class="footer_background" style="background-image: url(/images/footer.jpeg)"></div>*@
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="footer_content d-flex flex-lg-row flex-column align-items-center justify-content-lg-start justify-content-center">
-                    <div class="footer_logo"><a href="#">Kicksware</a></div>
-                    <div class="copyright ml-auto mr-auto">
-                        Copyright &copy;
-                        <script>document.write(new Date().getFullYear());</script> All rights reserved
-                    </div>
-                    <div class="menu_social ml-lg-auto">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+   <div class="footer_content">
+       <div class="footer_logo"><a asp-controller="Home">Kicksware</a></div>
+       <div class="copyright">
+           Copyright &copy; @Convert.ToString(DateTime.Today.Year) All rights reserved
+       </div>
+       <div class="menu_social">
+           <ul>
+               <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+               <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+               <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+               <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+           </ul>
+       </div>
+   </div>
 </footer>
 </div>
-    @* IMPORT LIBS *@
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/popper.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/lib/Isotope/isotope.min.js"></script>
-    <script src="~/lib/easing/easing.js"></script>
-    <script src="~/lib/parallax-js-master/parallax.min.js"></script>
-    @* IMPORT LIBS *@
-    <script src="~/js/common/common.js"></script>
-    <script src="~/js/layout/layout.js"></script>
-    <script src="~/js/user/auth.js"></script>
+    @* IMPORT PLUGINS *@
+    <script src="~/plugins/jquery/dist/jquery.min.js"></script>
+    <script src="~/plugins/bootstrap/dist/js/popper.js"></script>
+    <script src="~/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/plugins/Isotope/isotope.min.js"></script>
+    <script src="~/plugins/easing/easing.js"></script>
+    <script src="~/plugins/parallax/parallax.min.js"></script>
+    <script src="~/plugins/greensock/TweenMax.min.js"></script>
+    <script src="~/plugins/greensock/TimelineMax.min.js"></script>
+    <script src="~/plugins/greensock/ScrollToPlugin.min.js"></script>
+    <script src="~/plugins/scrollmagic/ScrollMagic.min.js"></script>
+    <script src="~/plugins/scrollmagic/debug.addIndicators.min.js"></script>
+    <script src="~/plugins/greensock/animation.gsap.min.js"></script>
+    <script src="~/plugins/greensock/animation.velocity.min.js"></script>
+    @* IMPORT MAIN SCRIPTS *@
+    <script src="~/scripts/common/common.js"></script>
+    <script src="~/scripts/layout/header.js"></script>
+    <script src="~/scripts/layout/menu.js"></script>
+    <script src="~/scripts/layout/search.js"></script>
+    <script src="~/scripts/user/auth.js"></script>
     @* RENDER BODY SCRIPTS *@
     @RenderSection("Scripts", false)
     <script>

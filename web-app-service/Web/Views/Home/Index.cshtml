@@ -6,11 +6,11 @@
 
 @section Styles
 {
-    <link rel="stylesheet" type="text/css" href="~/lib/OwlCarousel2-2.2.1/owl.carousel.css">
-    <link rel="stylesheet" type="text/css" href="~/lib/OwlCarousel2-2.2.1/owl.theme.default.css">
-    <link rel="stylesheet" type="text/css" href="~/lib/OwlCarousel2-2.2.1/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="~/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="~/plugins/OwlCarousel2-2.2.1/animate.css">
     <link href="~/styles/css/home/home.css" rel="stylesheet" />
-    <link href="~/styles/css/products_item/product_item.css" rel="stylesheet" />
+    <link href="~/styles/css/product-item/product-item.css" rel="stylesheet" />
     <link href="~/styles/css/responsive/home.responsive.css" rel="stylesheet" />
 }
 
@@ -87,7 +87,7 @@
                                     var price = $"{product.Price}$";
                                     <!-- Product -->
                                     <div class="col-sm product">
-                                        <div class="product_image"><img src=@image alt=""></div>
+                                        <div class="product_image"><img src=@image alt="" alt=""></div>
                                         @if (DateTime.Today.Subtract(product.AddedAt).Days < 5)
                                         {
                                             <div class="product_extra product_new"><a>New</a></div>
@@ -106,49 +106,6 @@
         </div>
     </div>
 }
-
-<!-- Icon Boxes -->
-
-<div class="icon_boxes">
-    <div class="container">
-        <div class="row icon_box_row">
-
-            <!-- Icon Box -->
-            <div class="col-lg-4 icon_box_col">
-                <div class="icon_box">
-                    <div class="icon_box_image"><img src="~/images/icon_1.svg" alt=""></div>
-                    <div class="icon_box_title">Free Shipping Worldwide</div>
-                    <div class="icon_box_text">
-                        <p>We Offer Free Shipping Worldwide!</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Icon Box -->
-            <div class="col-lg-4 icon_box_col">
-                <div class="icon_box">
-                    <div class="icon_box_image"><img src="~/images/icon_2.svg" alt=""></div>
-                    <div class="icon_box_title">Free Returns</div>
-                    <div class="icon_box_text">
-                        <p>We offer free returns or exchanges within 30 days of receiving your order. You can return your product for store credit, a different product, or a refund to the original payment method.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Icon Box -->
-            <div class="col-lg-4 icon_box_col">
-                <div class="icon_box">
-                    <div class="icon_box_image"><img src="~/images/icon_3.svg" alt=""></div>
-                    <div class="icon_box_title">24h Fast Support</div>
-                    <div class="icon_box_text">
-                        <p>Anywhere! Anytime! Anything! We'll be here for you!</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
 
 <!-- Newsletter -->
 
@@ -178,7 +135,7 @@
 
 @section Scripts
 {
-    <script src="~/lib/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-    <script src="~/js/home.js"></script>
+    <script src="~/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="~/scripts/home/home.js"></script>
 }
 
