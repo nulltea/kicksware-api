@@ -1,17 +1,32 @@
-﻿function headerScrollInit() {
+﻿const controller = new ScrollMagic.Controller();
+
+function headerScrollInit() {
 	new ScrollMagic.Scene({
 		triggerElement: "#scroll-trigger",
-		triggerHook: "onLeave"
+		triggerHook: 0
 	}).setClassToggle(".header", "scrolled")
-		.addTo( new ScrollMagic.Controller());
+		//.addIndicators()
+		.addTo(controller);
+}
+
+function heroParallaxInit() {
+	let opacityTween = TweenMax.to(".parallax-mirror", 1, {opacity: 0.1, ease: Linear.easeNone});
+
+	let opacityScene = new ScrollMagic.Scene({
+		triggerElement: ".page-content",
+		duration: 500
+	}).setTween(opacityTween)
+		.setPin(".parallax-mirror", {pushFollowers: false})
+		//.addIndicators()
+		.addTo(controller);
 }
 
 function changeTheme() {
-	let superContainer = $(".super_container");
-	if (superContainer.hasClass("theme-light")) {
-		superContainer.toggleClass("theme-dark").toggleClass("theme-light");
+	let body = $("body");
+	if (body.hasClass("theme-light")) {
+		body.toggleClass("theme-dark").toggleClass("theme-light");
 	} else {
-		superContainer.toggleClass("theme-light").toggleClass("theme-dark");
+		body.toggleClass("theme-light").toggleClass("theme-dark");
 	}
 	$(this).toggleClass("dark").toggleClass("light");
 }
@@ -29,7 +44,9 @@ function activePageInit(){
 $(document).ready(function () {
 	headerScrollInit();
 
+	activePageInit();
+
 	themeInit();
 
-	activePageInit();
+	//heroParallaxInit();
 });

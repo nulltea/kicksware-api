@@ -48,7 +48,7 @@ using web_app_service.Data.Reference_Data;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"57fa0c12c17d49a08b20fa666ae542efa91aa1aa", @"/Views/Sell/New/Details.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"eb13faaba876e14f119efae96039076ffb6f688a", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"dfdfc3c1df743b1ac25188a529acf17c4fc3481d", @"/Views/_ViewImports.cshtml")]
     public class Views_Sell_New_Details : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<SneakerProductViewModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("rel", new global::Microsoft.AspNetCore.Html.HtmlString("stylesheet"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);

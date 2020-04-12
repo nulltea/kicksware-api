@@ -38,6 +38,12 @@
 					color: @secondary;
 				});
 				.transition-properties(all 200ms ease);
+
+				&:hover {
+					.with-theme({
+						.text-hover-elevation(@elevation);
+					});
+				}
 			}
 		}
 

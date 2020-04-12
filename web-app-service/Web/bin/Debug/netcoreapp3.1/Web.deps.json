@@ -37,6 +37,7 @@
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.9.10",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.1",
           "Newtonsoft.Json": "12.0.3",
+          "SmartBreadcrumbs": "3.1.1",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
@@ -1261,6 +1262,17 @@
             "assetType": "native",
             "fileVersion": "4.6.25512.1"
           }
+        }
+      },
+      "SmartBreadcrumbs/3.1.1": {
+        "runtime": {
+          "lib/netcoreapp3.0/SmartBreadcrumbs.dll": {
+            "assemblyVersion": "3.1.1.0",
+            "fileVersion": "3.1.1.0"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.0/SmartBreadcrumbs.dll": {}
         }
       },
       "System.AppContext/4.3.0": {
@@ -4511,6 +4523,13 @@
       "sha512": "sha512-YhEdSQUsTx+C8m8Bw7ar5/VesXvCFMItyZF7G1AUY+OM0VPZUOeAVpJ4Wl6fydBGUYZxojTDR3I6Bj/+BPkJNA==",
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
+    },
+    "SmartBreadcrumbs/3.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-j5fkZngYNTJAPsQHzpeeXEyUwhL2xpqaOfbtq0aEpTXHcL5qtTsaDgakhco5TQqDc+kWm5M3MLAGu7uuaD9ogA==",
+      "path": "smartbreadcrumbs/3.1.1",
+      "hashPath": "smartbreadcrumbs.3.1.1.nupkg.sha512"
     },
     "System.AppContext/4.3.0": {
       "type": "package",

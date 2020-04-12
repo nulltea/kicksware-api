@@ -13,6 +13,7 @@ using web_app_service.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SmartBreadcrumbs.Extensions;
 
 namespace web_app_service
 {
@@ -33,6 +34,17 @@ namespace web_app_service
 			services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
 				.AddEntityFrameworkStores<ApplicationDbContext>();
 			services.AddControllersWithViews();
+
+			services.AddBreadcrumbs(GetType().Assembly, options =>
+			{
+				options.TagName = "nav";
+				options.TagClasses = "";
+				options.OlClasses = "breadcrumb";
+				options.LiClasses = "breadcrumb-item";
+				options.ActiveLiClasses = "breadcrumb-item active";
+				options.SeparatorElement = "<li class=\"separator\">❯</li>";
+			});
+
 			var builder = services.AddRazorPages();
 #if DEBUG
 			if (HostEnvironment.IsDevelopment()) builder.AddRazorRuntimeCompilation();

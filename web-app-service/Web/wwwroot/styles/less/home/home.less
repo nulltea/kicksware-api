@@ -7,7 +7,6 @@
 // MIXINS
 @import "../mixins/mixins";
 
-
 .home {
 	width: 100%;
 	height: 950px;
@@ -17,8 +16,6 @@
 .home_slider_container {
 	width: 100%;
 	height: 100%;
-	//padding-left: 60px;
-	//padding-right: 60px;
 	padding-bottom: 30px;
 }
 
@@ -48,7 +45,8 @@
 	font-size: 60px;
 	font-weight: 600;
 	.with-theme({
-		color: @theme-light-primary;
+		color: @theme-light-hint;
+		.text-elevation(@elevation);
 	});
 	line-height: 1.2;
 }
@@ -57,7 +55,8 @@
 	font-size: 14px;
 	font-weight: 400;
 	.with-theme({
-		color: @theme-light-primary;
+		color: @theme-light-hint;
+		.text-elevation(@elevation);
 	});
 	line-height: 2.14;
 	margin-top: 22px;

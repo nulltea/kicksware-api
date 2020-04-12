@@ -302,7 +302,20 @@
             <e p="facebook.svg" t="Include" />
             <e p="google.svg" t="Include" />
             <e p="heroes" t="Include">
+              <e p="44611184920_ab46a4d798_k.jpg" t="Include" />
+              <e p="45805327814_199a89eb8b_k.jpg" t="Include" />
+              <e p="49526904787_1e5ca1d590_k.jpg" t="Include" />
+              <e p="49614811003_c6a7596649_o.jpg" t="Include" />
+              <e p="61221_423055_r04_AJ_V_Top3_Retro-CZ1786-001_D2_LaceKeeper_14_HR_native_1600.jpg" t="Include" />
+              <e p="boxes-hero.jpg" t="Include" />
+              <e p="maksim-larin-NOpsC3nWTzY-unsplash (1).jpg" t="Include" />
+              <e p="nike-snkrs-in-atlanta-1.jpg" t="Include" />
+              <e p="NikeNews_Ho19_BB_Kyrie6_11PreHeatGroup_2_re_native_1600.jpg" t="Include" />
+              <e p="pair-of-nike-shoes-2529157.jpg" t="Include" />
+              <e p="seller-hero-2.jpg" t="Include" />
               <e p="seller-hero.jpg" t="Include" />
+              <e p="shop-hero.jpg" t="Include" />
+              <e p="whereslugo-ad047kyPBh8-unsplash (1).jpg" t="Include" />
             </e>
             <e p="hightop_sneakers.svg" t="Include" />
             <e p="home_addidas_4d.jpg" t="Include" />
@@ -359,7 +372,15 @@
             <e p="greensock" t="Include">
               <e p="animation.gsap.min.js" t="Include" />
               <e p="animation.velocity.min.js" t="Include" />
+              <e p="CSSRulePlugin.js" t="Include" />
+              <e p="CSSRulePlugin.min.js" t="Include" />
+              <e p="CSSRulePlugin.min.js.map" t="Include" />
+              <e p="gsap.js" t="Include" />
+              <e p="gsap.min.js" t="Include" />
+              <e p="gsap.min.js.map" t="Include" />
+              <e p="ScrollToPlugin.js" t="Include" />
               <e p="ScrollToPlugin.min.js" t="Include" />
+              <e p="ScrollToPlugin.min.js.map" t="Include" />
               <e p="TimelineMax.min.js" t="Include" />
               <e p="TweenMax.min.js" t="Include" />
             </e>
@@ -404,6 +425,8 @@
             </e>
             <e p="scrollmagic" t="Include">
               <e p="debug.addIndicators.min.js" t="Include" />
+              <e p="jquery.stellar.min.js" t="Include" />
+              <e p="scrollax.min.js" t="Include" />
               <e p="ScrollMagic.min.js" t="Include" />
             </e>
           </e>

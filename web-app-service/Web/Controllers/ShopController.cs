@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Services;
 using Microsoft.AspNetCore.Mvc;
+using SmartBreadcrumbs.Attributes;
 using web_app_service.Models;
 using web_app_service.Utils;
 
@@ -60,9 +61,16 @@ namespace web_app_service.Controllers
 			},
 		};
 
+		[ViewData]
+		public string HeroCoverPath { get; set; } = "/images/heroes/shop-hero.jpg";
+
+		[ViewData]
+		public string HeroBreadTitle { get; set; } = "Buy sneakers";
+
 		public ShopController(ISneakerProductService service) => _service = service;
 
 		[HttpGet]
+		[Breadcrumb("Shop", FromAction = "Index", FromController = typeof(HomeController))]
 		public IActionResult Products()
 		{
 			var products = _service.FetchAll()?.ToViewModel() ?? new List<SneakerProductViewModel>();
@@ -73,6 +81,7 @@ namespace web_app_service.Controllers
 		}
 
 		[HttpGet]
+		[Breadcrumb("Product item", FromAction = "Products", FromController = typeof(ShopController))]
 		public IActionResult ProductItem(string productId)
 		{
 			var product = _service.FetchOne(productId)?.ToViewModel();

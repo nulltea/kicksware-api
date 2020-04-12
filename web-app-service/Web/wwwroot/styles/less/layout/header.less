@@ -66,12 +66,18 @@
 			font-weight: 500;
 			.with-theme({
 				color: @secondary;
+				//.text-elevation(@elevation);
+				transition: background-size .4s ease-in-out;
 			});
-			.transition-properties(all 300ms ease-in-out);
+			.transition-properties(all 300ms ease);
 		}
 
 		&:hover a {
 			//TODO logo hover
+			.with-theme({
+				color: @secondary;
+				.text-hover-elevation(@elevation);
+			});
 		}
 	}
 
@@ -115,9 +121,13 @@
 					color: inherit;
 				}
 
-				&:hover {
+				&:not(.active):hover {
 					.with-theme({
 						color: @secondary;
+						& > a {
+							.text-hover-elevation(@elevation);
+							.transition-properties(text-shadow 300ms ease);
+						}
 					});
 				}
 
@@ -156,6 +166,15 @@
 
 				li {
 					margin: 0 10px;
+
+					&:hover {
+						.with-theme({
+							& > a {
+								.text-elevation(@elevation);
+								.transition-properties(text-shadow 300ms ease);
+							}
+						});
+					}
 				}
 			}
 		}

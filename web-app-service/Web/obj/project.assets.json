@@ -1239,6 +1239,18 @@
           }
         }
       },
+      "SmartBreadcrumbs/3.1.1": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.0/SmartBreadcrumbs.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/SmartBreadcrumbs.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "System.AppContext/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -4731,6 +4743,18 @@
         "runtimes/win-x86/native/sni.dll",
         "useSharedDesignerContext.txt",
         "version.txt"
+      ]
+    },
+    "SmartBreadcrumbs/3.1.1": {
+      "sha512": "j5fkZngYNTJAPsQHzpeeXEyUwhL2xpqaOfbtq0aEpTXHcL5qtTsaDgakhco5TQqDc+kWm5M3MLAGu7uuaD9ogA==",
+      "type": "package",
+      "path": "smartbreadcrumbs/3.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netcoreapp3.0/SmartBreadcrumbs.dll",
+        "smartbreadcrumbs.3.1.1.nupkg.sha512",
+        "smartbreadcrumbs.nuspec"
       ]
     },
     "System.AppContext/4.3.0": {
@@ -8835,7 +8859,8 @@
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.0",
       "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.9.10",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.1",
-      "Newtonsoft.Json >= 12.0.3"
+      "Newtonsoft.Json >= 12.0.3",
+      "SmartBreadcrumbs >= 3.1.1"
     ]
   },
   "packageFolders": {
@@ -8932,6 +8957,10 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[12.0.3, )"
+          },
+          "SmartBreadcrumbs": {
+            "target": "Package",
+            "version": "[3.1.1, )"
           }
         },
         "imports": [

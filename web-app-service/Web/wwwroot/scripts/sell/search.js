@@ -30,6 +30,10 @@ function submitSearch(actionUrl, prefix) {
 function displayResults(data) {
 	$(".search-grid").empty();
 
+	if (!data) {
+		notFoundHandle();
+	}
+
 	let len = Object.keys(data).length;
 
 	if (len === 0) {

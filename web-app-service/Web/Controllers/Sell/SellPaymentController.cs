@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using SmartBreadcrumbs.Attributes;
 using web_app_service.Data.Reference_Data;
 using web_app_service.Models;
 using web_app_service.Wizards;
@@ -8,6 +9,7 @@ namespace web_app_service.Controllers
 {
 	public partial class SellController
 	{
+		[Breadcrumb("Sell", FromAction = "Index", FromController = typeof(HomeController))]
 		public ActionResult Payment(SneakerProductViewModel model, bool rollback)
 		{
 			if (rollback) return this.ViewStep(2, model);

@@ -3,10 +3,12 @@ using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SmartBreadcrumbs.Attributes;
 using web_app_service.Models;
 
 namespace web_app_service.Controllers
 {
+	[DefaultBreadcrumb("Home")]
 	public class HomeController : Controller
 	{
 		public List<HomePageInfoViewModel> HomeInfo => new List<HomePageInfoViewModel>
