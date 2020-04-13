@@ -1,91 +1,116 @@
-﻿@model List<web_app_service.Models.SneakerProductViewModel>
+﻿@using Core.Reference
+@using web_app_service.Utils.Helpers
+@model List<web_app_service.Models.SneakerProductViewModel>
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section Styles
 {
-    <link href="~/styles/css/products/products.css" rel="stylesheet" />
-    <link href="~/styles/css/responsive/products.responsive.css" rel="stylesheet" />
+	<link href="~/styles/css/products/products.css" rel="stylesheet"/>
+	<link href="~/styles/css/responsive/products.responsive.css" rel="stylesheet"/>
 }
 
 
 <div class="products">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <!-- Product Sorting -->
-                <div class="sorting_bar d-flex flex-md-row flex-column align-items-md-center justify-content-md-start">
-                    <div class="results">Showing <span>@Model.Count</span> results</div>
-                    <div class="sorting_container ml-md-auto">
-                        <div class="sorting">
-                            <ul class="item_sorting">
-                                <li>
-                                    <span class="sorting_text">Sort by</span>
-                                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                                    <ul>
-                                        <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span>Default</span></li>
-                                        <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span>Price</span></li>
-                                        <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "stars" }'><span>Name</span></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="product_grid">
-                    @for (var y = 0; y <= Model.Count;)
-                    {
-                        <div class="row">
-                            @for (var x = 0; x < 4; x++)
-                            {
-                                if (y >= Model.Count)
-                                {
-                                    break;
-                                }
-                                var product = Model[y++];
-                                var image = "/files/" + product.Photos.FirstOrDefault() ?? string.Empty;
-                                var price = $"{product.Price}$";
-                                <!-- Product -->
-                                <div class="col-sm-3 product">
-                                    <div class="product_image"><img src=@image alt=""></div>
-                                    @if (DateTime.Today.Subtract(product.AddedAt).Days < 5)
-                                    {
-                                        <div class="product_extra product_new"><a>New</a></div>
-                                    }
-                                    <div class="product_content">
-                                        <div class="product_title"><a asp-area="" asp-controller="Shop" asp-action="ProductItem" asp-route-productId=@product.UniqueId>@Html.DisplayFor(modelItem => product.ModelName)</a></div>
-                                        <div class="product_price">@price</div>
-                                    </div>
-                                </div>
-                            }
-                        </div>
-                        if (y >= Model.Count)
-                        {
-                            break;
-                        }
-                    }
-                    <div class="product_pagination">
-                        <ul>
-                            @for (var y = 0; y < Math.Round(Model.Count / 12m, 0) + 1; y++)
-                            {
-                                <li class="active"><a href="#">@($"{Convert.ToString(y + 1).PadLeft(2, '0')}. ")</a></li>
-                            }
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="container products-content">
+		<div class="row filter-summary">
+			<button class="button toggle_menu" id="toggle_menu">
+				<span>Show filters</span>
+				@Html.VectorIconRender("filter.svg")
+			</button>
+			<div class="count">
+				<span>Showing @Model.Count results</span>
+			</div>
+			<div class="list-select sort_type">
+				<select asp-items="@Html.GetEnumSelectList<SortType>()" class="dropdown_item_select" id="currency">
+					<option disabled="">Category</option>
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<nav class="accordion filter-menu">
+					<header class="menu-panel">
+						<label for="mpa-close" class="box-title">Filter menu</label>
+					</header>
+					<input type="radio" name="accordion" id="mp1"/>
+					<section class="menu-panel">
+						<label class="section-title" for="mp1">Brand</label>
+						<label class="section-close" for="mpa-close"></label>
+						<div class="section-content">Click on an item to open. Click on its header or the list header to close.</div>
+					</section>
+					<input type="radio" name="accordion" id="mp2"/>
+					<section class="menu-panel">
+						<label class="section-title" for="mp2">Size</label>
+						<label class="section-close" for="mpa-close"></label>
+						<div class="section-content">Add the class 'arrows' to nav.accordion to add dropdown arrows.</div>
+					</section>
+					<input type="radio" name="accordion" id="mp3"/>
+					<section class="menu-panel">
+						<label class="section-title" for="mp3">Price</label>
+						<label class="section-close" for="mpa-close"></label>
+						<div class="section-content">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque finibus tristique nisi, maximus ullamcorper ante finibus eget.</div>
+					</section>
+					<input type="radio" name="accordion" id="mp4"/>
+					<section class="menu-panel">
+						<label class="section-title" for="mp4">Color</label>
+						<label class="section-close" for="mpa-close"></label>
+						<div class="section-content">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque finibus tristique nisi, maximus ullamcorper ante finibus eget.</div>
+					</section>
+					<input type="radio" name="accordion" id="mpa-close"/>
+				</nav>
+			</div>
+			<div class="col">
+				<div class="grid product-grid">
+					@foreach (var product in Model)
+					{
+						var image = "/files/" + product.Photos.FirstOrDefault();
+						var price = $"{product.Price}$";
+						<div class="product-cell">
+							<div class="thumb">
+								<img src="@image" alt="">
+							</div>
+							@if (DateTime.Today.Subtract(product.AddedAt).Days < 5)
+							{
+								<div class="product_extra product_new">
+									<a>New</a>
+								</div>
+							}
+							<div class="info">
+								<div class="brand-title">
+									<a asp-area="" asp-controller="Shop" asp-action="ProductItem" asp-route-productId=@product.UniqueId>@Html.DisplayFor(modelItem => product.BrandName)</a>
+								</div>
+								<div class="model-title">
+									<a asp-area="" asp-controller="Shop" asp-action="ProductItem" asp-route-productId=@product.UniqueId>@Html.DisplayFor(modelItem => product.ModelName)</a>
+								</div>
+								<div class="price">@price</div>
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="product_pagination">
+				<ul>
+					@for (var y = 0; y < Math.Round(Model.Count / 12m, 0) + 1; y++)
+					{
+						<li class="active">
+							<a href="#">@($"{Convert.ToString(y + 1).PadLeft(2, '0')}. ")</a>
+						</li>
+					}
+				</ul>
+			</div>
+		</div>
+	</div>
 </div>
 
 @section Scripts
 {
-    <script src="~/scripts/products/products.js"></script>
+	<script src="~/scripts/products/products.js"></script>
+	<script type="text/javascript">
+		initCustomDropDown();
+	</script>
 }
-

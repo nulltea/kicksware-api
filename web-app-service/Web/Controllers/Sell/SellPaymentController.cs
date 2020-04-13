@@ -9,15 +9,21 @@ namespace web_app_service.Controllers
 {
 	public partial class SellController
 	{
-		[Breadcrumb("Sell", FromAction = "Index", FromController = typeof(HomeController))]
+		[HttpGet]
+		[Breadcrumb("Payment", FromAction = "NewProduct", FromController = typeof(SellController))]
+		public ActionResult SetPayment(SneakerProductViewModel model)
+		{
+			HeroBreadSubTitle = "So let's talk about the price...";
+			model.Price = 500m;
+			AddBreadcrumbNode(nameof(Payment));
+			return this.ViewStep(3, model);
+		}
+
+		[HttpPost]
 		public ActionResult Payment(SneakerProductViewModel model, bool rollback)
 		{
-			if (rollback) return this.ViewStep(2, model);
-			if (model.ShippingInfo is null || !model.ShippingInfo.Any())
-			{
-				model.ShippingInfo = Catalog.DefaultShippingInfo;
-			}
-			return this.ViewStep(4, model);
+			if (rollback) SetPhotos(model);
+			return SetShipping(model);
 		}
 	}
 }

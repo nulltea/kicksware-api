@@ -45,7 +45,7 @@
             <nav class="icon-nav">
                 <ul>
                     <li class="theme light">
-                        @Html.VectorIconRender("theme.svg")
+                        @Html.VectorIconRender("theme.svg") @*TODO Nastya sunny easter egg*@
                     </li>
                     <li class="account hassubs">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -196,6 +196,7 @@
 @{
     var heroCoverPath = Convert.ToString(ViewData["HeroCoverPath"]);
     var heroBreadTitle = Convert.ToString(ViewData["HeroBreadTitle"]);
+    var heroBreadSubTitle = Convert.ToString(ViewData["HeroBreadSubTitle"]);
 }
 @if (!string.IsNullOrEmpty(heroCoverPath))
 {
@@ -204,8 +205,9 @@
             <source srcset="@heroCoverPath" media="(min-width: 600px)">
             <img src="@heroCoverPath" alt="">
         </picture>
-        <div class="hero-content">
+        <div class="hero-content" data-scrollax="properties: { 'top': '75%'}" data-scr>
             <span class="bread">@heroBreadTitle</span>
+            <span class="sub-bread">@heroBreadSubTitle</span>
             <breadcrumb></breadcrumb>
         </div>
     </div>
@@ -253,12 +255,6 @@
 @* RENDER BODY SCRIPTS *@
     @RenderSection("Scripts", false)
     <script type="text/javascript">
-        // let heroPath = "@ViewData["HeroPath"]";
-        // if (heroPath) {
-        //     let hero = $(".hero-parallax");
-        //     hero.parallax({imageSrc: heroPath});
-        //     hero.show();
-        // }
         $.Scrollax();
     </script>
 </body>

@@ -18,7 +18,7 @@ namespace web_app_service.Controllers
 			return Json(references);
 		}
 
-		[Breadcrumb("Sell", FromAction = "Index", FromController = typeof(HomeController))]
+		[HttpPost]
 		public ActionResult Search(SneakerReference reference)
 		{
 			if (reference is null || string.IsNullOrWhiteSpace(reference.UniqueId)) return this.ViewStep(1, new SneakerProductViewModel());

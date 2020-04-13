@@ -8,18 +8,20 @@ namespace web_app_service.Controllers
 	public partial class SellController
 	{
 		[HttpGet]
-		[Breadcrumb("Sell", FromAction = "Index", FromController = typeof(HomeController))]
+		[Breadcrumb("Details", FromAction = "NewProduct", FromController = typeof(SellController))]
 		public ActionResult SetDetails(SneakerProductViewModel model)
 		{
+			HeroBreadSubTitle = "Tell us about your sneakers. In details - the more the better";
+
 			return this.ViewStep(1, model);
 		}
 
-		[Breadcrumb("Sell", FromAction = "Index", FromController = typeof(HomeController))]
+		[HttpPost]
 		public ActionResult Details(SneakerProductViewModel model, bool rollback)
 		{
-			if (rollback) return this.ViewStep(0, model);
+			if (rollback) return RedirectToAction("NewProduct");
 
-			return this.ViewStep(2, model);
+			return SetPhotos(model);
 		}
 	}
 }

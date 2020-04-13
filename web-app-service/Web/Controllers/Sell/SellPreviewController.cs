@@ -9,7 +9,16 @@ namespace web_app_service.Controllers
 {
 	public partial class SellController
 	{
-		[Breadcrumb("Sell", FromAction = "Index", FromController = typeof(HomeController))]
+		[HttpGet]
+		[Breadcrumb("Preview", FromAction = "NewProduct", FromController = typeof(SellController))]
+		public ActionResult ShowPreview(SneakerProductViewModel model)
+		{
+			HeroBreadSubTitle = "Great job! If you are satisfied with it - send the whole thing to us, and we will publish it to all the sneakerheads around the world";
+			AddBreadcrumbNode(nameof(Preview));
+			return this.ViewStep(5, model);
+		}
+
+		[HttpPost]
 		public ActionResult Preview([FromServices] ISneakerProductService service, [FromForm] SneakerProductViewModel model)
 		{
 			var sneakerProduct = model as SneakerProduct;

@@ -36,12 +36,19 @@
           </e>
         </e>
         <e p="Reference" t="Include">
-          <e p="Currency.cs" t="Include" />
-          <e p="SearchType.cs" t="Include" />
-          <e p="ShippingInfo.cs" t="Include" />
-          <e p="SneakerCondition.cs" t="Include" />
-          <e p="SneakerSize.cs" t="Include" />
-          <e p="SneakerType.cs" t="Include" />
+          <e p="common" t="Include">
+            <e p="Currency.cs" t="Include" />
+            <e p="ShippingInfo.cs" t="Include" />
+          </e>
+          <e p="Products" t="Include">
+            <e p="SneakerCondition.cs" t="Include" />
+            <e p="SneakerSize.cs" t="Include" />
+            <e p="SneakerType.cs" t="Include" />
+          </e>
+          <e p="UI" t="Include">
+            <e p="SearchType.cs" t="Include" />
+            <e p="SortType.cs" t="Include" />
+          </e>
         </e>
         <e p="Repositories" t="Include">
           <e p="IAsyncRepository.cs" t="Include" />
@@ -245,29 +252,38 @@
         <e p="wwwroot" t="Include">
           <e p="favicon.ico" t="Include" />
           <e p="files" t="Include">
-            <e p="0h14ir2j.jpg" t="Include" />
-            <e p="0s0w1l2o.jpg" t="Include" />
-            <e p="5cnorteb.jpg" t="Include" />
-            <e p="5orjlo5g.jpeg" t="Include" />
-            <e p="5x50uapm.jpeg" t="Include" />
-            <e p="5zzxnec5.jpg" t="Include" />
-            <e p="aagwowcc.jpg" t="Include" />
-            <e p="aapeh10f.jpeg" t="Include" />
-            <e p="ep1s1qpi.jpg" t="Include" />
-            <e p="etbqdduj.jpg" t="Include" />
-            <e p="fl4mpszy.jpeg" t="Include" />
-            <e p="fx2zpb2z.jpg" t="Include" />
-            <e p="hi5gwnld.jpg" t="Include" />
-            <e p="i1ayaww5.jpg" t="Include" />
-            <e p="jx12vn3z.jpg" t="Include" />
-            <e p="lgq3vm2d.jpg" t="Include" />
-            <e p="m2pdrfbz.jpg" t="Include" />
-            <e p="ofmu1fbx.jpg" t="Include" />
-            <e p="ophkgzoa.jpg" t="Include" />
-            <e p="r4ufzifm.jpg" t="Include" />
-            <e p="rlm4tnni.jpg" t="Include" />
-            <e p="ypyd5rim.jpg" t="Include" />
-            <e p="z1zi1kfq.jpg" t="Include" />
+            <e p="1bsxj2oc.jpg" t="Include" />
+            <e p="3fh0cakb.jpg" t="Include" />
+            <e p="4foljwvs.jpeg" t="Include" />
+            <e p="4nyi2pw2.jpg" t="Include" />
+            <e p="4zoflpm3.jpg" t="Include" />
+            <e p="5ycnw4k5.jpg" t="Include" />
+            <e p="a2esgazg.jpg" t="Include" />
+            <e p="amcy1ylw.jpg" t="Include" />
+            <e p="bv4cskfm.jpg" t="Include" />
+            <e p="cbmt4tds.jpg" t="Include" />
+            <e p="cq4amo0v.jpg" t="Include" />
+            <e p="el5ayyzv.jpg" t="Include" />
+            <e p="fet0axcj.jpg" t="Include" />
+            <e p="foryatqv.jpg" t="Include" />
+            <e p="fqyfgj42.jpg" t="Include" />
+            <e p="fv3jhr3a.jpg" t="Include" />
+            <e p="it0fmfyd.jpg" t="Include" />
+            <e p="jtfxy5oy.jpg" t="Include" />
+            <e p="Nike-Af1-Blue-Wight-Green.jpg" t="Include" />
+            <e p="Nike-Air-Max-95-Gray.jpg" t="Include" />
+            <e p="Nike-ISPA-Air-Max-720.jpg" t="Include" />
+            <e p="Nike-Jordan-Proto-Max-720.jpg" t="Include" />
+            <e p="Nike_Jordan_OG.jpg" t="Include" />
+            <e p="Nike_Jordan_Orange (2).jpg" t="Include" />
+            <e p="qbiqpmzg.jpg" t="Include" />
+            <e p="tabrb3fe.jpg" t="Include" />
+            <e p="v443gqhn.jpg" t="Include" />
+            <e p="y-3-ren-4.jpg" t="Include" />
+            <e p="yapx4bgc.jpeg" t="Include" />
+            <e p="yjeetcgl.jpg" t="Include" />
+            <e p="yotezwfp.jpg" t="Include" />
+            <e p="zv5jz13w.jpg" t="Include" />
           </e>
           <e p="fonts" t="Include">
             <e p="Orbitron" t="Include">
@@ -300,16 +316,21 @@
             <e p="cloud_search.svg" t="Include" />
             <e p="details.svg" t="Include" />
             <e p="facebook.svg" t="Include" />
+            <e p="filter.svg" t="Include" />
             <e p="google.svg" t="Include" />
+            <e p="grid.svg" t="Include" />
+            <e p="hamburger.svg" t="Include" />
             <e p="heroes" t="Include">
+              <e p="35975611433_eab39d4bd5_k.jpg" t="Include" />
+              <e p="36206874751_3cace89429_k.jpg" t="Include" />
+              <e p="43178351822_bf6d2199e1_k.jpg" t="Include" />
               <e p="44611184920_ab46a4d798_k.jpg" t="Include" />
-              <e p="45805327814_199a89eb8b_k.jpg" t="Include" />
               <e p="49526904787_1e5ca1d590_k.jpg" t="Include" />
               <e p="49614811003_c6a7596649_o.jpg" t="Include" />
               <e p="61221_423055_r04_AJ_V_Top3_Retro-CZ1786-001_D2_LaceKeeper_14_HR_native_1600.jpg" t="Include" />
-              <e p="boxes-hero.jpg" t="Include" />
+              <e p="about-hero.jpg" t="Include" />
+              <e p="contact-hero.jpg" t="Include" />
               <e p="maksim-larin-NOpsC3nWTzY-unsplash (1).jpg" t="Include" />
-              <e p="nike-snkrs-in-atlanta-1.jpg" t="Include" />
               <e p="NikeNews_Ho19_BB_Kyrie6_11PreHeatGroup_2_re_native_1600.jpg" t="Include" />
               <e p="pair-of-nike-shoes-2529157.jpg" t="Include" />
               <e p="seller-hero-2.jpg" t="Include" />
@@ -319,7 +340,6 @@
             </e>
             <e p="hightop_sneakers.svg" t="Include" />
             <e p="home_addidas_4d.jpg" t="Include" />
-            <e p="home_adidas-yzy-qntm.jpg" t="Include" />
             <e p="home_air_max_plus_3.jpg" t="Include" />
             <e p="home_nike_ispa_720.jpeg" t="Include" />
             <e p="home_nike_ispa_envelope.jpeg" t="Include" />

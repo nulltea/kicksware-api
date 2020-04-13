@@ -9,10 +9,19 @@ namespace web_app_service.Controllers
 {
 	public partial class SellController
 	{
-		[Breadcrumb("Sell", FromAction = "Index", FromController = typeof(HomeController))]
+		[HttpGet]
+		[Breadcrumb("Photos", FromAction = "NewProduct", FromController = typeof(SellController))]
+		public ActionResult SetPhotos(SneakerProductViewModel model)
+		{
+			HeroBreadSubTitle = "Show buyers the best in your product";
+			AddBreadcrumbNode(nameof(Photos));
+			return this.ViewStep(2, model);
+		}
+
+		[HttpPost]
 		public ActionResult Photos(SneakerProductViewModel model, bool rollback)
 		{
-			if (rollback) return this.ViewStep(1, model);
+			if (rollback) return SetDetails(model);
 			if (model.FormFiles != null && model.FormFiles.Any())
 			{
 				foreach (var formFile in model.FormFiles)
@@ -27,9 +36,7 @@ namespace web_app_service.Controllers
 				}
 			}
 
-			model.Price = 500m;
-
-			return this.ViewStep(3, model);
+			return SetPayment(model);
 		}
 	}
 }

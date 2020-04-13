@@ -13,7 +13,7 @@ namespace web_app_service.Controllers
 	{
 		private readonly ISneakerProductService _service;
 
-		public static SneakerProductViewModel[] ProductsList =
+		public static readonly SneakerProductViewModel[] ProductsList =
 		{
 			new SneakerProductViewModel
 			{
@@ -67,6 +67,9 @@ namespace web_app_service.Controllers
 		[ViewData]
 		public string HeroBreadTitle { get; set; } = "Buy sneakers";
 
+		[ViewData]
+		public string HeroBreadSubTitle { get; set; } = "Select and buy whatever kicks you like";
+
 		public ShopController(ISneakerProductService service) => _service = service;
 
 		[HttpGet]
@@ -74,9 +77,7 @@ namespace web_app_service.Controllers
 		public IActionResult Products()
 		{
 			var products = _service.FetchAll()?.ToViewModel() ?? new List<SneakerProductViewModel>();
-#if DEBUG
-			products.AddRange(ProductsList);
-#endif
+
 			return View(products);
 		}
 

@@ -9,18 +9,6 @@ function headerScrollInit() {
 		.addTo(controller);
 }
 
-function heroParallaxInit() {
-	let opacityTween = TweenMax.to(".parallax-mirror", 1, {opacity: 0.1, ease: Linear.easeNone});
-
-	let opacityScene = new ScrollMagic.Scene({
-		triggerElement: ".page-content",
-		duration: 500
-	}).setTween(opacityTween)
-		.setPin(".parallax-mirror", {pushFollowers: false})
-		//.addIndicators()
-		.addTo(controller);
-}
-
 function changeTheme() {
 	let body = $("body");
 	if (body.hasClass("theme-light")) {
@@ -36,9 +24,15 @@ function themeInit() {
 }
 
 function activePageInit(){
-	$(`.main_nav a[href$='${window.location.pathname}']`)
-		.parent()
-		.toggleClass("active");
+	let baseRoute = window.location.pathname.split("/")[1];
+	if (baseRoute){
+		$(`.main_nav a[href*='/${window.location.pathname.split("/")[1]}/']`)
+			.parent()
+			.toggleClass("active");
+	} else {
+		$(`.main_nav a[href$='/']`).parent()
+			.toggleClass("active");
+	}
 }
 
 $(document).ready(function () {

@@ -1,6 +1,22 @@
 ﻿// COLORS //
 @import "../properties/colors";
 
+// FLEX LAYOUT //
+.flex-row(@justify: space-between, @align: center) {
+	display: flex;
+	flex-direction: row;
+	justify-content: @justify;
+	align-items: @align;
+}
+
+.flex-col(@justify: space-between, @align: center) {
+	display: flex;
+	flex-direction: column;
+	justify-content: @justify;
+	align-items: @align;
+}
+
+
 // CROSS-BROWSER //
 .transition-properties(...) {
 	-webkit-transition: @arguments;
