@@ -42,7 +42,7 @@ namespace web_app_service
 				options.OlClasses = "breadcrumb";
 				options.LiClasses = "breadcrumb-item";
 				options.ActiveLiClasses = "breadcrumb-item active";
-				options.SeparatorElement = "<li class=\"separator\">❯</li>";
+				options.SeparatorElement = "<li class=\"separator\">\u276F</li>";
 			});
 
 			var builder = services.AddRazorPages();

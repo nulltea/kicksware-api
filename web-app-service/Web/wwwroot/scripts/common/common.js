@@ -121,8 +121,9 @@ function initCustomDropDown() {
 			function(e) {
 				e.stopPropagation();
 				closeAllSelect(this);
-				this.nextSibling.classList.toggle("select-hide");
-				this.classList.toggle("select-arrow-active");
+				$(this.nextSibling).toggleClass("select-hide");
+				$(this).toggleClass("select-arrow-active");
+				$(this.parentElement).toggleClass("dropped");
 			});
 		selectedItem.innerHTML = $("select option:selected", customSelectors[i]).text();
 	}
@@ -135,7 +136,8 @@ function initCustomDropDown() {
 			if (element === selectedItem[i]) {
 				numArray.push(i)
 			} else {
-				selectedItem[i].classList.remove("select-arrow-active");
+				$(selectedItem[i]).removeClass("select-arrow-active");
+				$(selectedItem[i].parentElement).removeClass("dropped");
 			}
 		}
 		for (let i = 0; i < selectItems.length; i++) {
