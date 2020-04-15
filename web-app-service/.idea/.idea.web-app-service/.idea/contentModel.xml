@@ -46,6 +46,7 @@
             <e p="SneakerType.cs" t="Include" />
           </e>
           <e p="UI" t="Include">
+            <e p="FilterColor.cs" t="Include" />
             <e p="SearchType.cs" t="Include" />
             <e p="SortType.cs" t="Include" />
           </e>
@@ -162,6 +163,7 @@
           <e p="ApplicationDbContext.cs" t="Include" />
           <e p="Json" t="Include">
             <e p="colors.json" t="Include" />
+            <e p="filter-colors.json" t="Include" />
             <e p="sizes.json" t="Include" />
             <e p="sneaker_brands.json" t="Include" />
           </e>
@@ -320,7 +322,6 @@
             <e p="filter_used.svg" t="Include" />
             <e p="google.svg" t="Include" />
             <e p="grid.svg" t="Include" />
-            <e p="hamburger.svg" t="Include" />
             <e p="heroes" t="Include">
               <e p="35975611433_eab39d4bd5_k.jpg" t="Include" />
               <e p="36206874751_3cace89429_k.jpg" t="Include" />
@@ -347,6 +348,8 @@
             <e p="icon_1.svg" t="Include" />
             <e p="icon_2.svg" t="Include" />
             <e p="icon_3.svg" t="Include" />
+            <e p="list.svg" t="Include" />
+            <e p="list_.svg" t="Include" />
             <e p="payment.svg" t="Include" />
             <e p="photo.svg" t="Include" />
             <e p="preview.svg" t="Include" />
@@ -518,8 +521,12 @@
                 <e p="product-item.css.map" t="Include" />
               </e>
               <e p="Products" t="Include">
+                <e p="filter.css" t="Include" />
+                <e p="filter.css.map" t="Include" />
                 <e p="products.css" t="Include" />
                 <e p="products.css.map" t="Include" />
+                <e p="results.css" t="Include" />
+                <e p="results.css.map" t="Include" />
               </e>
               <e p="responsive" t="Include">
                 <e p="about.responsive.css" t="Include" />
@@ -590,7 +597,9 @@
                 <e p="product-item.less" t="Include" />
               </e>
               <e p="Products" t="Include">
+                <e p="filter.less" t="Include" />
                 <e p="products.less" t="Include" />
+                <e p="results.less" t="Include" />
               </e>
               <e p="Properties" t="Include">
                 <e p="colors.less" t="Include" />

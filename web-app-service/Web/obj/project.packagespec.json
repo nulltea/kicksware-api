@@ -38,6 +38,10 @@
   "frameworks": {
     "netcoreapp3.1": {
       "dependencies": {
+        "HtmlAgilityPack": {
+          "target": "Package",
+          "version": "[1.11.23, )"
+        },
         "Microsoft.AspNetCore.Authentication.Facebook": {
           "target": "Package",
           "version": "[3.1.2, )"

@@ -11,6 +11,8 @@
 @section Styles
 {
 	<link href="~/styles/css/products/products.css" rel="stylesheet"/>
+	<link href="~/styles/css/products/filter.css" rel="stylesheet"/>
+	<link href="~/styles/css/products/results.css" rel="stylesheet"/>
 	<link href="~/styles/css/responsive/products.responsive.css" rel="stylesheet"/>
 }
 
@@ -26,14 +28,21 @@
 			<div class="count">
 				<span>Showing @Model.Count results</span>
 			</div>
-			<div class="list-select sort_type">
-				<select asp-items="@Html.GetEnumSelectList<SortType>()" class="dropdown_item_select" id="currency">
-					<option disabled="">Category</option>
-				</select>
+			<div class="control-group">
+				<div class="list-select sort_type">
+					<select asp-items="@Html.GetEnumSelectList<SortType>()" class="dropdown_item_select" id="currency">
+						<option disabled="">Category</option>
+					</select>
+				</div>
+				<div class="layout-toggle">
+					<input type="checkbox" id="offers-sign" checked/>
+					@Html.VectorIconRender("list.svg", "is-unchecked")
+					@Html.VectorIconRender("grid.svg", "is-checked")
+				</div>
 			</div>
 		</div>
 		<div class="row content-area">
-			<div class="filter-control">
+			<aside class="filter-control">
 				<nav class="accordion collapsed arrows">
 					<header class="menu-panel">
 						<label class="section-title">Filter menu</label>
@@ -42,13 +51,14 @@
 					<section class="menu-panel brand">
 						<label class="section-title" for="mp1">Brand</label>
 						<div class="section-content">
-							<input type="text" id="brand-filter" class="autocomplete-input filter-input" required="required">
+							<input type="search" id="brand-filter" class="autocomplete-filter filter-input" required="required">
 							<div class="brand-list">
 								@foreach (var brand in Catalog.SneakerBrandsList.Take(4))
 								{
+									var id = $"check-{brand.Replace(" ", "_").ToLower()}";
 									<div class="brand-row">
-										<input type="checkbox" id="@($"check-{brand}")" name="regular_checkbox" class="regular_checkbox">
-										<label for="@($"check-{brand}")" class="checkbox_title">@brand</label>
+										<input type="checkbox" id="@id" name="regular_checkbox" class="regular_checkbox">
+										<label for="@id" class="checkbox_title">@brand</label>
 									</div>
 								}
 							</div>
@@ -61,31 +71,55 @@
 							<div class="size-grid">
 								@foreach (var size in Catalog.SneakerSizesList)
 								{
+									var id = $"check-{size.Europe}";
 									<button class="button size-cell">
-										<input type="checkbox" id="@($"check-{size.Europe}")">
-										<label for="@($"check-{size.Europe}")">@size.Europe.ToString("#.#")</label>
+										<input type="checkbox" id="@id">
+										<label for="@id">@size.Europe.ToString("#.#")</label>
 									</button>
 								}
 							</div>
 						</div>
 					</section>
 					<input type="checkbox" name="accordion" class="accordion-control" id="mp3"/>
-					<section class="menu-panel">
+					<section class="menu-panel color">
 						<label class="section-title" for="mp3">Color</label>
-						<div class="section-content">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque finibus tristique nisi, maximus ullamcorper ante finibus eget.</div>
+						<div class="section-content">
+							<div class="color-picker">
+								@foreach (var color in Catalog.FilterColors)
+								{
+									var id = $"color-{color.Name.Replace(" ", "_").ToLower()}";
+									<button class="button color-item" id="id" style="border-bottom: 3px solid @color.Hex; background: @color.Hex">
+										<input type="checkbox" id="@id">
+										<label for="@id">@color.Name</label>
+									</button>
+								}
+							</div>
+						</div>
 					</section>
 					<input type="checkbox" name="accordion" class="accordion-control" id="mp4"/>
-					<section class="menu-panel">
+					<section class="menu-panel price">
 						<label class="section-title" for="mp4">Price</label>
-						<div class="section-content">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque finibus tristique nisi, maximus ullamcorper ante finibus eget.</div>
+						<div class="section-content">
+							<div class="price-range">
+								<div class="multi-range">
+									<input type="range" class="price-slider min" min="100" value="100" max="1000"/>
+									<input type="range" class="price-slider max" min="100" value="1000" max="1000"/>
+								</div>
+								<div class="multi-input">
+									<input type="number" class="filter-input price-input min"/>
+									<input type="number" class="filter-input price-input max" value="1000"/>
+								</div>
+							</div>
+						</div>
 					</section>
+					<input type="checkbox" name="accordion" class="accordion-control" id="mp5"/>
 					<section class="menu-panel">
-						<label class="section-title" for="mp4">Condition</label>
-						<div class="section-content">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque finibus tristique nisi, maximus ullamcorper ante finibus eget.</div>
+						<label class="section-title" for="mp5">Condition</label>
+						<div class="section-content">//TODO</div> @* TODO condition filter *@
 					</section>
 				</nav>
 				<div class="spacer"></div>
-			</div>
+			</aside>
 			<div class="product-results">
 				<div class="grid product-grid">
 					@foreach (var product in Model)
@@ -133,7 +167,9 @@
 {
 	<script src="~/scripts/products/products.js"></script>
 	<script type="text/javascript">
+	$(document).ready(function () {
 		initCustomDropDown();
-		autocompleteInit($("#brand-filter").get(0), @Html.Raw(JsonConvert.SerializeObject(Catalog.SneakerBrandsList)));
+		autocompleteFilter("#brand-filter", @Html.Raw(JsonConvert.SerializeObject(Catalog.SneakerBrandsList)));
+	});
 	</script>
 }

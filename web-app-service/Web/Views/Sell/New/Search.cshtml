@@ -18,7 +18,7 @@
 			<div id="tab-content1" class="tab-content" role="tabpanel" aria-hidden="false">
 				<div class="row my-3 search-panel">
 					<span>@Html.VectorIconRender("search.svg")</span>
-					<input id="auto-search" type="text" name="prefix">
+					<input id="auto-search" type="search" name="prefix">
 					<div class="list-select">
 						<select asp-items="@Html.GetEnumSelectList<SearchType>()" class="dropdown_item_select" id="currency">
 							<option disabled="">Category</option>

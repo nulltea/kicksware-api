@@ -1048,3 +1048,6 @@ C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Web.csproj.CoreCompileInputs.cache
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Web.genruntimeconfig.cache
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\bin\Debug\netcoreapp3.1\SmartBreadcrumbs.dll
+C:\source\repos\sneaker-resale-platform\web-app-service\Web\bin\Debug\netcoreapp3.1\HtmlAgilityPack.dll
+C:\source\repos\sneaker-resale-platform\web-app-service\Web\bin\Debug\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll
+C:\source\repos\sneaker-resale-platform\web-app-service\Web\bin\Debug\netcoreapp3.1\Data\Json\filter-colors.json

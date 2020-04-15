@@ -1,15 +1,26 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Core.Constants;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace web_app_service.Utils.Helpers
 {
 	public static partial class CustomHelpers
 	{
-		public static IHtmlContent VectorIconRender(this IHtmlHelper helper, string icon, params object[] attr)
+		public static IHtmlContent VectorIconRender(this IHtmlHelper helper, string icon)
 		{
-			return new HtmlFormattableString(File.ReadAllText(Path.Combine(Constants.ImagesPath, icon)), attr);
+			var iconNode = HtmlAgilityPack.HtmlNode.CreateNode(File.ReadAllText(Path.Combine(Constants.ImagesPath, icon)));
+			return new HtmlString(iconNode.OuterHtml);
+		}
+
+		public static IHtmlContent VectorIconRender(this IHtmlHelper helper, string icon, params string[] classes)
+		{
+			var iconNode = HtmlAgilityPack.HtmlNode.CreateNode(File.ReadAllText(Path.Combine(Constants.ImagesPath, icon)));
+			classes.ToList().ForEach(iconNode.AddClass);
+			return new HtmlString(iconNode.OuterHtml);
 		}
 	}
 }
