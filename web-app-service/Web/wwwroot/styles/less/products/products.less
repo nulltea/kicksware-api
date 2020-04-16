@@ -40,13 +40,8 @@
 			.elevation(1, fade(@elevation, 20%));
 		});
 
-		&.pressed {
-			svg:first-of-type {
-				display: none;
-			}
-			svg:last-of-type {
-				display: inline-block;
-			}
+		&:active {
+			.elevation(0);
 		}
 
 		span {

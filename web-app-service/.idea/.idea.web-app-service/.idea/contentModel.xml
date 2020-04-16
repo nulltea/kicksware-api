@@ -315,6 +315,8 @@
           <e p="images" t="Include">
             <e p="_photo.svg" t="Include" />
             <e p="arrow.svg" t="Include" />
+            <e p="close-1.svg" t="Include" />
+            <e p="close.svg" t="Include" />
             <e p="cloud_search.svg" t="Include" />
             <e p="details.svg" t="Include" />
             <e p="facebook.svg" t="Include" />

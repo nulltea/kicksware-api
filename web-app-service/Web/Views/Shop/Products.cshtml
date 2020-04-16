@@ -1,4 +1,7 @@
-﻿@using Core.Reference
+﻿@using System.ComponentModel.DataAnnotations
+@using System.Globalization
+@using System.Reflection
+@using Core.Reference
 @using Newtonsoft.Json
 @using web_app_service.Data.Reference_Data
 @using web_app_service.Utils.Helpers
@@ -42,7 +45,7 @@
 			</div>
 		</div>
 		<div class="row content-area">
-			<aside class="filter-control">
+			<aside class="filter-sidebar">
 				<nav class="accordion collapsed arrows">
 					<header class="menu-panel">
 						<label class="section-title">Filter menu</label>
@@ -71,7 +74,7 @@
 							<div class="size-grid">
 								@foreach (var size in Catalog.SneakerSizesList)
 								{
-									var id = $"check-{size.Europe}";
+									var id = $"check-{Convert.ToString(size.Europe, CultureInfo.InvariantCulture).Replace(".", "_")}";
 									<button class="button size-cell">
 										<input type="checkbox" id="@id">
 										<label for="@id">@size.Europe.ToString("#.#")</label>
@@ -113,14 +116,37 @@
 						</div>
 					</section>
 					<input type="checkbox" name="accordion" class="accordion-control" id="mp5"/>
-					<section class="menu-panel">
+					<section class="menu-panel condition">
 						<label class="section-title" for="mp5">Condition</label>
-						<div class="section-content">//TODO</div> @* TODO condition filter *@
+						<div class="section-content">
+							<div class="condition-grid">
+								@{
+									var conditionValues = Enum.GetValues(typeof(SneakerCondition)).Cast<SneakerCondition>();
+								}
+								@foreach (var condition in conditionValues)
+								{
+									var id = $"condition-{condition.ToString().ToLower()}";
+									<button class="button">
+										<input type="checkbox" id="@id">
+										<label for="@id">@Html.DisplayFor(expr => condition)</label>
+									</button>
+								}
+							</div>
+						</div>
 					</section>
 				</nav>
 				<div class="spacer"></div>
 			</aside>
 			<div class="product-results">
+				<div class="filter-overbar">
+					<div class="filter-chips">
+						<button class="button" id="filter-reset">
+							<span>CLEAR ALL</span>
+							@Html.VectorIconRender("close.svg")
+						</button>
+					</div>
+					<div class="spacer"></div>
+				</div>
 				<div class="grid product-grid">
 					@foreach (var product in Model)
 					{

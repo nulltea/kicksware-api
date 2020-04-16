@@ -1,6 +1,7 @@
 ﻿function initFilterPanel() {
+	let filterMenu = $(".filter-sidebar");
 	$(".toggle-menu").click(function () {
-		let filterMenu = $(".filter-control");
+
 		let accordion = $(".accordion");
 
 		if (filterMenu.hasClass("active")) {
@@ -17,14 +18,13 @@
 	});
 
 	$(".accordion-control").change(function (e) {
-		$(".spacer").height($(".accordion").height());
+		filterMenu.find(".spacer").height($(".accordion").height());
 	});
 }
 
 function autocompleteFilter(inputSelector, filterValues) {
 	let currentFocus;
 	let input = $(inputSelector);
-	let autocompleteList = $(".brand-list");
 	input.on("input",function () {
 		closeAllLists();
 
@@ -62,6 +62,7 @@ function autocompleteFilter(inputSelector, filterValues) {
 					$(brandRow).toggleClass("temp-row");
 					closeAllLists();
 				});
+				chipsInit($(checkbox));
 				$(".brand-list").prepend($(brandRow));
 			}
 		}
@@ -163,6 +164,63 @@ function priceRangeInit() {
 	syncMinPrice(minRangeElement);
 }
 
+function chipsInit(option = null){
+	let filterOverbar = $(".filter-overbar");
+	let chipsPanel = $(".filter-chips");
+	let filterOptions = option ?? $(".section-content input[type=checkbox]");
+	filterOptions.each(function () {
+		$(this).change(function () {
+			showChipsPanel();
+			let option = $(this);
+			let id = `chip-${this.id}`;
+
+			if (!option.is(":checked")) {
+				$(`#${id}`).remove();
+				hideChipsPanel();
+				return;
+			}
+
+			let label = option.find("+ label");
+			let chip = document.createElement("SPAN");
+			chip.id = id;
+			chip.className = "chip";
+			chip.textContent = label.text();
+
+			let close = document.createElement("BUTTON");
+			close.className = "close-button";
+			$(close).click(function() {
+				$(chip).remove();
+				option.prop('checked', false);
+				hideChipsPanel();
+			});
+			chip.append(close);
+			chipsPanel.append(chip);
+		});
+	});
+
+	function showChipsPanel() {
+		if (!filterOverbar.hasClass("active")) {
+			filterOverbar.toggleClass("active");
+		}
+	}
+
+	function hideChipsPanel() {
+		if (!$(".chip").length) {
+			filterOverbar.toggleClass("active");
+		}
+	}
+
+	function resetAllFilters() {
+		filterOptions.each(function () {
+			$(this).prop('checked', false);
+		});
+		$(".chip").remove();
+		hideChipsPanel();
+	}
+
+	$("#filter-reset").click(resetAllFilters);
+}
+
 function initIsotope() {
 	let sortingButtons = $('.product_sorting_btn');
 	let sortNums = $('.num_sorting_btn');
@@ -213,4 +271,6 @@ $(document).ready(function () {
 	initFilterPanel();
 
 	priceRangeInit();
+
+	chipsInit();
 });

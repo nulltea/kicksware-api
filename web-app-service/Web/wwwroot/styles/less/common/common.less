@@ -154,6 +154,11 @@ input {
 	&[type="number"]::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 	}
+
+	&[type="search"]::-webkit-search-cancel-button {
+		-webkit-appearance: none;
+	}
+
 }
 
 textarea {
@@ -395,15 +400,8 @@ textarea {
 }
 
 .close-button {
-	position: absolute;
-	right: 32px;
-	top: 32px;
-	width: 32px;
-	height: 32px;
-	opacity: 0.5;
 	border: none;
 	outline: none;
-	margin: -50px;
 	background: transparent;
 
 	&:hover {
