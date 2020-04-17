@@ -78,6 +78,28 @@ services:
     depends_on:
       - mongodb
 
+  reference-service:
+    build:
+      context: ./reference-service
+      dockerfile: ./docker/Dockerfile
+      target: dev
+    env_file: ./reference-service/env/.env
+    image: reference-service
+    restart: always
+    labels:
+      - traefik.http.routers.reference-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/references`)
+      # - traefik.http.routers.reference-service.tls=true
+      # - traefik.http.routers.reference-service.tls.certresolver=le
+      - traefik.docker.network=middleware-service_web
+    networks:
+      - web
+      - data
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+
+
   search-service:
     build:
       context: ./elastic-search-service

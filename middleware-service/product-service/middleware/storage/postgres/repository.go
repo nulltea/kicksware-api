@@ -132,10 +132,10 @@ func (r *repository) Modify(sneakerProduct *model.SneakerProduct) error {
 	cmd, args, err := sqb.Update(r.table).SetMap(util.ToMap(sneakerProduct)).
 		Where(sqb.Eq{"UniqueId":sneakerProduct.UniqueId}).PlaceholderFormat(sqb.Dollar).ToSql()
 	if err != nil {
-		return errors.Wrap(err, "repository.SneakerProduct.Store")
+		return errors.Wrap(err, "repository.SneakerProduct.Modify")
 	}
 	if _, err := r.db.ExecContext(ctx, cmd, args); err != nil {
-		return errors.Wrap(err, "repository.SneakerProduct.Store")
+		return errors.Wrap(err, "repository.SneakerProduct.Modify")
 	}
 	return nil
 }
