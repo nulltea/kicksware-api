@@ -47,7 +47,7 @@ namespace Infrastructure.Data
 
 		public Task<SneakerProduct> PostAsync(SneakerProduct sneakerProduct) => _client.RequestAsync<SneakerProduct>(new PostSneakerProductRequest(sneakerProduct));
 
-		public Task<bool> UpdateAsync(SneakerProduct sneakerProduct) => _client.RequestAsync(new PostSneakerProductRequest(sneakerProduct));
+		public Task<bool> UpdateAsync(SneakerProduct sneakerProduct) => _client.RequestAsync(new PutSneakerProductRequest(sneakerProduct));
 
 		public Task<bool> DeleteAsync(SneakerProduct sneakerProduct) => _client.RequestAsync(new DeleteSneakerProductRequest(sneakerProduct));
 

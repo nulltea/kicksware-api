@@ -28,7 +28,7 @@ namespace web_app_service.Controllers
 				{
 					if (formFile.Length <= 0) continue;
 					var fileName = Path.ChangeExtension(Path.GetRandomFileName(), Path.GetExtension(formFile.FileName));
-					var filePath = Path.Combine(_environment.WebRootPath, "files", fileName);
+					var filePath = Path.Combine(_environment.WebRootPath, "files/photos/products", fileName);
 
 					using var stream = System.IO.File.Create(filePath);
 					formFile.CopyTo(stream);

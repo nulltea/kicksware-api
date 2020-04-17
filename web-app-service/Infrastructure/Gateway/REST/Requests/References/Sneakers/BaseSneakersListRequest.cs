@@ -1,10 +1,10 @@
 ﻿using RestSharp;
 
-namespace Infrastructure.Gateway.REST.ProductRequests.Sneakers
+namespace Infrastructure.Gateway.REST.References.Sneakers
 {
-	public class BaseSneakersListRequest : BaseSneakerProductRequest
+	public class BaseSneakerReferenceListRequest : BaseSneakerReferenceRequest
 	{
-		public BaseSneakersListRequest(string sneakersQuery, Method method = Method.GET)
-			: base(sneakersQuery, method) {}
+		public BaseSneakerReferenceListRequest(string referencesQuery, Method method = Method.GET)
+			: base(referencesQuery, method) {}
 	}
 }

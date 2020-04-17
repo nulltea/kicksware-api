@@ -1,31 +1,28 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Entities.Products;
+using Core.Entities.Reference;
 using Core.Repositories;
 
 namespace Core.Services
 {
-	public interface ISneakerProductService
+	public interface ISneakerReferenceService
 	{
 		#region CRUD Sync
 
-		SneakerProduct FetchOne(string uniqueId);
+		SneakerReference FetchOne(string uniqueId);
 
-		List<SneakerProduct> FetchAll();
+		List<SneakerReference> FetchAll();
 
-		List<SneakerProduct> Fetch(IEnumerable<string> idList);
+		List<SneakerReference> Fetch(IEnumerable<string> idList);
 
-		List<SneakerProduct> Fetch(object queryObject);
+		List<SneakerReference> Fetch(object queryObject);
 
-		SneakerProduct Store(SneakerProduct sneakerProduct);
+		SneakerReference Store(SneakerReference sneakerReference);
 
-		bool Modify(SneakerProduct sneakerProduct);
+		List<SneakerReference> Store(List<SneakerReference> sneakerReferences);
 
-		bool Replace(SneakerProduct sneakerProduct);
-
-		bool Remove(SneakerProduct sneakerProduct);
-
-		bool Remove(string uniqueId);
+		bool Modify(SneakerReference sneakerReference);
 
 		int Count(object queryObject);
 
@@ -33,37 +30,25 @@ namespace Core.Services
 
 		#region CRUD Async
 
-		Task<SneakerProduct> FetchOneAsync(string uniqueId);
+		Task<SneakerReference> FetchOneAsync(string uniqueId);
 
-		Task<List<SneakerProduct>> FetchAllAsync();
+		Task<List<SneakerReference>> FetchAllAsync();
 
-		Task<List<SneakerProduct>> FetchAsync(IEnumerable<string> idList);
+		Task<List<SneakerReference>> FetchAsync(IEnumerable<string> idList);
 
-		Task<List<SneakerProduct>> FetchAsync(object queryObject);
+		Task<List<SneakerReference>> FetchAsync(object queryObject);
 
-		Task<SneakerProduct> StoreAsync(SneakerProduct sneakerProduct);
+		Task<List<SneakerReference>> StoreAsync(List<SneakerReference> sneakerReferences);
 
-		Task<bool> ModifyAsync(SneakerProduct sneakerProduct);
+		Task<SneakerReference> StoreAsync(SneakerReference sneakerReference);
 
-		Task<bool> ReplaceAsync(SneakerProduct sneakerProduct);
-
-		Task<bool> RemoveAsync(SneakerProduct sneakerProduct);
-
-		Task<bool> RemoveAsync(string uniqueId);
+		Task<bool> ModifyAsync(SneakerReference sneakerReference);
 
 		Task<int> CountAsync(object queryObject);
 
 		#endregion
 
 		#region Usecases
-
-		bool AttachImages(SneakerProduct sneaker);
-
-		Task<bool> AttachImagesAsync(SneakerProduct sneaker);
-
-		Task<decimal> RequestConditionAnalysis(SneakerProduct sneaker);
-
-		Task<SneakerProduct> RequestSneakerPrediction(List<string> images);
 
 		#endregion
 	}

@@ -1,14 +1,14 @@
 ﻿using RestSharp;
 
-namespace Infrastructure.Gateway.REST.ProductRequests
+namespace Infrastructure.Gateway.REST.References
 {
-	public class ProductsListRequest : ProductRequest
+	public class ReferenceListRequest : ReferenceRequest
 	{
-		public ProductsListRequest(string productClass, string productsQuery, Method method = Method.GET)
-			: base(productClass, productsQuery, method)
+		public ReferenceListRequest(string referenceClass, string referenceQuery, Method method = Method.GET)
+			: base(referenceClass, referenceQuery, method)
 		{
-			AddParameter("productClass", productClass, ParameterType.UrlSegment);
-			AddParameter("productsQuery", productsQuery, ParameterType.QueryString);
+			AddParameter("referenceClass", referenceClass, ParameterType.UrlSegment);
+			AddParameter("referenceQuery", referenceQuery, ParameterType.QueryString);
 		}
 	}
 }

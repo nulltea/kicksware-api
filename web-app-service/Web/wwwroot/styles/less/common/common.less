@@ -168,7 +168,20 @@ textarea {
 	});
 }
 
-// GENERAL CLASSES //
+// GENERAL CLASSES /
+
+a.underline {
+	.transition-properties(all 300ms ease);
+
+	&:hover {
+		text-decoration: underline;
+		.with-theme({
+			.text-elevation(@elevation);
+		});
+	}
+}
+
+
 .float_left { float: left; }
 
 .float_right { float: right; }

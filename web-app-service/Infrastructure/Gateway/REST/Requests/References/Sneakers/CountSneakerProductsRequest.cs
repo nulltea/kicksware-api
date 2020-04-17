@@ -1,8 +1,8 @@
-﻿namespace Infrastructure.Gateway.REST.ProductRequests.Sneakers
+﻿namespace Infrastructure.Gateway.REST.References.Sneakers
 {
-	public class CountSneakerProductsRequest : BaseSneakersListRequest
+	public class CountSneakerReferencesRequest : BaseSneakerReferenceRequest
 	{
-		public CountSneakerProductsRequest(object queryObject) : base("/count?")
+		public CountSneakerReferencesRequest(object queryObject) : base("/count?")
 		{
 			AddObject(queryObject);
 		}

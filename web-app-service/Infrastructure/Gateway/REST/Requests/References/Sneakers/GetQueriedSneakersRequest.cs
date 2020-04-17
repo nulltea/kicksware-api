@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using RestSharp;
 
-namespace Infrastructure.Gateway.REST.ProductRequests.Sneakers
+namespace Infrastructure.Gateway.REST.References.Sneakers
 {
-	public class GetQueriedSneakersRequest : BaseSneakersListRequest
+	public class GetQueriedSneakerReferencesRequest : BaseSneakerReferenceRequest
 	{
-		public GetQueriedSneakersRequest(IEnumerable<string> idCodes) : base("/query")
+		public GetQueriedSneakerReferencesRequest(IEnumerable<string> idCodes) : base("/query")
 		{
 			foreach (var id in idCodes)
 			{

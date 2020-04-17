@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace Core.Entities.Reference
 {
@@ -14,6 +15,15 @@ namespace Core.Entities.Reference
 		Womens,
 
 		[EnumMember(Value = "Unisex")]
-		Unisex
+		Unisex,
+
+		[EnumMember(Value = "Youth")]
+		Youth,
+
+		[EnumMember(Value = "Preschool")]
+		Preschool,
+
+		[EnumMember(Value = "Toddler")]
+		Toddler
 	}
 }

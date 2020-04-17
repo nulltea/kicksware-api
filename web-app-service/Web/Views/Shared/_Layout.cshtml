@@ -26,41 +26,41 @@
 	<div class="header_container">
 		<div class="header_content">
 			<div class="logo">
-				<a asp-area="" asp-controller="Home" asp-action="Index">Kicksware</a>
+				<a asp-controller="Home" asp-action="Index">Kicksware</a>
 			</div>
 			<nav class="main_nav">
 				<ul>
 					<li>
-						<a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+						<a asp-controller="Home" asp-action="Index">Home</a>
 					</li>
 					<li>
-						<a asp-area="" asp-controller="Auth" asp-action="Facebook">Profile</a>
+						<a asp-controller="Auth" asp-action="Facebook">Profile</a>
 					</li>
 					<li>
-						<a asp-area="" asp-controller="Shop" asp-action="Products">Shop</a>
+						<a asp-controller="Shop" asp-action="Products">Shop</a>
 					</li>
 					<li class="hassubs">
-						<a asp-area="" asp-controller="Sell" asp-action="NewProduct">Sell</a>
+						<a asp-controller="Sell" asp-action="NewProduct">Sell</a>
 						<ul>
 							<li>
-								<a asp-area="" asp-controller="Sell" asp-action="NewProduct">Create new product</a>
+								<a asp-controller="Sell" asp-action="NewProduct">Create new product</a>
 							</li>
 							<li>
-								<a asp-area="" asp-controller="Sell" asp-action="MyProducts">My products</a>
+								<a asp-controller="Sell" asp-action="MyProducts">My products</a>
 							</li>
 						</ul>
 					</li>
 					<li>
-						<a asp-area="" asp-controller="About" asp-action="About">About</a>
+						<a asp-controller="About" asp-action="About">About</a>
 					</li>
 					<li>
-						<a asp-area="" asp-controller="Contact" asp-action="Contact">Contacts</a>
+						<a asp-controller="Contact" asp-action="Contact">Contacts</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="icon-nav">
 				<ul>
-					<li class="theme light">
+					<li class="theme dark">
 						@Html.VectorIconRender("theme.svg") @*TODO Nastya sunny easter egg*@
 					</li>
 					<li class="account hassubs">
@@ -82,15 +82,8 @@
 						</ul>
 					</li>
 					<li class="favorite">
-						<a asp-area="" asp-controller="Home" asp-action="">
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-								<g>
-									<path d="M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"/>
-								</g>
-								<g>
-									<path d="M12 9.229c.234-1.12 1.547-6.229 5.382-6.229 2.22 0 4.618 1.551 4.618 5.003 0 3.907-3.627 8.47-10 12.629-6.373-4.159-10-8.722-10-12.629 0-3.484 2.369-5.005 4.577-5.005 3.923 0 5.145 5.126 5.423 6.231zm-12-1.226c0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-7.962-9.648-9.028-12-3.737-2.338-5.262-12-4.27-12 3.737z"/>
-								</g>
-							</svg>
+						<a asp-controller="Home" asp-action="">
+							@Html.VectorIconRender("favorite.svg")
 						</a>
 					</li>
 					<li class="search">
@@ -134,22 +127,22 @@
 				</div>
 				<ul class="slider-menu-nav">
 					<li class="slider-menu-item">
-						<a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+						<a asp-controller="Home" asp-action="Index">Home</a>
 					</li>
 					<li class="slider-menu-item">
-						<a asp-area="" asp-controller="Home" asp-action="Index">Profile</a>
+						<a asp-controller="Home" asp-action="Index">Profile</a>
 					</li>
 					<li class="slider-menu-item">
-						<a asp-area="" asp-controller="Shop" asp-action="Products">Shop</a>
+						<a asp-controller="Shop" asp-action="Products">Shop</a>
 					</li>
 					<li class="slider-menu-item">
-						<a asp-area="" asp-controller="Sell" asp-action="NewProduct">Sell</a>
+						<a asp-controller="Sell" asp-action="NewProduct">Sell</a>
 					</li>
 					<li class="slider-menu-item">
-						<a asp-area="" asp-controller="Home" asp-action="Index">About</a>
+						<a asp-controller="Home" asp-action="Index">About</a>
 					</li>
 					<li class="slider-menu-item">
-						<a asp-area="" asp-controller="Contact" asp-action="Contact">Contacts</a>
+						<a asp-controller="Contact" asp-action="Contact">Contacts</a>
 					</li>
 				</ul>
 			</div>

@@ -1,19 +1,15 @@
 ﻿using System.IO;
 using Core.Entities.Products;
+using Core.Entities.Reference;
 using RestSharp;
 
-namespace Infrastructure.Gateway.REST.ProductRequests.Sneakers
+namespace Infrastructure.Gateway.REST.References.Sneakers
 {
-	public class PutSneakerImagesRequest : BaseSneakerProductRequest
+	public class PatchSneakerReferenceRequest : BaseSneakerReferenceRequest
 	{
-		public PutSneakerImagesRequest(SneakerProduct sneakerProduct) : base("/{sneakerId}/images", Method.PUT)
+		public PatchSneakerReferenceRequest(SneakerReference sneakerReference) : base(string.Empty, Method.PATCH)
 		{
-			AddParameter("sneakerId", sneakerProduct.UniqueId, ParameterType.UrlSegment);
-			AlwaysMultipartFormData = true;
-			foreach (var photo in sneakerProduct.Photos)
-			{
-				AddFile(Path.GetFileName(photo), photo);
-			}
+			AddJsonBody(sneakerReference);
 		}
 	}
 }

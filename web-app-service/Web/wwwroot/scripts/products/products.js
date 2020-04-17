@@ -221,6 +221,20 @@ function chipsInit(option = null){
 	$("#filter-reset").click(resetAllFilters);
 }
 
+function layoutToggleInit() {
+	let toggleWrapper = $(".layout-toggle");
+	let toggleInput = toggleWrapper.find("input[type=checkbox]");
+
+	toggleInput.change(function () {
+		let productsView = $(".products-view");
+		productsView.toggleClass("changing");
+		setTimeout(function () {
+			productsView.toggleClass("grid").toggleClass("list");
+			productsView.toggleClass("changing");
+		}, 500);
+	})
+}
+
 function initIsotope() {
 	let sortingButtons = $('.product_sorting_btn');
 	let sortNums = $('.num_sorting_btn');
@@ -273,4 +287,6 @@ $(document).ready(function () {
 	priceRangeInit();
 
 	chipsInit();
+
+	layoutToggleInit();
 });

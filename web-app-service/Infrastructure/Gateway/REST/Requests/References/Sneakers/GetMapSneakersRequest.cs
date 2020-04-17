@@ -1,8 +1,8 @@
-﻿namespace Infrastructure.Gateway.REST.ProductRequests.Sneakers
+﻿namespace Infrastructure.Gateway.REST.References.Sneakers
 {
-	public class GetMapSneakersRequest : BaseSneakersListRequest
+	public class GetMapSneakerReferencesRequest : BaseSneakerReferenceRequest
 	{
-		public GetMapSneakersRequest(object map) : base("/map")
+		public GetMapSneakerReferencesRequest(object map) : base("/map")
 		{
 			AddJsonBody(map);
 		}

@@ -1,7 +1,7 @@
-﻿namespace Infrastructure.Gateway.REST.ProductRequests.Sneakers
+﻿namespace Infrastructure.Gateway.REST.References.Sneakers
 {
-	public class GetAllSneakersRequest : BaseSneakersListRequest
+	public class GetAllSneakerReferencesRequest : BaseSneakerReferenceRequest
 	{
-		public GetAllSneakersRequest() : base(string.Empty) {}
+		public GetAllSneakerReferencesRequest() : base(string.Empty) {}
 	}
 }

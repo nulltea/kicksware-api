@@ -55,10 +55,12 @@
           <e p="IAsyncRepository.cs" t="Include" />
           <e p="IRepository.cs" t="Include" />
           <e p="ISneakerProductRepository.cs" t="Include" />
+          <e p="ISneakerReferenceRepository.cs" t="Include" />
           <e p="IUserRepository.cs" t="Include" />
         </e>
         <e p="Services" t="Include">
           <e p="ISneakerProductService.cs" t="Include" />
+          <e p="ISneakerReferenceService.cs" t="Include" />
           <e p="IUserService.cs" t="Include" />
           <e p="Search" t="Include">
             <e p="IAsyncSearchService.cs" t="Include" />
@@ -71,6 +73,7 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="Data" t="Include">
           <e p="SneakerProductsRestRepository.cs" t="Include" />
+          <e p="SneakerReferencesRestRepository.cs" t="Include" />
         </e>
         <e p="Gateway" t="Include">
           <e p="GraphQL" t="Include" />
@@ -96,6 +99,21 @@
                   <e p="PostSneakerProductRequest.cs" t="Include" />
                   <e p="PutSneakerImagesRequest.cs" t="Include" />
                   <e p="PutSneakerProductRequest.cs" t="Include" />
+                </e>
+              </e>
+              <e p="References" t="Include">
+                <e p="ReferenceListRequest.cs" t="Include" />
+                <e p="ReferenceRequest.cs" t="Include" />
+                <e p="Sneakers" t="Include">
+                  <e p="BaseSneakerProductRequest.cs" t="Include" />
+                  <e p="BaseSneakersListRequest.cs" t="Include" />
+                  <e p="CountSneakerProductsRequest.cs" t="Include" />
+                  <e p="GetAllSneakersRequest.cs" t="Include" />
+                  <e p="GetMapSneakersRequest.cs" t="Include" />
+                  <e p="GetQueriedSneakersRequest.cs" t="Include" />
+                  <e p="GetSneakerProductRequest.cs" t="Include" />
+                  <e p="PostSneakerProductRequest.cs" t="Include" />
+                  <e p="PutSneakerImagesRequest.cs" t="Include" />
                 </e>
               </e>
               <e p="Search" t="Include">
@@ -128,6 +146,7 @@
         <e p="Usecase" t="Include">
           <e p="ReferenceSearchService.cs" t="Include" />
           <e p="SneakerProductService.cs" t="Include" />
+          <e p="SneakerReferenceService.cs" t="Include" />
         </e>
       </e>
       <e p="packages" t="ExcludeRecursive" />
@@ -254,38 +273,70 @@
         <e p="wwwroot" t="Include">
           <e p="favicon.ico" t="Include" />
           <e p="files" t="Include">
-            <e p="1bsxj2oc.jpg" t="Include" />
-            <e p="3fh0cakb.jpg" t="Include" />
-            <e p="4foljwvs.jpeg" t="Include" />
-            <e p="4nyi2pw2.jpg" t="Include" />
-            <e p="4zoflpm3.jpg" t="Include" />
-            <e p="5ycnw4k5.jpg" t="Include" />
-            <e p="a2esgazg.jpg" t="Include" />
-            <e p="amcy1ylw.jpg" t="Include" />
-            <e p="bv4cskfm.jpg" t="Include" />
-            <e p="cbmt4tds.jpg" t="Include" />
-            <e p="cq4amo0v.jpg" t="Include" />
-            <e p="el5ayyzv.jpg" t="Include" />
-            <e p="fet0axcj.jpg" t="Include" />
-            <e p="foryatqv.jpg" t="Include" />
-            <e p="fqyfgj42.jpg" t="Include" />
-            <e p="fv3jhr3a.jpg" t="Include" />
-            <e p="it0fmfyd.jpg" t="Include" />
-            <e p="jtfxy5oy.jpg" t="Include" />
-            <e p="Nike-Af1-Blue-Wight-Green.jpg" t="Include" />
-            <e p="Nike-Air-Max-95-Gray.jpg" t="Include" />
-            <e p="Nike-ISPA-Air-Max-720.jpg" t="Include" />
-            <e p="Nike-Jordan-Proto-Max-720.jpg" t="Include" />
-            <e p="Nike_Jordan_OG.jpg" t="Include" />
-            <e p="Nike_Jordan_Orange (2).jpg" t="Include" />
-            <e p="qbiqpmzg.jpg" t="Include" />
-            <e p="tabrb3fe.jpg" t="Include" />
-            <e p="v443gqhn.jpg" t="Include" />
-            <e p="y-3-ren-4.jpg" t="Include" />
-            <e p="yapx4bgc.jpeg" t="Include" />
-            <e p="yjeetcgl.jpg" t="Include" />
-            <e p="yotezwfp.jpg" t="Include" />
-            <e p="zv5jz13w.jpg" t="Include" />
+            <e p="photos" t="Include">
+              <e p="Products" t="Include">
+                <e p="1bsxj2oc.jpg" t="Include" />
+                <e p="3fh0cakb.jpg" t="Include" />
+                <e p="4foljwvs.jpeg" t="Include" />
+                <e p="4nyi2pw2.jpg" t="Include" />
+                <e p="4zoflpm3.jpg" t="Include" />
+                <e p="5ycnw4k5.jpg" t="Include" />
+                <e p="a2esgazg.jpg" t="Include" />
+                <e p="amcy1ylw.jpg" t="Include" />
+                <e p="bv4cskfm.jpg" t="Include" />
+                <e p="cbmt4tds.jpg" t="Include" />
+                <e p="cq4amo0v.jpg" t="Include" />
+                <e p="el5ayyzv.jpg" t="Include" />
+                <e p="fet0axcj.jpg" t="Include" />
+                <e p="foryatqv.jpg" t="Include" />
+                <e p="fqyfgj42.jpg" t="Include" />
+                <e p="fv3jhr3a.jpg" t="Include" />
+                <e p="it0fmfyd.jpg" t="Include" />
+                <e p="jtfxy5oy.jpg" t="Include" />
+                <e p="Nike-Af1-Blue-Wight-Green.jpg" t="Include" />
+                <e p="Nike-Air-Max-95-Gray.jpg" t="Include" />
+                <e p="Nike-ISPA-Air-Max-720.jpg" t="Include" />
+                <e p="Nike-Jordan-Proto-Max-720.jpg" t="Include" />
+                <e p="Nike_Jordan_OG.jpg" t="Include" />
+                <e p="Nike_Jordan_Orange (2).jpg" t="Include" />
+                <e p="qbiqpmzg.jpg" t="Include" />
+                <e p="tabrb3fe.jpg" t="Include" />
+                <e p="v443gqhn.jpg" t="Include" />
+                <e p="y-3-ren-4.jpg" t="Include" />
+                <e p="yapx4bgc.jpeg" t="Include" />
+                <e p="yjeetcgl.jpg" t="Include" />
+                <e p="yotezwfp.jpg" t="Include" />
+                <e p="zv5jz13w.jpg" t="Include" />
+              </e>
+              <e p="References" t="Include">
+                <e p="543560-225_1.png" t="Include" />
+                <e p="543560_415_1_1.png" t="Include" />
+                <e p="744804-144_1_1.png" t="Include" />
+                <e p="805254-004_1.png" t="Include" />
+                <e p="air_jordan_13_retro_low_q54_810551-050_1.png" t="Include" />
+                <e p="b35309_1_1.png" t="Include" />
+                <e p="BD1355_1.png" t="Include" />
+                <e p="BD3347_1.png" t="Include" />
+                <e p="BD7927_1.png" t="Include" />
+                <e p="CD0383-600_1_1.png" t="Include" />
+                <e p="CD0383-700_1.png" t="Include" />
+                <e p="classic_leather_lux_V51810_1.png" t="Include" />
+                <e p="D50TK-495829_1.png" t="Include" />
+                <e p="D65206_1_1.png" t="Include" />
+                <e p="DB2570_1.png" t="Include" />
+                <e p="ee6297_1.png" t="Include" />
+                <e p="h32lk_1.png" t="Include" />
+                <e p="H51AK-4848_1.png" t="Include" />
+                <e p="h51ak_1.png" t="Include" />
+                <e p="mutombo_Q33018_1.png" t="Include" />
+                <e p="n7_zoom_kd_4_519567-046_1_1.png" t="Include" />
+                <e p="pump_fury_V63454_1.png" t="Include" />
+                <e p="Q23171_1.png" t="Include" />
+                <e p="question_mid_V63448_1.png" t="Include" />
+                <e p="v63450_1.png" t="Include" />
+                <e p="zx_flux_M19845_1.png" t="Include" />
+              </e>
+            </e>
           </e>
           <e p="fonts" t="Include">
             <e p="Orbitron" t="Include">
@@ -320,6 +371,7 @@
             <e p="cloud_search.svg" t="Include" />
             <e p="details.svg" t="Include" />
             <e p="facebook.svg" t="Include" />
+            <e p="favorite.svg" t="Include" />
             <e p="filter.svg" t="Include" />
             <e p="filter_used.svg" t="Include" />
             <e p="google.svg" t="Include" />

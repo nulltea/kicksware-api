@@ -1,7 +1,7 @@
-﻿@model web_app_service.Models.SneakerProductViewModel
+﻿@model Core.Entities.Reference.SneakerReference
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var images = Model.Photos.Select(image => "/files/" + image).ToList();
+    //var images = Model.Photos.Select(image => "/files/" + image).ToList();
     var relatedProducts = ViewBag.RelatedProducts as List<SneakerProductViewModel>;
 }
 
@@ -19,17 +19,13 @@
             <div class="col-lg-6">
                 <div class="details_image">
                     <div class="details_image_large">
-                        <img src=@images.ElementAtOrDefault(0) alt="">
-                        @if (DateTime.Today.Subtract(Model.AddedAt).Days < 5)
-                        {
-                            <div class="product_extra product_new"><a>New</a></div>
-                        }
+                        <img src="@Model.ImagePath" alt="">
                     </div>
                     <div class="details_image_thumbnails d-flex flex-row align-items-start justify-content-between">
-                        @foreach (var image in images)
-                        {
-                            <div class="details_image_thumbnail" data-image=@image><img src=@image alt=""></div>
-                        }
+                         @*@foreach (var image in images)
+                         {
+                             <div class="details_image_thumbnail" data-image=@image><img src=@image alt=""></div>
+                         }*@
                     </div>
                 </div>
             </div>

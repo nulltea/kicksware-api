@@ -51,7 +51,7 @@ namespace web_app_service.Controllers
 
 		public IActionResult Index()
 		{
-			ViewBag.FeaturedProducts = ShopController.ProductsList.Take(4).ToList(); //TODO
+			//ViewBag.FeaturedProducts = ShopController.ProductsList.Take(4).ToList(); //TODO
 			return View(HomeInfo);
 		}
 

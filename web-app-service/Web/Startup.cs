@@ -55,6 +55,8 @@ namespace web_app_service
 			services.AddSingleton<RestfulClient, RestfulClient>();
 			services.AddSingleton<ISneakerProductRepository, SneakerProductsRestRepository>();
 			services.AddSingleton<ISneakerProductService, SneakerProductService>();
+			services.AddSingleton<ISneakerReferenceRepository, SneakerReferencesRestRepository>();
+			services.AddSingleton<ISneakerReferenceService, SneakerReferenceService>();
 			services.AddSingleton<IReferenceSearchService, ReferenceSearchService>();
 
 			#endregion

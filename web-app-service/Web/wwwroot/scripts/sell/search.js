@@ -55,7 +55,7 @@ function addSearchResultCell(item, last) {
 	thumb.addEventListener("click", select);
 	thumb.className = "thumb";
 	let image = document.createElement("IMG");
-	image.setAttribute("src", item.imageLink);
+	image.setAttribute("src", item.imagePath);
 	thumb.append(image);
 
 	let info = document.createElement("DIV");

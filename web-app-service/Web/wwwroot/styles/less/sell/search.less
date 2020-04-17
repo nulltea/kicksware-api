@@ -197,6 +197,7 @@
 								});
 								z-index: 0;
 								cursor: pointer;
+								.transition-properties(300ms transform cubic-bezier(.155,1.105,.295,1.12), 300ms box-shadow, 300ms -webkit-transform cubic-bezier(.155,1.105,.295,1.12););
 
 								&:hover,
 								&.selected {
@@ -208,6 +209,7 @@
 										box-shadow: 4px 4px 5px -1px @secondary;
 										.elevation(9, @elevation);
 									});
+									.transform-properties(scale(1.05));
 								}
 
 								&:hover:before,

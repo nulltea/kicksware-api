@@ -1,11 +1,9 @@
-﻿@using System.ComponentModel.DataAnnotations
-@using System.Globalization
-@using System.Reflection
+﻿@using System.Globalization
 @using Core.Reference
 @using Newtonsoft.Json
 @using web_app_service.Data.Reference_Data
 @using web_app_service.Utils.Helpers
-@model List<web_app_service.Models.SneakerProductViewModel>
+@model List<Core.Entities.Reference.SneakerReference>
 
 @{
 	Layout = "~/Views/Shared/_Layout.cshtml";
@@ -38,7 +36,7 @@
 					</select>
 				</div>
 				<div class="layout-toggle">
-					<input type="checkbox" id="offers-sign" checked/>
+					<input type="checkbox" checked/>
 					@Html.VectorIconRender("list.svg", "is-unchecked")
 					@Html.VectorIconRender("grid.svg", "is-checked")
 				</div>
@@ -147,29 +145,35 @@
 					</div>
 					<div class="spacer"></div>
 				</div>
-				<div class="grid product-grid">
-					@foreach (var product in Model)
+				<div class="products-view grid">
+					@foreach (var reference in Model)
 					{
-						var image = "/files/" + product.Photos.FirstOrDefault();
-						var price = $"{product.Price}$";
+						var price = reference.Price != 0m ? $"${reference.Price}" : string.Empty;
 						<div class="product-cell">
-							<div class="thumb">
-								<img src="@image" alt="">
+							<div class="info-header">
+								<div class="price">@price</div>
 							</div>
-							@if (DateTime.Today.Subtract(product.AddedAt).Days < 5)
+							<div class="thumb">
+								<img src="@reference.ImagePath" alt="">
+							</div>
+							@*@if (DateTime.Today.Subtract(reference.AddedAt).Days < 5)
 							{
 								<div class="product_extra product_new">
 									<a>New</a>
 								</div>
-							}
-							<div class="info">
+							}*@
+							<div class="info-footer">
 								<div class="brand-title">
-									<a asp-area="" asp-controller="Shop" asp-action="ProductItem" asp-route-productId=@product.UniqueId>@Html.DisplayFor(modelItem => product.BrandName)</a>
+									<a class="underline" asp-controller="Shop" asp-action="ProductItem" asp-route-productId=@reference.UniqueId>@Html.DisplayFor(modelItem => reference.BrandName)</a>
 								</div>
 								<div class="model-title">
-									<a asp-area="" asp-controller="Shop" asp-action="ProductItem" asp-route-productId=@product.UniqueId>@Html.DisplayFor(modelItem => product.ModelName)</a>
+										@*TODO link to model page*@
+									<a class="underline" asp-controller="Shop" asp-action="ProductItem" asp-route-productId=@reference.UniqueId>@Html.DisplayFor(modelItem => reference.ModelName)</a>
 								</div>
-								<div class="price">@price</div>
+								<div class="favorite">
+									<input type="checkbox"/>
+									@Html.VectorIconRender("favorite.svg")
+								</div>
 							</div>
 						</div>
 					}

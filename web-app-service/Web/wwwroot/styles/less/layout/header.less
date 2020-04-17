@@ -217,7 +217,7 @@
 				height: 30px;
 
 				path {
-					transition: all 400ms ease;
+					transition: all 300ms ease;
 				}
 			}
 
@@ -231,11 +231,17 @@
 				fill: transparent
 			}
 
+			&:hover svg {
+				-webkit-filter: drop-shadow(2px 2px 2px fade(black, 50%));
+				filter: drop-shadow(2px 2px 2px fade(black, 50%));
+			}
+
 			&:hover g:nth-child(2) {
 				.with-theme({
 					fill: @secondary;
 				});
 			}
+
 		}
 
 		.favorite {
@@ -260,9 +266,17 @@
 				fill: transparent
 			}
 
-			&:hover g:nth-child(1) {
-				fill: crimson;
+			&:hover svg {
+				-webkit-filter: drop-shadow(2px 2px 2px fade(black, 50%));
+				filter: drop-shadow(2px 2px 2px fade(black, 50%));
 			}
+
+			&:hover g {
+				.with-theme({
+					fill: crimson;
+				});
+			}
+
 		}
 
 		.account {
@@ -274,7 +288,7 @@
 				height: 23px;
 
 				path {
-					transition: all 400ms ease;
+					transition: all 300ms ease;
 				}
 			}
 
@@ -288,11 +302,17 @@
 				fill: transparent;
 			}
 
+			&:hover svg {
+				-webkit-filter: drop-shadow(2px 2px 2px fade(black, 50%));
+				filter: drop-shadow(2px 2px 2px fade(black, 50%));
+			}
+
 			&:hover g:nth-child(2) {
 				.with-theme({
 					fill: @secondary;
 				});
 			}
+
 
 			&.hassubs ul {
 				display: flex;
@@ -435,12 +455,18 @@
 					});
 				}
 
+
+
 				&:hover circle:first-of-type {
 					fill: #F9D71C;
+					-webkit-filter: drop-shadow(2px 2px 2px fade(black, 50%));
+					filter: drop-shadow(2px 2px 2px fade(black, 50%));
 				}
 
 				&:hover path {
 					fill: #FDB813;
+					-webkit-filter: drop-shadow(2px 2px 2px fade(black, 50%));
+					filter: drop-shadow(2px 2px 2px fade(black, 50%));
 				}
 			}
 
@@ -469,6 +495,8 @@
 
 				&:hover circle:first-of-type {
 					fill: #F4F164;
+					-webkit-filter: drop-shadow(2px 2px 2px fade(black, 50%));
+					filter: drop-shadow(2px 2px 2px fade(black, 50%));
 				}
 			}
 		}
