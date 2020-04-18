@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Core.Entities.Reference;
 using Core.Repositories;
@@ -21,6 +22,8 @@ namespace Infrastructure.Data
 
 		public List<SneakerReference> GetAll() => _client.Request<List<SneakerReference>>(new GetAllSneakerReferencesRequest());
 
+		public List<SneakerReference> GetOffset(int count, int offset) => GetAll().Skip(offset).Take(count).ToList(); //TODO rest
+
 		public List<SneakerReference> Get(IEnumerable<string> idCodes) => _client.Request<List<SneakerReference>>(new GetQueriedSneakerReferencesRequest(idCodes));
 
 		public List<SneakerReference> Get(object queryObject) => _client.Request<List<SneakerReference>>(new GetMapSneakerReferencesRequest(queryObject));
@@ -35,7 +38,7 @@ namespace Infrastructure.Data
 
 		public bool Delete(string referenceId) => throw new NotImplementedException();
 
-		public int Count(object queryObject) => _client.Request<int>(new CountSneakerReferencesRequest(queryObject));
+		public int Count(object queryObject) => GetAll().Count;// TODO _client.Request<int>(new CountSneakerReferencesRequest(queryObject));
 
 		#endregion
 
@@ -44,6 +47,8 @@ namespace Infrastructure.Data
 		public Task<SneakerReference> GetUniqueAsync(string sneakerId) => _client.RequestAsync<SneakerReference>(new GetSneakerReferenceRequest(sneakerId));
 
 		public Task<List<SneakerReference>> GetAllAsync() => _client.RequestAsync<List<SneakerReference>>(new GetAllSneakerReferencesRequest());
+
+		public async Task<List<SneakerReference>> GetOffsetAsync(int count, int offset) => (await GetAllAsync()).Skip(offset).Take(count).ToList(); //TODO rest
 
 		public Task<List<SneakerReference>> GetAsync(IEnumerable<string> idList) => _client.RequestAsync<List<SneakerReference>>(new GetQueriedSneakerReferencesRequest(idList));
 
@@ -59,7 +64,7 @@ namespace Infrastructure.Data
 
 		public Task<bool> DeleteAsync(string referenceId) => throw new NotImplementedException();
 
-		public Task<int> CountAsync(object queryObject) => _client.RequestAsync<int>(new CountSneakerReferencesRequest(queryObject));
+		public async Task<int> CountAsync(object queryObject) => (await GetAllAsync()).Count;// TODO _client.RequestAsync<int>(new CountSneakerReferencesRequest(queryObject));
 
 		#endregion
 	}

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Core.Entities.Products;
 using Core.Repositories;
@@ -23,6 +24,8 @@ namespace Infrastructure.Usecase
 
 		public List<SneakerProduct> FetchAll() => _repository.GetAll();
 
+		public List<SneakerProduct> FetchOffset(int count, int offset) => _repository.GetOffset(count, offset);
+
 		public List<SneakerProduct> Fetch(IEnumerable<string> idList) => _repository.Get(idList);
 
 		public List<SneakerProduct> Fetch(object queryObject) => _repository.Get(queryObject);
@@ -45,7 +48,7 @@ namespace Infrastructure.Usecase
 
 		public bool Remove(string sneakerId) => _repository.Delete(sneakerId);
 
-		public int Count(object queryObject) => _repository.Count(queryObject);
+		public int Count(object queryObject  = default) => _repository.Count(queryObject);
 
 		#endregion
 
@@ -54,6 +57,8 @@ namespace Infrastructure.Usecase
 		public Task<SneakerProduct> FetchOneAsync(string sneakerId) => _repository.GetUniqueAsync(sneakerId);
 
 		public Task<List<SneakerProduct>> FetchAllAsync() => _repository.GetAllAsync();
+
+		public Task<List<SneakerProduct>> FetchOffsetAsync(int count, int offset) => _repository.GetOffsetAsync(count, offset);
 
 		public Task<List<SneakerProduct>> FetchAsync(IEnumerable<string> idList) => _repository.GetAsync(idList);
 
@@ -76,7 +81,7 @@ namespace Infrastructure.Usecase
 
 		public Task<bool> RemoveAsync(string sneakerId) => _repository.DeleteAsync(sneakerId);
 
-		public Task<int> CountAsync(object queryObject) => _repository.CountAsync(queryObject);
+		public Task<int> CountAsync(object queryObject  = default) => _repository.CountAsync(queryObject);
 
 		#endregion
 

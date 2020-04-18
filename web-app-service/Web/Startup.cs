@@ -1,4 +1,5 @@
 using System;
+using Core.Entities.Reference;
 using Core.Repositories;
 using Core.Services;
 using Infrastructure.Data;
@@ -56,6 +57,7 @@ namespace web_app_service
 			services.AddSingleton<ISneakerProductRepository, SneakerProductsRestRepository>();
 			services.AddSingleton<ISneakerProductService, SneakerProductService>();
 			services.AddSingleton<ISneakerReferenceRepository, SneakerReferencesRestRepository>();
+			services.AddTransient<ICommonService<SneakerReference>, SneakerReferenceService>();
 			services.AddSingleton<ISneakerReferenceService, SneakerReferenceService>();
 			services.AddSingleton<IReferenceSearchService, ReferenceSearchService>();
 

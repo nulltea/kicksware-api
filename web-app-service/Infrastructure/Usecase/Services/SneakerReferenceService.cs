@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Core.Entities.Products;
 using Core.Entities.Reference;
@@ -24,6 +25,8 @@ namespace Infrastructure.Usecase
 
 		public List<SneakerReference> FetchAll() => _repository.GetAll();
 
+		public List<SneakerReference> FetchOffset(int count, int offset) => _repository.GetOffset(count, offset);
+
 		public List<SneakerReference> Fetch(IEnumerable<string> idList) => _repository.Get(idList);
 
 		public List<SneakerReference> Fetch(object queryObject) => _repository.Get(queryObject);
@@ -34,7 +37,7 @@ namespace Infrastructure.Usecase
 
 		public bool Modify(SneakerReference sneakerReference) => _repository.Update(sneakerReference);
 
-		public int Count(object queryObject) => _repository.Count(queryObject);
+		public int Count(object queryObject = default) => _repository.Count(queryObject);
 
 		#endregion
 
@@ -43,6 +46,8 @@ namespace Infrastructure.Usecase
 		public Task<SneakerReference> FetchOneAsync(string sneakerId) => _repository.GetUniqueAsync(sneakerId);
 
 		public Task<List<SneakerReference>> FetchAllAsync() => _repository.GetAllAsync();
+
+		public Task<List<SneakerReference>> FetchOffsetAsync(int count, int offset) => _repository.GetOffsetAsync(count, offset);
 
 		public Task<List<SneakerReference>> FetchAsync(IEnumerable<string> idList) => _repository.GetAsync(idList);
 
@@ -54,7 +59,7 @@ namespace Infrastructure.Usecase
 
 		public Task<bool> ModifyAsync(SneakerReference sneakerReference) => _repository.UpdateAsync(sneakerReference);
 
-		public Task<int> CountAsync(object queryObject) => _repository.CountAsync(queryObject);
+		public Task<int> CountAsync(object queryObject = default) => _repository.CountAsync(queryObject);
 
 		#endregion
 

@@ -9,6 +9,8 @@ namespace Core.Repositories
 
 		List<T> GetAll();
 
+		List<T> GetOffset(int count, int offset);
+
 		List<T> Get(IEnumerable<string> idList);
 
 		List<T> Get(object queryObject);
@@ -21,6 +23,6 @@ namespace Core.Repositories
 
 		bool Delete(string uniqueId);
 
-		int Count(object queryObject);
+		int Count(object queryObject = default);
 	}
 }

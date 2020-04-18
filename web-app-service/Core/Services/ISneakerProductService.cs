@@ -5,13 +5,9 @@ using Core.Repositories;
 
 namespace Core.Services
 {
-	public interface ISneakerProductService
+	public interface ISneakerProductService : ICommonService<SneakerProduct>
 	{
 		#region CRUD Sync
-
-		SneakerProduct FetchOne(string uniqueId);
-
-		List<SneakerProduct> FetchAll();
 
 		List<SneakerProduct> Fetch(IEnumerable<string> idList);
 
@@ -27,15 +23,9 @@ namespace Core.Services
 
 		bool Remove(string uniqueId);
 
-		int Count(object queryObject);
-
 		#endregion
 
 		#region CRUD Async
-
-		Task<SneakerProduct> FetchOneAsync(string uniqueId);
-
-		Task<List<SneakerProduct>> FetchAllAsync();
 
 		Task<List<SneakerProduct>> FetchAsync(IEnumerable<string> idList);
 
@@ -50,8 +40,6 @@ namespace Core.Services
 		Task<bool> RemoveAsync(SneakerProduct sneakerProduct);
 
 		Task<bool> RemoveAsync(string uniqueId);
-
-		Task<int> CountAsync(object queryObject);
 
 		#endregion
 

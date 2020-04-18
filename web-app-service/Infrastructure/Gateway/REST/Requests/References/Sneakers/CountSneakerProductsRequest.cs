@@ -2,7 +2,7 @@
 {
 	public class CountSneakerReferencesRequest : BaseSneakerReferenceRequest
 	{
-		public CountSneakerReferencesRequest(object queryObject) : base("/count?")
+		public CountSneakerReferencesRequest(object queryObject) : base("/count")
 		{
 			AddObject(queryObject);
 		}

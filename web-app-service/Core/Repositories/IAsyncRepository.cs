@@ -10,6 +10,8 @@ namespace Core.Repositories
 
 		Task<List<T>> GetAllAsync();
 
+		Task<List<T>> GetOffsetAsync(int count, int offset);
+
 		Task<List<T>> GetAsync(IEnumerable<string> idList);
 
 		Task<List<T>> GetAsync(object queryObject);
@@ -22,6 +24,6 @@ namespace Core.Repositories
 
 		Task<bool> DeleteAsync(string uniqueId);
 
-		Task<int> CountAsync(object queryObject); //todo condition
+		Task<int> CountAsync(object queryObject = default); //todo condition
 	}
 }

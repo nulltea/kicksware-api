@@ -6,13 +6,9 @@ using Core.Repositories;
 
 namespace Core.Services
 {
-	public interface ISneakerReferenceService
+	public interface ISneakerReferenceService : ICommonService<SneakerReference>
 	{
 		#region CRUD Sync
-
-		SneakerReference FetchOne(string uniqueId);
-
-		List<SneakerReference> FetchAll();
 
 		List<SneakerReference> Fetch(IEnumerable<string> idList);
 
@@ -24,15 +20,9 @@ namespace Core.Services
 
 		bool Modify(SneakerReference sneakerReference);
 
-		int Count(object queryObject);
-
 		#endregion
 
 		#region CRUD Async
-
-		Task<SneakerReference> FetchOneAsync(string uniqueId);
-
-		Task<List<SneakerReference>> FetchAllAsync();
 
 		Task<List<SneakerReference>> FetchAsync(IEnumerable<string> idList);
 
@@ -43,8 +33,6 @@ namespace Core.Services
 		Task<SneakerReference> StoreAsync(SneakerReference sneakerReference);
 
 		Task<bool> ModifyAsync(SneakerReference sneakerReference);
-
-		Task<int> CountAsync(object queryObject);
 
 		#endregion
 

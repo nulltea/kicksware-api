@@ -1,7 +1,9 @@
-﻿namespace Core.Services
+﻿using Core.Entities.Users;
+
+namespace Core.Services
 {
-	public interface IUserService
+	public interface IUserService : ICommonService<User>
 	{
-		
+
 	}
 }

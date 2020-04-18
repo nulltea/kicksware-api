@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using Core.Entities.Reference;
 using Core.Services;
+using Infrastructure.Usecase.Models;
 using Microsoft.AspNetCore.Mvc;
 using SmartBreadcrumbs.Attributes;
 
@@ -22,11 +24,10 @@ namespace web_app_service.Controllers
 
 		[HttpGet]
 		[Breadcrumb("Shop", FromAction = "Index", FromController = typeof(HomeController))]
-		public IActionResult Products()
+		public IActionResult Products(int page = 1)
 		{
-			var products = _service.FetchAll().Take(16).ToList();
-
-			return View(products);
+			var products = new PagedModelList<SneakerReference>(_service, page);
+			return View(products.FetchPage(page));
 		}
 
 		[HttpGet]
