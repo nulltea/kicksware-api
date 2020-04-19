@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Core.Entities.Products;
 using Core.Entities.Reference;
+using Core.Gateway;
 using Core.Repositories;
 
 namespace Core.Services
@@ -10,29 +11,29 @@ namespace Core.Services
 	{
 		#region CRUD Sync
 
-		List<SneakerReference> Fetch(IEnumerable<string> idList);
+		List<SneakerReference> Fetch(IEnumerable<string> idList, RequestParams requestParams = default);
 
-		List<SneakerReference> Fetch(object queryObject);
+		List<SneakerReference> Fetch(object queryObject, RequestParams requestParams = default);
 
-		SneakerReference Store(SneakerReference sneakerReference);
+		SneakerReference Store(SneakerReference sneakerReference, RequestParams requestParams = default);
 
-		List<SneakerReference> Store(List<SneakerReference> sneakerReferences);
+		List<SneakerReference> Store(List<SneakerReference> sneakerReferences, RequestParams requestParams = default);
 
-		bool Modify(SneakerReference sneakerReference);
+		bool Modify(SneakerReference sneakerReference, RequestParams requestParams = default);
 
 		#endregion
 
 		#region CRUD Async
 
-		Task<List<SneakerReference>> FetchAsync(IEnumerable<string> idList);
+		Task<List<SneakerReference>> FetchAsync(IEnumerable<string> idList, RequestParams requestParams = default);
 
-		Task<List<SneakerReference>> FetchAsync(object queryObject);
+		Task<List<SneakerReference>> FetchAsync(object queryObject, RequestParams requestParams = default);
 
-		Task<List<SneakerReference>> StoreAsync(List<SneakerReference> sneakerReferences);
+		Task<List<SneakerReference>> StoreAsync(List<SneakerReference> sneakerReferences, RequestParams requestParams = default);
 
-		Task<SneakerReference> StoreAsync(SneakerReference sneakerReference);
+		Task<SneakerReference> StoreAsync(SneakerReference sneakerReference, RequestParams requestParams = default);
 
-		Task<bool> ModifyAsync(SneakerReference sneakerReference);
+		Task<bool> ModifyAsync(SneakerReference sneakerReference, RequestParams requestParams = default);
 
 		#endregion
 

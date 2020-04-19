@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Core.Entities.Products;
 using Core.Entities.Reference;
+using Core.Gateway;
 using Core.Repositories;
 using Core.Services;
 using Infrastructure.Gateway.REST.Client;
@@ -21,45 +22,50 @@ namespace Infrastructure.Usecase
 
 		#region CRUD Sync
 
-		public SneakerReference FetchOne(string sneakerId) => _repository.GetUnique(sneakerId);
+		public SneakerReference FetchUnique(string sneakerId, RequestParams requestParams = default) =>
+			_repository.GetUnique(sneakerId, requestParams);
 
-		public List<SneakerReference> FetchAll() => _repository.GetAll();
+		public List<SneakerReference> Fetch(RequestParams requestParams = default) => _repository.Get(requestParams);
 
-		public List<SneakerReference> FetchOffset(int count, int offset) => _repository.GetOffset(count, offset);
+		public List<SneakerReference> Fetch(IEnumerable<string> idList, RequestParams requestParams = default) => _repository.Get(idList, requestParams);
 
-		public List<SneakerReference> Fetch(IEnumerable<string> idList) => _repository.Get(idList);
+		public List<SneakerReference> Fetch(object queryObject, RequestParams requestParams = default) => _repository.Get(queryObject, requestParams);
 
-		public List<SneakerReference> Fetch(object queryObject) => _repository.Get(queryObject);
+		public List<SneakerReference> Fetch(Dictionary<string, object> queryMap, RequestParams requestParams = default) => _repository.Get(queryMap, requestParams);
 
-		public SneakerReference Store(SneakerReference sneakerReference) => _repository.Post(sneakerReference);
+		public SneakerReference Store(SneakerReference sneakerReference, RequestParams requestParams = default) => _repository.Post(sneakerReference, requestParams);
 
-		public List<SneakerReference> Store(List<SneakerReference> sneakerReferences) => _repository.Post(sneakerReferences);
+		public List<SneakerReference> Store(List<SneakerReference> sneakerReferences, RequestParams requestParams = default) => _repository.Post(sneakerReferences, requestParams);
 
-		public bool Modify(SneakerReference sneakerReference) => _repository.Update(sneakerReference);
+		public bool Modify(SneakerReference sneakerReference, RequestParams requestParams = default) => _repository.Update(sneakerReference, requestParams);
 
-		public int Count(object queryObject = default) => _repository.Count(queryObject);
+		public int Count(Dictionary<string, object> queryMap = default, RequestParams requestParams = default) => _repository.Count(queryMap, requestParams);
+
+		public int Count(object queryObject = default, RequestParams requestParams = default) => _repository.Count(queryObject, requestParams);
 
 		#endregion
 
 		#region CRUD Async
 
-		public Task<SneakerReference> FetchOneAsync(string sneakerId) => _repository.GetUniqueAsync(sneakerId);
+		public Task<SneakerReference> FetchUniqueAsync(string sneakerId, RequestParams requestParams = default) => _repository.GetUniqueAsync(sneakerId, requestParams);
 
-		public Task<List<SneakerReference>> FetchAllAsync() => _repository.GetAllAsync();
+		public Task<List<SneakerReference>> FetchAsync(RequestParams requestParams = default) => _repository.GetAsync(requestParams);
 
-		public Task<List<SneakerReference>> FetchOffsetAsync(int count, int offset) => _repository.GetOffsetAsync(count, offset);
+		public Task<List<SneakerReference>> FetchAsync(IEnumerable<string> idList, RequestParams requestParams = default) => _repository.GetAsync(idList, requestParams);
 
-		public Task<List<SneakerReference>> FetchAsync(IEnumerable<string> idList) => _repository.GetAsync(idList);
+		public Task<List<SneakerReference>> FetchAsync(object queryObject, RequestParams requestParams = default) => _repository.GetAsync(queryObject, requestParams);
 
-		public Task<List<SneakerReference>> FetchAsync(object queryObject) => _repository.GetAsync(queryObject);
+		public Task<List<SneakerReference>> FetchAsync(Dictionary<string, object> queryMap, RequestParams requestParams = default) => _repository.GetAsync(queryMap, requestParams);
 
-		public Task<SneakerReference> StoreAsync(SneakerReference sneakerReference) => _repository.PostAsync(sneakerReference);
+		public Task<SneakerReference> StoreAsync(SneakerReference sneakerReference, RequestParams requestParams = default) => _repository.PostAsync(sneakerReference, requestParams);
 
-		public Task<List<SneakerReference>> StoreAsync(List<SneakerReference> sneakerReferences) => _repository.PostAsync(sneakerReferences);
+		public Task<List<SneakerReference>> StoreAsync(List<SneakerReference> sneakerReferences, RequestParams requestParams = default) => _repository.PostAsync(sneakerReferences, requestParams);
 
-		public Task<bool> ModifyAsync(SneakerReference sneakerReference) => _repository.UpdateAsync(sneakerReference);
+		public Task<bool> ModifyAsync(SneakerReference sneakerReference, RequestParams requestParams = default) => _repository.UpdateAsync(sneakerReference, requestParams);
 
-		public Task<int> CountAsync(object queryObject = default) => _repository.CountAsync(queryObject);
+		public Task<int> CountAsync(Dictionary<string, object> queryMap = default, RequestParams requestParams = default) => _repository.CountAsync(queryMap, requestParams);
+
+		public Task<int> CountAsync(object queryObject = default, RequestParams requestParams = default) => _repository.CountAsync(queryObject, requestParams);
 
 		#endregion
 

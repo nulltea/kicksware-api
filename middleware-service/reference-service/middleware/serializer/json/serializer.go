@@ -29,6 +29,14 @@ func (r *serializer) Decode(input []byte) ([]*model.SneakerReference, error) {
 	return references, nil
 }
 
+func (r *serializer) DecodeMap(input []byte) (map[string]interface{}, error) {
+	queryMap := make(map[string]interface{})
+	if err := json.Unmarshal(input, &queryMap); err != nil {
+		return nil, errors.Wrap(err, "serializer.SneakerReference.Decode")
+	}
+	return queryMap, nil
+}
+
 func (r *serializer) Encode(input interface{}) ([]byte, error) {
 	raw, err := json.Marshal(input)
 	if err != nil {

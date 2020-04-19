@@ -1,25 +1,30 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Entities;
+using Core.Gateway;
 
 namespace Core.Services
 {
 	public interface ICommonService<T> where T : IBaseEntity
 	{
-		T FetchOne(string uniqueId);
+		T FetchUnique(string uniqueId, RequestParams requestParams = default);
 
-		List<T> FetchAll();
+		List<T> Fetch(RequestParams requestParams = default);
 
-		List<T> FetchOffset(int count, int offset);
+		List<T> Fetch(Dictionary<string, object> query, RequestParams requestParams = default);
 
-		int Count(object query = default);
+		int Count(Dictionary<string, object> query, RequestParams requestParams = default);
 
-		Task<T> FetchOneAsync(string uniqueId);
+		int Count(object query = default, RequestParams requestParams = default);
 
-		Task<List<T>> FetchAllAsync();
+		Task<T> FetchUniqueAsync(string uniqueId, RequestParams requestParams = default);
 
-		Task<List<T>> FetchOffsetAsync(int count, int offset);
+		Task<List<T>> FetchAsync(RequestParams requestParams = default);
 
-		Task<int> CountAsync(object query = default);
+		Task<List<T>> FetchAsync(Dictionary<string, object> query, RequestParams requestParams = default);
+
+		Task<int> CountAsync(Dictionary<string, object> query, RequestParams requestParams = default);
+
+		Task<int> CountAsync(object query = default, RequestParams requestParams = default);
 	}
 }

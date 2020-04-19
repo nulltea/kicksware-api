@@ -1,8 +1,16 @@
-﻿namespace Infrastructure.Gateway.REST.References.Sneakers
+﻿using System.Collections.Generic;
+using RestSharp;
+
+namespace Infrastructure.Gateway.REST.References.Sneakers
 {
 	public class GetMapSneakerReferencesRequest : BaseSneakerReferenceRequest
 	{
-		public GetMapSneakerReferencesRequest(object map) : base("/map")
+		public GetMapSneakerReferencesRequest(Dictionary<string, object> map) : base("/map?", Method.POST)
+		{
+			AddJsonBody(map);
+		}
+
+		public GetMapSneakerReferencesRequest(object map) : base("/map", Method.POST)
 		{
 			AddJsonBody(map);
 		}

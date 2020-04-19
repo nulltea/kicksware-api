@@ -26,6 +26,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0" />
+    <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.6" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
@@ -50,42 +51,6 @@
     <_ContentIncludedByDefault Remove="wwwroot\styles\css\auth\modal.css.map" />
     <_ContentIncludedByDefault Remove="wwwroot\styles\css\layout\social.css" />
     <_ContentIncludedByDefault Remove="wwwroot\styles\css\layout\social.css.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\css\font-awesome.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\css\font-awesome.min.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\fonts\FontAwesome.otf" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\animated.less" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\bordered-pulled.less" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\core.less" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\fixed-width.less" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\font-awesome.less" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\icons.less" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\larger.less" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\list.less" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\mixins.less" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\path.less" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\rotated-flipped.less" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\screen-reader.less" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\stacked.less" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\less\variables.less" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\font-awesome.scss" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_animated.scss" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_core.scss" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_fixed-width.scss" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_icons.scss" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_larger.scss" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_list.scss" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_mixins.scss" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_path.scss" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_screen-reader.scss" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_stacked.scss" />
-    <_ContentIncludedByDefault Remove="wwwroot\lib\font-awesome-4.7.0\scss\_variables.scss" />
     <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap4\bootstrap.min.css" />
     <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap4\bootstrap.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap4\popper.js" />

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Security.Authentication;
 using System.Threading.Tasks;
 using Core.Constants;
+using Core.Extension;
 using Core.Gateway;
 using Infrastructure.Serializers;
 using RestSharp;
@@ -15,26 +17,26 @@ namespace Infrastructure.Gateway.REST.Client
 		{
 			UseSerializer(() => new JsonRestSerializer());
 		}
-		
+
 		public void Authenticate() { }
 
 		public bool Request(IGatewayRestRequest request)
 		{
-			var response = Execute(request);
+			var response = Execute(ApplyRequestParams(request));
 			GuardUnsuccessfulRequest(request, response);
 			return response.IsSuccessful;
 		}
 
 		public async Task<bool> RequestAsync(IGatewayRestRequest request)
 		{
-			var response = await ExecuteAsync(request);
+			var response = await ExecuteAsync(ApplyRequestParams(request));
 			GuardUnsuccessfulRequest(request, response);
 			return response.IsSuccessful;
 		}
 
 		public T Request<T>(IGatewayRestRequest request)
 		{
-			var response = Execute<T>(request);
+			var response = Execute<T>(ApplyRequestParams(request));
 			GuardUnsuccessfulRequest(request, response);
 
 			if (response.StatusCode == HttpStatusCode.NotFound) return default;
@@ -44,7 +46,7 @@ namespace Infrastructure.Gateway.REST.Client
 
 		public async Task<T> RequestAsync<T>(IGatewayRestRequest request)
 		{
-			var response = await ExecuteAsync<T>(request);
+			var response = await ExecuteAsync<T>(ApplyRequestParams(request));
 			GuardUnsuccessfulRequest(request, response);
 			return response.Data;
 		}
@@ -54,6 +56,12 @@ namespace Infrastructure.Gateway.REST.Client
 			if (request.Method == Method.GET && response.StatusCode == HttpStatusCode.NotFound) return;
 			if (response.StatusCode == HttpStatusCode.Unauthorized) throw new AuthenticationException(response.Content);
 			if (response.StatusCode != HttpStatusCode.OK) throw new Exception(response.Content);
+		}
+
+		private IGatewayRestRequest ApplyRequestParams(IGatewayRestRequest request)
+		{
+			request.RequestParams?.ToMap().ToList().ForEach(kvp => request.AddParameter(kvp.Key, kvp.Value, ParameterType.QueryString));
+			return request;
 		}
 	}
 }

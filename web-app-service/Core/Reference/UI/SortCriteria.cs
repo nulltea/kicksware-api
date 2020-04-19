@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using Core.Model.Parameters;
 
 namespace Core.Reference
 {
-	public enum SortType
+	public enum SortCriteria
 	{
 		[EnumMember(Value = "Popular")]
 		[Display(Name = "Popular", ShortName = "Popular")]

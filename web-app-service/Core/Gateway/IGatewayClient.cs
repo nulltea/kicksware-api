@@ -14,4 +14,6 @@ namespace Core.Gateway
 
 		Task<TR> RequestAsync<TR>(T request);
 	}
+
+
 }

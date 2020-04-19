@@ -3,6 +3,7 @@ package msg
 import (
 	"reference-service/core/model"
 	"reference-service/core/service"
+
 	"github.com/pkg/errors"
 	"github.com/vmihailenco/msgpack"
 )
@@ -27,6 +28,14 @@ func (r *serializer) Decode(input []byte) ([]*model.SneakerReference, error) {
 		return nil, errors.Wrap(err, "serializer.SneakerReference.Decode")
 	}
 	return references, nil
+}
+
+func (r *serializer) DecodeMap(input []byte) (map[string]interface{}, error) {
+	queryMap := make(map[string]interface{})
+	if err := msgpack.Unmarshal(input, &queryMap); err != nil {
+		return nil, errors.Wrap(err, "serializer.SneakerReference.Decode")
+	}
+	return queryMap, nil
 }
 
 func (r *serializer) Encode(input interface{}) ([]byte, error) {

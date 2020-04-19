@@ -1,4 +1,7 @@
 ﻿namespace Core.Gateway
 {
-	public interface IGatewayRequest { }
+	public interface IGatewayRequest
+	{
+		RequestParams RequestParams { get; set; }
+	}
 }

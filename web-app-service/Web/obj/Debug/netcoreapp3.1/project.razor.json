@@ -1,5 +1,5 @@
 {
-  "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Web.csproj",
+  "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Web.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "3.0",
@@ -17868,6 +17868,30 @@
         }
       },
       {
+        "Kind": "ITagHelper",
+        "Name": "SmartBreadcrumbs.BreadcrumbTagHelper",
+        "AssemblyName": "SmartBreadcrumbs",
+        "Documentation": null,
+        "TagOutputHint": null,
+        "CaseSensitive": false,
+        "TagMatchingRules": [
+          {
+            "TagName": "breadcrumb",
+            "ParentTag": null,
+            "TagStructure": 0,
+            "Attributes": [],
+            "Diagnostics": []
+          }
+        ],
+        "BoundAttributes": [],
+        "AllowedChildTags": [],
+        "Diagnostics": [],
+        "Metadata": {
+          "Runtime.Name": "ITagHelper",
+          "Common.TypeName": "SmartBreadcrumbs.BreadcrumbTagHelper"
+        }
+      },
+      {
         "Kind": "Components.Bind",
         "Name": "Bind",
         "AssemblyName": "Microsoft.AspNetCore.Components",
@@ -20521,118 +20545,118 @@
   "RootNamespace": "web_app_service",
   "Documents": [
     {
-      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Views\\Contact\\Contact.cshtml",
-      "TargetPath": "Views\\Contact\\Contact.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Views\\_ViewImports.cshtml",
-      "TargetPath": "Views\\_ViewImports.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Views\\Shared\\_Layout.cshtml",
-      "TargetPath": "Views\\Shared\\_Layout.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Views\\Sell\\New\\Preview.cshtml",
-      "TargetPath": "Views\\Sell\\New\\Preview.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Views\\Home\\Index.cshtml",
-      "TargetPath": "Views\\Home\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Views\\Sell\\New\\Payment.cshtml",
-      "TargetPath": "Views\\Sell\\New\\Payment.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Views\\Sell\\ModifyProduct.cshtml",
-      "TargetPath": "Views\\Sell\\ModifyProduct.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Views\\Sell\\MyProducts.cshtml",
-      "TargetPath": "Views\\Sell\\MyProducts.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
-      "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Views\\Shop\\ProductItem.cshtml",
+      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Views\\Shop\\ProductItem.cshtml",
       "TargetPath": "Views\\Shop\\ProductItem.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Views\\Shop\\Products.cshtml",
-      "TargetPath": "Views\\Shop\\Products.cshtml",
+      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Views\\Sell\\ModifyProduct.cshtml",
+      "TargetPath": "Views\\Sell\\ModifyProduct.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Views\\Sell\\New\\Photos.cshtml",
-      "TargetPath": "Views\\Sell\\New\\Photos.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Views\\Shared\\Error.cshtml",
-      "TargetPath": "Views\\Shared\\Error.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Views\\Sell\\New\\Search.cshtml",
-      "TargetPath": "Views\\Sell\\New\\Search.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Views\\_ViewStart.cshtml",
-      "TargetPath": "Views\\_ViewStart.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Views\\Sell\\NewProduct.cshtml",
-      "TargetPath": "Views\\Sell\\NewProduct.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Views\\Sell\\New\\Details.cshtml",
-      "TargetPath": "Views\\Sell\\New\\Details.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Areas\\Identity\\Pages\\_ViewStart.cshtml",
+      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Areas\\Identity\\Pages\\_ViewStart.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\_ViewStart.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Views\\Shared\\_LoginPartial.cshtml",
-      "TargetPath": "Views\\Shared\\_LoginPartial.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Views\\About\\About.cshtml",
+      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Views\\About\\About.cshtml",
       "TargetPath": "Views\\About\\About.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Views\\Sell\\New\\Shipping.cshtml",
+      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Views\\Shared\\_Layout.cshtml",
+      "TargetPath": "Views\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Views\\_ViewImports.cshtml",
+      "TargetPath": "Views\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Views\\Sell\\New\\Shipping.cshtml",
       "TargetPath": "Views\\Sell\\New\\Shipping.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Views\\Checkout\\Checkout.cshtml",
+      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Views\\Shop\\Products.cshtml",
+      "TargetPath": "Views\\Shop\\Products.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Views\\Sell\\New\\Search.cshtml",
+      "TargetPath": "Views\\Sell\\New\\Search.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+      "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Views\\Home\\Privacy.cshtml",
+      "TargetPath": "Views\\Home\\Privacy.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Views\\Sell\\MyProducts.cshtml",
+      "TargetPath": "Views\\Sell\\MyProducts.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Views\\Shared\\_LoginPartial.cshtml",
+      "TargetPath": "Views\\Shared\\_LoginPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Views\\Sell\\NewProduct.cshtml",
+      "TargetPath": "Views\\Sell\\NewProduct.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Views\\Sell\\New\\Photos.cshtml",
+      "TargetPath": "Views\\Sell\\New\\Photos.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Views\\Sell\\New\\Payment.cshtml",
+      "TargetPath": "Views\\Sell\\New\\Payment.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Views\\_ViewStart.cshtml",
+      "TargetPath": "Views\\_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Views\\Home\\Index.cshtml",
+      "TargetPath": "Views\\Home\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Views\\Shared\\Error.cshtml",
+      "TargetPath": "Views\\Shared\\Error.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Views\\Sell\\New\\Details.cshtml",
+      "TargetPath": "Views\\Sell\\New\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Views\\Checkout\\Checkout.cshtml",
       "TargetPath": "Views\\Checkout\\Checkout.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\web-app-service\\Views\\Home\\Privacy.cshtml",
-      "TargetPath": "Views\\Home\\Privacy.cshtml",
+      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Views\\Sell\\New\\Preview.cshtml",
+      "TargetPath": "Views\\Sell\\New\\Preview.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Views\\Contact\\Contact.cshtml",
+      "TargetPath": "Views\\Contact\\Contact.cshtml",
       "FileKind": "mvc"
     }
   ],

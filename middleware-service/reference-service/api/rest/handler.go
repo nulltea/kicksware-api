@@ -1,24 +1,29 @@
 package rest
 
 import (
+	"io/ioutil"
+	"log"
+	"net/http"
+	"reflect"
+	"strconv"
+
+	"github.com/fatih/structs"
+	"github.com/go-chi/chi"
+	"github.com/pkg/errors"
+
+	"reference-service/api/common"
 	"reference-service/core/model"
 	"reference-service/core/service"
 	"reference-service/middleware/business"
 	"reference-service/middleware/serializer/json"
 	"reference-service/middleware/serializer/msg"
-	"reference-service/util"
-	"github.com/go-chi/chi"
-	"github.com/pkg/errors"
-	"io/ioutil"
-	"log"
-	"net/http"
 )
 
 type RestfulHandler interface {
 	GetOne(http.ResponseWriter, *http.Request)
 	Get(http.ResponseWriter, *http.Request)
 	GetAll(http.ResponseWriter, *http.Request)
-	GetQuery(http.ResponseWriter, *http.Request)
+	PostQuery(http.ResponseWriter, *http.Request)
 	PostOne(http.ResponseWriter, *http.Request)
 	Post(http.ResponseWriter, *http.Request)
 	Patch(http.ResponseWriter, *http.Request)
@@ -66,6 +71,7 @@ func (h *handler) Get(w http.ResponseWriter, r *http.Request) {
 
 func (h *handler) GetAll(w http.ResponseWriter, r *http.Request) {
 	sneakerReferences, err := h.Service.FetchAll()
+	params := &common.RequestParams{}
 	if err != nil {
 		if errors.Cause(err) == business.ErrReferenceNotFound {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
@@ -74,11 +80,17 @@ func (h *handler) GetAll(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	h.setupResponse(w, sneakerReferences, http.StatusOK)
+	params.AssignParams(r)
+	h.setupResponse(w, params.ApplyParams(sneakerReferences), http.StatusOK)
 }
 
-func (h *handler) GetQuery(w http.ResponseWriter, r *http.Request) {
-	query := util.ToQueryMap(r.URL.Query())
+func (h *handler) PostQuery(w http.ResponseWriter, r *http.Request) {
+	query, err := h.getRequestQueryBody(r)
+	params := &common.RequestParams{}
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusNotFound)
+		return
+	}
 	sneakerReferences, err := h.Service.FetchQuery(query)
 	if err != nil {
 		if errors.Cause(err) == business.ErrReferenceNotFound {
@@ -88,7 +100,8 @@ func (h *handler) GetQuery(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	h.setupResponse(w, sneakerReferences, http.StatusOK)
+	params.AssignParams(r)
+	h.setupResponse(w, params.ApplyParams(sneakerReferences), http.StatusOK)
 }
 
 func (h *handler) PostOne(w http.ResponseWriter, r *http.Request) {
@@ -161,6 +174,19 @@ func (h *handler) setupResponse(w http.ResponseWriter, body interface{}, statusC
 	}
 }
 
+func (h *handler) getRequestQueryBody(r *http.Request) (map[string]interface{}, error) {
+	contentType := r.Header.Get("Content-Type")
+	requestBody, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		return nil, err
+	}
+	body, err := h.serializer(contentType).DecodeMap(requestBody)
+	if err != nil {
+		return nil, err
+	}
+	return body, nil
+}
+
 func (h *handler) getRequestBody(r *http.Request) (*model.SneakerReference, error) {
 	contentType := r.Header.Get("Content-Type")
 	requestBody, err := ioutil.ReadAll(r.Body)
@@ -186,6 +212,33 @@ func (h *handler) getRequestBodies(r *http.Request) ([]*model.SneakerReference, 
 		return nil, err
 	}
 	return bodies, nil
+}
+
+func (h *handler) getRequestParams(r *http.Request) (requestParams common.RequestParams) {
+	query := r.URL.Query();
+	properties := structs.Names(requestParams)
+	prmType := reflect.TypeOf(requestParams);
+	for _, prop := range properties {
+		value := query.Get(prop)
+		paramField := reflect.ValueOf(&requestParams).Elem().FieldByName(prop);
+		field, _ := prmType.FieldByName(prop)
+		switch field.Type.Kind().String() {
+		case "string":
+			paramField.SetString(value);
+		case "int":
+		case "float":
+			if num, err := strconv.ParseInt(value, 10, 32); err != nil {
+				paramField.SetInt(num);
+			}
+		case "bool":
+			if sign, err := strconv.ParseBool(value); err != nil {
+				paramField.SetBool(sign);
+			}
+		default:
+			paramField.SetString(value);
+		}
+	}
+	return
 }
 
 func (h *handler) serializer(contentType string) service.SneakerReferenceSerializer {

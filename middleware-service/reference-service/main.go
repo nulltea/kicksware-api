@@ -17,7 +17,7 @@ import (
 )
 
 func main() {
-	// loadEnv()
+	loadEnv()
 	repo := getRepository()
 	if repo == nil {
 		return
@@ -73,4 +73,5 @@ func getRepository() repo.SneakerReferenceRepository {
 	}
 	return nil
 }
+
 

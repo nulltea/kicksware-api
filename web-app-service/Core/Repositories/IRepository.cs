@@ -1,28 +1,31 @@
 ﻿using System.Collections.Generic;
 using Core.Entities;
+using Core.Gateway;
 
 namespace Core.Repositories
 {
 	public interface IRepository<T> where T : IBaseEntity
 	{
-		T GetUnique(string id);
+		T GetUnique(string id, RequestParams requestParams = default);
 
-		List<T> GetAll();
+		List<T> Get(RequestParams requestParams = default);
 
-		List<T> GetOffset(int count, int offset);
+		List<T> Get(IEnumerable<string> idList, RequestParams requestParams = default);
 
-		List<T> Get(IEnumerable<string> idList);
+		List<T> Get(Dictionary<string, object> queryMap, RequestParams requestParams = default);
 
-		List<T> Get(object queryObject);
+		List<T> Get(object queryObject, RequestParams requestParams = default);
 
-		T Post(T entity);
+		T Post(T entity, RequestParams requestParams = default);
 
-		bool Update(T entity);
+		bool Update(T entity, RequestParams requestParams = default);
 
-		bool Delete(T entity);
+		bool Delete(T entity, RequestParams requestParams = default);
 
-		bool Delete(string uniqueId);
+		bool Delete(string uniqueId, RequestParams requestParams = default);
 
-		int Count(object queryObject = default);
+		int Count(Dictionary<string, object> queryMap, RequestParams requestParams = default);
+
+		int Count(object queryObject = default, RequestParams requestParams = default);
 	}
 }

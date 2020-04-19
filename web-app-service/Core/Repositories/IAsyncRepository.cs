@@ -1,29 +1,32 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Entities;
+using Core.Gateway;
 
 namespace Core.Repositories
 {
 	public interface IAsyncRepository<T> where T : IBaseEntity
 	{
-		Task<T> GetUniqueAsync(string uniqueId);
+		Task<T> GetUniqueAsync(string uniqueId, RequestParams requestParams = default);
 
-		Task<List<T>> GetAllAsync();
+		Task<List<T>> GetAsync(RequestParams requestParams = default);
 
-		Task<List<T>> GetOffsetAsync(int count, int offset);
+		Task<List<T>> GetAsync(IEnumerable<string> idList, RequestParams requestParams = default);
 
-		Task<List<T>> GetAsync(IEnumerable<string> idList);
+		Task<List<T>> GetAsync(Dictionary<string, object> queryMap, RequestParams requestParams = default);
 
-		Task<List<T>> GetAsync(object queryObject);
+		Task<List<T>> GetAsync(object queryObject, RequestParams requestParams = default);
 
-		Task<T> PostAsync(T entity);
+		Task<T> PostAsync(T entity, RequestParams requestParams = default);
 
-		Task<bool> UpdateAsync(T entity);
+		Task<bool> UpdateAsync(T entity, RequestParams requestParams = default);
 
-		Task<bool> DeleteAsync(T entity);
+		Task<bool> DeleteAsync(T entity, RequestParams requestParams = default);
 
-		Task<bool> DeleteAsync(string uniqueId);
+		Task<bool> DeleteAsync(string uniqueId, RequestParams requestParams = default);
 
-		Task<int> CountAsync(object queryObject = default); //todo condition
+		Task<int> CountAsync(Dictionary<string, object> queryMap, RequestParams requestParams = default);
+
+		Task<int> CountAsync(object queryObject = default, RequestParams requestParams = default);
 	}
 }

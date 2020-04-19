@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Entities.Products;
+using Core.Gateway;
 using Core.Repositories;
 using Infrastructure.Gateway.REST.Client;
 using Infrastructure.Gateway.REST.ProductRequests.Sneakers;
@@ -16,49 +17,76 @@ namespace Infrastructure.Data
 
 		#region Sync
 
-		public SneakerProduct GetUnique(string sneakerId) => _client.Request<SneakerProduct>(new GetSneakerProductRequest(sneakerId));
+		public SneakerProduct GetUnique(string sneakerId, RequestParams requestParams = default) =>
+			_client.Request<SneakerProduct>(new GetSneakerProductRequest(sneakerId) {RequestParams = requestParams});
 
-		public List<SneakerProduct> GetAll() => _client.Request<List<SneakerProduct>>(new GetAllSneakersRequest());
+		public List<SneakerProduct> Get(RequestParams requestParams = default) =>
+			_client.Request<List<SneakerProduct>>(new GetAllSneakersRequest {RequestParams = requestParams});
 
-		public List<SneakerProduct> GetOffset(int count, int offset) => GetAll().Skip(offset).Take(count).ToList(); //TODO rest
+		public List<SneakerProduct> Get(IEnumerable<string> idCodes, RequestParams requestParams = default) =>
+			_client.Request<List<SneakerProduct>>(new GetQueriedSneakersRequest(idCodes) {RequestParams = requestParams});
 
-		public List<SneakerProduct> Get(IEnumerable<string> idCodes) => _client.Request<List<SneakerProduct>>(new GetQueriedSneakersRequest(idCodes));
+		public List<SneakerProduct> Get(object queryObject, RequestParams requestParams = default) =>
+			_client.Request<List<SneakerProduct>>(new GetMapSneakersRequest(queryObject) {RequestParams = requestParams});
 
-		public List<SneakerProduct> Get(object queryObject) => _client.Request<List<SneakerProduct>>(new GetMapSneakersRequest(queryObject));
+		public List<SneakerProduct> Get(Dictionary<string, object> queryMap, RequestParams requestParams = default) =>
+			_client.Request<List<SneakerProduct>>(new GetMapSneakersRequest(queryMap) {RequestParams = requestParams});
 
-		public SneakerProduct Post(SneakerProduct sneakerProduct) => _client.Request<SneakerProduct>(new PostSneakerProductRequest(sneakerProduct));
 
-		public bool Update(SneakerProduct sneakerProduct) => _client.Request(new PutSneakerProductRequest(sneakerProduct));
+		public SneakerProduct Post(SneakerProduct sneakerProduct, RequestParams requestParams = default) =>
+			_client.Request<SneakerProduct>(new PostSneakerProductRequest(sneakerProduct) {RequestParams = requestParams});
 
-		public bool Delete(SneakerProduct sneakerProduct) => _client.Request(new DeleteSneakerProductRequest(sneakerProduct));
+		public bool Update(SneakerProduct sneakerProduct, RequestParams requestParams = default) =>
+			_client.Request(new PutSneakerProductRequest(sneakerProduct) {RequestParams = requestParams});
 
-		public bool Delete(string sneakerId) => _client.Request(new DeleteSneakerProductRequest(sneakerId));
+		public bool Delete(SneakerProduct sneakerProduct, RequestParams requestParams = default) =>
+			_client.Request(new DeleteSneakerProductRequest(sneakerProduct) {RequestParams = requestParams});
 
-		public int Count(object queryObject) => GetAll().Count;// TODO _client.Request<int>(new CountSneakerProductsRequest(queryObject));
+		public bool Delete(string sneakerId, RequestParams requestParams = default) =>
+			_client.Request(new DeleteSneakerProductRequest(sneakerId) {RequestParams = requestParams});
+
+		public int Count(Dictionary<string, object> queryMap, RequestParams requestParams = default) =>
+			Get(queryMap, requestParams).Count;// TODO _client.Request<int>(new CountSneakerProductsRequest(queryObject));
+
+		public int Count(object queryObject, RequestParams requestParams = default) =>
+			Get(requestParams).Count;// TODO _client.Request<int>(new CountSneakerProductsRequest(queryObject));
 
 		#endregion
 
 		#region Async
 
-		public Task<SneakerProduct> GetUniqueAsync(string sneakerId) => _client.RequestAsync<SneakerProduct>(new GetSneakerProductRequest(sneakerId));
+		public Task<SneakerProduct> GetUniqueAsync(string sneakerId, RequestParams requestParams = default) =>
+			_client.RequestAsync<SneakerProduct>(new GetSneakerProductRequest(sneakerId) {RequestParams = requestParams});
 
-		public Task<List<SneakerProduct>> GetAllAsync() => _client.RequestAsync<List<SneakerProduct>>(new GetAllSneakersRequest());
+		public Task<List<SneakerProduct>> GetAsync(RequestParams requestParams = default) =>
+			_client.RequestAsync<List<SneakerProduct>>(new GetAllSneakersRequest {RequestParams = requestParams});
 
-		public async Task<List<SneakerProduct>> GetOffsetAsync(int count, int offset) => (await GetAllAsync()).Skip(offset).Take(count).ToList(); //TODO rest
+		public Task<List<SneakerProduct>> GetAsync(IEnumerable<string> idList, RequestParams requestParams = default) =>
+			_client.RequestAsync<List<SneakerProduct>>(new GetQueriedSneakersRequest(idList) {RequestParams = requestParams});
 
-		public Task<List<SneakerProduct>> GetAsync(IEnumerable<string> idList) => _client.RequestAsync<List<SneakerProduct>>(new GetQueriedSneakersRequest(idList));
+		public Task<List<SneakerProduct>> GetAsync(object queryObject, RequestParams requestParams = default) =>
+			_client.RequestAsync<List<SneakerProduct>>(new GetMapSneakersRequest(queryObject) {RequestParams = requestParams});
 
-		public Task<List<SneakerProduct>> GetAsync(object queryObject) => _client.RequestAsync<List<SneakerProduct>>(new GetMapSneakersRequest(queryObject));
+		public Task<List<SneakerProduct>> GetAsync(Dictionary<string, object> queryMap, RequestParams requestParams = default) =>
+			_client.RequestAsync<List<SneakerProduct>>(new GetMapSneakersRequest(queryMap) {RequestParams = requestParams});
 
-		public Task<SneakerProduct> PostAsync(SneakerProduct sneakerProduct) => _client.RequestAsync<SneakerProduct>(new PostSneakerProductRequest(sneakerProduct));
+		public Task<SneakerProduct> PostAsync(SneakerProduct sneakerProduct, RequestParams requestParams = default) =>
+			_client.RequestAsync<SneakerProduct>(new PostSneakerProductRequest(sneakerProduct) {RequestParams = requestParams});
 
-		public Task<bool> UpdateAsync(SneakerProduct sneakerProduct) => _client.RequestAsync(new PutSneakerProductRequest(sneakerProduct));
+		public Task<bool> UpdateAsync(SneakerProduct sneakerProduct, RequestParams requestParams = default) =>
+			_client.RequestAsync(new PutSneakerProductRequest(sneakerProduct) {RequestParams = requestParams});
 
-		public Task<bool> DeleteAsync(SneakerProduct sneakerProduct) => _client.RequestAsync(new DeleteSneakerProductRequest(sneakerProduct));
+		public Task<bool> DeleteAsync(SneakerProduct sneakerProduct, RequestParams requestParams = default) =>
+			_client.RequestAsync(new DeleteSneakerProductRequest(sneakerProduct) {RequestParams = requestParams});
 
-		public Task<bool> DeleteAsync(string sneakerId) => _client.RequestAsync(new DeleteSneakerProductRequest(sneakerId));
+		public Task<bool> DeleteAsync(string sneakerId, RequestParams requestParams = default) =>
+			_client.RequestAsync(new DeleteSneakerProductRequest(sneakerId) {RequestParams = requestParams});
 
-		public async Task<int> CountAsync(object queryObject = default) => (await GetAllAsync()).Count;// TODO _client.RequestAsync<int>(new CountSneakerProductsRequest(queryObject));
+		public async Task<int> CountAsync(Dictionary<string, object> queryMap = default, RequestParams requestParams = default) =>
+			(await GetAsync()).Count;// TODO _client.RequestAsync<int>(new CountSneakerProductsRequest(queryObject));
+
+		public async Task<int> CountAsync(object queryObject = default, RequestParams requestParams = default) =>
+			(await GetAsync()).Count;// TODO _client.RequestAsync<int>(new CountSneakerProductsRequest(queryObject));
 
 		#endregion
 	}

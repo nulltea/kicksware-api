@@ -37,7 +37,6 @@ namespace web_app_service.Utils
 					property.SetValue(instance, property.GetValue(entity, null), null);
 				}
 			}
-
 			return instance;
 		}
 	}
