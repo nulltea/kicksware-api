@@ -14,6 +14,7 @@ web-app-service/Infrastructure/bin
 
 **/node_modules
 
+**/files/
 web-app-service/Web/wwwroot/files/
 web-app-service/Web/wwwroot/styles/css
 web-app-service/Web/wwwroot/images/heroes/

@@ -128,10 +128,7 @@ func (r *repository) FetchQuery(query interface{}) ([]*model.SneakerReference, e
 		return nil, errors.Wrap(err, "repository.SneakerReference.FetchQuery")
 	}
 	if sneakerReferences == nil || len(sneakerReferences) == 0 {
-		if err == mongo.ErrNoDocuments {
-			return nil, errors.Wrap(business.ErrReferenceNotFound, "repository.SneakerReference.FetchQuery")
-		}
-		return nil, errors.Wrap(err, "repository.SneakerReference.FetchQuery")
+		return nil, errors.Wrap(business.ErrReferenceNotFound, "repository.SneakerReference.FetchQuery")
 	}
 	return sneakerReferences, nil
 }

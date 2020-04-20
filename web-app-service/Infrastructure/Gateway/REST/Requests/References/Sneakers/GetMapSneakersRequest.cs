@@ -5,7 +5,7 @@ namespace Infrastructure.Gateway.REST.References.Sneakers
 {
 	public class GetMapSneakerReferencesRequest : BaseSneakerReferenceRequest
 	{
-		public GetMapSneakerReferencesRequest(Dictionary<string, object> map) : base("/map?", Method.POST)
+		public GetMapSneakerReferencesRequest(Dictionary<string, object> map) : base("/map", Method.POST)
 		{
 			AddJsonBody(map);
 		}

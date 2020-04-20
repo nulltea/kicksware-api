@@ -94,7 +94,7 @@ func (h *handler) PostQuery(w http.ResponseWriter, r *http.Request) {
 	sneakerReferences, err := h.Service.FetchQuery(query)
 	if err != nil {
 		if errors.Cause(err) == business.ErrReferenceNotFound {
-			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
+			http.Error(w, http.StatusText(http.StatusNoContent), http.StatusNoContent)
 			return
 		}
 		http.Error(w, err.Error(), http.StatusInternalServerError)

@@ -1,9 +1,11 @@
 ﻿@using System.Globalization
+@using System.Linq
 @using Core.Reference
+@using Microsoft.EntityFrameworkCore.Internal
 @using Newtonsoft.Json
 @using web_app_service.Data.Reference_Data
 @using web_app_service.Utils.Helpers
-@model Infrastructure.Usecase.Models.FilteredModel<Core.Entities.Reference.SneakerReference>
+@model Core.Model.IFilteredModel<Core.Entities.Reference.SneakerReference>
 
 @{
 	Layout = "~/Views/Shared/_Layout.cshtml";
@@ -18,222 +20,133 @@
 }
 
 <div class="products">
-<div class="container products-content">
-<div class="row filter-summary">
-	<button class="button toggle-menu">
-		<span>SHOW FILTERS</span>
-		@Html.VectorIconRender("filter.svg")
-		@Html.VectorIconRender("filter_used.svg")
-	</button>
-	<div class="count">
-		<span>Showing @Model.CountTotal results</span>
-	</div>
-	<div class="control-group">
-		<div class="list-select sort_type">
-			<select asp-items="@Html.GetEnumSelectList<SortCriteria>()" class="dropdown_item_select" id="currency">
-				<option disabled="">Category</option>
-			</select>
-		</div>
-		<div class="layout-toggle">
-			<input type="checkbox" checked/>
-			@Html.VectorIconRender("list.svg", "is-unchecked")
-			@Html.VectorIconRender("grid.svg", "is-checked")
-		</div>
-	</div>
-</div>
-<div class="row content-area">
-	<aside class="filter-sidebar">
-		<nav class="accordion collapsed arrows">
-			<form asp-action="RequestFilter" method="post" data-ajax="true" data-ajax-method="post" data-ajax-complete="completed">
-				<header class="menu-panel">
-					<label class="section-title">FILTERS</label>
-				</header>
-				<input type="checkbox" name="accordion" class="accordion-control" id="mp1"/>
-				<section class="menu-panel brand">
-					<label class="section-title" for="mp1">Brand</label>
-					<div class="section-content">
-						<input type="search" id="brand-filter" class="autocomplete-filter filter-input" required="required">
-						<div class="brand-list">
-							@foreach (var brand in Catalog.SneakerBrandsList.Take(4))
-							{
-								var id = $"check-{brand.Replace(" ", "_").ToLower()}";
-								<div class="brand-row">
-									<input type="checkbox" id="@id" name="regular_checkbox" class="regular_checkbox">
-									<label for="@id" class="checkbox_title">@brand</label>
-								</div>
-							}
-						</div>
-					</div>
-				</section>
-				<input type="checkbox" name="accordion" class="accordion-control" id="mp2"/>
-				<section class="menu-panel size">
-					<label class="section-title" for="mp2">Size</label>
-					<div class="section-content">
-						<div class="size-grid">
-							@foreach (var size in Catalog.SneakerSizesList)
-							{
-								var id = $"check-{Convert.ToString(size.Europe, CultureInfo.InvariantCulture).Replace(".", "_")}";
-								<button class="button size-cell">
-									<input type="checkbox" id="@id">
-									<label for="@id">@size.Europe.ToString("#.#")</label>
-								</button>
-							}
-						</div>
-					</div>
-				</section>
-				<input type="checkbox" name="accordion" class="accordion-control" id="mp3"/>
-				<section class="menu-panel color">
-					<label class="section-title" for="mp3">Color</label>
-					<div class="section-content">
-						<div class="color-picker">
-							@foreach (var color in Catalog.FilterColors)
-							{
-								var id = $"color-{color.Name.Replace(" ", "_").ToLower()}";
-								<button class="button color-item" id="id" style="border-bottom: 3px solid @color.Hex; background: @color.Hex">
-									<input type="checkbox" id="@id">
-									<label for="@id">@color.Name</label>
-								</button>
-							}
-						</div>
-					</div>
-				</section>
-				<input type="checkbox" name="accordion" class="accordion-control" id="mp4"/>
-				<section class="menu-panel price">
-					<label class="section-title" for="mp4">Price</label>
-					<div class="section-content">
-						<div class="price-range">
-							<div class="multi-range">
-								<input type="range" class="price-slider min" min="100" value="100" max="1000"/>
-								<input type="range" class="price-slider max" min="100" value="1000" max="1000"/>
-							</div>
-							<div class="multi-input">
-								<input type="number" class="filter-input price-input min"/>
-								<input type="number" class="filter-input price-input max" value="1000"/>
-							</div>
-						</div>
-					</div>
-				</section>
-				<input type="checkbox" name="accordion" class="accordion-control" id="mp5"/>
-				<section class="menu-panel condition">
-					<label class="section-title" for="mp5">Condition</label>
-					<div class="section-content">
-						<div class="condition-grid">
-							@{
-								var conditionValues = Enum.GetValues(typeof(SneakerCondition)).Cast<SneakerCondition>();
-							}
-							@foreach (var condition in conditionValues)
-							{
-								var id = $"condition-{condition.ToString().ToLower()}";
-								<button class="button">
-									<input type="checkbox" id="@id">
-									<label for="@id">@Html.DisplayFor(expr => condition)</label>
-								</button>
-							}
-						</div>
-					</div>
-				</section>
-			</form>
-		</nav>
-		<div class="spacer"></div>
-	</aside>
-	<div class="product-results">
-		<div class="filter-overbar">
-			<div class="filter-chips">
-				<button class="button" id="filter-reset">
-					<span>CLEAR ALL</span>
-					@Html.VectorIconRender("close.svg")
-				</button>
+	<div class="container products-content">
+		<div class="row filter-summary">
+			<button class="button toggle-menu">
+				<span>SHOW FILTERS</span>
+				@Html.VectorIconRender("filter.svg")
+				@Html.VectorIconRender("filter_used.svg")
+			</button>
+			<div class="count">
+				@{
+					var listingFrom = (Model.CurrentPage - 1) * Model.PageSize;
+					var listingTo = listingFrom + Model.PageSize;
+					var listingTotal = @Model.CountTotal;
+				}
+				<span>Showing @listingFrom - @listingTo / @listingTotal results</span>
 			</div>
-			<div class="spacer"></div>
+			<div class="control-group">
+				<div class="list-select sort_type">
+					<select asp-for="SortParameter.Criteria" asp-items="@Html.GetEnumSelectList<SortCriteria>()" class="dropdown_item_select" id="currency">
+						<option disabled="">Category</option>
+					</select>
+				</div>
+				<div class="layout-toggle">
+					<input type="checkbox" checked/>
+					@Html.VectorIconRender("list.svg", "is-unchecked")
+					@Html.VectorIconRender("grid.svg", "is-checked")
+				</div>
+			</div>
 		</div>
-		<div class="products-view grid">
-			@foreach (var reference in Model)
-			{
-				if (reference == null) { continue;}
-				var price = reference.Price != 0m ? $"${reference.Price}" : string.Empty;
-				<div class="product-cell">
-					<div class="info-header">
-						<div class="price">@price</div>
-					</div>
-					<div class="thumb">
-						<img src="@reference.ImagePath" alt="">
-					</div>
-					@*@if (DateTime.Today.Subtract(reference.AddedAt).Days < 5)
+		<div class="row content-area">
+			<aside class="filter-sidebar">
+				<nav class="accordion collapsed arrows">
+					<header class="menu-panel">
+						<label class="section-title">FILTERS</label>
+					</header>
+					<input type="checkbox" name="accordion" class="accordion-control" id="mp1"/>
+					<section class="menu-panel brand">
+						<label class="section-title" for="mp1">Brand</label>
+						<div class="section-content">
+							<input type="search" id="brand-filter" class="autocomplete-filter filter-input" required="required">
+							<div class="brand-list">
+								@foreach (var brand in Model["Brand"].Take(4)) //TODO
 								{
-									<div class="product_extra product_new">
-										<a>New</a>
+									<div class="brand-row">
+										@brand.RenderCheckbox(new {@class = "regular_checkbox"})
 									</div>
-								}*@
-					<div class="info-footer">
-						<div class="brand-title">
-							<a class="underline" asp-controller="Shop" asp-action="ProductItem" asp-route-productId=@reference.UniqueId>@Html.DisplayFor(modelItem => reference.BrandName)</a>
+								}
+							</div>
 						</div>
-						<div class="model-title">
-							@*TODO link to model page*@
-							<a class="underline" asp-controller="Shop" asp-action="ProductItem" asp-route-productId=@reference.UniqueId>@Html.DisplayFor(modelItem => reference.ModelName)</a>
+					</section>
+					<input type="checkbox" name="accordion" class="accordion-control" id="mp2"/>
+					<section class="menu-panel size">
+						<label class="section-title" for="mp2">Size</label>
+						<div class="section-content">
+							<div class="size-grid">
+								@foreach (var size in Model["Size"])
+								{
+									<button class="button size-cell">
+										@size.RenderCheckbox()
+									</button>
+								}
+							</div>
 						</div>
-						<div class="description">
-							@reference.Description
+					</section>
+					<input type="checkbox" name="accordion" class="accordion-control" id="mp3"/>
+					<section class="menu-panel color">
+						<label class="section-title" for="mp3">Color</label>
+						<div class="section-content">
+							<div class="color-picker">
+								@foreach (var color in Model["Color"])
+								{
+									var sourceValue = color.GetSourceValue<FilterColor>();
+									<button class="button color-item" style="border-bottom: 3px solid @sourceValue.Hex; background: @sourceValue.Hex">
+										@color.RenderCheckbox()
+									</button>
+								}
+							</div>
 						</div>
-						<div class="favorite">
-							<input type="checkbox"/>
-							@Html.VectorIconRender("favorite.svg")
+					</section>
+					<input type="checkbox" name="accordion" class="accordion-control" id="mp4"/>
+					<section class="menu-panel price">
+						<label class="section-title" for="mp4">Price</label>
+						<div class="section-content">
+							<div class="price-range">
+								<div class="multi-range">
+									<input type="range" class="price-slider min" min="0" value="0" max="1000"/>
+									<input type="range" class="price-slider max" min="100" value="1000" max="1000"/>
+								</div>
+								<div class="multi-input">
+									@Model["Price"][0].RenderInput(new {type = "number", value = 100, @class = "filter-input price-input min"})
+									@Model["Price"][1].RenderInput(new {type = "number", value = 1000, @class = "filter-input price-input max"})
+								</div>
+							</div>
 						</div>
+					</section>
+					<input type="checkbox" name="accordion" class="accordion-control" id="mp5"/>
+					<section class="menu-panel condition">
+						<label class="section-title" for="mp5">Condition</label>
+						<div class="section-content">
+							<div class="condition-grid">
+								@foreach (var condition in Model["Condition"])
+								{
+									<button class="button">
+										@condition.RenderCheckbox()
+									</button>
+								}
+							</div>
+						</div>
+					</section>
+				</nav>
+				<div class="spacer"></div>
+			</aside>
+			<div class="product-results">
+				<div class="filter-overbar">
+					<div class="filter-chips">
+						<button class="button" id="filter-reset">
+							<span>CLEAR ALL</span>
+							@Html.VectorIconRender("close.svg")
+						</button>
 					</div>
+					<div class="spacer"></div>
 				</div>
-			}
-		</div>
-		<div class="row pagination-control">
-			<nav>
-				<div class="left">
-					<ul>
-						<li class="prev">
-							<a asp-action="Products" asp-route-page="@(Model.CurrentPage - 1)">❮</a>
-						</li>
-						@if (Model.HasPagePrevious)
-						{
-							@for (var pageIndex = new[] {Model.CurrentPage - 3, 1}.Max(); pageIndex <= Model.CurrentPage - 1; pageIndex++)
-							{
-								<li>
-									<a asp-action="Products" asp-route-page="@pageIndex">@pageIndex</a>
-								</li>
-							}
-						}
-					</ul>
+				<div class="result-content" id="result-content">
+					@{ await Html.RenderPartialAsync("ReferencesPartial", Model); }
 				</div>
-				<div class="caption">
-					@if (Model.HasPageNext)
-					{
-						<a asp-action="Products" asp-route-page="@(Model.CurrentPage + 1)">NEXT</a>
-					}
-					else
-					{
-						<a>NEXT</a>
-					}
-				</div>
-				<div class="right">
-					<ul>
-						@if (Model.HasPageNext)
-						{
-							@for (var pageIndex = Model.CurrentPage + 1; pageIndex <= new[] {Model.CurrentPage + 3, Model.PagesTotal}.Min(); pageIndex++)
-							{
-								<li>
-									<a asp-action="Products" asp-route-page="@pageIndex">@pageIndex</a>
-								</li>
-							}
-						}
-						<li class="next">
-							<a asp-action="Products" asp-route-page="@(Model.CurrentPage + 1)">❯</a>
-						</li>
-					</ul>
-				</div>
-
-			</nav>
+			</div>
 		</div>
 	</div>
-</div>
-
-</div>
 </div>
 
 @section Scripts
@@ -243,7 +156,7 @@
 	<script type="text/javascript">
 	$(document).ready(function () {
 		initCustomDropDown();
-		autocompleteFilter("#brand-filter", @Html.Raw(JsonConvert.SerializeObject(Catalog.SneakerBrandsList)));
+		autocompleteFilter("#brand-filter", @Html.Raw(JsonConvert.SerializeObject(@Model["Brand"])));
 	});
 	</script>
 }

@@ -36,8 +36,8 @@ function autocompleteFilter(inputSelector, filterValues) {
 
 		for (let i = 0; i < filterValues.length; i++) {
 			let filteredValue = filterValues[i];
-			if (filteredValue.substr(0, value.length).toUpperCase() === value.toUpperCase()) {
-				let id = `check-${filteredValue.replace(" ", "_").toLowerCase()}`;
+			if (filteredValue["Caption"].substr(0, value.length).toUpperCase() === value.toUpperCase()) {
+				let id = filterValues[i]["RenderId"];
 
 				if ($(`#${id}`).length) {
 					continue;
@@ -49,13 +49,13 @@ function autocompleteFilter(inputSelector, filterValues) {
 				let checkbox = document.createElement("INPUT");
 				checkbox.type = "checkbox";
 				checkbox.id = id;
+				checkbox.value = filteredValue["Value"];
 				checkbox.className = "regular_checkbox";
 
 				let label = document.createElement("LABEL");
-				label.setAttribute("for", checkbox.id);
-				label.innerHTML = `<strong>${filteredValue.substr(0, value.length)}</strong>`;
-				label.innerHTML += filterValues[i].substr(value.length);
-				label.innerHTML += `<input type='hidden' value='${filteredValue}'>`;
+				label.setAttribute("for", id);
+				label.innerHTML = `<strong>${filteredValue["Caption"].substr(0, value.length)}</strong>`;
+				label.innerHTML += filteredValue["Caption"].substr(value.length);
 
 				brandRow.append(checkbox, label);
 				$(checkbox).change(function () {
@@ -63,6 +63,7 @@ function autocompleteFilter(inputSelector, filterValues) {
 					closeAllLists();
 				});
 				chipsInit($(checkbox));
+				bindFilterInputSubmitEvent($(checkbox));
 				$(".brand-list").prepend($(brandRow));
 			}
 		}
@@ -162,7 +163,7 @@ function priceRangeInit() {
 
 	syncMaxPrice(maxRangeElement);
 	syncMinPrice(minRangeElement);
-}
+} //TODO bind submit action on range change
 
 function chipsInit(option = null){
 	let filterOverbar = $(".filter-overbar");
@@ -193,6 +194,7 @@ function chipsInit(option = null){
 				option.prop('checked', false);
 				hideChipsPanel();
 			});
+			bindFilterInputSubmitEvent($(close), "click");
 			chip.append(close);
 			chipsPanel.append(chip);
 		});
@@ -217,8 +219,11 @@ function chipsInit(option = null){
 		$(".chip").remove();
 		hideChipsPanel();
 	}
-
-	$("#filter-reset").click(resetAllFilters);
+	if(option == null){
+		let resetButton = $("#filter-reset");
+		resetButton.click(resetAllFilters);
+		bindFilterInputSubmitEvent(resetButton, "click");
+	}
 }
 
 function layoutToggleInit() {
@@ -235,49 +240,33 @@ function layoutToggleInit() {
 	})
 }
 
-function initIsotope() {
-	let sortingButtons = $('.product_sorting_btn');
-	let sortNums = $('.num_sorting_btn');
-	let products = $(".product_grid");
-	if (products.length) {
-		let grid = products.isotope({
-			itemSelector: '.product',
-			layoutMode: 'fitRows',
-			fitRows:
-				{
-					gutter: 30,
-				},
-			getSortData:
-				{
-					price: function (itemElement) {
-						let priceEle = $(itemElement).find('.product_price').text().replace('$', '');
-						return parseFloat(priceEle);
-					},
-					name: '.product_name',
-					stars: function (itemElement) {
-						let starsElements = $(itemElement).find('.rating');
-						return starsElements.attr("data-rating");
-					},
-				},
-			animationOptions:
-				{
-					duration: 750,
-					easing: 'linear',
-					queue: false,
-				},
-		});
+function filterNavigatorInit(){
+	bindFilterInputSubmitEvent($(".filter-sidebar input[id^=filter-control]"));
+}
 
-		// Sort based on the value from the sorting_type dropdown
-		sortingButtons.each(function () {
-			$(this).on('click',
-				function () {
-					let parent = $(this).parent().parent().find('.sorting_text');
-					parent.text($(this).text());
-					let option = $(this).attr('data-isotope-option');
-					option = JSON.parse(option);
-					grid.isotope(option);
-				});
+
+function bindFilterInputSubmitEvent(element, event="change") {
+	element.on(event, function () {
+		$.post("/Shop/RequestFilter", formFilterParameters(), function(response) {
+			$(".result-content").html(response["content"]);
+			$(".count span").text(`Showing 0-${Math.min(response["pageSize"], response["length"])} / ${response["length"]} results`);
 		});
+	});
+
+	function formFilterParameters() {
+		let formMap = {};
+		$(".filter-sidebar input[id^=filter-control]").each(function () {
+			let param = {};
+			let checked = this.type === "checkbox" ? $(this).is(":checked") : true;
+			let value = this.value;
+			if (this.type === "number" || this.type === "range") {
+				value = parseFloat(value)
+			}
+			param[checked] = JSON.stringify(value);
+			formMap[this.id] = param;
+		});
+		console.log(formMap);
+		return formMap;
 	}
 }
 
@@ -289,4 +278,6 @@ $(document).ready(function () {
 	chipsInit();
 
 	layoutToggleInit();
+
+	filterNavigatorInit();
 });

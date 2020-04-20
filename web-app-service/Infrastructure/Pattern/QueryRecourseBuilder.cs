@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Attributes;
 using Core.Extension;
 using Core.Model.Parameters;
 using Core.Reference;
@@ -24,31 +25,72 @@ namespace Infrastructure.Pattern
 				var multiply = checkedParams.Count > 1;
 				if (multiply)
 				{
-					var groupOperator = Convert.ToString(filterGroup.ExpressionType.GetEnumMemberValue());
-					//TODO OR & AND handle
-					var listQuery = new Dictionary<string, object>
+					var groupExpression = filterGroup.ExpressionType.GetEnumAttribute<QueryExpressionAttribute>();
+					switch (groupExpression.Target)
 					{
-						{groupOperator, checkedParams.Select(param => param.Value) }
-					};
-					resultQuery.TryAdd(filterGroup.Property, listQuery);
+						case ExpressionTarget.Group:
+						case ExpressionTarget.Both:
+						{
+							var listQuery = new Dictionary<string, object>
+							{
+								{ groupExpression.OperatorSyntax, checkedParams.Select(param =>  FormatQueryValue(groupExpression, param.Value)) }
+							};
+							resultQuery.TryAdd(filterGroup.Property, listQuery);
+							break;
+						}
+						case ExpressionTarget.Each:
+						{
+							var eachParamQuery = new List<Dictionary<string, object>>();
+							foreach (var param in checkedParams)
+							{
+								if (param.ExpressionType == ExpressionType.Equal)
+								{
+									eachParamQuery.Add(new Dictionary<string, object>{{filterGroup.Property, param.Value}});
+								}
+								else
+								{
+									var nodeExpression = param.ExpressionType.GetEnumAttribute<QueryExpressionAttribute>();
+									var operatorCondition = new Dictionary<string, object>{{nodeExpression.OperatorSyntax, FormatQueryValue(nodeExpression, param.Value)}};
+									eachParamQuery.Add(new Dictionary<string, object>{{filterGroup.Property, operatorCondition}});
+								}
+							}
+							resultQuery.TryAdd(groupExpression.OperatorSyntax, eachParamQuery);
+							break;
+						}
+						case ExpressionTarget.Node:
+						{
+							var eachParamQuery = new Dictionary<string, object>();
+							foreach (var param in checkedParams)
+							{
+								var nodeExpression = param.ExpressionType.GetEnumAttribute<QueryExpressionAttribute>();
+								eachParamQuery.Add(nodeExpression.OperatorSyntax, FormatQueryValue(nodeExpression, param.Value));
+							}
+							resultQuery.TryAdd(filterGroup.Property, eachParamQuery);
+							break;
+						}
+						default:
+							throw new ArgumentOutOfRangeException(nameof(groupExpression.Target));
+					}
 					continue;
 				}
 
 				var singleNode = checkedParams.First();
 				if (singleNode.ExpressionType != ExpressionType.Equal)
 				{
-					var nodeOperator = Convert.ToString(singleNode.ExpressionType.GetEnumMemberValue());
-					var otherQuery = new Dictionary<string, object>
-					{
-						{nodeOperator, singleNode.Value }
-					};
-					resultQuery.Add(filterGroup.Property, otherQuery);
+					var nodeOperator = singleNode.ExpressionType.GetEnumAttribute<QueryExpressionAttribute>();
+					resultQuery.Add(filterGroup.Property, new KeyValuePair<string,object>(nodeOperator.OperatorSyntax, FormatQueryValue(nodeOperator, singleNode.Value)));
 					continue;
 				}
 				resultQuery.Add(filterGroup.Property, singleNode.Value);
 			}
-			resultQuery.Add("brandname", "Nike");
 			return resultQuery;
+		}
+
+		private static object FormatQueryValue(QueryExpressionAttribute expAttr, object value)
+		{
+			if (string.IsNullOrEmpty(expAttr.ValueWrapperFormat)) return value;
+
+			return string.Format(expAttr.ValueWrapperFormat, value);
 		}
 	}
 }

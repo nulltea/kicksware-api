@@ -1,46 +1,41 @@
 ﻿using System.Runtime.Serialization;
+using Core.Attributes;
 
 namespace Core.Reference
 {
 	public enum ExpressionType
 	{
-		[EnumMember(Value = "$and")]
+		[QueryExpression(OperatorSyntax = "$and", Target = ExpressionTarget.Each)]
 		And,
 
-		[EnumMember(Value = "$or")]
+		[QueryExpression(OperatorSyntax = "$or", Target = ExpressionTarget.Each)]
 		Or,
 
-		[EnumMember(Value = "$in")]
+		[QueryExpression(OperatorSyntax = "$in", Target = ExpressionTarget.Group)]
 		In,
 
-		[EnumMember(Value = "$nin")]
+		[QueryExpression(OperatorSyntax = "$nin", Target = ExpressionTarget.Group)]
 		NotIn,
 
-		[EnumMember(Value = "$bt")]
-		Between,
-
-		[EnumMember(Value = "$eq")]
+		[QueryExpression(OperatorSyntax = "$eq", Target = ExpressionTarget.Node)]
 		Equal,
 
-		[EnumMember(Value = "$ne")]
+		[QueryExpression(OperatorSyntax = "$ne", Target = ExpressionTarget.Node)]
 		NotEqual,
 
-		[EnumMember(Value = "$text")]
-		Like,
+		[QueryExpression(OperatorSyntax = "$regex", Target = ExpressionTarget.Node, ValueWrapperFormat = "/{0}/")]
+		Regex,
 
-		[EnumMember(Value = "$regex")]
-		LikeRegex,
-
-		[EnumMember(Value = "$ge")]
+		[QueryExpression(OperatorSyntax = "$ge", Target = ExpressionTarget.Node)]
 		GreaterThen,
 
-		[EnumMember(Value = "$gte")]
+		[QueryExpression(OperatorSyntax = "$gte", Target = ExpressionTarget.Node)]
 		GreaterThanOrEqual,
 
-		[EnumMember(Value = "$le")]
+		[QueryExpression(OperatorSyntax = "$le", Target = ExpressionTarget.Node)]
 		LessThan,
 
-		[EnumMember(Value = "$lte")]
+		[QueryExpression(OperatorSyntax = "$lte", Target = ExpressionTarget.Node)]
 		LessThanOrEqual
 	}
 }

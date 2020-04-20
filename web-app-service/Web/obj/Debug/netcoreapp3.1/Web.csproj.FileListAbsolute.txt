@@ -1052,3 +1052,4 @@ C:\source\repos\sneaker-resale-platform\web-app-service\Web\bin\Debug\netcoreapp
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\bin\Debug\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\bin\Debug\netcoreapp3.1\Data\Json\filter-colors.json
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\bin\Debug\netcoreapp3.1\PredicateExtensions.dll
+C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Shop\ReferencesPartial.cshtml.g.cs

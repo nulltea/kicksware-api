@@ -23,39 +23,64 @@ namespace Infrastructure.Gateway.REST.Client
 		public bool Request(IGatewayRestRequest request)
 		{
 			var response = Execute(ApplyRequestParams(request));
-			GuardUnsuccessfulRequest(request, response);
-			return response.IsSuccessful;
+
+			return HandleRequestStatus(response) && response.IsSuccessful;
 		}
 
 		public async Task<bool> RequestAsync(IGatewayRestRequest request)
 		{
 			var response = await ExecuteAsync(ApplyRequestParams(request));
-			GuardUnsuccessfulRequest(request, response);
-			return response.IsSuccessful;
+			return HandleRequestStatus(response) && response.IsSuccessful;
 		}
 
 		public T Request<T>(IGatewayRestRequest request)
 		{
 			var response = Execute<T>(ApplyRequestParams(request));
-			GuardUnsuccessfulRequest(request, response);
-
-			if (response.StatusCode == HttpStatusCode.NotFound) return default;
-
-			return response.Data;
+			if (!HandleRequestStatus<T>(response, out var data)) return default;
+			return data;
 		}
 
 		public async Task<T> RequestAsync<T>(IGatewayRestRequest request)
 		{
 			var response = await ExecuteAsync<T>(ApplyRequestParams(request));
-			GuardUnsuccessfulRequest(request, response);
-			return response.Data;
+			if (!HandleRequestStatus<T>(response, out var data)) return default;
+			return data;
 		}
 
-		private void GuardUnsuccessfulRequest(IRestRequest request, IRestResponse response)
+		private bool HandleRequestStatus<T>(IRestResponse<T> response, out T data)
 		{
-			if (request.Method == Method.GET && response.StatusCode == HttpStatusCode.NotFound) return;
-			if (response.StatusCode == HttpStatusCode.Unauthorized) throw new AuthenticationException(response.Content);
-			if (response.StatusCode != HttpStatusCode.OK) throw new Exception(response.Content);
+			switch (response.StatusCode)
+			{
+				case HttpStatusCode.OK:
+					data = response.Data;
+					return true;
+				case HttpStatusCode.NoContent:
+				case HttpStatusCode.NotFound:
+				case HttpStatusCode.NotModified:
+					data = Activator.CreateInstance<T>();
+					return true;
+				case HttpStatusCode.Unauthorized:
+					throw new AuthenticationException(response.Content);
+				default:
+					throw new Exception(response.Content);
+			}
+		}
+
+		private bool HandleRequestStatus(IRestResponse response)
+		{
+			switch (response.StatusCode)
+			{
+				case HttpStatusCode.OK:
+					return true;
+				case HttpStatusCode.NotFound:
+				case HttpStatusCode.NotImplemented:
+				case HttpStatusCode.NotModified:
+					return false;
+				case HttpStatusCode.Unauthorized:
+					throw new AuthenticationException(response.Content);
+				default:
+					throw new Exception(response.Content);
+			}
 		}
 
 		private IGatewayRestRequest ApplyRequestParams(IGatewayRestRequest request)

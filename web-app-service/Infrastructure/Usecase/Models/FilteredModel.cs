@@ -29,7 +29,7 @@ namespace Infrastructure.Usecase.Models
 
 		public bool HasPageNext => CurrentPage < PagesTotal;
 
-		public List<FilterGroup> FilterGroups { get; }
+		public List<FilterGroup> FilterGroups { get; set; }
 
 		public List<FilterParameter> FilterParameters => FilterGroups.SelectMany(g => g).ToList();
 
@@ -45,17 +45,54 @@ namespace Infrastructure.Usecase.Models
 			if (CurrentPage == 0) CurrentPage = 1;
 		}
 
-		public FilterGroup AddGroup(string name, string property, ExpressionType expressionType = ExpressionType.In, string description = default)
+		public FilterGroup AddFilterGroup(string name, string property, ExpressionType expressionType = ExpressionType.In, string description = default)
 		{
 			var group = new FilterGroup(name, property, expressionType, description);
 			FilterGroups.Add(group);
 			return group;
 		}
 
+		public FilterGroup GetFilterGroup(string name) => FilterGroups.FirstOrDefault(g => g.Caption.ToLower().Equals(name.ToLower()));
+
+		public FilterGroup this[string groupName]
+		{
+			get => GetFilterGroup(groupName);
+			set => AddFilterGroup(value);
+		}
+
+		internal FilterGroup AddFilterGroup(FilterGroup group)
+		{
+			var existedGroup = GetFilterGroup(group.Caption);
+			if (existedGroup is null)
+			{
+				FilterGroups.Add(group);
+			}
+			else
+			{
+				FilterGroups[FilterGroups.IndexOf(existedGroup)] = group;
+			}
+			return group;
+		}
+
+		public void ApplyUserInputs(Dictionary<string, (bool Checked, object Value)> filterInputs)
+		{
+			foreach (var filterInput in filterInputs)
+			{
+				var param = FilterParameters.FirstOrDefault(param => param.RenderId == filterInput.Key);
+				if (param is null) continue;
+				param.Checked = filterInput.Value.Checked;
+				param.Value = filterInput.Value.Value;
+			}
+		}
+
 		public void FetchPage(int page)
 		{
 			var queryMap = GetQueryMap();
-			GetCountTotal(queryMap);
+			if (GetCountTotal(queryMap) == 0)
+			{
+				Clear();
+				return;
+			}
 			if (0 >= page || page > PagesTotal) throw new PageNotValidException(page);
 			CurrentPage = page;
 			Clear();
@@ -69,7 +106,11 @@ namespace Infrastructure.Usecase.Models
 		public void FetchNext()
 		{
 			var queryMap = GetQueryMap();
-			GetCountTotal(queryMap);
+			if (GetCountTotal(queryMap) == 0)
+			{
+				Clear();
+				return;
+			}
 			if (!HasPageNext) throw new NextPageNotValidException();
 			Clear();
 			AddRange(_service.Fetch(new RequestParams
@@ -82,7 +123,11 @@ namespace Infrastructure.Usecase.Models
 		public void FetchPrevious()
 		{
 			var queryMap = GetQueryMap();
-			GetCountTotal(queryMap);
+			if (GetCountTotal(queryMap) == 0)
+			{
+				Clear();
+				return;
+			}
 			if (!HasPagePrevious) throw new PreviousPageNotValidException();
 
 			Clear();
@@ -96,7 +141,11 @@ namespace Infrastructure.Usecase.Models
 		public async Task FetchPageAsync(int page)
 		{
 			var queryMap = GetQueryMap();
-			await GetCountTotalAsync(queryMap);
+			if (await GetCountTotalAsync(queryMap) == 0)
+			{
+				Clear();
+				return;
+			}
 			if (0 >= page || page > PagesTotal) throw new PageNotValidException(page);
 			CurrentPage = page;
 			Clear();
@@ -110,7 +159,11 @@ namespace Infrastructure.Usecase.Models
 		public async Task FetchNextAsync()
 		{
 			var queryMap = GetQueryMap();
-			await GetCountTotalAsync(queryMap);
+			if (await GetCountTotalAsync(queryMap) == 0)
+			{
+				Clear();
+				return;
+			}
 			if (!HasPageNext) throw new NextPageNotValidException();
 			Clear();
 			AddRange(await _service.FetchAsync(new RequestParams
@@ -123,7 +176,11 @@ namespace Infrastructure.Usecase.Models
 		public async Task FetchPreviousAsync()
 		{
 			var queryMap = GetQueryMap();
-			await GetCountTotalAsync(queryMap);
+			if (await GetCountTotalAsync(queryMap) == 0)
+			{
+				Clear();
+				return;
+			}
 			if (!HasPagePrevious) throw new PreviousPageNotValidException();
 			Clear();
 			AddRange(await _service.FetchAsync(new RequestParams

@@ -20,7 +20,7 @@ func (p *RequestParams) ApplyParams(references []*model.SneakerReference) []*mod
 	if p.SkipOffset != 0 {
 		references = references[p.SkipOffset:]
 	}
-	if p.TakeCount != 0 {
+	if p.TakeCount != 0 && p.TakeCount < len(references) {
 		references = references[:p.TakeCount]
 	}
 	return references

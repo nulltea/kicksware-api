@@ -36,6 +36,8 @@ namespace web_app_service
 				.AddEntityFrameworkStores<ApplicationDbContext>();
 			services.AddControllersWithViews();
 
+			services.AddSession();
+
 			services.AddBreadcrumbs(GetType().Assembly, options =>
 			{
 				options.TagName = "nav";
@@ -98,7 +100,7 @@ namespace web_app_service
 			app.UseStaticFiles();
 
 			app.UseRouting();
-
+			app.UseSession();
 			app.UseAuthentication();
 			app.UseAuthorization();
 

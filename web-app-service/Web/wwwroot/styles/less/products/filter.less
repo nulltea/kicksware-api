@@ -530,7 +530,8 @@
 			}
 
 			.color-picker {
-				.flex-col(@align: stretch);
+				display: grid;
+				grid-row-gap: 15px;
 				width: 100%;
 
 				.color-item {
@@ -538,41 +539,45 @@
 					height: 40px;
 					line-height: 40px;
 					border-radius: 0;
-
 					.with-theme({
 						.elevation(2, @elevation);
 					});
 
-					&:not(:last-child) {
-						margin-bottom: 10px;
-					}
-
-					input[type=checkbox] {
-						display: none;
-					}
-
-					input[type=checkbox]:checked + label {
-						.with-theme({
-							background: unset;
-							color: @primary;
-						})
-					}
-
-					label {
-						position: relative;
+					.filter-checkbox {
 						width: 100%;
-						line-height: 40px;
 						color: inherit;
-						font-size: 16px;
-						font-weight: 600;
-						text-align: start;
-						padding-left: 15px;
-						z-index: 2;
-						.with-theme({
-							background: @hint;
-						});
-					}
+						background: inherit;
 
+						&:not(:last-child) {
+							margin-bottom: 10px;
+						}
+
+						input[type=checkbox] {
+							display: none;
+						}
+
+						input[type=checkbox]:checked + label {
+							.with-theme({
+								background: unset;
+								color: @primary;
+							})
+						}
+
+						label {
+							position: relative;
+							width: 100%;
+							line-height: 40px;
+							color: inherit;
+							font-size: 16px;
+							font-weight: 600;
+							text-align: start;
+							padding-left: 15px;
+							z-index: 2;
+							.with-theme({
+								background: @hint;
+							});
+						}
+					}
 					&:hover {
 						label {
 							.with-theme({
@@ -689,7 +694,6 @@
 			grid-auto-rows: auto;
 			grid-row-gap: 15px;
 		}
-
 		.button {
 			border-radius: 0;
 			.with-theme({
@@ -728,6 +732,10 @@
 					color: @secondary;
 				})
 			}
+		}
+
+		.filter-checkbox{
+			width: 100%;
 		}
 	}
 }

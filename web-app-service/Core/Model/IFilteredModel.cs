@@ -11,7 +11,13 @@ namespace Core.Model
 
 		List<FilterParameter> FilterParameters { get; }
 
-		FilterGroup AddGroup(string name, string property, ExpressionType expressionType = ExpressionType.In,
+		FilterGroup AddFilterGroup(string name, string property, ExpressionType expressionType = ExpressionType.In,
 							string description = default);
+
+		FilterGroup GetFilterGroup(string name);
+
+		void ApplyUserInputs(Dictionary<string, (bool Checked, object Value)> filterInputs);
+
+		FilterGroup this[string groupName] { get; set; }
 	}
 }
