@@ -36,13 +36,14 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./cert:/cert
-  product-service:
+  products-service:
     build:
       context: ./product-service
       dockerfile: ./docker/Dockerfile
       target: dev
     env_file: ./product-service/env/.env
-    image: product-service
+    hostname: kicksware.com
+    image: products-service
     restart: always
     labels:
       - traefik.http.routers.product-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/products`)
@@ -57,13 +58,14 @@ services:
     depends_on:
       - mongodb
 
-  user-service:
+  users-service:
     build:
       context: ./user-service
       dockerfile: ./docker/Dockerfile
       target: dev
     env_file: ./user-service/env/.env
-    image: user-service
+    hostname: kicksware.com
+    image: users-service
     restart: always
     labels:
       - traefik.http.routers.user-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/users`)
@@ -78,14 +80,14 @@ services:
     depends_on:
       - mongodb
 
-  reference-service:
+  references-service:
     build:
       context: ./reference-service
       dockerfile: ./docker/Dockerfile
       target: dev
     env_file: ./reference-service/env/.env
-    image: reference-service
-    restart: always
+    image: references-service
+    # restart: always
     labels:
       - traefik.http.routers.reference-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/references`)
       # - traefik.http.routers.reference-service.tls=true

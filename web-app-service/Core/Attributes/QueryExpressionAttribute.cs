@@ -20,6 +20,8 @@ namespace Core.Attributes
 
 		Both,
 
-		Each
+		Each,
+
+		Subquery
 	}
 }

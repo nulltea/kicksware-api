@@ -40,7 +40,7 @@ func (r *productService) FetchAll() ([]*model.SneakerProduct, error) {
 	return r.sneakerProductRepo.FetchAll()
 }
 
-func (r *productService) FetchQuery(query interface{}) ([]*model.SneakerProduct, error) {
+func (r *productService) FetchQuery(query map[string]interface{}) ([]*model.SneakerProduct, error) {
 	return r.sneakerProductRepo.FetchQuery(query)
 }
 

@@ -37,7 +37,7 @@
 			</div>
 			<div class="control-group">
 				<div class="list-select sort_type">
-					<select asp-for="SortParameter.Criteria" asp-items="@Html.GetEnumSelectList<SortCriteria>()" class="dropdown_item_select" id="currency">
+					<select asp-for="ChosenSorting" asp-items="@Model.FormSortSelect()" class="dropdown_item_select">
 						<option disabled="">Category</option>
 					</select>
 				</div>

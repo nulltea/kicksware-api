@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Core.Entities;
 using Core.Model.Parameters;
 using Core.Reference;
@@ -11,12 +12,22 @@ namespace Core.Model
 
 		List<FilterParameter> FilterParameters { get; }
 
-		FilterGroup AddFilterGroup(string name, string property, ExpressionType expressionType = ExpressionType.In,
+		FilterGroup AddFilterGroup(string caption, FilterProperty property, ExpressionType expressionType = ExpressionType.In,
 							string description = default);
+
+		FilterGroup AddForeignFilterGroup<TEntity>(string caption, string fieldName,
+													ExpressionType expressionType = ExpressionType.In,
+													string description = default);
+
+		FilterGroup AddForeignFilterGroup(string caption, string fieldName, Type foreignEntity,
+										ExpressionType expressionType = ExpressionType.In,
+										string description = default);
 
 		FilterGroup GetFilterGroup(string name);
 
 		void ApplyUserInputs(Dictionary<string, (bool Checked, object Value)> filterInputs);
+
+		public void FetchFiltered();
 
 		FilterGroup this[string groupName] { get; set; }
 	}

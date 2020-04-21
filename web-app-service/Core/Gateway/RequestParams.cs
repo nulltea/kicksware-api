@@ -1,4 +1,6 @@
-﻿namespace Core.Gateway
+﻿using Core.Reference;
+
+namespace Core.Gateway
 {
 	public class RequestParams
 	{
@@ -6,6 +8,8 @@
 
 		public int? SkipOffset { get; set; }
 
-		public bool? Pretty { get; set; }
+		public string SortBy { get; set; }
+
+		public SortDirection? SortDirection { get; set; }
 	}
 }

@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 
 namespace Core.Reference
 {
+	// TODO delete or use
 	public enum SearchType
 	{
 		[EnumMember(Value = "Multi")]

@@ -6,7 +6,7 @@ type SneakerProductService interface {
 	FetchOne(code string) (*model.SneakerProduct, error)
 	Fetch(codes []string) ([]*model.SneakerProduct, error)
 	FetchAll() ([]*model.SneakerProduct, error)
-	FetchQuery(query interface{}) ([]*model.SneakerProduct, error)
+	FetchQuery(query map[string]interface{}) ([]*model.SneakerProduct, error)
 	Store(sneakerProduct *model.SneakerProduct) error
 	Modify(sneakerProduct *model.SneakerProduct) error
 	Replace(sneakerProduct *model.SneakerProduct) error

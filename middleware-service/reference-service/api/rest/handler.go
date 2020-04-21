@@ -72,6 +72,7 @@ func (h *handler) Get(w http.ResponseWriter, r *http.Request) {
 func (h *handler) GetAll(w http.ResponseWriter, r *http.Request) {
 	sneakerReferences, err := h.Service.FetchAll()
 	params := &common.RequestParams{}
+	params.AssignParams(r)
 	if err != nil {
 		if errors.Cause(err) == business.ErrReferenceNotFound {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
@@ -80,7 +81,7 @@ func (h *handler) GetAll(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	params.AssignParams(r)
+
 	h.setupResponse(w, params.ApplyParams(sneakerReferences), http.StatusOK)
 }
 

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
+using Core.Attributes;
 using Core.Entities.Users;
 using Core.Reference;
 using Newtonsoft.Json;
@@ -14,6 +15,7 @@ namespace Core.Entities.Products
 	/// <summary>
 	/// Sneaker product entities
 	/// </summary>
+	[EntityService(Resource = "api/products/sneakers")]
 	public class SneakerProduct : IProduct
 	{
 		[Key]

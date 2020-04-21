@@ -8,15 +8,20 @@ import (
 	"github.com/fatih/structs"
 
 	"reference-service/core/model"
+	"reference-service/middleware/business"
 )
 
 type RequestParams struct {
 	TakeCount int
 	SkipOffset int
-	Pretty bool
+	SortBy string
+	SortDirection string
 }
 
 func (p *RequestParams) ApplyParams(references []*model.SneakerReference) []*model.SneakerReference {
+	if p.SortBy != "" {
+		business.NewSorter(references, p.SortBy).Sort(p.SortDirection == "desc")
+	}
 	if p.SkipOffset != 0 {
 		references = references[p.SkipOffset:]
 	}

@@ -84,7 +84,7 @@
 function initCustomDropDown() {
 	let customSelectors = document.getElementsByClassName("list-select");
 	for (let i = 0; i < customSelectors.length; i++) {
-		let selectElements = customSelectors[i].getElementsByTagName("select")[0];
+		let selectElement = customSelectors[i].getElementsByTagName("select")[0];
 
 		let selectedItem = document.createElement("div");
 		selectedItem.setAttribute("class", "select-selected");
@@ -93,9 +93,9 @@ function initCustomDropDown() {
 
 		let itemBox = document.createElement("div");
 		itemBox.setAttribute("class", "select-items select-hide");
-		for (let j = 1; j < selectElements.length; j++) {
+		for (let j = 1; j < selectElement.length; j++) {
 			let option = document.createElement("div");
-			option.innerHTML = selectElements.options[j].innerHTML;
+			option.innerHTML = selectElement.options[j].innerHTML;
 			option.addEventListener("click",
 				function(e) {
 					let originalSelect = this.parentNode.parentNode.getElementsByTagName("select")[0];
@@ -113,6 +113,7 @@ function initCustomDropDown() {
 						}
 					}
 					previousSibling.click();
+					$(selectElement).change();
 				});
 			itemBox.appendChild(option);
 		}

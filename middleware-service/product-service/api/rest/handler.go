@@ -4,23 +4,26 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"reflect"
+	"strconv"
 
+	"github.com/fatih/structs"
 	"github.com/go-chi/chi"
 	"github.com/pkg/errors"
 
+	"product-service/api/common"
 	"product-service/core/model"
 	"product-service/core/service"
 	"product-service/middleware/business"
 	"product-service/middleware/serializer/json"
 	"product-service/middleware/serializer/msg"
-	"product-service/util"
 )
 
 type RestfulHandler interface {
 	GetOne(http.ResponseWriter, *http.Request)
 	Get(http.ResponseWriter, *http.Request)
 	GetAll(http.ResponseWriter, *http.Request)
-	GetQuery(http.ResponseWriter, *http.Request)
+	PostQuery(http.ResponseWriter, *http.Request)
 	Post(http.ResponseWriter, *http.Request)
 	PutImages(http.ResponseWriter, *http.Request)
 	Patch(http.ResponseWriter, *http.Request)
@@ -70,6 +73,7 @@ func (h *handler) Get(w http.ResponseWriter, r *http.Request) {
 
 func (h *handler) GetAll(w http.ResponseWriter, r *http.Request) {
 	sneakerProducts, err := h.Service.FetchAll()
+	params := &common.RequestParams{}
 	if err != nil {
 		if errors.Cause(err) == business.ErrProductNotFound {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
@@ -78,11 +82,17 @@ func (h *handler) GetAll(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	h.setupResponse(w, sneakerProducts, http.StatusOK)
+	params.AssignParams(r)
+	h.setupResponse(w, params.ApplyParams(sneakerProducts), http.StatusOK)
 }
 
-func (h *handler) GetQuery(w http.ResponseWriter, r *http.Request) {
-	query := util.ToQueryMap(r.URL.Query())
+func (h *handler) PostQuery(w http.ResponseWriter, r *http.Request) {
+	query, err := h.getRequestQueryBody(r)
+	params := &common.RequestParams{}
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusNotFound)
+		return
+	}
 	sneakerProducts, err := h.Service.FetchQuery(query)
 	if err != nil {
 		if errors.Cause(err) == business.ErrProductNotFound {
@@ -92,7 +102,8 @@ func (h *handler) GetQuery(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	h.setupResponse(w, sneakerProducts, http.StatusOK)
+	params.AssignParams(r)
+	h.setupResponse(w, params.ApplyParams(sneakerProducts), http.StatusOK)
 }
 
 func (h *handler) Post(w http.ResponseWriter, r *http.Request) {
@@ -229,6 +240,46 @@ func (h *handler) getRequestFiles(r *http.Request) (files map[string][]byte, err
 				continue
 			}
 			files[h.Filename] = bytes
+		}
+	}
+	return
+}
+
+func (h *handler) getRequestQueryBody(r *http.Request) (map[string]interface{}, error) {
+	contentType := r.Header.Get("Content-Type")
+	requestBody, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		return nil, err
+	}
+	body, err := h.serializer(contentType).DecodeMap(requestBody)
+	if err != nil {
+		return nil, err
+	}
+	return body, nil
+}
+
+func (h *handler) getRequestParams(r *http.Request) (requestParams common.RequestParams) {
+	query := r.URL.Query();
+	properties := structs.Names(requestParams)
+	prmType := reflect.TypeOf(requestParams);
+	for _, prop := range properties {
+		value := query.Get(prop)
+		paramField := reflect.ValueOf(&requestParams).Elem().FieldByName(prop);
+		field, _ := prmType.FieldByName(prop)
+		switch field.Type.Kind().String() {
+		case "string":
+			paramField.SetString(value);
+		case "int":
+		case "float":
+			if num, err := strconv.ParseInt(value, 10, 32); err != nil {
+				paramField.SetInt(num);
+			}
+		case "bool":
+			if sign, err := strconv.ParseBool(value); err != nil {
+				paramField.SetBool(sign);
+			}
+		default:
+			paramField.SetString(value);
 		}
 	}
 	return

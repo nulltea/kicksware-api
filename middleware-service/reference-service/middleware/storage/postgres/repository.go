@@ -92,7 +92,7 @@ func (r *repository) FetchAll() ([]*model.SneakerReference, error) {
 	return sneakerReferences, nil
 }
 
-func (r *repository) FetchQuery(query interface{}) ([]*model.SneakerReference, error) {
+func (r *repository) FetchQuery(query map[string]interface{}) ([]*model.SneakerReference, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	sneakerReferences := make([]*model.SneakerReference, 0)

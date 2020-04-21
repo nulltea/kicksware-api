@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using Core.Attributes;
+﻿using Core.Attributes;
 
 namespace Core.Reference
 {
@@ -36,6 +35,6 @@ namespace Core.Reference
 		LessThan,
 
 		[QueryExpression(OperatorSyntax = "$lte", Target = ExpressionTarget.Node)]
-		LessThanOrEqual
+		LessThanOrEqual,
 	}
 }

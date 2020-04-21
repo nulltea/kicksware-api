@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Entities.Products;
 using Core.Entities.Reference;
 using Core.Model;
 using Core.Model.Parameters;
@@ -39,14 +40,15 @@ namespace web_app_service.Controllers
 
 		[HttpGet]
 		[Breadcrumb("Shop", FromAction = "Index", FromController = typeof(HomeController))]
-		public IActionResult Products(int page = 1)
+		public IActionResult Products(int page = 1, string sortBy = default)
 		{
 			var references = InitFilterHandler(_service);
+			if (!string.IsNullOrEmpty(sortBy)) references.ChooseSortParameter(sortBy);
 			references.FetchPage(page);
 			return View(references);
 		}
 
-		public async Task<IActionResult> RequestFilter(Dictionary<string, Dictionary<bool, string>> filterInputs)
+		public async Task<IActionResult> RequestFilter(Dictionary<string, Dictionary<bool, string>> filterInputs, string sortBy = default)
 		{
 			var references = InitFilterHandler(_service);
 			if (filterInputs != null && filterInputs.Any())
@@ -56,7 +58,9 @@ namespace web_app_service.Controllers
 					input => (input.Value.First().Key, JsonConvert.DeserializeObject(input.Value.First().Value))
 				));
 			}
-			references.FetchPage(1);
+			if (!string.IsNullOrEmpty(sortBy)) references.ChooseSortParameter(sortBy);
+
+			references.FetchFiltered();
 
 			return Json(new
 			{
@@ -69,16 +73,37 @@ namespace web_app_service.Controllers
 		private IFilteredModel<SneakerReference> InitFilterHandler(ICommonService<SneakerReference> service)
 		{
 			var referenceHandler = new FilteredModel<SneakerReference>(service);
+
+			// Setup filter groups & options
 			referenceHandler.AddFilterGroup("Brand", "brandname")
 				.AssignParameters(Catalog.SneakerBrandsList);
-			referenceHandler.AddFilterGroup("Size", "size").AssignParameters(Catalog.SneakerSizesList,
-				size => new FilterParameter(size.Europe.ToString("#.#"), size.Europe.ToString("#.#"))); //TODO foreign constraint filter
-			referenceHandler.AddFilterGroup("Color", "color", ExpressionType.Or).AssignParameters(Catalog.FilterColors,
-				color => new FilterParameter(color.Name, color.Name.ToUpper(), ExpressionType.Regex) {SourceValue = color});
-			referenceHandler.AddFilterGroup("Price", "price", ExpressionType.And).AssignParameters(
-				new FilterParameter("Price (min)", 0, ExpressionType.GreaterThanOrEqual) {Checked = true, ImmutableValue = false},
-				new FilterParameter("Price (max)", 1000, ExpressionType.LessThanOrEqual) {Checked = true, ImmutableValue = false});
-			referenceHandler.AddFilterGroup("Condition", "condition").AssignParameters(typeof(SneakerCondition));
+			referenceHandler.AddForeignFilterGroup<SneakerProduct>("Size", "size")
+				.AssignParameters(Catalog.SneakerSizesList, size =>
+					new FilterParameter(size.Europe.ToString("#.#"), size));
+			referenceHandler.AddFilterGroup("Color", "color", ExpressionType.Or)
+				.AssignParameters(Catalog.FilterColors, color =>
+					new FilterParameter(color.Name, color.Name.ToUpper(), ExpressionType.Regex) {SourceValue = color});
+			referenceHandler.AddFilterGroup("Price", "price", ExpressionType.And)
+				.AssignParameters(
+					new FilterParameter("Price (min)", 0, ExpressionType.GreaterThanOrEqual)
+						{Checked = true, ImmutableValue = false},
+					new FilterParameter("Price (max)", 1000, ExpressionType.LessThanOrEqual)
+						{Checked = true, ImmutableValue = false}
+			);
+			referenceHandler.AddForeignFilterGroup<SneakerProduct>("Condition", "condition")
+				.AssignParameters(typeof(SneakerCondition));
+
+			// Setup sort criteria
+			referenceHandler.AddSortParameters(criterion => criterion switch
+			{
+				SortCriteria.Popular => new SortParameter(criterion, "likes"),
+				SortCriteria.Newest => new SortParameter(criterion, "released"),
+				SortCriteria.Featured => new SortParameter(criterion, "likes"),
+				SortCriteria.PriceFromLow => new SortParameter(criterion, "price", SortDirection.Ascending),
+				SortCriteria.PriceFromHigh => new SortParameter(criterion, "price"),
+				_ => throw new ArgumentException("No such sort criteria")
+			});
+
 			return referenceHandler;
 		}
 
@@ -91,27 +116,6 @@ namespace web_app_service.Controllers
 			if (product == null) return NotFound();
 			//ViewBag.RelatedProducts = ProductsList; //TODO search related
 			return View(product);
-		}
-
-		private static async Task<string> RenderToStringAsync(PartialViewResult viewResult, IServiceProvider serviceProvider)
-		{
-			if (viewResult == null) throw new ArgumentNullException(nameof(viewResult));
-
-			var httpContext = new DefaultHttpContext
-			{
-				RequestServices = serviceProvider
-			};
-
-			var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
-
-			using (var stream = new MemoryStream())
-			{
-				httpContext.Response.Body = stream; // inject a convenient memory stream
-				await viewResult.ExecuteResultAsync(actionContext); // execute view result on that stream
-
-				httpContext.Response.Body.Position = 0;
-				return new StreamReader(httpContext.Response.Body).ReadToEnd(); // collect the content of the stream
-			}
 		}
 	}
 

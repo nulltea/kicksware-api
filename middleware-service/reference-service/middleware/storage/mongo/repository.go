@@ -109,7 +109,7 @@ func (r *repository) FetchAll() ([]*model.SneakerReference, error) {
 	return sneakerReference, nil
 }
 
-func (r *repository) FetchQuery(query interface{}) ([]*model.SneakerReference, error) {
+func (r *repository) FetchQuery(query map[string]interface{}) ([]*model.SneakerReference, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 

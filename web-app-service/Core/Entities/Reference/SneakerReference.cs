@@ -3,10 +3,12 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization;
+using Core.Attributes;
 using Core.Entities.Products;
 
 namespace Core.Entities.Reference
 {
+	[EntityService(Resource = "api/references/sneakers")]
 	public class SneakerReference : IProduct
 	{
 		[Key]

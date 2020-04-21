@@ -111,7 +111,7 @@ func (r *repository) FetchAll() ([]*model.SneakerProduct, error) {
 	return sneakerProduct, nil
 }
 
-func (r *repository) FetchQuery(query interface{}) ([]*model.SneakerProduct, error) {
+func (r *repository) FetchQuery(query map[string]interface{}) ([]*model.SneakerProduct, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 

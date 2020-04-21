@@ -147,10 +147,12 @@ function priceRangeInit() {
 		handleCollisionMax();
 		syncMaxPrice(this);
 	});
+	bindFilterInputSubmitEvent(rangeMax, "mouseup");
 	rangeMin.on("input", function () {
 		handleCollisionMin();
 		syncMinPrice(this);
 	});
+	bindFilterInputSubmitEvent(rangeMin, "mouseup");
 
 	inputMax.on("input", function () {
 		handleCollisionMax();
@@ -247,7 +249,7 @@ function filterNavigatorInit(){
 
 function bindFilterInputSubmitEvent(element, event="change") {
 	element.on(event, function () {
-		$.post("/Shop/RequestFilter", formFilterParameters(), function(response) {
+		$.post("/Shop/RequestFilter", {filterInputs: formFilterParameters(), sortBy: formSortParameter() }, function(response) {
 			$(".result-content").html(response["content"]);
 			$(".count span").text(`Showing 0-${Math.min(response["pageSize"], response["length"])} / ${response["length"]} results`);
 		});
@@ -265,9 +267,16 @@ function bindFilterInputSubmitEvent(element, event="change") {
 			param[checked] = JSON.stringify(value);
 			formMap[this.id] = param;
 		});
-		console.log(formMap);
 		return formMap;
 	}
+
+	function formSortParameter() {
+		return $(".sort_type select").val();
+	}
+}
+
+function sortingInit(){
+	bindFilterInputSubmitEvent($(".sort_type select"));
 }
 
 $(document).ready(function () {
@@ -280,4 +289,6 @@ $(document).ready(function () {
 	layoutToggleInit();
 
 	filterNavigatorInit();
+
+	sortingInit();
 });

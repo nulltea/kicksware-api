@@ -5,6 +5,7 @@
       <e p=".dockerignore" t="Include" />
       <e p="Core" t="IncludeRecursive">
         <e p="Attributes" t="Include">
+          <e p="EntityServiceAttribute.cs" t="Include" />
           <e p="QueryExpressionAttribute.cs" t="Include" />
         </e>
         <e p="bin" t="ExcludeRecursive" />
@@ -20,6 +21,7 @@
           </e>
           <e p="Reference" t="Include">
             <e p="Gender.cs" t="Include" />
+            <e p="IReference.cs" t="Include" />
             <e p="SneakerReference.cs" t="Include" />
           </e>
           <e p="Users" t="Include">
@@ -45,6 +47,7 @@
           <e p="Parameters" t="Include">
             <e p="FilterGroup.cs" t="Include" />
             <e p="FilterParameter.cs" t="Include" />
+            <e p="FilterProperty.cs" t="Include" />
             <e p="SortParameter.cs" t="Include" />
           </e>
         </e>
@@ -64,6 +67,7 @@
             <e p="Currency.cs" t="Include" />
             <e p="ExpressionType.cs" t="Include" />
             <e p="ShippingInfo.cs" t="Include" />
+            <e p="SortDirection.cs" t="Include" />
           </e>
           <e p="Products" t="Include">
             <e p="SneakerCondition.cs" t="Include" />
@@ -372,6 +376,7 @@
                 <e p="006329_3.png" t="Include" />
                 <e p="006695_1.png" t="Include" />
                 <e p="090915A-ICC_1.png" t="Include" />
+                <e p="1-J04256_1.png" t="Include" />
                 <e p="10-108362_1.png" t="Include" />
                 <e p="10-108406_1.png" t="Include" />
                 <e p="1012420_1.png" t="Include" />
@@ -395,6 +400,7 @@
                 <e p="162005_01_c6006_1.png" t="Include" />
                 <e p="170564_01_60047_1.png" t="Include" />
                 <e p="171340_01_2560_1.png" t="Include" />
+                <e p="175466-01_1.png" t="Include" />
                 <e p="2-J07907_1.png" t="Include" />
                 <e p="201.173195_01_60072_1.png" t="Include" />
                 <e p="305050-441_1.png" t="Include" />
@@ -407,6 +413,7 @@
                 <e p="333824-074_1.png" t="Include" />
                 <e p="345337_071_1.png" t="Include" />
                 <e p="357736-01_1.png" t="Include" />
+                <e p="357740-01_1.png" t="Include" />
                 <e p="357769-02_1.png" t="Include" />
                 <e p="358484-01_1.png" t="Include" />
                 <e p="358845-01_1.png" t="Include" />
@@ -607,6 +614,7 @@
                 <e p="B37613_1.png" t="Include" />
                 <e p="B37615_1.png" t="Include" />
                 <e p="B37616_1.png" t="Include" />
+                <e p="B37633_1.png" t="Include" />
                 <e p="B37646_1.png" t="Include" />
                 <e p="B37648_1.png" t="Include" />
                 <e p="B37652_1.png" t="Include" />
@@ -630,6 +638,7 @@
                 <e p="B41984_1.png" t="Include" />
                 <e p="B42063_1.png" t="Include" />
                 <e p="B42086_1.png" t="Include" />
+                <e p="B42087_1.png" t="Include" />
                 <e p="B42199_1_1.png" t="Include" />
                 <e p="B42200_1.png" t="Include" />
                 <e p="B42224_1.png" t="Include" />
@@ -650,6 +659,7 @@
                 <e p="b72954_1.png" t="Include" />
                 <e p="B74301_1.png" t="Include" />
                 <e p="b75571_1.png" t="Include" />
+                <e p="B75811_1.png" t="Include" />
                 <e p="b75941_1.png" t="Include" />
                 <e p="B75942_1.png" t="Include" />
                 <e p="B76079_1.png" t="Include" />
@@ -657,6 +667,7 @@
                 <e p="B79759_1.png" t="Include" />
                 <e p="B79760_1.png" t="Include" />
                 <e p="B96533_1.png" t="Include" />
+                <e p="B96613_1.png" t="Include" />
                 <e p="ba7198_1.png" t="Include" />
                 <e p="ba7239_1.png" t="Include" />
                 <e p="ba7252_1.png" t="Include" />
@@ -817,6 +828,7 @@
                 <e p="cg3601_1.png" t="Include" />
                 <e p="cg3604_1.png" t="Include" />
                 <e p="CG3781_1.png" t="Include" />
+                <e p="CG6395_1.png" t="Include" />
                 <e p="CI2969-002_1.png" t="Include" />
                 <e p="CJ0171-001_1.png" t="Include" />
                 <e p="CJ1154-100_1.png" t="Include" />
@@ -874,19 +886,24 @@
                 <e p="D96690_1.png" t="Include" />
                 <e p="d97352_1.png" t="Include" />
                 <e p="D97352_1_1.png" t="Include" />
+                <e p="DA8693_1.png" t="Include" />
                 <e p="DA8834_1.png" t="Include" />
                 <e p="DB2570_1.png" t="Include" />
                 <e p="DB2842_1.png" t="Include" />
                 <e p="DB2843_1.png" t="Include" />
                 <e p="e60aq_2650_1.png" t="Include" />
+                <e p="EE3707_1.png" t="Include" />
                 <e p="ee6297_1.png" t="Include" />
                 <e p="ee7287_1_1.png" t="Include" />
                 <e p="EE7583_1.png" t="Include" />
+                <e p="EE7931_1.png" t="Include" />
                 <e p="ee8104_1.png" t="Include" />
+                <e p="EE8688_1.png" t="Include" />
                 <e p="EE9614_1.png" t="Include" />
                 <e p="ef2367_1.png" t="Include" />
                 <e p="EF2829_1.png" t="Include" />
                 <e p="ef2905_1.png" t="Include" />
+                <e p="EF3660_1.png" t="Include" />
                 <e p="EG1728_1_1.png" t="Include" />
                 <e p="enegery_boost_2_esm_m_M29755_1.png" t="Include" />
                 <e p="energy_boost_esm_m_B44283_1.png" t="Include" />
@@ -895,14 +912,19 @@
                 <e p="equipment_running_support_C77362_1_1.png" t="Include" />
                 <e p="equipment_running_support_M20508_1.png" t="Include" />
                 <e p="f36640_1.png" t="Include" />
+                <e p="F803040_1.png" t="Include" />
                 <e p="f804009_1.png" t="Include" />
                 <e p="f804016_1.png" t="Include" />
+                <e p="F804051_1_1.png" t="Include" />
                 <e p="F97174_1.png" t="Include" />
                 <e p="f97226_1.png" t="Include" />
+                <e p="F97395_1.png" t="Include" />
                 <e p="f99760_1.png" t="Include" />
                 <e p="f99761_1.png" t="Include" />
                 <e p="f99762_1.png" t="Include" />
                 <e p="f99763_1.png" t="Include" />
+                <e p="F99801_1.png" t="Include" />
+                <e p="F99805_1.png" t="Include" />
                 <e p="F99983_1.png" t="Include" />
                 <e p="FA07-ND-I8M_1.png" t="Include" />
                 <e p="ff99710_1.png" t="Include" />
@@ -918,6 +940,7 @@
                 <e p="g17100_1_1.png" t="Include" />
                 <e p="g17179_1.png" t="Include" />
                 <e p="g19679_1.png" t="Include" />
+                <e p="G19763_1.png" t="Include" />
                 <e p="G26277_1.png" t="Include" />
                 <e p="G26513_1.png" t="Include" />
                 <e p="G26776_1.png" t="Include" />
@@ -932,6 +955,7 @@
                 <e p="G28319_1.png" t="Include" />
                 <e p="G50690_1.png" t="Include" />
                 <e p="G51707_1.png" t="Include" />
+                <e p="G54056_1.png" t="Include" />
                 <e p="g56303_1.png" t="Include" />
                 <e p="G56948_1.png" t="Include" />
                 <e p="g59648_1.png" t="Include" />
@@ -973,6 +997,7 @@
                 <e p="h02ak_5001_1.png" t="Include" />
                 <e p="H10CK-3621_1.png" t="Include" />
                 <e p="H10CK-4040_1.png" t="Include" />
+                <e p="H10CK.4040.S_1.png" t="Include" />
                 <e p="H10FK-6565_1.png" t="Include" />
                 <e p="H10HK-3494_1.png" t="Include" />
                 <e p="H10KK-4141_1.png" t="Include" />
@@ -1198,6 +1223,7 @@
                 <e p="m21364_1.png" t="Include" />
                 <e p="M21365_1.png" t="Include" />
                 <e p="M21408_1.png" t="Include" />
+                <e p="M21621_1.png" t="Include" />
                 <e p="M21623_1.png" t="Include" />
                 <e p="m21789_1.png" t="Include" />
                 <e p="m22112_1.png" t="Include" />
@@ -1319,7 +1345,9 @@
                 <e p="nmd_xr1_pk_S32218_1.png" t="Include" />
                 <e p="nsw0004_1.png" t="Include" />
                 <e p="nsw0005_1.png" t="Include" />
+                <e p="OMHE026E19E360249901_1AP.png" t="Include" />
                 <e p="OW0006_1AP_1.png" t="Include" />
+                <e p="OW0018_1-2AP.png" t="Include" />
                 <e p="OW0026_1AP.png" t="Include" />
                 <e p="owca079f18b750651019_1AP.png" t="Include" />
                 <e p="p00013_1.png" t="Include" />
@@ -1350,6 +1378,7 @@
                 <e p="q34751_1.png" t="Include" />
                 <e p="q35133_1.png" t="Include" />
                 <e p="Q4-EM03_1.png" t="Include" />
+                <e p="Q46473_1.png" t="Include" />
                 <e p="question_mid_J95560_1_1.png" t="Include" />
                 <e p="question_mid_V46904_1.png" t="Include" />
                 <e p="question_mid_V63448_1.png" t="Include" />
@@ -1502,6 +1531,7 @@
                 <e p="S85682_1.png" t="Include" />
                 <e p="shaq_attaq_M40173_1.png" t="Include" />
                 <e p="stan_smith_D70352_1.png" t="Include" />
+                <e p="stonef9-7_1ap.png" t="Include" />
                 <e p="su08-nd-18m-327-72219_1.png" t="Include" />
                 <e p="superstar_80s_nbhd_M25786_1_1.png" t="Include" />
                 <e p="superstar_80s_primeknit_S82779_1.png" t="Include" />
@@ -1513,6 +1543,7 @@
                 <e p="superstar_supercolor_pack_S41830_1.png" t="Include" />
                 <e p="superstar_supercolor_pack_S41833_1.png" t="Include" />
                 <e p="T5M2N-0193_1.png" t="Include" />
+                <e p="T606N-9790_1.png" t="Include" />
                 <e p="taekwondo_gazelle_M22148_1_1.png" t="Include" />
                 <e p="top_ten_hi_C76631_1.png" t="Include" />
                 <e p="top_ten_hi_pc_D70333_1.png" t="Include" />
@@ -1522,7 +1553,9 @@
                 <e p="v20699_1.png" t="Include" />
                 <e p="v24424_1_.png" t="Include" />
                 <e p="V24934_1.png" t="Include" />
+                <e p="V36MINDSEEKER-0003_1.png" t="Include" />
                 <e p="V36MINDSEEKER_1_1.png" t="Include" />
+                <e p="V44397_1.png" t="Include" />
                 <e p="V44403_1.png" t="Include" />
                 <e p="V44404_1.png" t="Include" />
                 <e p="V44405_1.png" t="Include" />
@@ -1550,6 +1583,7 @@
                 <e p="V53609_1.png" t="Include" />
                 <e p="v53621_1_1.png" t="Include" />
                 <e p="V53622_1_1.png" t="Include" />
+                <e p="V53880_1.png" t="Include" />
                 <e p="v53883_1.png" t="Include" />
                 <e p="v54095_1.png" t="Include" />
                 <e p="v54096_1.png" t="Include" />
@@ -1561,6 +1595,7 @@
                 <e p="V55494_1.png" t="Include" />
                 <e p="v55619_1.png" t="Include" />
                 <e p="V56035_1_2.png" t="Include" />
+                <e p="V56091_1.png" t="Include" />
                 <e p="V56110_1.png" t="Include" />
                 <e p="V56264_1.png" t="Include" />
                 <e p="V59336_1.png" t="Include" />
@@ -1579,6 +1614,7 @@
                 <e p="v61207_1.png" t="Include" />
                 <e p="V61215_1.png" t="Include" />
                 <e p="v61216_1.png" t="Include" />
+                <e p="V61416_1.png" t="Include" />
                 <e p="V61428_1.png" t="Include" />
                 <e p="v61429_1.png" t="Include" />
                 <e p="v61434_1.png" t="Include" />
@@ -1627,6 +1663,11 @@
                 <e p="yeezy_950_w_AQ4837_1.png" t="Include" />
                 <e p="YP6U1PMI_1.png" t="Include" />
                 <e p="yp6u6pmi_1.png" t="Include" />
+                <e p="YZ6MF6003.213_1.png" t="Include" />
+                <e p="YZ6MF6003.214_1.png" t="Include" />
+                <e p="YZ7MF7003.212_1.png" t="Include" />
+                <e p="YZ7MF7003.214_1.png" t="Include" />
+                <e p="YZ7WF7003.223_1.png" t="Include" />
                 <e p="zoom_kd_4_473679-702_1.png" t="Include" />
                 <e p="zoom_kd_4_479436-303_1.png" t="Include" />
                 <e p="zoom_kd_4_nerf_517408-400_1.png" t="Include" />

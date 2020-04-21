@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
+using System.Runtime.Serialization;
 using System.Security.Authentication;
 using System.Threading.Tasks;
 using Core.Constants;
@@ -83,9 +84,16 @@ namespace Infrastructure.Gateway.REST.Client
 			}
 		}
 
-		private IGatewayRestRequest ApplyRequestParams(IGatewayRestRequest request)
+		private static IGatewayRestRequest ApplyRequestParams(IGatewayRestRequest request)
 		{
-			request.RequestParams?.ToMap().ToList().ForEach(kvp => request.AddParameter(kvp.Key, kvp.Value, ParameterType.QueryString));
+			var parameters = request.RequestParams?.ToMap().Where(kvp => kvp.Value != null);
+			if (parameters is null) return request;
+			foreach (var pair in parameters)
+			{
+				var (key, value) = pair;
+				if (value is Enum enumVal) value = enumVal.GetEnumAttribute<EnumMemberAttribute>()?.Value ?? value;
+				request.AddParameter(key, value, ParameterType.QueryString);
+			}
 			return request;
 		}
 	}

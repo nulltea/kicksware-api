@@ -1196,17 +1196,6 @@
           "lib/netstandard1.6/NuGet.Frameworks.dll": {}
         }
       },
-      "PredicateExtensions/1.0.0": {
-        "runtime": {
-          "lib/PredicateExtensions.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        },
-        "compile": {
-          "lib/PredicateExtensions.dll": {}
-        }
-      },
       "RestSharp/106.10.1": {
         "runtime": {
           "lib/netstandard2.0/RestSharp.dll": {
@@ -2305,7 +2294,6 @@
         "dependencies": {
           "Core": "1.0.0",
           "Newtonsoft.Json": "12.0.3",
-          "PredicateExtensions": "1.0.0",
           "RestSharp": "106.10.1"
         },
         "runtime": {
@@ -4470,13 +4458,6 @@
       "sha512": "sha512-qbXaB76XYUVLocLBs8Z9TS/ERGK2wm797feO+0JEPFvT7o7MRadOR77mqaSD4J1k8G+DlZQyq+MlkCuxrkr3ag==",
       "path": "nuget.frameworks/4.7.0",
       "hashPath": "nuget.frameworks.4.7.0.nupkg.sha512"
-    },
-    "PredicateExtensions/1.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-+1F01u3KIVP/8ufEK/qzkjhu6UHQYuNwBm35yIIEc3DhMjt0MQL97+eSyFIVARJLxar90Sw3/icT6DrIB6SkOw==",
-      "path": "predicateextensions/1.0.0",
-      "hashPath": "predicateextensions.1.0.0.nupkg.sha512"
     },
     "RestSharp/106.10.1": {
       "type": "package",

@@ -1,5 +1,7 @@
 package model
 
+import "time"
+
 type SneakerReference struct {
 	UniqueId         string
 	ManufactureSku   string
@@ -10,6 +12,7 @@ type SneakerReference struct {
 	Gender           string
 	Nickname         string
 	Price            float64
+	Released         time.Time
 	ImageLink        string
 	StadiumUrl       string
 }

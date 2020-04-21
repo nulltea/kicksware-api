@@ -15,11 +15,13 @@ namespace Core.Model.Parameters
 
 		public  string Description { get; set; }
 
-		public string Property { get; set; }
+		public FilterProperty Property { get; set; }
 
 		public ExpressionType ExpressionType { get; set; }
 
-		public FilterGroup(string caption, string property, ExpressionType expressionType = ExpressionType.In, string description = default)
+		public List<FilterParameter> CheckedParameters => this.Where(param => param.Checked).ToList();
+
+		public FilterGroup(string caption, FilterProperty property, ExpressionType expressionType = ExpressionType.In, string description = default)
 		{
 			Caption = caption;
 			Property = property;
@@ -27,11 +29,19 @@ namespace Core.Model.Parameters
 			Description = description;
 		}
 
-		public void AssignParameter(FilterParameter parameter) => Add(parameter);
+		public FilterGroup AssignParameter(FilterParameter parameter)
+		{
+			Add(parameter);
+			return this;
+		}
 
-		public void AssignParameters(params FilterParameter[] parameters) => AddRange(parameters);
+		public FilterGroup AssignParameters(params FilterParameter[] parameters)
+		{
+			AddRange(parameters);
+			return this;
+		}
 
-		public void AssignParameters(Type type)
+		public FilterGroup AssignParameters(Type type)
 		{
 			var names = Enum.GetNames(type);
 			foreach (var name in names)
@@ -42,17 +52,29 @@ namespace Core.Model.Parameters
 				if (displayAttr is null || memberAttr is null) continue;
 				Add(new FilterParameter(displayAttr.Name, memberAttr.Value, description: displayAttr.GetDescription()));
 			}
+
+			return this;
 		}
 
-		public void AssignParameters<T>(IEnumerable<T> objects, Func<T, FilterParameter> selector) =>
+		public FilterGroup AssignParameters<T>(IEnumerable<T> objects, Func<T, FilterParameter> selector)
+		{
 			AddRange(objects.Select(selector));
+			return this;
+		}
 
-
-		public void AssignParameters(Dictionary<string, object> map) =>
+		public FilterGroup AssignParameters(Dictionary<string, object> map)
+		{
 			AddRange(map.Select(kvp => new FilterParameter(kvp.Key, kvp.Value)));
+			return this;
+		}
 
 
-		public void AssignParameters(IEnumerable<string> values) =>
+
+		public FilterGroup AssignParameters(IEnumerable<string> values)
+		{
 			AddRange(values.Select(value => new FilterParameter(value, value)));
+			return this;
+		}
+
 	}
 }

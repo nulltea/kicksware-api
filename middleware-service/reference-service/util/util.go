@@ -33,7 +33,7 @@ func ToBsonMap(v interface{}) (m bson.M, err error) {
 func ToSqlWhere(v interface{}) sqb.And {
 	filter := ToMap(v)
 	keys := funk.Keys(filter).([]string)
-	cond := funk.Map(keys, func(k interface{}) sqb.Sqlizer{
+	cond := funk.Map(keys, func(k interface{}) sqb.Sqlizer {
 		key := k.(string)
 		return sqb.Eq{key:filter[key]}
 	}).([]sqb.Sqlizer)
