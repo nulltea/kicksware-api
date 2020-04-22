@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using Core.Attributes;
 using Core.Entities.Products;
 
-namespace Core.Entities.Reference
+namespace Core.Entities.References
 {
 	[EntityService(Resource = "api/references/sneakers")]
 	public class SneakerReference : IProduct
@@ -17,6 +17,13 @@ namespace Core.Entities.Reference
 		public string ManufactureSku { get; set; }
 
 		public string BrandName { get; set; }
+
+		public SneakerBrand Brand
+		{
+			get => _brand ??= BrandName;
+			private set => _brand = value;
+		}
+		private SneakerBrand _brand;
 
 		public string ModelName { get; set; }
 
@@ -48,6 +55,10 @@ namespace Core.Entities.Reference
 				return string.Concat(@"\", Path.GetRelativePath(Constants.Constants.WebRootPath, storagePath));
 			}
 		}
+
+		public string HeroPath { get; set; }
+
+		public DateTime Released { get; set; }
 
 		[DataType(DataType.Url)]
 		public string StadiumUrl { get; set; }

@@ -8,13 +8,13 @@ using Core.Reference;
 
 namespace Infrastructure.Pattern
 {
-	public class QueryRecourseBuilder
+	public class QueryBuilder
 	{
-		private List<FilterGroup> _queryGroups;
-
 		public void SetQueryArguments(FilterGroup group) => _queryGroups = new List<FilterGroup> {group};
 
 		public void SetQueryArguments(List<FilterGroup> groups) => _queryGroups = groups;
+
+		private List<FilterGroup> _queryGroups;
 
 		public void SetQueryArguments(List<FilterParameter> parameters, FilterProperty property, ExpressionType expressionType = ExpressionType.Or) => _queryGroups = new List<FilterGroup>
 		{

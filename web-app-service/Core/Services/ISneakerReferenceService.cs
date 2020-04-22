@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Entities.Products;
-using Core.Entities.Reference;
+using Core.Entities.References;
 using Core.Gateway;
 using Core.Repositories;
 

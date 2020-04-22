@@ -4,11 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization;
 using Core.Reference;
 using Newtonsoft.Json;
 
-namespace web_app_service.Data.Reference_Data
+namespace Web.Data.Reference_Data
 {
 	public static partial class Catalog
 	{

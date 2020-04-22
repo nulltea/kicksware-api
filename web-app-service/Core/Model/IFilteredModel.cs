@@ -6,7 +6,7 @@ using Core.Reference;
 
 namespace Core.Model
 {
-	public interface IFilteredModel<T> : IPagedModel<T>, ISortedModel where T : IBaseEntity
+	public interface IFilteredModel<out TEntity> : IPagedModel<TEntity>, ISortedModel where TEntity : IBaseEntity
 	{
 		List<FilterGroup> FilterGroups { get; }
 
@@ -15,7 +15,7 @@ namespace Core.Model
 		FilterGroup AddFilterGroup(string caption, FilterProperty property, ExpressionType expressionType = ExpressionType.In,
 							string description = default);
 
-		FilterGroup AddForeignFilterGroup<TEntity>(string caption, string fieldName,
+		FilterGroup AddForeignFilterGroup<TForeignEntity>(string caption, string fieldName,
 													ExpressionType expressionType = ExpressionType.In,
 													string description = default);
 
@@ -23,9 +23,11 @@ namespace Core.Model
 										ExpressionType expressionType = ExpressionType.In,
 										string description = default);
 
+		FilterGroup AddHiddenFilterGroup(string caption, string fieldName, ExpressionType expressionType = ExpressionType.In);
+
 		FilterGroup GetFilterGroup(string name);
 
-		void ApplyUserInputs(Dictionary<string, (bool Checked, object Value)> filterInputs);
+		void ApplyUserInputs(List<FilterInput> filterInputs);
 
 		public void FetchFiltered();
 

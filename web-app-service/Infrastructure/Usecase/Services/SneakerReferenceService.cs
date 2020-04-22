@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Entities.Products;
-using Core.Entities.Reference;
+using Core.Entities.References;
 using Core.Gateway;
 using Core.Repositories;
 using Core.Services;

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
-namespace web_app_service.Controllers
+namespace Web.Controllers
 {
 	public class AuthController : Controller
 	{

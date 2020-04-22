@@ -1,7 +1,7 @@
 ﻿using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 
-namespace web_app_service.Wizards
+namespace Web.Wizards
 {
 	public interface IEntityWizard<in T> where T : class, IBaseEntity
 	{

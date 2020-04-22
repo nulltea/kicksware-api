@@ -11,15 +11,17 @@ namespace Core.Model.Parameters
 {
 	public class FilterGroup : List<FilterParameter>
 	{
-		public string Caption { get; set; }
+		public string Caption { get; }
 
-		public  string Description { get; set; }
+		public  string Description { get; }
 
-		public FilterProperty Property { get; set; }
+		public FilterProperty Property { get; }
 
-		public ExpressionType ExpressionType { get; set; }
+		public ExpressionType ExpressionType { get; }
 
 		public List<FilterParameter> CheckedParameters => this.Where(param => param.Checked).ToList();
+
+		public bool Hidden { get; set; } = false;
 
 		public FilterGroup(string caption, FilterProperty property, ExpressionType expressionType = ExpressionType.In, string description = default)
 		{
@@ -29,17 +31,14 @@ namespace Core.Model.Parameters
 			Description = description;
 		}
 
-		public FilterGroup AssignParameter(FilterParameter parameter)
-		{
-			Add(parameter);
-			return this;
-		}
+		public FilterGroup AssignParameter(FilterParameter parameter) => Add(parameter);
 
-		public FilterGroup AssignParameters(params FilterParameter[] parameters)
-		{
-			AddRange(parameters);
-			return this;
-		}
+		public FilterGroup AssignParameter(string caption, object value,
+											ExpressionType expressionType = ExpressionType.Equal,
+											string description = default) =>
+			Add(new FilterParameter(caption, value, expressionType, description));
+
+		public FilterGroup AssignParameters(params FilterParameter[] parameters) => AddRange(parameters);
 
 		public FilterGroup AssignParameters(Type type)
 		{
@@ -52,22 +51,14 @@ namespace Core.Model.Parameters
 				if (displayAttr is null || memberAttr is null) continue;
 				Add(new FilterParameter(displayAttr.Name, memberAttr.Value, description: displayAttr.GetDescription()));
 			}
-
 			return this;
 		}
 
-		public FilterGroup AssignParameters<T>(IEnumerable<T> objects, Func<T, FilterParameter> selector)
-		{
+		public FilterGroup AssignParameters<T>(IEnumerable<T> objects, Func<T, FilterParameter> selector) =>
 			AddRange(objects.Select(selector));
-			return this;
-		}
 
-		public FilterGroup AssignParameters(Dictionary<string, object> map)
-		{
+		public FilterGroup AssignParameters(Dictionary<string, object> map) =>
 			AddRange(map.Select(kvp => new FilterParameter(kvp.Key, kvp.Value)));
-			return this;
-		}
-
 
 
 		public FilterGroup AssignParameters(IEnumerable<string> values)
@@ -76,5 +67,19 @@ namespace Core.Model.Parameters
 			return this;
 		}
 
+		private new FilterGroup Add(FilterParameter parameter)
+		{
+			if (Hidden) parameter.Checked = true;
+			base.Add(parameter);
+			return this;
+		}
+
+		private new FilterGroup AddRange(IEnumerable<FilterParameter> collection)
+		{
+			var filterParameters = collection.ToList();
+			if (Hidden) filterParameters.ForEach(param => param.Checked = true);
+			base.AddRange(filterParameters);
+			return this;
+		}
 	}
 }

@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-web_app_service-FB5F10FB-9901-4EFB-B052-89A6AF3E4FA8</UserSecretsId>
-    <RootNamespace>web_app_service</RootNamespace>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
@@ -82,6 +81,8 @@
     <_ContentIncludedByDefault Remove="wwwroot\plugins\scrollmagic\plugins\animation.velocity.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\plugins\scrollmagic\plugins\debug.addIndicators.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\plugins\scrollmagic\plugins\jquery.ScrollMagic.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\styles\css\product-item\product-item.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\styles\css\product-item\product-item.css.map" />
   </ItemGroup>
 
 </Project>

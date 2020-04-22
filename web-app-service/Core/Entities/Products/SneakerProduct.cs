@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using Core.Attributes;
+using Core.Entities.References;
 using Core.Entities.Users;
 using Core.Reference;
 using Newtonsoft.Json;
@@ -22,6 +23,13 @@ namespace Core.Entities.Products
 		public string UniqueId { get; set; }
 
 		public string BrandName { get; set; }
+
+		public SneakerBrand Brand
+		{
+			get => _brand ??= BrandName;
+			private set => _brand = value;
+		}
+		private SneakerBrand _brand;
 
 		public string ModelName { get; set; }
 

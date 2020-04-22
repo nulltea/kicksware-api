@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 using Core.Entities.Products;
 using Microsoft.AspNetCore.Http;
 
-namespace web_app_service.Models
+namespace Web.Models
 {
 	public class SneakerProductViewModel : SneakerProduct
 	{

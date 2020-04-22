@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Core.Entities.Products;
-using Core.Entities.Reference;
+using Core.Entities.References;
 using RestSharp;
 
 namespace Infrastructure.Gateway.REST.References.Sneakers

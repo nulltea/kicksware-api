@@ -1,12 +1,12 @@
-﻿using Core.Entities.Reference;
+﻿using Core.Entities.References;
 using Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using SmartBreadcrumbs.Attributes;
-using web_app_service.Data.Reference_Data;
-using web_app_service.Models;
-using web_app_service.Wizards;
+using Web.Data.Reference_Data;
+using Web.Models;
+using Web.Wizards;
 
-namespace web_app_service.Controllers
+namespace Web.Controllers
 {
 	public partial class SellController
 	{

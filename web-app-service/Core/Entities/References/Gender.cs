@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.Serialization;
 
-namespace Core.Entities.Reference
+namespace Core.Entities.References
 {
 	public enum Gender
 	{

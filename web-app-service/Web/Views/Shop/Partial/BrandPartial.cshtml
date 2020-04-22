@@ -1,0 +1,52 @@
+﻿@using Web.Utils.Helpers
+@model Core.Model.IFilteredModel<Core.Entities.References.SneakerReference>
+
+@if (Model is null || !Model.Any())
+{
+	await Html.RenderPartialAsync("Partial/NoResultsPartial", Model);
+	return;
+}
+
+<div class="products-view grid">
+	@foreach (var reference in Model)
+	{
+		if (reference == null)
+		{
+			continue;
+		}
+		var price = reference.Price != 0m ? $"${reference.Price}" : string.Empty;
+		<div class="product-cell">
+			<div class="info-header">
+				<div class="price">@price</div>
+			</div>
+			<div class="thumb">
+				<img src="@reference.ImagePath" alt="">
+			</div>
+			@*@if (DateTime.Today.Subtract(reference.AddedAt).Days < 5)
+			{
+				<div class="product_extra product_new">
+					<a>New</a>
+				</div>
+			}*@
+			<div class="info-footer">
+				<div class="brand-title">
+					<a class="underline" asp-action="Brand" asp-route-brandId=@reference.Brand.UniqueId>@Html.DisplayFor(modelItem => reference.BrandName)</a>
+				</div>
+				<div class="model-title">
+					@*TODO link to model page*@
+					<a class="underline" asp-action="ReferenceItem" asp-route-referenceId=@reference.UniqueId>@Html.DisplayFor(modelItem => reference.ModelName)</a>
+				</div>
+				<div class="description">
+					@reference.Description
+				</div>
+				<div class="favorite">
+					<input type="checkbox"/>
+					@Html.VectorIconRender("favorite.svg")
+				</div>
+			</div>
+		</div>
+	}
+</div>
+
+
+@{ await Html.RenderPartialAsync("Partial/PagedPartial", Model); }

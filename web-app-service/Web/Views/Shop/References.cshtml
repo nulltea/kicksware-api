@@ -1,27 +1,27 @@
-﻿@using System.Globalization
-@using System.Linq
+﻿@using System.Linq
+@using Core.Extension
 @using Core.Reference
-@using Microsoft.EntityFrameworkCore.Internal
 @using Newtonsoft.Json
-@using web_app_service.Data.Reference_Data
-@using web_app_service.Utils.Helpers
-@model Core.Model.IFilteredModel<Core.Entities.Reference.SneakerReference>
+@using Web.Utils.Helpers
+@model Core.Model.IFilteredModel<Core.Entities.IBaseEntity>
 
 @{
+	ViewBag.Title = "Products";
 	Layout = "~/Views/Shared/_Layout.cshtml";
+	var entityValue = ViewContext.RouteData.Values["action"].ToString();
 }
 
 @section Styles
 {
-	<link href="~/styles/css/products/products.css" rel="stylesheet"/>
-	<link href="~/styles/css/products/filter.css" rel="stylesheet"/>
-	<link href="~/styles/css/products/results.css" rel="stylesheet"/>
+	<link href="~/styles/css/shop/products.css" rel="stylesheet"/>
+	<link href="~/styles/css/shop/filter.css" rel="stylesheet"/>
+	<link href="~/styles/css/shop/results.css" rel="stylesheet"/>
 	<link href="~/styles/css/responsive/products.responsive.css" rel="stylesheet"/>
 }
 
 <div class="products">
 	<div class="container products-content">
-		<div class="row filter-summary">
+		<summary class="row filter-summary">
 			<button class="button toggle-menu">
 				<span>SHOW FILTERS</span>
 				@Html.VectorIconRender("filter.svg")
@@ -47,7 +47,7 @@
 					@Html.VectorIconRender("grid.svg", "is-checked")
 				</div>
 			</div>
-		</div>
+		</summary>
 		<div class="row content-area">
 			<aside class="filter-sidebar">
 				<nav class="accordion collapsed arrows">
@@ -60,11 +60,14 @@
 						<div class="section-content">
 							<input type="search" id="brand-filter" class="autocomplete-filter filter-input" required="required">
 							<div class="brand-list">
-								@foreach (var brand in Model["Brand"].Take(4)) //TODO
+								@if (!@Model["Brand"].Hidden) @* TODO *@
 								{
-									<div class="brand-row">
-										@brand.RenderCheckbox(new {@class = "regular_checkbox"})
-									</div>
+									@foreach (var brand in Model["Brand"].Take(4)) //TODO
+									{
+										<div class="brand-row">
+											@brand.RenderCheckbox(new {@class = "regular_checkbox"})
+										</div>
+									}
 								}
 							</div>
 						</div>
@@ -142,7 +145,7 @@
 					<div class="spacer"></div>
 				</div>
 				<div class="result-content" id="result-content">
-					@{ await Html.RenderPartialAsync("ReferencesPartial", Model); }
+					@{ await Html.RenderPartialAsync($"Partial/{entityValue.ToTitleCase()}Partial", Model); }
 				</div>
 			</div>
 		</div>
@@ -152,7 +155,7 @@
 @section Scripts
 {
 	<script src="~/plugins/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
-	<script src="~/scripts/products/products.js"></script>
+	<script src="~/scripts/shop/products.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function () {
 		initCustomDropDown();

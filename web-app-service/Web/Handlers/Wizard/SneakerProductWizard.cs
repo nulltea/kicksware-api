@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using web_app_service.Models;
+using Web.Models;
 
-namespace web_app_service.Wizards
+namespace Web.Wizards
 {
 	public static class SneakerProductWizard
 	{

@@ -4,7 +4,7 @@ using Core.Entities;
 
 namespace Core.Model
 {
-	public interface IPagedModel<T> : IEnumerable<T> where T: IBaseEntity
+	public interface IPagedModel<out TEntity> : IEnumerable<TEntity> where TEntity: IBaseEntity
 	{
 		int CurrentPage { get; set; }
 

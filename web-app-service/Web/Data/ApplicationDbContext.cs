@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace web_app_service.Data
+namespace Web.Data
 {
 	public class ApplicationDbContext : IdentityDbContext
 	{

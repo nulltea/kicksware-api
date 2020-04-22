@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace web_app_service.Wizards
+namespace Web.Wizards
 {
 	public class WizardSteps
 	{

@@ -21,13 +21,13 @@ using web_app_service;
 #nullable disable
 #nullable restore
 #line 2 "C:\source\repos\sneaker-resale-platform\web-app-service\Web\Views\_ViewImports.cshtml"
-using web_app_service.Models;
+using Web.Models;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"0267444c0a75172c2d7a370b274e3e967da2b2d6", @"/Views/Sell/MyProducts.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"dfdfc3c1df743b1ac25188a529acf17c4fc3481d", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"435ec045da096c47c760a45e6841baf92c29fbd7", @"/Views/_ViewImports.cshtml")]
     public class Views_Sell_MyProducts : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

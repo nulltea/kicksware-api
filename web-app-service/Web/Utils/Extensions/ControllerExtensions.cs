@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-namespace web_app_service.Utils.Extensions
+namespace Web.Utils.Extensions
 {
 	public static class ControllerExtensions
 	{

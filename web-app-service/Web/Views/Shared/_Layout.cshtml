@@ -1,4 +1,4 @@
-﻿@using web_app_service.Utils.Helpers
+﻿@using Web.Utils.Helpers
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +7,7 @@
 	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
 	<meta http-equiv="Pragma" content="no-cache"/>
 	<meta http-equiv="Expires" content="0"/>
-	<title>@ViewData["Title"] - web_app_service</title>
+	<title>@ViewBag.Title | Kicksware </title>
 	<link rel="stylesheet" type="text/css" href="~/plugins/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="~/styles/css/common/common.css">
 	<link rel="stylesheet" type="text/css" href="~/styles/css/layout/header.css">
@@ -37,7 +37,7 @@
 						<a asp-controller="Auth" asp-action="Facebook">Profile</a>
 					</li>
 					<li>
-						<a asp-controller="Shop" asp-action="Products">Shop</a>
+						<a asp-controller="Shop" asp-action="References">Shop</a>
 					</li>
 					<li class="hassubs">
 						<a asp-controller="Sell" asp-action="NewProduct">Sell</a>
@@ -54,7 +54,7 @@
 						<a asp-controller="About" asp-action="About">About</a>
 					</li>
 					<li>
-						<a asp-controller="Contact" asp-action="Contact">Contacts</a>
+						<a asp-controller="Contact" asp-action="Contact">Contact</a>
 					</li>
 				</ul>
 			</nav>
@@ -133,7 +133,7 @@
 						<a asp-controller="Home" asp-action="Index">Profile</a>
 					</li>
 					<li class="slider-menu-item">
-						<a asp-controller="Shop" asp-action="Products">Shop</a>
+						<a asp-controller="Shop" asp-action="References">Shop</a>
 					</li>
 					<li class="slider-menu-item">
 						<a asp-controller="Sell" asp-action="NewProduct">Sell</a>

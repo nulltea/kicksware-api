@@ -66,16 +66,23 @@ namespace Infrastructure.Usecase.Models
 			return group;
 		}
 
-		public FilterGroup AddForeignFilterGroup<TEntity>(string caption, string fieldName,
-														ExpressionType expressionType = ExpressionType.In,
-														string description = default) =>
-			AddForeignFilterGroup(caption, fieldName, typeof(TEntity), expressionType, description);
+		public FilterGroup AddForeignFilterGroup<TForeignEntity>(string caption, string fieldName,
+																ExpressionType expressionType = ExpressionType.In,
+																string description = default) =>
+			AddForeignFilterGroup(caption, fieldName, typeof(TForeignEntity), expressionType, description);
 
 		public FilterGroup AddForeignFilterGroup(string caption, string fieldName, Type foreignEntity,
 												ExpressionType expressionType = ExpressionType.In,
 												string description = default)
 		{
 			var group = new FilterGroup(caption, new FilterProperty(fieldName, foreignEntity), expressionType, description);
+			FilterGroups.Add(group);
+			return group;
+		}
+
+		public FilterGroup AddHiddenFilterGroup(string caption, string fieldName, ExpressionType expressionType = ExpressionType.In)
+		{
+			var group = new FilterGroup(caption, fieldName, expressionType) {Hidden = true};
 			FilterGroups.Add(group);
 			return group;
 		}
@@ -102,14 +109,14 @@ namespace Infrastructure.Usecase.Models
 			return group;
 		}
 
-		public void ApplyUserInputs(Dictionary<string, (bool Checked, object Value)> filterInputs)
+		public void ApplyUserInputs(List<FilterInput> filterInputs)
 		{
-			foreach (var (key, (@checked, value)) in filterInputs)
+			foreach (var input in filterInputs)
 			{
-				var param = FilterParameters.FirstOrDefault(p => p.RenderId == key);
+				var param = FilterParameters.FirstOrDefault(p => p.RenderId == input.RenderId);
 				if (param is null) continue;
-				param.Checked = @checked;
-				param.Value = value;
+				param.Checked = input.Checked;
+				param.Value = input.Value;
 			}
 		}
 
@@ -117,7 +124,7 @@ namespace Infrastructure.Usecase.Models
 
 		private Dictionary<string, object> GetQueryMap()
 		{
-			var queryBuilder = new QueryRecourseBuilder();
+			var queryBuilder = new QueryBuilder();
 			queryBuilder.SetQueryArguments(FilterGroups);
 			return queryBuilder.Build();
 		}
@@ -143,7 +150,7 @@ namespace Infrastructure.Usecase.Models
 		}
 
 		public SortParameter ChooseSortParameter(string value) =>
-			ChosenSorting = SortParameters.FirstOrDefault(sp => sp.RenderValue == value);
+			ChosenSorting = SortParameters.FirstOrDefault(sp => string.Equals(sp.RenderValue, value, StringComparison.CurrentCultureIgnoreCase));
 
 		#endregion
 

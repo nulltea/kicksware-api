@@ -1,5 +1,7 @@
 using System;
-using Core.Entities.Reference;
+using Core.Entities.Products;
+using Core.Entities.References;
+using Core.Model;
 using Core.Repositories;
 using Core.Services;
 using Infrastructure.Data;
@@ -10,11 +12,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
-using web_app_service.Data;
+using Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SmartBreadcrumbs.Extensions;
+using Web.Handlers.Filter;
+using Web.Models;
 
 namespace web_app_service
 {
@@ -56,12 +60,20 @@ namespace web_app_service
 			#region Dependency injection
 
 			services.AddSingleton<RestfulClient, RestfulClient>();
+
 			services.AddSingleton<ISneakerProductRepository, SneakerProductsRestRepository>();
-			services.AddSingleton<ISneakerProductService, SneakerProductService>();
 			services.AddSingleton<ISneakerReferenceRepository, SneakerReferencesRestRepository>();
+
 			services.AddTransient<ICommonService<SneakerReference>, SneakerReferenceService>();
+			//services.AddTransient<ICommonService<SneakerBrandReferenceViewModel>, SneakerReferenceService>(); TODO
+			services.AddTransient<ICommonService<SneakerProduct>, SneakerProductService>();
 			services.AddSingleton<ISneakerReferenceService, SneakerReferenceService>();
+			services.AddSingleton<ISneakerProductService, SneakerProductService>();
 			services.AddSingleton<IReferenceSearchService, ReferenceSearchService>();
+
+			services.AddTransient<FilterContentBuilder<SneakerReference>, ReferencesFilterContent>();
+			services.AddTransient<FilterContentBuilder<SneakerProduct>, ProductsFilterContent>();
+			services.AddTransient<FilterContentBuilder<SneakerBrandReferenceViewModel>, BrandFilterContent>();
 
 			#endregion
 
@@ -108,7 +120,8 @@ namespace web_app_service
 			{
 				endpoints.MapControllerRoute(
 					name: "default",
-					pattern: "{controller=Home}/{action=Index}/{id?}");
+					pattern: "{controller=Home}/{action=Index}/{id?}"
+				);
 				endpoints.MapRazorPages();
 			});
 

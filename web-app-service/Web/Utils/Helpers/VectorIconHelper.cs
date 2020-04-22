@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-namespace web_app_service.Utils.Helpers
+namespace Web.Utils.Helpers
 {
 	public static partial class CustomHelpers
 	{

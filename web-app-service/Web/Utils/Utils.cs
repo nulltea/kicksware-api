@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Entities.Products;
 using Core.Entities.Users;
-using web_app_service.Models;
+using Web.Models;
 
-namespace web_app_service.Utils
+namespace Web.Utils
 {
 	public static class Utils
 	{

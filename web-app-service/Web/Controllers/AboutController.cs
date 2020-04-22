@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmartBreadcrumbs.Attributes;
 
-namespace web_app_service.Controllers
+namespace Web.Controllers
 {
 	public class AboutController : Controller
 	{

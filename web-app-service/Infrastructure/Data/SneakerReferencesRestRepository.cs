@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Core.Entities.Reference;
+using Core.Entities.References;
 using Core.Gateway;
 using Core.Repositories;
 using Infrastructure.Gateway.REST.Client;
-using Infrastructure.Gateway.REST.ProductRequests.Sneakers;
 using Infrastructure.Gateway.REST.References.Sneakers;
 
 namespace Infrastructure.Data

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Core.Entities.Reference;
+using Core.Entities.References;
 using Core.Services;
 using Infrastructure.Gateway.REST.Client;
 using Infrastructure.Gateway.REST.Search.SneakerReference;

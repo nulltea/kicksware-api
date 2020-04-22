@@ -63,7 +63,7 @@ function autocompleteFilter(inputSelector, filterValues) {
 					closeAllLists();
 				});
 				chipsInit($(checkbox));
-				bindFilterInputSubmitEvent($(checkbox));
+				bindRequestUpdateEvent($(checkbox));
 				$(".brand-list").prepend($(brandRow));
 			}
 		}
@@ -147,12 +147,12 @@ function priceRangeInit() {
 		handleCollisionMax();
 		syncMaxPrice(this);
 	});
-	bindFilterInputSubmitEvent(rangeMax, "mouseup");
+	bindRequestUpdateEvent(rangeMax, 1, "mouseup");
 	rangeMin.on("input", function () {
 		handleCollisionMin();
 		syncMinPrice(this);
 	});
-	bindFilterInputSubmitEvent(rangeMin, "mouseup");
+	bindRequestUpdateEvent(rangeMin, 1, "mouseup");
 
 	inputMax.on("input", function () {
 		handleCollisionMax();
@@ -165,7 +165,7 @@ function priceRangeInit() {
 
 	syncMaxPrice(maxRangeElement);
 	syncMinPrice(minRangeElement);
-} //TODO bind submit action on range change
+}
 
 function chipsInit(option = null){
 	let filterOverbar = $(".filter-overbar");
@@ -196,7 +196,7 @@ function chipsInit(option = null){
 				option.prop('checked', false);
 				hideChipsPanel();
 			});
-			bindFilterInputSubmitEvent($(close), "click");
+			bindRequestUpdateEvent($(close), 1, "click");
 			chip.append(close);
 			chipsPanel.append(chip);
 		});
@@ -224,7 +224,7 @@ function chipsInit(option = null){
 	if(option == null){
 		let resetButton = $("#filter-reset");
 		resetButton.click(resetAllFilters);
-		bindFilterInputSubmitEvent(resetButton, "click");
+		bindRequestUpdateEvent(resetButton, 1, "click");
 	}
 }
 
@@ -243,40 +243,71 @@ function layoutToggleInit() {
 }
 
 function filterNavigatorInit(){
-	bindFilterInputSubmitEvent($(".filter-sidebar input[id^=filter-control]"));
+	bindRequestUpdateEvent($(".filter-sidebar input[id^=filter-control]"));
 }
 
-
-function bindFilterInputSubmitEvent(element, event="change") {
+function bindRequestUpdateEvent(element, page=1, event="change") {
 	element.on(event, function () {
-		$.post("/Shop/RequestFilter", {filterInputs: formFilterParameters(), sortBy: formSortParameter() }, function(response) {
+		$.post(`${window.location.pathname}/requestUpdate`, {filterInputs: formFilterParameters(), page: page, sortBy: formSortParameter() }, function(response) {
 			$(".result-content").html(response["content"]);
-			$(".count span").text(`Showing 0-${Math.min(response["pageSize"], response["length"])} / ${response["length"]} results`);
+			$(".count span").text(`Showing ${(page - 1) * response["pageSize"]}-${Math.min(response["pageSize"], response["length"])} / ${response["length"]} results`);
+			setLayoutMode();
+			paginationInit();
+			window.history.pushState("Kicksware", `(Page ${page})`, `?page=${page}&sortBy=${formSortParameter()}`);
+			loading($(".product-cell"))
 		});
 	});
 
 	function formFilterParameters() {
-		let formMap = {};
+		let filterInputs = [];
 		$(".filter-sidebar input[id^=filter-control]").each(function () {
-			let param = {};
 			let checked = this.type === "checkbox" ? $(this).is(":checked") : true;
 			let value = this.value;
 			if (this.type === "number" || this.type === "range") {
 				value = parseFloat(value)
 			}
-			param[checked] = JSON.stringify(value);
-			formMap[this.id] = param;
+			filterInputs.push({RenderId: this.id, Checked: checked, ValueJson: JSON.stringify(value)})
 		});
-		return formMap;
+		return filterInputs;
 	}
 
 	function formSortParameter() {
-		return $(".sort_type select").val();
+		return $(".sort_type select").val().toLowerCase();
+	}
+
+	function setLayoutMode() {
+		let toggle = $(".layout-toggle input[type=checkbox]");
+		let view =  $(".products-view");
+		if (toggle.is(":checked") && view.hasClass("list")){
+			view.removeClass("list").addClass("grid");
+		} else if (!toggle.is(":checked") && view.hasClass("grid")) {
+			view.removeClass("grid").addClass("list");
+		}
 	}
 }
 
 function sortingInit(){
-	bindFilterInputSubmitEvent($(".sort_type select"));
+	let sortSelector = $(".sort_type select");
+	bindRequestUpdateEvent(sortSelector, $("#page-current").val());
+
+	sortSelector.val(new URL(window.location.href).searchParams.get("sortBy") ?? "Newest");
+}
+
+function paginationInit() {
+	$("button[id^=page]").each(function () {
+		bindRequestUpdateEvent($(this), $(this).val(), "click");
+	})
+}
+
+function loading(items){
+	TweenMax.staggerFrom(items, 1, {
+		scale: 0.6,
+		opacity: 0,
+		delay: .5,
+		ease: Elastic.easeOut,
+		force3D: true,
+		clearProps: "all"
+	}, 0.05);
 }
 
 $(document).ready(function () {
@@ -291,4 +322,6 @@ $(document).ready(function () {
 	filterNavigatorInit();
 
 	sortingInit();
+
+	paginationInit();
 });

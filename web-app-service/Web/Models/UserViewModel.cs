@@ -1,6 +1,6 @@
 ﻿using Core.Entities.Users;
 
-namespace web_app_service.Models
+namespace Web.Models
 {
 	public class UserViewModel : User { }
 }
