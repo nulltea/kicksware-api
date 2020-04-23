@@ -1,4 +1,5 @@
-﻿using Core.Entities.References;
+﻿using System.Linq;
+using Core.Entities.References;
 using Microsoft.AspNetCore.Mvc;
 using SmartBreadcrumbs.Attributes;
 using Web.Models;
@@ -16,6 +17,12 @@ namespace Web.Controllers
 				InitFilterHandler<SneakerReference>(new {brandId}); //TODO custom builder
 			if (!string.IsNullOrEmpty(sortBy)) references.ChooseSortParameter(sortBy);
 			references.FetchPage(page);
+			var brand = references.FirstOrDefault()?.Brand ?? new SneakerBrand(brandId);
+			HeroCoverPath = brand.HeroPath;
+			HeroBreadTitle = brand.Name;
+			HeroBreadSubTitle = brand.Description;
+			HeroLogoPath = brand.Logo;
+
 			return View("References", references);
 		}
 	}

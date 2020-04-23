@@ -234,6 +234,7 @@ a.underline {
 	background: @theme-dark-primary;
 	overflow: hidden;
 
+
 	.hero-cover {
 		position:absolute;
 		width:100%;
@@ -248,7 +249,8 @@ a.underline {
 			object-fit: cover;
 		}
 	}
-	.hero-content{
+
+	.hero-content {
 		position: absolute;
 		display: flex;
 		flex-direction: column;
@@ -259,10 +261,14 @@ a.underline {
 		top: 0;
 		bottom: -8%;
 
+		.with-theme({
+			color: @theme-light-hint;
+		});
+
 		span, li {
 			.with-theme({
 				.text-elevation(@elevation);
-				color: @theme-light-hint;
+				color: inherit;
 			})
 		}
 
@@ -281,22 +287,22 @@ a.underline {
 			}
 
 			.breadcrumb-item {
-				color: @theme-light-hint;
+				color: inherit;
 
 				&.active {
-					color: @theme-light-hint;
+					color: inherit;
 				}
 
 				a {
 					.with-theme({
-						color: @theme-light-hint;
+						color: inherit;
 					});
 					.transition-properties(all 300ms ease);
 
 					&:hover {
 						text-decoration: underline;
 						.with-theme({
-							color: @theme-light-primary;
+							color: inherit;
 							.text-hover-elevation(@elevation);
 						});
 					}
@@ -304,7 +310,7 @@ a.underline {
 			}
 
 			.separator {
-				color: @theme-light-hint;
+				color: inherit;
 				margin-left: 5px;
 				margin-right: 15px;
 			}
@@ -312,16 +318,24 @@ a.underline {
 		.bread {
 			font-size: 50px;
 			font-weight: 600;
-			color: @theme-light-hint;
+			color: inherit;
 			opacity: 1;
 		}
 
 		.sub-bread{
 			font-size: 25px;
 			font-weight: 500;
-			color: @theme-light-hint;
+			color: inherit;
 			opacity: 1;
 		}
+	}
+
+	.logo {
+		width: 100px;
+		height: 100px;
+		fill: @theme-light-primary;
+		-webkit-filter: drop-shadow(2px 2px 2px fade(@theme-light-elevation, 50%));
+		filter: drop-shadow(2px 2px 2px fade(@theme-light-elevation, 50%));
 	}
 }
 

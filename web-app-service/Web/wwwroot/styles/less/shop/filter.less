@@ -233,10 +233,11 @@
 
 	.filter-chips {
 		.flex-row(@justify: flex-start);
+		flex-wrap: wrap;
 		position: absolute;
 		top: 50px;
 		width: 100%;
-		padding: 15px;
+		padding: 15px 15px 0;
 		border-radius: 10px;
 		opacity: 0;
 		z-index: 0;
@@ -245,6 +246,10 @@
 			background: @primary;
 			.elevation(6, @elevation);
 		});
+
+		& > * {
+			margin: 0 15px 15px 0;
+		}
 
 		.button {
 			padding-left: 10px;
@@ -258,7 +263,6 @@
 			border-radius: 40px;
 			padding-left: 15px;
 			padding-right: 8px;
-			margin-left: 15px;
 			.with-theme({
 				background: @hint;
 				color: @secondary;

@@ -65,7 +65,6 @@ namespace web_app_service
 			services.AddSingleton<ISneakerReferenceRepository, SneakerReferencesRestRepository>();
 
 			services.AddTransient<ICommonService<SneakerReference>, SneakerReferenceService>();
-			//services.AddTransient<ICommonService<SneakerBrandReferenceViewModel>, SneakerReferenceService>(); TODO
 			services.AddTransient<ICommonService<SneakerProduct>, SneakerProductService>();
 			services.AddSingleton<ISneakerReferenceService, SneakerReferenceService>();
 			services.AddSingleton<ISneakerProductService, SneakerProductService>();
@@ -73,7 +72,6 @@ namespace web_app_service
 
 			services.AddTransient<FilterContentBuilder<SneakerReference>, ReferencesFilterContent>();
 			services.AddTransient<FilterContentBuilder<SneakerProduct>, ProductsFilterContent>();
-			services.AddTransient<FilterContentBuilder<SneakerBrandReferenceViewModel>, BrandFilterContent>();
 
 			#endregion
 

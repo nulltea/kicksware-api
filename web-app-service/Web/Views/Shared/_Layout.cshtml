@@ -254,15 +254,21 @@
 	var heroCoverPath = Convert.ToString(ViewData["HeroCoverPath"]);
 	var heroBreadTitle = Convert.ToString(ViewData["HeroBreadTitle"]);
 	var heroBreadSubTitle = Convert.ToString(ViewData["HeroBreadSubTitle"]);
+	var heroLogoPath = Convert.ToString(ViewData["HeroLogoPath"]);
 }
 @if (!string.IsNullOrEmpty(heroCoverPath))
 {
-	<div class="hero-parallax" id="hero-parallax" data-scrollax-parent="true">
+	var heroId = System.IO.Path.GetFileNameWithoutExtension(heroCoverPath);
+	<div class="hero-parallax" id="@heroId" data-scrollax-parent="true">
 		<picture class="hero-cover" data-scrollax="properties: { 'translateY': '50%', 'opacity': 0.5 }">
 			<source srcset="@heroCoverPath" media="(min-width: 600px)">
 			<img src="@heroCoverPath" alt="">
 		</picture>
 		<div class="hero-content" data-scrollax="properties: { 'top': '75%'}" data-scr>
+			@if (!string.IsNullOrEmpty(heroLogoPath))
+			{
+				@Html.VectorIconRender(heroLogoPath, "logo")
+			}
 			<span class="bread">@heroBreadTitle</span>
 			<span class="sub-bread">@heroBreadSubTitle</span>
 			<breadcrumb></breadcrumb>

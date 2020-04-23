@@ -20,8 +20,6 @@ namespace Core.Entities.References
 
 		public decimal Relevance { get; set; }
 
-		public string HeroImage { get; set; }
-
 		public string HeroPath { get; set; }
 
 		public static implicit operator SneakerBrand(string field) => new SneakerBrand(field);
@@ -32,7 +30,7 @@ namespace Core.Entities.References
 		{
 			Name = name;
 			UniqueId = new Regex("[\\n\\t;,.\\s()\\/]").Replace(Convert.ToString(name), "_").ToLower();
-			Logo = $"/images/icons/{UniqueId}-logo.svg";
+			Logo = $"logos/{UniqueId}-logo.svg";
 			HeroPath = $"/images/heroes/{UniqueId}-hero.jpg";
 		}
 

@@ -87,7 +87,7 @@ services:
       target: dev
     env_file: ./reference-service/env/.env
     image: references-service
-    # restart: always
+    restart: always
     labels:
       - traefik.http.routers.reference-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/references`)
       # - traefik.http.routers.reference-service.tls=true

@@ -11,7 +11,6 @@ using Core.Services;
 using Infrastructure.Usecase.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Web.Models;
 using Web.Utils.Extensions;
 
 namespace Web.Controllers
@@ -26,6 +25,9 @@ namespace Web.Controllers
 
 		[ViewData]
 		public string HeroBreadSubTitle { get; set; } = "Select and buy whatever kicks you like";
+
+		[ViewData]
+		public string HeroLogoPath { get; set; }
 
 		private IFilteredModel<TEntity> InitFilterHandler<TEntity>(object additionalParams = default) where TEntity : IBaseEntity
 		{

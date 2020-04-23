@@ -17,7 +17,7 @@
 		filterMenu.toggleClass("active");
 	});
 
-	$(".accordion-control").change(function (e) {
+	$(".accordion-control").change(function () {
 		filterMenu.find(".spacer").height($(".accordion").height());
 	});
 }
@@ -167,7 +167,7 @@ function priceRangeInit() {
 	syncMinPrice(minRangeElement);
 }
 
-function chipsInit(option = null){
+function chipsInit(option = null) {
 	let filterOverbar = $(".filter-overbar");
 	let chipsPanel = $(".filter-chips");
 	let filterOptions = option ?? $(".section-content input[type=checkbox]");
@@ -179,6 +179,7 @@ function chipsInit(option = null){
 
 			if (!option.is(":checked")) {
 				$(`#${id}`).remove();
+				spacerHeightHandle();
 				hideChipsPanel();
 				return;
 			}
@@ -194,11 +195,14 @@ function chipsInit(option = null){
 			$(close).click(function() {
 				$(chip).remove();
 				option.prop('checked', false);
+				spacerHeightHandle();
 				hideChipsPanel();
 			});
+
 			bindRequestUpdateEvent($(close), 1, "click");
 			chip.append(close);
 			chipsPanel.append(chip);
+			spacerHeightHandle();
 		});
 	});
 
@@ -211,6 +215,7 @@ function chipsInit(option = null){
 	function hideChipsPanel() {
 		if (!$(".chip").length) {
 			filterOverbar.toggleClass("active");
+			filterOverbar.find(".spacer").height(0);
 		}
 	}
 
@@ -221,7 +226,14 @@ function chipsInit(option = null){
 		$(".chip").remove();
 		hideChipsPanel();
 	}
-	if(option == null){
+
+	function spacerHeightHandle() {
+		let chipsPanel = filterOverbar.find(".filter-chips");
+		let height = chipsPanel.outerHeight();
+		filterOverbar.find(".spacer").height(height);
+	}
+
+	if(option == null) {
 		let resetButton = $("#filter-reset");
 		resetButton.click(resetAllFilters);
 		bindRequestUpdateEvent(resetButton, 1, "click");
@@ -248,7 +260,10 @@ function filterNavigatorInit(){
 
 function bindRequestUpdateEvent(element, page=1, event="change") {
 	element.on(event, function () {
-		$.post(`${window.location.pathname}/requestUpdate`, {filterInputs: formFilterParameters(), page: page, sortBy: formSortParameter() }, function(response) {
+		let pathValues = window.location.pathname.split("/");
+		let controller = pathValues[1];
+		let entity = pathValues[2];
+		$.post(`/${controller}/${entity}/requestUpdate`, {filterInputs: formFilterParameters(), page: page, sortBy: formSortParameter() }, function(response) {
 			$(".result-content").html(response["content"]);
 			$(".count span").text(`Showing ${(page - 1) * response["pageSize"]}-${Math.min(response["pageSize"], response["length"])} / ${response["length"]} results`);
 			setLayoutMode();
@@ -272,7 +287,7 @@ function bindRequestUpdateEvent(element, page=1, event="change") {
 	}
 
 	function formSortParameter() {
-		return $(".sort_type select").val().toLowerCase();
+		return ($(".sort_type select").val() ?? "Newest").toLowerCase();
 	}
 
 	function setLayoutMode() {
@@ -290,7 +305,7 @@ function sortingInit(){
 	let sortSelector = $(".sort_type select");
 	bindRequestUpdateEvent(sortSelector, $("#page-current").val());
 
-	sortSelector.val(new URL(window.location.href).searchParams.get("sortBy") ?? "Newest");
+	sortSelector.val(new URL(window.location.href).searchParams.get("sortBy") ?? "newest");
 }
 
 function paginationInit() {

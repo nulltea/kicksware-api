@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Core.Entities;
 using Core.Exceptions;
-using Core.Extension;
 using Core.Gateway;
 using Core.Model;
 using Core.Model.Parameters;

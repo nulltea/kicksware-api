@@ -54,83 +54,107 @@
 					<header class="menu-panel">
 						<label class="section-title">FILTERS</label>
 					</header>
-					<input type="checkbox" name="accordion" class="accordion-control" id="mp1"/>
-					<section class="menu-panel brand">
-						<label class="section-title" for="mp1">Brand</label>
-						<div class="section-content">
-							<input type="search" id="brand-filter" class="autocomplete-filter filter-input" required="required">
-							<div class="brand-list">
-								@if (!@Model["Brand"].Hidden) @* TODO *@
-								{
-									@foreach (var brand in Model["Brand"].Take(4)) //TODO
-									{
-										<div class="brand-row">
-											@brand.RenderCheckbox(new {@class = "regular_checkbox"})
+					@foreach (var filterGroup in Model.FilterGroups)
+					{
+						if (filterGroup.Hidden)
+						{
+							foreach (var parameter in filterGroup)
+							{
+								@parameter.RenderHidden()
+							}
+							continue;
+						}
+						switch (filterGroup.Caption.ToLower())
+						{
+							case "brand":
+								<input type="checkbox" name="accordion" class="accordion-control" id="mp1"/>
+								<section class="menu-panel brand">
+									<label class="section-title" for="mp1">Brand</label>
+									<div class="section-content">
+										<input type="search" id="brand-filter" class="autocomplete-filter filter-input" required="required">
+										<div class="brand-list">
+											@if (!@Model["Brand"].Hidden) @* TODO *@
+											{
+												@foreach (var brand in Model["Brand"].Take(4)) //TODO
+												{
+													<div class="brand-row">
+														@brand.RenderCheckbox(new {@class = "regular_checkbox"})
+													</div>
+												}
+											}
 										</div>
-									}
-								}
-							</div>
-						</div>
-					</section>
-					<input type="checkbox" name="accordion" class="accordion-control" id="mp2"/>
-					<section class="menu-panel size">
-						<label class="section-title" for="mp2">Size</label>
-						<div class="section-content">
-							<div class="size-grid">
-								@foreach (var size in Model["Size"])
-								{
-									<button class="button size-cell">
-										@size.RenderCheckbox()
-									</button>
-								}
-							</div>
-						</div>
-					</section>
-					<input type="checkbox" name="accordion" class="accordion-control" id="mp3"/>
-					<section class="menu-panel color">
-						<label class="section-title" for="mp3">Color</label>
-						<div class="section-content">
-							<div class="color-picker">
-								@foreach (var color in Model["Color"])
-								{
-									var sourceValue = color.GetSourceValue<FilterColor>();
-									<button class="button color-item" style="border-bottom: 3px solid @sourceValue.Hex; background: @sourceValue.Hex">
-										@color.RenderCheckbox()
-									</button>
-								}
-							</div>
-						</div>
-					</section>
-					<input type="checkbox" name="accordion" class="accordion-control" id="mp4"/>
-					<section class="menu-panel price">
-						<label class="section-title" for="mp4">Price</label>
-						<div class="section-content">
-							<div class="price-range">
-								<div class="multi-range">
-									<input type="range" class="price-slider min" min="0" value="0" max="1000"/>
-									<input type="range" class="price-slider max" min="100" value="1000" max="1000"/>
-								</div>
-								<div class="multi-input">
-									@Model["Price"][0].RenderInput(new {type = "number", value = 100, @class = "filter-input price-input min"})
-									@Model["Price"][1].RenderInput(new {type = "number", value = 1000, @class = "filter-input price-input max"})
-								</div>
-							</div>
-						</div>
-					</section>
-					<input type="checkbox" name="accordion" class="accordion-control" id="mp5"/>
-					<section class="menu-panel condition">
-						<label class="section-title" for="mp5">Condition</label>
-						<div class="section-content">
-							<div class="condition-grid">
-								@foreach (var condition in Model["Condition"])
-								{
-									<button class="button">
-										@condition.RenderCheckbox()
-									</button>
-								}
-							</div>
-						</div>
-					</section>
+									</div>
+								</section>
+								break;
+							case "size":
+								<input type="checkbox" name="accordion" class="accordion-control" id="mp2"/>
+								<section class="menu-panel size">
+									<label class="section-title" for="mp2">Size</label>
+									<div class="section-content">
+										<div class="size-grid">
+											@foreach (var size in Model["Size"])
+											{
+												<button class="button size-cell">
+													@size.RenderCheckbox()
+												</button>
+											}
+										</div>
+									</div>
+								</section>
+								break;
+							case "color":
+								<input type="checkbox" name="accordion" class="accordion-control" id="mp3"/>
+								<section class="menu-panel color">
+									<label class="section-title" for="mp3">Color</label>
+									<div class="section-content">
+										<div class="color-picker">
+											@foreach (var color in Model["Color"])
+											{
+												var sourceValue = color.GetSourceValue<FilterColor>();
+												<button class="button color-item" style="border-bottom: 3px solid @sourceValue.Hex; background: @sourceValue.Hex">
+													@color.RenderCheckbox()
+												</button>
+											}
+										</div>
+									</div>
+								</section>
+								break;
+							case "price":
+								<input type="checkbox" name="accordion" class="accordion-control" id="mp4"/>
+								<section class="menu-panel price">
+									<label class="section-title" for="mp4">Price</label>
+									<div class="section-content">
+										<div class="price-range">
+											<div class="multi-range">
+												<input type="range" class="price-slider min" min="0" value="0" max="1000"/>
+												<input type="range" class="price-slider max" min="100" value="1000" max="1000"/>
+											</div>
+											<div class="multi-input">
+												@Model["Price"][0].RenderInput(new {type = "number", value = 100, @class = "filter-input price-input min"})
+												@Model["Price"][1].RenderInput(new {type = "number", value = 1000, @class = "filter-input price-input max"})
+											</div>
+										</div>
+									</div>
+								</section>
+								break;
+							case "condition":
+								<input type="checkbox" name="accordion" class="accordion-control" id="mp5"/>
+								<section class="menu-panel condition">
+									<label class="section-title" for="mp5">Condition</label>
+									<div class="section-content">
+										<div class="condition-grid">
+											@foreach (var condition in Model["Condition"])
+											{
+												<button class="button">
+													@condition.RenderCheckbox()
+												</button>
+											}
+										</div>
+									</div>
+								</section>
+								break;
+						}
+					}
 				</nav>
 				<div class="spacer"></div>
 			</aside>

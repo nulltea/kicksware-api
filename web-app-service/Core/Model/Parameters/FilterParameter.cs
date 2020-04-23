@@ -70,5 +70,14 @@ namespace Core.Model.Parameters
 			input.MergeAttributes(attributes.ToMap(), true);
 			return input;
 		}
+
+		public IHtmlContent RenderHidden()
+		{
+			var hidden = new TagBuilder("input");
+			hidden.Attributes["type"] = "hidden";
+			hidden.Attributes["id"] = RenderId;
+			hidden.Attributes["value"] = Convert.ToString(Value);
+			return hidden;
+		}
 	}
 }

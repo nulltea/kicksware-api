@@ -16,7 +16,7 @@ namespace Core.Model.Parameters
 
 		public SortDirection Direction { get; set; }
 
-		public string RenderValue => Criteria?.GetEnumAttribute<EnumMemberAttribute>()?.Value ?? Caption;
+		public string RenderValue => (Criteria?.GetEnumAttribute<EnumMemberAttribute>()?.Value ?? Caption).ToLower();
 
 		public SortParameter(SortCriteria criteria, FilterProperty property, SortDirection direction = SortDirection.Descending)
 		{

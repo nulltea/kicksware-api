@@ -248,7 +248,6 @@
         <e p="Dockerfile" t="Include" />
         <e p="Handlers" t="Include">
           <e p="Filter" t="Include">
-            <e p="BrandFilterContent.cs" t="Include" />
             <e p="ProductsFilterContent.cs" t="Include" />
             <e p="ReferencesFilterContent.cs" t="Include" />
           </e>
@@ -284,9 +283,12 @@
           <e p="Extensions" t="Include">
             <e p="ControllerExtensions.cs" t="Include" />
           </e>
-          <e p="Helpers" t="Include">
+          <e p="HtmlHelpers" t="Include">
             <e p="HiddenForWizardStep.cs" t="Include" />
             <e p="VectorIconHelper.cs" t="Include" />
+          </e>
+          <e p="TagHelpers" t="Include">
+            <e p="ToggleTagHelper.cs" t="Include" />
           </e>
           <e p="Utils.cs" t="Include" />
         </e>
@@ -455,6 +457,7 @@
                 <e p="401620_002_1.png" t="Include" />
                 <e p="401620_002_1_1.png" t="Include" />
                 <e p="416269-101_1.png" t="Include" />
+                <e p="428902-302_1.png" t="Include" />
                 <e p="466512-671_1.png" t="Include" />
                 <e p="467827-105_1.png" t="Include" />
                 <e p="469786_325_1.png" t="Include" />
@@ -557,6 +560,7 @@
                 <e p="ah1040_054_1.png" t="Include" />
                 <e p="AH1041-054_1.png" t="Include" />
                 <e p="AH6772-010_1.png" t="Include" />
+                <e p="AH8798-007_1.png" t="Include" />
                 <e p="air_force_1_promo_la_BMB930-M8-C1_1.png" t="Include" />
                 <e p="air_jordan_13_retro_low_q54_810551-050_1.png" t="Include" />
                 <e p="air_max_90_lunar_c3_0_631744-106_1.png" t="Include" />
@@ -607,6 +611,7 @@
                 <e p="AR3565-003_1.png" t="Include" />
                 <e p="AR3565-004_1.png" t="Include" />
                 <e p="AR3565-101_1.png" t="Include" />
+                <e p="AR4410-207_1.png" t="Include" />
                 <e p="AR5410-161_1_1.png" t="Include" />
                 <e p="ar9880_023_3.png" t="Include" />
                 <e p="army_tr_chukka_M25802_1.png" t="Include" />
@@ -621,6 +626,7 @@
                 <e p="AT9193-600_1.png" t="Include" />
                 <e p="AT9195-001_1.png" t="Include" />
                 <e p="AV4789-101_1.png" t="Include" />
+                <e p="AV5878-800_1.png" t="Include" />
                 <e p="av6697_101.png" t="Include" />
                 <e p="B32664_1.png" t="Include" />
                 <e p="b32703_1.png" t="Include" />
@@ -690,6 +696,7 @@
                 <e p="B43515_1.png" t="Include" />
                 <e p="B43589_1.png" t="Include" />
                 <e p="B43593_1.png" t="Include" />
+                <e p="B43893_1.png" t="Include" />
                 <e p="B49755_1.png" t="Include" />
                 <e p="b49794_1.png" t="Include" />
                 <e p="B54177_1_1.png" t="Include" />
@@ -886,6 +893,7 @@
                 <e p="CJ0171-001_1.png" t="Include" />
                 <e p="CJ1154-100_1.png" t="Include" />
                 <e p="CJ6971-200_1.png" t="Include" />
+                <e p="CJ9218-100_1.png" t="Include" />
                 <e p="classic_leather_lux_V51810_1.png" t="Include" />
                 <e p="classic_leather_r12_V54303_1.png" t="Include" />
                 <e p="CM7879_1.png" t="Include" />
@@ -907,6 +915,7 @@
                 <e p="CQ2530_1.png" t="Include" />
                 <e p="CQ3080_1.png" t="Include" />
                 <e p="CQ3081_1.png" t="Include" />
+                <e p="CQ9601-001_1.png" t="Include" />
                 <e p="crazy_1_G98371_1.png" t="Include" />
                 <e p="crazy_1_G98714_1.png" t="Include" />
                 <e p="d30uk_3342_1.png" t="Include" />
@@ -1095,8 +1104,10 @@
                 <e p="gel_sight_H50CK-5042_1.png" t="Include" />
                 <e p="GRNCAM11505_1.png" t="Include" />
                 <e p="h008_mn8skt_333_103865_1.png" t="Include" />
+                <e p="H008MJORD834159096_1.png" t="Include" />
                 <e p="H008URBAN546-LN2_1.png" t="Include" />
                 <e p="h009-mnbskt-178-z_1.png" t="Include" />
+                <e p="H009MJORD047242351_1.png" t="Include" />
                 <e p="H00DK-1717_1.png" t="Include" />
                 <e p="H00FK-5046_1.png" t="Include" />
                 <e p="h00jj_6521_1.png" t="Include" />
@@ -1353,6 +1364,7 @@
                 <e p="m25790_1_4.png" t="Include" />
                 <e p="m25794_1.png" t="Include" />
                 <e p="M29010_1.png" t="Include" />
+                <e p="M3310_1.png" t="Include" />
                 <e p="m40341_1_1.png" t="Include" />
                 <e p="m40343_1.png" t="Include" />
                 <e p="M41747_1.png" t="Include" />
@@ -1384,6 +1396,7 @@
                 <e p="m49096_1.png" t="Include" />
                 <e p="M49321_1.png" t="Include" />
                 <e p="M49793_1.png" t="Include" />
+                <e p="M5039_1.png" t="Include" />
                 <e p="m52006xd_grx_1ap.png" t="Include" />
                 <e p="m52006xd_yex_1ap.png" t="Include" />
                 <e p="M53003XD-BKX_1AP.png" t="Include" />
@@ -1426,6 +1439,7 @@
                 <e p="m67758_1.png" t="Include" />
                 <e p="M7650_1.png" t="Include" />
                 <e p="M7652_1.png" t="Include" />
+                <e p="M8437_1.png" t="Include" />
                 <e p="m850_M850KH_1.png" t="Include" />
                 <e p="M990AL2_1.png" t="Include" />
                 <e p="M990AL5_1.png" t="Include" />
@@ -1795,6 +1809,9 @@
                 <e p="W998DTV_1.png" t="Include" />
                 <e p="workout_plus_25th_anniversary_J90974_1.png" t="Include" />
                 <e p="wrt580lb_1.png" t="Include" />
+                <e p="X31115-SK148U_1.png" t="Include" />
+                <e p="X3310_1.png" t="Include" />
+                <e p="X5039_1.png" t="Include" />
                 <e p="X7650_1.png" t="Include" />
                 <e p="yeezy_950_m_AQ4830_1.png" t="Include" />
                 <e p="yeezy_950_m_AQ4831_1.png" t="Include" />
@@ -1861,21 +1878,47 @@
             <e p="google.svg" t="Include" />
             <e p="grid.svg" t="Include" />
             <e p="heroes" t="Include">
-              <e p="35975611433_eab39d4bd5_k.jpg" t="Include" />
-              <e p="36206874751_3cace89429_k.jpg" t="Include" />
-              <e p="43178351822_bf6d2199e1_k.jpg" t="Include" />
-              <e p="49526904787_1e5ca1d590_k.jpg" t="Include" />
-              <e p="49614811003_c6a7596649_o.jpg" t="Include" />
-              <e p="61221_423055_r04_AJ_V_Top3_Retro-CZ1786-001_D2_LaceKeeper_14_HR_native_1600.jpg" t="Include" />
               <e p="about-hero.jpg" t="Include" />
+              <e p="adidas-4d-hero.jpg" t="Include" />
+              <e p="adidas-hero.jpg" t="Include" />
+              <e p="adidas_y-3-hero.jpg" t="Include" />
+              <e p="adidas_y-3-hero2.jpg" t="Include" />
+              <e p="adidas_y-3-hero_.jpg" t="Include" />
+              <e p="asics-hero.jpg" t="Include" />
+              <e p="asics-hero2.jpg" t="Include" />
+              <e p="bape-hero.jpg" t="Include" />
               <e p="contact-hero.jpg" t="Include" />
-              <e p="maksim-larin-NOpsC3nWTzY-unsplash (1).jpg" t="Include" />
-              <e p="NikeNews_Ho19_BB_Kyrie6_11PreHeatGroup_2_re_native_1600.jpg" t="Include" />
-              <e p="pair-of-nike-shoes-2529157.jpg" t="Include" />
-              <e p="seller-hero-2.jpg" t="Include" />
+              <e p="converse-hero.jpg" t="Include" />
+              <e p="jordan-hero.jpg" t="Include" />
+              <e p="jordan-hero3.jpg" t="Include" />
+              <e p="new_balance-hero.jpg" t="Include" />
+              <e p="new_balance-hero2.jpg" t="Include" />
+              <e p="nike-adapt-hero.jpg" t="Include" />
+              <e p="nike-air_force-hero.jpg" t="Include" />
+              <e p="nike-air_force_high-hero.jpg" t="Include" />
+              <e p="nike-air_max_90-hero.jpg" t="Include" />
+              <e p="nike-air_max_90-hero2.jpg" t="Include" />
+              <e p="nike-air_yeezy-hero.jpg" t="Include" />
+              <e p="nike-hero.jpg" t="Include" />
+              <e p="nike-kobe-hero.jpg" t="Include" />
+              <e p="nike-off_white-hero.jpg" t="Include" />
+              <e p="nike-react-hero.jpg" t="Include" />
+              <e p="nike-stock-hero.jpg" t="Include" />
+              <e p="nike-uptempo-hero.jpg" t="Include" />
+              <e p="nike-x-sacai-hero.jpg" t="Include" />
+              <e p="nike-x-sacai-hero2.jpg" t="Include" />
+              <e p="puma-hero.jpg" t="Include" />
+              <e p="puma-hero2.jpg" t="Include" />
+              <e p="reebok-hero.jpg" t="Include" />
+              <e p="reebok-hero2.jpg" t="Include" />
               <e p="seller-hero.jpg" t="Include" />
+              <e p="seller-hero2.jpg" t="Include" />
               <e p="shop-hero.jpg" t="Include" />
-              <e p="whereslugo-ad047kyPBh8-unsplash (1).jpg" t="Include" />
+              <e p="vans-hero.jpg" t="Include" />
+              <e p="yeezy-500-hero.jpg" t="Include" />
+              <e p="yeezy-700-hero.jpg" t="Include" />
+              <e p="yeezy-hero.jpg" t="Include" />
+              <e p="yeezy-hero2.jpg" t="Include" />
             </e>
             <e p="hightop_sneakers.svg" t="Include" />
             <e p="home_addidas_4d.jpg" t="Include" />
