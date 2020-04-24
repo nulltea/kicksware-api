@@ -31,12 +31,22 @@ namespace Core.Model.Parameters
 			Description = description;
 		}
 
+		public FilterGroup(FilterProperty property, ExpressionType expressionType = ExpressionType.In)
+		{
+			Property = property;
+			ExpressionType = expressionType;
+		}
+
 		public FilterGroup AssignParameter(FilterParameter parameter) => Add(parameter);
 
 		public FilterGroup AssignParameter(string caption, object value,
 											ExpressionType expressionType = ExpressionType.Equal,
 											string description = default) =>
 			Add(new FilterParameter(caption, value, expressionType, description));
+
+		public FilterGroup AssignParameter(object value,
+											ExpressionType expressionType = ExpressionType.Equal) =>
+			Add(new FilterParameter(value, expressionType));
 
 		public FilterGroup AssignParameters(params FilterParameter[] parameters) => AddRange(parameters);
 

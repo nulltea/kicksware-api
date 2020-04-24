@@ -429,6 +429,7 @@
                 <e p="170564_01_60047_1.png" t="Include" />
                 <e p="171340_01_2560_1.png" t="Include" />
                 <e p="175466-01_1.png" t="Include" />
+                <e p="175467-01_1.png" t="Include" />
                 <e p="2-J07907_1.png" t="Include" />
                 <e p="201.173195_01_60072_1.png" t="Include" />
                 <e p="305050-441_1.png" t="Include" />
@@ -796,6 +797,7 @@
                 <e p="BQ6972-001_1.png" t="Include" />
                 <e p="BQ6972-100_1.png" t="Include" />
                 <e p="BQ6980-400_1.png" t="Include" />
+                <e p="BS8160_1.png" t="Include" />
                 <e p="BV0074-200_1.png" t="Include" />
                 <e p="BV1111-001_1.png" t="Include" />
                 <e p="BV1111-008_1.png" t="Include" />
@@ -987,18 +989,25 @@
                 <e p="equipment_running_support_C77362_1_1.png" t="Include" />
                 <e p="equipment_running_support_M20508_1.png" t="Include" />
                 <e p="f36640_1.png" t="Include" />
+                <e p="F36MS590.V93_1.png" t="Include" />
                 <e p="F36MS590.V97_1.png" t="Include" />
                 <e p="F36MS591.C78_1.png" t="Include" />
+                <e p="F36MS591.C79_1.png" t="Include" />
                 <e p="F36MS591.C82_1.png" t="Include" />
                 <e p="F36MS959.D1_1.png" t="Include" />
                 <e p="F36MS959.E7_1.png" t="Include" />
                 <e p="F36MS959.E8_1.png" t="Include" />
+                <e p="F36MS959.E9_1.png" t="Include" />
                 <e p="F36WS590.V97_1.png" t="Include" />
                 <e p="F36WS590.W12_1.png" t="Include" />
                 <e p="F36WS590.W14_1.png" t="Include" />
                 <e p="F36WS591.C79_1.png" t="Include" />
+                <e p="F36WS591.C82_1.png" t="Include" />
+                <e p="F36WS591.C84_1.png" t="Include" />
                 <e p="F36WS959.E7_1.png" t="Include" />
                 <e p="F36WS959.E8_1.png" t="Include" />
+                <e p="F36WS959.E9_1.png" t="Include" />
+                <e p="F36WS959.F2_1.png" t="Include" />
                 <e p="F803040_1.png" t="Include" />
                 <e p="f804009_1.png" t="Include" />
                 <e p="f804016_1.png" t="Include" />
@@ -1760,6 +1769,7 @@
                 <e p="V61029_1.png" t="Include" />
                 <e p="V61038_1_1.png" t="Include" />
                 <e p="V61041_1.png" t="Include" />
+                <e p="V61196_1.png" t="Include" />
                 <e p="v61207_1.png" t="Include" />
                 <e p="V61215_1.png" t="Include" />
                 <e p="v61216_1.png" t="Include" />
@@ -1867,7 +1877,6 @@
           <e p="images" t="Include">
             <e p="_photo.svg" t="Include" />
             <e p="arrow.svg" t="Include" />
-            <e p="close-1.svg" t="Include" />
             <e p="close.svg" t="Include" />
             <e p="cloud_search.svg" t="Include" />
             <e p="details.svg" t="Include" />
@@ -1882,8 +1891,6 @@
               <e p="adidas-4d-hero.jpg" t="Include" />
               <e p="adidas-hero.jpg" t="Include" />
               <e p="adidas_y-3-hero.jpg" t="Include" />
-              <e p="adidas_y-3-hero2.jpg" t="Include" />
-              <e p="adidas_y-3-hero_.jpg" t="Include" />
               <e p="asics-hero.jpg" t="Include" />
               <e p="asics-hero2.jpg" t="Include" />
               <e p="bape-hero.jpg" t="Include" />
@@ -1997,6 +2004,10 @@
             </e>
             <e p="easing" t="Include">
               <e p="easing.js" t="Include" />
+            </e>
+            <e p="flickity" t="Include">
+              <e p="flickity.css" t="Include" />
+              <e p="flickity.min.js" t="Include" />
             </e>
             <e p="greensock" t="Include">
               <e p="animation.gsap.min.js" t="Include" />

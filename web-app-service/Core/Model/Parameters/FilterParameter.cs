@@ -38,6 +38,13 @@ namespace Core.Model.Parameters
 			Description = description;
 		}
 
+		public FilterParameter(object value, ExpressionType expressionType = ExpressionType.Equal)
+		{
+			_value = value;
+			ExpressionType = expressionType;
+			Checked = true;
+		}
+
 		public T GetSourceValue<T>() => (T)SourceValue;
 
 		public IHtmlContent RenderCheckbox(object attributes = default)

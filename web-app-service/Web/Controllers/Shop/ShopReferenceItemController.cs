@@ -1,4 +1,7 @@
-﻿using Core.Services;
+﻿using System.Collections.Generic;
+using Core.Entities.References;
+using Core.Gateway;
+using Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using SmartBreadcrumbs.Attributes;
 
@@ -14,8 +17,10 @@ namespace Web.Controllers
 			var reference = service.FetchUnique(referenceId);
 
 			if (reference is null) return NotFound();
-			//ViewBag.RelatedProducts = ProductsList; TODO search related
-			return View();
+
+			ViewBag.RelatedReferences = service.GetRelated(reference, new RequestParams {TakeCount = 12});
+
+			return View(reference);
 		}
 	}
 }

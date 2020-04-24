@@ -1,15 +1,26 @@
 package util
 
 import (
+	"net/url"
+
 	sqb "github.com/Masterminds/squirrel"
 	"github.com/fatih/structs"
 	"github.com/thoas/go-funk"
 	"go.mongodb.org/mongo-driver/bson"
-	"net/url"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func ToMap(v interface{}) map[string]interface{} {
 	return structs.Map(v)
+}
+
+func toMap(v interface{}) (m map[string]interface{}, err error) {
+	data, err := bson.Marshal(v)
+	if err != nil {
+		return
+	}
+	err = bson.Unmarshal(data, &m)
+	return
 }
 
 func ToBsonDoc(v interface{}) (d bson.D, err error) {
@@ -22,11 +33,31 @@ func ToBsonDoc(v interface{}) (d bson.D, err error) {
 }
 
 func ToBsonMap(v interface{}) (m bson.M, err error) {
-	data, err := bson.Marshal(v)
+	data, err := toMap(v)
 	if err != nil {
 		return
 	}
-	err = bson.Unmarshal(data, &m)
+	m = bson.M {}
+	for key := range data {
+		switch data[key].(type) {
+		case map[string]interface{}:
+			sub, err := ToBsonMap(data[key])
+			if err != nil {
+				m[key] = data[key]
+			} else {
+				if key == "$regex" {
+					m[key] = primitive.Regex{
+						Pattern: sub["pattern"].(string),
+						Options: sub["options"].(string),
+					}
+				} else {
+					m[key] = sub
+				}
+			}
+		default:
+			m[key] = data[key]
+		}
+	}
 	return
 }
 

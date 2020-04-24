@@ -10,16 +10,37 @@ namespace Infrastructure.Pattern
 {
 	public class QueryBuilder
 	{
-		public void SetQueryArguments(FilterGroup group) => _queryGroups = new List<FilterGroup> {group};
+		public QueryBuilder SetQueryArguments(FilterGroup group)
+		{
+			_queryGroups = new List<FilterGroup> {group};
+			return this;
+		}
 
-		public void SetQueryArguments(List<FilterGroup> groups) => _queryGroups = groups;
+		public QueryBuilder SetQueryArguments(List<FilterGroup> groups)
+		{
+			_queryGroups = groups;
+			return this;
+		}
 
 		private List<FilterGroup> _queryGroups;
 
-		public void SetQueryArguments(List<FilterParameter> parameters, FilterProperty property, ExpressionType expressionType = ExpressionType.Or) => _queryGroups = new List<FilterGroup>
+		public QueryBuilder SetQueryArguments(List<FilterParameter> parameters, FilterProperty property, ExpressionType expressionType = ExpressionType.Or)
 		{
-			new FilterGroup(property, property, expressionType).AssignParameters(parameters.ToArray())
-		};
+			_queryGroups = new List<FilterGroup>
+			{
+				new FilterGroup(property, property, expressionType).AssignParameters(parameters.ToArray())
+			};
+			return this;
+		}
+
+		public QueryBuilder SetQueryArguments(FilterProperty property, ExpressionType expressionType = ExpressionType.In, params FilterParameter[] parameters)
+		{
+			_queryGroups = new List<FilterGroup>
+			{
+				new FilterGroup(property, expressionType).AssignParameters(parameters.ToArray())
+			};
+			return this;
+		}
 
 		public Dictionary<string, object> Build()
 		{
@@ -127,9 +148,18 @@ namespace Infrastructure.Pattern
 
 		private static object FormatQueryValue(QueryExpressionAttribute expAttr, object value)
 		{
-			if (string.IsNullOrEmpty(expAttr.ValueWrapperFormat)) return value;
-
-			return string.Format(expAttr.ValueWrapperFormat, value);
+			value = !string.IsNullOrEmpty(expAttr.ValueWrapperFormat)
+				? string.Format(expAttr.ValueWrapperFormat, value)
+				: value;
+			if (expAttr.OperatorSyntax.Contains("regex"))
+			{
+				value = new Dictionary<string, object>
+				{
+					{"pattern", value},
+					{"options", string.Empty}
+				};
+			}
+			return value;
 		}
 	}
 }

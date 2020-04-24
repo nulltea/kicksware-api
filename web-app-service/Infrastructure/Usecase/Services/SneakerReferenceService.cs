@@ -5,10 +5,13 @@ using System.Threading.Tasks;
 using Core.Entities.Products;
 using Core.Entities.References;
 using Core.Gateway;
+using Core.Model.Parameters;
+using Core.Reference;
 using Core.Repositories;
 using Core.Services;
 using Infrastructure.Gateway.REST.Client;
 using Infrastructure.Gateway.REST.ProductRequests.Sneakers;
+using Infrastructure.Pattern;
 
 namespace Infrastructure.Usecase
 {
@@ -70,6 +73,22 @@ namespace Infrastructure.Usecase
 		#endregion
 
 		#region Usecases
+
+		public List<SneakerReference> GetRelated(SneakerReference reference, RequestParams requestParams)
+		{
+			var query = new QueryBuilder()
+				.SetQueryArguments("modelname", ExpressionType.And, new FilterParameter(reference.ModelName, ExpressionType.Regex))
+				.Build();
+			return Fetch(query, requestParams);
+		}
+
+		public Task<List<SneakerReference>> GetRelatedAsync(SneakerReference reference, RequestParams requestParams)
+		{
+			var query = new QueryBuilder()
+				.SetQueryArguments("modelname", ExpressionType.And, new FilterParameter(reference.ModelName, ExpressionType.Regex))
+				.Build();
+			return FetchAsync(query, requestParams);
+		}
 
 		#endregion
 	}

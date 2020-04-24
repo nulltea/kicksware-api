@@ -3,52 +3,52 @@
 @model SneakerProductViewModel
 
 @{
-    ViewData["Title"] = "Preview";
-    Layout = "~/Views/Sell/NewProduct.cshtml";
+	ViewData["Title"] = "Preview";
+	Layout = "~/Views/Sell/NewProduct.cshtml";
 }
 
 @section Styles
 {
-    <link rel="stylesheet" type="text/css" href="~/styles/css/sell/preview.css"/>
+	<link rel="stylesheet" type="text/css" href="~/styles/css/sell/preview.css"/>
 }
 
 <div class="container search-content">
-    <div class="row">
-        <div class="col-sm mx-3">
-            <div class="product-gallery">
-                @foreach (var image in Model.Photos)
-                 {
-                    <div class="product-gallery-image">
-                        <img src="@image" itemprop="image" alt="@Model.ModelName" title="@Model.ModelName">
-                    </div>
-                 }
-            </div>
-        </div>
-        <div class="col-sm mx-3">
-            <div class="product-info">
-                @foreach (var image in Model.Photos)
-                 {
-                    <div class="product-top">
-                        <span class="brand-title">@Model.BrandName</span>
-                        <span class="model-title">@Model.ModelName</span>
-                        <span class="color-title">@Model.Color</span>
-                        <span class="color-title">@Model.Size</span>
-                    </div>
-                    <div class="product-details">
-                        <span class="brand-title">@Model.Description</span>
-                        <span class="model-title">@Model.Condition</span>
-                        <span class="color-title">@Model.ModelSKU</span>
-                    </div>
-                    <div class="product-price">
-                        <span>@Model.Price</span>
-                    </div>
-                 }
-            </div>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-sm">
+			<div class="product-gallery">
+				@foreach (var image in Model.Photos)
+				{
+					<div class="product-gallery-image">
+						<img src="@image" itemprop="image" alt="@Model.ModelName" title="@Model.ModelName">
+					</div>
+				}
+			</div>
+		</div>
+		<div class="col-sm">
+			<div class="product-info">
+				@foreach (var image in Model.Photos)
+				{
+					<div class="product-top">
+						<span class="brand-title">@Model.BrandName</span>
+						<span class="model-title">@Model.ModelName</span>
+						<span class="color-title">@Model.Color</span>
+						<span class="color-title">@Model.Size</span>
+					</div>
+					<div class="product-details">
+						<span class="brand-title">@Model.Description</span>
+						<span class="model-title">@Model.Condition</span>
+						<span class="color-title">@Model.ModelSKU</span>
+					</div>
+					<div class="product-price">
+						<span>@Model.Price</span>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
 </div>
 
 @section Scripts
 {
-    <script src="~/scripts/sell/preview.js"></script>
+	<script src="~/scripts/sell/preview.js"></script>
 }

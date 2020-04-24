@@ -13,7 +13,7 @@ namespace Web.Controllers
 		{
 			var product = service.FetchUnique(productId);
 
-			if (product == null) return NotFound();
+			if (product is null) return NotFound();
 			//ViewBag.RelatedProducts = ProductsList; //TODO search related
 			return View();
 		}

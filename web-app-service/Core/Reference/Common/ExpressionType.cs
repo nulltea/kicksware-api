@@ -22,7 +22,7 @@ namespace Core.Reference
 		[QueryExpression(OperatorSyntax = "$ne", Target = ExpressionTarget.Node)]
 		NotEqual,
 
-		[QueryExpression(OperatorSyntax = "$regex", Target = ExpressionTarget.Node, ValueWrapperFormat = "/{0}/")]
+		[QueryExpression(OperatorSyntax = "$regex", Target = ExpressionTarget.Node, ValueWrapperFormat = ".*{0}.*")]
 		Regex,
 
 		[QueryExpression(OperatorSyntax = "$ge", Target = ExpressionTarget.Node)]

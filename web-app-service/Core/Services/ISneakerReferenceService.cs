@@ -39,6 +39,10 @@ namespace Core.Services
 
 		#region Usecases
 
+		List<SneakerReference> GetRelated(SneakerReference reference, RequestParams requestParams);
+
+		Task<List<SneakerReference>> GetRelatedAsync(SneakerReference reference, RequestParams requestParams);
+
 		#endregion
 	}
 }
