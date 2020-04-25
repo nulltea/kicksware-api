@@ -14,7 +14,7 @@ namespace Web.Handlers.Filter
 		{
 			if (AdditionalParams != null && AdditionalParams.TryGetValue("brandId", out var brandId))
 			{
-				model.AddHiddenFilterGroup("brand", "brandname", ExpressionType.Equal)
+				model.AddHiddenFilterGroup("brandname", ExpressionType.Equal)
 					.AssignParameter(Convert.ToString(brandId), Convert.ToString(brandId));
 			}
 			else

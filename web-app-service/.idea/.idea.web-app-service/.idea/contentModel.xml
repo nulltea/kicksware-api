@@ -4,6 +4,9 @@
     <e p="C:\source\repos\sneaker-resale-platform\web-app-service" t="IncludeFlat">
       <e p=".dockerignore" t="Include" />
       <e p="Core" t="IncludeRecursive">
+        <e p="Algorithms" t="Include">
+          <e p="LevenshteinDistance.cs" t="Include" />
+        </e>
         <e p="Attributes" t="Include">
           <e p="EntityServiceAttribute.cs" t="Include" />
           <e p="QueryExpressionAttribute.cs" t="Include" />
@@ -14,17 +17,23 @@
         </e>
         <e p="Core.csproj" t="IncludeRecursive" />
         <e p="Entities" t="Include">
+          <e p="EntityComparer.cs" t="Include" />
           <e p="IBaseEntity.cs" t="Include" />
           <e p="Products" t="Include">
             <e p="IProduct.cs" t="Include" />
             <e p="SneakerProduct.cs" t="Include" />
           </e>
           <e p="References" t="Include">
-            <e p="Gender.cs" t="Include" />
-            <e p="IBrand.cs" t="Include" />
-            <e p="IReference.cs" t="Include" />
-            <e p="SneakerBrand.cs" t="Include" />
-            <e p="SneakerReference.cs" t="Include" />
+            <e p="Abstract" t="Include">
+              <e p="IBrand.cs" t="Include" />
+              <e p="IModel.cs" t="Include" />
+              <e p="IReference.cs" t="Include" />
+            </e>
+            <e p="Concrete" t="Include">
+              <e p="SneakerBrand.cs" t="Include" />
+              <e p="SneakerModel.cs" t="Include" />
+              <e p="SneakerReference.cs" t="Include" />
+            </e>
           </e>
           <e p="Users" t="Include">
             <e p="User.cs" t="Include" />
@@ -35,6 +44,7 @@
         </e>
         <e p="Extensions" t="Include">
           <e p="EnumExtension.cs" t="Include" />
+          <e p="SequenceExtension.cs" t="Include" />
           <e p="StringExtension.cs" t="Include" />
           <e p="TypeExtension.cs" t="Include" />
         </e>
@@ -71,6 +81,7 @@
           <e p="common" t="Include">
             <e p="Currency.cs" t="Include" />
             <e p="ExpressionType.cs" t="Include" />
+            <e p="Gender.cs" t="Include" />
             <e p="ShippingInfo.cs" t="Include" />
             <e p="SortDirection.cs" t="Include" />
           </e>
@@ -678,6 +689,7 @@
                 <e p="B41675_1.png" t="Include" />
                 <e p="B41679_1.png" t="Include" />
                 <e p="B41680_1.png" t="Include" />
+                <e p="B41932_1.png" t="Include" />
                 <e p="B41967_1.png" t="Include" />
                 <e p="B41984_1.png" t="Include" />
                 <e p="B41988_1.png" t="Include" />
@@ -1803,6 +1815,7 @@
                 <e p="vn-0_zsigqe_1.png" t="Include" />
                 <e p="vn-0_zsigue_1.png" t="Include" />
                 <e p="VN0A49G2-T5Q_1.png" t="Include" />
+                <e p="vn0a49g2_1.png" t="Include" />
                 <e p="W213017D-BKX_1AP.png" t="Include" />
                 <e p="W291501D-BKX_1.png" t="Include" />
                 <e p="W291501D-WHX_1.png" t="Include" />
@@ -2247,8 +2260,8 @@
       </e>
       <e p="web-app-service.sln" t="IncludeFlat" />
     </e>
-    <e p="C:\Users\tyalu\.Rider2019.3\config\scratches" t="IncludeRecursive" />
-    <e p="C:\Users\tyalu\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\tyalu\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_web-app-service.-481469185.00" t="ExcludeRecursive" />
+    <e p="C:\Users\tyalu\AppData\local\JetBrains\Rider2019.3\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\tyalu\AppData\local\JetBrains\Rider2019.3\resharper-host\local\Transient\ReSharperHost\v201\SolutionCaches\_web-app-service.-481469185.00" t="ExcludeRecursive" />
+    <e p="C:\Users\tyalu\AppData\Roaming\JetBrains\Rider2019.3\scratches" t="IncludeRecursive" />
   </component>
 </project>

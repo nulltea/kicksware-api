@@ -18,7 +18,7 @@
 <!-- Reference Details -->
 <div class="product-item">
 	<div class="product-content">
-		<section class="row product-header">
+		<section class="row product-header elevated">
 			<div class="col-sm product-gallery">
 				<div class="image-carousel">
 					<picture>
@@ -31,7 +31,7 @@
 			<!-- Reference Content -->
 			<div class="col-sm product-title">
 				<div class="title-header">
-					<div class="favorite">
+					<div class="favorite-product">
 						<input type="checkbox"/>
 						@Html.VectorIconRender("favorite.svg")
 					</div>
@@ -46,89 +46,96 @@
 						<a asp-action="Checkout" asp-controller="Checkout">BUY NEW</a>
 					</button>
 					<button class="button">
-						<a asp-action="Products" asp-route-referenceId="@Model.UniqueId">BUY USED</a>
+						<a asp-action="Products" asp-route-referenceId="@Model.UniqueID">BUY USED</a>
 					</button>
 				</div>
 			</div>
 		</section>
-		<section class="row product-details carousel js-flickity" data-flickity-options='{ "wrapAround": true }'>
+		<section class="row product-details carousel">
+			<h3 class="carousel-title">DETAILS</h3>
+			<div class="carousel-wrapper js-flickity" data-flickity-options='{ "wrapAround": true }'>
+				<div class="carousel-cell">
+					<div class="details-caption">BRAND</div>
+					<a class="underline details-info">@Model.BrandName</a>
+				</div>
+				<div class="carousel-cell">
+					<div class="details-caption">RELEASE DATE</div>
+					<a class="underline details-info">@Model.Released.ToShortDateString()</a>
+				</div>
+				<div class="carousel-cell">
+					<div class="details-caption">SKU</div>
+					<a class="underline details-info">@Model.ManufactureSku</a>
+				</div>
+				<div class="carousel-cell">
+					<div class="details-caption">NICKNAME</div>
+					<a class="underline details-info">@Model.Nickname</a>
+				</div>
+				<div class="carousel-cell">
+					<div class="details-caption">MAIN COLOR</div>
+					<a class="underline details-info">@Model.Color?.Split("/")[0]</a>
+				</div>
+				<div class="carousel-cell">
+					<div class="details-caption">COLORWAY</div>
+					<a class="underline details-info">@Model.Color</a>
+				</div>
+				<div class="carousel-cell">
+					<div class="details-caption">GENDER</div>
+					<a class="underline details-info">@Model.Gender</a>
+				</div>
+				<div class="carousel-cell">
+					<div class="details-caption">DESIGNER</div>
+					<a class="underline details-info">@Model.BrandName</a>
+				</div>
+				<div class="carousel-cell">
+					<div class="details-caption">TECHNOLOGY</div>
+					<a class="underline details-info">Model.Technology</a>
+				</div>
+				<div class="carousel-cell">
+					<div class="details-caption">CATEGORY</div>
+					<a class="underline details-info">Model.Category</a>
+				</div>
+			</div>
+		</section>
 
-			<div class="carousel-cell">
-				<div class="details-caption">BRAND</div>
-				<a class="underline details-info">@Model.BrandName</a>
-			</div>
-			<div class="carousel-cell">
-				<div class="details-caption">RELEASE DATE</div>
-				<a class="underline details-info">@Model.Released.ToShortDateString()</a>
-			</div>
-			<div class="carousel-cell">
-				<div class="details-caption">SKU</div>
-				<a class="underline details-info">@Model.ManufactureSku</a>
-			</div>
-			<div class="carousel-cell">
-				<div class="details-caption">NICKNAME</div>
-				<a class="underline details-info">@Model.Nickname</a>
-			</div>
-			<div class="carousel-cell">
-				<div class="details-caption">MAIN COLOR</div>
-				<a class="underline details-info">@Model.Color?.Split("/")[0]</a>
-			</div>
-			<div class="carousel-cell">
-				<div class="details-caption">COLORWAY</div>
-				<a class="underline details-info">@Model.Color</a>
-			</div>
-			<div class="carousel-cell">
-				<div class="details-caption">GENDER</div>
-				<a class="underline details-info">@Model.Gender</a>
-			</div>
-			<div class="carousel-cell">
-				<div class="details-caption">DESIGNER</div>
-				<a class="underline details-info">@Model.BrandName</a>
-			</div>
-			<div class="carousel-cell">
-				<div class="details-caption">TECHNOLOGY</div>
-				<a class="underline details-info">Model.Technology</a>
-			</div>
-			<div class="carousel-cell">
-				<div class="details-caption">CATEGORY</div>
-				<a class="underline details-info">Model.Category</a>
-			</div>
-		</section>
-		<section class="row product-description">
-			<h3 class="description_title">DESCRIPTION</h3>
-			<div class="description-content">
-				@Model.Description
-			</div>
-		</section>
+		@if (!string.IsNullOrEmpty(@Model.Description))
+		{
+			<section class="row product-description elevated">
+				<h3 class="description_title">DESCRIPTION</h3>
+				<div class="description-content">
+					@Model.Description
+				</div>
+			</section>
+		}
 
 		@if (relatedReferences != null && relatedReferences.Any())
 		{
-			<section class="row product-related carousel js-flickity" data-flickity-options='{ "wrapAround": true }'>
-				@foreach (var reference in relatedReferences)
-				{
-					<div class="carousel-cell">
-						<div class="info-header">
-							<div class="price">@(reference.Price != 0m ? $"${reference.Price}" : string.Empty)</div>
-						</div>
-						<div class="thumb">
-							<img src="@reference.ImagePath" alt="">
-						</div>
-						<div class="info-footer">
-							<div class="brand-title">
-								<a class="underline" asp-action="Brand" asp-route-brandId=@reference.Brand.Name>@reference.BrandName</a>
+			<section class="row product-related carousel reference-carousel">
+				<h3 class="carousel-title">RELATED MODELS</h3>
+				<div class="carousel-wrapper js-flickity" data-flickity-options='{"wrapAround": true}'>
+					@foreach (var reference in relatedReferences)
+					{
+						<div class="carousel-cell">
+							<div class="info-header">
+								<div class="price">@(reference.Price != 0m ? $"${reference.Price}" : string.Empty)</div>
 							</div>
-							<div class="model-title">
-								@*TODO link to model page*@
-								<a class="underline" asp-action="ReferenceItem" asp-route-referenceId=@reference.UniqueId>@reference.ModelName</a>
+							<div class="thumb">
+								<img src="@reference.ImagePath" alt="">
 							</div>
-							<div class="favorite">
-								<input type="checkbox"/>
-								@Html.VectorIconRender("favorite.svg")
+							<div class="info-footer">
+								<div class="brand-title">
+									<a class="underline" asp-action="Brand" asp-route-brandId=@reference.Brand.Name>@reference.BrandName</a>
+								</div>
+								<div class="model-title">
+									<a class="underline" asp-action="ReferenceItem" asp-route-referenceId=@reference.UniqueID>@reference.ModelName</a>
+								</div>
+								<div class="favorite-product">
+									<input type="checkbox"/>
+									@Html.VectorIconRender("favorite.svg")
+								</div>
 							</div>
 						</div>
-					</div>
-				}
-
+					}
+				</div>
 			</section>
 		}
 	</div>

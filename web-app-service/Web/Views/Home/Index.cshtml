@@ -1,142 +1,137 @@
-﻿@model List<Web.Models.HomePageInfoViewModel>
+﻿@using Core.Entities.References
+@using Web.Utils.Helpers
+@model List<Web.Models.HomePageInfoViewModel>
 @{
-    ViewBag.Title = "Home";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    var featuredProducts = ViewBag.FeaturedProducts as List<SneakerProductViewModel>;
+	ViewBag.Title = "Home";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	var featuredReferences = ViewBag.FeaturedReferences as List<SneakerReference>;
 }
 
 @section Styles
 {
-    <link rel="stylesheet" type="text/css" href="~/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-    <link rel="stylesheet" type="text/css" href="~/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
-    <link rel="stylesheet" type="text/css" href="~/plugins/OwlCarousel2-2.2.1/animate.css">
-    <link href="~/styles/css/home/home.css" rel="stylesheet" />
-    <link href="~/styles/css/product-item/product-item.css" rel="stylesheet" />
-    <link href="~/styles/css/responsive/home.responsive.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="~/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+	<link rel="stylesheet" type="text/css" href="~/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+	<link rel="stylesheet" type="text/css" href="~/plugins/OwlCarousel2-2.2.1/animate.css">
+	<link href="~/styles/css/home/home.css" rel="stylesheet"/>
+	<link href="~/styles/css/shop/product-item.css" rel="stylesheet"/>
+	<link href="~/styles/css/responsive/home.responsive.css" rel="stylesheet"/>
+	<link href="~/plugins/flickity/flickity.css" rel="stylesheet"/>
+
 }
 
 <div class="home">
-    <div class="home_slider_container">
-        <!-- Home Slider -->
-        <div class="owl-carousel owl-theme home_slider">
-            @foreach (var info in Model)
-            {
-                <!-- Slider Item -->
-                <div class="owl-item home_slider_item">
-                    <div class="home_slider_background" style="background-image: url(/images/@info.Image)"></div>
-                    <div class="home_slider_content_container">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="home_slider_content" data-animation-in="fadeIn" data-animation-out="animate-out fadeOut">
-                                        <div class="home_slider_title">@info.Title</div>
-                                        <div class="home_slider_subtitle">@info.Description</div>
-                                        <div class="button button_light home_button" id="home-button"><a href=@info.ButtonAction>@info.ButtonCaption</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
+	<section class="main-carousel">
+		<!-- Home Slider -->
+		<div class="owl-carousel owl-theme home_slider">
+			@foreach (var info in Model)
+			{
+				<!-- Slider Item -->
+				<div class="owl-item home_slider_item">
+					<div class="home_slider_background" style="background-image: url(@info.Image)"></div>
+					<div class="home_slider_content_container">
+						<div class="container">
+							<div class="row">
+								<div class="col">
+									<div class="home_slider_content" data-animation-in="fadeIn" data-animation-out="animate-out fadeOut">
+										<div class="home_slider_title">@info.Title</div>
+										<div class="home_slider_subtitle">@info.Description</div>
+										<div class="button button_light home_button" id="home-button">
+											<a href=@info.ButtonAction>@info.ButtonCaption</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
 
-        <!-- Home Slider Dots -->
+		<!-- Home Slider Dots -->
+		<div class="home_slider_dots_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="home_slider_dots">
+							<ul id="home_slider_custom_dots" class="home_slider_custom_dots">
+								<li class="home_slider_custom_dot active">01.</li>
+								<li class="home_slider_custom_dot">02.</li>
+								<li class="home_slider_custom_dot">03.</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-        <div class="home_slider_dots_container">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="home_slider_dots">
-                            <ul id="home_slider_custom_dots" class="home_slider_custom_dots">
-                                <li class="home_slider_custom_dot active">01.</li>
-                                <li class="home_slider_custom_dot">02.</li>
-                                <li class="home_slider_custom_dot">03.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+	</section>
 
-    </div>
+
+	@if (featuredReferences != null && featuredReferences.Any())
+	{
+		<section class="carousel reference-carousel">
+			<h3 class="carousel-title">FEATURED MODELS</h3>
+			<div class="carousel-wrapper js-flickity" data-flickity-options='{ "wrapAround": true }'>
+				@foreach (var reference in featuredReferences)
+				{
+					<div class="carousel-cell">
+						<div class="info-header">
+							<div class="price">@(reference.Price != 0m ? $"${reference.Price}" : string.Empty)</div>
+						</div>
+						<div class="thumb">
+							<img src="@reference.ImagePath" alt="">
+						</div>
+						<div class="info-footer">
+							<div class="brand-title">
+								<a class="underline" asp-action="Brand" asp-controller="Shop" asp-route-brandId=@reference.Brand.Name>@reference.BrandName</a>
+							</div>
+							<div class="model-title">
+								@*TODO link to model page*@
+								<a class="underline" asp-action="ReferenceItem" asp-controller="Shop" asp-route-referenceId=@reference.UniqueID>@reference.ModelName</a>
+							</div>
+							<div class="favorite-product">
+								<input type="checkbox"/>
+								@Html.VectorIconRender("favorite.svg")
+							</div>
+						</div>
+					</div>
+				}
+			</div>
+		</section>
+	}
+
+	<!-- Newsletter -->
+
+	<section class="newsletter">
+		<div class="container">
+			<div class="row">
+				<hr class="newsletter_border"/>
+			</div>
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2">
+					<div class="newsletter_content text-center">
+						<div class="newsletter_title">Subscribe to our newsletter</div>
+						<div class="newsletter_text">
+							<p>Subscribe to our newsletter and stay updated on the latest developments and special offers!</p>
+						</div>
+						<div class="newsletter_form_container">
+							<form action="#" id="newsletter_form" class="newsletter_form">
+								<input type="email" class="newsletter_input" required="required">
+								<button class="button">
+									<span>Subscribe</span>
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 </div>
-
-@if (featuredProducts != null && featuredProducts.Any())
-{
-    <div class="products">
-        <div class="container">
-            <div class="row">
-                <div class="col text-center">
-                    <div class="products_title">Featured Products</div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="product_grid">
-                        @for (var y = 0; y < featuredProducts.Count; y++)
-                        {
-                            <div class="row">
-                                @for (var x = 0; x <= 4; x++)
-                                {
-                                    if (y >= featuredProducts.Count)
-                                    {
-                                        break;
-                                    }
-                                    var product = featuredProducts[y++];
-                                    var image = "/files/" + product.Photos.FirstOrDefault() ?? string.Empty;
-                                    var price = $"{product.Price}$";
-                                    <!-- Product -->
-                                    <div class="col-sm product">
-                                        <div class="product_image"><img src=@image alt="" alt=""></div>
-                                        @if (DateTime.Today.Subtract(product.AddedAt).Days < 5)
-                                        {
-                                            <div class="product_extra product_new"><a>New</a></div>
-                                        }
-                                        <div class="product_content">
-                                            <div class="product_title"><a asp-area="" asp-controller="Shop" asp-action="ReferenceItem" asp-route-productId=@product.UniqueId>@Html.DisplayFor(modelItem => product.ModelName)</a></div>
-                                            <div class="product_price">@price</div>
-                                        </div>
-                                    </div>
-                                }
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-}
-
-<!-- Newsletter -->
-
-<div class="newsletter">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="newsletter_border"></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2">
-                <div class="newsletter_content text-center">
-                    <div class="newsletter_title">Subscribe to our newsletter</div>
-                    <div class="newsletter_text"><p>Subscribe to our newsletter and stay updated on the latest developments and special offers!</p></div>
-                    <div class="newsletter_form_container">
-                        <form action="#" id="newsletter_form" class="newsletter_form">
-                            <input type="email" class="newsletter_input" required="required">
-                            <button class="newsletter_button trans_200"><span>Subscribe</span></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 @section Scripts
 {
-    <script src="~/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-    <script src="~/scripts/home/home.js"></script>
+	<script src="~/plugins/flickity/flickity.min.js"></script>
+	<script src="~/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+	<script src="~/scripts/home/home.js"></script>
+	<script src="~/scripts/shop/productItem.js"></script>
 }
-

@@ -76,14 +76,14 @@ namespace Infrastructure.Usecase.Models
 			return group;
 		}
 
-		public FilterGroup AddHiddenFilterGroup(string caption, string fieldName, ExpressionType expressionType = ExpressionType.In)
+		public FilterGroup AddHiddenFilterGroup(FilterProperty property, ExpressionType expressionType = ExpressionType.In)
 		{
-			var group = new FilterGroup(caption, fieldName, expressionType) {Hidden = true};
+			var group = new FilterGroup(property, expressionType) {Hidden = true};
 			FilterGroups.Add(group);
 			return group;
 		}
 
-		public FilterGroup GetFilterGroup(string name) => FilterGroups.FirstOrDefault(g => g.Caption.ToLower().Equals(name.ToLower()));
+		public FilterGroup GetFilterGroup(string name) => FilterGroups.FirstOrDefault(g => g.GroupID.Equals(name.ToLower()));
 
 		public FilterGroup this[string groupName]
 		{

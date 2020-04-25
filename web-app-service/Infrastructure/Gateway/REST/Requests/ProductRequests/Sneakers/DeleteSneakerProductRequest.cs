@@ -5,7 +5,7 @@ namespace Infrastructure.Gateway.REST.ProductRequests.Sneakers
 {
 	public class DeleteSneakerProductRequest : BaseSneakerProductRequest 
 	{
-		public DeleteSneakerProductRequest(SneakerProduct sneakerProduct) : this(sneakerProduct.UniqueId) { }
+		public DeleteSneakerProductRequest(SneakerProduct sneakerProduct) : this(sneakerProduct.UniqueID) { }
 
 		public DeleteSneakerProductRequest(string sneakerId) : base("/{sneakerId}", Method.DELETE)
 		{

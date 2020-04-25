@@ -21,11 +21,11 @@ namespace Web.Controllers
 		[HttpPost]
 		public ActionResult Search(SneakerReference reference)
 		{
-			if (reference is null || string.IsNullOrWhiteSpace(reference.UniqueId)) return this.ViewStep(1, new SneakerProductViewModel());
+			if (reference is null || string.IsNullOrWhiteSpace(reference.UniqueID)) return this.ViewStep(1, new SneakerProductViewModel());
 
 ;			var sneakerProduct = new SneakerProductViewModel
 			{
-				ModelRefId = reference.UniqueId,
+				ReferenceID = reference.UniqueID,
 				ModelSKU = reference.ManufactureSku,
 				ModelName = reference.ModelName,
 				BrandName = reference.BrandName,

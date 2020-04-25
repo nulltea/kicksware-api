@@ -55,6 +55,7 @@ namespace Infrastructure.Gateway.REST.Client
 				case HttpStatusCode.OK:
 					data = response.Data;
 					return true;
+				case 0:
 				case HttpStatusCode.NoContent:
 				case HttpStatusCode.NotFound:
 				case HttpStatusCode.NotModified:

@@ -54,6 +54,21 @@ func ToBsonMap(v interface{}) (m bson.M, err error) {
 					m[key] = sub
 				}
 			}
+		case []interface{}, primitive.A:
+			values := bson.A{}
+			for _, item := range data[key].(primitive.A) {
+				switch item.(type) {
+				case map[string]interface{}:
+					sub, err := ToBsonMap(item)
+					if err != nil {
+						continue
+					}
+					values = append(values, sub)
+				default:
+					values = append(values, item)
+				}
+			}
+			m[key] = values
 		default:
 			m[key] = data[key]
 		}

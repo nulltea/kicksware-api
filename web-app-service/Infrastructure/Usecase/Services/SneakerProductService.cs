@@ -41,7 +41,7 @@ namespace Infrastructure.Usecase
 			var response = _repository.Post(sneakerProduct, requestParams);
 
 			if (response == null) return null;
-			sneakerProduct.UniqueId = response.UniqueId;
+			sneakerProduct.UniqueID = response.UniqueID;
 
 			return !_client.Request(new PutSneakerImagesRequest(sneakerProduct)) ? null : response;
 		}

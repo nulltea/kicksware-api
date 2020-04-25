@@ -23,7 +23,7 @@ namespace Core.Model
 										ExpressionType expressionType = ExpressionType.In,
 										string description = default);
 
-		FilterGroup AddHiddenFilterGroup(string caption, string fieldName, ExpressionType expressionType = ExpressionType.In);
+		FilterGroup AddHiddenFilterGroup(FilterProperty property, ExpressionType expressionType = ExpressionType.In);
 
 		FilterGroup GetFilterGroup(string name);
 

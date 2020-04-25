@@ -8,7 +8,7 @@ namespace Infrastructure.Gateway.REST.ProductRequests.Sneakers
 	{
 		public PutSneakerImagesRequest(SneakerProduct sneakerProduct) : base("/{sneakerId}/images", Method.PUT)
 		{
-			AddParameter("sneakerId", sneakerProduct.UniqueId, ParameterType.UrlSegment);
+			AddParameter("sneakerId", sneakerProduct.UniqueID, ParameterType.UrlSegment);
 			AlwaysMultipartFormData = true;
 			foreach (var photo in sneakerProduct.Photos)
 			{

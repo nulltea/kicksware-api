@@ -11,6 +11,17 @@ namespace Web.Handlers.Filter
 	{
 		public override void ConfigureFilter(IFilteredModel<SneakerProduct> model)
 		{
+			if (AdditionalParams != null && AdditionalParams.TryGetValue("referenceId", out var referenceId)
+										&& !string.IsNullOrEmpty(referenceId?.ToString()))
+			{
+				model.AddHiddenFilterGroup("ReferenceID",  ExpressionType.Equal)
+					.AssignParameter(Convert.ToString(referenceId));
+			}
+			else
+			{
+				model.AddFilterGroup("Brand", "brandname")
+					.AssignParameters(Catalog.SneakerBrandsList);
+			}
 			model.AddFilterGroup("Size", "size")
 				.AssignParameters(Catalog.SneakerSizesList, size =>
 					new FilterParameter(size.Europe.ToString("#.#"), size));

@@ -13,7 +13,7 @@ namespace Core.Model.Parameters
 	{
 		public string Caption { get; }
 
-		public  string Description { get; }
+		public string GroupID => (Caption ?? Property).ToLower();
 
 		public FilterProperty Property { get; }
 
@@ -22,6 +22,8 @@ namespace Core.Model.Parameters
 		public List<FilterParameter> CheckedParameters => this.Where(param => param.Checked).ToList();
 
 		public bool Hidden { get; set; } = false;
+
+		public  string Description { get; }
 
 		public FilterGroup(string caption, FilterProperty property, ExpressionType expressionType = ExpressionType.In, string description = default)
 		{

@@ -11,6 +11,7 @@ using Core.Services;
 using Infrastructure.Usecase.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using SmartBreadcrumbs.Nodes;
 using Web.Utils.Extensions;
 
 namespace Web.Controllers
@@ -34,7 +35,7 @@ namespace Web.Controllers
 			var service = HttpContext.RequestServices.GetService<ICommonService<TEntity>>();
 			var handler = new FilteredModel<TEntity>(service);
 
-			var contentBuilder =  HttpContext.RequestServices.GetService<FilterContentBuilder<TEntity>>();
+			var contentBuilder = HttpContext.RequestServices.GetService<FilterContentBuilder<TEntity>>();
 			if (additionalParams != default) contentBuilder.SetAdditionalParams(additionalParams);
 			contentBuilder.ConfigureFilter(handler);
 			contentBuilder.ConfigureSorting(handler);
@@ -42,22 +43,25 @@ namespace Web.Controllers
 			return handler;
 		}
 
-		private IFilteredModel<IBaseEntity> InitFilterHandler(string entity) => entity switch
-		{
-			"references" => InitFilterHandler<SneakerReference>(),
-			"products" => InitFilterHandler<SneakerProduct>(),
-			"brand" => InitFilterHandler<SneakerReference>(), //TODO custom builder
-			_ => InitFilterHandler<SneakerReference>(),
-		};
+		private IFilteredModel<IBaseEntity> InitFilterHandler(string entity) =>
+			entity switch
+			{
+				"references" => InitFilterHandler<SneakerReference>(),
+				"products" => InitFilterHandler<SneakerProduct>(),
+				"brand" => InitFilterHandler<SneakerReference>(), //TODO custom builder
+				_ => InitFilterHandler<SneakerReference>(),
+			};
 
 		[Route("shop/{entity}/requestUpdate")]
-		public async Task<IActionResult> RequestUpdate(string entity, List<FilterInput> filterInputs, int page = 1, string sortBy = default)
+		public async Task<IActionResult> RequestUpdate(string entity, List<FilterInput> filterInputs, int page = 1,
+														string sortBy = default)
 		{
 			var handler = InitFilterHandler(entity);
 			if (filterInputs != null && filterInputs.Any())
 			{
 				handler.ApplyUserInputs(filterInputs);
 			}
+
 			if (!string.IsNullOrEmpty(sortBy)) handler.ChooseSortParameter(sortBy);
 
 			handler.FetchPage(page);
@@ -68,6 +72,13 @@ namespace Web.Controllers
 				length = handler.CountTotal,
 				pageSize = handler.PageSize
 			});
+		}
+
+		private void AddBreadcrumbNode(string fromAction, string title)
+		{
+			var baseNode = new MvcBreadcrumbNode("References", "Shop", "Shop");
+			var currentNode = new MvcBreadcrumbNode(fromAction, "Shop", title) {Parent = baseNode};
+			ViewData["BreadcrumbNode"] = currentNode;
 		}
 	}
 }

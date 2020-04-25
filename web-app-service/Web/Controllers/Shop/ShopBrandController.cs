@@ -13,16 +13,18 @@ namespace Web.Controllers
 		[Breadcrumb("Shop", FromAction = "Index", FromController = typeof(HomeController))]
 		public IActionResult Brand(string brandId, int page = 1, string sortBy = default)
 		{
-			var references =
-				InitFilterHandler<SneakerReference>(new {brandId}); //TODO custom builder
+			var references = InitFilterHandler<SneakerReference>(new {brandId}); // TODO custom builder
 			if (!string.IsNullOrEmpty(sortBy)) references.ChooseSortParameter(sortBy);
 			references.FetchPage(page);
+
 			var brand = references.FirstOrDefault()?.Brand ?? new SneakerBrand(brandId);
+
 			HeroCoverPath = brand.HeroPath;
 			HeroBreadTitle = brand.Name;
 			HeroBreadSubTitle = brand.Description;
 			HeroLogoPath = brand.Logo;
 
+			AddBreadcrumbNode(nameof(Brand), brand.Name);
 			return View("References", references);
 		}
 	}

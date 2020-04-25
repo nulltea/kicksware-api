@@ -18,8 +18,13 @@ namespace Web.Controllers
 
 			if (reference is null) return NotFound();
 
-			ViewBag.RelatedReferences = service.GetRelated(reference, new RequestParams {TakeCount = 12});
+			HeroCoverPath = reference.Brand.HeroPath;
+			HeroBreadTitle = reference.Brand.Name;
+			HeroBreadSubTitle = reference.Brand.Description;
+			HeroLogoPath = reference.Brand.Logo;
 
+			ViewBag.RelatedReferences = service.GetRelated(reference, new RequestParams {TakeCount = 12});
+			AddBreadcrumbNode(nameof(ReferenceItem), reference.ModelName);
 			return View(reference);
 		}
 	}

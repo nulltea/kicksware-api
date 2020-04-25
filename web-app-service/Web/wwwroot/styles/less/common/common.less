@@ -342,6 +342,7 @@ a.underline {
 
 
 .button {
+	position: relative;
 	width: 178px;
 	height: 61px;
 	text-align: center;
@@ -366,7 +367,20 @@ a.underline {
 		.transition-properties(all 200ms ease);
 	}
 
+	span {
+		display: block;
+		position: relative;
+		font-weight: 600;
+		z-index: 1;
+	}
+
 	&:hover a {
+		.with-theme({
+			color: @primary;
+		});
+	}
+
+	&:hover span {
 		.with-theme({
 			color: @primary;
 		});

@@ -73,14 +73,11 @@
 									<div class="section-content">
 										<input type="search" id="brand-filter" class="autocomplete-filter filter-input" required="required">
 										<div class="brand-list">
-											@if (!@Model["Brand"].Hidden) @* TODO *@
+											@foreach (var brand in filterGroup.Take(4))
 											{
-												@foreach (var brand in Model["Brand"].Take(4)) //TODO
-												{
-													<div class="brand-row">
-														@brand.RenderCheckbox(new {@class = "regular_checkbox"})
-													</div>
-												}
+												<div class="brand-row">
+													@brand.RenderCheckbox(new {@class = "regular_checkbox"})
+												</div>
 											}
 										</div>
 									</div>
@@ -92,7 +89,7 @@
 									<label class="section-title" for="mp2">Size</label>
 									<div class="section-content">
 										<div class="size-grid">
-											@foreach (var size in Model["Size"])
+											@foreach (var size in filterGroup)
 											{
 												<button class="button size-cell">
 													@size.RenderCheckbox()
@@ -108,7 +105,7 @@
 									<label class="section-title" for="mp3">Color</label>
 									<div class="section-content">
 										<div class="color-picker">
-											@foreach (var color in Model["Color"])
+											@foreach (var color in filterGroup)
 											{
 												var sourceValue = color.GetSourceValue<FilterColor>();
 												<button class="button color-item" style="border-bottom: 3px solid @sourceValue.Hex; background: @sourceValue.Hex">
@@ -130,8 +127,8 @@
 												<input type="range" class="price-slider max" min="100" value="1000" max="1000"/>
 											</div>
 											<div class="multi-input">
-												@Model["Price"][0].RenderInput(new {type = "number", value = 100, @class = "filter-input price-input min"})
-												@Model["Price"][1].RenderInput(new {type = "number", value = 1000, @class = "filter-input price-input max"})
+												@filterGroup[0].RenderInput(new {type = "number", value = 100, @class = "filter-input price-input min"})
+												@filterGroup[1].RenderInput(new {type = "number", value = 1000, @class = "filter-input price-input max"})
 											</div>
 										</div>
 									</div>
@@ -143,7 +140,7 @@
 									<label class="section-title" for="mp5">Condition</label>
 									<div class="section-content">
 										<div class="condition-grid">
-											@foreach (var condition in Model["Condition"])
+											@foreach (var condition in filterGroup)
 											{
 												<button class="button">
 													@condition.RenderCheckbox()

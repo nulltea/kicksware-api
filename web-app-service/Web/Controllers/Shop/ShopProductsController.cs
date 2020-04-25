@@ -10,9 +10,9 @@ namespace Web.Controllers
 		[HttpGet]
 		[Route("shop/products")]
 		[Breadcrumb("Shop", FromAction = "Index", FromController = typeof(HomeController))]
-		public IActionResult Products(int page = 1, string sortBy = default)
+		public IActionResult Products(string referenceId = default, int page = 1, string sortBy = default)
 		{
-			var products = InitFilterHandler<SneakerProduct>();
+			var products = InitFilterHandler<SneakerProduct>(new {referenceId});
 			if (!string.IsNullOrEmpty(sortBy)) products.ChooseSortParameter(sortBy);
 			products.FetchPage(page);
 			return View("References", products);

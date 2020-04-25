@@ -15,6 +15,7 @@
 	bottom: 0;
 	background: transparent;
 	z-index: 3;
+	.transition-properties(left 500ms cubic-bezier(.155,1.105,.295,1.12););
 
 
 	&.active {
@@ -58,8 +59,8 @@
 			background: inherit;
 			border: none;
 			.with-theme({
-	border-bottom: 3px solid @secondary;
-});
+				border-bottom: 3px solid @secondary;
+			});
 			border-radius: 0;
 			outline: none;
 			padding-left: 35px;
@@ -69,7 +70,7 @@
 		.close-button {
 			position: absolute;
 			margin: 0;
-			right: -3px;
+			right: 12px;
 			top: 0;
 			opacity: 0.5;
 		}

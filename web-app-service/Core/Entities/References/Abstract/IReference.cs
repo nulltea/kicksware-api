@@ -10,8 +10,6 @@ namespace Core.Entities.References
 
 		string BrandName { get; set; }
 
-		IBrand Brand { get; set; }
-
 		string ModelName { get; set; }
 
 		decimal Price { get; set; }

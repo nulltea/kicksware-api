@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Algorithms;
+using Core.Entities;
 using Core.Entities.Products;
 using Core.Entities.References;
+using Core.Extension;
 using Core.Gateway;
 using Core.Model.Parameters;
 using Core.Reference;
@@ -74,20 +77,93 @@ namespace Infrastructure.Usecase
 
 		#region Usecases
 
-		public List<SneakerReference> GetRelated(SneakerReference reference, RequestParams requestParams)
+		public List<SneakerReference> GetRelated(SneakerReference reference, RequestParams requestParams = default)
 		{
+			var requiredCount = requestParams?.TakeCount ?? 5;
+			var query = new QueryBuilder()
+				.SetQueryArguments("brandname", ExpressionType.And, new FilterParameter(reference.BrandName))
+				.SetQueryArguments("modelname", ExpressionType.And, new FilterParameter(reference.ModelName, ExpressionType.Regex))
+				.Build();
+
+			if (requestParams?.TakeCount != null) requestParams.TakeCount++; // later -1 current reference
+
+			var related = Fetch(query, requestParams);
+			if ((related is null || related.Count < requiredCount) && reference.Model?.BaseModel != null)
+			{
+				query = new QueryBuilder()
+					.SetQueryArguments("brandname", ExpressionType.And, new FilterParameter(reference.BrandName))
+					.SetQueryArguments("modelname", ExpressionType.And, new FilterParameter(reference.Model.BaseModel?.Name, ExpressionType.Regex))
+					.Build();
+				var lessRelated = Fetch(query);
+				if (lessRelated != null && lessRelated.Any())
+				{
+					lessRelated = lessRelated.OrderBySimilarity(r => r.ModelName, reference.ModelName)
+						.Where(r => r.UniqueID != reference.UniqueID)
+						.ToList();
+					related = (related?.Union(lessRelated) ?? lessRelated).ToList();
+				}
+			}
+			return related?
+				.Where(r => r.UniqueID != reference.UniqueID)
+				.Distinct(new EntityComparer<SneakerReference>())
+				.Take(requiredCount).ToList();
+		}
+
+		public async Task<List<SneakerReference>> GetRelatedAsync(SneakerReference reference, RequestParams requestParams = default)
+		{
+			var requiredCount = requestParams?.TakeCount ?? 5;
 			var query = new QueryBuilder()
 				.SetQueryArguments("modelname", ExpressionType.And, new FilterParameter(reference.ModelName, ExpressionType.Regex))
 				.Build();
+			if (requestParams?.TakeCount != null) requestParams.TakeCount++; // later -1 current reference
+
+			var related = await FetchAsync(query, requestParams);
+			if ((related is null || related.Count < requiredCount) && reference.Model?.BaseModel != null)
+			{
+				query = new QueryBuilder()
+					.SetQueryArguments("modelname", ExpressionType.And, new FilterParameter(reference.ModelName, ExpressionType.Regex))
+					.Build();
+				var lessRelated = await FetchAsync(query);
+				if (lessRelated != null && lessRelated.Any())
+				{
+					lessRelated = lessRelated.OrderBySimilarity(r => r.ModelName, reference.ModelName)
+						.Where(r => r.UniqueID != reference.UniqueID)
+						.ToList();
+					related = (related?.Union(lessRelated) ?? lessRelated).ToList();
+				}
+			}
+			return related?
+				.Where(r => r.UniqueID != reference.UniqueID)
+				.Distinct(new EntityComparer<SneakerReference>())
+				.Take(requiredCount).ToList();
+		}
+
+		public List<SneakerReference> GetFeatured(IEnumerable<string> models, RequestParams requestParams = default)
+		{
+			var query = new QueryBuilder()
+				.SetQueryArguments("modelname", ExpressionType.Or, models.Select(model => new FilterParameter(model, ExpressionType.Regex)).ToArray())
+				.Build();
+
+			if (requestParams?.SortBy is null)
+			{
+				(requestParams ??= new RequestParams()).SortBy = "price";
+				requestParams.SortDirection = SortDirection.Descending;
+			}
 			return Fetch(query, requestParams);
 		}
 
-		public Task<List<SneakerReference>> GetRelatedAsync(SneakerReference reference, RequestParams requestParams)
+		public async Task<List<SneakerReference>> GetFeaturedAsync(IEnumerable<string> models, RequestParams requestParams = default)
 		{
 			var query = new QueryBuilder()
-				.SetQueryArguments("modelname", ExpressionType.And, new FilterParameter(reference.ModelName, ExpressionType.Regex))
+				.SetQueryArguments("modelname", ExpressionType.And, models.Select(model => new FilterParameter(model, ExpressionType.Regex)).ToArray())
 				.Build();
-			return FetchAsync(query, requestParams);
+
+			if (requestParams?.SortBy is null)
+			{
+				(requestParams ??= new RequestParams()).SortBy = "price";
+				requestParams.SortDirection = SortDirection.Descending;
+			}
+			return await FetchAsync(query, requestParams);
 		}
 
 		#endregion

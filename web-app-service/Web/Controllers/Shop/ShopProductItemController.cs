@@ -14,7 +14,10 @@ namespace Web.Controllers
 			var product = service.FetchUnique(productId);
 
 			if (product is null) return NotFound();
+
 			//ViewBag.RelatedProducts = ProductsList; //TODO search related
+
+			AddBreadcrumbNode(nameof(ProductItem), product.ModelName);
 			return View();
 		}
 	}

@@ -5,14 +5,15 @@ using System.Net;
 using System.Runtime.Serialization;
 using Core.Attributes;
 using Core.Entities.Products;
+using Core.Reference;
 
 namespace Core.Entities.References
 {
 	[EntityService(Resource = "api/references/sneakers")]
-	public class SneakerReference : IProduct
+	public class SneakerReference : IReference
 	{
 		[Key]
-		public string UniqueId { get; set; }
+		public string UniqueID { get; set; }
 
 		public string ManufactureSku { get; set; }
 
@@ -27,6 +28,13 @@ namespace Core.Entities.References
 
 		public string ModelName { get; set; }
 
+		public SneakerModel Model
+		{
+			get => _model ??= new SneakerModel(ModelName, Brand);
+			private set => _model = value;
+		}
+		private SneakerModel _model;
+
 		[DataType(DataType.Currency)]
 		public decimal Price { get; set; }
 
@@ -37,6 +45,8 @@ namespace Core.Entities.References
 		public Gender Gender { get; set; }
 
 		public string Nickname { get; set; }
+
+		public string Designer { get; set; }
 
 		[DataType(DataType.ImageUrl)]
 		public string ImageLink { get; set; }
@@ -65,5 +75,7 @@ namespace Core.Entities.References
 
 		[OnDeserialized]
 		internal void OnDeserialized(StreamingContext context) { }
+
+		public bool Equals(SneakerReference other) => other != null && UniqueID == other.UniqueID;
 	}
 }

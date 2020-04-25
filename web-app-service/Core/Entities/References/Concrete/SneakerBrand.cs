@@ -10,7 +10,7 @@ namespace Core.Entities.References
 	public class SneakerBrand : IBrand
 	{
 		[Key]
-		public string UniqueId { get; }
+		public string UniqueID { get; }
 
 		public string Name { get; set; }
 
@@ -29,11 +29,13 @@ namespace Core.Entities.References
 		public SneakerBrand(string name)
 		{
 			Name = name;
-			UniqueId = new Regex("[\\n\\t;,.\\s()\\/]").Replace(Convert.ToString(name), "_").ToLower();
-			Logo = $"logos/{UniqueId}-logo.svg";
-			HeroPath = $"/images/heroes/{UniqueId}-hero.jpg";
+			UniqueID = new Regex("[\\n\\t;,.\\s()\\/]").Replace(Convert.ToString(name), "_").ToLower();
+			Logo = $"logos/{UniqueID}-logo.svg";
+			HeroPath = $"/images/heroes/{UniqueID}-hero.jpg";
 		}
 
 		public override string ToString() => Name;
+
+		public bool Equals(SneakerBrand other) => other != null && UniqueID == other.UniqueID;
 	}
 }

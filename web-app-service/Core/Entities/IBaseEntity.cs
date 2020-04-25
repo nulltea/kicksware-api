@@ -1,7 +1,9 @@
-﻿namespace Core.Entities
+﻿using System;
+
+namespace Core.Entities
 {
 	public interface IBaseEntity
 	{
-		string UniqueId { get; }
+		string UniqueID { get; }
 	}
 }

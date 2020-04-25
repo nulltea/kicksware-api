@@ -39,9 +39,13 @@ namespace Core.Services
 
 		#region Usecases
 
-		List<SneakerReference> GetRelated(SneakerReference reference, RequestParams requestParams);
+		List<SneakerReference> GetRelated(SneakerReference reference, RequestParams requestParams = default);
 
-		Task<List<SneakerReference>> GetRelatedAsync(SneakerReference reference, RequestParams requestParams);
+		Task<List<SneakerReference>> GetRelatedAsync(SneakerReference reference, RequestParams requestParams = default);
+
+		List<SneakerReference> GetFeatured(IEnumerable<string> models, RequestParams requestParams = default);
+
+		Task<List<SneakerReference>> GetFeaturedAsync(IEnumerable<string> models, RequestParams requestParams = default);
 
 		#endregion
 	}

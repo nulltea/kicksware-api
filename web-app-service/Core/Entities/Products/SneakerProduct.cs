@@ -20,7 +20,7 @@ namespace Core.Entities.Products
 	public class SneakerProduct : IProduct
 	{
 		[Key]
-		public string UniqueId { get; set; }
+		public string UniqueID { get; set; }
 
 		public string BrandName { get; set; }
 
@@ -35,7 +35,7 @@ namespace Core.Entities.Products
 
 		public string ModelSKU { get; set; }
 
-		public string ModelRefId { get; set; }
+		public string ReferenceID { get; set; }
 
 		[DataType(DataType.Currency)]
 		public decimal Price { get; set; }
@@ -84,5 +84,7 @@ namespace Core.Entities.Products
 				Photos.Add(image);
 			}
 		}
+
+		public bool Equals(SneakerProduct other) => other != null && UniqueID == other.UniqueID;
 	}
 }
