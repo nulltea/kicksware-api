@@ -74,7 +74,7 @@ namespace Web.Controllers
 		{
 			var service = HttpContext.RequestServices.GetService<ISneakerReferenceService>();
 			return service.GetFeatured(new[] {"Question Mid", "Crazy 97", "JS Wings", "Alien Stomper Hi", "Zoom KD 4"},
-				new RequestParams {TakeCount = 15,});
+				new RequestParams {Limit = 15,});
 		}
 	}
 }

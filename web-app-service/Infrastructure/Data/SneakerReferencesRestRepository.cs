@@ -6,6 +6,7 @@ using Core.Entities.References;
 using Core.Gateway;
 using Core.Repositories;
 using Infrastructure.Gateway.REST.Client;
+using Infrastructure.Gateway.REST.ProductRequests.Sneakers;
 using Infrastructure.Gateway.REST.References.Sneakers;
 
 namespace Infrastructure.Data
@@ -28,10 +29,10 @@ namespace Infrastructure.Data
 			_client.Request<List<SneakerReference>>(new GetQueriedSneakerReferencesRequest(idCodes){RequestParams = requestParams});
 
 		public List<SneakerReference> Get(object queryObject, RequestParams requestParams = default) =>
-			_client.Request<List<SneakerReference>>(new GetMapSneakerReferencesRequest(queryObject){RequestParams = requestParams});
+			_client.Request<List<SneakerReference>>(new GetQueriedSneakerReferencesRequest(queryObject){RequestParams = requestParams});
 
 		public List<SneakerReference> Get(Dictionary<string, object> queryMap, RequestParams requestParams = default) =>
-			_client.Request<List<SneakerReference>>(new GetMapSneakerReferencesRequest(queryMap){RequestParams = requestParams});
+			_client.Request<List<SneakerReference>>(new GetQueriedSneakerReferencesRequest(queryMap){RequestParams = requestParams});
 
 		public SneakerReference Post(SneakerReference sneakerReference, RequestParams requestParams = default) =>
 			_client.Request<SneakerReference>(new PostSneakerReferenceRequest(sneakerReference){RequestParams = requestParams});
@@ -47,10 +48,12 @@ namespace Infrastructure.Data
 		public bool Delete(string referenceId, RequestParams requestParams = default) => throw new NotImplementedException();
 
 		public int Count(Dictionary<string, object> queryMap, RequestParams requestParams = default) =>
-			Get(queryMap, requestParams).Count; // TODO _client.Request<int>(new CountSneakerReferencesRequest(queryMap){RequestParams = requestParams});
+			_client.Request<int>(new CountSneakerReferencesRequest(queryMap){RequestParams = requestParams});
 
 		public int Count(object queryObject, RequestParams requestParams = default) =>
-			Get().Count; // TODO _client.Request<int>(new CountSneakerReferencesRequest(queryObject){RequestParams = requestParams});
+			_client.Request<int>(new CountSneakerReferencesRequest(queryObject){RequestParams = requestParams});
+
+		public int Count() => _client.Request<int>(new CountSneakerReferencesRequest());
 
 		#endregion
 
@@ -62,17 +65,14 @@ namespace Infrastructure.Data
 		public Task<List<SneakerReference>> GetAsync(RequestParams requestParams = default) =>
 			_client.RequestAsync<List<SneakerReference>>(new GetAllSneakerReferencesRequest{RequestParams = requestParams});
 
-		public async Task<List<SneakerReference>> GetOffsetAsync(int count, int offset, RequestParams requestParams = default) =>
-			(await GetAsync()).Skip(offset).Take(count).ToList(); //TODO rest
-
 		public Task<List<SneakerReference>> GetAsync(IEnumerable<string> idList, RequestParams requestParams = default) =>
 			_client.RequestAsync<List<SneakerReference>>(new GetQueriedSneakerReferencesRequest(idList){RequestParams = requestParams});
 
 		public Task<List<SneakerReference>> GetAsync(object queryObject, RequestParams requestParams = default) =>
-			_client.RequestAsync<List<SneakerReference>>(new GetMapSneakerReferencesRequest(queryObject){RequestParams = requestParams});
+			_client.RequestAsync<List<SneakerReference>>(new GetQueriedSneakerReferencesRequest(queryObject){RequestParams = requestParams});
 
 		public Task<List<SneakerReference>> GetAsync(Dictionary<string, object> queryMap, RequestParams requestParams = default) =>
-			_client.RequestAsync<List<SneakerReference>>(new GetMapSneakerReferencesRequest(queryMap){RequestParams = requestParams});
+			_client.RequestAsync<List<SneakerReference>>(new GetQueriedSneakerReferencesRequest(queryMap){RequestParams = requestParams});
 
 		public Task<SneakerReference> PostAsync(SneakerReference sneakerReference, RequestParams requestParams = default) =>
 			_client.RequestAsync<SneakerReference>(new PostSneakerReferenceRequest(sneakerReference){RequestParams = requestParams});
@@ -87,11 +87,13 @@ namespace Infrastructure.Data
 
 		public Task<bool> DeleteAsync(string referenceId, RequestParams requestParams = default) => throw new NotImplementedException();
 
-		public async Task<int> CountAsync(Dictionary<string, object> queryMap, RequestParams requestParams = default) =>
-			(await GetAsync(queryMap, requestParams)).Count; // TODO _client.RequestAsync<int>(new CountSneakerReferencesRequest(queryMap){RequestParams = requestParams});
+		public  Task<int> CountAsync(Dictionary<string, object> queryMap, RequestParams requestParams = default) =>
+			_client.RequestAsync<int>(new CountSneakerReferencesRequest(queryMap){RequestParams = requestParams});
 
-		public async Task<int> CountAsync(object queryObject, RequestParams requestParams = default) =>
-			(await GetAsync()).Count; // TODO _client.RequestAsync<int>(new CountSneakerReferencesRequest(queryObject){RequestParams = requestParams});
+		public Task<int> CountAsync(object queryObject, RequestParams requestParams = default) =>
+			_client.RequestAsync<int>(new CountSneakerReferencesRequest(queryObject){RequestParams = requestParams});
+
+		public Task<int> CountAsync() => _client.RequestAsync<int>(new CountSneakerReferencesRequest());
 
 		#endregion
 	}

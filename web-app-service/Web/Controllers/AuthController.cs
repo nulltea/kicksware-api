@@ -9,6 +9,16 @@ namespace Web.Controllers
 {
 	public class AuthController : Controller
 	{
+		public IActionResult SignUp()
+		{
+			return Challenge();
+		}
+
+		public IActionResult Login()
+		{
+			return Challenge();
+		}
+
 		public IActionResult Facebook()
 		{
 			var authProperties = new AuthenticationProperties

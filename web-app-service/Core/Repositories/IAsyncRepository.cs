@@ -27,6 +27,8 @@ namespace Core.Repositories
 
 		Task<int> CountAsync(Dictionary<string, object> queryMap, RequestParams requestParams = default);
 
-		Task<int> CountAsync(object queryObject = default, RequestParams requestParams = default);
+		Task<int> CountAsync(object queryObject, RequestParams requestParams = default);
+
+		Task<int> CountAsync();
 	}
 }

@@ -263,12 +263,14 @@ function bindRequestUpdateEvent(element, page=1, event="change") {
 		let pathValues = window.location.pathname.split("/");
 		let controller = pathValues[1];
 		let entity = pathValues[2];
+		toggleLoadOverlay();
 		$.post(`/${controller}/${entity}/requestUpdate`, {filterInputs: formFilterParameters(), page: page, sortBy: formSortParameter() }, function(response) {
 			$(".result-content").html(response["content"]);
 			$(".count span").text(`Showing ${(page - 1) * response["pageSize"]}-${Math.min(response["pageSize"], response["length"])} / ${response["length"]} results`);
 			setLayoutMode();
 			paginationInit();
 			window.history.pushState("Kicksware", `(Page ${page})`, `?page=${page}&sortBy=${formSortParameter()}`);
+			toggleLoadOverlay();
 			loading($(".product-cell"))
 		});
 	});

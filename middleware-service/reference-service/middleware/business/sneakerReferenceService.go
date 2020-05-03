@@ -14,6 +14,7 @@ import (
 	"github.com/thoas/go-funk"
 	"gopkg.in/dealancer/validate.v2"
 
+	"reference-service/core/meta"
 	"reference-service/core/model"
 	"reference-service/core/repo"
 	"reference-service/core/service"
@@ -38,18 +39,18 @@ func (s *referenceService) FetchOne(code string) (*model.SneakerReference, error
 	return s.sneakerReferenceRepo.FetchOne(code)
 }
 
-func (s *referenceService) Fetch(codes []string) ([]*model.SneakerReference, error) {
-	return s.sneakerReferenceRepo.Fetch(codes)
+func (s *referenceService) Fetch(codes []string, params meta.RequestParams) ([]*model.SneakerReference, error) {
+	return s.sneakerReferenceRepo.Fetch(codes, params)
 }
 
-func (s *referenceService) FetchAll() ([]*model.SneakerReference, error) {
-	return s.sneakerReferenceRepo.FetchAll()
+func (s *referenceService) FetchAll(params meta.RequestParams) ([]*model.SneakerReference, error) {
+	return s.sneakerReferenceRepo.FetchAll(params)
 }
 
-func (s *referenceService) FetchQuery(query map[string]interface{}) (refs []*model.SneakerReference, err error) {
-	foreignKeys, sub := s.handleSubquery(query)
-	refs, err = s.sneakerReferenceRepo.FetchQuery(query)
-	if err == nil && sub {
+func (s *referenceService) FetchQuery(query meta.RequestQuery, params meta.RequestParams) (refs []*model.SneakerReference, err error) {
+	foreignKeys, is := s.handleForeignSubquery(query)
+	refs, err = s.sneakerReferenceRepo.FetchQuery(query, params)
+	if err == nil && is {
 		refs = funk.Filter(refs, func(ref *model.SneakerReference) bool {
 			return funk.Contains(foreignKeys, ref.UniqueId)
 		}).([]*model.SneakerReference)
@@ -76,11 +77,28 @@ func (s *referenceService) Modify(sneakerReference *model.SneakerReference) erro
 	return s.sneakerReferenceRepo.Modify(sneakerReference)
 }
 
-func (s *referenceService) handleSubquery(query map[string]interface{}) (foreignKeys []string, sub bool) {
+func (s *referenceService) CountAll() (int, error) {
+	return s.sneakerReferenceRepo.CountAll()
+}
+
+func (s *referenceService) Count(query meta.RequestQuery, params meta.RequestParams) (int, error) {
+	foreignKeys, is := s.handleForeignSubquery(query); if is {
+		refs, err := s.sneakerReferenceRepo.FetchQuery(query, params)
+		if err == nil && is {
+			refs = funk.Filter(refs, func(ref *model.SneakerReference) bool {
+				return funk.Contains(foreignKeys, ref.UniqueId)
+			}).([]*model.SneakerReference)
+		}
+		return len(refs), nil
+	}
+	return s.sneakerReferenceRepo.Count(query, params)
+}
+
+func (s *referenceService) handleForeignSubquery(query map[string]interface{}) (foreignKeys []string, is bool) {
 	foreignKeys = make([]string, 0)
 	for key := range query {
 		if strings.Contains(key, "*/") {
-			sub = true
+			is = true
 			res := strings.TrimLeft(key, "*/");
 			host := fmt.Sprintf("%s-service", strings.Split(res, "/")[0]);
 			service := fmt.Sprintf(os.Getenv("INNER_SERVICE_FORMAT"), host, res)

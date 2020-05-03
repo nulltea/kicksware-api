@@ -25,7 +25,7 @@ func (s *ReferenceSorter) Less(i, j int) bool {
 	case "price":
 		return s.items[i].Price < s.items[j].Price
 	case "released":
-		return s.items[i].Released.Sub(s.items[j].Released).Hours() < 0
+		return s.items[i].ReleaseDate.Sub(s.items[j].ReleaseDate).Hours() < 0
 	default:
 		return s.items[i].UniqueId < s.items[j].UniqueId
 	}

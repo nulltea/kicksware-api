@@ -17,7 +17,9 @@ import (
 )
 
 func main() {
-	// loadEnv()
+	if os.Getenv("DEBUG") == "True"{
+		loadEnv()
+	}
 	repo := getRepository()
 	if repo == nil {
 		return

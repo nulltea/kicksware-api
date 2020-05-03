@@ -9,7 +9,7 @@ namespace Core.Model.Parameters
 {
 	public class FilterParameter
 	{
-		public string RenderId => $"filter-control-{new Regex("[\\n\\t;,.\\s()\\/]").Replace(Caption ?? Convert.ToString(Value), "_").ToLower()}";
+		public string RenderId => $"filter-control-{new Regex("[\\n\\t;,.\\s()\\/]").Replace((Caption ?? Convert.ToString(Value))!, "_").ToLower()}";
 
 		public string Caption { get; }
 

@@ -4,29 +4,26 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"reflect"
-	"strconv"
 
-	"github.com/fatih/structs"
 	"github.com/go-chi/chi"
 	"github.com/pkg/errors"
 
-	"reference-service/api/common"
+	"reference-service/core/meta"
 	"reference-service/core/model"
 	"reference-service/core/service"
 	"reference-service/middleware/business"
 	"reference-service/middleware/serializer/json"
 	"reference-service/middleware/serializer/msg"
+	"reference-service/util"
 )
 
 type RestfulHandler interface {
 	GetOne(http.ResponseWriter, *http.Request)
 	Get(http.ResponseWriter, *http.Request)
-	GetAll(http.ResponseWriter, *http.Request)
-	PostQuery(http.ResponseWriter, *http.Request)
 	PostOne(http.ResponseWriter, *http.Request)
 	Post(http.ResponseWriter, *http.Request)
 	Patch(http.ResponseWriter, *http.Request)
+	Count(http.ResponseWriter, *http.Request)
 }
 
 type handler struct {
@@ -56,8 +53,26 @@ func (h *handler) GetOne(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *handler) Get(w http.ResponseWriter, r *http.Request) {
-	codes := r.URL.Query()["referenceId"]
-	sneakerReferences, err := h.Service.Fetch(codes)
+	var sneakerReferences []*model.SneakerReference
+	var err error
+	params := NewRequestParams(r)
+
+	if r.Method == http.MethodPost {
+		query, err := h.getRequestQuery(r)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		sneakerReferences, err = h.Service.FetchQuery(query, params)
+	} else if r.Method == http.MethodGet {
+		codes := r.URL.Query()["referenceId"]
+		if codes != nil && len(codes) > 0 {
+			sneakerReferences, err = h.Service.Fetch(codes, params)
+		} else {
+			sneakerReferences, err = h.Service.FetchAll(params)
+		}
+	}
+
 	if err != nil {
 		if errors.Cause(err) == business.ErrReferenceNotFound {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
@@ -69,46 +84,10 @@ func (h *handler) Get(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, sneakerReferences, http.StatusOK)
 }
 
-func (h *handler) GetAll(w http.ResponseWriter, r *http.Request) {
-	sneakerReferences, err := h.Service.FetchAll()
-	params := &common.RequestParams{}
-	params.AssignParams(r)
-	if err != nil {
-		if errors.Cause(err) == business.ErrReferenceNotFound {
-			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
-			return
-		}
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	h.setupResponse(w, params.ApplyParams(sneakerReferences), http.StatusOK)
-}
-
-func (h *handler) PostQuery(w http.ResponseWriter, r *http.Request) {
-	query, err := h.getRequestQueryBody(r)
-	params := &common.RequestParams{}
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusNotFound)
-		return
-	}
-	sneakerReferences, err := h.Service.FetchQuery(query)
-	if err != nil {
-		if errors.Cause(err) == business.ErrReferenceNotFound {
-			http.Error(w, http.StatusText(http.StatusNoContent), http.StatusNoContent)
-			return
-		}
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	params.AssignParams(r)
-	h.setupResponse(w, params.ApplyParams(sneakerReferences), http.StatusOK)
-}
-
 func (h *handler) PostOne(w http.ResponseWriter, r *http.Request) {
 	sneakerReference, err := h.getRequestBody(r)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 	err = h.Service.StoreOne(sneakerReference)
@@ -160,6 +139,38 @@ func (h *handler) Patch(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, nil, http.StatusOK)
 }
 
+func (h *handler) Count(w http.ResponseWriter, r *http.Request) {
+	var count int
+	var err error
+	params := NewRequestParams(r)
+
+	if r.Method == http.MethodPost {
+		query, err := h.getRequestQuery(r)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		count, err = h.Service.Count(query, params)
+	} else if r.Method == http.MethodGet {
+		query := r.URL.Query()
+		if query != nil && len(query) > 0 {
+			count, err = h.Service.Count(util.ToQueryMap(query), params)
+		} else {
+			count, err = h.Service.CountAll()
+		}
+	}
+
+	if err != nil {
+		if errors.Cause(err) == business.ErrReferenceNotFound {
+			h.setupResponse(w, 0, http.StatusOK)
+			return
+		}
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	h.setupResponse(w, count, http.StatusOK)
+}
+
 func (h *handler) setupResponse(w http.ResponseWriter, body interface{}, statusCode int) {
 	w.Header().Set("Content-Type", h.ContentType)
 	w.WriteHeader(statusCode)
@@ -175,7 +186,7 @@ func (h *handler) setupResponse(w http.ResponseWriter, body interface{}, statusC
 	}
 }
 
-func (h *handler) getRequestQueryBody(r *http.Request) (map[string]interface{}, error) {
+func (h *handler) getRequestQuery(r *http.Request) (meta.RequestQuery, error) {
 	contentType := r.Header.Get("Content-Type")
 	requestBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -213,33 +224,6 @@ func (h *handler) getRequestBodies(r *http.Request) ([]*model.SneakerReference, 
 		return nil, err
 	}
 	return bodies, nil
-}
-
-func (h *handler) getRequestParams(r *http.Request) (requestParams common.RequestParams) {
-	query := r.URL.Query();
-	properties := structs.Names(requestParams)
-	prmType := reflect.TypeOf(requestParams);
-	for _, prop := range properties {
-		value := query.Get(prop)
-		paramField := reflect.ValueOf(&requestParams).Elem().FieldByName(prop);
-		field, _ := prmType.FieldByName(prop)
-		switch field.Type.Kind().String() {
-		case "string":
-			paramField.SetString(value);
-		case "int":
-		case "float":
-			if num, err := strconv.ParseInt(value, 10, 32); err != nil {
-				paramField.SetInt(num);
-			}
-		case "bool":
-			if sign, err := strconv.ParseBool(value); err != nil {
-				paramField.SetBool(sign);
-			}
-		default:
-			paramField.SetString(value);
-		}
-	}
-	return
 }
 
 func (h *handler) serializer(contentType string) service.SneakerReferenceSerializer {

@@ -12,15 +12,20 @@
 }
 
 /*----COMMON CAROUSEL----*/
-&.carousel {
+.carousel {
 	.flex-col(@align: flex-start);
 	min-height: 200px;
 	padding: 0;
 	box-shadow: none;
 	border-radius: 0;
-	.with-theme({
 
-	});
+	h3 {
+		margin: 0;
+		padding: 5px 15px 5px 15px;
+		.with-theme({
+			border-left: 3px solid @secondary;
+		})
+	}
 
 	.carousel-wrapper {
 		width: 100%;
@@ -353,6 +358,20 @@
 			.product-gallery{
 				padding: 20px;
 				.image-carousel{
+					max-height: 500px;
+					overflow-y: auto;
+
+					&::-webkit-scrollbar {
+						width: 4px;
+					}
+
+					/* Handle */
+					&::-webkit-scrollbar-thumb {
+						.with-theme({
+							background: @secondary
+						})
+					}
+
 					.with-theme({
 						.deepening(2, @elevation);
 						background: @hint;

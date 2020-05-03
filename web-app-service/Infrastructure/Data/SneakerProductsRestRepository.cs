@@ -27,10 +27,10 @@ namespace Infrastructure.Data
 			_client.Request<List<SneakerProduct>>(new GetQueriedSneakersRequest(idCodes) {RequestParams = requestParams});
 
 		public List<SneakerProduct> Get(object queryObject, RequestParams requestParams = default) =>
-			_client.Request<List<SneakerProduct>>(new GetMapSneakersRequest(queryObject) {RequestParams = requestParams});
+			_client.Request<List<SneakerProduct>>(new GetQueriedSneakersRequest(queryObject) {RequestParams = requestParams});
 
 		public List<SneakerProduct> Get(Dictionary<string, object> queryMap, RequestParams requestParams = default) =>
-			_client.Request<List<SneakerProduct>>(new GetMapSneakersRequest(queryMap) {RequestParams = requestParams});
+			_client.Request<List<SneakerProduct>>(new GetQueriedSneakersRequest(queryMap) {RequestParams = requestParams});
 
 
 		public SneakerProduct Post(SneakerProduct sneakerProduct, RequestParams requestParams = default) =>
@@ -51,6 +51,8 @@ namespace Infrastructure.Data
 		public int Count(object queryObject, RequestParams requestParams = default) =>
 			Get(requestParams).Count;// TODO _client.Request<int>(new CountSneakerProductsRequest(queryObject));
 
+		public int Count() => _client.Request<int>(new CountSneakerProductsRequest());
+
 		#endregion
 
 		#region Async
@@ -65,10 +67,10 @@ namespace Infrastructure.Data
 			_client.RequestAsync<List<SneakerProduct>>(new GetQueriedSneakersRequest(idList) {RequestParams = requestParams});
 
 		public Task<List<SneakerProduct>> GetAsync(object queryObject, RequestParams requestParams = default) =>
-			_client.RequestAsync<List<SneakerProduct>>(new GetMapSneakersRequest(queryObject) {RequestParams = requestParams});
+			_client.RequestAsync<List<SneakerProduct>>(new GetQueriedSneakersRequest(queryObject) {RequestParams = requestParams});
 
 		public Task<List<SneakerProduct>> GetAsync(Dictionary<string, object> queryMap, RequestParams requestParams = default) =>
-			_client.RequestAsync<List<SneakerProduct>>(new GetMapSneakersRequest(queryMap) {RequestParams = requestParams});
+			_client.RequestAsync<List<SneakerProduct>>(new GetQueriedSneakersRequest(queryMap) {RequestParams = requestParams});
 
 		public Task<SneakerProduct> PostAsync(SneakerProduct sneakerProduct, RequestParams requestParams = default) =>
 			_client.RequestAsync<SneakerProduct>(new PostSneakerProductRequest(sneakerProduct) {RequestParams = requestParams});
@@ -82,11 +84,13 @@ namespace Infrastructure.Data
 		public Task<bool> DeleteAsync(string sneakerId, RequestParams requestParams = default) =>
 			_client.RequestAsync(new DeleteSneakerProductRequest(sneakerId) {RequestParams = requestParams});
 
-		public async Task<int> CountAsync(Dictionary<string, object> queryMap = default, RequestParams requestParams = default) =>
-			(await GetAsync()).Count;// TODO _client.RequestAsync<int>(new CountSneakerProductsRequest(queryObject));
+		public Task<int> CountAsync(Dictionary<string, object> queryMap, RequestParams requestParams = default) =>
+			_client.RequestAsync<int>(new CountSneakerProductsRequest(queryMap));
 
-		public async Task<int> CountAsync(object queryObject = default, RequestParams requestParams = default) =>
-			(await GetAsync()).Count;// TODO _client.RequestAsync<int>(new CountSneakerProductsRequest(queryObject));
+		public Task<int> CountAsync(object queryObject, RequestParams requestParams = default) =>
+			_client.RequestAsync<int>(new CountSneakerProductsRequest(queryObject));
+
+		public Task<int> CountAsync() => _client.RequestAsync<int>(new CountSneakerProductsRequest());
 
 		#endregion
 	}

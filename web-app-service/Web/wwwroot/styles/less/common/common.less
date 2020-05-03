@@ -27,17 +27,46 @@ html {
 	scroll-behavior: smooth;
 }
 
+/*----SCROLLBAR----*/
+
+
+
 body {
 	font-family: Oxanium, sans-serif;
 	font-size: 18px;
 	font-weight: 400;
+	// overflow-y: overlay;
 
-	&.theme-light{
+	&.theme-light {
 		background: @theme-light-primary;
+
+		&::-webkit-scrollbar-thumb {
+			background: @theme-light-secondary;
+
+			&:hover {
+				background: @theme-light-secondary;
+			}
+		}
 	}
 
 	&.theme-dark {
 		background: @theme-dark-primary;
+
+		&::-webkit-scrollbar-thumb {
+			background: @theme-dark-secondary;
+			&:hover {
+				background: @theme-dark-secondary;
+			}
+		}
+	}
+
+	&::-webkit-scrollbar {
+		width: 15px;
+		overflow: visible;
+	}
+
+	&::-webkit-scrollbar-track {
+		background: transparent;
 	}
 }
 
@@ -834,6 +863,63 @@ input[type="checkbox"].regular_checkbox {
 
 			}
 		}*/
+	}
+}
+
+.modal-backdrop {
+	display: none;
+
+	&.show {
+		display: block;
+	}
+}
+
+.preloader {
+	.loader{
+		position: fixed;
+		z-index: 3;
+		left: 0;
+		right: 0;
+		top: 50%;
+		margin: -30px auto 0;
+		width: 60px;
+		height: 60px;
+		list-style: none;
+	}
+
+	@-webkit-keyframes loadbars {
+		0%{
+			height: 10px;
+			margin-top: 25px;
+		}
+		50%{
+			height:50px;
+			margin-top: 0;
+		}
+		100%{
+			height: 10px;
+			margin-top: 25px;
+		}
+	}
+
+	li{
+		width: 10px;
+		height: 10px;
+		float: right;
+		margin-right: 5px;
+		.with-theme({
+			background-color: @secondary;
+		});
+		box-shadow: 0 100px 20px rgba(0,0,0,0.2);
+	}
+	li:first-child{
+		-webkit-animation: loadbars 0.6s cubic-bezier(0.645,0.045,0.355,1) infinite 0s;
+	}
+	li:nth-child(2){
+		-webkit-animation: loadbars 0.6s ease-in-out infinite -0.2s;
+	}
+	li:nth-child(3){
+		-webkit-animation: loadbars 0.6s ease-in-out infinite -0.4s;
 	}
 }
 

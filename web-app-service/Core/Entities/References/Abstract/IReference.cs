@@ -16,6 +16,6 @@ namespace Core.Entities.References
 
 		string Description { get; set; }
 
-		public DateTime Released { get; set; }
+		public DateTime ReleaseDate { get; set; }
 	}
 }

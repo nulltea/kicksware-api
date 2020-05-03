@@ -165,8 +165,8 @@ namespace Infrastructure.Usecase.Models
 			Clear();
 			AddRange(_service.Fetch(queryMap, new RequestParams
 			{
-				TakeCount = PageSize,
-				SkipOffset = (page - 1) * PageSize,
+				Limit = PageSize,
+				Offset = (page - 1) * PageSize,
 				SortBy = ChosenSorting?.Property.FieldName,
 				SortDirection = ChosenSorting?.Direction
 			}));
@@ -184,8 +184,8 @@ namespace Infrastructure.Usecase.Models
 			Clear();
 			AddRange(_service.Fetch(new RequestParams
 			{
-				TakeCount = PageSize,
-				SkipOffset = (++CurrentPage - 1) * PageSize,
+				Limit = PageSize,
+				Offset = (++CurrentPage - 1) * PageSize,
 				SortBy = ChosenSorting?.Property.FieldName,
 				SortDirection = ChosenSorting?.Direction
 			}));
@@ -204,8 +204,8 @@ namespace Infrastructure.Usecase.Models
 			Clear();
 			AddRange(_service.Fetch(new RequestParams
 			{
-				TakeCount = PageSize,
-				SkipOffset = (--CurrentPage - 1) * PageSize,
+				Limit = PageSize,
+				Offset = (--CurrentPage - 1) * PageSize,
 				SortBy = ChosenSorting?.Property.FieldName,
 				SortDirection = ChosenSorting?.Direction
 			}));
@@ -224,8 +224,8 @@ namespace Infrastructure.Usecase.Models
 			Clear();
 			AddRange(await _service.FetchAsync(queryMap, new RequestParams
 			{
-				TakeCount = PageSize,
-				SkipOffset = (page - 1) * PageSize,
+				Limit = PageSize,
+				Offset = (page - 1) * PageSize,
 				SortBy = ChosenSorting?.Property.FieldName,
 				SortDirection = ChosenSorting?.Direction
 			}));
@@ -243,8 +243,8 @@ namespace Infrastructure.Usecase.Models
 			Clear();
 			AddRange(await _service.FetchAsync(new RequestParams
 			{
-				TakeCount = PageSize,
-				SkipOffset = (++CurrentPage - 1) * PageSize,
+				Limit = PageSize,
+				Offset = (++CurrentPage - 1) * PageSize,
 				SortBy = ChosenSorting?.Property.FieldName,
 				SortDirection = ChosenSorting?.Direction
 			}));
@@ -262,8 +262,8 @@ namespace Infrastructure.Usecase.Models
 			Clear();
 			AddRange(await _service.FetchAsync(new RequestParams
 			{
-				TakeCount = PageSize,
-				SkipOffset = (--CurrentPage - 1) * PageSize,
+				Limit = PageSize,
+				Offset = (--CurrentPage - 1) * PageSize,
 				SortBy = ChosenSorting?.Property.FieldName,
 				SortDirection = ChosenSorting?.Direction
 			}));

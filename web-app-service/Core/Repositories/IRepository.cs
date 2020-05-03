@@ -26,6 +26,8 @@ namespace Core.Repositories
 
 		int Count(Dictionary<string, object> queryMap, RequestParams requestParams = default);
 
-		int Count(object queryObject = default, RequestParams requestParams = default);
+		int Count(object queryObject, RequestParams requestParams = default);
+
+		int Count();
 	}
 }

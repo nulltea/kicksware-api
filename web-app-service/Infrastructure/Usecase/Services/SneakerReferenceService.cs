@@ -45,9 +45,11 @@ namespace Infrastructure.Usecase
 
 		public bool Modify(SneakerReference sneakerReference, RequestParams requestParams = default) => _repository.Update(sneakerReference, requestParams);
 
-		public int Count(Dictionary<string, object> queryMap = default, RequestParams requestParams = default) => _repository.Count(queryMap, requestParams);
+		public int Count() => _repository.Count();
 
-		public int Count(object queryObject = default, RequestParams requestParams = default) => _repository.Count(queryObject, requestParams);
+		public int Count(Dictionary<string, object> queryMap, RequestParams requestParams = default) => _repository.Count(queryMap, requestParams);
+
+		public int Count(object queryObject, RequestParams requestParams = default) => _repository.Count(queryObject, requestParams);
 
 		#endregion
 
@@ -69,9 +71,9 @@ namespace Infrastructure.Usecase
 
 		public Task<bool> ModifyAsync(SneakerReference sneakerReference, RequestParams requestParams = default) => _repository.UpdateAsync(sneakerReference, requestParams);
 
-		public Task<int> CountAsync(Dictionary<string, object> queryMap = default, RequestParams requestParams = default) => _repository.CountAsync(queryMap, requestParams);
+		public Task<int> CountAsync(Dictionary<string, object> queryMap, RequestParams requestParams = default) => _repository.CountAsync(queryMap, requestParams);
 
-		public Task<int> CountAsync(object queryObject = default, RequestParams requestParams = default) => _repository.CountAsync(queryObject, requestParams);
+		public Task<int> CountAsync(object queryObject, RequestParams requestParams = default) => _repository.CountAsync(queryObject, requestParams);
 
 		#endregion
 
@@ -79,20 +81,20 @@ namespace Infrastructure.Usecase
 
 		public List<SneakerReference> GetRelated(SneakerReference reference, RequestParams requestParams = default)
 		{
-			var requiredCount = requestParams?.TakeCount ?? 5;
+			var requiredCount = requestParams?.Limit ?? 5;
 			var query = new QueryBuilder()
 				.SetQueryArguments("brandname", ExpressionType.And, new FilterParameter(reference.BrandName))
 				.SetQueryArguments("modelname", ExpressionType.And, new FilterParameter(reference.ModelName, ExpressionType.Regex))
 				.Build();
 
-			if (requestParams?.TakeCount != null) requestParams.TakeCount++; // later -1 current reference
+			if (requestParams?.Limit != null) requestParams.Limit++; // later -1 current reference
 
 			var related = Fetch(query, requestParams);
-			if ((related is null || related.Count < requiredCount) && reference.Model?.BaseModel != null)
+			if ((related is null || related.Count < requiredCount) && reference.BaseModel != null)
 			{
 				query = new QueryBuilder()
 					.SetQueryArguments("brandname", ExpressionType.And, new FilterParameter(reference.BrandName))
-					.SetQueryArguments("modelname", ExpressionType.And, new FilterParameter(reference.Model.BaseModel?.Name, ExpressionType.Regex))
+					.SetQueryArguments("modelname", ExpressionType.And, new FilterParameter(reference.BaseModel?.Name, ExpressionType.Regex))
 					.Build();
 				var lessRelated = Fetch(query);
 				if (lessRelated != null && lessRelated.Any())
@@ -103,6 +105,22 @@ namespace Infrastructure.Usecase
 					related = (related?.Union(lessRelated) ?? lessRelated).ToList();
 				}
 			}
+
+			if (related != null && related.Count < requiredCount && reference.Brand != null)
+			{
+				query = new QueryBuilder()
+					.SetQueryArguments("brandname", ExpressionType.And, new FilterParameter(reference.BrandName))
+					.Build();
+				var lessRelated = Fetch(query);
+				if (lessRelated != null && lessRelated.Any())
+				{
+					lessRelated = lessRelated.OrderBySimilarity(r => r.ModelName, reference.ModelName)
+						.Where(r => r.UniqueID != reference.UniqueID)
+						.ToList();
+					related = related.Union(lessRelated).ToList();
+				}
+			}
+
 			return related?
 				.Where(r => r.UniqueID != reference.UniqueID)
 				.Distinct(new EntityComparer<SneakerReference>())
@@ -111,11 +129,11 @@ namespace Infrastructure.Usecase
 
 		public async Task<List<SneakerReference>> GetRelatedAsync(SneakerReference reference, RequestParams requestParams = default)
 		{
-			var requiredCount = requestParams?.TakeCount ?? 5;
+			var requiredCount = requestParams?.Limit ?? 5;
 			var query = new QueryBuilder()
 				.SetQueryArguments("modelname", ExpressionType.And, new FilterParameter(reference.ModelName, ExpressionType.Regex))
 				.Build();
-			if (requestParams?.TakeCount != null) requestParams.TakeCount++; // later -1 current reference
+			if (requestParams?.Limit != null) requestParams.Limit++; // later -1 current reference
 
 			var related = await FetchAsync(query, requestParams);
 			if ((related is null || related.Count < requiredCount) && reference.Model?.BaseModel != null)

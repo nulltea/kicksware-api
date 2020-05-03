@@ -23,7 +23,7 @@ namespace Web.Controllers
 			HeroBreadSubTitle = reference.Brand.Description;
 			HeroLogoPath = reference.Brand.Logo;
 
-			ViewBag.RelatedReferences = service.GetRelated(reference, new RequestParams {TakeCount = 12});
+			ViewBag.RelatedReferences = service.GetRelated(reference, new RequestParams {Limit = 12});
 			AddBreadcrumbNode(nameof(ReferenceItem), reference.ModelName);
 			return View(reference);
 		}

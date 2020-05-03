@@ -13,5 +13,15 @@ namespace Infrastructure.Gateway.REST.ProductRequests.Sneakers
 				AddParameter("sneakerId", id, ParameterType.QueryString);
 			}
 		}
+
+		public GetQueriedSneakersRequest(Dictionary<string, object> map) : base("/query", Method.POST)
+		{
+			AddJsonBody(map);
+		}
+
+		public GetQueriedSneakersRequest(object map) : base("/query", Method.POST)
+		{
+			AddJsonBody(map);
+		}
 	}
 }

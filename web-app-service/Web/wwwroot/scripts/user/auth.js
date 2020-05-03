@@ -68,7 +68,7 @@ $(document).ready(function () {
 	$("#sign-up-btn").click(singUpShow);
 
 	window.addEventListener("click", function (event) {
-		var modal = $("#loginModal");
+		let modal = $("#loginModal");
 		if (modal.is(":visible") && !isDescendant(modal[0], event.target)) {
 			modal.fadeOut("slow");
 			modal.modal("hide");

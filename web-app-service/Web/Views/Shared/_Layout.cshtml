@@ -17,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="~/styles/css/layout/social.css">
 	<link rel="stylesheet" type="text/css" href="~/styles/css/user/modal.css">
 	<link rel="stylesheet" type="text/css" href="~/styles/css/responsive/layout.responsive.css">
-	@RenderSection("Styles", false)
+	@await RenderSectionAsync("Styles", false)
 </head>
 <body class="theme-dark">
 <div class="super_container">
@@ -218,7 +218,7 @@
 				<p class="login-title" id="auth-title">Create an Account</p>
 			</div>
 			<div class="modal-body">
-				<form id="auth-form" class="auth-form">
+				<form asp-controller="Auth" asp-action="SignUp" id="auth-form" class="auth-form">
 					<div class="auth-input">
 						<label for="email-input">Email Address</label>
 						<input type="email" id="email-input" class="email-input" required="required">
@@ -249,7 +249,13 @@
 		</div>
 	</div>
 </div>
-
+<div class="modal fade preloader" tabindex="-1">
+	<ul class="loader">
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</div>
 @{
 	var heroCoverPath = Convert.ToString(ViewData["HeroCoverPath"]);
 	var heroBreadTitle = Convert.ToString(ViewData["HeroBreadTitle"]);

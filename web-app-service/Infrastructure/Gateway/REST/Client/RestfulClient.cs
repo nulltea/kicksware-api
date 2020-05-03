@@ -56,9 +56,10 @@ namespace Infrastructure.Gateway.REST.Client
 					data = response.Data;
 					return true;
 				case 0:
-				case HttpStatusCode.NoContent:
 				case HttpStatusCode.NotFound:
+				case HttpStatusCode.NoContent:
 				case HttpStatusCode.NotModified:
+				case HttpStatusCode.NotImplemented:
 					data = Activator.CreateInstance<T>();
 					return true;
 				case HttpStatusCode.Unauthorized:
@@ -74,9 +75,11 @@ namespace Infrastructure.Gateway.REST.Client
 			{
 				case HttpStatusCode.OK:
 					return true;
+				case 0:
 				case HttpStatusCode.NotFound:
-				case HttpStatusCode.NotImplemented:
+				case HttpStatusCode.NoContent:
 				case HttpStatusCode.NotModified:
+				case HttpStatusCode.NotImplemented:
 					return false;
 				case HttpStatusCode.Unauthorized:
 					throw new AuthenticationException(response.Content);
@@ -93,7 +96,7 @@ namespace Infrastructure.Gateway.REST.Client
 			{
 				var (key, value) = pair;
 				if (value is Enum enumVal) value = enumVal.GetEnumAttribute<EnumMemberAttribute>()?.Value ?? value;
-				request.AddParameter(key, value, ParameterType.QueryString);
+				request.AddParameter(key.ToLower(), value, ParameterType.QueryString);
 			}
 			return request;
 		}

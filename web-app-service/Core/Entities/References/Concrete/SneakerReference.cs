@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Net;
@@ -35,6 +36,14 @@ namespace Core.Entities.References
 		}
 		private SneakerModel _model;
 
+		public string BaseModelName { get; set; }
+
+		public SneakerModel BaseModel
+		{
+			get => _model ??= new SneakerModel(BaseModelName, Brand);
+			private set => _model = value;
+		}
+
 		[DataType(DataType.Currency)]
 		public decimal Price { get; set; }
 
@@ -51,9 +60,16 @@ namespace Core.Entities.References
 		[DataType(DataType.ImageUrl)]
 		public string ImageLink { get; set; }
 
+		public List<string> ImageLinks { get; set; }
+
+		public List<string> Materials { get; set; }
+
+		public List<string> Categories { get; set; }
+
 		public string ImagePath {
 			get
 			{
+				if (string.IsNullOrEmpty(ImageLink)) return string.Empty; // TODO no image available icon
 				var uri = new Uri(ImageLink);
 				var imageName = Path.GetFileName(uri.LocalPath);
 				var storagePath = Path.Combine(Constants.Constants.FileStoragePath, "photos/references", imageName);
@@ -66,9 +82,7 @@ namespace Core.Entities.References
 			}
 		}
 
-		public string HeroPath { get; set; }
-
-		public DateTime Released { get; set; }
+		public DateTime ReleaseDate { get; set; }
 
 		[DataType(DataType.Url)]
 		public string StadiumUrl { get; set; }

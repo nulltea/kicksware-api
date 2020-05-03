@@ -1,10 +1,20 @@
-﻿namespace Infrastructure.Gateway.REST.References.Sneakers
+﻿using System.Collections.Generic;
+using RestSharp;
+
+namespace Infrastructure.Gateway.REST.References.Sneakers
 {
 	public class CountSneakerReferencesRequest : BaseSneakerReferenceRequest
 	{
-		public CountSneakerReferencesRequest(object queryObject) : base("/count")
+		public CountSneakerReferencesRequest() : base("/count") { }
+
+		public CountSneakerReferencesRequest(Dictionary<string, object> query) : base("/count", Method.POST)
 		{
-			AddObject(queryObject);
+			AddJsonBody(query);
+		}
+
+		public CountSneakerReferencesRequest(object query) : base("/count", Method.POST)
+		{
+			if (query != default) AddJsonBody(query);
 		}
 	}
 }

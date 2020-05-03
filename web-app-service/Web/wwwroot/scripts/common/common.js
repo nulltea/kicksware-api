@@ -165,4 +165,17 @@ function isDescendant(parent, child) {
 	return false;
 }
 
+function toggleLoadOverlay() {
+	let preloader = $(".preloader")
+	$('.modal-backdrop').toggleClass("show");
+	if (preloader.is(":visible")) {
+		preloader.modal("hide");
+		preloader.hide();
+		$('body').removeClass("modal-open");
+	} else {
+		preloader.show();
+		preloader.modal("show");
+	}
+}
+
 

@@ -50,6 +50,7 @@ namespace Web.Handlers.Filter
 				SortCriteria.PriceFromHigh => new SortParameter(criterion, "price"),
 				_ => throw new ArgumentException("No such sort criteria")
 			});
+			model.ChooseSortParameter("newest");
 		}
 	}
 }

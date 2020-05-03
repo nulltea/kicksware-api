@@ -22,19 +22,19 @@
 <div class="home">
 	<section class="main-carousel">
 		<!-- Home Slider -->
-		<div class="owl-carousel owl-theme home_slider">
+		<div class="owl-carousel owl-theme home-auto-slider">
 			@foreach (var info in Model)
 			{
 				<!-- Slider Item -->
-				<div class="owl-item home_slider_item">
-					<div class="home_slider_background" style="background-image: url(@info.Image)"></div>
-					<div class="home_slider_content_container">
+				<div class="owl-item auto-slider-item">
+					<div class="auto-slider-background" style="background-image: url(@info.Image)"></div>
+					<div class="auto-slider-content-container">
 						<div class="container">
 							<div class="row">
 								<div class="col">
-									<div class="home_slider_content" data-animation-in="fadeIn" data-animation-out="animate-out fadeOut">
-										<div class="home_slider_title">@info.Title</div>
-										<div class="home_slider_subtitle">@info.Description</div>
+									<div class="auto-slider-content" data-animation-in="fadeIn" data-animation-out="animate-out fadeOut">
+										<div class="auto-slider-title">@info.Title</div>
+										<div class="auto-slider-subtitle">@info.Description</div>
 										<div class="button button_light home_button" id="home-button">
 											<a href=@info.ButtonAction>@info.ButtonCaption</a>
 										</div>
@@ -48,15 +48,15 @@
 		</div>
 
 		<!-- Home Slider Dots -->
-		<div class="home_slider_dots_container">
+		<div class="auto-slider-dots_container">
 			<div class="container">
 				<div class="row">
 					<div class="col">
-						<div class="home_slider_dots">
-							<ul id="home_slider_custom_dots" class="home_slider_custom_dots">
-								<li class="home_slider_custom_dot active">01.</li>
-								<li class="home_slider_custom_dot">02.</li>
-								<li class="home_slider_custom_dot">03.</li>
+						<div class="auto-slider-dots">
+							<ul class="auto-slider-dots-list">
+								<li class="auto-slider-dot active">01.</li>
+								<li class="auto-slider-dot">02.</li>
+								<li class="auto-slider-dot">03.</li>
 							</ul>
 						</div>
 					</div>

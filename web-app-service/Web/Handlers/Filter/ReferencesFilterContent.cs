@@ -43,13 +43,14 @@ namespace Web.Handlers.Filter
 		{
 			model.AddSortParameters(criterion => criterion switch
 			{
-				SortCriteria.Popular => new SortParameter(criterion, "likes"),
-				SortCriteria.Newest => new SortParameter(criterion, "released"),
-				SortCriteria.Featured => new SortParameter(criterion, "likes"),
+				SortCriteria.Popular => new SortParameter(criterion, ""),
+				SortCriteria.Newest => new SortParameter(criterion, "releasedate"),
+				SortCriteria.Featured => new SortParameter(criterion, ""),
 				SortCriteria.PriceFromLow => new SortParameter(criterion, "price", SortDirection.Ascending),
 				SortCriteria.PriceFromHigh => new SortParameter(criterion, "price"),
 				_ => throw new ArgumentException("No such sort criteria")
 			});
+			model.ChooseSortParameter("newest");
 		}
 	}
 }
