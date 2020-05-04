@@ -6,6 +6,7 @@ import (
 	"github.com/go-redis/redis"
 	"github.com/pkg/errors"
 	"github.com/thoas/go-funk"
+	"user-service/core/meta"
 	"user-service/core/model"
 	"user-service/core/repo"
 	"user-service/middleware/business"
@@ -29,13 +30,13 @@ func newRedisClient(redisURL string) (*redis.Client, error) {
 }
 
 func NewRedisRepository(redisURL string) (repo.UserRepository, error) {
-	rep := &repository{}
+	repo := &repository{}
 	client, err := newRedisClient(redisURL)
 	if err != nil {
 		return nil, errors.Wrap(err, "repository.NewRedisRepository")
 	}
-	rep.client = client
-	return rep, nil
+	repo.client = client
+	return repo, nil
 }
 
 func (r *repository) generateKey(code  string) string {
@@ -93,8 +94,8 @@ func (r *repository) FetchAll() ([]*model.User, error) {
 	return users, nil
 }
 
-func (r *repository) FetchQuery(query interface{}) ([]*model.User, error) {
-	return r.FetchAll() //todo querying
+func (r *repository) FetchQuery(query meta.RequestQuery) ([]*model.User, error) {
+	return r.FetchAll() // todo querying
 }
 
 func (r *repository) Store(user *model.User) error {
@@ -138,9 +139,13 @@ func (r *repository) RemoveObj(user *model.User) error {
 	return nil
 }
 
-func (r *repository) Count(query interface{}) (int64, error) {
-	keys := r.client.Keys("user*").Val()
-	return int64(len(keys)), nil
+func (r *repository) Count(query meta.RequestQuery) (int, error) {
+	return r.CountAll()
 }
 
+
+func (r *repository) CountAll() (int, error) {
+	keys := r.client.Keys("user*").Val()
+	return len(keys), nil
+}
 

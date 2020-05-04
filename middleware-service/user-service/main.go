@@ -1,11 +1,12 @@
 package main
 
 import (
-	"fmt"
-	env "github.com/joho/godotenv"
 	"log"
 	"os"
 	"strconv"
+
+	env "github.com/joho/godotenv"
+
 	"user-service/api/rest"
 	"user-service/core/repo"
 	"user-service/middleware/business"
@@ -16,13 +17,19 @@ import (
 )
 
 func main() {
-	// loadEnv()
+	if os.Getenv("DEBUG") == "True"{
+		loadEnv()
+	}
 	repo := getRepository()
 	if repo == nil {
 		return
 	}
 	service := business.NewUserService(repo)
-	handler := rest.NewHandler(service, os.Getenv("CONTENT_TYPE"))
+	expirationDelta, err := strconv.Atoi(os.Getenv("TOKEN_EXPIRATION_DELTA")); if err != nil {
+		panic(err)
+	}
+	auth := business.NewAuthServiceJWT(service, expirationDelta)
+	handler := rest.NewHandler(service, auth, os.Getenv("CONTENT_TYPE"))
 	routes := rest.ProvideRoutes(handler)
 	srv := server.NewInstance(os.Getenv("HOST"))
 	srv.SetupRouter(routes)
@@ -34,14 +41,6 @@ func loadEnv() {
 	if err != nil {
 		log.Fatal(err)
 	}
-}
-
-func httpPort() string {
-	port := "8420"
-	if os.Getenv("PORT") != "" {
-		port = os.Getenv("PORT")
-	}
-	return fmt.Sprintf(":%s", port)
 }
 
 func getRepository() repo.UserRepository {

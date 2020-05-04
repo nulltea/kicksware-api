@@ -39,14 +39,6 @@ func loadEnv() {
 	}
 }
 
-func httpPort() string {
-	port := "8420"
-	if os.Getenv("PORT") != "" {
-		port = os.Getenv("PORT")
-	}
-	return fmt.Sprintf(":%s", port)
-}
-
 func getRepository() repo.SneakerReferenceRepository {
 	switch os.Getenv("USE_DB") {
 	case "mongo":

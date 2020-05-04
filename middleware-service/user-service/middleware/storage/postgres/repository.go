@@ -6,6 +6,7 @@ import (
 	_ "github.com/jackc/pgx/v4/stdlib"
 	"github.com/jmoiron/sqlx"
 	"github.com/pkg/errors"
+	"user-service/core/meta"
 	"user-service/core/model"
 	"user-service/core/repo"
 	"user-service/middleware/business"
@@ -92,11 +93,13 @@ func (r *repository) FetchAll() ([]*model.User, error) {
 	return users, nil
 }
 
-func (r *repository) FetchQuery(query interface{}) ([]*model.User, error) {
+func (r *repository) FetchQuery(query meta.RequestQuery) ([]*model.User, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	users := make([]*model.User, 0)
-	where := util.ToSqlWhere(query)
+	where, err := query.ToSql(); if err != nil {
+		return nil, errors.Wrap(err, "repository.User.FetchQuery")
+	}
 	cmd, args, err := sqb.Select("*").From(r.table).
 		Where(where).PlaceholderFormat(sqb.Dollar).ToSql()
 	if err != nil {
@@ -158,24 +161,36 @@ func (r *repository) Remove(code string) error {
 	return nil
 }
 
-func (r *repository) RemoveObj(user *model.User) error {
-	if err := r.Remove(user.UniqueId); err != nil {
-		return errors.Wrap(err, "repository.User.RemoveObj")
-	}
-	return nil
-}
-
-func (r *repository) Count(query interface{}) (count int64, err error) {
+func (r *repository) Count(query meta.RequestQuery) (count int, err error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	where := util.ToSqlWhere(query)
+
+	where, err := query.ToSql(); if err != nil {
+		return 0, errors.Wrap(err, "repository.User.Count")
+	}
+
 	cmd, args, err := sqb.Select("COUNT(*)").From(r.table).
 		Where(where).PlaceholderFormat(sqb.Dollar).ToSql()
 	if err != nil {
-		return 0, errors.Wrap(err, "repository.User.FetchQuery")
+		return 0, errors.Wrap(err, "repository.User.Count")
 	}
 	if err = r.db.SelectContext(ctx, &count, cmd, args); err != nil {
-		return 0, errors.Wrap(err, "repository.User.FetchQuery")
+		return 0, errors.Wrap(err, "repository.User.Count")
+	}
+	return
+}
+
+func (r *repository) CountAll() (count int, err error) {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	cmd, args, err := sqb.Select("COUNT(*)").From(r.table).
+		PlaceholderFormat(sqb.Dollar).ToSql()
+	if err != nil {
+		return 0, errors.Wrap(err, "repository.User.CountAll")
+	}
+	if err = r.db.SelectContext(ctx, &count, cmd, args); err != nil {
+		return 0, errors.Wrap(err, "repository.User.CountAll")
 	}
 	return
 }

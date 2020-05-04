@@ -2,12 +2,15 @@ package mongo
 
 import (
 	"context"
+	"time"
+
 	"github.com/pkg/errors"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
-	"time"
+
+	"user-service/core/meta"
 	"user-service/core/model"
 	"user-service/core/repo"
 	"user-service/middleware/business"
@@ -50,11 +53,11 @@ func NewMongoRepository(url, db, collection string, mongoTimeout int) (repo.User
 	return repo, nil
 }
 
-func (r *repository) FetchOne(code string) (*model.User, error) {
+func (r *repository) FetchOne(username string) (*model.User, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 	user := &model.User{}
-	filter := bson.M{"UniqueId": code}
+	filter := bson.M{"username": username}
 	err := r.collection.FindOne(ctx, filter).Decode(&user)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -65,10 +68,10 @@ func (r *repository) FetchOne(code string) (*model.User, error) {
 	return user, nil
 }
 
-func (r *repository) Fetch(codes []string) ([]*model.User, error) {
+func (r *repository) Fetch(usernames []string) ([]*model.User, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
-	filter := bson.M{"UniqueId": bson.M{"$in": codes}}
+	filter := bson.M{"username": bson.M{"$in": usernames}}
 
 	cursor, err := r.collection.Find(ctx, filter)
 	if err != nil  {
@@ -109,11 +112,11 @@ func (r *repository) FetchAll() ([]*model.User, error) {
 	return user, nil
 }
 
-func (r *repository) FetchQuery(query interface{}) ([]*model.User, error) {
+func (r *repository) FetchQuery(query meta.RequestQuery) ([]*model.User, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 
-	filter, err := util.ToBsonMap(query)
+	filter, err := query.ToBson()
 	if err != nil {
 		return nil, errors.Wrap(err, "repository.User.FetchQuery")
 	}
@@ -166,7 +169,7 @@ func (r *repository) Modify(user *model.User) error {
 func (r *repository) Replace(user *model.User) error {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
-	filter := bson.M{"UniqueId": user.UniqueId}
+	filter := bson.M{"uniqueid": user.UniqueId}
 	if _, err := r.collection.ReplaceOne(ctx, filter, user); err != nil {
 		return errors.Wrap(err, "repository.User.Replace")
 	}
@@ -183,19 +186,11 @@ func (r *repository) Remove(code string) error {
 	return nil
 }
 
-func (r *repository) RemoveObj(user *model.User) error {
-	if err := r.Remove(user.UniqueId); err != nil {
-		return errors.Wrap(err, "repository.User.RemoveObj")
-	}
-	return nil
-}
-
-func (r *repository) Count(query interface{}) (int64, error) {
+func (r *repository) Count(query meta.RequestQuery) (int, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 
-	filter, err := util.ToBsonMap(query)
-	if err != nil {
+	filter, err := query.ToBson(); if err != nil {
 		return 0, errors.Wrap(err, "repository.User.Count")
 	}
 
@@ -203,5 +198,17 @@ func (r *repository) Count(query interface{}) (int64, error) {
 	if err != nil {
 		return 0, errors.Wrap(err, "repository.User.Count")
 	}
-	return count, nil
+	return int(count), nil
+}
+
+func (r *repository) CountAll() (int, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
+	defer cancel()
+
+	filter := bson.M{}
+	count, err := r.collection.CountDocuments(ctx, filter)
+	if err != nil {
+		return 0, errors.Wrap(err, "repository.User.Count")
+	}
+	return int(count), nil
 }

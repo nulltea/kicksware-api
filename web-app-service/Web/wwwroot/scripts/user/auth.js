@@ -8,10 +8,11 @@ function loginShow() {
 	$("#google-btn-caption").text("Continue with Google");
 	$("#email-btn-caption").text("Log in with Email");
 	$("#login-footer-msg").html("Don't have an account? <a id='sing-up'>Sing Up</a>");
-	$("#sing-up").css("cursor", "pointer");
-	$("#sing-up").on("click", singUpShow);
+	$("#sing-up").css("cursor", "pointer")
+		.on("click", singUpShow);
 	$("#login-privacy").hide();
 	$("#email-btn").on("click", authLoginShow);
+	$(".auth-form").attr("action", "/Auth/Login");
 	if (!$("#loginModal").is(":visible")) {
 		$("#loginModal").modal("show");
 	}
@@ -26,13 +27,20 @@ function singUpShow() {
 	$("#google-btn-caption").text("Sign up with Google");
 	$("#email-btn-caption").text("Sign up with Email");
 	$("#login-footer-msg").html("Already have an account? <a id='login'>Log in</a>");
-	$("#login").css("cursor", "pointer");
-	$("#login").on("click", loginShow);
-	$("#email-btn").on("click", authSingUpShow);
+	$("#login").css("cursor", "pointer").on("click", loginShow);
 	$("#login-privacy").show();
-	if (!$("#loginModal").is(":visible")) {
-		$("#loginModal").modal("show");
+	$("#email-btn").on("click", authSingUpShow);
+	$(".auth-form").attr("action", "/Auth/SignUp");
+	let modal = $("#loginModal");
+	if (!modal.is(":visible")) {
+		modal.modal("show");
 	}
+	$("button[type=submit]").click(function (event) {
+		$.post($(".auth-form").attr("action"), model, function(response) {
+			window.location.href = response.redirectUrl;
+		});
+		event.preventDefault();
+	})
 }
 
 function authSingUpShow() {
@@ -40,8 +48,8 @@ function authSingUpShow() {
 	$("#auth-btn-caption").text("Sing Up");
 	$("#auth-footer-msg").hide();
 	$("#notify-footer-msg").show();
-	$("#auth").css("cursor", "pointer");
-	$("#auth").on("click", loginShow);
+	$("#auth").css("cursor", "pointer")
+		.on("click", loginShow);
 	$("#auth-privacy").show();
 	$("#login-content").hide();
 	$("#auth-content").show();

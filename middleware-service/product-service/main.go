@@ -18,7 +18,9 @@ import (
 )
 
 func main() {
-	// loadEnv()
+	if os.Getenv("DEBUG") == "True"{
+		loadEnv()
+	}
 	repo := getRepository()
 	if repo == nil {
 		return
@@ -36,14 +38,6 @@ func loadEnv() {
 	if err != nil {
 		log.Fatal(err)
 	}
-}
-
-func httpPort() string {
-	port := "8420"
-	if os.Getenv("PORT") != "" {
-		port = os.Getenv("PORT")
-	}
-	return fmt.Sprintf(":%s", port)
 }
 
 func getRepository() repo.SneakerProductRepository {

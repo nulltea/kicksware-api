@@ -26,7 +26,7 @@ var (
 )
 
 type referenceService struct {
-	sneakerReferenceRepo repo.SneakerReferenceRepository
+	repo repo.SneakerReferenceRepository
 }
 
 func NewSneakerReferenceService(sneakerReferenceRepo repo.SneakerReferenceRepository) service.SneakerReferenceService {
@@ -36,20 +36,20 @@ func NewSneakerReferenceService(sneakerReferenceRepo repo.SneakerReferenceReposi
 }
 
 func (s *referenceService) FetchOne(code string) (*model.SneakerReference, error) {
-	return s.sneakerReferenceRepo.FetchOne(code)
+	return s.repo.FetchOne(code)
 }
 
 func (s *referenceService) Fetch(codes []string, params meta.RequestParams) ([]*model.SneakerReference, error) {
-	return s.sneakerReferenceRepo.Fetch(codes, params)
+	return s.repo.Fetch(codes, params)
 }
 
 func (s *referenceService) FetchAll(params meta.RequestParams) ([]*model.SneakerReference, error) {
-	return s.sneakerReferenceRepo.FetchAll(params)
+	return s.repo.FetchAll(params)
 }
 
 func (s *referenceService) FetchQuery(query meta.RequestQuery, params meta.RequestParams) (refs []*model.SneakerReference, err error) {
 	foreignKeys, is := s.handleForeignSubquery(query)
-	refs, err = s.sneakerReferenceRepo.FetchQuery(query, params)
+	refs, err = s.repo.FetchQuery(query, params)
 	if err == nil && is {
 		refs = funk.Filter(refs, func(ref *model.SneakerReference) bool {
 			return funk.Contains(foreignKeys, ref.UniqueId)
@@ -60,30 +60,30 @@ func (s *referenceService) FetchQuery(query meta.RequestQuery, params meta.Reque
 
 func (s *referenceService) StoreOne(sneakerReference *model.SneakerReference) error {
 	if err := validate.Validate(sneakerReference); err != nil {
-		return errors.Wrap(ErrReferenceNotValid, "service.sneakerReferenceRepo.Store")
+		return errors.Wrap(ErrReferenceNotValid, "service.repo.Store")
 	}
 	sneakerReference.UniqueId = xid.New().String()
-	return s.sneakerReferenceRepo.StoreOne(sneakerReference)
+	return s.repo.StoreOne(sneakerReference)
 }
 
 func (s *referenceService) Store(sneakerReferences []*model.SneakerReference) error {
 	for _, sneakerReference := range sneakerReferences {
 		sneakerReference.UniqueId = xid.New().String()
 	}
-	return s.sneakerReferenceRepo.Store(sneakerReferences)
+	return s.repo.Store(sneakerReferences)
 }
 
 func (s *referenceService) Modify(sneakerReference *model.SneakerReference) error {
-	return s.sneakerReferenceRepo.Modify(sneakerReference)
+	return s.repo.Modify(sneakerReference)
 }
 
 func (s *referenceService) CountAll() (int, error) {
-	return s.sneakerReferenceRepo.CountAll()
+	return s.repo.CountAll()
 }
 
 func (s *referenceService) Count(query meta.RequestQuery, params meta.RequestParams) (int, error) {
 	foreignKeys, is := s.handleForeignSubquery(query); if is {
-		refs, err := s.sneakerReferenceRepo.FetchQuery(query, params)
+		refs, err := s.repo.FetchQuery(query, params)
 		if err == nil && is {
 			refs = funk.Filter(refs, func(ref *model.SneakerReference) bool {
 				return funk.Contains(foreignKeys, ref.UniqueId)
@@ -91,7 +91,7 @@ func (s *referenceService) Count(query meta.RequestQuery, params meta.RequestPar
 		}
 		return len(refs), nil
 	}
-	return s.sneakerReferenceRepo.Count(query, params)
+	return s.repo.Count(query, params)
 }
 
 func (s *referenceService) handleForeignSubquery(query map[string]interface{}) (foreignKeys []string, is bool) {
