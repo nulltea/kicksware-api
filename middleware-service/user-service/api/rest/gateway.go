@@ -8,6 +8,7 @@ import (
 func ProvideRoutes(rest RestfulHandler) *chi.Mux {
 	router := chi.NewRouter()
 	router.Use(
+		rest.Authenticator,
 		middleware.Logger,
 		middleware.Recoverer,
 		middleware.RequestID,

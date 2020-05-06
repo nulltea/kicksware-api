@@ -8,19 +8,18 @@ using Infrastructure.Data;
 using Infrastructure.Gateway.REST.Client;
 using Infrastructure.Usecase;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
-using Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SmartBreadcrumbs.Extensions;
+using Web.Data;
 using Web.Handlers.Filter;
-using Web.Models;
 
-namespace web_app_service
+namespace Web
 {
 	public class Startup
 	{

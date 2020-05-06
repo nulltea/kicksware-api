@@ -8,6 +8,7 @@ require (
 	github.com/fatih/structs v1.1.0
 	github.com/go-chi/chi v4.0.3+incompatible
 	github.com/go-redis/redis v6.15.7+incompatible
+	github.com/google/wire v0.4.0
 	github.com/jackc/pgx/v4 v4.5.0
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/joho/godotenv v1.3.0
@@ -20,4 +21,5 @@ require (
 	go.mongodb.org/mongo-driver v1.3.1
 	google.golang.org/appengine v1.6.5 // indirect
 	gopkg.in/dealancer/validate.v2 v2.1.0
+	gopkg.in/yaml.v2 v2.2.4
 )

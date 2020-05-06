@@ -1,0 +1,25 @@
+commonConfig:
+  host: localhost:8080
+  hostname: kicksware.com
+  usedDB: mongo
+  contentType: application/json
+authConfig:
+  tokenExpirationDelta: 72
+  privateKeyPath: keys/private.key
+  publicKeyPath: keys/public.key.pub
+mongoConfig:
+  URL: mongodb://localhost:27017
+  database: sneakerResaleDB
+  collection: users
+  login: admin
+  password: admin
+  timeout: 30
+redisConfig:
+  URL: redis://redis:6379
+postgresConfig:
+  URL: postgres://postgres:1879@postgres:5432/sneakerResaleDB
+  database: sneakerResaleDB
+  collection: Users
+  login: postgres
+  password: 1879
+  timeout: 30

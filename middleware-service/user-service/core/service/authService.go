@@ -1,6 +1,7 @@
 package service
 
 import (
+	"crypto/rsa"
 	"errors"
 
 	"user-service/core/meta"
@@ -17,5 +18,6 @@ type AuthService interface {
 	SingUp(user *model.User) (*meta.AuthToken, error)
 	Login(user *model.User) (*meta.AuthToken, error)
 	GenerateToken(user *model.User) (*meta.AuthToken, error)
+	PublicKey() *rsa.PublicKey
 	Logout(token string) error
 }

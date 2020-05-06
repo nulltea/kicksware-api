@@ -12,12 +12,13 @@ import (
 	"user-service/core/meta"
 	"user-service/core/model"
 	"user-service/core/service"
-	"user-service/middleware/business"
-	"user-service/middleware/serializer/json"
-	"user-service/middleware/serializer/msg"
+	"user-service/usecase/business"
+	"user-service/usecase/serializer/json"
+	"user-service/usecase/serializer/msg"
 )
 
 type RestfulHandler interface {
+	// Endpoint handlers:
 	GetOne(http.ResponseWriter, *http.Request)
 	Get(http.ResponseWriter, *http.Request)
 	Post(http.ResponseWriter, *http.Request)
@@ -28,6 +29,8 @@ type RestfulHandler interface {
 	Login(http.ResponseWriter, *http.Request)
 	RefreshToken(http.ResponseWriter, *http.Request)
 	Logout(http.ResponseWriter, *http.Request)
+	// Middleware:
+	Authenticator(next http.Handler) http.Handler
 }
 
 type handler struct {

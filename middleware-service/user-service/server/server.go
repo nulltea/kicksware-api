@@ -3,30 +3,33 @@ package server
 import (
 	"context"
 	"fmt"
-	"github.com/go-chi/chi"
-	"github.com/pkg/errors"
 	"net/http"
 	"os"
 	"os/signal"
 	"time"
+
+	"github.com/go-chi/chi"
+	"github.com/pkg/errors"
+
+	"user-service/core/service"
 )
 
 type instance struct {
-	Server *http.Server
+	Server  *http.Server
 	Address string
 }
 
-func NewInstance(addr string) *instance {
+func NewInstance(addr string) service.Server {
 	return &instance{
 		Server: &http.Server{
-			Addr:      addr,
+			Addr: addr,
 		},
 		Address: addr,
 	}
 }
 
-func (s *instance) SetupRouter(router chi.Router) {
-	s.Server.Handler = router;
+func (s *instance) SetupRoutes(router chi.Router) {
+	s.Server.Handler = router
 }
 
 func (s *instance) Start() {

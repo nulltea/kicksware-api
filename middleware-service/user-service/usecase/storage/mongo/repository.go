@@ -13,7 +13,7 @@ import (
 	"user-service/core/meta"
 	"user-service/core/model"
 	"user-service/core/repo"
-	"user-service/middleware/business"
+	"user-service/usecase/business"
 	"user-service/util"
 )
 
