@@ -1,4 +1,4 @@
-module service-common
+module github.com/timoth-y/sneaker-resale-platform/middleware-serviceservice-common
 
 go 1.14
 
