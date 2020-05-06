@@ -11,7 +11,7 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/pkg/errors"
 
-	"service-common/core"
+	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/core"
 )
 
 type instance struct {
@@ -19,7 +19,7 @@ type instance struct {
 	Address string
 }
 
-func NewInstance(addr string) service.Server {
+func NewInstance(addr string) core.Server {
 	return &instance{
 		Server: &http.Server{
 			Addr:      addr,
