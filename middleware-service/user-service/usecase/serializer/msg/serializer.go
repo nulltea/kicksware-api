@@ -22,6 +22,13 @@ func (r *serializer) Decode(input []byte) (*model.User, error) {
 	return user, nil
 }
 
+func (r *serializer) DecodeRange(input []byte) (users []*model.User, err error) {
+	if err := msgpack.Unmarshal(input, &users); err != nil {
+		return nil, errors.Wrap(err, "serializer.SneakerReference.DecodeRange")
+	}
+	return
+}
+
 func (r *serializer) DecodeMap(input []byte) (map[string]interface{}, error) {
 	queryMap := make(map[string]interface{})
 	if err := msgpack.Unmarshal(input, &queryMap); err != nil {

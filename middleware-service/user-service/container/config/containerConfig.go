@@ -1,7 +1,8 @@
 package config
 
 import (
-	"user-service/container"
+	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/container"
+
 	"user-service/container/factory"
 	"user-service/env"
 )

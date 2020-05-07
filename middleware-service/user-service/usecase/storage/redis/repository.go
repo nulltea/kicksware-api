@@ -3,17 +3,30 @@ package redis
 import (
 	"encoding/json"
 	"fmt"
+
 	"github.com/go-redis/redis"
 	"github.com/pkg/errors"
 	"github.com/thoas/go-funk"
+
 	"user-service/core/meta"
 	"user-service/core/model"
 	"user-service/core/repo"
+	"user-service/env"
 	"user-service/usecase/business"
 )
 
 type repository struct {
 	client *redis.Client
+}
+
+func NewRedisRepository(config env.DataStoreConfig) (repo.UserRepository, error) {
+	rep := &repository{}
+	client, err := newRedisClient(config.URL)
+	if err != nil {
+		return nil, errors.Wrap(err, "repository.NewRedisRepository")
+	}
+	rep.client = client
+	return rep, nil
 }
 
 func newRedisClient(redisURL string) (*redis.Client, error) {
@@ -27,16 +40,6 @@ func newRedisClient(redisURL string) (*redis.Client, error) {
 		return nil, err
 	}
 	return client, nil
-}
-
-func NewRedisRepository(redisURL string) (repo.UserRepository, error) {
-	repo := &repository{}
-	client, err := newRedisClient(redisURL)
-	if err != nil {
-		return nil, errors.Wrap(err, "repository.NewRedisRepository")
-	}
-	repo.client = client
-	return repo, nil
 }
 
 func (r *repository) generateKey(code  string) string {
@@ -59,7 +62,7 @@ func (r *repository) FetchOne(code string) (*model.User, error) {
 	return user, nil
 }
 
-func (r *repository) Fetch(codes []string) ([]*model.User, error) {
+func (r *repository) Fetch(codes []string, params meta.RequestParams) ([]*model.User, error) {
 	keys := funk.Map(codes, r.generateKey).([]string)
 	data, err := r.client.MGet(keys...).Result()
 	if err != nil {
@@ -75,7 +78,7 @@ func (r *repository) Fetch(codes []string) ([]*model.User, error) {
 	return users, nil
 }
 
-func (r *repository) FetchAll() ([]*model.User, error) {
+func (r *repository) FetchAll(params meta.RequestParams) ([]*model.User, error) {
 	keys := r.client.Keys("user*").Val()
 	if len(keys) == 0 {
 		return nil, errors.Wrap(business.ErrUserNotFound, "repository.User.FetchAll")
@@ -94,8 +97,8 @@ func (r *repository) FetchAll() ([]*model.User, error) {
 	return users, nil
 }
 
-func (r *repository) FetchQuery(query meta.RequestQuery) ([]*model.User, error) {
-	return r.FetchAll() // todo querying
+func (r *repository) FetchQuery(query meta.RequestQuery, params meta.RequestParams) ([]*model.User, error) {
+	return r.FetchAll(params) // todo querying
 }
 
 func (r *repository) Store(user *model.User) error {
@@ -139,7 +142,7 @@ func (r *repository) RemoveObj(user *model.User) error {
 	return nil
 }
 
-func (r *repository) Count(query meta.RequestQuery) (int, error) {
+func (r *repository) Count(query meta.RequestQuery, params meta.RequestParams) (int, error) {
 	return r.CountAll()
 }
 

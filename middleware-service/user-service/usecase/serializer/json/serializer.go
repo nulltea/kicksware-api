@@ -2,7 +2,9 @@ package json
 
 import (
 	"encoding/json"
+
 	"github.com/pkg/errors"
+
 	"user-service/core/model"
 	"user-service/core/service"
 )
@@ -13,12 +15,18 @@ func NewSerializer() service.UserSerializer {
 	return &serializer{}
 }
 
-func (r *serializer) Decode(input []byte) (*model.User, error) {
-	user := &model.User{}
-	if err := json.Unmarshal(input, user); err != nil {
+func (r *serializer) Decode(input []byte) (user *model.User, err error) {
+	if err = json.Unmarshal(input, user); err != nil {
 		return nil, errors.Wrap(err, "serializer.User.Decode")
 	}
-	return user, nil
+	return
+}
+
+func (r *serializer) DecodeRange(input []byte) (users []*model.User, err error) {
+	if err := json.Unmarshal(input, &users); err != nil {
+		return nil, errors.Wrap(err, "serializer.SneakerReference.DecodeRange")
+	}
+	return
 }
 
 func (r *serializer) DecodeMap(input []byte) (map[string]interface{}, error) {

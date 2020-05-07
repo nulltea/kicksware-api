@@ -15,10 +15,11 @@ type ServiceConfig struct {
 }
 
 type CommonConfig struct {
-	Host        string `yaml:"host"`
-	HostName    string `yaml:"hostname"`
-	UsedDB      string `yaml:"usedDB"`
-	ContentType string `yaml:"contentType"`
+	Host               string `yaml:"host"`
+	HostName           string `yaml:"hostname"`
+	UsedDB             string `yaml:"usedDB"`
+	ContentType        string `yaml:"contentType"`
+	InnerServiceFormat string `yaml:"innerServiceFormat"`
 }
 
 type DataStoreConfig struct {

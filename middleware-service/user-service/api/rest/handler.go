@@ -12,6 +12,7 @@ import (
 	"user-service/core/meta"
 	"user-service/core/model"
 	"user-service/core/service"
+	"user-service/env"
 	"user-service/usecase/business"
 	"user-service/usecase/serializer/json"
 	"user-service/usecase/serializer/msg"
@@ -34,22 +35,22 @@ type RestfulHandler interface {
 }
 
 type handler struct {
-	Service service.UserService
-	Auth service.AuthService
-	ContentType string
+	service     service.UserService
+	auth        service.AuthService
+	contentType string
 }
 
-func NewHandler(service service.UserService, auth service.AuthService, contentType string) RestfulHandler {
+func NewHandler(service service.UserService, auth service.AuthService, config env.CommonConfig) RestfulHandler {
 	return &handler{
-		Service:     service,
-		Auth:        auth,
-		ContentType: contentType,
+		service,
+		auth,
+		config.ContentType,
 	}
 }
 
 func (h *handler) GetOne(w http.ResponseWriter, r *http.Request) {
 	username := chi.URLParam(r,"username")
-	user, err := h.Service.FetchOne(username)
+	user, err := h.service.FetchOne(username)
 	if err != nil {
 		if errors.Cause(err) == business.ErrUserNotFound {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
@@ -64,6 +65,7 @@ func (h *handler) GetOne(w http.ResponseWriter, r *http.Request) {
 func (h *handler) Get(w http.ResponseWriter, r *http.Request) {
 	var users []*model.User
 	var err error
+	params := NewRequestParams(r)
 
 	if r.Method == http.MethodPost {
 		query, err := h.getRequestQuery(r)
@@ -71,12 +73,12 @@ func (h *handler) Get(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
-		users, err = h.Service.FetchQuery(query)
+		users, err = h.service.FetchQuery(query, params)
 	} else if r.Method == http.MethodGet {
 		if codes := r.URL.Query()["userId"]; codes != nil && len(codes) != 0 {
-			users, err = h.Service.Fetch(codes)
+			users, err = h.service.Fetch(codes, params)
 		} else {
-			users, err = h.Service.FetchAll()
+			users, err = h.service.FetchAll(params)
 		}
 	}
 
@@ -96,7 +98,7 @@ func (h *handler) Post(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	err = h.Service.Register(user)
+	err = h.service.Register(user)
 	if err != nil {
 		if errors.Cause(err) == business.ErrUserInvalid {
 			http.Error(w, err.Error(), http.StatusBadRequest)
@@ -113,7 +115,7 @@ func (h *handler) Patch(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	err = h.Service.Modify(user)
+	err = h.service.Modify(user)
 	if err != nil {
 		if errors.Cause(err) == business.ErrUserInvalid {
 			http.Error(w, err.Error(), http.StatusBadRequest)
@@ -130,7 +132,7 @@ func (h *handler) Put(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	err = h.Service.Replace(user)
+	err = h.service.Replace(user)
 	if err != nil {
 		if errors.Cause(err) == business.ErrUserInvalid {
 			http.Error(w, err.Error(), http.StatusBadRequest)
@@ -144,7 +146,7 @@ func (h *handler) Put(w http.ResponseWriter, r *http.Request) {
 
 func (h *handler) Delete(w http.ResponseWriter, r *http.Request) {
 	code := chi.URLParam(r,"sneakerId")
-	err := h.Service.Remove(code)
+	err := h.service.Remove(code)
 	if err != nil {
 		if errors.Cause(err) == business.ErrUserNotFound {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
@@ -161,7 +163,7 @@ func (h *handler) SingUp(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	token, err := h.Auth.SingUp(user); if err != nil {
+	token, err := h.auth.SingUp(user); if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -174,7 +176,7 @@ func (h *handler) Login(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	token, err := h.Auth.Login(user); if err != nil {
+	token, err := h.auth.Login(user); if err != nil {
 		if errors.Cause(err) == service.ErrPasswordInvalid ||
 			errors.Cause(err) == service.ErrNotConfirmed {
 			http.Error(w, err.Error(), http.StatusUnauthorized)
@@ -192,7 +194,7 @@ func (h *handler) RefreshToken(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	token, err := h.Auth.GenerateToken(user); if err != nil {
+	token, err := h.auth.GenerateToken(user); if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -202,7 +204,7 @@ func (h *handler) RefreshToken(w http.ResponseWriter, r *http.Request) {
 
 func (h *handler) Logout(w http.ResponseWriter, r *http.Request) {
 	token := chi.URLParam(r,"token")
-	if err := h.Auth.Logout(token); err != nil {
+	if err := h.auth.Logout(token); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -211,10 +213,10 @@ func (h *handler) Logout(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *handler) setupResponse(w http.ResponseWriter, body interface{}, statusCode int) {
-	w.Header().Set("Content-Type", h.ContentType)
+	w.Header().Set("Content-Type", h.contentType)
 	w.WriteHeader(statusCode)
 	if body != nil {
-		raw, err := h.serializer(h.ContentType).Encode(body)
+		raw, err := h.serializer(h.contentType).Encode(body)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return

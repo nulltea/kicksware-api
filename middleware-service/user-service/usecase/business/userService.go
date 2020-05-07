@@ -2,10 +2,12 @@ package business
 
 import (
 	"errors"
+	"time"
+
 	errs "github.com/pkg/errors"
 	"github.com/rs/xid"
 	"gopkg.in/dealancer/validate.v2"
-	"time"
+
 	"user-service/core/meta"
 	"user-service/core/model"
 	"user-service/core/repo"
@@ -31,16 +33,16 @@ func (s *UserService) FetchOne(code string) (*model.User, error) {
 	return s.repo.FetchOne(code)
 }
 
-func (s *UserService) Fetch(codes []string) ([]*model.User, error) {
-	return s.repo.Fetch(codes)
+func (s *UserService) Fetch(codes []string, params meta.RequestParams) ([]*model.User, error) {
+	return s.repo.Fetch(codes, params)
 }
 
-func (s *UserService) FetchAll() ([]*model.User, error) {
-	return s.repo.FetchAll()
+func (s *UserService) FetchAll(params meta.RequestParams) ([]*model.User, error) {
+	return s.repo.FetchAll(params)
 }
 
-func (s *UserService) FetchQuery(query meta.RequestQuery) ([]*model.User, error) {
-	return s.repo.FetchQuery(query)
+func (s *UserService) FetchQuery(query meta.RequestQuery, params meta.RequestParams) ([]*model.User, error) {
+	return s.repo.FetchQuery(query, params)
 }
 
 func (s *UserService) Modify(user *model.User) error {
@@ -55,8 +57,8 @@ func (s *UserService) Remove(code string) error {
 	return s.repo.Remove(code)
 }
 
-func (s *UserService) Count(query meta.RequestQuery) (int, error) {
-	return s.repo.Count(query)
+func (s *UserService) Count(query meta.RequestQuery, params meta.RequestParams) (int, error) {
+	return s.repo.Count(query, params)
 }
 
 func (s *UserService) CountAll() (int, error) {

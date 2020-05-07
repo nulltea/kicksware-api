@@ -12,6 +12,7 @@ func ProvideRoutes(rest RestfulHandler) *chi.Mux {
 		middleware.Recoverer,
 		middleware.RequestID,
 		middleware.RealIP,
+		rest.Authenticator,
 	)
 	router.Mount("/api/references/sneakers", restRoutes(rest))
 	return router

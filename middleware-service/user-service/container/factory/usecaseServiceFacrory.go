@@ -14,8 +14,6 @@ func ProvideDataService(repository repo.UserRepository) service.UserService {
 func ProvideAuthService(service service.UserService, config env.ServiceConfig) service.AuthService {
 	return business.NewAuthServiceJWT(
 		service,
-		config.Auth.TokenExpirationDelta,
-		config.Auth.PrivateKeyPath,
-		config.Auth.PublicKeyPath,
+		config.Auth,
 	)
 }

@@ -13,6 +13,7 @@ import (
 	"user-service/core/meta"
 	"user-service/core/model"
 	"user-service/core/service"
+	"user-service/env"
 )
 
 type authService struct {
@@ -22,12 +23,12 @@ type authService struct {
 	publicKey *rsa.PublicKey
 }
 
-func NewAuthServiceJWT(userService service.UserService, expirationDelta int, privateKey, publicKey string) service.AuthService {
+func NewAuthServiceJWT(userService service.UserService, authConfig env.AuthConfig) service.AuthService {
 	return &authService{
 		userService,
-		expirationDelta,
-		getPrivateKey(privateKey),
-		getPublicKey(publicKey),
+		authConfig.TokenExpirationDelta,
+		getPrivateKey(authConfig.PrivateKeyPath),
+		getPublicKey(authConfig.PublicKeyPath),
 	}
 }
 

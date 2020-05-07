@@ -4,48 +4,49 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"reflect"
-	"strconv"
 
-	"github.com/fatih/structs"
 	"github.com/go-chi/chi"
 	"github.com/pkg/errors"
 
-	"product-service/api/common"
+	"product-service/core/meta"
 	"product-service/core/model"
 	"product-service/core/service"
-	"product-service/middleware/business"
-	"product-service/middleware/serializer/json"
-	"product-service/middleware/serializer/msg"
+	"product-service/env"
+	"product-service/usecase/business"
+	"product-service/usecase/serializer/json"
+	"product-service/usecase/serializer/msg"
 )
 
 type RestfulHandler interface {
+	// Endpoint handlers:
 	GetOne(http.ResponseWriter, *http.Request)
 	Get(http.ResponseWriter, *http.Request)
-	GetAll(http.ResponseWriter, *http.Request)
-	PostQuery(http.ResponseWriter, *http.Request)
 	Post(http.ResponseWriter, *http.Request)
 	PutImages(http.ResponseWriter, *http.Request)
 	Patch(http.ResponseWriter, *http.Request)
 	Put(http.ResponseWriter, *http.Request)
 	Delete(http.ResponseWriter, *http.Request)
+	// Middleware:
+	Authenticator(next http.Handler) http.Handler
 }
 
 type handler struct {
-	Service service.SneakerProductService
-	ContentType string
+	service     service.SneakerProductService
+	auth        service.AuthService
+	contentType string
 }
 
-func NewHandler(service service.SneakerProductService, contentType string) RestfulHandler {
+func NewHandler(service service.SneakerProductService, auth service.AuthService, config env.CommonConfig) RestfulHandler {
 	return &handler{
-		Service:     service,
-		ContentType: contentType,
+		service,
+		auth,
+		config.ContentType,
 	}
 }
 
 func (h *handler) GetOne(w http.ResponseWriter, r *http.Request) {
 	code := chi.URLParam(r,"sneakerId")
-	sneakerProduct, err := h.Service.FetchOne(code)
+	sneakerProduct, err := h.service.FetchOne(code)
 	if err != nil {
 		if errors.Cause(err) == business.ErrProductNotFound {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
@@ -58,8 +59,25 @@ func (h *handler) GetOne(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *handler) Get(w http.ResponseWriter, r *http.Request) {
-	codes := r.URL.Query()["sneakerId"]
-	sneakerProducts, err := h.Service.Fetch(codes)
+	var sneakerProducts []*model.SneakerProduct
+	var err error
+	params := NewRequestParams(r)
+
+	if r.Method == http.MethodPost {
+		query, err := h.getRequestQuery(r); if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		sneakerProducts, err = h.service.FetchQuery(query, params)
+	} else if r.Method == http.MethodGet {
+		codes := r.URL.Query()["sneakerId"]
+		if codes != nil && len(codes) > 0 {
+			sneakerProducts, err = h.service.Fetch(codes, params)
+		} else {
+			sneakerProducts, err = h.service.FetchAll(params)
+		}
+	}
+
 	if err != nil {
 		if errors.Cause(err) == business.ErrProductNotFound {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
@@ -71,48 +89,13 @@ func (h *handler) Get(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, sneakerProducts, http.StatusOK)
 }
 
-func (h *handler) GetAll(w http.ResponseWriter, r *http.Request) {
-	sneakerProducts, err := h.Service.FetchAll()
-	params := &common.RequestParams{}
-	if err != nil {
-		if errors.Cause(err) == business.ErrProductNotFound {
-			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
-			return
-		}
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	params.AssignParams(r)
-	h.setupResponse(w, params.ApplyParams(sneakerProducts), http.StatusOK)
-}
-
-func (h *handler) PostQuery(w http.ResponseWriter, r *http.Request) {
-	query, err := h.getRequestQueryBody(r)
-	params := &common.RequestParams{}
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusNotFound)
-		return
-	}
-	sneakerProducts, err := h.Service.FetchQuery(query)
-	if err != nil {
-		if errors.Cause(err) == business.ErrProductNotFound {
-			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
-			return
-		}
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	params.AssignParams(r)
-	h.setupResponse(w, params.ApplyParams(sneakerProducts), http.StatusOK)
-}
-
 func (h *handler) Post(w http.ResponseWriter, r *http.Request) {
 	sneakerProduct, err := h.getRequestBody(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	err = h.Service.Store(sneakerProduct)
+	err = h.service.Store(sneakerProduct)
 	if err != nil {
 		if errors.Cause(err) == business.ErrProductInvalid {
 			http.Error(w, err.Error(), http.StatusBadRequest)
@@ -131,13 +114,13 @@ func (h *handler) PutImages(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	code := chi.URLParam(r,"sneakerId")
-	sneakerProduct, err := h.Service.FetchOne(code)
+	sneakerProduct, err := h.service.FetchOne(code)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 	sneakerProduct.Images = files
-	if err = h.Service.Modify(sneakerProduct); err != nil {
+	if err = h.service.Modify(sneakerProduct); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
@@ -151,7 +134,7 @@ func (h *handler) Patch(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	err = h.Service.Modify(sneakerProduct)
+	err = h.service.Modify(sneakerProduct)
 	if err != nil {
 		if errors.Cause(err) == business.ErrProductInvalid {
 			http.Error(w, err.Error(), http.StatusBadRequest)
@@ -169,7 +152,7 @@ func (h *handler) Put(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	err = h.Service.Replace(sneakerProduct)
+	err = h.service.Replace(sneakerProduct)
 	if err != nil {
 		if errors.Cause(err) == business.ErrProductInvalid {
 			http.Error(w, err.Error(), http.StatusBadRequest)
@@ -183,7 +166,7 @@ func (h *handler) Put(w http.ResponseWriter, r *http.Request) {
 
 func (h *handler) Delete(w http.ResponseWriter, r *http.Request) {
 	code := chi.URLParam(r,"sneakerId")
-	err := h.Service.Remove(code)
+	err := h.service.Remove(code)
 	if err != nil {
 		if errors.Cause(err) == business.ErrProductNotFound {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
@@ -196,10 +179,10 @@ func (h *handler) Delete(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *handler) setupResponse(w http.ResponseWriter, body interface{}, statusCode int) {
-	w.Header().Set("Content-Type", h.ContentType)
+	w.Header().Set("Content-Type", h.contentType)
 	w.WriteHeader(statusCode)
 	if body != nil {
-		raw, err := h.serializer(h.ContentType).Encode(body)
+		raw, err := h.serializer(h.contentType).Encode(body)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -258,31 +241,17 @@ func (h *handler) getRequestQueryBody(r *http.Request) (map[string]interface{}, 
 	return body, nil
 }
 
-func (h *handler) getRequestParams(r *http.Request) (requestParams common.RequestParams) {
-	query := r.URL.Query();
-	properties := structs.Names(requestParams)
-	prmType := reflect.TypeOf(requestParams);
-	for _, prop := range properties {
-		value := query.Get(prop)
-		paramField := reflect.ValueOf(&requestParams).Elem().FieldByName(prop);
-		field, _ := prmType.FieldByName(prop)
-		switch field.Type.Kind().String() {
-		case "string":
-			paramField.SetString(value);
-		case "int":
-		case "float":
-			if num, err := strconv.ParseInt(value, 10, 32); err != nil {
-				paramField.SetInt(num);
-			}
-		case "bool":
-			if sign, err := strconv.ParseBool(value); err != nil {
-				paramField.SetBool(sign);
-			}
-		default:
-			paramField.SetString(value);
-		}
+func (h *handler) getRequestQuery(r *http.Request) (meta.RequestQuery, error) {
+	contentType := r.Header.Get("Content-Type")
+	requestBody, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		return nil, err
 	}
-	return
+	body, err := h.serializer(contentType).DecodeMap(requestBody)
+	if err != nil {
+		return nil, err
+	}
+	return body, nil
 }
 
 func (h *handler) serializer(contentType string) service.SneakerProductSerializer {

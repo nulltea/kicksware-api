@@ -2,13 +2,13 @@ package factory
 
 import (
 	"github.com/go-chi/chi"
+	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/core"
+	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/server"
 
-	"user-service/core/service"
 	"user-service/env"
-	"user-service/server"
 )
 
-func ProvideServer(config env.ServiceConfig, router chi.Router) service.Server {
+func ProvideServer(config env.ServiceConfig, router chi.Router) core.Server {
 	srv := server.NewInstance(config.Common.Host)
 	srv.SetupRoutes(router)
 	return srv

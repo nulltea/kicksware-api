@@ -7,40 +7,46 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/pkg/errors"
+	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/util"
 
 	"reference-service/core/meta"
 	"reference-service/core/model"
 	"reference-service/core/service"
-	"reference-service/middleware/business"
-	"reference-service/middleware/serializer/json"
-	"reference-service/middleware/serializer/msg"
-	"reference-service/util"
+	"reference-service/env"
+	"reference-service/usecase/business"
+	"reference-service/usecase/serializer/json"
+	"reference-service/usecase/serializer/msg"
 )
 
 type RestfulHandler interface {
+	// Endpoint handlers:
 	GetOne(http.ResponseWriter, *http.Request)
 	Get(http.ResponseWriter, *http.Request)
 	PostOne(http.ResponseWriter, *http.Request)
 	Post(http.ResponseWriter, *http.Request)
 	Patch(http.ResponseWriter, *http.Request)
 	Count(http.ResponseWriter, *http.Request)
+	// Middleware:
+	Authenticator(next http.Handler) http.Handler
 }
 
 type handler struct {
-	Service service.SneakerReferenceService
-	ContentType string
+	service     service.SneakerReferenceService
+	auth        service.AuthService
+	contentType string
 }
 
-func NewHandler(service service.SneakerReferenceService, contentType string) RestfulHandler {
+func NewHandler(service service.SneakerReferenceService, auth service.AuthService, config env.CommonConfig) RestfulHandler {
 	return &handler{
-		Service:     service,
-		ContentType: contentType,
+		service,
+		auth,
+		config.ContentType,
 	}
 }
 
 func (h *handler) GetOne(w http.ResponseWriter, r *http.Request) {
 	code := chi.URLParam(r,"referenceId")
-	sneakerReference, err := h.Service.FetchOne(code)
+	sneakerReference, err := h.service.FetchOne(code)
 	if err != nil {
 		if errors.Cause(err) == business.ErrReferenceNotFound {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
@@ -58,18 +64,17 @@ func (h *handler) Get(w http.ResponseWriter, r *http.Request) {
 	params := NewRequestParams(r)
 
 	if r.Method == http.MethodPost {
-		query, err := h.getRequestQuery(r)
-		if err != nil {
+		query, err := h.getRequestQuery(r); if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
-		sneakerReferences, err = h.Service.FetchQuery(query, params)
+		sneakerReferences, err = h.service.FetchQuery(query, params)
 	} else if r.Method == http.MethodGet {
 		codes := r.URL.Query()["referenceId"]
 		if codes != nil && len(codes) > 0 {
-			sneakerReferences, err = h.Service.Fetch(codes, params)
+			sneakerReferences, err = h.service.Fetch(codes, params)
 		} else {
-			sneakerReferences, err = h.Service.FetchAll(params)
+			sneakerReferences, err = h.service.FetchAll(params)
 		}
 	}
 
@@ -90,7 +95,7 @@ func (h *handler) PostOne(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	err = h.Service.StoreOne(sneakerReference)
+	err = h.service.StoreOne(sneakerReference)
 	if err != nil {
 		if errors.Cause(err) == business.ErrReferenceNotValid {
 			http.Error(w, err.Error(), http.StatusBadRequest)
@@ -108,7 +113,7 @@ func (h *handler) Post(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	err = h.Service.Store(sneakerReference)
+	err = h.service.Store(sneakerReference)
 	if err != nil {
 		if errors.Cause(err) == business.ErrReferenceNotValid {
 			http.Error(w, err.Error(), http.StatusBadRequest)
@@ -127,7 +132,7 @@ func (h *handler) Patch(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	err = h.Service.Modify(sneakerReference)
+	err = h.service.Modify(sneakerReference)
 	if err != nil {
 		if errors.Cause(err) == business.ErrReferenceNotValid {
 			http.Error(w, err.Error(), http.StatusBadRequest)
@@ -150,13 +155,13 @@ func (h *handler) Count(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
-		count, err = h.Service.Count(query, params)
+		count, err = h.service.Count(query, params)
 	} else if r.Method == http.MethodGet {
 		query := r.URL.Query()
 		if query != nil && len(query) > 0 {
-			count, err = h.Service.Count(util.ToQueryMap(query), params)
+			count, err = h.service.Count(util.ToQueryMap(query), params)
 		} else {
-			count, err = h.Service.CountAll()
+			count, err = h.service.CountAll()
 		}
 	}
 
@@ -172,10 +177,10 @@ func (h *handler) Count(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *handler) setupResponse(w http.ResponseWriter, body interface{}, statusCode int) {
-	w.Header().Set("Content-Type", h.ContentType)
+	w.Header().Set("Content-Type", h.contentType)
 	w.WriteHeader(statusCode)
 	if body != nil {
-		raw, err := h.serializer(h.ContentType).Encode(body)
+		raw, err := h.serializer(h.contentType).Encode(body)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -205,7 +210,7 @@ func (h *handler) getRequestBody(r *http.Request) (*model.SneakerReference, erro
 	if err != nil {
 		return nil, err
 	}
-	body, err := h.serializer(contentType).DecodeOne(requestBody)
+	body, err := h.serializer(contentType).Decode(requestBody)
 	if err != nil {
 		return nil, err
 	}
@@ -219,7 +224,7 @@ func (h *handler) getRequestBodies(r *http.Request) ([]*model.SneakerReference, 
 	if err != nil {
 		return nil, err
 	}
-	bodies, err := h.serializer(contentType).Decode(requestBody)
+	bodies, err := h.serializer(contentType).DecodeRange(requestBody)
 	if err != nil {
 		return nil, err
 	}

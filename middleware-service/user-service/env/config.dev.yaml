@@ -3,10 +3,11 @@ commonConfig:
   hostname: kicksware.com
   usedDB: mongo
   contentType: application/json
+  innerServiceFormat: http://%s:8080/%s/
 authConfig:
   tokenExpirationDelta: 72
-  privateKeyPath: keys/private.key
-  publicKeyPath: keys/public.key.pub
+  privateKeyPath: key/private.key
+  publicKeyPath: ../key/public.key.pub
 mongoConfig:
   URL: mongodb://localhost:27017
   database: sneakerResaleDB

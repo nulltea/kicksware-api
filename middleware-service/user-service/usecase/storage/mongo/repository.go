@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
+	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/util"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -13,8 +14,8 @@ import (
 	"user-service/core/meta"
 	"user-service/core/model"
 	"user-service/core/repo"
+	"user-service/env"
 	"user-service/usecase/business"
-	"user-service/util"
 )
 
 type repository struct {
@@ -22,6 +23,21 @@ type repository struct {
 	database   *mongo.Database
 	collection *mongo.Collection
 	timeout    time.Duration
+}
+
+func NewMongoRepository(config env.DataStoreConfig) (repo.UserRepository, error) {
+	repo := &repository{
+		timeout:  time.Duration(config.Timeout) * time.Second,
+	}
+	client, err := newMongoClient(config.URL, config.Timeout)
+	if err != nil {
+		return nil, errors.Wrap(err, "repository.NewMongoRepository")
+	}
+	repo.client = client
+	database := client.Database(config.Database)
+	repo.database = database
+	repo.collection = database.Collection(config.Collection)
+	return repo, nil
 }
 
 func newMongoClient(mongoURL string, mongoTimeout int) (*mongo.Client, error) {
@@ -36,21 +52,6 @@ func newMongoClient(mongoURL string, mongoTimeout int) (*mongo.Client, error) {
 		return nil, err
 	}
 	return client, nil
-}
-
-func NewMongoRepository(url, db, collection string, mongoTimeout int) (repo.UserRepository, error) {
-	repo := &repository{
-		timeout:  time.Duration(mongoTimeout) * time.Second,
-	}
-	client, err := newMongoClient(url, mongoTimeout)
-	if err != nil {
-		return nil, errors.Wrap(err, "repository.NewMongoRepo")
-	}
-	repo.client = client
-	database := client.Database(db)
-	repo.database = database
-	repo.collection = database.Collection(collection)
-	return repo, nil
 }
 
 func (r *repository) FetchOne(username string) (*model.User, error) {
@@ -68,7 +69,7 @@ func (r *repository) FetchOne(username string) (*model.User, error) {
 	return user, nil
 }
 
-func (r *repository) Fetch(usernames []string) ([]*model.User, error) {
+func (r *repository) Fetch(usernames []string, params meta.RequestParams) ([]*model.User, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 	filter := bson.M{"username": bson.M{"$in": usernames}}
@@ -92,7 +93,7 @@ func (r *repository) Fetch(usernames []string) ([]*model.User, error) {
 	return users, nil
 }
 
-func (r *repository) FetchAll() ([]*model.User, error) {
+func (r *repository) FetchAll(params meta.RequestParams) ([]*model.User, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 
@@ -112,7 +113,7 @@ func (r *repository) FetchAll() ([]*model.User, error) {
 	return user, nil
 }
 
-func (r *repository) FetchQuery(query meta.RequestQuery) ([]*model.User, error) {
+func (r *repository) FetchQuery(query meta.RequestQuery, params meta.RequestParams) ([]*model.User, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 
@@ -186,7 +187,7 @@ func (r *repository) Remove(code string) error {
 	return nil
 }
 
-func (r *repository) Count(query meta.RequestQuery) (int, error) {
+func (r *repository) Count(query meta.RequestQuery, params meta.RequestParams) (int, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 

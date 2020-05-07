@@ -10,7 +10,7 @@ import (
 
 func ProvideGatewayHandler(service service.UserService, authService service.AuthService,
 	config env.ServiceConfig) rest.RestfulHandler {
-	return rest.NewHandler(service, authService, config.Common.ContentType)
+	return rest.NewHandler(service, authService, config.Common)
 }
 
 func ProvideEndpointRouter(handler rest.RestfulHandler) chi.Router {

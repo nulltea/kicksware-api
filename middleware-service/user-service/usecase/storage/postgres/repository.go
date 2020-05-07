@@ -2,20 +2,35 @@ package postgres
 
 import (
 	"context"
+
 	sqb "github.com/Masterminds/squirrel"
 	_ "github.com/jackc/pgx/v4/stdlib"
 	"github.com/jmoiron/sqlx"
 	"github.com/pkg/errors"
+	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/util"
+
 	"user-service/core/meta"
 	"user-service/core/model"
 	"user-service/core/repo"
+	"user-service/env"
 	"user-service/usecase/business"
-	"user-service/util"
 )
 
 type repository struct {
 	db *sqlx.DB
 	table string
+}
+
+func NewPostgresRepository(config env.DataStoreConfig) (repo.UserRepository, error) {
+	db, err := newPostgresClient(config.URL)
+	if err != nil {
+		return nil, errors.Wrap(err, "repository.NewPostgresRepository")
+	}
+	repo := &repository{
+		db: db,
+		table:  config.Collection,
+	}
+	return repo, nil
 }
 
 func newPostgresClient(url string) (*sqlx.DB, error) {
@@ -29,18 +44,6 @@ func newPostgresClient(url string) (*sqlx.DB, error) {
 		return nil, errors.Wrap(err, "repository.newPostgresClient")
 	}
 	return db, nil
-}
-
-func NewPostgresRepository(connection, table string) (repo.UserRepository, error) {
-	db, err := newPostgresClient(connection)
-	if err != nil {
-		return nil, errors.Wrap(err, "repository.NewPostgresRepo")
-	}
-	repo := &repository{
-		db: db,
-		table:  table,
-	}
-	return repo, nil
 }
 
 func (r *repository) FetchOne(code string) (*model.User, error) {
@@ -58,7 +61,7 @@ func (r *repository) FetchOne(code string) (*model.User, error) {
 	return user, nil
 }
 
-func (r *repository) Fetch(codes []string) ([]*model.User, error) {
+func (r *repository) Fetch(codes []string, params meta.RequestParams) ([]*model.User, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	users := make([]*model.User, 0)
@@ -76,7 +79,7 @@ func (r *repository) Fetch(codes []string) ([]*model.User, error) {
 	return users, nil
 }
 
-func (r *repository) FetchAll() ([]*model.User, error) {
+func (r *repository) FetchAll(params meta.RequestParams) ([]*model.User, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	users := make([]*model.User, 0)
@@ -93,7 +96,7 @@ func (r *repository) FetchAll() ([]*model.User, error) {
 	return users, nil
 }
 
-func (r *repository) FetchQuery(query meta.RequestQuery) ([]*model.User, error) {
+func (r *repository) FetchQuery(query meta.RequestQuery, params meta.RequestParams) ([]*model.User, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	users := make([]*model.User, 0)
@@ -161,7 +164,7 @@ func (r *repository) Remove(code string) error {
 	return nil
 }
 
-func (r *repository) Count(query meta.RequestQuery) (count int, err error) {
+func (r *repository) Count(query meta.RequestQuery, params meta.RequestParams) (count int, err error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
