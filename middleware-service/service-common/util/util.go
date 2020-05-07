@@ -1,7 +1,12 @@
 package util
 
 import (
+	"bufio"
+	"crypto/rsa"
+	"crypto/x509"
+	"encoding/pem"
 	"net/url"
+	"os"
 
 	"github.com/fatih/structs"
 	"github.com/thoas/go-funk"
@@ -58,4 +63,32 @@ func ToQueryMap(v url.Values) (qm map[string]interface{}) {
 		qm[key] = v[key][0]
 	}
 	return
+}
+
+func GetPublicKey(keyPath string) *rsa.PublicKey {
+	publicKeyFile, err := os.Open(keyPath)
+	if err != nil {
+		panic(err)
+	}
+
+	pemFileInfo, _ := publicKeyFile.Stat()
+	var size int64 = pemFileInfo.Size()
+	pemBytes := make([]byte, size)
+
+	buffer := bufio.NewReader(publicKeyFile)
+	_, err = buffer.Read(pemBytes)
+
+	data, _ := pem.Decode(pemBytes)
+
+	publicKeyFile.Close()
+
+	publicKeyImported, err := x509.ParsePKIXPublicKey(data.Bytes); if err != nil {
+		panic(err)
+	}
+
+	publicKey, ok := publicKeyImported.(*rsa.PublicKey); if !ok {
+		return nil
+	}
+
+	return publicKey
 }
