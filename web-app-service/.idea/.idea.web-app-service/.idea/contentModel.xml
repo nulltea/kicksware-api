@@ -36,6 +36,9 @@
             </e>
           </e>
           <e p="Users" t="Include">
+            <e p="AuthClaims.cs" t="Include" />
+            <e p="AuthCredentials.cs" t="Include" />
+            <e p="AuthToken.cs" t="Include" />
             <e p="User.cs" t="Include" />
           </e>
         </e>
@@ -104,6 +107,7 @@
           <e p="IUserRepository.cs" t="Include" />
         </e>
         <e p="Services" t="Include">
+          <e p="IAuthService.cs" t="Include" />
           <e p="ICommonService.cs" t="Include" />
           <e p="ISneakerProductService.cs" t="Include" />
           <e p="ISneakerReferenceService.cs" t="Include" />
@@ -129,6 +133,15 @@
               <e p="RestfulClient.cs" t="Include" />
             </e>
             <e p="Requests" t="Include">
+              <e p="Auth" t="Include">
+                <e p="AuthBaseRequest.cs" t="Include" />
+                <e p="AuthGuestRequest.cs" t="Include" />
+                <e p="AuthLoginRequest.cs" t="Include" />
+                <e p="AuthLogoutRequest.cs" t="Include" />
+                <e p="AuthRefreshTokenRequest.cs" t="Include" />
+                <e p="AuthSingUpRequest.cs" t="Include" />
+                <e p="AuthValidateTokenRequest.cs" t="Include" />
+              </e>
               <e p="IGatewayRestRequest.cs" t="Include" />
               <e p="ProductRequests" t="Include">
                 <e p="ProductRequest.cs" t="Include" />
@@ -195,6 +208,7 @@
             <e p="FilteredModel.cs" t="Include" />
           </e>
           <e p="Services" t="Include">
+            <e p="AuthService.cs" t="Include" />
             <e p="ReferenceSearchService.cs" t="Include" />
             <e p="SneakerProductService.cs" t="Include" />
             <e p="SneakerReferenceService.cs" t="Include" />
@@ -212,7 +226,18 @@
             </e>
           </e>
         </e>
+        <e p="Auth" t="Include">
+          <e p="Events" t="Include" />
+          <e p="MiddleareAuthExtensions.cs" t="Include" />
+          <e p="MiddlewareAuthDefaults.cs" t="Include" />
+          <e p="MiddlewareAuthHandler.cs" t="Include" />
+          <e p="MiddlewareAuthOptions.cs" t="Include" />
+          <e p="MiddlewareAuthPostConfigureOptions.cs" t="Include" />
+        </e>
         <e p="bin" t="ExcludeRecursive" />
+        <e p="Config" t="Include">
+          <e p="AppSettings.cs" t="Include" />
+        </e>
         <e p="Controllers" t="Include">
           <e p="AboutController.cs" t="Include" />
           <e p="AuthController.cs" t="Include" />
@@ -238,20 +263,14 @@
           </e>
         </e>
         <e p="Data" t="Include">
-          <e p="ApplicationDbContext.cs" t="Include" />
+          <e p="Catalog" t="Include">
+            <e p="Catalog.cs" t="Include" />
+          </e>
           <e p="Json" t="Include">
             <e p="colors.json" t="Include" />
             <e p="filter-colors.json" t="Include" />
             <e p="sizes.json" t="Include" />
             <e p="sneaker_brands.json" t="Include" />
-          </e>
-          <e p="Migrations" t="Include">
-            <e p="00000000000000_CreateIdentitySchema.cs" t="Include" />
-            <e p="00000000000000_CreateIdentitySchema.Designer.cs" t="Include" />
-            <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
-          </e>
-          <e p="Reference" t="Include">
-            <e p="Catalog.cs" t="Include" />
           </e>
         </e>
         <e p="Dockerfile" t="Include" />

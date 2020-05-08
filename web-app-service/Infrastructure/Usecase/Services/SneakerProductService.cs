@@ -6,6 +6,7 @@ using Core.Entities.Products;
 using Core.Gateway;
 using Core.Repositories;
 using Core.Services;
+using Infrastructure.Gateway.REST;
 using Infrastructure.Gateway.REST.Client;
 using Infrastructure.Gateway.REST.ProductRequests.Sneakers;
 
@@ -15,9 +16,9 @@ namespace Infrastructure.Usecase
 	{
 		private readonly ISneakerProductRepository _repository;
 
-		private readonly RestfulClient _client;
+		private readonly IGatewayClient<IGatewayRestRequest> _client;
 
-		public SneakerProductService(ISneakerProductRepository repository, RestfulClient client) =>
+		public SneakerProductService(ISneakerProductRepository repository, IGatewayClient<IGatewayRestRequest> client) =>
 			(_repository, _client) = (repository, client);
 
 		#region CRUD Sync

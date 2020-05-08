@@ -9,9 +9,9 @@ import (
 
 	"github.com/fatih/structs"
 
-	"reference-service/core/meta"
-	"reference-service/core/model"
-	"reference-service/usecase/business"
+	"search-service/core/meta"
+	"search-service/core/model"
+	"search-service/usecase/business"
 )
 
 type params struct {

@@ -16,7 +16,7 @@ func NewSerializer() service.SneakerProductSerializer {
 }
 
 func (r *serializer) Decode(input []byte) (product *model.SneakerProduct, err error) {
-	if err = json.Unmarshal(input, product); err != nil {
+	if err = json.Unmarshal(input, &product); err != nil {
 		return nil, errors.Wrap(err, "serializer.SneakerProduct.Decode")
 	}
 	return

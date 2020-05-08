@@ -14,12 +14,11 @@ func NewSerializer() service.SneakerProductSerializer {
 	return &serializer{}
 }
 
-func (r *serializer) Decode(input []byte) (*model.SneakerProduct, error) {
-	sneakerProduct := &model.SneakerProduct{}
-	if err := msgpack.Unmarshal(input, sneakerProduct); err != nil {
+func (r *serializer) Decode(input []byte) (product *model.SneakerProduct, err error) {
+	if err = msgpack.Unmarshal(input, &product); err != nil {
 		return nil, errors.Wrap(err, "serializer.SneakerProduct.Decode")
 	}
-	return sneakerProduct, nil
+	return
 }
 
 func (r *serializer) DecodeRange(input []byte) (products []*model.SneakerProduct, err error) {

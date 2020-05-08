@@ -1,12 +1,12 @@
 commonConfig:
-  host: 0.0.0.0:8080
+  host: localhost:8080
   hostname: kicksware.com
   contentType: application/json
   innerServiceFormat: http://%s:8080%s
 authConfig:
   publicKeyPath: ../key/public.key.pub
 elasticConfig:
-  URL: http://elasticsearch:9200
+  URL: http://localhost:9200
   index: sneaker_reference
   startupDelay: 60
   sniffing: false

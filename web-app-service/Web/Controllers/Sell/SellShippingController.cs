@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using SmartBreadcrumbs.Attributes;
-using Web.Data.Reference_Data;
+using Web.Data.Catalog;
 using Web.Models;
 using Web.Wizards;
 

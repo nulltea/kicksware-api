@@ -15,6 +15,10 @@ namespace Core.Entities.Users
 
 		public string LastName { get; set; }
 
+		public bool Confirmed { get; set; }
+
+		public bool Admin { get; set; }
+
 		public bool Equals(User other) => other != null && UniqueID == other.UniqueID;
 	}
 }

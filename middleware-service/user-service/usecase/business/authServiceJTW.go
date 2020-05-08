@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
+	"github.com/rs/xid"
 
 	"user-service/core/meta"
 	"user-service/core/model"
@@ -22,6 +23,8 @@ type authService struct {
 	privateKey *rsa.PrivateKey
 	publicKey *rsa.PublicKey
 }
+
+
 
 func NewAuthServiceJWT(userService service.UserService, authConfig env.AuthConfig) service.AuthService {
 	return &authService{
@@ -39,7 +42,7 @@ func (s *authService) SingUp(user *model.User) (*meta.AuthToken, error) {
 	return s.GenerateToken(user)
 }
 
-func (s *authService) Login(user *model.User)(*meta.AuthToken, error) {
+func (s *authService) Login(user *model.User) (*meta.AuthToken, error) {
 	registered, err := s.userService.FetchOne(user.Username); if err != nil {
 		return nil, err
 	}
@@ -54,13 +57,22 @@ func (s *authService) Login(user *model.User)(*meta.AuthToken, error) {
 	return s.GenerateToken(user)
 }
 
+func (s *authService) Guest() (*meta.AuthToken, error) {
+	return s.GenerateToken(&model.User{
+		Guest: true,
+		UniqueId: xid.New().String(),
+	})
+}
+
 func (s *authService) GenerateToken(user *model.User) (*meta.AuthToken, error) {
 	token := jwt.New(jwt.SigningMethodRS512)
 	expiresAt := time.Now().Add(time.Hour * time.Duration(s.expirationDelta))
-	token.Claims = &jwt.StandardClaims {
+	token.Claims = &meta.AuthClaims {
 		ExpiresAt: expiresAt.Unix(),
 		IssuedAt: time.Now().Unix(),
 		Issuer: user.UniqueId,
+		Admin: user.Admin,
+		Guest: user.Guest,
 	}
 	tokenString, err := token.SignedString(s.privateKey)
 	if err != nil {
@@ -76,7 +88,6 @@ func (s *authService) PublicKey() *rsa.PublicKey {
 func (s *authService) Logout(token string) error {
 	panic("implement me")
 }
-
 
 func getPrivateKey(keyPath string) *rsa.PrivateKey {
 	privateKeyFile, err := os.Open(keyPath)

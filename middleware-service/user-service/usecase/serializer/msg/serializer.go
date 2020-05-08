@@ -14,9 +14,8 @@ func NewSerializer() service.UserSerializer {
 	return &serializer{}
 }
 
-func (r *serializer) Decode(input []byte) (*model.User, error) {
-	user := &model.User{}
-	if err := msgpack.Unmarshal(input, user); err != nil {
+func (r *serializer) Decode(input []byte) (user *model.User, err error) {
+	if err = msgpack.Unmarshal(input, &user); err != nil {
 		return nil, errors.Wrap(err, "serializer.User.Decode")
 	}
 	return user, nil

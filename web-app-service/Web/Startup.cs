@@ -1,12 +1,15 @@
 using System;
 using Core.Entities.Products;
 using Core.Entities.References;
+using Core.Gateway;
 using Core.Model;
 using Core.Repositories;
 using Core.Services;
 using Infrastructure.Data;
+using Infrastructure.Gateway.REST;
 using Infrastructure.Gateway.REST.Client;
 using Infrastructure.Usecase;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -14,7 +17,9 @@ using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using SmartBreadcrumbs.Extensions;
 using Web.Data;
 using Web.Handlers.Filter;
@@ -32,13 +37,8 @@ namespace Web
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddDbContext<ApplicationDbContext>(options =>
-				options.UseSqlServer(
-					Configuration.GetConnectionString("DefaultConnection")));
-			services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-				.AddEntityFrameworkStores<ApplicationDbContext>();
+			services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true);
 			services.AddControllersWithViews();
-
 			services.AddSession();
 
 			services.AddBreadcrumbs(GetType().Assembly, options =>
@@ -58,7 +58,7 @@ namespace Web
 
 			#region Dependency injection
 
-			services.AddSingleton<RestfulClient, RestfulClient>();
+			services.AddSingleton<IGatewayClient<IGatewayRestRequest>, RestfulClient>();
 
 			services.AddSingleton<ISneakerProductRepository, SneakerProductsRestRepository>();
 			services.AddSingleton<ISneakerReferenceRepository, SneakerReferencesRestRepository>();
@@ -76,7 +76,9 @@ namespace Web
 
 			#region Authentication
 
-			services.AddAuthentication()
+			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+				.AddCookie()
+				.AddJwtBearer(options => ConfigureJwtAuth(options))
 				.AddFacebook(facebookOptions =>
 				{
 					facebookOptions.AppId = Environment.GetEnvironmentVariable("Authentication:Facebook:AppId");
@@ -97,12 +99,10 @@ namespace Web
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
-				app.UseDatabaseErrorPage();
 			}
 			else
 			{
 				app.UseExceptionHandler("/Home/Error");
-				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 				app.UseHsts();
 			}
 			app.UseHttpsRedirection();
@@ -110,6 +110,7 @@ namespace Web
 
 			app.UseRouting();
 			app.UseSession();
+
 			app.UseAuthentication();
 			app.UseAuthorization();
 
@@ -121,14 +122,20 @@ namespace Web
 				);
 				endpoints.MapRazorPages();
 			});
-
-			var provider = new FileExtensionContentTypeProvider();
-			provider.Mappings[".less"] = "plain/text";
-
-			app.UseStaticFiles(new StaticFileOptions
-			{
-				ContentTypeProvider = provider
-			});
 		}
+
+		#region Configuration handlers
+
+		private JwtBearerOptions ConfigureJwtAuth(JwtBearerOptions options)
+		{
+			options.RequireHttpsMetadata = false;
+			options.TokenValidationParameters = new TokenValidationParameters
+			{
+				SaveSigninToken = true,
+			};
+			return options;
+		}
+
+		#endregion
 	}
 }

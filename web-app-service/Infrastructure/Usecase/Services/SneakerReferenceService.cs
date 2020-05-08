@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Core.Algorithms;
 using Core.Entities;
-using Core.Entities.Products;
 using Core.Entities.References;
 using Core.Extension;
 using Core.Gateway;
@@ -12,8 +9,6 @@ using Core.Model.Parameters;
 using Core.Reference;
 using Core.Repositories;
 using Core.Services;
-using Infrastructure.Gateway.REST.Client;
-using Infrastructure.Gateway.REST.ProductRequests.Sneakers;
 using Infrastructure.Pattern;
 
 namespace Infrastructure.Usecase
@@ -21,10 +16,7 @@ namespace Infrastructure.Usecase
 	public class SneakerReferenceService : ISneakerReferenceService
 	{
 		private readonly ISneakerReferenceRepository _repository;
-
-		private readonly RestfulClient _client;
-
-		public SneakerReferenceService(ISneakerReferenceRepository repository, RestfulClient client) => (_repository, _client) = (repository, client);
+		public SneakerReferenceService(ISneakerReferenceRepository repository) => _repository = repository;
 
 		#region CRUD Sync
 

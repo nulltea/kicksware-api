@@ -36,12 +36,13 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./cert:/cert
+
   products-service:
     build:
       context: ./product-service
       dockerfile: ./docker/Dockerfile
       target: dev
-    env_file: ./product-service/env/.env
+    env_file: ./product-service/env/.env.prod
     hostname: kicksware.com
     image: products-service
     restart: always
@@ -53,6 +54,9 @@ services:
     networks:
       - web
       - data
+    volumes:
+      - ./product-service/env:/dist/env
+      - ./key:/key
     links:
       - mongodb
     depends_on:
@@ -63,18 +67,22 @@ services:
       context: ./user-service
       dockerfile: ./docker/Dockerfile
       target: dev
-    env_file: ./user-service/env/.env
+    env_file: ./user-service/env/.env.prod
     hostname: kicksware.com
     image: users-service
     restart: always
     labels:
-      - traefik.http.routers.user-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/users`)
+      - traefik.http.routers.user-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/users`) || PathPrefix(`/api/auth`)
       # - traefik.http.routers.user-service.tls=true
       # - traefik.http.routers.user-service.tls.certresolver=le
       - traefik.docker.network=middleware-service_web
     networks:
       - web
       - data
+    volumes:
+      - ./user-service/env:/dist/env
+      - ./user-service/key:/dist/key
+      - ./key:/key
     links:
       - mongodb
     depends_on:
@@ -85,7 +93,7 @@ services:
       context: ./reference-service
       dockerfile: ./docker/Dockerfile
       target: dev
-    env_file: ./reference-service/env/.env
+    env_file: ./reference-service/env/.env.prod
     image: references-service
     restart: always
     labels:
@@ -93,6 +101,9 @@ services:
       # - traefik.http.routers.reference-service.tls=true
       # - traefik.http.routers.reference-service.tls.certresolver=le
       - traefik.docker.network=middleware-service_web
+    volumes:
+      - ./reference-service/env:/dist/env
+      - ./key:/key
     networks:
       - web
       - data
@@ -104,12 +115,12 @@ services:
 
   search-service:
     build:
-      context: ./elastic-search-service
+      context: ./search-service
       dockerfile: ./docker/Dockerfile
       target: dev
     image: search-service
     restart: always
-    env_file: ./elastic-search-service/env/.env
+    env_file: ./search-service/env/.env.prod
     labels:
       - traefik.http.routers.search-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/search`)
       # - traefik.http.routers.search-service.tls=true
@@ -119,12 +130,17 @@ services:
       - web
       - elastic
       - data
+    volumes:
+      - ./search-service/env:/dist/env
+      - ./key:/key
     links:
-      - mongodb
+      - references-service
+      - products-service
       - elasticsearch
       - kibana
     depends_on:
-      - mongodb
+      - references-service
+      - products-service
       - elasticsearch
       - kibana
 
@@ -144,6 +160,8 @@ services:
       - ./backup/mongo/init.sh:/docker-entrypoint-initdb.d/init.sh
     networks:
       - data
+    logging:
+      driver: none
 
   elasticsearch:
     container_name: elasticsearch

@@ -18,8 +18,8 @@ var (
 )
 
 func InitEnvironment() {
-	if os.Getenv("DEBUG") == "True" {
-		err := env.Load(ProjectDirectory + "/env/.env"); if err != nil {
+	if os.Getenv("ENV") == "DEV" {
+		err := env.Load(ProjectDirectory + "/env/.env.dev"); if err != nil {
 			log.Fatal(err)
 		}
 		reassignVariables()

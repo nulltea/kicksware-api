@@ -1,5 +1,5 @@
 commonConfig:
-  host: localhost:8080
+  host: 0.0.0.0:8080
   hostname: kicksware.com
   usedDB: mongo
   contentType: application/json
@@ -9,7 +9,7 @@ authConfig:
   privateKeyPath: key/private.key
   publicKeyPath: ../key/public.key.pub
 mongoConfig:
-  URL: mongodb://localhost:27017
+  URL: mongodb://mongodb:27017
   database: sneakerResaleDB
   collection: users
   login: admin

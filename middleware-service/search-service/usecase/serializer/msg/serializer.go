@@ -15,14 +15,14 @@ func NewSerializer() service.SneakerSearchSerializer {
 }
 
 func (r *serializer) DecodeReference(input []byte) (ref *model.SneakerReference, err error) {
-	if err = msgpack.Unmarshal(input, ref); err != nil {
+	if err = msgpack.Unmarshal(input, &ref); err != nil {
 		return nil, errors.Wrap(err, "serializer.Search.DecodeReference")
 	}
 	return
 }
 
 func (r *serializer) DecodeProduct(input []byte) (prod *model.SneakerProduct, err error) {
-	if err = msgpack.Unmarshal(input, prod); err != nil {
+	if err = msgpack.Unmarshal(input, &prod); err != nil {
 		return nil, errors.Wrap(err, "serializer.Search.DecodeProduct")
 	}
 	return

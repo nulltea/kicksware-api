@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Entities.References;
+using Core.Gateway;
 using Core.Services;
-using Infrastructure.Gateway.REST.Client;
+using Infrastructure.Gateway.REST;
 using Infrastructure.Gateway.REST.Search.SneakerReference;
 
 namespace Infrastructure.Usecase
 {
 	public class ReferenceSearchService : IReferenceSearchService
 	{
-		private readonly RestfulClient _client;
+		private readonly IGatewayClient<IGatewayRestRequest> _client;
 
-		public ReferenceSearchService(RestfulClient client) => _client = client;
+		public ReferenceSearchService(IGatewayClient<IGatewayRestRequest> client) => _client = client;
 
 		#region Sync
 

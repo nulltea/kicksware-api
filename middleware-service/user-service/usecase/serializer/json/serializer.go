@@ -16,7 +16,7 @@ func NewSerializer() service.UserSerializer {
 }
 
 func (r *serializer) Decode(input []byte) (user *model.User, err error) {
-	if err = json.Unmarshal(input, user); err != nil {
+	if err = json.Unmarshal(input, &user); err != nil {
 		return nil, errors.Wrap(err, "serializer.User.Decode")
 	}
 	return

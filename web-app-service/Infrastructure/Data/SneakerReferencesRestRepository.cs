@@ -1,21 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Core.Entities.References;
 using Core.Gateway;
 using Core.Repositories;
-using Infrastructure.Gateway.REST.Client;
-using Infrastructure.Gateway.REST.ProductRequests.Sneakers;
+using Infrastructure.Gateway.REST;
 using Infrastructure.Gateway.REST.References.Sneakers;
 
 namespace Infrastructure.Data
 {
 	public class SneakerReferencesRestRepository : ISneakerReferenceRepository
 	{
-		private readonly RestfulClient _client;
+		private readonly IGatewayClient<IGatewayRestRequest> _client;
 
-		public SneakerReferencesRestRepository(RestfulClient client) => _client = client;
+		public SneakerReferencesRestRepository(IGatewayClient<IGatewayRestRequest> client) => _client = client;
 
 		#region Sync
 

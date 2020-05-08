@@ -1,19 +1,18 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Core.Entities.Products;
 using Core.Gateway;
 using Core.Repositories;
-using Infrastructure.Gateway.REST.Client;
+using Infrastructure.Gateway.REST;
 using Infrastructure.Gateway.REST.ProductRequests.Sneakers;
 
 namespace Infrastructure.Data
 {
 	public class SneakerProductsRestRepository : ISneakerProductRepository
 	{
-		private readonly RestfulClient _client;
+		private readonly IGatewayClient<IGatewayRestRequest> _client;
 
-		public SneakerProductsRestRepository(RestfulClient client) => _client = client;
+		public SneakerProductsRestRepository(IGatewayClient<IGatewayRestRequest> client) => _client = client;
 
 		#region Sync
 

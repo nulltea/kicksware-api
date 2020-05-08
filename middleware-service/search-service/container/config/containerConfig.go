@@ -18,6 +18,8 @@ func ConfigureContainer(container container.ServiceContainer, config env.Service
 		BindSingleton(factory.ProvideReferenceSyncService).
 		BindSingleton(factory.ProvideProductSyncService).
 
+		BindSingleton(factory.ProvideAuthService).
+
 		BindSingleton(factory.ProvideGatewayHandler).
 		BindTransient(factory.ProvideEndpointRouter).
 

@@ -28,6 +28,7 @@ type RestfulHandler interface {
 	Delete(http.ResponseWriter, *http.Request)
 	SingUp(http.ResponseWriter, *http.Request)
 	Login(http.ResponseWriter, *http.Request)
+	Guest(http.ResponseWriter, *http.Request)
 	RefreshToken(http.ResponseWriter, *http.Request)
 	Logout(http.ResponseWriter, *http.Request)
 	// Middleware:
@@ -156,60 +157,6 @@ func (h *handler) Delete(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	h.setupResponse(w, nil, http.StatusOK)
-}
-
-func (h *handler) SingUp(w http.ResponseWriter, r *http.Request) {
-	user, err := h.getRequestBody(r); if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-	token, err := h.auth.SingUp(user); if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	h.setupAuthCookie(w, token)
-	h.setupResponse(w, token, http.StatusOK)
-}
-
-func (h *handler) Login(w http.ResponseWriter, r *http.Request) {
-	user, err := h.getRequestBody(r); if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-	token, err := h.auth.Login(user); if err != nil {
-		if errors.Cause(err) == service.ErrPasswordInvalid ||
-			errors.Cause(err) == service.ErrNotConfirmed {
-			http.Error(w, err.Error(), http.StatusUnauthorized)
-			return
-		}
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	h.setupAuthCookie(w, token)
-	h.setupResponse(w, token, http.StatusOK)
-}
-
-func (h *handler) RefreshToken(w http.ResponseWriter, r *http.Request) {
-	user, err := h.getRequestBody(r); if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-	token, err := h.auth.GenerateToken(user); if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	h.setupAuthCookie(w, token)
-	h.setupResponse(w, token, http.StatusOK)
-}
-
-func (h *handler) Logout(w http.ResponseWriter, r *http.Request) {
-	token := chi.URLParam(r,"token")
-	if err := h.auth.Logout(token); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	h.recallAuthCookie(w)
-	h.setupResponse(w, token, http.StatusOK)
 }
 
 func (h *handler) setupResponse(w http.ResponseWriter, body interface{}, statusCode int) {

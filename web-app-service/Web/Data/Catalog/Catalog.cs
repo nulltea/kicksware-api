@@ -7,7 +7,7 @@ using System.Reflection;
 using Core.Reference;
 using Newtonsoft.Json;
 
-namespace Web.Data.Reference_Data
+namespace Web.Data.Catalog
 {
 	public static partial class Catalog
 	{

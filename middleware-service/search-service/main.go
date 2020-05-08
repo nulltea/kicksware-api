@@ -1,9 +1,15 @@
 package main
 
-import "search-service/startup"
+import (
+	"log"
+
+	"search-service/startup"
+)
 
 func main() {
 	srv, container := startup.InitializeServer()
-	startup.PerformDataSync(container)
+	if err := startup.PerformDataSync(container); err != nil {
+		log.Fatalln(err)
+	}
 	srv.Start()
 }
