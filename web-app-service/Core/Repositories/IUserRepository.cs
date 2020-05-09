@@ -1,6 +1,6 @@
-﻿using Core.Entities.Products;
+﻿using Core.Entities.Users;
 
 namespace Core.Repositories
 {
-	public interface IUserRepository : IAsyncRepository<SneakerProduct>, IRepository<SneakerProduct> { }
+	public interface IUserRepository : IAsyncRepository<User>, IRepository<User> { }
 }

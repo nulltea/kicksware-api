@@ -1,6 +1,7 @@
 using System;
 using Core.Entities.Products;
 using Core.Entities.References;
+using Core.Entities.Users;
 using Core.Gateway;
 using Core.Model;
 using Core.Repositories;
@@ -9,20 +10,16 @@ using Infrastructure.Data;
 using Infrastructure.Gateway.REST;
 using Infrastructure.Gateway.REST.Client;
 using Infrastructure.Usecase;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.StaticFiles;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
 using SmartBreadcrumbs.Extensions;
-using Web.Data;
+using Web.Auth;
 using Web.Handlers.Filter;
+using Web.Handlers.Users;
 
 namespace Web
 {
@@ -37,7 +34,7 @@ namespace Web
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true);
+			services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true);
 			services.AddControllersWithViews();
 			services.AddSession();
 
@@ -62,23 +59,27 @@ namespace Web
 
 			services.AddSingleton<ISneakerProductRepository, SneakerProductsRestRepository>();
 			services.AddSingleton<ISneakerReferenceRepository, SneakerReferencesRestRepository>();
+			services.AddSingleton<IUserRepository, UserRestRepository>();
 
 			services.AddTransient<ICommonService<SneakerReference>, SneakerReferenceService>();
 			services.AddTransient<ICommonService<SneakerProduct>, SneakerProductService>();
 			services.AddSingleton<ISneakerReferenceService, SneakerReferenceService>();
 			services.AddSingleton<ISneakerProductService, SneakerProductService>();
 			services.AddSingleton<IReferenceSearchService, ReferenceSearchService>();
+			services.AddSingleton<IUserService, UserService>();
+
 
 			services.AddTransient<FilterContentBuilder<SneakerReference>, ReferencesFilterContent>();
 			services.AddTransient<FilterContentBuilder<SneakerProduct>, ProductsFilterContent>();
+
+			services.AddTransient<IUserStore<User>, UserStore>();
 
 			#endregion
 
 			#region Authentication
 
-			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-				.AddCookie()
-				.AddJwtBearer(options => ConfigureJwtAuth(options))
+			services.AddAuthentication(MiddlewareAuthDefaults.AuthenticationScheme)
+				.AddMiddlewareAuth<AuthService>(options => ConfigureAuthOptions(options))
 				.AddFacebook(facebookOptions =>
 				{
 					facebookOptions.AppId = Environment.GetEnvironmentVariable("Authentication:Facebook:AppId");
@@ -126,13 +127,8 @@ namespace Web
 
 		#region Configuration handlers
 
-		private JwtBearerOptions ConfigureJwtAuth(JwtBearerOptions options)
+		private static MiddlewareAuthOptions ConfigureAuthOptions(MiddlewareAuthOptions options)
 		{
-			options.RequireHttpsMetadata = false;
-			options.TokenValidationParameters = new TokenValidationParameters
-			{
-				SaveSigninToken = true,
-			};
 			return options;
 		}
 

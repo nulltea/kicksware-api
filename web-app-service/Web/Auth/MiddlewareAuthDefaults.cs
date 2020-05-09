@@ -16,6 +16,6 @@ namespace Web.Auth
 
 		public static readonly string ReturnUrlParameter = "ReturnUrl";
 
-		public static readonly string CookiePrefix = ".AspNetCore.";
+		public static readonly string CookiePrefix = ".Kicksware.";
 	}
 }

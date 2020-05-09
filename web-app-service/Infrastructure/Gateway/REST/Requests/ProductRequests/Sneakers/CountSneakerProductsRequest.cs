@@ -9,11 +9,11 @@ namespace Infrastructure.Gateway.REST.ProductRequests.Sneakers
 
 		public CountSneakerProductsRequest(Dictionary<string, object> query) : base("/count", Method.POST)
 		{
-			AddObject(query);
+			AddJsonBody(query);
 		}
 		public CountSneakerProductsRequest(object query) : base("/count", Method.POST)
 		{
-			AddObject(query);
+			AddJsonBody(query);
 		}
 	}
 }

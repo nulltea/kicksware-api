@@ -22,7 +22,7 @@ func restRoutes(rest RestfulHandler) (r *chi.Mux) {
 	r = chi.NewRouter()
 	r.Use(rest.Authenticator)
 	r.Get("/{username}", rest.GetOne)
-	r.Get("/", rest.Get)
+	r.Get("", rest.Get)
 	r.Post("/query", rest.Get)
 	r.Post("/", rest.Post)
 	r.Put("/", rest.Put)

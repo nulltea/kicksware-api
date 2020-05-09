@@ -51,6 +51,10 @@
           <e p="StringExtension.cs" t="Include" />
           <e p="TypeExtension.cs" t="Include" />
         </e>
+        <e p="Factory" t="Include">
+          <e p="IQueryPredicateBuilder.cs" t="Include" />
+          <e p="IQueryRecourseBuilder.cs" t="Include" />
+        </e>
         <e p="Gateway" t="Include">
           <e p="IGatewayClient.cs" t="Include" />
           <e p="IGatewayRequest.cs" t="Include" />
@@ -75,10 +79,6 @@
               <e p="Core.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
-        </e>
-        <e p="Pattern" t="Include">
-          <e p="IQueryPredicateBuilder.cs" t="Include" />
-          <e p="IQueryRecourseBuilder.cs" t="Include" />
         </e>
         <e p="Reference" t="Include">
           <e p="common" t="Include">
@@ -124,6 +124,7 @@
         <e p="Data" t="Include">
           <e p="SneakerProductsRestRepository.cs" t="Include" />
           <e p="SneakerReferencesRestRepository.cs" t="Include" />
+          <e p="UserRestRepository.cs" t="Include" />
         </e>
         <e p="Gateway" t="Include">
           <e p="GraphQL" t="Include" />
@@ -184,7 +185,16 @@
                   <e p="SearchReferenceRequestBase.cs" t="Include" />
                 </e>
               </e>
-              <e p="UserRequests" t="Include" />
+              <e p="Users" t="Include">
+                <e p="CountUsersRequest.cs" t="Include" />
+                <e p="DeleteUserRequest.cs" t="Include" />
+                <e p="GetAllUsersRequest.cs" t="Include" />
+                <e p="GetQueriedUsersRequest.cs" t="Include" />
+                <e p="GetUserRequest.cs" t="Include" />
+                <e p="PostUserRequest.cs" t="Include" />
+                <e p="PutUserRequest.cs" t="Include" />
+                <e p="UserBaseRequest.cs" t="Include" />
+              </e>
             </e>
           </e>
         </e>
@@ -212,6 +222,7 @@
             <e p="ReferenceSearchService.cs" t="Include" />
             <e p="SneakerProductService.cs" t="Include" />
             <e p="SneakerReferenceService.cs" t="Include" />
+            <e p="UserService.cs" t="Include" />
           </e>
         </e>
       </e>
@@ -233,6 +244,9 @@
           <e p="MiddlewareAuthHandler.cs" t="Include" />
           <e p="MiddlewareAuthOptions.cs" t="Include" />
           <e p="MiddlewareAuthPostConfigureOptions.cs" t="Include" />
+          <e p="Service" t="Include">
+            <e p="AuthTokenSerializer.cs" t="Include" />
+          </e>
         </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="Config" t="Include">
@@ -240,7 +254,6 @@
         </e>
         <e p="Controllers" t="Include">
           <e p="AboutController.cs" t="Include" />
-          <e p="AuthController.cs" t="Include" />
           <e p="CheckOutController.cs" t="Include" />
           <e p="ContactController.cs" t="Include" />
           <e p="HomeController.cs" t="Include" />
@@ -261,6 +274,10 @@
             <e p="ShopReferenceItemController.cs" t="Include" />
             <e p="ShopReferencesController.cs" t="Include" />
           </e>
+          <e p="user" t="Include">
+            <e p="AuthController.cs" t="Include" />
+            <e p="ProfileController.cs" t="Include" />
+          </e>
         </e>
         <e p="Data" t="Include">
           <e p="Catalog" t="Include">
@@ -279,6 +296,9 @@
             <e p="ProductsFilterContent.cs" t="Include" />
             <e p="ReferencesFilterContent.cs" t="Include" />
           </e>
+          <e p="Users" t="Include">
+            <e p="UserStore.cs" t="Include" />
+          </e>
           <e p="Wizard" t="Include">
             <e p="IEntityWizard.cs" t="Include" />
             <e p="SneakerProductWizard.cs" t="Include" />
@@ -288,6 +308,13 @@
         </e>
         <e p="libman.json" t="Include" />
         <e p="Models" t="Include">
+          <e p="Auth" t="Include">
+            <e p="ForgotPasswordViewModel.cs" t="Include" />
+            <e p="LoginViewModel.cs" t="Include" />
+            <e p="RecoveryCodeViewModel.cs" t="Include" />
+            <e p="ResetPasswordViewModel.cs" t="Include" />
+            <e p="SignUpViewModel.cs" t="Include" />
+          </e>
           <e p="ErrorViewModel.cs" t="Include" />
           <e p="HomePageInfoViewModel.cs" t="Include" />
           <e p="SneakerBrandReferenceViewModel.cs" t="Include" />
@@ -318,6 +345,9 @@
           <e p="TagHelpers" t="Include">
             <e p="ToggleTagHelper.cs" t="Include" />
           </e>
+          <e p="UrlHelpers" t="Include">
+            <e p="UrlHelperExtensions.cs" t="Include" />
+          </e>
           <e p="Utils.cs" t="Include" />
         </e>
         <e p="Views" t="Include">
@@ -325,6 +355,19 @@
           <e p="_ViewStart.cshtml" t="Include" />
           <e p="About" t="Include">
             <e p="About.cshtml" t="Include" />
+          </e>
+          <e p="Auth" t="Include">
+            <e p="AccessDenied.cshtml" t="Include" />
+            <e p="ConfirmEmail.cshtml" t="Include" />
+            <e p="ForgotPassword.cshtml" t="Include" />
+            <e p="ForgotPasswordConfirmation.cshtml" t="Include" />
+            <e p="Lockout.cshtml" t="Include" />
+            <e p="Login.cshtml" t="Include" />
+            <e p="LoginWithRecoveryCode.cshtml" t="Include" />
+            <e p="ResetPassword.cshtml" t="Include" />
+            <e p="ResetPasswordConfirmation.cshtml" t="Include" />
+            <e p="SignedOut.cshtml" t="Include" />
+            <e p="SignUp.cshtml" t="Include" />
           </e>
           <e p="Checkout" t="Include">
             <e p="Checkout.cshtml" t="Include" />

@@ -1,4 +1,5 @@
-﻿using Core.Entities.Users;
+﻿using System.Threading.Tasks;
+using Core.Entities.Users;
 using Core.Gateway;
 using Core.Services;
 using Infrastructure.Gateway.REST;
@@ -27,5 +28,23 @@ namespace Infrastructure.Usecase
 			(token = _client.Request<AuthToken>(new AuthRefreshTokenRequest(token))) != null;
 
 		public bool ValidateToken(AuthToken token) => _client.Request<bool>(new AuthValidateTokenRequest(token));
+
+		public Task<AuthToken> SingUpAsync(User user, AuthCredentials credentials) =>
+			_client.RequestAsync<AuthToken>(new AuthSingUpRequest(user, credentials));
+
+		public Task<AuthToken> LoginAsync(AuthCredentials credentials) =>
+			_client.RequestAsync<AuthToken>(new AuthLoginRequest(credentials));
+
+		public Task<AuthToken> GuestAsync() =>
+			 _client.RequestAsync<AuthToken>(new AuthGuestRequest());
+
+		public Task LogoutAsync(AuthToken token) =>
+			_client.RequestAsync(new AuthValidateTokenRequest(token));
+
+		public Task<AuthToken> RefreshTokenAsync(AuthToken token) =>
+			_client.RequestAsync<AuthToken>(new AuthRefreshTokenRequest(token));
+
+		public Task<bool> ValidateTokenAsync(AuthToken token) =>
+			_client.RequestAsync<bool>(new AuthValidateTokenRequest(token));
 	}
 }

@@ -1,4 +1,5 @@
-﻿using Core.Entities.Users;
+﻿using System.Threading.Tasks;
+using Core.Entities.Users;
 
 namespace Core.Services
 {
@@ -15,5 +16,17 @@ namespace Core.Services
 		bool RefreshToken(ref AuthToken token);
 
 		bool ValidateToken(AuthToken token);
+
+		Task<AuthToken> SingUpAsync(User user, AuthCredentials credentials);
+
+		Task<AuthToken> LoginAsync(AuthCredentials credentials);
+
+		Task<AuthToken> GuestAsync();
+
+		Task LogoutAsync(AuthToken token);
+
+		Task<AuthToken> RefreshTokenAsync(AuthToken token);
+
+		Task<bool> ValidateTokenAsync(AuthToken token);
 	}
 }

@@ -6,7 +6,7 @@ namespace Infrastructure.Gateway.REST.ProductRequests.Sneakers
 {
 	public class GetQueriedSneakersRequest : BaseSneakersListRequest
 	{
-		public GetQueriedSneakersRequest(IEnumerable<string> idCodes) : base("/query")
+		public GetQueriedSneakersRequest(IEnumerable<string> idCodes) : base("")
 		{
 			foreach (var id in idCodes)
 			{

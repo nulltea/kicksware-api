@@ -64,7 +64,7 @@ namespace Web.Controllers
 
 			if (!string.IsNullOrEmpty(sortBy)) handler.ChooseSortParameter(sortBy);
 
-			handler.FetchPage(page);
+			await handler.FetchPageAsync(page);
 
 			return Json(new
 			{

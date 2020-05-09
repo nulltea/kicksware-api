@@ -2,6 +2,8 @@
 using Core.Entities.Users;
 using Core.Gateway;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 
 namespace Web.Auth
@@ -31,6 +33,14 @@ namespace Web.Auth
 		public CookieSecurePolicy CookieSecure { get; set; } = CookieSecurePolicy.None;
 
 		public TimeSpan CookieExpireTimeSpan { get; set; }
+
+		public ICookieManager CookieManager { get; set; }
+
+		public IDataProtectionProvider DataProtectionProvider { get; set; }
+
+		public ISecureDataFormat<AuthToken> TokenDataFormat { get; set; }
+
+		public ITicketStore SessionStore { get; set; }
 
 		public MiddlewareAuthOptions() { }
 	}

@@ -21,7 +21,7 @@ namespace Infrastructure.Usecase
 		public SneakerProductService(ISneakerProductRepository repository, IGatewayClient<IGatewayRestRequest> client) =>
 			(_repository, _client) = (repository, client);
 
-		#region CRUD Sync
+		#region CRUD sync
 
 		public SneakerProduct FetchUnique(string sneakerId, RequestParams requestParams = default) =>
 			_repository.GetUnique(sneakerId, requestParams);
@@ -66,7 +66,7 @@ namespace Infrastructure.Usecase
 
 		#endregion
 
-		#region CRUD Async
+		#region CRUD async
 
 		public Task<SneakerProduct> FetchUniqueAsync(string sneakerId, RequestParams requestParams = default) =>
 			_repository.GetUniqueAsync(sneakerId, requestParams);
