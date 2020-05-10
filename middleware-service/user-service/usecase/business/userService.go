@@ -69,8 +69,8 @@ func (s *UserService) Register(user *model.User) error {
 	if err := validate.Validate(user); err != nil {
 		return errs.Wrap(ErrUserInvalid, "service.repo.Register")
 	}
-	user.UniqueId = xid.New().String()
 	user.RegisterDate = time.Now()
+	user.UniqueID = xid.NewWithTime(user.RegisterDate).String()
 	return s.repo.Store(user)
 }
 

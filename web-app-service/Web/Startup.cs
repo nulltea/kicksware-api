@@ -10,14 +10,17 @@ using Infrastructure.Data;
 using Infrastructure.Gateway.REST;
 using Infrastructure.Gateway.REST.Client;
 using Infrastructure.Usecase;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SmartBreadcrumbs.Extensions;
 using Web.Auth;
+using Web.Container.Factory;
 using Web.Handlers.Filter;
 using Web.Handlers.Users;
 
@@ -36,6 +39,7 @@ namespace Web
 		{
 			services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true);
 			services.AddControllersWithViews();
+			services.AddHttpContextAccessor();
 			services.AddSession();
 
 			services.AddBreadcrumbs(GetType().Assembly, options =>
@@ -55,7 +59,7 @@ namespace Web
 
 			#region Dependency injection
 
-			services.AddSingleton<IGatewayClient<IGatewayRestRequest>, RestfulClient>();
+			services.AddTransient<IGatewayClient<IGatewayRestRequest>, RestfulClient>(ServiceFactory.ProvideRestClient);
 
 			services.AddSingleton<ISneakerProductRepository, SneakerProductsRestRepository>();
 			services.AddSingleton<ISneakerReferenceRepository, SneakerReferencesRestRepository>();
@@ -63,16 +67,18 @@ namespace Web
 
 			services.AddTransient<ICommonService<SneakerReference>, SneakerReferenceService>();
 			services.AddTransient<ICommonService<SneakerProduct>, SneakerProductService>();
-			services.AddSingleton<ISneakerReferenceService, SneakerReferenceService>();
-			services.AddSingleton<ISneakerProductService, SneakerProductService>();
-			services.AddSingleton<IReferenceSearchService, ReferenceSearchService>();
-			services.AddSingleton<IUserService, UserService>();
+			services.AddTransient<ISneakerReferenceService, SneakerReferenceService>();
+			services.AddTransient<ISneakerProductService, SneakerProductService>();
+			services.AddTransient<IReferenceSearchService, ReferenceSearchService>();
+			services.AddTransient<IUserService, UserService>();
 
 
 			services.AddTransient<FilterContentBuilder<SneakerReference>, ReferencesFilterContent>();
 			services.AddTransient<FilterContentBuilder<SneakerProduct>, ProductsFilterContent>();
 
 			services.AddTransient<IUserStore<User>, UserStore>();
+
+			services.AddSingleton<ISecureDataFormat<AuthToken>, SecureDataFormat<AuthToken>>(ServiceFactory.ProvideSecureTokenFormat);
 
 			#endregion
 

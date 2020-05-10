@@ -15,7 +15,7 @@ namespace Infrastructure.Usecase
 
 		#region CRUD sync
 
-		public User FetchUnique(string username, RequestParams requestParams = default) =>_repository.GetUnique(username, requestParams);
+		public User FetchUnique(string userID, RequestParams requestParams = default) =>_repository.GetUnique(userID, requestParams);
 
 		public List<User> Fetch(RequestParams requestParams = default) =>_repository.Get(requestParams);
 
@@ -32,7 +32,7 @@ namespace Infrastructure.Usecase
 
 		public bool Remove(User user, RequestParams requestParams = default) => _repository.Delete(user, requestParams);
 
-		public bool Remove(string username, RequestParams requestParams = default) => _repository.Delete(username, requestParams);
+		public bool Remove(string userID, RequestParams requestParams = default) => _repository.Delete(userID, requestParams);
 
 		public int Count(Dictionary<string, object> query, RequestParams requestParams = default) => _repository.Count(query, requestParams);
 
@@ -42,7 +42,7 @@ namespace Infrastructure.Usecase
 
 		#region CRUD async
 
-		public Task<User> FetchUniqueAsync(string username, RequestParams requestParams = default) => _repository.GetUniqueAsync(username, requestParams);
+		public Task<User> FetchUniqueAsync(string userID, RequestParams requestParams = default) => _repository.GetUniqueAsync(userID, requestParams);
 
 		public Task<List<User>> FetchAsync(RequestParams requestParams = default) => _repository.GetAsync(requestParams);
 
@@ -58,7 +58,7 @@ namespace Infrastructure.Usecase
 
 		public Task<bool> RemoveAsync(User user, RequestParams requestParams = default) => _repository.DeleteAsync(user, requestParams);
 
-		public Task<bool> RemoveAsync(string username, RequestParams requestParams = default) => _repository.DeleteAsync(username, requestParams);
+		public Task<bool> RemoveAsync(string userID, RequestParams requestParams = default) => _repository.DeleteAsync(userID, requestParams);
 
 		public Task<int> CountAsync(Dictionary<string, object> query, RequestParams requestParams = default) => _repository.CountAsync(query, requestParams);
 
@@ -69,13 +69,13 @@ namespace Infrastructure.Usecase
 
 		#region Usecase
 
-		public void SendEmailConfirmation(string username, string callbackUrl) => throw new System.NotImplementedException();
+		public void SendEmailConfirmation(string userID, string callbackUrl) => throw new System.NotImplementedException();
 
-		public Task SendEmailConfirmationAsync(string username, string callbackUrl) => throw new System.NotImplementedException();
+		public Task SendEmailConfirmationAsync(string userID, string callbackUrl) => throw new System.NotImplementedException();
 
-		public void SendResetPasswordEmail(string username, string callbackUrl) => throw new System.NotImplementedException();
+		public void SendResetPasswordEmail(string userID, string callbackUrl) => throw new System.NotImplementedException();
 
-		public Task SendResetPasswordEmailAsync(string username, string callbackUrl) => throw new System.NotImplementedException();
+		public Task SendResetPasswordEmailAsync(string userID, string callbackUrl) => throw new System.NotImplementedException();
 
 		#endregion
 	}

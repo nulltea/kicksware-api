@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
+using Core.Entities.Users;
 
 namespace Core.Gateway
 {
 	public interface IGatewayClient<in T> where T : IGatewayRequest
 	{
-		void Authenticate();
+		void Authenticate(AuthToken token);
 
 		bool Request(T request);
 

@@ -5,6 +5,8 @@ namespace Core.Entities.Users
 {
 	public class AuthToken
 	{
+		public string Name { get; set; }
+
 		public string Token { get; set; }
 
 		public bool Success { get; set; }

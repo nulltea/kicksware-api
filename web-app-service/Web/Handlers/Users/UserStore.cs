@@ -28,23 +28,22 @@ namespace Web.Handlers.Users
 
 		public Task<User> FindByIdAsync(string userId, CancellationToken _) => _service.FetchUniqueAsync(userId);
 
-		public Task<User> FindByNameAsync(string normalizedUserName, CancellationToken _) => _service.FetchUniqueAsync(normalizedUserName);
+		public Task<User> FindByNameAsync(string normalizedUserName, CancellationToken _) => _service.FetchUniqueAsync(normalizedUserName.ToLower());
 
-		public Task<string> GetNormalizedUserNameAsync(User user, CancellationToken _) => Task.FromResult(user.UserName);
+		public Task<string> GetNormalizedUserNameAsync(User user, CancellationToken _) => Task.FromResult(user.UniqueID);
 
 		public Task<string> GetUserIdAsync(User user, CancellationToken _) => Task.FromResult(user.UniqueID);
 
-		public Task<string> GetUserNameAsync(User user, CancellationToken _) => Task.FromResult(user.UserName);
+		public Task<string> GetUserNameAsync(User user, CancellationToken _) => Task.FromResult(user.UniqueID);
 
 		public Task SetNormalizedUserNameAsync(User user, string normalizedName, CancellationToken _)
 		{
-			user.UserName = normalizedName;
 			return Task.CompletedTask;
 		}
 
 		public Task SetUserNameAsync(User user, string userName, CancellationToken _)
 		{
-			user.UserName = userName;
+			user.UniqueID = userName;
 			return Task.CompletedTask;
 		}
 

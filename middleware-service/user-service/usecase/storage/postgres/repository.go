@@ -51,7 +51,7 @@ func (r *repository) FetchOne(code string) (*model.User, error) {
 	defer cancel()
 	user := &model.User{}
 	cmd, args, err := sqb.Select("*").From(r.table).
-		Where(sqb.Eq{"UniqueId":code}).PlaceholderFormat(sqb.Dollar).ToSql()
+		Where(sqb.Eq{"uniqueid":code}).PlaceholderFormat(sqb.Dollar).ToSql()
 	if err != nil {
 		return nil, errors.Wrap(err, "repository.User.FetchOne")
 	}
@@ -66,7 +66,7 @@ func (r *repository) Fetch(codes []string, params meta.RequestParams) ([]*model.
 	defer cancel()
 	users := make([]*model.User, 0)
 	cmd, args, err := sqb.Select("*").From(r.table).
-		Where(sqb.Eq{"UniqueId":codes}).PlaceholderFormat(sqb.Dollar).ToSql()
+		Where(sqb.Eq{"uniqueid":codes}).PlaceholderFormat(sqb.Dollar).ToSql()
 	if err != nil {
 		return nil, errors.Wrap(err, "repository.User.Fetch")
 	}
@@ -134,7 +134,7 @@ func (r *repository) Modify(user *model.User) error {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	cmd, args, err := sqb.Update(r.table).SetMap(util.ToMap(user)).
-		Where(sqb.Eq{"UniqueId":user.UniqueId}).PlaceholderFormat(sqb.Dollar).ToSql()
+		Where(sqb.Eq{"uniqueid":user.UniqueID}).PlaceholderFormat(sqb.Dollar).ToSql()
 	if err != nil {
 		return errors.Wrap(err, "repository.User.Store")
 	}
@@ -154,7 +154,7 @@ func (r *repository) Replace(user *model.User) error {
 func (r *repository) Remove(code string) error {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	cmd, args, err := sqb.Delete(r.table).Where(sqb.Eq{"UniqueId":code}).PlaceholderFormat(sqb.Dollar).ToSql()
+	cmd, args, err := sqb.Delete(r.table).Where(sqb.Eq{"uniqueid":code}).PlaceholderFormat(sqb.Dollar).ToSql()
 	if err != nil {
 		return errors.Wrap(err, "repository.User.Remove")
 	}

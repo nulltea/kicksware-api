@@ -4,9 +4,9 @@ namespace Infrastructure.Gateway.REST.Users
 {
 	public class GetUserRequest : UserBaseRequest
 	{
-		public GetUserRequest(string username) : base("/{username}")
+		public GetUserRequest(string userID) : base("/{userID}")
 		{
-			AddParameter("username", username, ParameterType.UrlSegment);
+			AddParameter("userID", userID, ParameterType.UrlSegment);
 		}
 	}
 }

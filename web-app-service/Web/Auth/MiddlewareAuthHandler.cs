@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -8,9 +10,11 @@ using Core.Entities.Users;
 using Core.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Web.Utils.Extensions;
 
 namespace Web.Auth
 {
@@ -47,7 +51,7 @@ namespace Web.Auth
 
 			if (!fetchedToken.Succeeded) return fetchedToken;
 
-			StoreCookieToken(RetrieveFromTicket(fetchedToken.Ticket));
+			StoreCookieToken(fetchedToken.Ticket.RetrieveToken());
 
 			_getTokenTask = Task.FromResult(fetchedToken);
 			return fetchedToken;
@@ -55,7 +59,9 @@ namespace Web.Auth
 
 		protected override async Task HandleChallengeAsync(AuthenticationProperties properties)
 		{
-			throw new NotImplementedException($"{nameof(HandleChallengeAsync)} not implemented");
+			var authResult = await HandleAuthenticateOnceSafeAsync();
+
+			if (!authResult.Succeeded) Response.StatusCode = (int) HttpStatusCode.Unauthorized;
 		}
 
 		protected override async Task HandleSignInAsync(ClaimsPrincipal user, AuthenticationProperties properties)
@@ -68,7 +74,7 @@ namespace Web.Auth
 
 			if (!fetchedToken.Succeeded) return;
 
-			StoreCookieToken(RetrieveFromTicket(fetchedToken.Ticket));
+			StoreCookieToken(fetchedToken.Ticket.RetrieveToken());
 		}
 
 		protected override Task HandleSignOutAsync(AuthenticationProperties properties)
@@ -87,7 +93,7 @@ namespace Web.Auth
 		{
 			var cookie = Options.CookieManager.GetRequestCookie(Context, Options.Cookie.Name);
 
-			token = Options.TokenDataFormat.Unprotect(cookie, GetTlsTokenBinding());
+			token = Options.TokenDataFormat.Unprotect(cookie, Context.GetTlsTokenBinding());
 
 			if (token is null) return AuthenticateResult.Fail("Unprotect token failed");
 
@@ -120,7 +126,8 @@ namespace Web.Auth
 
 		private void StoreCookieToken(AuthToken token)
 		{
-			var cookieValue = Options.TokenDataFormat.Protect(token, GetTlsTokenBinding());
+			var cookieValue = Options.TokenDataFormat.Protect(token, Context.GetTlsTokenBinding());
+
 
 			Options.CookieManager.AppendResponseCookie(
 				Context,
@@ -139,24 +146,37 @@ namespace Web.Auth
 
 		private AuthenticationTicket ProvideTokenAuthTicket(AuthToken token)
 		{
-			var ticket = new AuthenticationTicket(ClaimsPrincipal.Current, ProvideTokenAuthProperties(token),
-				Scheme.Name);
+			var claims = ReadTokenPayload(token);
+			if (claims is null) throw new NullReferenceException(nameof(claims));
+
+			var ticket = new AuthenticationTicket(claims, token.ToAuthProperties(), Scheme.Name);
 			return ticket;
 		}
-
-		private AuthenticationProperties ProvideTokenAuthProperties(AuthToken token) =>
-			new AuthenticationProperties(new Dictionary<string, string>
-			{
-				{TokenPropertyName, token.Token}
-			});
-
-		private AuthToken RetrieveFromTicket(AuthenticationTicket ticket) => ticket.Properties.GetParameter<AuthToken>(TokenPropertyName);
 
 		private AuthCredentials ProvideClaimsCredentials(ClaimsPrincipal claims)
 		{
 
 			var claimsMap = claims.Claims.ToDictionary(claim => claim.Type, claim => claim.Value);
 			return new AuthCredentials(claimsMap[ClaimTypes.Email], claimsMap["pwd"]);
+		}
+
+		private ClaimsPrincipal ReadTokenPayload(AuthToken token)
+		{
+			var handler = new JwtSecurityTokenHandler();
+			var claims = handler.ReadJwtToken(token).Claims?.ToList();
+
+			if (claims is null || !claims.Any()) return null;
+
+			var identity = new ClaimsIdentity(claims, MiddlewareAuthDefaults.AuthenticationScheme);
+
+			return new ClaimsPrincipal(identity);
+		}
+		private ClaimsPrincipal ProvideGuestClaims()
+		{
+			var id = new ClaimsIdentity(MiddlewareAuthDefaults.AuthenticationScheme);
+			id.AddClaim(new Claim(ClaimTypes.Name, "guest"));
+			id.AddClaim(new Claim(ClaimTypes.Anonymous, true.ToString()));
+			return new ClaimsPrincipal(id);
 		}
 
 		private void CheckForRefresh(AuthenticationTicket token)
@@ -168,14 +188,8 @@ namespace Web.Auth
 			if (expiresUtc < currentUtc)
 			{
 				//_service.RefreshToken(ref token);
-				StoreCookieToken(RetrieveFromTicket(token));
+				StoreCookieToken(token.RetrieveToken());
 			}
-		}
-
-		private string GetTlsTokenBinding()
-		{
-			var binding = Context.Features.Get<ITlsTokenBindingFeature>()?.GetProvidedTokenBindingId();
-			return binding == null ? null : Convert.ToBase64String(binding);
 		}
 	}
 }

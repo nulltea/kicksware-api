@@ -54,11 +54,11 @@ func newMongoClient(mongoURL string, mongoTimeout int) (*mongo.Client, error) {
 	return client, nil
 }
 
-func (r *repository) FetchOne(username string) (*model.User, error) {
+func (r *repository) FetchOne(userID string) (*model.User, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 	user := &model.User{}
-	filter := bson.M{"username": username}
+	filter := bson.M{"uniqueid": userID}
 	err := r.collection.FindOne(ctx, filter).Decode(&user)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -72,7 +72,7 @@ func (r *repository) FetchOne(username string) (*model.User, error) {
 func (r *repository) Fetch(usernames []string, params meta.RequestParams) ([]*model.User, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
-	filter := bson.M{"username": bson.M{"$in": usernames}}
+	filter := bson.M{"uniqueid": bson.M{"$in": usernames}}
 
 	cursor, err := r.collection.Find(ctx, filter)
 	if err != nil  {
@@ -160,7 +160,7 @@ func (r *repository) Modify(user *model.User) error {
 	update := bson.D{
 		{"$set", doc},
 	}
-	filter := bson.M{"UniqueId": user.UniqueId}
+	filter := bson.M{"uniqueid": user.UniqueID}
 	if _, err = r.collection.UpdateOne(ctx, filter, update); err != nil {
 		return errors.Wrap(err, "repository.User.Modify")
 	}
@@ -170,7 +170,7 @@ func (r *repository) Modify(user *model.User) error {
 func (r *repository) Replace(user *model.User) error {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
-	filter := bson.M{"uniqueid": user.UniqueId}
+	filter := bson.M{"uniqueid": user.UniqueID}
 	if _, err := r.collection.ReplaceOne(ctx, filter, user); err != nil {
 		return errors.Wrap(err, "repository.User.Replace")
 	}
@@ -180,7 +180,7 @@ func (r *repository) Replace(user *model.User) error {
 func (r *repository) Remove(code string) error {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
-	filter := bson.M{"UniqueId": code}
+	filter := bson.M{"uniqueid": code}
 	if _, err := r.collection.DeleteOne(ctx, filter); err != nil {
 		return errors.Wrap(err, "repository.User.Remove")
 	}

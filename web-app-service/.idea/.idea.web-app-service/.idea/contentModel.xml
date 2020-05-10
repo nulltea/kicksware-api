@@ -240,6 +240,7 @@
         <e p="Auth" t="Include">
           <e p="Events" t="Include" />
           <e p="MiddleareAuthExtensions.cs" t="Include" />
+          <e p="MiddleareAuthServiceExtensions.cs" t="Include" />
           <e p="MiddlewareAuthDefaults.cs" t="Include" />
           <e p="MiddlewareAuthHandler.cs" t="Include" />
           <e p="MiddlewareAuthOptions.cs" t="Include" />
@@ -251,6 +252,12 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="Config" t="Include">
           <e p="AppSettings.cs" t="Include" />
+        </e>
+        <e p="Container" t="Include">
+          <e p="Factory" t="Include">
+            <e p="AuthFactory.cs" t="Include" />
+            <e p="ClientFactory.cs" t="Include" />
+          </e>
         </e>
         <e p="Controllers" t="Include">
           <e p="AboutController.cs" t="Include" />
@@ -309,6 +316,7 @@
         <e p="libman.json" t="Include" />
         <e p="Models" t="Include">
           <e p="Auth" t="Include">
+            <e p="AuthCommonViewModel.cs" t="Include" />
             <e p="ForgotPasswordViewModel.cs" t="Include" />
             <e p="LoginViewModel.cs" t="Include" />
             <e p="RecoveryCodeViewModel.cs" t="Include" />
@@ -336,6 +344,7 @@
         <e p="Startup.cs" t="Include" />
         <e p="Utils" t="Include">
           <e p="Extensions" t="Include">
+            <e p="ContextExtensions.cs" t="Include" />
             <e p="ControllerExtensions.cs" t="Include" />
           </e>
           <e p="HtmlHelpers" t="Include">
@@ -358,6 +367,7 @@
           </e>
           <e p="Auth" t="Include">
             <e p="AccessDenied.cshtml" t="Include" />
+            <e p="AuthDialog.cshtml" t="Include" />
             <e p="ConfirmEmail.cshtml" t="Include" />
             <e p="ForgotPassword.cshtml" t="Include" />
             <e p="ForgotPasswordConfirmation.cshtml" t="Include" />
@@ -378,6 +388,9 @@
           <e p="Home" t="Include">
             <e p="Index.cshtml" t="Include" />
             <e p="Privacy.cshtml" t="Include" />
+          </e>
+          <e p="Profile" t="Include">
+            <e p="Profile.cshtml" t="Include" />
           </e>
           <e p="Sell" t="Include">
             <e p="ModifyProduct.cshtml" t="Include" />
@@ -732,8 +745,13 @@
                 <e p="408452-617_1.png" t="Include" />
                 <e p="408452_033_1_2.png" t="Include" />
                 <e p="408452_089_1.png" t="Include" />
+                <e p="414574-042_1.png" t="Include" />
                 <e p="414574-115_1.png" t="Include" />
+                <e p="414574-122_1.png" t="Include" />
                 <e p="414574-405_1.png" t="Include" />
+                <e p="414574-705_1.png" t="Include" />
+                <e p="414574_004_1.png" t="Include" />
+                <e p="414574_103_1.png" t="Include" />
                 <e p="415082-403_1.png" t="Include" />
                 <e p="416269-101_1.png" t="Include" />
                 <e p="428902-302_1.png" t="Include" />
@@ -1121,6 +1139,7 @@
                 <e p="883232-441_1.png" t="Include" />
                 <e p="883232-442_1.png" t="Include" />
                 <e p="883232_008_1_4.png" t="Include" />
+                <e p="884129-104_1_1.png" t="Include" />
                 <e p="884129_011_1.png" t="Include" />
                 <e p="884129_061.png" t="Include" />
                 <e p="884491-103_1.png" t="Include" />

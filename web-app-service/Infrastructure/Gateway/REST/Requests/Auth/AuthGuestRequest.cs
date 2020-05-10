@@ -2,6 +2,6 @@
 {
 	public class AuthGuestRequest : AuthBaseRequest
 	{
-		public AuthGuestRequest() : base("guest") { }
+		public AuthGuestRequest() : base("/guest") { }
 	}
 }

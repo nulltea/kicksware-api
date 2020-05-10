@@ -50,8 +50,8 @@ func NewHandler(service service.UserService, auth service.AuthService, config en
 }
 
 func (h *handler) GetOne(w http.ResponseWriter, r *http.Request) {
-	username := chi.URLParam(r,"username")
-	user, err := h.service.FetchOne(username)
+	userID := chi.URLParam(r,"userID")
+	user, err := h.service.FetchOne(userID)
 	if err != nil {
 		if errors.Cause(err) == business.ErrUserNotFound {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
@@ -76,7 +76,7 @@ func (h *handler) Get(w http.ResponseWriter, r *http.Request) {
 		}
 		users, err = h.service.FetchQuery(query, params)
 	} else if r.Method == http.MethodGet {
-		if codes := r.URL.Query()["userId"]; codes != nil && len(codes) != 0 {
+		if codes := r.URL.Query()["userID"]; codes != nil && len(codes) != 0 {
 			users, err = h.service.Fetch(codes, params)
 		} else {
 			users, err = h.service.FetchAll(params)
@@ -146,7 +146,7 @@ func (h *handler) Put(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *handler) Delete(w http.ResponseWriter, r *http.Request) {
-	code := chi.URLParam(r,"sneakerId")
+	code := chi.URLParam(r,"userID")
 	err := h.service.Remove(code)
 	if err != nil {
 		if errors.Cause(err) == business.ErrUserNotFound {

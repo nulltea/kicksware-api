@@ -111,7 +111,7 @@
 					color: @google-red-color;
 					border: 2.8px solid @google-red-color;
 					.with-theme({
-						background:@hint;
+						background: @hint;
 					});
 
 					.google-logo {
@@ -153,17 +153,27 @@
 				.email-input, .password-input {
 					width: 100%;
 					height: 40px;
+					border: none;
 					.with-theme({
-	background: @hint;
-});
-					.with-theme({
-						border: 2.8px solid @secondary;
+						background: lighten(@hint, 4%);
+						border-bottom: 2.8px solid @secondary;
+						.elevation(1, @elevation);
 					});
 					outline: none;
 					padding-left: 15px;
+
+					&:-webkit-autofill,
+					&:-webkit-autofill:hover,
+					&:-webkit-autofill:focus,
+					&:-webkit-autofill:active {
+						.with-theme({
+							-webkit-box-shadow: 0 0 0 30px lighten(@hint, 4%) inset !important;
+							-webkit-text-fill-color: @secondary !important;
+						})
+					}
 				}
 
-				.notify-input {
+				.auth-checkbox {
 					margin-top: 15px;
 				}
 			}

@@ -35,19 +35,13 @@ function singUpShow() {
 	if (!modal.is(":visible")) {
 		modal.modal("show");
 	}
-	$("button[type=submit]").click(function (event) {
-		$.post($(".auth-form").attr("action"), model, function(response) {
-			window.location.href = response.redirectUrl;
-		});
-		event.preventDefault();
-	})
 }
 
 function authSingUpShow() {
 	$("#auth-title").text("Create an Account");
 	$("#auth-btn-caption").text("Sing Up");
 	$("#auth-footer-msg").hide();
-	$("#notify-footer-msg").show();
+	$(".auth-checkbox .checkbox_title").text("Sign up for emails from Kicksware");
 	$("#auth").css("cursor", "pointer")
 		.on("click", loginShow);
 	$("#auth-privacy").show();
@@ -59,11 +53,12 @@ function authLoginShow() {
 	$("#auth-title").text("Log in");
 	$("#auth-btn-caption").text("Log in");
 	$("#auth-footer-msg").show();
-	$("#notify-footer-msg").hide();
+	$(".auth-checkbox .checkbox_title").text("Remember me");
 	$("#sing-up").css("cursor", "pointer");
 	$("#auth-privacy").hide();
 	$("#login-content").hide();
 	$("#auth-content").show();
+
 }
 
 
@@ -82,4 +77,11 @@ $(document).ready(function () {
 			modal.modal("hide");
 		}
 	});
+
+	$("#auth-content button[type=submit]").click(function (event) {
+		$.post($(".auth-form").attr("action"), model, function(response) {
+			window.location.href = response.redirectUrl;
+		});
+		event.preventDefault();
+	})
 });

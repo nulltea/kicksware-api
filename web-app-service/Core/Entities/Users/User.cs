@@ -7,8 +7,6 @@ namespace Core.Entities.Users
 	{
 		public string UniqueID { get; set; }
 
-		public string UserName { get; set; }
-
 		public string PasswordHash { get; set; }
 
 		public string FirstName { get; set; }

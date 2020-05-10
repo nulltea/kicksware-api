@@ -102,7 +102,7 @@ func (r *repository) FetchQuery(query meta.RequestQuery, params meta.RequestPara
 }
 
 func (r *repository) Store(user *model.User) error {
-	key := r.generateKey(user.UniqueId)
+	key := r.generateKey(user.UniqueID)
 	data, err := json.Marshal(user)
 	if err != nil {
 		return errors.Wrap(err, "repository.User.Store")
@@ -136,7 +136,7 @@ func (r *repository) Remove(code string) error {
 }
 
 func (r *repository) RemoveObj(user *model.User) error {
-	if err := r.Remove(user.UniqueId); err != nil {
+	if err := r.Remove(user.UniqueID); err != nil {
 		return errors.Wrap(err, "repository.User.RemoveObj")
 	}
 	return nil

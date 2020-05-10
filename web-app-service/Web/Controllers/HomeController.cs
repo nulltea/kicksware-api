@@ -4,6 +4,8 @@ using System.Linq;
 using Core.Entities.References;
 using Core.Gateway;
 using Core.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SmartBreadcrumbs.Attributes;
@@ -53,6 +55,7 @@ namespace Web.Controllers
 			_logger = logger;
 		}
 
+		[Authorize]
 		public IActionResult Index()
 		{
 			ViewBag.FeaturedReferences = GetFeatured();

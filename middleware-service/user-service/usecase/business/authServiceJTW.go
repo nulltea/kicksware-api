@@ -43,7 +43,7 @@ func (s *authService) SingUp(user *model.User) (*meta.AuthToken, error) {
 }
 
 func (s *authService) Login(user *model.User) (*meta.AuthToken, error) {
-	registered, err := s.userService.FetchOne(user.Username); if err != nil {
+	registered, err := s.userService.FetchOne(user.UniqueID); if err != nil {
 		return nil, err
 	}
 
@@ -60,7 +60,7 @@ func (s *authService) Login(user *model.User) (*meta.AuthToken, error) {
 func (s *authService) Guest() (*meta.AuthToken, error) {
 	return s.GenerateToken(&model.User{
 		Guest: true,
-		UniqueId: xid.New().String(),
+		UniqueID: xid.New().String(),
 	})
 }
 
@@ -70,7 +70,7 @@ func (s *authService) GenerateToken(user *model.User) (*meta.AuthToken, error) {
 	token.Claims = &meta.AuthClaims {
 		ExpiresAt: expiresAt.Unix(),
 		IssuedAt: time.Now().Unix(),
-		Issuer: user.UniqueId,
+		Issuer: user.UniqueID,
 		Admin: user.Admin,
 		Guest: user.Guest,
 	}

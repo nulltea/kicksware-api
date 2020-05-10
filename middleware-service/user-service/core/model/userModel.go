@@ -3,8 +3,9 @@ package model
 import "time"
 
 type User struct {
-	UniqueId     string    `json:"uniqueid"`
-	Username     string    `json:"username"`
+	UniqueID     string    `json:"uniqueid"`
+	Email        string    `json:"email"`
+	PhoneNumber  string    `json:"phonenumber"`
 	PasswordHash string    `json:"passwordhash"`
 	Confirmed    bool      `json:"confirmed"`
 	Admin        bool      `json:"admin"`

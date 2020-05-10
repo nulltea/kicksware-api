@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Core.Entities.Users;
 using Core.Services;
@@ -22,8 +23,7 @@ namespace Web.Controllers
 
 		private readonly ILogger _logger;
 
-		public AuthController(IUserService service, UserManager<User> userManager, SignInManager<User> signInManager,
-							ILogger<AuthController> logger)
+		public AuthController(IUserService service, UserManager<User> userManager, SignInManager<User> signInManager, ILogger<AuthController> logger)
 		{
 			_service = service;
 			_userManager = userManager;
@@ -31,9 +31,16 @@ namespace Web.Controllers
 			_logger = logger;
 		}
 
+		public Task<IActionResult> Auth(AuthCommonViewModel model, AuthMode mode)
+		{
+			if (mode == AuthMode.Login) return Login(model);
+
+			return SignUp(model);
+		}
+
 		[HttpGet]
 		[AllowAnonymous]
-		public async Task<IActionResult> Login(string returnUrl = null)
+		public async Task<IActionResult> Login(string returnUrl = default)
 		{
 			await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
@@ -44,7 +51,7 @@ namespace Web.Controllers
 		[HttpPost]
 		[AllowAnonymous]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+		public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = default)
 		{
 			ViewData["ReturnUrl"] = returnUrl;
 			if (ModelState.IsValid)
@@ -67,7 +74,7 @@ namespace Web.Controllers
 
 		[HttpGet]
 		[AllowAnonymous]
-		public async Task<IActionResult> LoginWithRecoveryCode(string returnUrl = null)
+		public async Task<IActionResult> LoginWithRecoveryCode(string returnUrl = default)
 		{
 			var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
 			if (user is null) throw new ApplicationException("Unable to load two-factor authentication user.");
@@ -78,7 +85,7 @@ namespace Web.Controllers
 		[HttpPost]
 		[AllowAnonymous]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> LoginWithRecoveryCode(RecoveryCodeViewModel model, string returnUrl = null)
+		public async Task<IActionResult> LoginWithRecoveryCode(RecoveryCodeViewModel model, string returnUrl = default)
 		{
 			if (!ModelState.IsValid) return View(model);
 
@@ -99,29 +106,29 @@ namespace Web.Controllers
 
 		[HttpGet]
 		[AllowAnonymous]
-		public IActionResult SignUp(string returnUrl = null)
+		public IActionResult ContinueSignUp(SignUpViewModel model, string returnUrl = default)
 		{
 			ViewData["ReturnUrl"] = returnUrl;
-			return View();
+			return View("SignUp", model);
 		}
 
 		[HttpPost]
 		[AllowAnonymous]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> SignUp(SignUpViewModel model, string returnUrl = null)
+		public async Task<IActionResult> SignUp(SignUpViewModel model, string returnUrl = default)
 		{
 			ViewData["ReturnUrl"] = returnUrl;
 
-			if (!ModelState.IsValid) return View(model);
+			// if (!ModelState.IsValid) return View(model);
 
-			var user = new User {UserName = model.UserName, Email = model.Email};
+			var user = new User {Email = model.Email};
 			var result = await _userManager.CreateAsync(user, model.Password);
 			if (result.Succeeded)
 			{
 				_logger.LogInformation("User created a new account with password.");
 
 				var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-				var callbackUrl = Url.EmailConfirmationLink(user.UserName, code, Request.Scheme);
+				var callbackUrl = Url.EmailConfirmationLink(user.UniqueID, code, Request.Scheme);
 				await _service.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
 				await _signInManager.SignInAsync(user, false);
@@ -190,7 +197,7 @@ namespace Web.Controllers
 
 			var code = await _userManager.GeneratePasswordResetTokenAsync(user);
 			var callbackUrl = Url.ResetPasswordCallbackLink(user.UniqueID, code, Request.Scheme);
-			await _service.SendResetPasswordEmailAsync(user.UserName, callbackUrl);
+			await _service.SendResetPasswordEmailAsync(user.UniqueID, callbackUrl);
 			return RedirectToAction(nameof(ForgotPasswordConfirmation));
 		}
 
@@ -258,5 +265,12 @@ namespace Web.Controllers
 		}
 
 		#endregion
+
+		public enum AuthMode
+		{
+			SingUp,
+
+			Login
+		}
 	}
 }

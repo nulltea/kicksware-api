@@ -16,6 +16,10 @@ namespace Web.Auth
 
 		public static readonly string ReturnUrlParameter = "ReturnUrl";
 
-		public static readonly string CookiePrefix = ".Kicksware.";
+		public static readonly string CookiePrefix = "Kicksware.";
+
+		public static readonly string TokenPrefix = "auth.token";
+
+		public static string AuthCookieName => string.Concat(CookiePrefix, AuthenticationScheme);
 	}
 }

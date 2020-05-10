@@ -7,11 +7,11 @@ namespace Infrastructure.Gateway.REST.ProductRequests.Sneakers
 {
 	public class DeleteUserRequest : UserBaseRequest
 	{
-		public DeleteUserRequest(User user) : this(user.UserName) { }
+		public DeleteUserRequest(User user) : this(user.UniqueID) { }
 
-		public DeleteUserRequest(string username) : base("/{username}", Method.DELETE)
+		public DeleteUserRequest(string userID) : base("/{userID}", Method.DELETE)
 		{
-			AddParameter("username", username, ParameterType.UrlSegment);
+			AddParameter("userID", userID, ParameterType.UrlSegment);
 		}
 	}
 }

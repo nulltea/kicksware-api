@@ -15,8 +15,8 @@ namespace Infrastructure.Data
 
 		public UserRestRepository(IGatewayClient<IGatewayRestRequest> client) => _client = client;
 
-		public User GetUnique(string username, RequestParams requestParams = default) =>
-			_client.Request<User>(new GetUserRequest(username) {RequestParams = requestParams});
+		public User GetUnique(string userId, RequestParams requestParams = default) =>
+			_client.Request<User>(new GetUserRequest(userId) {RequestParams = requestParams});
 
 		public List<User> Get(RequestParams requestParams = default) =>
 			_client.Request<List<User>>(new GetAllUserRequest {RequestParams = requestParams});
@@ -39,8 +39,8 @@ namespace Infrastructure.Data
 		public bool Delete(User user, RequestParams requestParams = default) =>
 			_client.Request(new DeleteUserRequest(user) {RequestParams = requestParams});
 
-		public bool Delete(string username, RequestParams requestParams = default) =>
-			_client.Request(new DeleteUserRequest(username) {RequestParams = requestParams});
+		public bool Delete(string userId, RequestParams requestParams = default) =>
+			_client.Request(new DeleteUserRequest(userId) {RequestParams = requestParams});
 
 		public int Count(Dictionary<string, object> queryMap, RequestParams requestParams = default) =>
 			_client.Request<int>(new CountUsersRequest(queryMap) {RequestParams = requestParams});
@@ -50,8 +50,8 @@ namespace Infrastructure.Data
 
 		public int Count() => _client.Request<int>(new CountUsersRequest());
 
-		public Task<User> GetUniqueAsync(string username, RequestParams requestParams = default) =>
-			_client.RequestAsync<User>(new GetUserRequest(username));
+		public Task<User> GetUniqueAsync(string userId, RequestParams requestParams = default) =>
+			_client.RequestAsync<User>(new GetUserRequest(userId));
 
 		public Task<List<User>> GetAsync(RequestParams requestParams = default) =>
 			_client.RequestAsync<List<User>>(new GetAllUserRequest {RequestParams = requestParams});
@@ -77,8 +77,8 @@ namespace Infrastructure.Data
 		public Task<bool> DeleteAsync(User user, RequestParams requestParams = default) =>
 			_client.RequestAsync(new DeleteUserRequest(user) {RequestParams = requestParams});
 
-		public Task<bool> DeleteAsync(string username, RequestParams requestParams = default) =>
-			_client.RequestAsync(new DeleteUserRequest(username) {RequestParams = requestParams});
+		public Task<bool> DeleteAsync(string userId, RequestParams requestParams = default) =>
+			_client.RequestAsync(new DeleteUserRequest(userId) {RequestParams = requestParams});
 
 		public Task<int> CountAsync(Dictionary<string, object> queryMap, RequestParams requestParams = default) =>
 			_client.RequestAsync<int>(new CountUsersRequest(queryMap) {RequestParams = requestParams});

@@ -6,11 +6,11 @@ namespace Infrastructure.Gateway.REST.Users
 {
 	public class GetQueriedUsersRequest : UserBaseRequest
 	{
-		public GetQueriedUsersRequest(IEnumerable<string> usernames) : base("/")
+		public GetQueriedUsersRequest(IEnumerable<string> userIDs) : base("/")
 		{
-			foreach (var username in usernames)
+			foreach (var userID in userIDs)
 			{
-				AddParameter("username", username, ParameterType.QueryString);
+				AddParameter("userID", userID, ParameterType.QueryString);
 			}
 		}
 

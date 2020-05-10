@@ -5,10 +5,12 @@ using System.Runtime.Serialization;
 using System.Security.Authentication;
 using System.Threading.Tasks;
 using Core.Constants;
+using Core.Entities.Users;
 using Core.Extension;
 using Core.Gateway;
 using Infrastructure.Serializers;
 using RestSharp;
+using RestSharp.Authenticators;
 
 namespace Infrastructure.Gateway.REST.Client
 {
@@ -19,7 +21,10 @@ namespace Infrastructure.Gateway.REST.Client
 			UseSerializer(() => new JsonRestSerializer());
 		}
 
-		public void Authenticate() { }
+		public void Authenticate(AuthToken token)
+		{
+			Authenticator = new JwtAuthenticator(token);
+		}
 
 		public bool Request(IGatewayRestRequest request)
 		{

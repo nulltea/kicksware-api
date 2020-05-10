@@ -25,7 +25,7 @@ func (s *UserSorter) Less(i, j int) bool {
 	case "registered":
 		return s.items[i].RegisterDate.Sub(s.items[j].RegisterDate).Hours() < 0
 	default:
-		return s.items[i].UniqueId < s.items[j].UniqueId
+		return s.items[i].UniqueID < s.items[j].UniqueID
 	}
 }
 func (s *UserSorter) Asc() []*model.User {
