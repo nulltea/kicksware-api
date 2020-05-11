@@ -32,6 +32,7 @@ type DataStoreConfig struct {
 }
 
 type AuthConfig struct {
+	IssuerName           string `yaml:"issuerName"`
 	TokenExpirationDelta int    `yaml:"tokenExpirationDelta"`
 	PrivateKeyPath       string `yaml:"privateKeyPath"`
 	PublicKeyPath        string `yaml:"publicKeyPath"`

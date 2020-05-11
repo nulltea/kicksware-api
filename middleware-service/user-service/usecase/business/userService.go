@@ -33,6 +33,14 @@ func (s *UserService) FetchOne(code string) (*model.User, error) {
 	return s.repo.FetchOne(code)
 }
 
+func (s *UserService) FetchByEmail(email string) (*model.User, error) {
+	query := meta.RequestQuery{"email":email}
+	users, err := s.repo.FetchQuery(query, nil); if err != nil || len(users) == 0 {
+		return nil, err
+	}
+	return users[0], nil
+}
+
 func (s *UserService) Fetch(codes []string, params meta.RequestParams) ([]*model.User, error) {
 	return s.repo.Fetch(codes, params)
 }

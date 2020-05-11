@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Core.Entities.Users;
 using Core.Services;
@@ -121,17 +124,19 @@ namespace Web.Controllers
 
 			// if (!ModelState.IsValid) return View(model);
 
-			var user = new User {Email = model.Email};
+			var user = new User { Email = model.Email};
 			var result = await _userManager.CreateAsync(user, model.Password);
+
 			if (result.Succeeded)
 			{
 				_logger.LogInformation("User created a new account with password.");
 
-				var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-				var callbackUrl = Url.EmailConfirmationLink(user.UniqueID, code, Request.Scheme);
-				await _service.SendEmailConfirmationAsync(model.Email, callbackUrl);
-
-				await _signInManager.SignInAsync(user, false);
+				user = await _userManager.FindByEmailAsync(model.Email);
+				await _signInManager.SignInWithClaimsAsync(user, false, new []
+				{
+					new Claim(ClaimTypes.Email, user.Email),
+					new Claim(ClaimTypes.Hash, user.PasswordHash)
+				});
 				_logger.LogInformation("User created a new account with password.");
 				return RedirectToLocal(returnUrl);
 			}

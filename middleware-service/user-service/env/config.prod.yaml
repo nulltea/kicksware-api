@@ -5,6 +5,7 @@ commonConfig:
   contentType: application/json
   innerServiceFormat: http://%s:8080/%s/
 authConfig:
+  issuerName: middleware/user-service
   tokenExpirationDelta: 72
   privateKeyPath: key/private.key
   publicKeyPath: ../key/public.key.pub

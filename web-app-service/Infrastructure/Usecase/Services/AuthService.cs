@@ -14,7 +14,7 @@ namespace Infrastructure.Usecase
 		public AuthService(IGatewayClient<IGatewayRestRequest> client) => _client = client;
 
 		public bool SingUp(User user, AuthCredentials credentials, out AuthToken token) =>
-			(token = _client.Request<AuthToken>(new AuthSingUpRequest(user, credentials))) != null;
+			(token = _client.Request<AuthToken>(new AuthSingUpRequest(user))) != null;
 
 		public bool Login(AuthCredentials credentials, out AuthToken token) =>
 			(token = _client.Request<AuthToken>(new AuthLoginRequest(credentials))) != null;
@@ -29,8 +29,8 @@ namespace Infrastructure.Usecase
 
 		public bool ValidateToken(AuthToken token) => _client.Request<bool>(new AuthValidateTokenRequest(token));
 
-		public Task<AuthToken> SingUpAsync(User user, AuthCredentials credentials) =>
-			_client.RequestAsync<AuthToken>(new AuthSingUpRequest(user, credentials));
+		public Task<AuthToken> SingUpAsync(User user) =>
+			_client.RequestAsync<AuthToken>(new AuthSingUpRequest(user));
 
 		public Task<AuthToken> LoginAsync(AuthCredentials credentials) =>
 			_client.RequestAsync<AuthToken>(new AuthLoginRequest(credentials));

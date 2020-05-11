@@ -12,8 +12,10 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Web.Utils.Extensions;
 
 namespace Web.Auth
@@ -24,12 +26,15 @@ namespace Web.Auth
 
 		private readonly IAuthService _service;
 
+		private readonly UserManager<User> _userManager;
+
 		private const string TokenPropertyName = "AUTHTOKEN";
 
-		public MiddlewareAuthHandler(IOptionsMonitor<MiddlewareAuthOptions> options, IAuthService service,
+		public MiddlewareAuthHandler(UserManager<User> userManager, IOptionsMonitor<MiddlewareAuthOptions> options, IAuthService service,
 									ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock)
 			: base(options, logger, encoder, clock)
 		{
+			_userManager = userManager;
 			_service = service;
 		}
 
@@ -47,7 +52,7 @@ namespace Web.Auth
 
 			// if (!await _service.ValidateTokenAsync(token)) return AuthenticateResult.Fail("Token not valid");
 
-			var fetchedToken = await FetchGuestToken();
+			var fetchedToken = await RequestGuestToken();
 
 			if (!fetchedToken.Succeeded) return fetchedToken;
 
@@ -64,13 +69,13 @@ namespace Web.Auth
 			if (!authResult.Succeeded) Response.StatusCode = (int) HttpStatusCode.Unauthorized;
 		}
 
-		protected override async Task HandleSignInAsync(ClaimsPrincipal user, AuthenticationProperties properties)
+		protected override async Task HandleSignInAsync(ClaimsPrincipal claims, AuthenticationProperties properties)
 		{
-			if (user == null) throw new ArgumentNullException(nameof(user));
-			// properties = properties ?? new AuthenticationProperties();
-			var credentials = ProvideClaimsCredentials(user);
+			if (claims == null) throw new ArgumentNullException(nameof(claims));
 
-			var fetchedToken = await FetchLoginToken(credentials);
+			var user = await ProvideClaimsUser(claims);
+
+			var fetchedToken = await RequestLogin(user);
 
 			if (!fetchedToken.Succeeded) return;
 
@@ -102,7 +107,7 @@ namespace Web.Auth
 			return AuthenticateResult.Success(ProvideTokenAuthTicket(token));
 		}
 
-		private async Task<AuthenticateResult> FetchGuestToken()
+		private async Task<AuthenticateResult> RequestGuestToken()
 		{
 			if (_service is null) return AuthenticateResult.Fail("Auth service not configured");
 
@@ -113,7 +118,7 @@ namespace Web.Auth
 				: AuthenticateResult.Success(ProvideTokenAuthTicket(token));
 		}
 
-		private async Task<AuthenticateResult> FetchLoginToken(AuthCredentials credentials)
+		private async Task<AuthenticateResult> RequestLogin(AuthCredentials credentials)
 		{
 			if (_service is null) return AuthenticateResult.Fail("Auth service not configured");
 
@@ -127,7 +132,6 @@ namespace Web.Auth
 		private void StoreCookieToken(AuthToken token)
 		{
 			var cookieValue = Options.TokenDataFormat.Protect(token, Context.GetTlsTokenBinding());
-
 
 			Options.CookieManager.AppendResponseCookie(
 				Context,
@@ -153,30 +157,25 @@ namespace Web.Auth
 			return ticket;
 		}
 
-		private AuthCredentials ProvideClaimsCredentials(ClaimsPrincipal claims)
-		{
-
-			var claimsMap = claims.Claims.ToDictionary(claim => claim.Type, claim => claim.Value);
-			return new AuthCredentials(claimsMap[ClaimTypes.Email], claimsMap["pwd"]);
-		}
+		private Task<User> ProvideClaimsUser(ClaimsPrincipal claims) => _userManager.GetUserAsync(claims);
 
 		private ClaimsPrincipal ReadTokenPayload(AuthToken token)
 		{
-			var handler = new JwtSecurityTokenHandler();
-			var claims = handler.ReadJwtToken(token).Claims?.ToList();
+			var jwtHandler = new JwtSecurityTokenHandler {MapInboundClaims = true};
+			var claims = jwtHandler.ReadJwtToken(token).Claims?.ToList();
 
 			if (claims is null || !claims.Any()) return null;
+
+			for (var i = 0; i < claims.Count; i++)
+			{
+				var claim = claims[i];
+				if (!jwtHandler.InboundClaimTypeMap.TryGetValue(claim.Type, out var mappedType)) continue;
+				claims[i] = new Claim(mappedType, claim.Value, claim.Issuer, claim.Issuer);
+			}
 
 			var identity = new ClaimsIdentity(claims, MiddlewareAuthDefaults.AuthenticationScheme);
 
 			return new ClaimsPrincipal(identity);
-		}
-		private ClaimsPrincipal ProvideGuestClaims()
-		{
-			var id = new ClaimsIdentity(MiddlewareAuthDefaults.AuthenticationScheme);
-			id.AddClaim(new Claim(ClaimTypes.Name, "guest"));
-			id.AddClaim(new Claim(ClaimTypes.Anonymous, true.ToString()));
-			return new ClaimsPrincipal(id);
 		}
 
 		private void CheckForRefresh(AuthenticationTicket token)

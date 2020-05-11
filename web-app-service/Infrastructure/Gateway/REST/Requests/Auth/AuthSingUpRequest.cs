@@ -6,9 +6,8 @@ namespace Infrastructure.Gateway.REST.Auth
 {
 	public class AuthSingUpRequest : AuthBaseRequest
 	{
-		public AuthSingUpRequest(User user, AuthCredentials credentials) : base("/sing-up", Method.POST)
+		public AuthSingUpRequest(User user) : base("/sing-up", Method.POST)
 		{
-			AddJsonBody(credentials);
 			AddJsonBody(user);
 		}
 	}

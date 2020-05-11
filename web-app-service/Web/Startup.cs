@@ -84,8 +84,9 @@ namespace Web
 
 			#region Authentication
 
-			services.AddAuthentication(MiddlewareAuthDefaults.AuthenticationScheme)
-				.AddMiddlewareAuth<AuthService>(options => ConfigureAuthOptions(options))
+			services
+				.AddAuthentication(ConfigureAuthOptions)
+				.AddMiddlewareAuth<AuthService>(ConfigureAuthOptions)
 				.AddFacebook(facebookOptions =>
 				{
 					facebookOptions.AppId = Environment.GetEnvironmentVariable("Authentication:Facebook:AppId");
@@ -133,9 +134,19 @@ namespace Web
 
 		#region Configuration handlers
 
-		private static MiddlewareAuthOptions ConfigureAuthOptions(MiddlewareAuthOptions options)
+		private static void ConfigureAuthOptions(AuthenticationOptions options)
 		{
-			return options;
+			options.DefaultScheme = MiddlewareAuthDefaults.AuthenticationScheme;
+			options.DefaultSignInScheme = MiddlewareAuthDefaults.AuthenticationScheme;
+			options.DefaultAuthenticateScheme = MiddlewareAuthDefaults.AuthenticationScheme;
+			options.DefaultSignOutScheme = MiddlewareAuthDefaults.AuthenticationScheme;
+			options.DefaultChallengeScheme = MiddlewareAuthDefaults.AuthenticationScheme;
+			options.SchemeMap[IdentityConstants.ApplicationScheme].HandlerType = typeof(MiddlewareAuthHandler);
+		}
+
+		private static void ConfigureAuthOptions(MiddlewareAuthOptions options)
+		{
+
 		}
 
 		#endregion

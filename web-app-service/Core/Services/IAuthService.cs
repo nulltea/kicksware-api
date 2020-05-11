@@ -17,7 +17,7 @@ namespace Core.Services
 
 		bool ValidateToken(AuthToken token);
 
-		Task<AuthToken> SingUpAsync(User user, AuthCredentials credentials);
+		Task<AuthToken> SingUpAsync(User user);
 
 		Task<AuthToken> LoginAsync(AuthCredentials credentials);
 

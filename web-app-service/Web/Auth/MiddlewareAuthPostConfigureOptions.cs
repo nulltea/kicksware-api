@@ -26,7 +26,7 @@ namespace Web.Auth
 				IsEssential = true,
 			};
 
-			if (string.IsNullOrEmpty(options.Cookie.Name)) options.Cookie.Name = MiddlewareAuthDefaults.CookiePrefix + name;
+			if (string.IsNullOrEmpty(options.Cookie.Name)) options.Cookie.Name = MiddlewareAuthDefaults.AuthCookieName;
 
 			if (!options.LoginPath.HasValue) options.LoginPath = MiddlewareAuthDefaults.LoginPath;
 

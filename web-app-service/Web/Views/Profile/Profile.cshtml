@@ -1,8 +1,34 @@
-﻿@model Core.Entities.Users.User
+﻿@using Web.Utils.Helpers
+@model Core.Entities.Users.User
 
 @{
 	ViewBag.Title = "Profile";
 	Layout = "_Layout";
 }
 
-<h2>@Model.Email</h2>
+@section Styles
+{
+	<link href="~/styles/css/profile/profile.css" rel="stylesheet"/>
+	<link href="~/styles/css/responsive/profile.responsive.css" rel="stylesheet"/>
+}
+
+<div class="profile">
+	<div class="container products-card">
+		<div class="row content-area">
+			<aside class="profile-sidebar">
+				<nav>
+				</nav>
+			</aside>
+			<div class="profile-content">
+
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts
+{
+	<script src="~/scripts/profile/profile.js"></script>
+	<script type="text/javascript">
+	</script>
+}

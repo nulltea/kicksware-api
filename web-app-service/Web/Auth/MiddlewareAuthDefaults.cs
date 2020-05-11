@@ -4,7 +4,7 @@ namespace Web.Auth
 {
 	public static class MiddlewareAuthDefaults
 	{
-		public const string AuthenticationScheme = "MIDDLEWARE";
+		public const string AuthenticationScheme = "Middleware.Identity";
 
 		public const string DisplayName = "Authentication Middleware";
 

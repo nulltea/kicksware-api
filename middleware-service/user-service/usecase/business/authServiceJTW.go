@@ -19,6 +19,7 @@ import (
 
 type authService struct {
 	userService service.UserService
+	issuerName string
 	expirationDelta int
 	privateKey *rsa.PrivateKey
 	publicKey *rsa.PublicKey
@@ -29,6 +30,7 @@ type authService struct {
 func NewAuthServiceJWT(userService service.UserService, authConfig env.AuthConfig) service.AuthService {
 	return &authService{
 		userService,
+		authConfig.IssuerName,
 		authConfig.TokenExpirationDelta,
 		getPrivateKey(authConfig.PrivateKeyPath),
 		getPublicKey(authConfig.PublicKeyPath),
@@ -43,23 +45,23 @@ func (s *authService) SingUp(user *model.User) (*meta.AuthToken, error) {
 }
 
 func (s *authService) Login(user *model.User) (*meta.AuthToken, error) {
-	registered, err := s.userService.FetchOne(user.UniqueID); if err != nil {
+	registered, err := s.userService.FetchByEmail(user.Email); if err != nil || registered == nil {
 		return nil, err
 	}
 
 	if registered.PasswordHash != user.PasswordHash {
 		return nil, service.ErrPasswordInvalid
 	}
-	if !registered.Confirmed {
-		return nil, service.ErrNotConfirmed
-	}
+	// if !registered.Confirmed {
+	// 	return nil, service.ErrNotConfirmed
+	// }
 
-	return s.GenerateToken(user)
+	return s.GenerateToken(registered)
 }
 
 func (s *authService) Guest() (*meta.AuthToken, error) {
 	return s.GenerateToken(&model.User{
-		Guest: true,
+		Role: "",
 		UniqueID: xid.New().String(),
 	})
 }
@@ -68,11 +70,12 @@ func (s *authService) GenerateToken(user *model.User) (*meta.AuthToken, error) {
 	token := jwt.New(jwt.SigningMethodRS512)
 	expiresAt := time.Now().Add(time.Hour * time.Duration(s.expirationDelta))
 	token.Claims = &meta.AuthClaims {
+		Issuer: s.issuerName,
+		UniqueID: user.UniqueID,
+		Email: user.Email,
+		Role: string(user.Role),
 		ExpiresAt: expiresAt.Unix(),
 		IssuedAt: time.Now().Unix(),
-		Issuer: user.UniqueID,
-		Admin: user.Admin,
-		Guest: user.Guest,
 	}
 	tokenString, err := token.SignedString(s.privateKey)
 	if err != nil {

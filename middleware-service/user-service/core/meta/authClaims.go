@@ -12,8 +12,10 @@ type AuthClaims struct {
 	IssuedAt  int64  `json:"iat,omitempty"`
 	Issuer    string `json:"iss,omitempty"`
 	Subject   string `json:"sub,omitempty"`
-	Guest     bool   `json:"gst,omitempty"`
-	Admin     bool   `json:"adm,omitempty"`
+	UniqueID  string `json:"nameid,omitempty"`
+	Username  string `json:"unique_name,omitempty"`
+	Email     string `json:"sub,omitempty"`
+	Role      string `json:"role,omitempty"`
 }
 
 func (c AuthClaims) Valid() error {

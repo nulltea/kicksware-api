@@ -21,13 +21,13 @@ func ProvideRoutes(rest RestfulHandler) *chi.Mux {
 func restRoutes(rest RestfulHandler) (r *chi.Mux) {
 	r = chi.NewRouter()
 	r.Use(rest.Authenticator)
-	r.Get("/{userId}", rest.GetOne)
+	r.Get("/{userID}", rest.GetOne)
 	r.Get("/", rest.Get)
 	r.Post("/query", rest.Get)
 	r.Post("/", rest.Post)
 	r.Put("/", rest.Put)
 	r.Patch("/", rest.Patch)
-	r.Delete("/{userId}", rest.Delete)
+	r.Delete("/{userID}", rest.Delete)
 	return
 }
 

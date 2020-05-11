@@ -30,14 +30,15 @@ namespace Web.Handlers.Users
 
 		public Task<User> FindByNameAsync(string normalizedUserName, CancellationToken _) => _service.FetchUniqueAsync(normalizedUserName.ToLower());
 
-		public Task<string> GetNormalizedUserNameAsync(User user, CancellationToken _) => Task.FromResult(user.UniqueID);
+		public Task<string> GetNormalizedUserNameAsync(User user, CancellationToken _) => Task.FromResult(user.Email.Split("@")[0]);
 
 		public Task<string> GetUserIdAsync(User user, CancellationToken _) => Task.FromResult(user.UniqueID);
 
-		public Task<string> GetUserNameAsync(User user, CancellationToken _) => Task.FromResult(user.UniqueID);
+		public Task<string> GetUserNameAsync(User user, CancellationToken _) => Task.FromResult(user.Email.Split("@")[0]);
 
 		public Task SetNormalizedUserNameAsync(User user, string normalizedName, CancellationToken _)
 		{
+			user.UniqueID = normalizedName;
 			return Task.CompletedTask;
 		}
 
