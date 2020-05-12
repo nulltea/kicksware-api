@@ -3,7 +3,7 @@
 
 @if (Model is null || !Model.Any())
 {
-	await Html.RenderPartialAsync("Partial/NoResultsPartial", Model);
+	await Html.RenderPartialAsync("Partial/_NoResultsPartial", Model);
 	return;
 }
 <div class="products-view grid">
@@ -47,4 +47,4 @@
 	}
 </div>
 
-@{ await Html.RenderPartialAsync("Partial/PagedPartial", Model); }
+@{ await Html.RenderPartialAsync("_PagedPartial", Model); }

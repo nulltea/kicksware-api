@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Core.Entities.Users;
 using Core.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -35,8 +36,9 @@ namespace Web.Controllers
 			_authManager = authManager;
 		}
 
+		[HttpGet]
 		[Authorize]
-		[Route("profile/")]
+		[Route("profile/{mode?}")]
 		[Breadcrumb("Shop", FromAction = "Index", FromController = typeof(HomeController))]
 		public async Task<IActionResult> Profile()
 		{
@@ -45,6 +47,15 @@ namespace Web.Controllers
 			HeroBreadSubTitle = user?.Email;
 
 			return View(user);
+		}
+
+		[HttpPost]
+		[Authorize]
+		public async Task<IActionResult> Account(User user)
+		{
+			var result = await _userManager.UpdateAsync(user);
+			if (result.Succeeded) return Json(new {success = true});
+			return Json(new {success = false, errors = result.Errors.Select(err => err.Description)});
 		}
 	}
 }

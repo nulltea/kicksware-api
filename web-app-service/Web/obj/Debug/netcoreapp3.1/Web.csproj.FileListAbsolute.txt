@@ -1059,8 +1059,6 @@ C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Shop\Partial\BrandPartial.cshtml.g.cs
-C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Shop\Partial\NoResultsPartial.cshtml.g.cs
-C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Shop\Partial\PagedPartial.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Shop\Partial\ProductsPartial.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Shop\Partial\ReferencesPartial.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Shop\ProductItem.cshtml.g.cs
@@ -1077,3 +1075,12 @@ C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Web.dll
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Web.pdb
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Web.genruntimeconfig.cache
+C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Profile\Partial\Account.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Profile\Partial\Buying.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Profile\Partial\Favorite.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Profile\Partial\Payment.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Profile\Partial\Selling.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Profile\Partial\Settings.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Profile\Partial\_NoResultsPartial.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_PagedPartial.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Shop\Partial\_NoResultsPartial.cshtml.g.cs

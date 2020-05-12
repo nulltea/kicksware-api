@@ -40,34 +40,40 @@ body {
 	&.theme-light {
 		background: @theme-light-primary;
 
-		&::-webkit-scrollbar-thumb {
-			background: @theme-light-secondary;
-
+		*::-webkit-scrollbar-thumb, &::-webkit-scrollbar-thumb {
+			background: fade(@theme-light-secondary, 20%);
 			&:hover {
 				background: @theme-light-secondary;
 			}
+		}
+		*::-webkit-scrollbar-track, &::-webkit-scrollbar-track {
+			background: transparent;
+		}
+		*::-webkit-scrollbar, &::-webkit-scrollbar {
+			width: 15px;
+			overflow: visible;
 		}
 	}
 
 	&.theme-dark {
 		background: @theme-dark-primary;
 
-		&::-webkit-scrollbar-thumb {
-			background: @theme-dark-secondary;
+		*::-webkit-scrollbar-thumb, &::-webkit-scrollbar-thumb {
+			background: @theme-dark-hint;
 			&:hover {
 				background: @theme-dark-secondary;
 			}
 		}
+		*::-webkit-scrollbar-track, &::-webkit-scrollbar-track {
+			background: transparent;
+		}
+		*::-webkit-scrollbar, &::-webkit-scrollbar {
+			width: 15px;
+			overflow: visible;
+		}
 	}
 
-	&::-webkit-scrollbar {
-		width: 15px;
-		overflow: visible;
-	}
 
-	&::-webkit-scrollbar-track {
-		background: transparent;
-	}
 }
 
 div {
@@ -179,8 +185,8 @@ input {
 		.appearance-properties(textfield)
 	}
 
-	&[type="number"]::-webkit-outer-spin-button,
-	&[type="number"]::-webkit-inner-spin-button {
+	&::-webkit-outer-spin-button,
+	&::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 	}
 
@@ -192,10 +198,11 @@ input {
 	&:-webkit-autofill:focus,
 	&:-webkit-autofill:active {
 		.with-theme({
-			-webkit-box-shadow: 0 0 0 30px @hint inset !important;
+			box-shadow: 0 0 0 30px @hint inset !important;
 			-webkit-text-fill-color: @secondary !important;
 		})
 	}
+
 }
 
 textarea {

@@ -36,9 +36,11 @@
             </e>
           </e>
           <e p="Users" t="Include">
+            <e p="AddressInfo.cs" t="Include" />
             <e p="AuthClaims.cs" t="Include" />
             <e p="AuthCredentials.cs" t="Include" />
             <e p="AuthToken.cs" t="Include" />
+            <e p="PaymentInfo.cs" t="Include" />
             <e p="User.cs" t="Include" />
           </e>
         </e>
@@ -390,6 +392,15 @@
             <e p="Privacy.cshtml" t="Include" />
           </e>
           <e p="Profile" t="Include">
+            <e p="Partial" t="Include">
+              <e p="_NoResultsPartial.cshtml" t="Include" />
+              <e p="Account.cshtml" t="Include" />
+              <e p="Buying.cshtml" t="Include" />
+              <e p="Favorite.cshtml" t="Include" />
+              <e p="Payment.cshtml" t="Include" />
+              <e p="Selling.cshtml" t="Include" />
+              <e p="Settings.cshtml" t="Include" />
+            </e>
             <e p="Profile.cshtml" t="Include" />
           </e>
           <e p="Sell" t="Include">
@@ -408,14 +419,14 @@
           <e p="Shared" t="Include">
             <e p="_Layout.cshtml" t="Include" />
             <e p="_LoginPartial.cshtml" t="Include" />
+            <e p="_PagedPartial.cshtml" t="Include" />
             <e p="_ValidationScriptsPartial.cshtml" t="Include" />
             <e p="Error.cshtml" t="Include" />
           </e>
           <e p="Shop" t="Include">
             <e p="Partial" t="Include">
+              <e p="_NoResultsPartial.cshtml" t="Include" />
               <e p="BrandPartial.cshtml" t="Include" />
-              <e p="NoResultsPartial.cshtml" t="Include" />
-              <e p="PagedPartial.cshtml" t="Include" />
               <e p="ProductsPartial.cshtml" t="Include" />
               <e p="ReferencesPartial.cshtml" t="Include" />
             </e>
@@ -427,6 +438,16 @@
         <e p="Web.csproj" t="IncludeRecursive" />
         <e p="wwwroot" t="Include">
           <e p="favicon.ico" t="Include" />
+          <e p="files" t="Include">
+            <e p="photos" t="Include">
+              <e p="References" t="Include">
+                <e p="333888_025_1.png" t="Include" />
+                <e p="700875-400_1.png" t="Include" />
+                <e p="air_max_90_current_huarache_pr_375576-261_1_1.png" t="Include" />
+                <e p="air_max_90_premium_tz_laf_372446-171_1_1.png" t="Include" />
+              </e>
+            </e>
+          </e>
           <e p="fonts" t="Include">
             <e p="Orbitron" t="Include">
               <e p="OFL.txt" t="Include" />
@@ -454,11 +475,16 @@
           </e>
           <e p="images" t="Include">
             <e p="_photo.svg" t="Include" />
+            <e p="account.svg" t="Include" />
+            <e p="address.svg" t="Include" />
             <e p="arrow.svg" t="Include" />
+            <e p="bookmark.svg" t="Include" />
+            <e p="buy.svg" t="Include" />
             <e p="close.svg" t="Include" />
             <e p="cloud_search.svg" t="Include" />
             <e p="details.svg" t="Include" />
             <e p="facebook.svg" t="Include" />
+            <e p="favorite-bold.svg" t="Include" />
             <e p="favorite.svg" t="Include" />
             <e p="filter.svg" t="Include" />
             <e p="filter_used.svg" t="Include" />
@@ -542,14 +568,19 @@
               <e p="versace-logo.svg" t="Include" />
               <e p="yeezy-logo.svg" t="Include" />
             </e>
+            <e p="logout.svg" t="Include" />
             <e p="payment.svg" t="Include" />
             <e p="photo.svg" t="Include" />
             <e p="preview.svg" t="Include" />
+            <e p="save.svg" t="Include" />
             <e p="search.svg" t="Include" />
+            <e p="sell.svg" t="Include" />
+            <e p="settings.svg" t="Include" />
             <e p="shipping.svg" t="Include" />
             <e p="sneaker_not_found.svg" t="Include" />
             <e p="theme.svg" t="Include" />
             <e p="upload.svg" t="Include" />
+            <e p="user.svg" t="Include" />
           </e>
           <e p="plugins" t="Include">
             <e p="bootstrap" t="Include">
@@ -613,6 +644,7 @@
                 <e p="jquery.min.js" t="Include" />
                 <e p="jquery.min.map" t="Include" />
               </e>
+              <e p="jquery.disable-autofill.js" t="Include" />
               <e p="LICENSE.txt" t="Include" />
             </e>
             <e p="jquery-ajax-unobtrusive" t="Include">

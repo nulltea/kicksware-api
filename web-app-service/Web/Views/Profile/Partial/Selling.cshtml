@@ -1,0 +1,14 @@
+﻿@using Core.Services
+@using Infrastructure.Usecase.Models
+@using Core.Entities.Products
+@model Core.Entities.Users.User
+@inject ISneakerProductService Service
+
+<div class="row section-content" id="selling-content">
+	<h3>SOLD SNEAKERS</h3>
+	@{
+		var soldSneakers = new FilteredModel<SneakerProduct>(Service);
+		await soldSneakers.FetchPageAsync(1);
+		await Html.RenderPartialAsync("../Shop/Partial/ProductsPartial", soldSneakers);
+	}
+</div>

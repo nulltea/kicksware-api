@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
@@ -9,19 +8,17 @@ using System.Threading.Tasks;
 using Core.Entities.Users;
 using Core.Services;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using Web.Utils.Extensions;
 
 namespace Web.Auth
 {
 	public class MiddlewareAuthHandler : SignInAuthenticationHandler<MiddlewareAuthOptions>
 	{
+		#region Properties
+
 		private Task<AuthenticateResult> _getTokenTask;
 
 		private readonly IAuthService _service;
@@ -30,13 +27,16 @@ namespace Web.Auth
 
 		private const string TokenPropertyName = "AUTHTOKEN";
 
+		#endregion
+
 		public MiddlewareAuthHandler(UserManager<User> userManager, IOptionsMonitor<MiddlewareAuthOptions> options, IAuthService service,
-									ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock)
-			: base(options, logger, encoder, clock)
+									ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock) : base(options, logger, encoder, clock)
 		{
 			_userManager = userManager;
 			_service = service;
 		}
+
+		#region Main operations
 
 		protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
 		{
@@ -94,6 +94,10 @@ namespace Web.Auth
 			return Task.CompletedTask;
 		}
 
+		#endregion
+
+		#region Token providers
+
 		private AuthenticateResult ReadCookieToken(out AuthToken token)
 		{
 			var cookie = Options.CookieManager.GetRequestCookie(Context, Options.Cookie.Name);
@@ -128,6 +132,10 @@ namespace Web.Auth
 				? AuthenticateResult.Fail("Access forbidden")
 				: AuthenticateResult.Success(ProvideTokenAuthTicket(token));
 		}
+
+		#endregion
+
+		#region Service methods
 
 		private void StoreCookieToken(AuthToken token)
 		{
@@ -190,5 +198,7 @@ namespace Web.Auth
 				StoreCookieToken(token.RetrieveToken());
 			}
 		}
+
+		#endregion
 	}
 }

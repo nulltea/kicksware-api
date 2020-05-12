@@ -1,0 +1,14 @@
+﻿@using Core.Services
+@using Infrastructure.Usecase.Models
+@using Core.Entities.References
+@model Core.Entities.Users.User
+@inject ISneakerReferenceService Service
+
+<div class="row section-content" id="favorite-content">
+	<h3>FAVORITE SNEAKERS</h3>
+	@{
+		var favoriteSneakers = new FilteredModel<SneakerReference>(Service);
+		await favoriteSneakers.FetchPageAsync(1);
+		await Html.RenderPartialAsync("../Shop/Partial/ReferencesPartial", favoriteSneakers);
+	}
+</div>

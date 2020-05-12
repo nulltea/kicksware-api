@@ -10,18 +10,88 @@
 {
 	<link href="~/styles/css/profile/profile.css" rel="stylesheet"/>
 	<link href="~/styles/css/responsive/profile.responsive.css" rel="stylesheet"/>
+	<link href="~/styles/css/shop/results.css" rel="stylesheet"/>
 }
 
 <div class="profile">
-	<div class="container products-card">
-		<div class="row content-area">
-			<aside class="profile-sidebar">
-				<nav>
-				</nav>
-			</aside>
-			<div class="profile-content">
-
-			</div>
+	<div class="container profile-card">
+		<aside class="profile-sidebar">
+			<nav>
+				<ul>
+					<li>
+						@Html.VectorIconRender("account.svg")
+						<input type="button" id="pr1"/>
+						<label for="pr1">ACCOUNT</label>
+					</li>
+					<li>
+						@Html.VectorIconRender("buy.svg")
+						<input type="button" id="pr2"/>
+						<label for="pr2">BUYING</label>
+					</li>
+					<li>
+						@Html.VectorIconRender("sell.svg")
+						<input type="button" id="pr3"/>
+						<label for="pr3">SELLING</label>
+					</li>
+					<li>
+						@Html.VectorIconRender("favorite.svg")
+						<input type="button" id="pr4"/>
+						<label for="pr4">FAVORITE</label>
+					</li>
+					<li>
+						@Html.VectorIconRender("payment.svg")
+						<input type="button" id="pr5"/>
+						<label for="pr5">PAYMENT</label>
+					</li>
+					<li>
+						@Html.VectorIconRender("address.svg")
+						<input type="button" id="pr6"/>
+						<label for="pr6">ADDRESS</label>
+					</li>
+					<li>
+						@Html.VectorIconRender("settings.svg")
+						<input type="button" id="pr7"/>
+						<label for="pr7">SETTING</label>
+					</li>
+					<li>
+						@Html.VectorIconRender("logout.svg")
+						<input type="button" id="pr8"/>
+						<label for="pr8">LOGOUT</label>
+					</li>
+				</ul>
+			</nav>
+		</aside>
+		<div class="profile-content">
+			<section class="profile-section active" id="section-pr1" name="account">
+				@{
+					await Html.RenderPartialAsync("Partial/Account");
+				}
+			</section>
+			<section class="profile-section" id="section-pr2" name="buying">
+				@{
+					await Html.RenderPartialAsync("Partial/Buying");
+				}
+			</section>
+			<section class="profile-section" id="section-pr3" name="selling">
+				@{
+					await Html.RenderPartialAsync("Partial/Selling");
+				}
+			</section>
+			<section class="profile-section" id="section-pr4" name="favorite">
+				@{
+					await Html.RenderPartialAsync("Partial/Favorite");
+				}
+			</section>
+			<section class="profile-section" id="section-pr5" name="payment">
+				@{
+					await Html.RenderPartialAsync("Partial/Payment");
+				}
+			</section>
+			<section class="profile-section" id="section-pr7" name="settings">
+				@{
+					await Html.RenderPartialAsync("Partial/Settings");
+				}
+			</section>
 		</div>
 	</div>
 </div>
@@ -29,6 +99,8 @@
 @section Scripts
 {
 	<script src="~/scripts/profile/profile.js"></script>
+	<script src="plugins/jquery/jquery.disable-autofill.js"></script>
 	<script type="text/javascript">
+
 	</script>
 }

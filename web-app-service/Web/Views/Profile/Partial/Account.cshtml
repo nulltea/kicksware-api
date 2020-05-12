@@ -1,0 +1,57 @@
+﻿@using Web.Utils.Helpers
+@model Core.Entities.Users.User
+
+<form asp-action="Account" class="profile-form section-content" id="account-content" autocomplete="off">
+	<div class="row">
+		<div class="col">
+			<h3>EDIT ACCOUNT INFORMATION</h3>
+			<div class="row my-3">
+				<label asp-for="Username">Username</label>
+				<input asp-for="Username" type="text" class="profile-input" autocomplete="off">
+				<span asp-validation-for="Username" class="text-danger"></span>
+			</div>
+			<div class="row my-3">
+				<label asp-for="FirstName">First Name</label>
+				<input asp-for="FirstName" type="text" class="profile-input" required="required">
+				<span asp-validation-for="FirstName" class="text-danger"></span>
+			</div>
+			<div class="row my-3">
+				<label asp-for="LastName">Last Name</label>
+				<input asp-for="LastName" type="text" class="profile-input" required="required">
+				<span asp-validation-for="FirstName" class="text-danger"></span>
+			</div>
+			<div class="row my-3">
+				<label asp-for="Email">Email</label>
+				<input asp-for="Email" type="email" class="profile-input" required="required">
+				<span asp-validation-for="Email" class="text-danger"></span>
+			</div>
+			<div class="row my-3">
+				<label asp-for="PhoneNumber">Phone Number</label>
+				<input asp-for="PhoneNumber" type="tel" pattern="[+0-9]" maxlength="13" class="profile-input">
+				<span asp-validation-for="Email" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col">
+			<h3>CHANGE PASSWORD</h3>
+			<div class="row my-3">
+				<label asp-for="PasswordHash" for="current-password">Current Password</label>
+				<input asp-for="PasswordHash" type="password" id="current-password" class="profile-input">
+				<span asp-validation-for="PasswordHash" class="text-danger"></span>
+			</div>
+			<div class="row my-3">
+				<label asp-for="PasswordHash" for="new-password">New Password</label>
+				<input asp-for="PasswordHash" type="password" id="new-password" class="profile-input">
+				<span asp-validation-for="PasswordHash" class="text-danger"></span>
+			</div>
+			<div class="row my-3">
+				<label asp-for="PasswordHash" for="confirm-password">Confirm New Password</label>
+				<input asp-for="PasswordHash" type="password" id="confirm-password" class="profile-input">
+				<span asp-validation-for="PasswordHash" class="text-danger"></span>
+			</div>
+		</div>
+	</div>
+	<button class="button" type="submit">
+		@Html.VectorIconRender("save.svg")
+		<span>SAVE CHANGES</span>
+	</button>
+</form>

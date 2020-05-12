@@ -202,7 +202,7 @@ namespace Infrastructure.Usecase.Models
 			if (!HasPagePrevious) throw new PreviousPageNotValidException();
 
 			Clear();
-			AddRange(_service.Fetch(new RequestParams
+			AddRange(_service.Fetch(queryMap, new RequestParams
 			{
 				Limit = PageSize,
 				Offset = (--CurrentPage - 1) * PageSize,
@@ -241,7 +241,7 @@ namespace Infrastructure.Usecase.Models
 			}
 			if (!HasPageNext) throw new NextPageNotValidException();
 			Clear();
-			AddRange(await _service.FetchAsync(new RequestParams
+			AddRange(await _service.FetchAsync(queryMap, new RequestParams
 			{
 				Limit = PageSize,
 				Offset = (++CurrentPage - 1) * PageSize,
@@ -260,7 +260,7 @@ namespace Infrastructure.Usecase.Models
 			}
 			if (!HasPagePrevious) throw new PreviousPageNotValidException();
 			Clear();
-			AddRange(await _service.FetchAsync(new RequestParams
+			AddRange(await _service.FetchAsync(queryMap, new RequestParams
 			{
 				Limit = PageSize,
 				Offset = (--CurrentPage - 1) * PageSize,
