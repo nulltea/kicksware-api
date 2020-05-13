@@ -1,4 +1,5 @@
 ﻿using Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using SmartBreadcrumbs.Attributes;
@@ -8,6 +9,7 @@ using Web.Wizards;
 
 namespace Web.Controllers
 {
+	[Authorize(Policy = "NotGuest")]
 	public partial class SellController : Controller
 	{
 		private readonly ISneakerProductService _service;

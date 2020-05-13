@@ -169,9 +169,9 @@
 </header>
 <div id="scroll-trigger"></div>
 
-<div class="modal fade" tabindex="-1" id="loginModal" data-keyboard="false" data-backdrop="static">
+<div class="modal fade" tabindex="-1" id="auth-modal" data-keyboard="false" data-backdrop="static">
 	@{
-		await Html.RenderPartialAsync("../Auth/AuthDialog", new AuthCommonViewModel());
+		await Html.RenderPartialAsync("../Auth/_AuthDialogPartial", new AuthCommonViewModel());
 	}
 </div>
 <div class="modal fade preloader" tabindex="-1">

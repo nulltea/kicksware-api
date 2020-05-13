@@ -9,6 +9,7 @@ using SmartBreadcrumbs.Attributes;
 
 namespace Web.Controllers
 {
+	[Authorize(Policy = "NotGuest")]
 	public class ProfileController : Controller
 	{
 		[ViewData]

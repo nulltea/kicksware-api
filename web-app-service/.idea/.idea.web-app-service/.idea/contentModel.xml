@@ -37,11 +37,14 @@
           </e>
           <e p="Users" t="Include">
             <e p="AddressInfo.cs" t="Include" />
-            <e p="AuthClaims.cs" t="Include" />
-            <e p="AuthCredentials.cs" t="Include" />
-            <e p="AuthToken.cs" t="Include" />
+            <e p="Auth" t="Include">
+              <e p="AuthClaims.cs" t="Include" />
+              <e p="AuthCredentials.cs" t="Include" />
+              <e p="AuthToken.cs" t="Include" />
+            </e>
             <e p="PaymentInfo.cs" t="Include" />
             <e p="User.cs" t="Include" />
+            <e p="UserRole.cs" t="Include" />
           </e>
         </e>
         <e p="Exceptions" t="Include">
@@ -306,6 +309,9 @@
             <e p="ReferencesFilterContent.cs" t="Include" />
           </e>
           <e p="Users" t="Include">
+            <e p="MiddlewareSignInManager.cs" t="Include" />
+            <e p="NotGuestHandler.cs" t="Include" />
+            <e p="NotGuestRequirement.cs" t="Include" />
             <e p="UserStore.cs" t="Include" />
           </e>
           <e p="Wizard" t="Include">
@@ -368,8 +374,8 @@
             <e p="About.cshtml" t="Include" />
           </e>
           <e p="Auth" t="Include">
+            <e p="_AuthDialogPartial.cshtml" t="Include" />
             <e p="AccessDenied.cshtml" t="Include" />
-            <e p="AuthDialog.cshtml" t="Include" />
             <e p="ConfirmEmail.cshtml" t="Include" />
             <e p="ForgotPassword.cshtml" t="Include" />
             <e p="ForgotPasswordConfirmation.cshtml" t="Include" />
@@ -438,16 +444,6 @@
         <e p="Web.csproj" t="IncludeRecursive" />
         <e p="wwwroot" t="Include">
           <e p="favicon.ico" t="Include" />
-          <e p="files" t="Include">
-            <e p="photos" t="Include">
-              <e p="References" t="Include">
-                <e p="333888_025_1.png" t="Include" />
-                <e p="700875-400_1.png" t="Include" />
-                <e p="air_max_90_current_huarache_pr_375576-261_1_1.png" t="Include" />
-                <e p="air_max_90_premium_tz_laf_372446-171_1_1.png" t="Include" />
-              </e>
-            </e>
-          </e>
           <e p="fonts" t="Include">
             <e p="Orbitron" t="Include">
               <e p="OFL.txt" t="Include" />
@@ -569,6 +565,7 @@
               <e p="yeezy-logo.svg" t="Include" />
             </e>
             <e p="logout.svg" t="Include" />
+            <e p="mail.svg" t="Include" />
             <e p="payment.svg" t="Include" />
             <e p="photo.svg" t="Include" />
             <e p="preview.svg" t="Include" />
@@ -581,6 +578,7 @@
             <e p="theme.svg" t="Include" />
             <e p="upload.svg" t="Include" />
             <e p="user.svg" t="Include" />
+            <e p="verify.svg" t="Include" />
           </e>
           <e p="plugins" t="Include">
             <e p="bootstrap" t="Include">
@@ -644,7 +642,6 @@
                 <e p="jquery.min.js" t="Include" />
                 <e p="jquery.min.map" t="Include" />
               </e>
-              <e p="jquery.disable-autofill.js" t="Include" />
               <e p="LICENSE.txt" t="Include" />
             </e>
             <e p="jquery-ajax-unobtrusive" t="Include">

@@ -24,6 +24,8 @@ namespace Web.Models.Auth
 		/// </summary>
 		public bool AuthSign { get; set; }
 
+		public bool AwaitVerification { get; set; }
+
 		public static implicit operator LoginViewModel(AuthCommonViewModel model) =>
 			new LoginViewModel
 			{

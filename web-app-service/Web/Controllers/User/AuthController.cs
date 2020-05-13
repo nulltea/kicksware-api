@@ -12,10 +12,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Web.Models.Auth;
+using Web.Utils.Extensions;
 using Web.Utils.UrlHelpers;
 
 namespace Web.Controllers
 {
+	[Authorize(Policy = "NotGuest")]
 	public class AuthController : Controller
 	{
 		private readonly IUserService _service;
@@ -34,6 +36,35 @@ namespace Web.Controllers
 			_logger = logger;
 		}
 
+		[HttpGet]
+		public async Task<IActionResult> Auth()
+		{
+			var user = await _userManager.GetUserAsync(HttpContext.User);
+			if (!_signInManager.IsSignedIn(HttpContext.User) ||
+				user is null || !user.Confirmed)
+			{
+				var content = await this.RenderViewAsync("_AuthDialogPartial",
+					new AuthCommonViewModel
+					{
+						Email = user?.Email,
+						UserName = user?.Username,
+						AwaitVerification = !(user?.Confirmed ?? true)
+					}, true);
+				return Json(new
+				{
+					IsLogedIn = false,
+					Content = content
+				});
+			}
+
+			return Json(new
+			{
+				IsLogedIn = true,
+				RedirectUrl = Url.Action("Profile", "Profile")
+			});
+		}
+
+		[HttpPost]
 		public Task<IActionResult> Auth(AuthCommonViewModel model, AuthMode mode)
 		{
 			if (mode == AuthMode.Login) return Login(model);
@@ -138,11 +169,11 @@ namespace Web.Controllers
 					new Claim(ClaimTypes.Hash, user.PasswordHash)
 				});
 				_logger.LogInformation("User created a new account with password.");
-				return RedirectToLocal(returnUrl);
+				return Json(new {success = true});
 			}
 
 			AddErrors(result);
-			return View(model);
+			return Json(new {success = false});
 		}
 
 
@@ -165,6 +196,19 @@ namespace Web.Controllers
 			await _signInManager.SignOutAsync();
 			_logger.LogInformation("User logged out.");
 			return RedirectToAction(nameof(HomeController.Index), "Home");
+		}
+
+		[HttpGet]
+		[AllowAnonymous]
+		public async Task<IActionResult> ResendEmail(string userId, string code)
+		{
+			if (userId is null || code is null) return RedirectToAction(nameof(HomeController.Index), "Home");
+
+			var user = await _userManager.FindByIdAsync(userId);
+			if (user == null) throw new ApplicationException($"Unable to load user with ID '{userId}'.");
+
+			var result = await _userManager.ConfirmEmailAsync(user, code);
+			return View(result.Succeeded ? "ConfirmEmail" : "Error");
 		}
 
 		[HttpGet]
@@ -245,9 +289,14 @@ namespace Web.Controllers
 
 
 		[HttpGet]
-		public IActionResult AccessDenied() => View();
+		public IActionResult AccessDenied(string fromAction)
+		{
+			TempData.Add("locked", true);
+			return View();
+		}
 
 		#region Helpers
+
 
 		private void AddErrors(IdentityResult result)
 		{

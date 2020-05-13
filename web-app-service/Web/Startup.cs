@@ -1,7 +1,9 @@
 using System;
+using System.Security.Claims;
 using Core.Entities.Products;
 using Core.Entities.References;
 using Core.Entities.Users;
+using Core.Extension;
 using Core.Gateway;
 using Core.Model;
 using Core.Repositories;
@@ -11,6 +13,7 @@ using Infrastructure.Gateway.REST;
 using Infrastructure.Gateway.REST.Client;
 using Infrastructure.Usecase;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -72,11 +75,12 @@ namespace Web
 			services.AddTransient<IReferenceSearchService, ReferenceSearchService>();
 			services.AddTransient<IUserService, UserService>();
 
-
 			services.AddTransient<FilterContentBuilder<SneakerReference>, ReferencesFilterContent>();
 			services.AddTransient<FilterContentBuilder<SneakerProduct>, ProductsFilterContent>();
 
 			services.AddTransient<IUserStore<User>, UserStore>();
+			services.AddTransient<SignInManager<User>, MiddlewareSignInManager>();
+			services.AddTransient<IAuthorizationHandler, NotGuestHandler>();
 
 			services.AddSingleton<ISecureDataFormat<AuthToken>, SecureDataFormat<AuthToken>>(ServiceFactory.ProvideSecureTokenFormat);
 
@@ -97,6 +101,8 @@ namespace Web
 					options.ClientId = Environment.GetEnvironmentVariable("Authentication:Google:ClientId");
 					options.ClientSecret = Environment.GetEnvironmentVariable("Authentication:Google:ClientSecret");
 				});
+
+			services.AddAuthorization(ConfigureAuthOptions);
 
 			#endregion
 		}
@@ -142,6 +148,11 @@ namespace Web
 			options.DefaultSignOutScheme = MiddlewareAuthDefaults.AuthenticationScheme;
 			options.DefaultChallengeScheme = MiddlewareAuthDefaults.AuthenticationScheme;
 			options.SchemeMap[IdentityConstants.ApplicationScheme].HandlerType = typeof(MiddlewareAuthHandler);
+		}
+
+		private static void ConfigureAuthOptions(AuthorizationOptions options)
+		{
+			options.AddPolicy("NotGuest", policy => policy.Requirements.Add(new NotGuestRequirement()));
 		}
 
 		private static void ConfigureAuthOptions(MiddlewareAuthOptions options)

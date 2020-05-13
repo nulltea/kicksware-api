@@ -6,12 +6,12 @@ namespace Core.Extension
 {
 	public static class EnumExtension
 	{
-		public static object GetEnumMemberValue(this Enum source)
+		public static string GetEnumMemberValue(this Enum source)
 		{
 			var type = source.GetType();
 			var field = type.GetField(source.ToString());
-			var memberAttr = field.GetCustomAttribute<EnumMemberAttribute>(true);
-			return memberAttr.Value;
+			var memberAttr = field?.GetCustomAttribute<EnumMemberAttribute>(true);
+			return memberAttr?.Value;
 		}
 
 		public static T GetEnumAttribute<T>(this Enum source) where T : Attribute

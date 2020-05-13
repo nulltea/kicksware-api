@@ -1029,7 +1029,6 @@ C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\About\About.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Auth\AccessDenied.cshtml.g.cs
-C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Auth\AuthDialog.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Auth\ConfirmEmail.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Auth\ForgotPassword.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Auth\ForgotPasswordConfirmation.cshtml.g.cs
@@ -1084,3 +1083,4 @@ C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Profile\Partial\_NoResultsPartial.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_PagedPartial.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Shop\Partial\_NoResultsPartial.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Auth\_AuthDialogPartial.cshtml.g.cs

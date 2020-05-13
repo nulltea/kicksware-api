@@ -99,8 +99,11 @@
 @section Scripts
 {
 	<script src="~/scripts/profile/profile.js"></script>
-	<script src="plugins/jquery/jquery.disable-autofill.js"></script>
-	<script type="text/javascript">
+	@if (Context.Items.ContainsKey("locked"))
+	{
+		<script type="text/javascript">
+			lock();
+		</script>
+	}
 
-	</script>
 }
