@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 
-namespace Web.Auth
+namespace Web.Handlers.Authentication
 {
 	public class MiddlewareAuthOptions: AuthenticationSchemeOptions
 	{

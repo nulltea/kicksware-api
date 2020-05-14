@@ -1,13 +1,10 @@
 ﻿using Core.Entities.Users;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using Web.Auth.Service;
 
-namespace Web.Auth
+namespace Web.Handlers.Authentication
 {
 	public class MiddlewareAuthPostConfigureOptions : IPostConfigureOptions<MiddlewareAuthOptions>
 	{

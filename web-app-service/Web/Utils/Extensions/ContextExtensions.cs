@@ -3,7 +3,8 @@ using System.Linq;
 using Core.Entities.Users;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
-using Web.Auth;
+using Web.Handlers.Authentication;
+using Web.Handlers.Authorisation;
 
 namespace Web.Utils.Extensions
 {
@@ -35,6 +36,14 @@ namespace Web.Utils.Extensions
 		{
 			var binding = context.Features.Get<ITlsTokenBindingFeature>()?.GetProvidedTokenBindingId();
 			return binding == null ? null : Convert.ToBase64String(binding);
+		}
+
+		public static bool IsLockedContext(this HttpContext context, out AuthLockedResponse response)
+		{
+			response = default;
+			if (!context.Items.ContainsKey(AuthLockedResponse.AuthLockedKey)) return false;
+			response = context.Items[AuthLockedResponse.AuthLockedKey] as AuthLockedResponse;
+			return true;
 		}
 	}
 }

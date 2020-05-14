@@ -45,7 +45,18 @@ namespace Web.Controllers
 		{
 			var user = await _userManager.GetUserAsync(HttpContext.User);
 
-			HeroBreadSubTitle = user?.Email;
+			if (user is null) return RedirectToAction("Auth", "Auth");
+
+			if (!string.IsNullOrEmpty(user.FirstName) || !string.IsNullOrEmpty(user.LastName))
+			{
+				HeroBreadSubTitle = string.Join(" ", user.FirstName, user.LastName);
+			}
+			else
+			{
+				HeroBreadSubTitle = user.Username ?? user.Email;
+			}
+
+			if (!string.IsNullOrEmpty(user.Avatar)) HeroLogoPath = user.Avatar;
 
 			return View(user);
 		}

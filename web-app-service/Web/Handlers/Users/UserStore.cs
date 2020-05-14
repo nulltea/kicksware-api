@@ -28,23 +28,24 @@ namespace Web.Handlers.Users
 
 		public Task<User> FindByIdAsync(string userId, CancellationToken _) => _service.FetchUniqueAsync(userId);
 
-		public Task<User> FindByNameAsync(string normalizedUserName, CancellationToken _) => _service.FetchUniqueAsync(normalizedUserName.ToLower());
+		public async Task<User> FindByNameAsync(string normalizedUserName, CancellationToken _) =>
+		(await _service.FetchAsync(PropertyQuery("username_n", normalizedUserName)))?.FirstOrDefault();
 
-		public Task<string> GetNormalizedUserNameAsync(User user, CancellationToken _) => Task.FromResult(user.Email.Split("@")[0]);
+		public Task<string> GetNormalizedUserNameAsync(User user, CancellationToken _) => Task.FromResult(user.UsernameN ?? user.EmailN);
 
 		public Task<string> GetUserIdAsync(User user, CancellationToken _) => Task.FromResult(user.UniqueID);
 
-		public Task<string> GetUserNameAsync(User user, CancellationToken _) => Task.FromResult(user.Email.Split("@")[0]);
+		public Task<string> GetUserNameAsync(User user, CancellationToken _) => Task.FromResult(user.Username ?? user.Email);
 
 		public Task SetNormalizedUserNameAsync(User user, string normalizedName, CancellationToken _)
 		{
-			user.UniqueID = normalizedName;
+			user.UsernameN = normalizedName;
 			return Task.CompletedTask;
 		}
 
 		public Task SetUserNameAsync(User user, string userName, CancellationToken _)
 		{
-			user.UniqueID = userName;
+			user.Username = userName;
 			return Task.CompletedTask;
 		}
 
@@ -55,13 +56,13 @@ namespace Web.Handlers.Users
 		}
 
 		public async Task<User> FindByEmailAsync(string normalizedEmail, CancellationToken _) =>
-			(await _service.FetchAsync(PropertyQuery("email", normalizedEmail))).FirstOrDefault();
+			(await _service.FetchAsync(PropertyQuery("email_n", normalizedEmail)))?.FirstOrDefault();
 
 		public Task<string> GetEmailAsync(User user, CancellationToken _) => Task.FromResult(user.Email);
 
 		public Task<bool> GetEmailConfirmedAsync(User user, CancellationToken _) => Task.FromResult(user.Confirmed);
 
-		public Task<string> GetNormalizedEmailAsync(User user, CancellationToken _) => Task.FromResult(user.Email);
+		public Task<string> GetNormalizedEmailAsync(User user, CancellationToken _) => Task.FromResult(user.EmailN);
 
 		public Task SetEmailAsync(User user, string email, CancellationToken _)
 		{
@@ -77,7 +78,7 @@ namespace Web.Handlers.Users
 
 		public Task SetNormalizedEmailAsync(User user, string normalizedEmail, CancellationToken _)
 		{
-			user.Email = normalizedEmail;
+			user.EmailN = normalizedEmail;
 			return Task.CompletedTask;
 		}
 

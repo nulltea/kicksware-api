@@ -11,9 +11,10 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+
 using Web.Utils.Extensions;
 
-namespace Web.Auth
+namespace Web.Handlers.Authentication
 {
 	public class MiddlewareAuthHandler : SignInAuthenticationHandler<MiddlewareAuthOptions>
 	{

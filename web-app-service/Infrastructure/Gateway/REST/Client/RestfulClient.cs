@@ -58,7 +58,7 @@ namespace Infrastructure.Gateway.REST.Client
 			switch (response.StatusCode)
 			{
 				case HttpStatusCode.OK:
-					data = response.Data;
+					data = response.Data ?? Activator.CreateInstance<T>();
 					return true;
 				case 0:
 				case HttpStatusCode.NotFound:

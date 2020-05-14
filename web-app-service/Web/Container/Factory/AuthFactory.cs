@@ -3,8 +3,7 @@ using Core.Entities.Users;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.DependencyInjection;
-using Web.Auth;
-using Web.Auth.Service;
+using Web.Handlers.Authentication;
 
 namespace Web.Container.Factory
 {

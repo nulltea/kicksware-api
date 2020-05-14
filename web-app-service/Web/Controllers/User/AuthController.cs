@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Security.Claims;
@@ -17,7 +18,6 @@ using Web.Utils.UrlHelpers;
 
 namespace Web.Controllers
 {
-	[Authorize(Policy = "NotGuest")]
 	public class AuthController : Controller
 	{
 		private readonly IUserService _service;
@@ -28,7 +28,8 @@ namespace Web.Controllers
 
 		private readonly ILogger _logger;
 
-		public AuthController(IUserService service, UserManager<User> userManager, SignInManager<User> signInManager, ILogger<AuthController> logger)
+		public AuthController(IUserService service, UserManager<User> userManager, SignInManager<User> signInManager,
+							ILogger<AuthController> logger)
 		{
 			_service = service;
 			_userManager = userManager;
@@ -36,50 +37,74 @@ namespace Web.Controllers
 			_logger = logger;
 		}
 
+		#region Main auth operations
+
 		[HttpGet]
-		public async Task<IActionResult> Auth()
+		public async Task<IActionResult> Auth(User user = default)
 		{
-			var user = await _userManager.GetUserAsync(HttpContext.User);
-			if (!_signInManager.IsSignedIn(HttpContext.User) ||
-				user is null || !user.Confirmed)
+			if (string.IsNullOrEmpty(user.UniqueID)) user = null;
+			user ??= await _userManager.GetUserAsync(HttpContext.User);
+			if (!_signInManager.IsSignedIn(HttpContext.User) || user is null || !user.Confirmed)
 			{
+				var verifyPending = !(user?.Confirmed ?? true);
+
 				var content = await this.RenderViewAsync("_AuthDialogPartial",
 					new AuthCommonViewModel
 					{
-						Email = user?.Email,
-						UserName = user?.Username,
-						AwaitVerification = !(user?.Confirmed ?? true)
+						Email = user?.Email, UserName = user?.Username, VerifyPending = verifyPending
 					}, true);
+
 				return Json(new
 				{
-					IsLogedIn = false,
-					Content = content
+					Success = true,
+					Logged = false,
+					Content = content,
+					VerifyPending = verifyPending,
+					RedirectUrl = Url.Action("Index", "Home")
 				});
 			}
 
-			return Json(new
-			{
-				IsLogedIn = true,
-				RedirectUrl = Url.Action("Profile", "Profile")
-			});
+			return Json(new {Success = true, Logged = true, RedirectUrl = Url.Action("Profile", "Profile")});
 		}
 
 		[HttpPost]
 		public Task<IActionResult> Auth(AuthCommonViewModel model, AuthMode mode)
 		{
-			if (mode == AuthMode.Login) return Login(model);
-
-			return SignUp(model);
+			return mode == AuthMode.Login ? Login(model) : SignUp(model);
 		}
 
-		[HttpGet]
+		[HttpPost]
 		[AllowAnonymous]
-		public async Task<IActionResult> Login(string returnUrl = default)
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> SignUp(SignUpViewModel model, string returnUrl = default)
 		{
-			await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-
 			ViewData["ReturnUrl"] = returnUrl;
-			return View();
+
+			// TODO if (!ModelState.IsValid) return View(model);
+
+			var user = new User {Email = model.Email};
+			var result = await _userManager.CreateAsync(user, model.Password);
+
+			if (!result.Succeeded) return Json(new
+			{
+				Success = false,
+				Error = result.Errors.FirstOrDefault()?.Description
+			});
+
+			user = await _userManager.FindByEmailAsync(model.Email);
+			if (user is null) return Json(new
+			{
+				Success = false,
+				Error = "Something gone wrong during creation your account. Please try again soon"
+			});
+
+			_logger.LogInformation($"User {user.Username} created a new account with password");
+			await _signInManager.SignInWithClaimsAsync(user, false, user.ExtractCredentials());
+			_logger.LogInformation($"User {user.Username} signed up with new account");
+
+			await SendEmailConfirmationAsync(user);
+
+			return await Auth(user);
 		}
 
 		[HttpPost]
@@ -88,23 +113,45 @@ namespace Web.Controllers
 		public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = default)
 		{
 			ViewData["ReturnUrl"] = returnUrl;
-			if (ModelState.IsValid)
-			{
-				var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe,
-					lockoutOnFailure: false);
-				if (result.Succeeded)
+			var user = await _userManager.FindByEmailAsync(model.Email);
+			if (user is null)
+				return Json(new
 				{
-					_logger.LogInformation("User logged in.");
-					return RedirectToLocal(returnUrl);
-				}
-
-				ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-				return View(model);
+					Success = false,
+					Error = $"User with email {model.Email} was not found.\nPlease check your credentials"
+				});
+			var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
+			if (result.Succeeded)
+			{
+				_logger.LogInformation($"User {user.Username} logged");
+				return await Auth(user);
 			}
 
-			return View(model);
+			return Json(new {Success = false, Error = $"User not allowed yet",});
 		}
 
+		public IActionResult Facebook()
+		{
+			var authProperties = new AuthenticationProperties {RedirectUri = Url.Action("Index", "Home")};
+			return Challenge(authProperties, "Facebook");
+		}
+
+		public IActionResult Google()
+		{
+			var authProperties = new AuthenticationProperties {RedirectUri = Url.Action("Index", "Home")};
+			return Challenge(authProperties, "Google");
+		}
+
+		public async Task<IActionResult> Logout()
+		{
+			await _signInManager.SignOutAsync();
+			_logger.LogInformation("User logged out.");
+			return RedirectToAction("Index", "Home");
+		}
+
+		#endregion
+
+		#region Additional auth operations
 
 		[HttpGet]
 		[AllowAnonymous]
@@ -131,7 +178,7 @@ namespace Web.Controllers
 
 			var result = await _signInManager.TwoFactorRecoveryCodeSignInAsync(recoveryCode);
 
-			if (result.Succeeded) return RedirectToLocal(returnUrl);
+			if (result.Succeeded) return Redirect(returnUrl);
 
 			ModelState.AddModelError(string.Empty, "Invalid recovery code entered.");
 
@@ -140,75 +187,20 @@ namespace Web.Controllers
 
 		[HttpGet]
 		[AllowAnonymous]
-		public IActionResult ContinueSignUp(SignUpViewModel model, string returnUrl = default)
+		public async Task<IActionResult> ResendEmail(string userID)
 		{
-			ViewData["ReturnUrl"] = returnUrl;
-			return View("SignUp", model);
-		}
+			var user = await _userManager.FindByIdAsync(userID);
+			user ??= await _userManager.GetUserAsync(HttpContext.User);
 
-		[HttpPost]
-		[AllowAnonymous]
-		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> SignUp(SignUpViewModel model, string returnUrl = default)
-		{
-			ViewData["ReturnUrl"] = returnUrl;
-
-			// if (!ModelState.IsValid) return View(model);
-
-			var user = new User { Email = model.Email};
-			var result = await _userManager.CreateAsync(user, model.Password);
-
-			if (result.Succeeded)
+			if (user is null) return Json(new
 			{
-				_logger.LogInformation("User created a new account with password.");
+				Success = false,
+				Error = "Cannot find specified user. Please check your email and try again"
+			});
 
-				user = await _userManager.FindByEmailAsync(model.Email);
-				await _signInManager.SignInWithClaimsAsync(user, false, new []
-				{
-					new Claim(ClaimTypes.Email, user.Email),
-					new Claim(ClaimTypes.Hash, user.PasswordHash)
-				});
-				_logger.LogInformation("User created a new account with password.");
-				return Json(new {success = true});
-			}
+			await SendEmailConfirmationAsync(user);
 
-			AddErrors(result);
-			return Json(new {success = false});
-		}
-
-
-		public IActionResult Facebook()
-		{
-			var authProperties = new AuthenticationProperties {RedirectUri = Url.Action("Index", "Home")};
-			return Challenge(authProperties, "Facebook");
-		}
-
-		public IActionResult Google()
-		{
-			var authProperties = new AuthenticationProperties {RedirectUri = Url.Action("Index", "Home")};
-			return Challenge(authProperties, "Google");
-		}
-
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Logout()
-		{
-			await _signInManager.SignOutAsync();
-			_logger.LogInformation("User logged out.");
-			return RedirectToAction(nameof(HomeController.Index), "Home");
-		}
-
-		[HttpGet]
-		[AllowAnonymous]
-		public async Task<IActionResult> ResendEmail(string userId, string code)
-		{
-			if (userId is null || code is null) return RedirectToAction(nameof(HomeController.Index), "Home");
-
-			var user = await _userManager.FindByIdAsync(userId);
-			if (user == null) throw new ApplicationException($"Unable to load user with ID '{userId}'.");
-
-			var result = await _userManager.ConfirmEmailAsync(user, code);
-			return View(result.Succeeded ? "ConfirmEmail" : "Error");
+			return Json(new {Success = true});
 		}
 
 		[HttpGet]
@@ -279,7 +271,6 @@ namespace Web.Controllers
 			var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
 			if (result.Succeeded) return RedirectToAction(nameof(ResetPasswordConfirmation));
 
-			AddErrors(result);
 			return View();
 		}
 
@@ -291,34 +282,22 @@ namespace Web.Controllers
 		[HttpGet]
 		public IActionResult AccessDenied(string fromAction)
 		{
-			TempData.Add("locked", true);
 			return View();
 		}
 
-		#region Helpers
-
-
-		private void AddErrors(IdentityResult result)
-		{
-			foreach (var error in result.Errors)
-			{
-				ModelState.AddModelError(string.Empty, error.Description);
-			}
-		}
-
-		private IActionResult RedirectToLocal(string returnUrl)
-		{
-			if (Url.IsLocalUrl(returnUrl))
-			{
-				return Redirect(returnUrl);
-			}
-			else
-			{
-				return RedirectToAction(nameof(HomeController.Index), "Home");
-			}
-		}
-
 		#endregion
+
+		#region Service & Helpers
+
+		private async Task SendEmailConfirmationAsync(User user)
+		{
+			var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+			var callbackUrl = Url.EmailConfirmationLink(user.UniqueID, code, Request.Scheme);
+			await _service.SendEmailConfirmationAsync(user.UniqueID, callbackUrl);
+
+			_logger.LogInformation($"Email conformation was sent to user {user.Username}");
+
+		}
 
 		public enum AuthMode
 		{
@@ -326,5 +305,7 @@ namespace Web.Controllers
 
 			Login
 		}
+
+		#endregion
 	}
 }

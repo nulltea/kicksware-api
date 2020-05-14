@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Web.Auth
+namespace Web.Handlers.Authentication
 {
 	public static class MiddlewareAuthDefaults
 	{

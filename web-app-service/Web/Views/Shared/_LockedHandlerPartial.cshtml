@@ -1,0 +1,9 @@
+﻿@using Web.Utils.Extensions
+
+@if (Context.IsLockedContext(out var lockParams) && lockParams.Locked)
+{
+	<script type="text/javascript">
+		lock("@lockParams.RedirectTo")
+	</script>
+}
+

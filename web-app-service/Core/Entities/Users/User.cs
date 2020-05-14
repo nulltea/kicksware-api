@@ -9,6 +9,10 @@ namespace Core.Entities.Users
 
 		public string Username { get; set; }
 
+		public string UsernameN { get; set; }
+
+		public string EmailN { get; set; }
+
 		public string FirstName { get; set; }
 
 		public string LastName { get; set; }

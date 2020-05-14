@@ -1,16 +1,13 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Core.Entities.Users;
 using Core.Extension;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Routing;
+using Web.Handlers.Users;
 
-namespace Web.Handlers.Users
+namespace Web.Handlers.Authorisation
 {
 	public class NotGuestHandler : AuthorizationHandler<NotGuestRequirement>
 	{
@@ -20,7 +17,8 @@ namespace Web.Handlers.Users
 
 		private LinkGenerator _linkGenerator;
 
-		public NotGuestHandler(UserManager<User> userManager, IHttpContextAccessor accessor, LinkGenerator linkGenerator)
+		public NotGuestHandler(UserManager<User> userManager, IHttpContextAccessor accessor,
+								LinkGenerator linkGenerator)
 		{
 			_userManager = userManager;
 			_accessor = accessor;
@@ -30,28 +28,30 @@ namespace Web.Handlers.Users
 		protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context,
 															NotGuestRequirement requirement)
 		{
-			var httpContext = _accessor.HttpContext;
 			if (context.User.IsInRole(UserRole.Guest.GetEnumMemberValue()))
 			{
-				context.Succeed(requirement);
-				AccessDenied(httpContext);
+				AccessDenied(context, requirement);
 				return;
 			}
 
 			var user = await _userManager.GetUserAsync(context.User);
-
 			if (user is null || !user.Confirmed)
 			{
-				context.Succeed(requirement);
-				AccessDenied(httpContext);
+				AccessDenied(context, requirement);
+				return;
 			}
+
 			context.Succeed(requirement);
 		}
 
-		private void AccessDenied(HttpContext context)
+		private void AccessDenied(AuthorizationHandlerContext context, IAuthorizationRequirement requirement)
 		{
-			context.Items.Add("locked", true);
-			//context.Response.Redirect(_linkGenerator.GetPathByAction("AccessDenied", "Auth", new {fromAction = context.Request.Path}));
+			var httpContext = _accessor.HttpContext;
+			httpContext.Items.Add(
+				AuthLockedResponse.AuthLockedKey,
+				new AuthLockedResponse(httpContext.Request.Path)
+			);
+			context.Succeed(requirement);
 		}
 	}
 }

@@ -129,6 +129,31 @@
 		z-index: 10;
 		.transition-properties(all 400ms cubic-bezier(.155,1.5,.295,1.5));
 
+		.error {
+			position: absolute;
+			left: 0;
+			top: -50px;
+			width: 100%;
+			height: auto;
+			font-size: 12px;
+			font-weight: 600;
+			padding-left: 5px;
+			padding-top: 2px;
+			border-top-left-radius: 10px;
+			border-top-right-radius: 10px;
+			z-index: 1;
+			.transition-properties(all 400ms cubic-bezier(.1, 1.2, .3, 1.2));
+			.with-theme({
+				background: @error;
+				color: @primary;
+				.elevation(1, fade(@elevation, 40%));
+			});
+
+			&.active {
+				top: 0;
+			}
+		}
+
 		.modal-content {
 			height: 100%;
 			padding: 35px;

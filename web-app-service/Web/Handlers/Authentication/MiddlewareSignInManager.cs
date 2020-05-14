@@ -1,5 +1,4 @@
-﻿using System;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using Core.Entities.Users;
 using Core.Extension;
 using Microsoft.AspNetCore.Authentication;
@@ -8,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Web.Handlers.Users
+namespace Web.Handlers.Authentication
 {
 	public class MiddlewareSignInManager : SignInManager<User>
 	{

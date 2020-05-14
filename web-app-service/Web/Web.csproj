@@ -128,6 +128,10 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Update="Views\Shared\_LockedHandlerPartial.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 
@@ -157,7 +161,7 @@
 
 
   <ItemGroup>
-    <Folder Include="Auth\Events" />
+    <Folder Include="Auth" />
     <Folder Include="wwwroot\styles\css" />
   </ItemGroup>
 

@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 
-namespace Web.Auth
+namespace Web.Handlers.Authentication
 {
 	public static class MiddlewareAuthExtensions
 	{

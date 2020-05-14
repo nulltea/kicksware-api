@@ -38,6 +38,10 @@ type AuthConfig struct {
 	PublicKeyPath        string `yaml:"publicKeyPath"`
 }
 
+type MailConfig struct {
+
+}
+
 func ReadServiceConfig(filename string) (sc ServiceConfig, err error) {
 	file, err := ioutil.ReadFile(filename); if err != nil {
 		return

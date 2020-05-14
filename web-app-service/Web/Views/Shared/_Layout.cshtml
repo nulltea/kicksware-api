@@ -265,7 +265,10 @@
 <script src="~/scripts/layout/search.js"></script>
 <script src="~/scripts/user/auth.js"></script>
 @* RENDER BODY SCRIPTS *@
-@RenderSection("Scripts", false)
+@await RenderSectionAsync("Scripts", false)
+@{
+	await Html.RenderPartialAsync("_LockedHandlerPartial");
+}
 <script type="text/javascript">
         $.Scrollax();
     </script>

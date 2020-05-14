@@ -1,14 +1,14 @@
 ﻿function menuButtonInit() {
-	$(".account").click(function () {
+	$(".account").off("click").click(function () {
 		$.get("/Auth/Auth", function(response) {
-			if (response["isLoggedIn"]) {
+			if (response["logged"]) {
 				window.location.href = response["redirectUrl"];
 				return
 			}
 			$("#auth-modal").html(response["content"]);
 			window.redirectURL = response["redirectUrl"];
 			showDialog();
-		})
+		});
 	});
 }
 
@@ -24,7 +24,7 @@ function loginOAuthInit() {
 	$("#email-btn-caption").text("Log in with Email");
 	$("#login-footer-msg").html("Don't have an account? <a id='sing-up'>Sing Up</a>");
 	$("#login-privacy").hide();
-	$("#email-btn").on("click", contentManualShow);
+	$("#email-btn").off("click").click(contentManualShow);
 	$(".auth-form").attr("action", "/Auth/Login");
 }
 
@@ -39,7 +39,7 @@ function singUpOAuthInit() {
 	$("#email-btn-caption").text("Sign up with Email");
 	$("#login-footer-msg").html("Already have an account? <a id='login'>Log in</a>");
 	$("#login-privacy").show();
-	$("#email-btn").on("click", contentManualShow);
+	$("#email-btn").off("click").click(contentManualShow);
 	$(".auth-form").attr("action", "/Auth/SignUp");
 }
 
@@ -55,14 +55,11 @@ function singUpManualInit() {
 	$("#auth-privacy").show();
 	$("#oauth-content").hide();
 	$("#manual-content").show();
-
 	let authForm = $(".auth-form");
-	authForm.find("button[type=submit]").click(function (event) {
+	authForm.attr("action", "/Auth/SignUp");
+	authForm.find("button[type=submit]").off("click").click(function (event) {
 		event.preventDefault();
-		$.post(authForm.attr("action"), authForm.serialize(), function(response) {
-			$(".auth-dialog").removeClass("login").addClass("locked");
-			enableContent("verify")
-		});
+		onAuthFormSubmit(authForm);
 	})
 }
 
@@ -79,13 +76,34 @@ function loginManualInit() {
 	$("#manual-content").show();
 
 	let authForm = $(".auth-form");
-	authForm.find("button[type=submit]").click(function (event) {
+	authForm.attr("action", "/Auth/Login");
+	authForm.find("button[type=submit]").off("click").click(function (event) {
 		event.preventDefault();
-		$.post(authForm.attr("action"), authForm.serialize(), function(response) {
-			$(".auth-dialog").removeClass("login").addClass("locked");
-			enableContent("verify")
-		});
+		onAuthFormSubmit(authForm);
 	})
+}
+
+function onAuthFormSubmit(authForm) {
+	$.post(authForm.attr("action"), authForm.serialize(), function(response) {
+		if (!response["success"]) {
+			showError(response["error"]);
+			return;
+		}
+		resetError();
+		if (response["verifyPending"]) {
+			if (response["content"]) {
+				$("#auth-modal").html(response["content"]);
+			} else {
+				$(".auth-dialog").removeClass("login")
+					.addClass("locked");
+			}
+			window.redirectURL = response["redirectUrl"];
+			enableContent("verify")
+			verifyInit();
+			return;
+		}
+		closeDialog();
+	});
 }
 
 function contentOAuthShow() {
@@ -112,12 +130,14 @@ function verifyInit(){
 	}
 	let content = $("#verify-content");
 	let confirmButton = content.find("#confirm-button");
-	confirmButton.click(function () {
-		if (redirectURL) {
-			window.location.href = redirectURL;
-			return;
-		}
-		closeDialog();
+	confirmButton.off("click").click(function () {
+		$.get("/Auth/Auth", function(response) {
+			if (response["logged"]) {
+				closeDialog();
+				return
+			}
+			window.location.href = "/";
+		});
 	})
 }
 
@@ -128,6 +148,7 @@ function enableContent(content) {
 	}
 	dialog.classList.remove("oauth", "manual", "verify")
 	dialog.classList.add(content);
+	resetError();
 }
 
 function modalInit() {
@@ -150,6 +171,7 @@ function modalInit() {
 			singUpOAuthInit();
 			singUpManualInit();
 		}
+		resetError();
 	})
 }
 
@@ -160,6 +182,7 @@ function showDialog() {
 	singUpOAuthInit();
 	singUpManualInit();
 	verifyInit();
+	resetError();
 	$("#auth-modal").modal("show");
 }
 
@@ -167,16 +190,23 @@ function closeDialog() {
 	$("#auth-modal").fadeOut("slow").modal("hide");
 }
 
+function showError(errorMsg) {
+	$(".error").addClass("active").text(errorMsg ?? "Something went wrong. Please try again soon");
+}
 
-function lock(){
+function resetError() {
+	$(".error").text("").removeClass("active");
+}
+
+function lock(redirectURL){
 	$.get("/Auth/Auth", function(response) {
-		if (response["isLoggedIn"]) {
+		if (response["logged"]) {
 			window.location.href = response["redirectUrl"];
 			return
 		}
 		let modal = $("#auth-modal");
 		modal.html(response["content"]);
-		window.redirectURL = response["redirectUrl"];
+		window.redirectURL = redirectURL;
 		showDialog();
 		modal.addClass("locked");
 	})

@@ -1,9 +1,8 @@
 using System;
-using System.Security.Claims;
+using System.Collections.Generic;
 using Core.Entities.Products;
 using Core.Entities.References;
 using Core.Entities.Users;
-using Core.Extension;
 using Core.Gateway;
 using Core.Model;
 using Core.Repositories;
@@ -16,14 +15,14 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SmartBreadcrumbs.Extensions;
-using Web.Auth;
 using Web.Container.Factory;
+using Web.Handlers.Authentication;
+using Web.Handlers.Authorisation;
 using Web.Handlers.Filter;
 using Web.Handlers.Users;
 
@@ -40,7 +39,7 @@ namespace Web
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true);
+			services.AddDefaultIdentity<User>(ConfigureAuthOptions);
 			services.AddControllersWithViews();
 			services.AddHttpContextAccessor();
 			services.AddSession();
@@ -148,6 +147,20 @@ namespace Web
 			options.DefaultSignOutScheme = MiddlewareAuthDefaults.AuthenticationScheme;
 			options.DefaultChallengeScheme = MiddlewareAuthDefaults.AuthenticationScheme;
 			options.SchemeMap[IdentityConstants.ApplicationScheme].HandlerType = typeof(MiddlewareAuthHandler);
+		}
+
+		private static void ConfigureAuthOptions(IdentityOptions options)
+		{
+			options.SignIn.RequireConfirmedEmail = true;
+			options.SignIn.RequireConfirmedPhoneNumber = false;
+
+			options.Password.RequireUppercase = true;
+			options.Password.RequireLowercase = true;
+			options.Password.RequireNonAlphanumeric = true;
+			options.Password.RequireDigit = true;
+			options.Password.RequiredLength = 6;
+
+			options.User.RequireUniqueEmail = true;
 		}
 
 		private static void ConfigureAuthOptions(AuthorizationOptions options)

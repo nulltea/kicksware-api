@@ -4,7 +4,7 @@
 @{
 	var dialogMode = "oauth";
 
-	if (!string.IsNullOrEmpty(Model.Email) && Model.AwaitVerification)
+	if (!string.IsNullOrEmpty(Model.Email) && Model.VerifyPending)
 	{
 		dialogMode = "verify locked";
 	}
@@ -28,6 +28,7 @@
 		</div>
 	</div>
 	<div class="form-controls">
+		<span class="error"></span>
 		<div id="oauth-content" class="modal-content">
 			<div class="modal-header">
 				<p class="login-title" id="login-title">Create an Account</p>

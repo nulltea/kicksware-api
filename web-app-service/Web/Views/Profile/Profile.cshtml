@@ -55,8 +55,7 @@
 					</li>
 					<li>
 						@Html.VectorIconRender("logout.svg")
-						<input type="button" id="pr8"/>
-						<label for="pr8">LOGOUT</label>
+						<a asp-action="Logout" asp-controller="Auth">LOGOUT</a>
 					</li>
 				</ul>
 			</nav>
@@ -99,11 +98,4 @@
 @section Scripts
 {
 	<script src="~/scripts/profile/profile.js"></script>
-	@if (Context.Items.ContainsKey("locked"))
-	{
-		<script type="text/javascript">
-			lock();
-		</script>
-	}
-
 }

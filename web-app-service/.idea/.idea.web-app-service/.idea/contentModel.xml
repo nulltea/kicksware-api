@@ -242,18 +242,7 @@
             </e>
           </e>
         </e>
-        <e p="Auth" t="Include">
-          <e p="Events" t="Include" />
-          <e p="MiddleareAuthExtensions.cs" t="Include" />
-          <e p="MiddleareAuthServiceExtensions.cs" t="Include" />
-          <e p="MiddlewareAuthDefaults.cs" t="Include" />
-          <e p="MiddlewareAuthHandler.cs" t="Include" />
-          <e p="MiddlewareAuthOptions.cs" t="Include" />
-          <e p="MiddlewareAuthPostConfigureOptions.cs" t="Include" />
-          <e p="Service" t="Include">
-            <e p="AuthTokenSerializer.cs" t="Include" />
-          </e>
-        </e>
+        <e p="Auth" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="Config" t="Include">
           <e p="AppSettings.cs" t="Include" />
@@ -304,14 +293,28 @@
         </e>
         <e p="Dockerfile" t="Include" />
         <e p="Handlers" t="Include">
+          <e p="Authentication" t="Include">
+            <e p="MiddleareAuthExtensions.cs" t="Include" />
+            <e p="MiddleareAuthServiceExtensions.cs" t="Include" />
+            <e p="MiddlewareAuthDefaults.cs" t="Include" />
+            <e p="MiddlewareAuthHandler.cs" t="Include" />
+            <e p="MiddlewareAuthOptions.cs" t="Include" />
+            <e p="MiddlewareAuthPostConfigureOptions.cs" t="Include" />
+            <e p="MiddlewareSignInManager.cs" t="Include" />
+            <e p="Service" t="Include">
+              <e p="AuthTokenSerializer.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Authorisation" t="Include">
+            <e p="AuthLockedResponse.cs" t="Include" />
+            <e p="NotGuestHandler.cs" t="Include" />
+            <e p="NotGuestRequirement.cs" t="Include" />
+          </e>
           <e p="Filter" t="Include">
             <e p="ProductsFilterContent.cs" t="Include" />
             <e p="ReferencesFilterContent.cs" t="Include" />
           </e>
           <e p="Users" t="Include">
-            <e p="MiddlewareSignInManager.cs" t="Include" />
-            <e p="NotGuestHandler.cs" t="Include" />
-            <e p="NotGuestRequirement.cs" t="Include" />
             <e p="UserStore.cs" t="Include" />
           </e>
           <e p="Wizard" t="Include">
@@ -354,6 +357,7 @@
           <e p="Extensions" t="Include">
             <e p="ContextExtensions.cs" t="Include" />
             <e p="ControllerExtensions.cs" t="Include" />
+            <e p="EntityExtensions.cs" t="Include" />
           </e>
           <e p="HtmlHelpers" t="Include">
             <e p="HiddenForWizardStep.cs" t="Include" />
@@ -424,6 +428,7 @@
           </e>
           <e p="Shared" t="Include">
             <e p="_Layout.cshtml" t="Include" />
+            <e p="_LockedHandlerPartial.cshtml" t="Include" />
             <e p="_LoginPartial.cshtml" t="Include" />
             <e p="_PagedPartial.cshtml" t="Include" />
             <e p="_ValidationScriptsPartial.cshtml" t="Include" />

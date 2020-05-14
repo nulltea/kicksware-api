@@ -41,13 +41,13 @@ namespace Core.Services
 
 		#region Usecases
 
-		public void SendEmailConfirmation(string username, string callbackUrl);
+		public void SendEmailConfirmation(string userID, string callbackUrl);
 
-		public Task SendEmailConfirmationAsync(string username, string callbackUrl);
+		public Task SendEmailConfirmationAsync(string userID, string callbackUrl);
 
-		public void SendResetPasswordEmail(string username, string callbackUrl);
+		public void SendResetPasswordEmail(string userID, string callbackUrl);
 
-		public Task SendResetPasswordEmailAsync(string username, string callbackUrl);
+		public Task SendResetPasswordEmailAsync(string userID, string callbackUrl);
 
 		#endregion
 	}

@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using Core.Entities.Users;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Web.Auth.Service;
 using Web.Utils.Extensions;
 
-namespace Web.Auth
+namespace Web.Handlers.Authentication
 {
 	public static class AuthExtensions
 	{

@@ -3,7 +3,7 @@ using Core.Entities.Users;
 using Microsoft.AspNetCore.Authentication;
 using Newtonsoft.Json;
 
-namespace Web.Auth.Service
+namespace Web.Handlers.Authentication
 {
 	public class AuthTokenSerializer : IDataSerializer<AuthToken>
 	{
