@@ -9,6 +9,7 @@ import (
 type ServiceConfig struct {
 	Common      CommonConfig    `yaml:"commonConfig"`
 	Auth        AuthConfig      `yaml:"authConfig"`
+	Mail        MailConfig      `yaml:"mailConfig"`
 	Mongo       DataStoreConfig `yaml:"mongoConfig"`
 	Postgres    DataStoreConfig `yaml:"postgresConfig"`
 	Redis       DataStoreConfig `yaml:"redisConfig"`
@@ -39,7 +40,12 @@ type AuthConfig struct {
 }
 
 type MailConfig struct {
-
+	Server                string `yaml:"server"`
+	Address               string `yaml:"address"`
+	Password              string `yaml:"password"`
+	VerifyEmailTemplate   string `yaml:"verifyEmailTemplate"`
+	ResetPasswordTemplate string `yaml:"resetPasswordTemplate"`
+	NotificationTemplate  string `yaml:"notificationTemplate"`
 }
 
 func ReadServiceConfig(filename string) (sc ServiceConfig, err error) {

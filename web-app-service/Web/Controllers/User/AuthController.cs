@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Core.Entities.Users;
 using Core.Services;
@@ -95,7 +91,7 @@ namespace Web.Controllers
 			if (user is null) return Json(new
 			{
 				Success = false,
-				Error = "Something gone wrong during creation your account. Please try again soon"
+				Error = "Something went wrong during creation your account. Please try again soon"
 			});
 
 			_logger.LogInformation($"User {user.Username} created a new account with password");
@@ -120,6 +116,12 @@ namespace Web.Controllers
 					Success = false,
 					Error = $"User with email {model.Email} was not found.\nPlease check your credentials"
 				});
+
+			if (!await _userManager.CheckPasswordAsync(user, model.Password))
+			{
+				return Json(new {Success = false, Error = "The password you entered is incorrect. Please try again"});
+			}
+
 			var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
 			if (result.Succeeded)
 			{
@@ -127,7 +129,7 @@ namespace Web.Controllers
 				return await Auth(user);
 			}
 
-			return Json(new {Success = false, Error = $"User not allowed yet",});
+			return Json(new {Success = false, Error = "Something went wrong during logging in. Please try again soon"});
 		}
 
 		public IActionResult Facebook()
@@ -187,9 +189,9 @@ namespace Web.Controllers
 
 		[HttpGet]
 		[AllowAnonymous]
-		public async Task<IActionResult> ResendEmail(string userID)
+		public async Task<IActionResult> ResendEmail(string email)
 		{
-			var user = await _userManager.FindByIdAsync(userID);
+			var user = await _userManager.FindByEmailAsync(email);
 			user ??= await _userManager.GetUserAsync(HttpContext.User);
 
 			if (user is null) return Json(new
@@ -213,7 +215,7 @@ namespace Web.Controllers
 			if (user == null) throw new ApplicationException($"Unable to load user with ID '{userId}'.");
 
 			var result = await _userManager.ConfirmEmailAsync(user, code);
-			return View(result.Succeeded ? "ConfirmEmail" : "Error");
+			return View(result.Succeeded ? "ConfirmEmail" : "Error", user);
 		}
 
 		[HttpGet]

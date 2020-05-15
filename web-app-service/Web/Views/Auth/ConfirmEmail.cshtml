@@ -1,10 +1,49 @@
-﻿@{
-    ViewData["Title"] = "Confirm email";
+﻿@using Web.Utils.Helpers
+@model Core.Entities.Users.User
+@{
+	ViewData["Title"] = "Confirm email";
 }
 
-<h2>@ViewData["Title"]</h2>
-<div>
-    <p>
-        Thank you for confirming your email.
-    </p>
-</div>
+@section Styles
+{
+	<style type="text/css">
+		#confirm-button {
+			margin-top: 20px;
+		}
+
+		.form-controls {
+			height: auto !important;
+		}
+
+		.modal-body svg {
+			margin-bottom: 10px;
+			margin-top: -10px;
+		}
+	</style>
+}
+
+<div class="modal-dialog modal-lg auth-dialog verify locked" id="confirm-content">
+		<div class="form-controls">
+			<div id="verify-content" class="modal-content">
+				<div class="modal-header">
+					<p class="login-title">Perfect. Thank you</p>
+				</div>
+				<div class="modal-body">
+					@Html.VectorIconRender("verified.svg")
+					<p>Your email address <strong>@Model.Email</strong> cas been confirmed</p>
+					<p style="font-size: 14px">You are now have a full access to <strong>Kicksware</strong>. Go buy or sell your perfect kicks!</p>
+					<button class="button login-button auth-button" id="confirm-button">
+						<a asp-action="Profile" asp-controller="Profile">Awesome</a>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+@section Scripts
+{
+	<script type="text/javascript">
+		let modal = $("#auth-modal");
+		modal.find(".auth-dialog").replaceWith($("#confirm-content"))
+		showDialog();
+	</script>
+}

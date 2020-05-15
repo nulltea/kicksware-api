@@ -86,10 +86,10 @@ function loginManualInit() {
 function onAuthFormSubmit(authForm) {
 	$.post(authForm.attr("action"), authForm.serialize(), function(response) {
 		if (!response["success"]) {
-			showError(response["error"]);
+			showAuthAlert("error", response["error"]);
 			return;
 		}
-		resetError();
+		resetAuthAlert();
 		if (response["verifyPending"]) {
 			if (response["content"]) {
 				$("#auth-modal").html(response["content"]);
@@ -139,6 +139,22 @@ function verifyInit(){
 			window.location.href = "/";
 		});
 	})
+	$("#resend-email").off("click").click(function (event) {
+		event.preventDefault();
+		$.get(this.href, function(response) {
+			if (response["success"]) {
+				let emailSendMsg = $("#email-send-msg")
+				let newMessage = emailSendMsg.text().replace(
+					"A verification email was sent to",
+					"We've sent another confirmation email to"
+				)
+				emailSendMsg.text(newMessage);
+				$(".login-privacy").detach()
+				return
+			}
+			window.location.href = "/";
+		});
+	})
 }
 
 function enableContent(content) {
@@ -148,7 +164,7 @@ function enableContent(content) {
 	}
 	dialog.classList.remove("oauth", "manual", "verify")
 	dialog.classList.add(content);
-	resetError();
+	resetAuthAlert();
 }
 
 function modalInit() {
@@ -171,7 +187,7 @@ function modalInit() {
 			singUpOAuthInit();
 			singUpManualInit();
 		}
-		resetError();
+		resetAuthAlert();
 	})
 }
 
@@ -182,7 +198,7 @@ function showDialog() {
 	singUpOAuthInit();
 	singUpManualInit();
 	verifyInit();
-	resetError();
+	resetAuthAlert();
 	$("#auth-modal").modal("show");
 }
 
@@ -190,12 +206,33 @@ function closeDialog() {
 	$("#auth-modal").fadeOut("slow").modal("hide");
 }
 
-function showError(errorMsg) {
-	$(".error").addClass("active").text(errorMsg ?? "Something went wrong. Please try again soon");
+function showAuthAlert(mode, message, lifetime = 5) {
+	resetAuthAlert(function () {
+		$("#auth-modal .alert-banner")
+			.addClass(mode)
+			.text(message)
+			.addClass("active")
+		clearTimeout(window.lifetimeHandler)
+		window.lifetimeHandler = window.setTimeout(function () {
+			resetAuthAlert();
+		}, lifetime * 1000);
+	});
 }
 
-function resetError() {
-	$(".error").text("").removeClass("active");
+
+function resetAuthAlert(callback) {
+	let banner = $("#auth-modal .alert-banner");
+	if (callback) {
+		if (banner.hasClass("active")){
+			requestAnimationFrame(function () {
+				banner.removeClass("active success error warning").text("");
+			})
+			window.setTimeout(callback, 500);
+		}
+		callback();
+	} else {
+		banner.removeClass("active success error warning").text("");
+	}
 }
 
 function lock(redirectURL){
@@ -208,7 +245,11 @@ function lock(redirectURL){
 		modal.html(response["content"]);
 		window.redirectURL = redirectURL;
 		showDialog();
-		modal.addClass("locked");
+		let dialog = modal.find(".auth-dialog");
+		dialog.addClass("locked");
+		dialog.find(".close-button").off("click").click(function () {
+			window.location.href = "/";
+		})
 	})
 }
 

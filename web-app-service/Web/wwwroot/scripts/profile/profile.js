@@ -21,11 +21,39 @@ function profileFormInit(){
 	form.submit(function (event) {
 		event.preventDefault();
 		$.post(form.attr("action"), form.serialize(), function(response) {
-			console.log(response.success);
+			showAlert(response.result, response.message);
 		});
 	})
 }
 
+function showAlert(mode, message, lifetime = 5) {
+	resetAlert(function () {
+		$(".profile .alert-banner")
+			.addClass(mode)
+			.text(message)
+			.addClass("active")
+		clearTimeout(window.lifetimeHandler)
+		window.lifetimeHandler = window.setTimeout(function () {
+			resetAlert();
+		}, lifetime * 1000);
+	});
+}
+
+
+function resetAlert(callback) {
+	let banner = $(".profile .alert-banner");
+	if (callback) {
+		if (banner.hasClass("active")){
+			requestAnimationFrame(function () {
+				banner.removeClass("active success error warning").text("");
+			})
+			window.setTimeout(callback, 500);
+		}
+		callback();
+	} else {
+		banner.removeClass("active success error warning").text("");
+	}
+}
 
 $(document).ready(function () {
 	"use strict";

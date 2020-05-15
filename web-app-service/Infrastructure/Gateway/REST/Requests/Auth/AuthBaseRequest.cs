@@ -3,7 +3,7 @@ using RestSharp;
 
 namespace Infrastructure.Gateway.REST.Auth
 {
-	public class AuthBaseRequest : RestRequest, IGatewayRestRequest
+	public abstract class AuthBaseRequest : RestRequest, IGatewayRestRequest
 	{
 		public RequestParams RequestParams { get; set; }
 

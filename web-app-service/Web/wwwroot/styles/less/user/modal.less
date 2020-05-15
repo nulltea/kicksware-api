@@ -125,16 +125,18 @@
 		position: absolute;
 		left: 50px;
 		width: 400px;
-		height: 500px;
+		height: auto;
+		max-height: 500px;
 		z-index: 10;
 		.transition-properties(all 400ms cubic-bezier(.155,1.5,.295,1.5));
 
-		.error {
+		.alert-banner {
 			position: absolute;
 			left: 0;
 			top: -50px;
 			width: 100%;
 			height: auto;
+			max-height: 40px;
 			font-size: 12px;
 			font-weight: 600;
 			padding-left: 5px;
@@ -146,6 +148,19 @@
 			.with-theme({
 				background: @error;
 				color: @primary;
+
+				&.success {
+					background: @success;
+				}
+
+				&.error {
+					background: @error;
+				}
+
+				&.warning {
+					background: @warning;
+				}
+
 				.elevation(1, fade(@elevation, 40%));
 			});
 
@@ -160,7 +175,7 @@
 			border-radius: 10px;
 			.with-theme({
 				//border: 2px solid @secondary;
-				background: @hint;
+				background: @hint !important;
 				.elevation(9, @elevation);
 			});
 
@@ -173,6 +188,7 @@
 					font-size: 30px;
 					font-weight: bold;
 					margin-bottom: auto;
+					text-align: center;
 				}
 
 				.login-message {
@@ -207,12 +223,21 @@
 						});
 					}
 
-					& span {
+					& span, & a {
 						position: relative;
 						z-index: 1;
 					}
 
-					&:hover span {
+					&.auth-button a {
+						line-height: 37px;
+						font-size: 16px;
+						font-weight: 600;
+						.with-theme({
+							color: @primary;
+						})
+					}
+
+					&:hover span, &:hover a {
 						.with-theme({
 							color: @secondary;
 						});
@@ -235,7 +260,7 @@
 							margin-right: 5px;
 						}
 
-						&:hover span {
+						&:hover span, &:hover a {
 							color: @facebook-color;
 						}
 
@@ -264,7 +289,7 @@
 							background: @google-red-color;
 						}
 
-						&:hover span {
+						&:hover span, &:hover a {
 							.with-theme({
 								color: @theme-light-primary;
 							});

@@ -3,7 +3,7 @@ using RestSharp;
 
 namespace Infrastructure.Gateway.REST.ProductRequests
 {
-	public class ProductRequest : RestRequest, IGatewayRestRequest
+	public abstract class ProductRequest : RestRequest, IGatewayRestRequest
 	{
 		public RequestParams RequestParams { get; set; }
 

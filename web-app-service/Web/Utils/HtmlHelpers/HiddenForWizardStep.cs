@@ -40,5 +40,26 @@ namespace Web.Utils.Helpers
 				yield return helper.Hidden(property, value);
 			}
 		}
+
+		public static IEnumerable<IHtmlContent> HiddenForPartialModel(this IHtmlHelper helper, object model, params string[] exceptFields)
+		{
+			var modelDictionary = model.GetType()
+				.GetProperties(BindingFlags.Instance | BindingFlags.Public)
+				.Where(prop => !exceptFields.ToList()
+					.Exists(f => string.Equals(f, prop.Name, StringComparison.CurrentCultureIgnoreCase)))
+				.ToDictionary(prop => prop.Name, prop => prop.GetValue(model, null));
+			foreach (var (property, value) in modelDictionary)
+			{
+				if (value is IList list && value.GetType().IsGenericType)
+				{
+					foreach (var valueItem in list)
+					{
+						yield return helper.Hidden(property, valueItem);
+					}
+					continue;
+				}
+				yield return helper.Hidden(property, value);
+			}
+		}
 	}
 }

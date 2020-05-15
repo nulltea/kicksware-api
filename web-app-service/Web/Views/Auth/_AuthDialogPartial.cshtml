@@ -28,7 +28,7 @@
 		</div>
 	</div>
 	<div class="form-controls">
-		<span class="error"></span>
+		<span class="alert-banner"></span>
 		<div id="oauth-content" class="modal-content">
 			<div class="modal-header">
 				<p class="login-title" id="login-title">Create an Account</p>
@@ -102,8 +102,8 @@
 			</div>
 			<div class="modal-body">
 				@Html.VectorIconRender("verify.svg")
-				<p>A verification email was sent to <b>@Model.Email</b></p>
-				<p>Please check your inbox. Once you verify your account, you will have full access to Kicksware</p>
+				<p id="email-send-msg">A verification email was sent to <b>@Model.Email</b></p>
+				<p>Please check your inbox. Once you verify your account, you will have full access to <strong>Kicksware</strong></p>
 				<button class="button login-button auth-button" id="confirm-button">
 					<span>Let me in</span>
 				</button>
@@ -111,9 +111,9 @@
 			<div class="modal-footer">
 				<p class="login-privacy">
 					Didn't receive an email?
-					<b>
-						<a asp-controller="Auth" asp-action="ResendEmail" asp-route-userid="@Model.Email">Resend email</a>
-					</b>
+					<strong>
+						<a id="resend-email" asp-controller="Auth" asp-action="ResendEmail" asp-route-email="@Model.Email">Resend email</a>
+					</strong>
 				</p>
 			</div>
 		</div>

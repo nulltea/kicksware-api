@@ -31,6 +31,9 @@ type RestfulHandler interface {
 	Guest(http.ResponseWriter, *http.Request)
 	RefreshToken(http.ResponseWriter, *http.Request)
 	Logout(http.ResponseWriter, *http.Request)
+	SendEmailConfirmation(http.ResponseWriter, *http.Request)
+	SendResetPassword(http.ResponseWriter, *http.Request)
+	SendNotification(http.ResponseWriter, *http.Request)
 	// Middleware:
 	Authenticator(next http.Handler) http.Handler
 }
@@ -38,13 +41,15 @@ type RestfulHandler interface {
 type handler struct {
 	service     service.UserService
 	auth        service.AuthService
+	mail        service.MailService
 	contentType string
 }
 
-func NewHandler(service service.UserService, auth service.AuthService, config env.CommonConfig) RestfulHandler {
+func NewHandler(service service.UserService, auth service.AuthService, mail service.MailService, config env.CommonConfig) RestfulHandler {
 	return &handler{
 		service,
 		auth,
+		mail,
 		config.ContentType,
 	}
 }

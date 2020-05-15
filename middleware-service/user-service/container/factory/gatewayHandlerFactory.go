@@ -8,9 +8,14 @@ import (
 	"user-service/env"
 )
 
-func ProvideGatewayHandler(service service.UserService, authService service.AuthService,
+func ProvideGatewayHandler(service service.UserService, authService service.AuthService, mailService service.MailService,
 	config env.ServiceConfig) rest.RestfulHandler {
-	return rest.NewHandler(service, authService, config.Common)
+	return rest.NewHandler(
+		service,
+		authService,
+		mailService,
+		config.Common,
+	)
 }
 
 func ProvideEndpointRouter(handler rest.RestfulHandler) chi.Router {

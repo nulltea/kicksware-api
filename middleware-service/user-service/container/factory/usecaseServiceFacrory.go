@@ -17,3 +17,10 @@ func ProvideAuthService(service service.UserService, config env.ServiceConfig) s
 		config.Auth,
 	)
 }
+
+func ProvideMailService(service service.UserService, config env.ServiceConfig) service.MailService {
+	return business.NewMailService(
+		service,
+		config.Mail,
+	)
+}

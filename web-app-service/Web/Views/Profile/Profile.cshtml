@@ -1,4 +1,5 @@
 ﻿@using Web.Utils.Helpers
+@using Web.Utils
 @model Core.Entities.Users.User
 
 @{
@@ -14,6 +15,7 @@
 }
 
 <div class="profile">
+	<div class="alert-banner"></div>
 	<div class="container profile-card">
 		<aside class="profile-sidebar">
 			<nav>
@@ -63,7 +65,7 @@
 		<div class="profile-content">
 			<section class="profile-section active" id="section-pr1" name="account">
 				@{
-					await Html.RenderPartialAsync("Partial/Account");
+					await Html.RenderPartialAsync("Partial/Account", Model.ToViewModel());
 				}
 			</section>
 			<section class="profile-section" id="section-pr2" name="buying">

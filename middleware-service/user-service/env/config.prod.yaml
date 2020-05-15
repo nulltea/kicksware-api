@@ -9,6 +9,13 @@ authConfig:
   tokenExpirationDelta: 72
   privateKeyPath: key/private.key
   publicKeyPath: ../key/public.key.pub
+mailConfig:
+  server: smtp.zoho.eu:465
+  address: accounts@kicksware.com
+  password: Er2PQRQc
+  verifyEmailTemplate: template/verify.template.html
+  resetPasswordTemplate: template/verify.template.html
+  notificationTemplate: template/verify.template.html
 mongoConfig:
   URL: mongodb://mongodb:27017
   database: sneakerResaleDB

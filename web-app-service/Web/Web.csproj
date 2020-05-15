@@ -161,7 +161,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Auth" />
     <Folder Include="wwwroot\styles\css" />
   </ItemGroup>
 

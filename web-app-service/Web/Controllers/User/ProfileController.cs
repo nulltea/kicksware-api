@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Core.Entities.Users;
 using Core.Services;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SmartBreadcrumbs.Attributes;
+using Web.Models;
 
 namespace Web.Controllers
 {
@@ -63,11 +65,48 @@ namespace Web.Controllers
 
 		[HttpPost]
 		[Authorize]
-		public async Task<IActionResult> Account(User user)
+		public async Task<IActionResult> Account(UserViewModel user)
 		{
 			var result = await _userManager.UpdateAsync(user);
-			if (result.Succeeded) return Json(new {success = true});
-			return Json(new {success = false, errors = result.Errors.Select(err => err.Description)});
+
+			var updateResult = result.Succeeded
+				? FormSubmitResult(SubmitResult.Success, "Great! Account information was successfully updated")
+				: FormSubmitResult(SubmitResult.Error, result.Errors.Select(err => err.Description).FirstOrDefault());
+
+			if (!result.Succeeded) return updateResult;
+
+			if (!string.IsNullOrWhiteSpace(user.NewPassword))
+			{
+				if (!user.NewPassword.Equals(user.ConfirmedPassword))
+				{
+					return FormSubmitResult(SubmitResult.Error, "Password confirmation and Password must match");
+				}
+
+				result = await _userManager.ChangePasswordAsync(user, user.CurrentPassword, user.NewPassword);
+
+				return result.Succeeded
+					? FormSubmitResult(SubmitResult.Success, "Nice! Got yourself a new secret password")
+					: FormSubmitResult(SubmitResult.Error, result.Errors.Select(err => err.Description).FirstOrDefault());
+			}
+
+			return updateResult;
 		}
+
+		private JsonResult FormSubmitResult(SubmitResult result, string message) => Json(new
+		{
+			Result = result.ToString().ToLower(),
+			Message = message
+		});
+
+		private enum SubmitResult
+		{
+			Success,
+
+			Error,
+
+			Warning
+		}
+
+
 	}
 }

@@ -149,6 +149,12 @@
                 <e p="AuthValidateTokenRequest.cs" t="Include" />
               </e>
               <e p="IGatewayRestRequest.cs" t="Include" />
+              <e p="Mail" t="Include">
+                <e p="MailBaseRequest.cs" t="Include" />
+                <e p="PostEmailConfirmationRequest.cs" t="Include" />
+                <e p="PostNotificationRequest.cs" t="Include" />
+                <e p="PostPasswordResetRequest.cs" t="Include" />
+              </e>
               <e p="ProductRequests" t="Include">
                 <e p="ProductRequest.cs" t="Include" />
                 <e p="ProductsListRequest.cs" t="Include" />
@@ -169,14 +175,14 @@
                 <e p="ReferenceListRequest.cs" t="Include" />
                 <e p="ReferenceRequest.cs" t="Include" />
                 <e p="Sneakers" t="Include">
-                  <e p="BaseSneakerProductRequest.cs" t="Include" />
+                  <e p="BaseSneakerReferenceRequest.cs" t="Include" />
                   <e p="BaseSneakersListRequest.cs" t="Include" />
-                  <e p="CountSneakerProductsRequest.cs" t="Include" />
+                  <e p="CountSneakerReferencesRequest.cs" t="Include" />
                   <e p="GetAllSneakersRequest.cs" t="Include" />
-                  <e p="GetQueriedSneakersRequest.cs" t="Include" />
-                  <e p="GetSneakerProductRequest.cs" t="Include" />
-                  <e p="PostSneakerProductRequest.cs" t="Include" />
-                  <e p="PutSneakerImagesRequest.cs" t="Include" />
+                  <e p="GetQueriedSneakerReferencesRequest.cs" t="Include" />
+                  <e p="GetSneakerReferenceRequest.cs" t="Include" />
+                  <e p="PatchSneakerReferenceRequest.cs" t="Include" />
+                  <e p="PostSneakerReferenceRequest.cs" t="Include" />
                 </e>
               </e>
               <e p="Search" t="Include">
@@ -242,7 +248,6 @@
             </e>
           </e>
         </e>
-        <e p="Auth" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="Config" t="Include">
           <e p="AppSettings.cs" t="Include" />
@@ -583,6 +588,7 @@
             <e p="theme.svg" t="Include" />
             <e p="upload.svg" t="Include" />
             <e p="user.svg" t="Include" />
+            <e p="verified.svg" t="Include" />
             <e p="verify.svg" t="Include" />
           </e>
           <e p="plugins" t="Include">

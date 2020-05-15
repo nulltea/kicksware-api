@@ -4,6 +4,8 @@ using Core.Entities.Users;
 using Core.Gateway;
 using Core.Repositories;
 using Core.Services;
+using Infrastructure.Gateway.REST;
+using Infrastructure.Gateway.REST.Mail;
 
 namespace Infrastructure.Usecase
 {
@@ -11,7 +13,9 @@ namespace Infrastructure.Usecase
 	{
 		private IUserRepository _repository;
 
-		public UserService(IUserRepository repository) => _repository = repository;
+		private readonly IGatewayClient<IGatewayRestRequest> _client;
+		public UserService(IUserRepository repository, IGatewayClient<IGatewayRestRequest> client) =>
+			(_repository, _client) = (repository, client);
 
 		#region CRUD sync
 
@@ -69,13 +73,17 @@ namespace Infrastructure.Usecase
 
 		#region Usecase
 
-		public void SendEmailConfirmation(string userID, string callbackUrl) => throw new System.NotImplementedException();
+		public void SendEmailConfirmation(string userID, string callbackUrl) =>
+			_client.Request(new PostEmailConfirmationRequest(userID, callbackUrl));
 
-		public Task SendEmailConfirmationAsync(string userID, string callbackUrl) => throw new System.NotImplementedException();
+		public Task SendEmailConfirmationAsync(string userID, string callbackUrl) =>
+			_client.RequestAsync(new PostEmailConfirmationRequest(userID, callbackUrl));
 
-		public void SendResetPasswordEmail(string userID, string callbackUrl) => throw new System.NotImplementedException();
+		public void SendResetPasswordEmail(string userID, string callbackUrl) =>
+			_client.Request(new PostPasswordResetRequest(userID, callbackUrl));
 
-		public Task SendResetPasswordEmailAsync(string userID, string callbackUrl) => throw new System.NotImplementedException();
+		public Task SendResetPasswordEmailAsync(string userID, string callbackUrl) =>
+			_client.RequestAsync(new PostPasswordResetRequest(userID, callbackUrl));
 
 		#endregion
 	}

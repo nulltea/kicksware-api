@@ -25,6 +25,7 @@
 		});
 	}
 
+
 	.profile-sidebar {
 		position: relative;
 		min-height: ~"calc(100% - 20px)";
@@ -157,6 +158,45 @@
 
 		.pagination-control{
 			width: 100%;
+		}
+	}
+
+	.alert-banner {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: ~"calc(100% - 200px)";
+		height: auto;
+		max-height: 75px;
+		min-height: 25px;
+		font-size: 14px;
+		font-weight: 600;
+		text-align: end;
+		padding: 5px 5px;
+		margin: 0 100px;
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
+		z-index: 0;
+		.transition-properties(all 400ms cubic-bezier(.1, 1.2, .3, 1.2));
+		.with-theme({
+			color: @primary;
+			.elevation(6, fade(@elevation, 40%));
+
+			&.success {
+				background: @success;
+			}
+
+			&.error {
+				background: @error;
+			}
+
+			&.warning {
+				background: @warning;
+			}
+		});
+
+		&.active {
+			.transform-properties(translateY(~"calc(-100% + 5px)"))
 		}
 	}
 

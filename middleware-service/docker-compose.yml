@@ -72,7 +72,7 @@ services:
     image: users-service
     restart: always
     labels:
-      - traefik.http.routers.user-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/users`) || PathPrefix(`/api/auth`)
+      - traefik.http.routers.user-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/users`) || PathPrefix(`/api/auth`) || PathPrefix(`/api/mail`)
       # - traefik.http.routers.user-service.tls=true
       # - traefik.http.routers.user-service.tls.certresolver=le
       - traefik.docker.network=middleware-service_web
@@ -82,6 +82,7 @@ services:
     volumes:
       - ./user-service/env:/dist/env
       - ./user-service/key:/dist/key
+      - ./user-service/template:/dist/template
       - ./key:/key
     links:
       - mongodb
