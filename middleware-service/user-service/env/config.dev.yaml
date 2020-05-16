@@ -14,12 +14,13 @@ mailConfig:
   address: accounts@kicksware.com
   password: Er2PQRQc
   verifyEmailTemplate: template/verify.template.html
-  resetPasswordTemplate: template/verify.template.html
-  notificationTemplate: template/verify.template.html
+  resetPasswordTemplate: template/reset.template.html
+  notificationTemplate: template/notification.template.html
 mongoConfig:
   URL: mongodb://localhost:27017
   database: sneakerResaleDB
   collection: users
+  likesCollection: likes
   login: admin
   password: admin
   timeout: 30
@@ -29,6 +30,7 @@ postgresConfig:
   URL: postgres://postgres:1879@localhost:5432/sneakerResaleDB
   database: sneakerResaleDB
   collection: Users
+  likesCollection: Likes
   login: postgres
   password: 1879
   timeout: 30

@@ -77,7 +77,7 @@ namespace Web.Controllers
 
 			if (!string.IsNullOrWhiteSpace(user.NewPassword))
 			{
-				if (!user.NewPassword.Equals(user.ConfirmedPassword))
+				if (!user.NewPassword.Equals(user.ConfirmPassword))
 				{
 					return FormSubmitResult(SubmitResult.Error, "Password confirmation and Password must match");
 				}
@@ -86,7 +86,7 @@ namespace Web.Controllers
 
 				return result.Succeeded
 					? FormSubmitResult(SubmitResult.Success, "Nice! Got yourself a new secret password")
-					: FormSubmitResult(SubmitResult.Error, result.Errors.Select(err => err.Description).FirstOrDefault());
+					: FormSubmitResult(SubmitResult.Error, result.Errors.FirstOrDefault()?.Description);
 			}
 
 			return updateResult;

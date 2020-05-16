@@ -12,7 +12,7 @@
 	pointer-events: all;
 	.flex-row();
 	width: 800px;
-	height: 500px;
+	height: 600px;
 	overflow: hidden;
 	.transition-properties(~"all 300ms cubic-bezier(.2, 1, .3, 1) !important");
 
@@ -54,6 +54,10 @@
 		width: 400px;
 		.form-controls{
 			left: unset;
+		}
+
+		.common-content {
+			display: block;
 		}
 	}
 
@@ -120,7 +124,6 @@
 		}
 	}
 
-
 	.form-controls {
 		position: absolute;
 		left: 50px;
@@ -130,47 +133,9 @@
 		z-index: 10;
 		.transition-properties(all 400ms cubic-bezier(.155,1.5,.295,1.5));
 
-		.alert-banner {
-			position: absolute;
-			left: 0;
-			top: -50px;
-			width: 100%;
-			height: auto;
-			max-height: 40px;
-			font-size: 12px;
-			font-weight: 600;
-			padding-left: 5px;
-			padding-top: 2px;
-			border-top-left-radius: 10px;
-			border-top-right-radius: 10px;
-			z-index: 1;
-			.transition-properties(all 400ms cubic-bezier(.1, 1.2, .3, 1.2));
-			.with-theme({
-				background: @error;
-				color: @primary;
-
-				&.success {
-					background: @success;
-				}
-
-				&.error {
-					background: @error;
-				}
-
-				&.warning {
-					background: @warning;
-				}
-
-				.elevation(1, fade(@elevation, 40%));
-			});
-
-			&.active {
-				top: 0;
-			}
-		}
-
 		.modal-content {
 			height: 100%;
+			min-height: 450px;
 			padding: 35px;
 			border-radius: 10px;
 			.with-theme({
@@ -199,16 +164,10 @@
 			.modal-body {
 				.flex-col(@justify: space-between, @align: stretch);
 				border: none;
-				margin-bottom: 25px;
-				margin-top: 25px;
+				// margin-bottom: 25px;
+				// margin-top: 25px;
 
 				.login-button {
-					.with-theme({
-						color: @primary;
-					});
-					.with-theme({
-						background: @secondary;
-					});
 					display: inline-block;
 					position: relative;
 					cursor: pointer;
@@ -216,6 +175,11 @@
 					font-size: 16px;
 					font-weight: 700;
 					height: 40px;
+					.with-theme({
+						background: @secondary;
+						color: @primary;
+						.elevation(2);
+					});
 
 					&:after {
 						.with-theme({
@@ -308,6 +272,7 @@
 					flex-direction: column;
 
 					.auth-input {
+						.flex-col(@align: flex-start);
 						margin-bottom: 5px;
 					}
 
@@ -356,11 +321,12 @@
 
 				.login-message {
 					font-size: 16px;
+					padding-left: 1rem;
 				}
 			}
 		}
 
-		#verify-content {
+		.common-content, #verify-content {
 			.modal-body {
 				margin-top: 10px;
 				margin-bottom: 20px;
@@ -371,6 +337,10 @@
 					font-size: 15px;
 					font-weight: 500;
 					letter-spacing: 0.5px;
+				}
+
+				.auth-button {
+					margin-top: 10px;
 				}
 			}
 
@@ -383,10 +353,52 @@
 			svg {
 				width: 100px;
 				height: 100px;
+				margin-bottom: 10px;
 				.with-theme({
 					fill: @secondary;
 				})
 			}
+		}
+	}
+
+	.alert-banner {
+		position: absolute;
+		left: 0;
+		top: -40px;
+		width: 100%;
+		height: auto;
+		opacity: 0;
+		max-height: 40px;
+		font-size: 12px;
+		font-weight: 600;
+		padding-left: 5px;
+		padding-top: 2px;
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
+		z-index: 1;
+		.transition-properties(top 400ms cubic-bezier(.1, 1.2, .3, 1.2));
+		.with-theme({
+			background: @error;
+			color: @primary;
+
+			&.success {
+				background: @success;
+			}
+
+			&.error {
+				background: @error;
+			}
+
+			&.warning {
+				background: @warning;
+			}
+
+			.elevation(1, fade(@elevation, 40%));
+		});
+
+		&.active {
+			top: 0;
+			opacity: 1;
 		}
 	}
 }

@@ -173,17 +173,14 @@
                                                         <tr>
                                                             <td>
                                                                 <p class="message-caption">
-                                                                    Welcome to
-                                                                    <strong>Kicksware</strong>!<br><br>
+                                                                    {{.title}}
                                                                 </p>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
                                                                 <p class="message">
-                                                                    <strong>You're almost done...</strong><br/> Please
-                                                                    confirm your email by kicking the button below:
-                                                                    <br><br>
+                                                                    {{.info}}
                                                                 </p>
                                                             </td>
                                                         </tr>
@@ -195,7 +192,7 @@
                                                                     <tr>
                                                                         <td align="center" valign="top">
                                                                             <a class="button" href="{{.link}}" class="button">
-                                                                                VERIFY EMAIL
+                                                                                {{.button}}
                                                                             </a>
                                                                         </td>
                                                                     </tr>
@@ -205,7 +202,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td style="padding-top:30px;">
-                                                                <p class="link-caption">Or verify using this link:</p>
+                                                                <p class="link-caption">{{.footer}}</p>
                                                                 <p class="link">
                                                                     <a href="{{.link}}"
                                                                        style="color:#5885ff; text-decoration:underline;">https://kicksware.com/auth/verify</a>

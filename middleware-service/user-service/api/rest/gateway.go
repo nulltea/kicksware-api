@@ -16,6 +16,7 @@ func ProvideRoutes(rest RestfulHandler) *chi.Mux {
 	router.Mount("/api/users", restRoutes(rest))
 	router.Mount("/api/auth", authRoutes(rest))
 	router.Mount("/api/mail", mailRoutes(rest))
+	router.Mount("/api/interact", interactRoutes(rest))
 	return router
 }
 
@@ -47,5 +48,12 @@ func mailRoutes(rest RestfulHandler) (r *chi.Mux) {
 	r.Get("/confirm", rest.SendEmailConfirmation)
 	r.Get("/password-reset", rest.SendResetPassword)
 	r.Get("/notify", rest.SendNotification)
+	return
+}
+
+func interactRoutes(rest RestfulHandler) (r *chi.Mux) {
+	r = chi.NewRouter()
+	r.Get("/like", rest.Like)
+	r.Get("/unlike", rest.Unlike)
 	return
 }

@@ -69,7 +69,16 @@ func (s *mailService) SendEmailConfirmation(userID, callbackURL string) error { 
 }
 
 func (s *mailService) SendResetPassword(userID, callbackURL string) error {
-	panic("implement me")
+	user, err := s.userService.FetchOne(userID); if err != nil {
+		return err
+	}
+	values := map[string]string{
+		"link": callbackURL,
+	}
+	msg, err := useTemplate(s.config.ResetPasswordTemplate, values); if err != nil {
+		return errors.Wrapf(err, "mailService: Could not parse or use specified template %q", s.config.ResetPasswordTemplate)
+	}
+	return s.sendMail("Kicksware password reset", msg, user.Email)
 }
 
 func (s *mailService) SendNotification(userID, notificationContent string) error {

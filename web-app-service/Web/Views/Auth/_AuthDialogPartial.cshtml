@@ -28,7 +28,7 @@
 		</div>
 	</div>
 	<div class="form-controls">
-		<span class="alert-banner"></span>
+		<div class="alert-banner"></div>
 		<div id="oauth-content" class="modal-content">
 			<div class="modal-header">
 				<p class="login-title" id="login-title">Create an Account</p>
@@ -85,8 +85,8 @@
 				</form>
 			</div>
 			<div class="modal-footer">
-				<p class="login-message" id="auth-footer-msg">
-					<a>Forgot your password?</a>
+				<p class="login-message" id="forgot-password">
+					<a asp-action="ForgotPassword" asp-route-email="@Model.Email">Forgot your password?</a>
 				</p>
 				<p class="login-privacy" id="auth-privacy">
 					By creating an account, I accept Kicksware
@@ -96,7 +96,7 @@
 			</div>
 		</div>
 
-		<div id="verify-content" class="modal-content">
+		<div id="verify-content" class="modal-content common-content">
 			<div class="modal-header">
 				<p class="login-title">Verify your Account</p>
 			</div>

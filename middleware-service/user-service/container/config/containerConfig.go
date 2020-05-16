@@ -10,10 +10,15 @@ import (
 func ConfigureContainer(container container.ServiceContainer, config env.ServiceConfig) {
 	container.BindInstance(config).
 		BindSingleton(factory.ProvideRepository).
+		BindSingleton(factory.ProvideLikesRepository).
+
 		BindSingleton(factory.ProvideDataService).
 		BindSingleton(factory.ProvideAuthService).
 		BindSingleton(factory.ProvideMailService).
+		BindSingleton(factory.ProvideInteractService).
+
 		BindSingleton(factory.ProvideGatewayHandler).
 		BindTransient(factory.ProvideEndpointRouter).
+
 		BindTransient(factory.ProvideServer)
 }

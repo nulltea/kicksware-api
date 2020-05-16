@@ -20,20 +20,26 @@ import (
 
 type RestfulHandler interface {
 	// Endpoint handlers:
+	// CRUD
 	GetOne(http.ResponseWriter, *http.Request)
 	Get(http.ResponseWriter, *http.Request)
 	Post(http.ResponseWriter, *http.Request)
 	Patch(http.ResponseWriter, *http.Request)
 	Put(http.ResponseWriter, *http.Request)
 	Delete(http.ResponseWriter, *http.Request)
+	// Auth
 	SingUp(http.ResponseWriter, *http.Request)
 	Login(http.ResponseWriter, *http.Request)
 	Guest(http.ResponseWriter, *http.Request)
 	RefreshToken(http.ResponseWriter, *http.Request)
 	Logout(http.ResponseWriter, *http.Request)
+	// Mail
 	SendEmailConfirmation(http.ResponseWriter, *http.Request)
 	SendResetPassword(http.ResponseWriter, *http.Request)
 	SendNotification(http.ResponseWriter, *http.Request)
+	// Interaction
+	Like(http.ResponseWriter, *http.Request)
+	Unlike(http.ResponseWriter, *http.Request)
 	// Middleware:
 	Authenticator(next http.Handler) http.Handler
 }
@@ -42,14 +48,17 @@ type handler struct {
 	service     service.UserService
 	auth        service.AuthService
 	mail        service.MailService
+	interact    service.InteractService
 	contentType string
 }
 
-func NewHandler(service service.UserService, auth service.AuthService, mail service.MailService, config env.CommonConfig) RestfulHandler {
+func NewHandler(service service.UserService, auth service.AuthService, mail service.MailService,
+	interact service.InteractService, config env.CommonConfig) RestfulHandler {
 	return &handler{
 		service,
 		auth,
 		mail,
+		interact,
 		config.ContentType,
 	}
 }

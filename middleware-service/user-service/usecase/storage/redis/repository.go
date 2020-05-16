@@ -19,11 +19,11 @@ type repository struct {
 	client *redis.Client
 }
 
-func NewRedisRepository(config env.DataStoreConfig) (repo.UserRepository, error) {
+func NewRepository(config env.DataStoreConfig) (repo.UserRepository, error) {
 	rep := &repository{}
 	client, err := newRedisClient(config.URL)
 	if err != nil {
-		return nil, errors.Wrap(err, "repository.NewRedisRepository")
+		return nil, errors.Wrap(err, "repository.NewRepository")
 	}
 	rep.client = client
 	return rep, nil

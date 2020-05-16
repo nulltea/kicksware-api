@@ -9,11 +9,12 @@ import (
 )
 
 func ProvideGatewayHandler(service service.UserService, authService service.AuthService, mailService service.MailService,
-	config env.ServiceConfig) rest.RestfulHandler {
+	interactService service.InteractService, config env.ServiceConfig) rest.RestfulHandler {
 	return rest.NewHandler(
 		service,
 		authService,
 		mailService,
+		interactService,
 		config.Common,
 	)
 }

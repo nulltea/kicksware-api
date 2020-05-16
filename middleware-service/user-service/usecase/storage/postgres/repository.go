@@ -21,10 +21,10 @@ type repository struct {
 	table string
 }
 
-func NewPostgresRepository(config env.DataStoreConfig) (repo.UserRepository, error) {
+func NewRepository(config env.DataStoreConfig) (repo.UserRepository, error) {
 	db, err := newPostgresClient(config.URL)
 	if err != nil {
-		return nil, errors.Wrap(err, "repository.NewPostgresRepository")
+		return nil, errors.Wrap(err, "repository.NewRepository")
 	}
 	repo := &repository{
 		db: db,
@@ -154,7 +154,7 @@ func (r *repository) Replace(user *model.User) error {
 func (r *repository) Remove(code string) error {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	cmd, args, err := sqb.Delete(r.table).Where(sqb.Eq{"uniqueID":code}).PlaceholderFormat(sqb.Dollar).ToSql()
+	cmd, args, err := sqb.Delete(r.table).Where(sqb.Eq{"UniqueID":code}).PlaceholderFormat(sqb.Dollar).ToSql()
 	if err != nil {
 		return errors.Wrap(err, "repository.User.Remove")
 	}

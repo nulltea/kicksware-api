@@ -384,17 +384,11 @@
           </e>
           <e p="Auth" t="Include">
             <e p="_AuthDialogPartial.cshtml" t="Include" />
+            <e p="_ForgotPassword.cshtml" t="Include" />
+            <e p="_ResetPasswordConfirm.cshtml" t="Include" />
             <e p="AccessDenied.cshtml" t="Include" />
             <e p="ConfirmEmail.cshtml" t="Include" />
-            <e p="ForgotPassword.cshtml" t="Include" />
-            <e p="ForgotPasswordConfirmation.cshtml" t="Include" />
-            <e p="Lockout.cshtml" t="Include" />
-            <e p="Login.cshtml" t="Include" />
-            <e p="LoginWithRecoveryCode.cshtml" t="Include" />
             <e p="ResetPassword.cshtml" t="Include" />
-            <e p="ResetPasswordConfirmation.cshtml" t="Include" />
-            <e p="SignedOut.cshtml" t="Include" />
-            <e p="SignUp.cshtml" t="Include" />
           </e>
           <e p="Checkout" t="Include">
             <e p="Checkout.cshtml" t="Include" />
@@ -579,6 +573,7 @@
             <e p="payment.svg" t="Include" />
             <e p="photo.svg" t="Include" />
             <e p="preview.svg" t="Include" />
+            <e p="reset-password.svg" t="Include" />
             <e p="save.svg" t="Include" />
             <e p="search.svg" t="Include" />
             <e p="sell.svg" t="Include" />

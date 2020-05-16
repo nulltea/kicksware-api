@@ -24,12 +24,13 @@ type CommonConfig struct {
 }
 
 type DataStoreConfig struct {
-	URL        string `yaml:"URL"`
-	Database   string `yaml:"database"`
-	Collection string `yaml:"collection"`
-	Login      string `yaml:"login"`
-	Password   string `yaml:"password"`
-	Timeout    int    `yaml:"timeout"`
+	URL             string `yaml:"URL"`
+	Database        string `yaml:"database"`
+	Collection      string `yaml:"collection"`
+	LikesCollection string `yaml:"likesCollection"`
+	Login           string `yaml:"login"`
+	Password        string `yaml:"password"`
+	Timeout         int    `yaml:"timeout"`
 }
 
 type AuthConfig struct {

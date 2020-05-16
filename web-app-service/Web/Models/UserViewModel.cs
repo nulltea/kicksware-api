@@ -8,6 +8,6 @@ namespace Web.Models
 
 		public string NewPassword { get; set; }
 
-		public string ConfirmedPassword { get; set; }
+		public string ConfirmPassword { get; set; }
 	}
 }

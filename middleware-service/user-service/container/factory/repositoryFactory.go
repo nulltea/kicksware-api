@@ -13,17 +13,33 @@ import (
 func ProvideRepository(config env.ServiceConfig) repo.UserRepository {
 	switch config.Common.UsedDB {
 	case "redis":
-		repo, err := redis.NewRedisRepository(config.Redis); if err != nil {
+		repo, err := redis.NewRepository(config.Redis); if err != nil {
 			log.Fatal(err)
 		}
 		return repo
 	case "mongo":
-		repo, err := mongo.NewMongoRepository(config.Mongo); if err != nil {
+		repo, err := mongo.NewRepository(config.Mongo); if err != nil {
 			log.Fatal(err)
 		}
 		return repo
 	case "postgres":
-		repo, err := postgres.NewPostgresRepository(config.Postgres); if err != nil {
+		repo, err := postgres.NewRepository(config.Postgres); if err != nil {
+			log.Fatal(err)
+		}
+		return repo
+	}
+	return nil
+}
+
+func ProvideLikesRepository(config env.ServiceConfig) repo.LikesRepository {
+	switch config.Common.UsedDB {
+	case "mongo":
+		repo, err := mongo.NewLikesRepository(config.Mongo); if err != nil {
+			log.Fatal(err)
+		}
+		return repo
+	case "postgres":
+		repo, err := postgres.NewLikesRepository(config.Postgres); if err != nil {
 			log.Fatal(err)
 		}
 		return repo

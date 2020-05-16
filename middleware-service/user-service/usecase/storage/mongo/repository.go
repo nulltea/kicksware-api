@@ -25,13 +25,13 @@ type repository struct {
 	timeout    time.Duration
 }
 
-func NewMongoRepository(config env.DataStoreConfig) (repo.UserRepository, error) {
+func NewRepository(config env.DataStoreConfig) (repo.UserRepository, error) {
 	repo := &repository{
 		timeout:  time.Duration(config.Timeout) * time.Second,
 	}
 	client, err := newMongoClient(config.URL, config.Timeout)
 	if err != nil {
-		return nil, errors.Wrap(err, "repository.NewMongoRepository")
+		return nil, errors.Wrap(err, "repository.NewRepository")
 	}
 	repo.client = client
 	database := client.Database(config.Database)
@@ -212,4 +212,27 @@ func (r *repository) CountAll() (int, error) {
 		return 0, errors.Wrap(err, "repository.User.Count")
 	}
 	return int(count), nil
+}
+
+func (r *repository) buildQueryPipeline(matchQuery bson.M, param meta.RequestParams) mongo.Pipeline {
+	pipe := mongo.Pipeline{}
+	pipe = append(pipe, bson.D{{"$match", matchQuery}})
+
+	pipe = append(pipe, bson.D {
+		{"$lookup", bson.M {
+			"from": "likes",
+			"localField": "unique_id",
+			"foreignField": "user_id",
+			"as": "like",
+		}},
+	})
+	pipe = append(pipe, bson.D {{ "$unwind", "$like"}})
+
+	pipe = append(pipe, bson.D {
+		{ "$project", bson.M {
+				"licked_references": "$like.entity_id",
+		}},
+	})
+
+	return pipe
 }

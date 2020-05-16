@@ -24,3 +24,10 @@ func ProvideMailService(service service.UserService, config env.ServiceConfig) s
 		config.Mail,
 	)
 }
+
+func ProvideInteractService(service service.UserService, likesRepo repo.LikesRepository) service.InteractService {
+	return business.NewInteractService(
+		service,
+		likesRepo,
+	)
+}

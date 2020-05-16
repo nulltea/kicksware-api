@@ -73,16 +73,16 @@ namespace Infrastructure.Usecase
 
 		#region Usecase
 
-		public void SendEmailConfirmation(string userID, string callbackUrl) =>
+		public bool SendEmailConfirmation(string userID, string callbackUrl) =>
 			_client.Request(new PostEmailConfirmationRequest(userID, callbackUrl));
 
-		public Task SendEmailConfirmationAsync(string userID, string callbackUrl) =>
+		public Task<bool> SendEmailConfirmationAsync(string userID, string callbackUrl) =>
 			_client.RequestAsync(new PostEmailConfirmationRequest(userID, callbackUrl));
 
-		public void SendResetPasswordEmail(string userID, string callbackUrl) =>
+		public bool SendResetPasswordEmail(string userID, string callbackUrl) =>
 			_client.Request(new PostPasswordResetRequest(userID, callbackUrl));
 
-		public Task SendResetPasswordEmailAsync(string userID, string callbackUrl) =>
+		public Task<bool> SendResetPasswordEmailAsync(string userID, string callbackUrl) =>
 			_client.RequestAsync(new PostPasswordResetRequest(userID, callbackUrl));
 
 		#endregion

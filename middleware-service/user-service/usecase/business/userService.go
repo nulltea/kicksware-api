@@ -21,21 +21,21 @@ var (
 	ErrEmailInvalid  = errors.New("user email could not be empty")
 )
 
-type UserService struct {
+type userService struct {
 	repo repo.UserRepository
 }
 
 func NewUserService(userRepo repo.UserRepository) service.UserService {
-	return &UserService{
+	return &userService{
 		userRepo,
 	}
 }
 
-func (s *UserService) FetchOne(code string) (*model.User, error) {
+func (s *userService) FetchOne(code string) (*model.User, error) {
 	return s.repo.FetchOne(code)
 }
 
-func (s *UserService) FetchByEmail(email string) (*model.User, error) {
+func (s *userService) FetchByEmail(email string) (*model.User, error) {
 	query := meta.RequestQuery{"email": email}
 	users, err := s.repo.FetchQuery(query, nil); if err != nil || len(users) == 0 {
 		return nil, err
@@ -43,7 +43,7 @@ func (s *UserService) FetchByEmail(email string) (*model.User, error) {
 	return users[0], nil
 }
 
-func (s *UserService) FetchByUsername(username string) (*model.User, error) {
+func (s *userService) FetchByUsername(username string) (*model.User, error) {
 	query := meta.RequestQuery{"username": username}
 	users, err := s.repo.FetchQuery(query, nil); if err != nil || len(users) == 0 {
 		return nil, err
@@ -51,19 +51,19 @@ func (s *UserService) FetchByUsername(username string) (*model.User, error) {
 	return users[0], nil
 }
 
-func (s *UserService) Fetch(codes []string, params meta.RequestParams) ([]*model.User, error) {
+func (s *userService) Fetch(codes []string, params meta.RequestParams) ([]*model.User, error) {
 	return s.repo.Fetch(codes, params)
 }
 
-func (s *UserService) FetchAll(params meta.RequestParams) ([]*model.User, error) {
+func (s *userService) FetchAll(params meta.RequestParams) ([]*model.User, error) {
 	return s.repo.FetchAll(params)
 }
 
-func (s *UserService) FetchQuery(query meta.RequestQuery, params meta.RequestParams) ([]*model.User, error) {
+func (s *userService) FetchQuery(query meta.RequestQuery, params meta.RequestParams) ([]*model.User, error) {
 	return s.repo.FetchQuery(query, params)
 }
 
-func (s *UserService) GenerateUsername(user *model.User, save bool) (string, error) {
+func (s *userService) GenerateUsername(user *model.User, save bool) (string, error) {
 	if len(user.Email) == 0 {
 		return "", ErrEmailInvalid
 	}
@@ -84,27 +84,27 @@ func (s *UserService) GenerateUsername(user *model.User, save bool) (string, err
 	return username, nil;
 }
 
-func (s *UserService) Modify(user *model.User) error {
+func (s *userService) Modify(user *model.User) error {
 	return s.repo.Modify(user)
 }
 
-func (s *UserService) Replace(user *model.User) error {
+func (s *userService) Replace(user *model.User) error {
 	return s.repo.Replace(user)
 }
 
-func (s *UserService) Remove(code string) error {
+func (s *userService) Remove(code string) error {
 	return s.repo.Remove(code)
 }
 
-func (s *UserService) Count(query meta.RequestQuery, params meta.RequestParams) (int, error) {
+func (s *userService) Count(query meta.RequestQuery, params meta.RequestParams) (int, error) {
 	return s.repo.Count(query, params)
 }
 
-func (s *UserService) CountAll() (int, error) {
+func (s *userService) CountAll() (int, error) {
 	return s.repo.CountAll()
 }
 
-func (s *UserService) Register(user *model.User) error {
+func (s *userService) Register(user *model.User) error {
 	if err := validate.Validate(user); err != nil {
 		return errs.Wrap(ErrUserInvalid, "service.repo.Register")
 	}

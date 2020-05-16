@@ -56,7 +56,7 @@ namespace Web.Controllers
 					Logged = false,
 					Content = content,
 					VerifyPending = verifyPending,
-					RedirectUrl = Url.Action("Index", "Home")
+					RedirectURL = Url.Action("Index", "Home")
 				});
 			}
 
@@ -98,7 +98,11 @@ namespace Web.Controllers
 			await _signInManager.SignInWithClaimsAsync(user, false, user.ExtractCredentials());
 			_logger.LogInformation($"User {user.Username} signed up with new account");
 
-			await SendEmailConfirmationAsync(user);
+			if (!await SendEmailConfirmationAsync(user)) return Json(new
+			{
+				Success = false,
+				Error = "Something went wrong during sending you an email. Please try again soon"
+			});
 
 			return await Auth(user);
 		}
@@ -129,7 +133,11 @@ namespace Web.Controllers
 				return await Auth(user);
 			}
 
-			return Json(new {Success = false, Error = "Something went wrong during logging in. Please try again soon"});
+			return Json(new
+			{
+				Success = false,
+				Error = "Something went wrong during logging in. Please try again soon"
+			});
 		}
 
 		public IActionResult Facebook()
@@ -157,38 +165,6 @@ namespace Web.Controllers
 
 		[HttpGet]
 		[AllowAnonymous]
-		public async Task<IActionResult> LoginWithRecoveryCode(string returnUrl = default)
-		{
-			var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
-			if (user is null) throw new ApplicationException("Unable to load two-factor authentication user.");
-			ViewData["ReturnUrl"] = returnUrl;
-			return View();
-		}
-
-		[HttpPost]
-		[AllowAnonymous]
-		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> LoginWithRecoveryCode(RecoveryCodeViewModel model, string returnUrl = default)
-		{
-			if (!ModelState.IsValid) return View(model);
-
-			var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
-
-			if (user == null) throw new ApplicationException("Unable to load two-factor authentication user.");
-
-			var recoveryCode = model.RecoveryCode.Replace(" ", string.Empty);
-
-			var result = await _signInManager.TwoFactorRecoveryCodeSignInAsync(recoveryCode);
-
-			if (result.Succeeded) return Redirect(returnUrl);
-
-			ModelState.AddModelError(string.Empty, "Invalid recovery code entered.");
-
-			return View();
-		}
-
-		[HttpGet]
-		[AllowAnonymous]
 		public async Task<IActionResult> ResendEmail(string email)
 		{
 			var user = await _userManager.FindByEmailAsync(email);
@@ -200,7 +176,11 @@ namespace Web.Controllers
 				Error = "Cannot find specified user. Please check your email and try again"
 			});
 
-			await SendEmailConfirmationAsync(user);
+			if (!await SendEmailConfirmationAsync(user)) return Json(new
+			{
+				Success = false,
+				Error = "Something went wrong during sending you an email. Please try again soon"
+			});
 
 			return Json(new {Success = true});
 		}
@@ -218,44 +198,45 @@ namespace Web.Controllers
 			return View(result.Succeeded ? "ConfirmEmail" : "Error", user);
 		}
 
-		[HttpGet]
-		[AllowAnonymous]
-		public IActionResult ForgotPassword()
-		{
-			return View();
-		}
-
 		[HttpPost]
 		[AllowAnonymous]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+		public async Task<IActionResult> ForgotPassword(LoginViewModel model)
 		{
-			if (!ModelState.IsValid) return View(model);
-
 			var user = await _userManager.FindByEmailAsync(model.Email);
 			if (user is null || !await _userManager.IsEmailConfirmedAsync(user))
 			{
-				return RedirectToAction(nameof(ForgotPasswordConfirmation));
+				return Json(new
+				{
+					Success = false,
+					Error = $"User with email {model.Email} was not found.\nPlease check your credentials"
+				});
 			}
 
 			var code = await _userManager.GeneratePasswordResetTokenAsync(user);
 			var callbackUrl = Url.ResetPasswordCallbackLink(user.UniqueID, code, Request.Scheme);
-			await _service.SendResetPasswordEmailAsync(user.UniqueID, callbackUrl);
-			return RedirectToAction(nameof(ForgotPasswordConfirmation));
-		}
+			if (!await _service.SendResetPasswordEmailAsync(user.UniqueID, callbackUrl))
+			{
+				return Json(new
+				{
+					Success = false,
+					Error = "Something went wrong during sending you an email. Please try again soon"
+				});
+			}
 
-		[HttpGet]
-		[AllowAnonymous]
-		public IActionResult ForgotPasswordConfirmation()
-		{
-			return View();
+			return Json(new
+			{
+				Success = true,
+				Content = await this.RenderViewAsync("_ForgotPassword",
+					user, true)
+			});
 		}
 
 		[HttpGet]
 		[AllowAnonymous]
 		public IActionResult ResetPassword(string code = null)
 		{
-			if (code is null) throw new ApplicationException("A code must be supplied for password reset.");
+			if (code is null) throw new ApplicationException("A code must be supplied for password reset");
 			var model = new ResetPasswordViewModel {Code = code};
 			return View(model);
 		}
@@ -265,24 +246,49 @@ namespace Web.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
 		{
-			if (!ModelState.IsValid) return View(model);
-
 			var user = await _userManager.FindByEmailAsync(model.Email);
-			if (user is null) return RedirectToAction(nameof(ResetPasswordConfirmation));
+			if (user is null) return Json(new
+			{
+				Success = false,
+				Error = $"User with email {model.Email} was not found.\nPlease check your credentials"
+			});
+
+			if (string.IsNullOrWhiteSpace(model.Password)) return Json(new
+			{
+				Success = false,
+				Error = "Would you like me to choose your new password? Spoiler: I can't do that..."
+			});
+
+			if (!model.Password.Equals(model.ConfirmPassword))
+			{
+				return Json(new
+				{
+					Success = false,
+					Error = "Password confirmation and Password must match"
+				});
+			}
 
 			var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
-			if (result.Succeeded) return RedirectToAction(nameof(ResetPasswordConfirmation));
+			if (!result.Succeeded) return Json(new
+			{
+				Success = false,
+				Error = result.Errors.FirstOrDefault()?.Description
+			});
 
-			return View();
+			return Json(new
+			{
+				Success = true,
+				RedirectURL = Url.Action("Index", "Home"),
+				Content = await this.RenderViewAsync("_ResetPasswordConfirm", new AuthCommonViewModel
+				{
+					Email = model.Email,
+					AuthSign = true,
+				}, true)
+			});
 		}
 
 		[HttpGet]
-		[AllowAnonymous]
-		public IActionResult ResetPasswordConfirmation() => View();
-
-
-		[HttpGet]
-		public IActionResult AccessDenied(string fromAction)
+		public IActionResult AccessDenied()
 		{
 			return View();
 		}
@@ -291,15 +297,16 @@ namespace Web.Controllers
 
 		#region Service & Helpers
 
-		private async Task SendEmailConfirmationAsync(User user)
+		private async Task<bool> SendEmailConfirmationAsync(User user)
 		{
 			var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 			var callbackUrl = Url.EmailConfirmationLink(user.UniqueID, code, Request.Scheme);
-			await _service.SendEmailConfirmationAsync(user.UniqueID, callbackUrl);
+			if (!await _service.SendEmailConfirmationAsync(user.UniqueID, callbackUrl)) return false;
 
 			_logger.LogInformation($"Email conformation was sent to user {user.Username}");
-
+			return true;
 		}
+
 
 		public enum AuthMode
 		{

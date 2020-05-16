@@ -36,7 +36,15 @@ namespace Infrastructure.Gateway.REST.Client
 		public async Task<bool> RequestAsync(IGatewayRestRequest request)
 		{
 			var response = await ExecuteAsync(ApplyRequestParams(request));
-			return HandleRequestStatus(response) && response.IsSuccessful;
+			try
+			{
+				HandleRequestStatus(response);
+			}
+			catch
+			{
+				return false;
+			}
+			return response.IsSuccessful;
 		}
 
 		public T Request<T>(IGatewayRestRequest request)
