@@ -1,11 +1,14 @@
 package rest
 
-import "net/http"
+import (
+	"net/http"
+
+	"github.com/go-chi/chi"
+)
 
 func (h *handler) Like(w http.ResponseWriter, r *http.Request) {
-	query := r.URL.Query()
-	userID := query.Get("userID")
-	entityID := query.Get("entityID")
+	userID := r.URL.User.Username()
+	entityID := chi.URLParam(r, "entityID")
 	err := h.interact.Like(userID, entityID)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -15,9 +18,8 @@ func (h *handler) Like(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *handler) Unlike(w http.ResponseWriter, r *http.Request) {
-	query := r.URL.Query()
-	userID := query.Get("userID")
-	entityID := query.Get("entityID")
+	userID := r.URL.User.Username()
+	entityID := chi.URLParam(r, "entityID")
 	err := h.interact.Unlike(userID, entityID)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

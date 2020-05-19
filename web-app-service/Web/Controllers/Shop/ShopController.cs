@@ -8,7 +8,9 @@ using Core.Extension;
 using Core.Model;
 using Core.Model.Parameters;
 using Core.Services;
+using Core.Services.Interactive;
 using Infrastructure.Usecase.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using SmartBreadcrumbs.Nodes;
@@ -79,6 +81,21 @@ namespace Web.Controllers
 			var baseNode = new MvcBreadcrumbNode("References", "Shop", "Shop");
 			var currentNode = new MvcBreadcrumbNode(fromAction, "Shop", title) {Parent = baseNode};
 			ViewData["BreadcrumbNode"] = currentNode;
+		}
+
+
+		[Authorize(Policy = "NotGuest")]
+		public async Task<IActionResult> Like(string id)
+		{
+			await HttpContext.RequestServices.GetService<ILikeService>().LikeAsync(id);
+			return Ok();
+		}
+
+		[Authorize(Policy = "NotGuest")]
+		public async Task<IActionResult> UnlikeAsync(string id)
+		{
+			await HttpContext.RequestServices.GetService<ILikeService>().UnlikeAsync(id);
+			return Ok();
 		}
 	}
 }

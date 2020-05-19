@@ -61,7 +61,7 @@ func (s *authService) Login(user *model.User) (*meta.AuthToken, error) {
 
 func (s *authService) Guest() (*meta.AuthToken, error) {
 	return s.GenerateToken(&model.User{
-		Role: "",
+		Role: model.Guest,
 		UniqueID: xid.New().String(),
 	})
 }

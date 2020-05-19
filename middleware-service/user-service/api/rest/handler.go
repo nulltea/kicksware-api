@@ -42,6 +42,7 @@ type RestfulHandler interface {
 	Unlike(http.ResponseWriter, *http.Request)
 	// Middleware:
 	Authenticator(next http.Handler) http.Handler
+	Authorizer(next http.Handler) http.Handler
 }
 
 type handler struct {

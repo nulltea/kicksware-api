@@ -327,6 +327,14 @@ function loading(items){
 	}, 0.05);
 }
 
+function favoriteInit(){
+	$(".favorite input[type=checkbox]").change(function () {
+		let id = $(this).closest(".product-cell").attr("id")
+		let checked = $(this).is(":checked");
+		$.get(`/shop/${checked ? "like" : "unlike"}/${id}`);
+	})
+}
+
 $(document).ready(function () {
 	initFilterPanel();
 
@@ -341,4 +349,6 @@ $(document).ready(function () {
 	sortingInit();
 
 	paginationInit();
+
+	favoriteInit();
 });

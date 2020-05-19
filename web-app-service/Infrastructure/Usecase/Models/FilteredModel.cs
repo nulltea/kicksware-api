@@ -83,6 +83,16 @@ namespace Infrastructure.Usecase.Models
 			return group;
 		}
 
+		public FilterGroup AddHiddenFilterGroup<TForeignEntity>(string fieldName, ExpressionType expressionType = ExpressionType.In)
+		{
+			var group = new FilterGroup(new FilterProperty(fieldName, typeof(TForeignEntity)), expressionType)
+			{
+				Hidden = true
+			};
+			FilterGroups.Add(group);
+			return group;
+		}
+
 		public FilterGroup GetFilterGroup(string name) => FilterGroups.FirstOrDefault(g => g.GroupID.Equals(name.ToLower()));
 
 		public FilterGroup this[string groupName]

@@ -72,7 +72,8 @@ services:
     image: users-service
     restart: always
     labels:
-      - traefik.http.routers.user-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/users`) || PathPrefix(`/api/auth`) || PathPrefix(`/api/mail`)
+      - traefik.http.routers.user-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/users`) || PathPrefix(`/api/auth`) ||
+        PathPrefix(`/api/mail`) || PathPrefix(`/api/interact`)
       # - traefik.http.routers.user-service.tls=true
       # - traefik.http.routers.user-service.tls.certresolver=le
       - traefik.docker.network=middleware-service_web

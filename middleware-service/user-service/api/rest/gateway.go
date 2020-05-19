@@ -23,6 +23,7 @@ func ProvideRoutes(rest RestfulHandler) *chi.Mux {
 func restRoutes(rest RestfulHandler) (r *chi.Mux) {
 	r = chi.NewRouter()
 	r.Use(rest.Authenticator)
+	// r.Use(rest.Authorizer)
 	r.Get("/{userID}", rest.GetOne)
 	r.Get("/", rest.Get)
 	r.Post("/query", rest.Get)
@@ -45,6 +46,8 @@ func authRoutes(rest RestfulHandler) (r *chi.Mux) {
 
 func mailRoutes(rest RestfulHandler) (r *chi.Mux) {
 	r = chi.NewRouter()
+	r.Use(rest.Authenticator)
+	r.Use(rest.Authorizer)
 	r.Get("/confirm", rest.SendEmailConfirmation)
 	r.Get("/password-reset", rest.SendResetPassword)
 	r.Get("/notify", rest.SendNotification)
@@ -53,7 +56,9 @@ func mailRoutes(rest RestfulHandler) (r *chi.Mux) {
 
 func interactRoutes(rest RestfulHandler) (r *chi.Mux) {
 	r = chi.NewRouter()
-	r.Get("/like", rest.Like)
-	r.Get("/unlike", rest.Unlike)
+	r.Use(rest.Authenticator)
+	r.Use(rest.Authorizer)
+	r.Get("/like/{entityID}", rest.Like)
+	r.Get("/unlike/{entityID}", rest.Unlike)
 	return
 }

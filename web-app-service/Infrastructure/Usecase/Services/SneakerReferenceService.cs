@@ -9,6 +9,8 @@ using Core.Model.Parameters;
 using Core.Reference;
 using Core.Repositories;
 using Core.Services;
+using Infrastructure.Gateway.REST;
+using Infrastructure.Gateway.REST.Interact;
 using Infrastructure.Pattern;
 
 namespace Infrastructure.Usecase
@@ -16,7 +18,11 @@ namespace Infrastructure.Usecase
 	public class SneakerReferenceService : ISneakerReferenceService
 	{
 		private readonly ISneakerReferenceRepository _repository;
-		public SneakerReferenceService(ISneakerReferenceRepository repository) => _repository = repository;
+
+		private readonly IGatewayClient<IGatewayRestRequest> _client;
+
+		public SneakerReferenceService(ISneakerReferenceRepository repository, IGatewayClient<IGatewayRestRequest> client) =>
+			(_repository, _client) = (repository, client);
 
 		#region CRUD sync
 

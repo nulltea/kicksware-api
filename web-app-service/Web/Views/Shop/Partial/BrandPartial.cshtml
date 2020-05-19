@@ -1,5 +1,8 @@
 ﻿@using Web.Utils.Helpers
+@using Microsoft.AspNetCore.Identity
+@using Core.Entities.Users
 @model Core.Model.IFilteredModel<Core.Entities.References.SneakerReference>
+@inject SignInManager<User> SignInManager;
 
 @if (Model is null || !Model.Any())
 {
@@ -15,7 +18,7 @@
 			continue;
 		}
 		var price = reference.Price != 0m ? $"${reference.Price}" : string.Empty;
-		<div class="product-cell">
+		<div class="product-cell" id="@reference.UniqueID">
 			<div class="info-header">
 				<div class="price">@price</div>
 			</div>
@@ -39,10 +42,13 @@
 				<div class="description">
 					@reference.Description
 				</div>
-				<div class="favorite">
-					<input type="checkbox"/>
-					@Html.VectorIconRender("favorite.svg")
-				</div>
+				@if (SignInManager.IsSignedIn(Context.User))
+				{
+					<div class="favorite">
+						<input type="checkbox" asp-for="@reference.Liked"/>
+						@Html.VectorIconRender("favorite.svg")
+					</div>
+				}
 			</div>
 		</div>
 	}

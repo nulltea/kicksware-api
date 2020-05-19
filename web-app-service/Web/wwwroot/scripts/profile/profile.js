@@ -55,10 +55,50 @@ function resetAlert(callback) {
 	}
 }
 
+function favouriteInit(){
+	loading($(".product-cell"))
+	$(".favorite input[type=checkbox]").change(function () {
+		let id = $(this).closest(".product-cell").attr("id")
+		let checked = $(this).is(":checked");
+		$.get(`/shop/${checked ? "like" : "unlike"}/${id}`);
+		if (!$(this).is(":checked")) {
+			let cell = $(this).closest(".product-cell");
+			requestAnimationFrame(function () {
+				cell.css("transform", "scale(0)")
+			})
+			window.setTimeout(function () {
+				cell.remove();
+			}, 300);
+		}
+	})
+	loading
+}
+
+function loading(items){
+	TweenMax.staggerFrom(items, 1, {
+		scale: 0.6,
+		opacity: 0,
+		delay: .5,
+		ease: Elastic.easeOut,
+		force3D: true,
+		clearProps: "all"
+	}, 0.05);
+}
+
+function themeSettingInit(){
+	$("#theme-select").change(function () {
+		setTheme($(this).find("option:selected").text().toLowerCase());
+	})
+}
+
 $(document).ready(function () {
 	"use strict";
 
 	sidebarControlInit();
 
 	profileFormInit();
+
+	favouriteInit();
+
+	themeSettingInit();
 });

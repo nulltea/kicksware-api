@@ -22,4 +22,6 @@ type SneakerReference struct {
 	ImageLink      string
 	ImageLinks     []string
 	StadiumUrl     string
+	Likes          int
+	Liked          bool
 }

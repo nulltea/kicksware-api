@@ -46,7 +46,7 @@ func newPostgresClient(url string) (*sqlx.DB, error) {
 	return db, nil
 }
 
-func (r *repository) FetchOne(code string) (*model.SneakerReference, error) {
+func (r *repository) FetchOne(code string, params meta.RequestParams) (*model.SneakerReference, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	sneakerReference := &model.SneakerReference{}

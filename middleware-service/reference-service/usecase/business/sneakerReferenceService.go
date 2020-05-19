@@ -37,8 +37,8 @@ func NewSneakerReferenceService(sneakerReferenceRepo repo.SneakerReferenceReposi
 	}
 }
 
-func (s *referenceService) FetchOne(code string) (*model.SneakerReference, error) {
-	return s.repo.FetchOne(code)
+func (s *referenceService) FetchOne(code string, params meta.RequestParams) (*model.SneakerReference, error) {
+	return s.repo.FetchOne(code, params)
 }
 
 func (s *referenceService) Fetch(codes []string, params meta.RequestParams) ([]*model.SneakerReference, error) {

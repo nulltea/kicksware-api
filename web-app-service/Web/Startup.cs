@@ -7,6 +7,7 @@ using Core.Gateway;
 using Core.Model;
 using Core.Repositories;
 using Core.Services;
+using Core.Services.Interactive;
 using Infrastructure.Data;
 using Infrastructure.Gateway.REST;
 using Infrastructure.Gateway.REST.Client;
@@ -73,6 +74,7 @@ namespace Web
 			services.AddTransient<ISneakerProductService, SneakerProductService>();
 			services.AddTransient<IReferenceSearchService, ReferenceSearchService>();
 			services.AddTransient<IUserService, UserService>();
+			services.AddTransient<ILikeService, LikeService>();
 
 			services.AddTransient<FilterContentBuilder<SneakerReference>, ReferencesFilterContent>();
 			services.AddTransient<FilterContentBuilder<SneakerProduct>, ProductsFilterContent>();

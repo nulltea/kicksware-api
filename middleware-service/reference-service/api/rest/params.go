@@ -19,6 +19,7 @@ type params struct {
 	offset int
 	sortBy string
 	sortDirection string
+	userID string
 }
 
 func NewRequestParams(r *http.Request) meta.RequestParams {
@@ -46,6 +47,10 @@ func NewRequestParams(r *http.Request) meta.RequestParams {
 			setPrivateField(field, value)
 		}
 	}
+	if r.URL.User != nil {
+		p.userID = r.URL.User.Username()
+	}
+
 	return p
 }
 
@@ -81,6 +86,14 @@ func (p *params) SortDirectionNum() int {
 }
 func (p *params) SetSortDirection(direction string) {
 	p.sortDirection = direction
+}
+
+func (p *params) UserID() string {
+	return p.userID
+}
+
+func (p *params) SetUserID(userID string) {
+	p.userID = userID
 }
 
 func (p *params) ApplyParams(references []*model.SneakerReference) []*model.SneakerReference {

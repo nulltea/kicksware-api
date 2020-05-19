@@ -28,6 +28,8 @@ type RestfulHandler interface {
 	Count(http.ResponseWriter, *http.Request)
 	// Middleware:
 	Authenticator(next http.Handler) http.Handler
+	Authorizer(next http.Handler) http.Handler
+	UserSetter(next http.Handler) http.Handler
 }
 
 type handler struct {
@@ -46,7 +48,8 @@ func NewHandler(service service.SneakerReferenceService, auth service.AuthServic
 
 func (h *handler) GetOne(w http.ResponseWriter, r *http.Request) {
 	code := chi.URLParam(r,"referenceId")
-	sneakerReference, err := h.service.FetchOne(code)
+	params := NewRequestParams(r)
+	sneakerReference, err := h.service.FetchOne(code, params)
 	if err != nil {
 		if errors.Cause(err) == business.ErrReferenceNotFound {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)

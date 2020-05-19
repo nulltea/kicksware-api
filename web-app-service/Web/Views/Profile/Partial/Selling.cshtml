@@ -7,8 +7,12 @@
 <div class="row section-content" id="selling-content">
 	<h3>SOLD SNEAKERS</h3>
 	@{
-		var soldSneakers = new FilteredModel<SneakerProduct>(Service);
-		await soldSneakers.FetchPageAsync(1);
-		await Html.RenderPartialAsync("../Shop/Partial/ProductsPartial", soldSneakers);
+		if (Model?.UniqueID != null)
+		{
+			var soldSneakers = new FilteredModel<SneakerProduct>(Service);
+			soldSneakers.AddHiddenFilterGroup("owner").AssignParameter(Model.UniqueID);
+			await soldSneakers.FetchPageAsync(1);
+			await Html.RenderPartialAsync("../Shop/Partial/ProductsPartial", soldSneakers);
+		}
 	}
 </div>

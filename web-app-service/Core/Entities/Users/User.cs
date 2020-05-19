@@ -29,6 +29,10 @@ namespace Core.Entities.Users
 
 		public PaymentInfo PaymentInfo { get; set; } = new PaymentInfo();
 
+		public string[] Liked { get; set; }
+
+		public Settings Settings { get; set; } = new Settings();
+
 		public bool Equals(User other) => other != null && UniqueID == other.UniqueID;
 	}
 }

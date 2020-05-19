@@ -62,12 +62,15 @@ func (s *productService) FetchQuery(query meta.RequestQuery, params meta.Request
 	return
 }
 
-func (s *productService) Store(sneakerProduct *model.SneakerProduct) error {
+func (s *productService) Store(sneakerProduct *model.SneakerProduct, params meta.RequestParams) error {
 	if err := validate.Validate(sneakerProduct); err != nil {
 		return errs.Wrap(ErrProductInvalid, "service.repo.Store")
 	}
 	sneakerProduct.UniqueId = xid.New().String()
 	sneakerProduct.AddedAt = time.Now()
+	if params != nil {
+		sneakerProduct.Owner = params.UserID()
+	}
 	return s.repo.Store(sneakerProduct)
 }
 

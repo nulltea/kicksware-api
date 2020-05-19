@@ -11,7 +11,7 @@
 {
 	<link rel="stylesheet" type="text/css" href="~/styles/css/sell/sell.css"/>
 	<link href="~/styles/css/responsive/sell.responsive.css" rel="stylesheet"/>
-	@RenderSection("Styles", required: false)
+	@await RenderSectionAsync("Styles", required: false)
 }
 
 <div class="sell">
@@ -70,5 +70,5 @@
 		await Html.RenderPartialAsync("_ValidationScriptsPartial");
 	}
 	<script src="~/scripts/sell/sell.js"></script>
-	@RenderSection("Scripts", false)
+	@await RenderSectionAsync("Scripts", false)
 }

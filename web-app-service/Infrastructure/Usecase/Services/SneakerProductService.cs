@@ -8,6 +8,7 @@ using Core.Repositories;
 using Core.Services;
 using Infrastructure.Gateway.REST;
 using Infrastructure.Gateway.REST.Client;
+using Infrastructure.Gateway.REST.Interact;
 using Infrastructure.Gateway.REST.ProductRequests.Sneakers;
 
 namespace Infrastructure.Usecase

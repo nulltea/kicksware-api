@@ -1,14 +1,20 @@
 ﻿@using Core.Services
 @using Infrastructure.Usecase.Models
 @using Core.Entities.References
+@using Core.Entities
+@using Core.Reference
 @model Core.Entities.Users.User
 @inject ISneakerReferenceService Service
 
 <div class="row section-content" id="buying-content">
 	<h3>PURCHASED SNEAKERS</h3>
 	@{
-		var purchasedSneakers = new FilteredModel<SneakerReference>(Service);
-		await purchasedSneakers.FetchPageAsync(1);
-		await Html.RenderPartialAsync("../Shop/Partial/ReferencesPartial", purchasedSneakers);
+		if (Model?.UniqueID != null)
+		{
+			var purchasedSneakers = new FilteredModel<SneakerReference>(Service);
+			purchasedSneakers.AddHiddenFilterGroup<Order>("user_id", ExpressionType.Equal).AssignParameter(Model.UniqueID);
+			await purchasedSneakers.FetchPageAsync(1);
+			await Html.RenderPartialAsync("../Shop/Partial/ReferencesPartial", purchasedSneakers);
+		}
 	}
 </div>

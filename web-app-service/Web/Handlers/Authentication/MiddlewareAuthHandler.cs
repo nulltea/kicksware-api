@@ -83,16 +83,23 @@ namespace Web.Handlers.Authentication
 			StoreCookieToken(fetchedToken.Ticket.RetrieveToken());
 		}
 
-		protected override Task HandleSignOutAsync(AuthenticationProperties properties)
+		protected override async Task HandleSignOutAsync(AuthenticationProperties properties)
 		{
 			var result = ReadCookieToken(out var token);
 
-			if (!result.Succeeded) return Task.CompletedTask;
+			if (!result.Succeeded) return ;
 
-			_service.LogoutAsync(token);
+			await _service.LogoutAsync(token);
 
 			RemoveCookieToken();
-			return Task.CompletedTask;
+
+			var fetchedToken = await RequestGuestToken();
+
+			if (!fetchedToken.Succeeded) return;
+
+			StoreCookieToken(fetchedToken.Ticket.RetrieveToken());
+
+			_getTokenTask = Task.FromResult(fetchedToken);
 		}
 
 		#endregion

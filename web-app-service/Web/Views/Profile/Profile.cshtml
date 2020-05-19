@@ -46,11 +46,6 @@
 						<label for="pr5">PAYMENT</label>
 					</li>
 					<li>
-						@Html.VectorIconRender("address.svg")
-						<input type="button" id="pr6"/>
-						<label for="pr6">ADDRESS</label>
-					</li>
-					<li>
 						@Html.VectorIconRender("settings.svg")
 						<input type="button" id="pr7"/>
 						<label for="pr7">SETTING</label>
@@ -100,4 +95,7 @@
 @section Scripts
 {
 	<script src="~/scripts/profile/profile.js"></script>
+	<script type="text/javascript">
+		initCustomDropDown();
+	</script>
 }

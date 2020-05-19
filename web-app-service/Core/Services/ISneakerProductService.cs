@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Core.Entities.Products;
 using Core.Gateway;
 using Core.Repositories;
+using Core.Services.Interactive;
 
 namespace Core.Services
 {

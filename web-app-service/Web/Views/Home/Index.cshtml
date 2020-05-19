@@ -74,7 +74,7 @@
 			<div class="carousel-wrapper js-flickity" data-flickity-options='{ "wrapAround": true }'>
 				@foreach (var reference in featuredReferences)
 				{
-					<div class="carousel-cell">
+					<div class="carousel-cell" id="@reference.UniqueID">
 						<div class="info-header">
 							<div class="price">@(reference.Price != 0m ? $"${reference.Price}" : string.Empty)</div>
 						</div>

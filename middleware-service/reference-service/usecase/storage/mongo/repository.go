@@ -52,11 +52,11 @@ func newMongoClient(mongoURL string, mongoTimeout int) (*mongo.Client, error) {
 	return client, nil
 }
 
-func (r *repository) FetchOne(code string) (*model.SneakerReference, error) {
+func (r *repository) FetchOne(code string, params meta.RequestParams) (*model.SneakerReference, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 
-	query := r.buildQueryPipeline(bson.M{"uniqueid": code}, nil)
+	query := r.buildQueryPipeline(bson.M{"uniqueid": code}, params)
 	cursor, err := r.collection.Aggregate(ctx, query); if err != nil {
 		return nil, errors.Wrap(err, "repository.SneakerReference.FetchOne")
 	}
@@ -269,6 +269,35 @@ func (r *repository) buildQueryPipeline(matchQuery bson.M, param meta.RequestPar
 	pipe = append(pipe, bson.D{{ "$unwind", bson.M{
 			"path": "$basemodel",
 			"preserveNullAndEmptyArrays": true,
+		}},
+	})
+
+	pipe = append(pipe, bson.D{
+		{"$lookup", bson.M {
+			"from": "likes",
+			"localField": "uniqueid",
+			"foreignField": "entity_id",
+			"as": "like",
+		}},
+	})
+
+	pipe = append(pipe, bson.D {
+		{ "$addFields", bson.M {
+			"likes": bson.M{"$size": "$like"},
+		}},
+	})
+
+	if param != nil && len(param.UserID()) != 0 {
+		pipe = append(pipe, bson.D {
+			{ "$addFields", bson.M {
+				"liked": bson.M{"$in": bson.A{param.UserID(),"$like.user_id"}},
+			}},
+		})
+	}
+
+	pipe = append(pipe, bson.D {
+		{ "$project", bson.M {
+			"like": 0,
 		}},
 	})
 

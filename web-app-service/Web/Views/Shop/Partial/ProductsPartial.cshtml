@@ -1,5 +1,8 @@
 ﻿@using Web.Utils.Helpers
+@using Core.Entities.Users
+@using Microsoft.AspNetCore.Identity
 @model Core.Model.IFilteredModel<Core.Entities.Products.SneakerProduct>
+@inject SignInManager<User> SignInManager;
 
 @if (Model is null || !Model.Any())
 {
@@ -14,7 +17,7 @@
 			continue;
 		}
 		var price = product.Price != 0m ? $"${product.Price}" : string.Empty;
-		<div class="product-cell">
+		<div class="product-cell" id="@product.UniqueID">
 			<div class="info-header">
 				<div class="price">@price</div>
 			</div>
@@ -29,19 +32,26 @@
 			}*@
 			<div class="info-footer">
 				<div class="brand-title">
-					<a class="underline" asp-action="Brand" asp-route-productId=@product.Brand.Name>@Html.DisplayFor(modelItem => product.BrandName)</a>
+					<a class="underline" asp-action="Brand" asp-route-productId=@product.Brand.Name asp-controller="Shop">
+						@Html.DisplayFor(modelItem => product.BrandName)
+					</a>
 				</div>
 				<div class="model-title">
 					@*TODO link to model page*@
-					<a class="underline" asp-action="ProductItem" asp-route-productId=@product.UniqueID>@Html.DisplayFor(modelItem => product.ModelName)</a>
+					<a class="underline" asp-action="ProductItem" asp-route-productId=@product.UniqueID asp-controller="Shop">
+						@Html.DisplayFor(modelItem => product.ModelName)
+					</a>
 				</div>
 				<div class="description">
 					@product.Description
 				</div>
-				<div class="favorite">
-					<input type="checkbox"/>
-					@Html.VectorIconRender("favorite.svg")
-				</div>
+				@if (SignInManager.IsSignedIn(Context.User))
+				{
+					<div class="favorite">
+						<input type="checkbox" asp-for="@product.Liked"/>
+						@Html.VectorIconRender("favorite.svg")
+					</div>
+				}
 			</div>
 		</div>
 	}

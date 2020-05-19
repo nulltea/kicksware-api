@@ -20,6 +20,7 @@ func ProvideRoutes(rest RestfulHandler) *chi.Mux {
 
 func restRoutes(rest RestfulHandler) (r *chi.Mux) {
 	r = chi.NewRouter()
+	r.Use(rest.UserSetter)
 	r.Get("/{referenceId}", rest.GetOne)
 	r.Get("/", rest.Get)
 	r.Post("/query", rest.Get)

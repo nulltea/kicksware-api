@@ -28,6 +28,7 @@ type RestfulHandler interface {
 	Delete(http.ResponseWriter, *http.Request)
 	// Middleware:
 	Authenticator(next http.Handler) http.Handler
+	Authorizer(next http.Handler) http.Handler
 }
 
 type handler struct {
@@ -95,7 +96,8 @@ func (h *handler) Post(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	err = h.service.Store(sneakerProduct)
+	params := NewRequestParams(r)
+	err = h.service.Store(sneakerProduct, params)
 	if err != nil {
 		if errors.Cause(err) == business.ErrProductInvalid {
 			http.Error(w, err.Error(), http.StatusBadRequest)

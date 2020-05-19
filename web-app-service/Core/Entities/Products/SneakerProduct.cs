@@ -75,6 +75,10 @@ namespace Core.Entities.Products
 		[JsonIgnore]
 		public DateTime AddedAt { get; set; }
 
+		public int Likes { get; set; }
+
+		public bool Liked { get; set; }
+
 		[OnDeserialized]
 		internal void OnDeserialized(StreamingContext context)
 		{

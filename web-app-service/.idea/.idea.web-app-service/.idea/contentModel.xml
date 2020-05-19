@@ -19,6 +19,10 @@
         <e p="Entities" t="Include">
           <e p="EntityComparer.cs" t="Include" />
           <e p="IBaseEntity.cs" t="Include" />
+          <e p="Orders" t="Include">
+            <e p="IOrder.cs" t="Include" />
+            <e p="Order.cs" t="Include" />
+          </e>
           <e p="Products" t="Include">
             <e p="IProduct.cs" t="Include" />
             <e p="SneakerProduct.cs" t="Include" />
@@ -43,6 +47,7 @@
               <e p="AuthToken.cs" t="Include" />
             </e>
             <e p="PaymentInfo.cs" t="Include" />
+            <e p="Settings.cs" t="Include" />
             <e p="User.cs" t="Include" />
             <e p="UserRole.cs" t="Include" />
           </e>
@@ -114,6 +119,9 @@
         <e p="Services" t="Include">
           <e p="IAuthService.cs" t="Include" />
           <e p="ICommonService.cs" t="Include" />
+          <e p="Interactive" t="Include">
+            <e p="ILikeService.cs" t="Include" />
+          </e>
           <e p="ISneakerProductService.cs" t="Include" />
           <e p="ISneakerReferenceService.cs" t="Include" />
           <e p="IUserService.cs" t="Include" />
@@ -149,6 +157,11 @@
                 <e p="AuthValidateTokenRequest.cs" t="Include" />
               </e>
               <e p="IGatewayRestRequest.cs" t="Include" />
+              <e p="Interact" t="Include">
+                <e p="InteractBaseRequest.cs" t="Include" />
+                <e p="LikeRequest.cs" t="Include" />
+                <e p="UnlikeRequest.cs" t="Include" />
+              </e>
               <e p="Mail" t="Include">
                 <e p="MailBaseRequest.cs" t="Include" />
                 <e p="PostEmailConfirmationRequest.cs" t="Include" />
@@ -230,6 +243,7 @@
           </e>
           <e p="Services" t="Include">
             <e p="AuthService.cs" t="Include" />
+            <e p="LikeService.cs" t="Include" />
             <e p="ReferenceSearchService.cs" t="Include" />
             <e p="SneakerProductService.cs" t="Include" />
             <e p="SneakerReferenceService.cs" t="Include" />
@@ -448,6 +462,20 @@
         <e p="Web.csproj" t="IncludeRecursive" />
         <e p="wwwroot" t="Include">
           <e p="favicon.ico" t="Include" />
+          <e p="files" t="Include">
+            <e p="photos" t="Include">
+              <e p="References" t="Include">
+                <e p="153265_617_1_1.png" t="Include" />
+                <e p="342132_003_1.png" t="Include" />
+                <e p="510815_017_1.png" t="Include" />
+                <e p="510815_109_1_2.png" t="Include" />
+                <e p="510815_127_1_.png" t="Include" />
+                <e p="540847_845_1.png" t="Include" />
+                <e p="air_jordan_1_high_strap_342132-001_1_1.png" t="Include" />
+                <e p="aq7476_016_1.png" t="Include" />
+              </e>
+            </e>
+          </e>
           <e p="fonts" t="Include">
             <e p="Orbitron" t="Include">
               <e p="OFL.txt" t="Include" />

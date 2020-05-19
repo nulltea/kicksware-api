@@ -57,30 +57,40 @@ func newMongoClient(mongoURL string, mongoTimeout int) (*mongo.Client, error) {
 func (r *repository) FetchOne(userID string) (*model.User, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
-	user := &model.User{}
-	filter := bson.M{"unique_id": userID}
-	err := r.collection.FindOne(ctx, filter).Decode(&user)
-	if err != nil {
-		if err == mongo.ErrNoDocuments {
+	query := r.buildQueryPipeline(bson.M{"unique_id": userID}, nil)
+	cursor, err := r.collection.Aggregate(ctx, query); if err != nil {
+		return nil, errors.Wrap(err, "repository.User.FetchOne")
+	}
+	defer cursor.Close(ctx)
+
+	var users []*model.User
+	if err = cursor.All(ctx, &users); err != nil {
+		return nil, errors.Wrap(err, "repository.User.FetchOne")
+	}
+	if err != nil || len(users) == 0 {
+		if err == mongo.ErrNoDocuments || len(users) == 0 {
 			return nil, errors.Wrap(business.ErrUserNotFound, "repository.User.FetchOne")
 		}
 		return nil, errors.Wrap(err, "repository.User.FetchOne")
 	}
-	return user, nil
+	return users[0], nil
 }
 
 func (r *repository) Fetch(usernames []string, params meta.RequestParams) ([]*model.User, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
-	filter := bson.M{"unique_id": bson.M{"$in": usernames}}
 
-	cursor, err := r.collection.Find(ctx, filter)
-	if err != nil  {
-		return nil, errors.Wrap(err, "repository.User.Fetch")
+	filter := bson.M{"unique_id": bson.M{"$in": usernames}}
+	query := r.buildQueryPipeline(filter, nil)
+	cursor, err := r.collection.Aggregate(ctx, query); if err != nil {
+		return nil, errors.Wrap(err, "repository.User.FetchOne")
 	}
 	defer cursor.Close(ctx)
 
 	var users []*model.User
+	if err = cursor.All(ctx, &users); err != nil {
+		return nil, errors.Wrap(err, "repository.User.FetchOne")
+	}
 	if err = cursor.All(ctx, &users); err != nil {
 		return nil, errors.Wrap(err, "repository.User.Fetch")
 	}
@@ -97,9 +107,9 @@ func (r *repository) FetchAll(params meta.RequestParams) ([]*model.User, error) 
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 
-	cursor, err := r.collection.Find(ctx, bson.D{})
-	if err != nil  {
-		return nil, errors.Wrap(err, "repository.User.FetchAll")
+	query := r.buildQueryPipeline(bson.M{}, nil)
+	cursor, err := r.collection.Aggregate(ctx, query); if err != nil {
+		return nil, errors.Wrap(err, "repository.User.FetchOne")
 	}
 	defer cursor.Close(ctx)
 
@@ -121,11 +131,10 @@ func (r *repository) FetchQuery(query meta.RequestQuery, params meta.RequestPara
 	if err != nil {
 		return nil, errors.Wrap(err, "repository.User.FetchQuery")
 	}
-	cursor, err := r.collection.Find(ctx, filter)
-	if err != nil  {
-		return nil, errors.Wrap(err, "repository.User.FetchQuery")
+	queryPipe := r.buildQueryPipeline(filter, nil)
+	cursor, err := r.collection.Aggregate(ctx, queryPipe); if err != nil {
+		return nil, errors.Wrap(err, "repository.User.FetchOne")
 	}
-	defer cursor.Close(ctx)
 
 	var users []*model.User
 	if err = cursor.All(ctx, &users); err != nil {
@@ -226,11 +235,15 @@ func (r *repository) buildQueryPipeline(matchQuery bson.M, param meta.RequestPar
 			"as": "like",
 		}},
 	})
-	pipe = append(pipe, bson.D {{ "$unwind", "$like"}})
+	pipe = append(pipe, bson.D {
+		{ "$addFields", bson.M {
+			"liked": "$like.entity_id",
+		}},
+	})
 
 	pipe = append(pipe, bson.D {
 		{ "$project", bson.M {
-				"licked_references": "$like.entity_id",
+				"like": 0,
 		}},
 	})
 

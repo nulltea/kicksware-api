@@ -6,7 +6,7 @@ import (
 )
 
 type SneakerReferenceService interface {
-	FetchOne(code string) (*model.SneakerReference, error)
+	FetchOne(code string, params meta.RequestParams) (*model.SneakerReference, error)
 	Fetch(codes []string, params meta.RequestParams) ([]*model.SneakerReference, error)
 	FetchAll(params meta.RequestParams) ([]*model.SneakerReference, error)
 	FetchQuery(query meta.RequestQuery, params meta.RequestParams) ([]*model.SneakerReference, error)

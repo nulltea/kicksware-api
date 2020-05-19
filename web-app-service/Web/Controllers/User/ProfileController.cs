@@ -92,6 +92,28 @@ namespace Web.Controllers
 			return updateResult;
 		}
 
+		public async Task<IActionResult> SetTheme(Theme theme)
+		{
+			var user = await _userManager.GetUserAsync(HttpContext.User);
+
+			if (user != null)
+			{
+				user.Settings.Theme = theme;
+				await _userManager.UpdateAsync(user);
+			}
+
+			return Json(new {Success = true});
+		}
+
+		public async Task<IActionResult> GetTheme()
+		{
+			var user = await _userManager.GetUserAsync(HttpContext.User);
+
+			if (user is null) return Json(new { Theme = "dark" });
+
+			return Json(new { user.Settings.Theme });
+		}
+
 		private JsonResult FormSubmitResult(SubmitResult result, string message) => Json(new
 		{
 			Result = result.ToString().ToLower(),

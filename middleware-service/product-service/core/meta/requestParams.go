@@ -13,4 +13,7 @@ type RequestParams interface {
 	SortDirection() string
 	SortDirectionNum() int
 	SetSortDirection(direction string)
+
+	UserID() string
+	SetUserID(userID string)
 }

@@ -11,16 +11,42 @@ function headerScrollInit() {
 
 function changeTheme() {
 	let body = $("body");
+	let theme;
 	if (body.hasClass("theme-light")) {
 		body.toggleClass("theme-dark").toggleClass("theme-light");
+		theme = "Dark";
 	} else {
 		body.toggleClass("theme-light").toggleClass("theme-dark");
+		theme = "Light";
 	}
 	$(this).toggleClass("dark").toggleClass("light");
+
+	$.get(`/Profile/SetTheme?theme=${theme}`)
+	saveTheme(theme)
+}
+
+function saveTheme(theme) {
+	localStorage.setItem("kicksware.theme", theme);
+}
+
+function getTheme() {
+	let theme = localStorage.getItem("kicksware.theme");
+	if (!theme) {
+		$.get("Profile/GetTheme", function (response) {
+			theme = response["theme"];
+		});
+	}
+	return (theme ?? "dark").toLowerCase();
+}
+
+function setTheme(theme) {
+	$("body").removeClass("theme-light theme-dark").addClass(`theme-${theme}`);
+	$(".theme").removeClass("light dark").addClass(theme);
 }
 
 function themeInit() {
 	$(".theme").click(changeTheme);
+	setTheme(getTheme());
 }
 
 function activePageInit(){
