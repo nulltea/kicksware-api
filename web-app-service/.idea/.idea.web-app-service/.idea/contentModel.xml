@@ -270,6 +270,7 @@
           <e p="Factory" t="Include">
             <e p="AuthFactory.cs" t="Include" />
             <e p="ClientFactory.cs" t="Include" />
+            <e p="MenuFactory.cs" t="Include" />
           </e>
         </e>
         <e p="Controllers" t="Include">
@@ -303,6 +304,9 @@
           <e p="Catalog" t="Include">
             <e p="Catalog.cs" t="Include" />
           </e>
+          <e p="Content" t="Include">
+            <e p="MenuShopContent.json" t="Include" />
+          </e>
           <e p="Json" t="Include">
             <e p="colors.json" t="Include" />
             <e p="filter-colors.json" t="Include" />
@@ -332,6 +336,14 @@
           <e p="Filter" t="Include">
             <e p="ProductsFilterContent.cs" t="Include" />
             <e p="ReferencesFilterContent.cs" t="Include" />
+          </e>
+          <e p="Menu" t="Include">
+            <e p="IMenuContent.cs" t="Include" />
+            <e p="MenuBuilder.cs" t="Include" />
+            <e p="MenuContent.cs" t="Include" />
+            <e p="Shop" t="Include">
+              <e p="ShopMenuContent.cs" t="Include" />
+            </e>
           </e>
           <e p="Users" t="Include">
             <e p="UserStore.cs" t="Include" />
@@ -446,6 +458,10 @@
             <e p="_PagedPartial.cshtml" t="Include" />
             <e p="_ValidationScriptsPartial.cshtml" t="Include" />
             <e p="Error.cshtml" t="Include" />
+            <e p="Header" t="Include">
+              <e p="_IconNav.cshtml" t="Include" />
+              <e p="_MainNav.cshtml" t="Include" />
+            </e>
           </e>
           <e p="Shop" t="Include">
             <e p="Partial" t="Include">
@@ -462,20 +478,6 @@
         <e p="Web.csproj" t="IncludeRecursive" />
         <e p="wwwroot" t="Include">
           <e p="favicon.ico" t="Include" />
-          <e p="files" t="Include">
-            <e p="photos" t="Include">
-              <e p="References" t="Include">
-                <e p="153265_617_1_1.png" t="Include" />
-                <e p="342132_003_1.png" t="Include" />
-                <e p="510815_017_1.png" t="Include" />
-                <e p="510815_109_1_2.png" t="Include" />
-                <e p="510815_127_1_.png" t="Include" />
-                <e p="540847_845_1.png" t="Include" />
-                <e p="air_jordan_1_high_strap_342132-001_1_1.png" t="Include" />
-                <e p="aq7476_016_1.png" t="Include" />
-              </e>
-            </e>
-          </e>
           <e p="fonts" t="Include">
             <e p="Orbitron" t="Include">
               <e p="OFL.txt" t="Include" />

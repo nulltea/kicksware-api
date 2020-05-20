@@ -20,11 +20,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using SmartBreadcrumbs.Extensions;
+using Web.Config;
 using Web.Container.Factory;
 using Web.Handlers.Authentication;
 using Web.Handlers.Authorisation;
 using Web.Handlers.Filter;
+using Web.Handlers.Menu;
 using Web.Handlers.Users;
 
 namespace Web
@@ -44,6 +47,8 @@ namespace Web
 			services.AddControllersWithViews();
 			services.AddHttpContextAccessor();
 			services.AddSession();
+
+			services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
 			services.AddBreadcrumbs(GetType().Assembly, options =>
 			{
@@ -78,6 +83,8 @@ namespace Web
 
 			services.AddTransient<FilterContentBuilder<SneakerReference>, ReferencesFilterContent>();
 			services.AddTransient<FilterContentBuilder<SneakerProduct>, ProductsFilterContent>();
+
+			services.AddTransient(ServiceFactory.ProvideShopMenuBuilder);
 
 			services.AddTransient<IUserStore<User>, UserStore>();
 			services.AddTransient<SignInManager<User>, MiddlewareSignInManager>();

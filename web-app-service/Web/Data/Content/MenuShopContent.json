@@ -1,0 +1,466 @@
+﻿{
+  "Caption": "Shop",
+  "Controller": "Shop",
+  "Action": "References",
+  "InnerContent": [
+    {
+      "Caption": "Nike",
+      "Action": "Brand",
+      "RouteValues": "nike",
+      "InnerContent": [
+        {
+          "Caption": "Basketball",
+          "Action": "Model",
+          "InnerContent": [
+            {
+              "Caption": "LeBron James",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Kobe Bryant",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Kevin Durant",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Kyrie Irving",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Penny Hardaway",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Uptempo",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "More",
+              "RouteValues": ""
+            }
+          ]
+        },
+        {
+          "Caption": "Lifestyle",
+          "InnerContent": [
+            {
+              "Caption": "Air Force 1",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "React",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Presto",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Huarache",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Blazer",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Trainer",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Nike Off-White",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "More",
+              "RouteValues": ""
+            }
+          ]
+        },
+        {
+          "Caption": "Air Max",
+          "InnerContent": [
+            {
+              "Caption": "Air Max 1",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Air Max 90",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Air Max 95",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Air Max 97",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Air Max 98",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Air Max 98",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Air Max 270",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Air Max 720",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "VaporMax",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "More",
+              "RouteValues": ""
+            }
+          ]
+        },
+        {
+          "Caption": "Nike SB",
+          "InnerContent": [
+            {
+              "Caption": "Dunk Low",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Dunk Mid",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Dunk High",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Blazer",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Stefan Janoski",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "More",
+              "RouteValues": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Caption": "Jordan",
+      "Action": "Brand",
+      "RouteValues": "jordan",
+      "InnerContent": [
+        {
+          "Action": "Model",
+          "InnerContent": [
+            {
+              "Caption": "Jordan 1",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Jordan 2",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Jordan 3",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Jordan 4",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Jordan 5",
+              "RouteValues": ""
+            }
+          ]
+        },
+        {
+          "Action": "Model",
+          "InnerContent": [
+            {
+              "Caption": "Jordan 6",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Jordan 7",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Jordan 8",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Jordan 9",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Jordan 10",
+              "RouteValues": ""
+            }
+          ]
+        },
+        {
+          "Action": "Model",
+          "InnerContent": [
+            {
+              "Caption": "Jordan 11",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Jordan 12",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Jordan 13",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Jordan 14",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Jordan 15 to Present",
+              "RouteValues": ""
+            }
+          ]
+        },
+        {
+          "Action": "Model",
+          "InnerContent": [
+            {
+              "Caption": "Future",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Spiz'ike",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Son Of Mars",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Why Not Zer0",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "More",
+              "RouteValues": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Caption": "Adidas",
+      "Action": "Brand",
+      "RouteValues": "adidas",
+      "InnerContent": [
+        {
+          "Caption": "Adidas Originals",
+          "InnerContent": [
+            {
+              "Caption": "Ultra-Boost",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "NDM",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Tubular",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "EQT",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Superstar",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Crazy BYW",
+              "RouteValues": ""
+            }
+          ]
+        },
+        {
+          "Caption": "Collaboration",
+          "InnerContent": [
+            {
+              "Caption": "Y-3",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Pharrell",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Raf Simons",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Stan Smith",
+              "RouteValues": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Caption": "Yeezy",
+      "Action": "Brand",
+      "RouteValues": "yeezy",
+      "InnerContent": [
+        {
+          "Caption": "Addidas Yeezy",
+          "InnerContent": [
+            {
+              "Caption": "Yeezy Boost",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Yeezy 350",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Yeezy 500",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Yeezy 700",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Yeezy 750",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Yeezy 950",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "More Yeezy",
+              "RouteValues": ""
+            }
+          ]
+        },
+        {
+          "Caption": "Nike Yeezy",
+          "InnerContent": [
+            {
+              "Caption": "Air Yeezy",
+              "RouteValues": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Caption": "Puma",
+      "Action": "Brand",
+      "RouteValues": "puma",
+      "InnerContent": [
+        {
+          "InnerContent": [
+            {
+              "Caption": "RS",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Venom",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "",
+              "RouteValues": "Thunder"
+            },
+            {
+              "Caption": "",
+              "RouteValues": "CELL"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Caption": "Rebook",
+      "Action": "Brand",
+      "RouteValues": "reebok",
+      "InnerContent": [
+        {
+          "InnerContent": [
+            {
+              "Caption": "Instapump",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Kamikaze",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Killshot",
+              "RouteValues": "Thunder"
+            },
+            {
+              "Caption": "Question Mid",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Shaq Attaq",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Shaqnosis",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "Aztrek",
+              "RouteValues": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Caption": "Asics",
+      "Action": "Brand",
+      "RouteValues": "asics",
+      "InnerContent": [
+        {
+          "InnerContent": [
+            {
+              "Caption": "GEL-Kayano",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "GEL-LYTE",
+              "RouteValues": ""
+            },
+            {
+              "Caption": "GEL-SAGA",
+              "RouteValues": "Thunder"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Caption": "New Balance",
+      "Action": "Brand",
+      "RouteValues": "new_balance"
+    }
+  ]
+}

@@ -24,148 +24,89 @@
 <div class="super_container">
 <div class="header-spacer"></div>
 <header class="header">
-	<div class="header_container">
-		<div class="header_content">
-			<div class="logo">
-				<a asp-controller="Home" asp-action="Index">Kicksware</a>
+<div class="header_container">
+	<div class="header_content">
+		<div class="logo">
+			<a asp-controller="Home" asp-action="Index">Kicksware</a>
+		</div>
+		@{
+			await Html.RenderPartialAsync("Header/_MainNav");
+			await Html.RenderPartialAsync("Header/_IconNav");
+		}
+	</div>
+</div>
+<!-- Search Panel -->
+<div class="search_panel trans_500">
+	<div class="search_panel_content">
+		<form action="#">
+			@Html.VectorIconRender("search.svg")
+			<input type="search" class="search_input" required="required">
+			<button type="button" class="close-button"></button>
+		</form>
+	</div>
+</div>
+<!-- Slider Menu -->
+<div class="hamburger">
+	<span></span>
+	<span></span>
+	<span></span>
+</div>
+<div class="menu trans_400">
+	<div class="menu-container">
+		<div class="slider-menu-content">
+			<div class="slider-menu-search">
+				<form action="#">
+					@Html.VectorIconRender("search.svg")
+					<input type="search" required="required" class="menu-search-input">
+				</form>
 			</div>
-			<nav class="main_nav">
-				<ul>
-					<li>
-						<a asp-controller="Home" asp-action="Index">Home</a>
-					</li>
-					<li>
-						<a asp-controller="Profile" asp-action="Profile">Profile</a>
-					</li>
-					<li>
-						<a asp-controller="Shop" asp-action="References">Shop</a>
-					</li>
-					<li class="hassubs">
-						<a asp-controller="Sell" asp-action="NewProduct">Sell</a>
-						<ul>
-							<li>
-								<a asp-controller="Sell" asp-action="NewProduct">Create new product</a>
-							</li>
-							<li>
-								<a asp-controller="Sell" asp-action="MyProducts">My products</a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<a asp-controller="About" asp-action="About">About</a>
-					</li>
-					<li>
-						<a asp-controller="Contact" asp-action="Contact">Contact</a>
-					</li>
-				</ul>
-			</nav>
-			<nav class="icon-nav">
-				<ul>
-					<li class="theme dark">
-						@Html.VectorIconRender("theme.svg") @*TODO Nastya sunny easter egg*@
-					</li>
-					<li class="account hassubs">
-						@Html.VectorIconRender("user.svg")
-						<ul>
-							<li class="button header-button" id="login-btn">
-								<span>Login</span>
-							</li>
-							<li class="button header-button-strong" id="sign-up-btn">
-								<span>Sing Up</span>
-							</li>
-						</ul>
-					</li>
-					<li class="favorite">
-						<a asp-controller="Profile" asp-action="Profile" asp-route-mode="favorite">
-							@Html.VectorIconRender("favorite.svg")
-						</a>
-					</li>
-					<li class="search">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<g id="search-path">
-								<path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396l1.414-1.414l-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8s3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6s-6-2.691-6-6s2.691-6 6-6z"/><path d="M11.412 8.586c.379.38.588.882.588 1.414h2a3.977 3.977 0 0 0-1.174-2.828c-1.514-1.512-4.139-1.512-5.652 0l1.412 1.416c.76-.758 2.07-.756 2.826-.002z"/>
-							</g>
-							<g>
-								<path d="M10 2c-4.411 0-8 3.589-8 8s3.589 8 8 8a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396l1.414-1.414l-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8z"/>
-							</g>
-						</svg>
-					</li>
-				</ul>
-			</nav>
-		</div>
-	</div>
-	<!-- Search Panel -->
-	<div class="search_panel trans_500">
-		<div class="search_panel_content">
-			<form action="#">
-				@Html.VectorIconRender("search.svg")
-				<input type="search" class="search_input" required="required">
-				<button type="button" class="close-button"></button>
-			</form>
-		</div>
-	</div>
-	<!-- Slider Menu -->
-	<div class="hamburger">
-		<span></span>
-		<span></span>
-		<span></span>
-	</div>
-	<div class="menu trans_400">
-		<div class="menu-container">
-			<div class="slider-menu-content">
-				<div class="slider-menu-search">
-					<form action="#">
-						@Html.VectorIconRender("search.svg")
-						<input type="search" required="required" class="menu-search-input">
-					</form>
-				</div>
-				<ul class="slider-menu-nav">
-					<li class="slider-menu-item">
-						<a asp-controller="Home" asp-action="Index">Home</a>
-					</li>
-					<li class="slider-menu-item">
-						<a asp-controller="Home" asp-action="Index">Profile</a>
-					</li>
-					<li class="slider-menu-item">
-						<a asp-controller="Shop" asp-action="References">Shop</a>
-					</li>
-					<li class="slider-menu-item">
-						<a asp-controller="Sell" asp-action="NewProduct">Sell</a>
-					</li>
-					<li class="slider-menu-item">
-						<a asp-controller="Home" asp-action="Index">About</a>
-					</li>
-					<li class="slider-menu-item">
-						<a asp-controller="Contact" asp-action="Contact">Contacts</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<div class="menu_social">
-			<ul>
-				<li>
-					<a href="#">
-						<i class="fa fa-pinterest" aria-hidden="true"></i>
-					</a>
+			<ul class="slider-menu-nav">
+				<li class="slider-menu-item">
+					<a asp-controller="Home" asp-action="Index">Home</a>
 				</li>
-				<li>
-					<a href="#">
-						<i class="fa fa-instagram" aria-hidden="true"></i>
-					</a>
+				<li class="slider-menu-item">
+					<a asp-controller="Home" asp-action="Index">Profile</a>
 				</li>
-				<li>
-					<a href="#">
-						<i class="fa fa-facebook" aria-hidden="true"></i>
-					</a>
+				<li class="slider-menu-item">
+					<a asp-controller="Shop" asp-action="References">Shop</a>
 				</li>
-				<li>
-					<a href="#">
-						<i class="fa fa-twitter" aria-hidden="true"></i>
-					</a>
+				<li class="slider-menu-item">
+					<a asp-controller="Sell" asp-action="NewProduct">Sell</a>
+				</li>
+				<li class="slider-menu-item">
+					<a asp-controller="Home" asp-action="Index">About</a>
+				</li>
+				<li class="slider-menu-item">
+					<a asp-controller="Contact" asp-action="Contact">Contacts</a>
 				</li>
 			</ul>
 		</div>
 	</div>
+	<div class="menu_social">
+		<ul>
+			<li>
+				<a href="#">
+					<i class="fa fa-pinterest" aria-hidden="true"></i>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class="fa fa-instagram" aria-hidden="true"></i>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class="fa fa-facebook" aria-hidden="true"></i>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class="fa fa-twitter" aria-hidden="true"></i>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
 </header>
 <div id="scroll-trigger"></div>
 

@@ -41,7 +41,6 @@ namespace Web.Controllers
 			if (additionalParams != default) contentBuilder.SetAdditionalParams(additionalParams);
 			contentBuilder.ConfigureFilter(handler);
 			contentBuilder.ConfigureSorting(handler);
-
 			return handler;
 		}
 

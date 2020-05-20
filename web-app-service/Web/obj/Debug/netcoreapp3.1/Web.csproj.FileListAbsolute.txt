@@ -1079,3 +1079,6 @@ C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LockedHandlerPartial.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Auth\_ForgotPassword.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Auth\_ResetPasswordConfirm.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Header\_IconNav.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Header\_MainNav.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\Web\bin\Debug\netcoreapp3.1\Data\Content\MenuShopContent.json

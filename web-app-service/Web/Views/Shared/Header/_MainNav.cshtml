@@ -1,0 +1,26 @@
+﻿@using Web.Handlers.Menu
+@inject MenuBuilder<ShopMenuContent> ShopMenuBuilder;
+
+<nav class="main_nav">
+	<ul>
+		<li>
+			<a asp-controller="Home" asp-action="Index">HOME</a>
+		</li>
+		<li>
+			<a asp-controller="Profile" asp-action="Profile">PROFILE</a>
+		</li>
+		<li class="expandable">
+			<a asp-controller="Shop" asp-action="References">SHOP</a>
+			@ShopMenuBuilder.RenderMenu(Html)
+		</li>
+		<li class="expandable">
+			<a asp-controller="Sell" asp-action="NewProduct">SELL</a>
+		</li>
+		<li>
+			<a asp-controller="About" asp-action="About">ABOUT</a>
+		</li>
+		<li>
+			<a asp-controller="Contact" asp-action="Contact">CONTACT</a>
+		</li>
+	</ul>
+</nav>

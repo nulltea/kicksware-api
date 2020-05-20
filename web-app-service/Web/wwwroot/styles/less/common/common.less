@@ -521,49 +521,6 @@ a.underline {
 	}
 }
 
-.hassubs {
-	ul {
-		position: absolute;
-		right: -15px;
-		top: calc(~"100% + 20px");
-		width: 230px;
-		text-align: right;
-		padding: 20px 25px;
-		visibility: hidden;
-		opacity: 0;
-		border-radius: 10px;
-		.transition-properties(all 200ms ease);
-		.with-theme({
-			background: fade(@primary, 95%);
-			.elevation(8, @elevation);
-		});
-
-		li:not(:last-child) {
-			margin-bottom: 10px;
-		}
-
-		li a {
-			font-size: 18px;
-			font-weight: 600;
-			color: #767676;
-			padding: 0 5px 2px 5px;
-			.transition-properties(all 200ms ease);
-		}
-
-		li a:hover {
-			.with-theme({
-				color: @secondary;
-			});
-		}
-	}
-
-	&:hover ul {
-		visibility: visible;
-		opacity: 1;
-		top: calc(~"100%");
-	}
-}
-
 //----CUSTOM LIST SELECT----//
 .list-select {
 	position: inherit;

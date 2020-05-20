@@ -18,6 +18,7 @@
 	z-index: 100;
 	.with-theme({
 		background: @primary_variant;
+		//.elevation(4);
 	});
 	.transition-properties(all 300ms ease);
 
@@ -85,96 +86,162 @@
 		width: 580px;
 		height: 100%;
 
-		& > ul {
+		ul {
 			display: flex;
 			align-items: flex-start;
 			justify-content: space-between;
 			height: inherit;
+		}
 
-			& > li {
-				position: relative;
-				display: flex;
-				align-items: flex-end;
-				justify-content: center;
-				height: calc(~"50% + 30px");
-				padding-bottom: 20px;
-				min-width: 12%;
-				padding-left: 5px;
-				padding-right: 5px;
-				border-bottom-left-radius: 10px;
-				border-bottom-right-radius: 10px;
-				.with-theme({
-					background: transparent;
-					color: @passive;
-				});
-				.transition-properties(all 300ms ease);
+		li {
+			position: unset;
+			.flex-row(center, flex-end);
+			height: 100%;
+			padding-bottom: 45px;
+			min-width: 12%;
+			.with-theme({
+				background: transparent;
+				color: @passive;
+			});
+			.transition-properties(all 300ms ease);
 
-				.scrolled & {
-					padding-bottom: 25px;
-					height: calc(~"100% + 5px");
-				}
+			.scrolled & {
+				padding-bottom: 25px;
+				height: calc(~"100% + 5px");
+			}
 
-				a {
-					font-size: 18px;
-					font-weight: 600;
-					color: inherit;
-				}
+			a {
+				font-size: 18px;
+				font-weight: 600;
+				color: inherit;
+			}
 
-				&:not(.active):hover {
+			&:not(.active):hover {
+				& > a {
 					.with-theme({
 						color: @secondary;
-						& > a {
-							.text-hover-elevation(@elevation);
-							.transition-properties(text-shadow 300ms ease);
-						}
+						.text-hover-elevation(@elevation);
+						.transition-properties(text-shadow 300ms ease);
 					});
 				}
+			}
 
-				&.active {
-					.with-theme({
-						background: @secondary;
-						color: @primary;
-						.elevation(4, @elevation);
-					});
+			&.active {
+				height: calc(~"50% + 30px");
+				padding-bottom: 20px;
+				border-bottom-left-radius: 10px;
+				border-bottom-right-radius: 10px;
+				z-index: 10;
+				.with-theme({
+					background: @secondary;
+					color: @primary;
+					.elevation(4, @elevation);
+				});
 
-					&:hover {
-						height: calc(~"50% + 40px");
-					}
+				&:hover {
+					height: calc(~"100% - 10px");
+				}
 
-					.scrolled &:hover {
-						height: calc(~"100% + 15px");
-					}
+				.scrolled &:hover {
+					height: calc(~"100% + 15px");
 				}
 			}
 		}
 
-		li.hassubs {
-			ul {
-				display: flex;
-				flex-direction: row;
-				align-items: center;
-				justify-content: space-between;
-				width: max-content;
-				left:0;
-				right:0;
+		li.expandable {
+			.sub-panel {
+				.flex-row(center, flex-start);
+				position: absolute;
+				top: 100%;
+				left: 0;
+				right: 0;
+				width: 100%;
+				height: auto;
+				visibility: hidden;
+				opacity: 0;
+				border-bottom-left-radius: 10px;
+				border-bottom-right-radius: 10px;
 				.with-theme({
-					color: @passive;
+					background: @primary;
+					.elevation(4);
 				});
-				//border-top-left-radius: 0;
-				//border-top-right-radius: 0;
 
-				li {
-					margin: 0 10px;
+				&:before {
+					content: "";
+					position: absolute;
+					display: block;
+					width: 100%;
+					height: 10px;
+					top: -10px;
+					.with-theme({
+						background: @primary;
+					});
+				}
 
-					&:hover {
-						.with-theme({
-							& > a {
-								.text-elevation(@elevation);
-								.transition-properties(text-shadow 300ms ease);
-							}
-						});
+				&:after {
+					content: "";
+					position: absolute;
+					display: block;
+					height: 2px;
+					left: 0;
+					right: 0;
+					.with-theme({
+						background: @secondary;
+					});
+				}
+
+				ul{
+					height: auto;
+
+					li {
+						height: 65px;
+						min-width: unset;
+						padding: 0 20px;
+						align-items: center;
+
+						.sub-panel{
+							display: grid;
+							grid-auto-flow: column;
+							align-self: center;
+						}
 					}
 				}
+
+				& > .sub-item {
+					height: auto;
+					padding: 20px 40px;
+				}
+			}
+
+			.sub-group {
+				.flex-col(@align: flex-start);
+				padding: 25px 40px 0;
+
+				h3 {
+					margin-bottom: 15px;
+				}
+			}
+
+			.sub-item {
+				height: 50px;
+				.flex-col(center, center);
+				.with-theme({
+					background: transparent;
+					color: @passive;
+				});
+
+				a {
+					height: 100%;
+					font-size: 18px;
+					font-weight: 600;
+					color: inherit;
+				}
+			}
+
+			&:hover > .sub-panel {
+				opacity: 1;
+				top: calc(~"100%");
+				visibility: visible;
 			}
 		}
 
@@ -190,6 +257,69 @@
 	.icon-nav {
 		height: 100%;
 		.transition-properties(height 300ms ease-in-out);
+
+		.expandable {
+			ul {
+				position: absolute;
+				right: -15px;
+				top: calc(~"100% + 20px");
+				width: 230px;
+				text-align: right;
+				padding: 20px 25px;
+				visibility: hidden;
+				opacity: 0;
+				border-radius: 10px;
+				.transition-properties(all 200ms ease);
+				.with-theme({
+					background: fade(@primary, 95%);
+					.elevation(8, @elevation);
+				});
+
+				li:not(:last-child) {
+					margin-bottom: 10px;
+				}
+
+				li a {
+					font-size: 18px;
+					font-weight: 600;
+					color: #767676;
+					padding: 0 5px 2px 5px;
+					.transition-properties(all 200ms ease);
+				}
+
+				li a:hover {
+					.with-theme({
+						color: @secondary;
+					});
+				}
+			}
+
+			.sub-panel {
+				position: absolute;
+				left: 0;
+				right: 0;
+				width: 100%;
+				top: calc(~"100% + 20px");
+				text-align: right;
+				padding: 20px 25px;
+				visibility: hidden;
+				opacity: 0;
+				border-bottom-left-radius: 10px;
+				border-bottom-right-radius: 10px;
+				.transition-properties(all 200ms ease);
+				.with-theme({
+					background: @primary;
+					//.elevation(8, @elevation);
+				});
+			}
+
+			&:hover ul,
+			&:hover .sub-panel {
+				visibility: visible;
+				opacity: 1;
+				top: calc(~"100%");
+			}
+		}
 
 		ul {
 			width: inherit;
@@ -313,7 +443,7 @@
 			}
 
 
-			&.hassubs ul {
+			&.expandable ul {
 				display: flex;
 				flex-direction: column;
 				align-items: stretch;
@@ -331,16 +461,16 @@
 				}
 			}
 
-			&.hassubs:hover ul {
+			&.expandable:hover ul {
 				visibility: visible;
 				opacity: 1;
 			}
 
-			.hassubs li {
+			.expandable li {
 				opacity: 1;
 			}
 
-			.hassubs li span {
+			.expandable li span {
 				position: relative;
 				z-index: 1;
 			}
@@ -453,7 +583,6 @@
 						fill: @primary;
 					});
 				}
-
 
 
 				&:hover circle:first-of-type {
