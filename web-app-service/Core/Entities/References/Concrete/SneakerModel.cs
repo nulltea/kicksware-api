@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+using Core.Extension;
 using Core.Reference;
 
 namespace Core.Entities.References
@@ -29,7 +30,7 @@ namespace Core.Entities.References
 		public SneakerModel(string name)
 		{
 			Name = name;
-			UniqueID = new Regex("[\\n\\t-;,.\\s()\\/]").Replace(Convert.ToString(name), "_").ToLower();
+			UniqueID = Convert.ToString(name)?.ToFormattedID().ToLower();
 		}
 
 		public SneakerModel(string name, SneakerBrand brand) : this(name)

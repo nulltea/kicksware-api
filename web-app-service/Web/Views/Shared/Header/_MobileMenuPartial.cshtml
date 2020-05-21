@@ -1,0 +1,58 @@
+﻿@using Web.Utils.Helpers
+
+<div class="menu trans_400">
+	<div class="menu-container">
+		<div class="slider-menu-content">
+			<div class="slider-menu-search">
+				<form action="#">
+					@Html.VectorIconRender("search.svg")
+					<input type="search" required="required" class="menu-search-input">
+				</form>
+			</div>
+			<ul class="slider-menu-nav">
+				<li class="slider-menu-item">
+					<a asp-controller="Home" asp-action="Index">Home</a>
+				</li>
+				<li class="slider-menu-item">
+					<a asp-controller="Home" asp-action="Index">Profile</a>
+				</li>
+				<li class="slider-menu-item">
+					<a asp-controller="Shop" asp-action="References">Shop</a>
+				</li>
+				<li class="slider-menu-item">
+					<a asp-controller="Sell" asp-action="NewProduct">Sell</a>
+				</li>
+				<li class="slider-menu-item">
+					<a asp-controller="Home" asp-action="Index">About</a>
+				</li>
+				<li class="slider-menu-item">
+					<a asp-controller="Contact" asp-action="Contact">Contacts</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="menu_social">
+		<ul>
+			<li>
+				<a href="#">
+					<i class="fa fa-pinterest" aria-hidden="true"></i>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class="fa fa-instagram" aria-hidden="true"></i>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class="fa fa-facebook" aria-hidden="true"></i>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class="fa fa-twitter" aria-hidden="true"></i>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>

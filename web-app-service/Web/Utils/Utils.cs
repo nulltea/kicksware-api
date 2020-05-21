@@ -10,24 +10,24 @@ namespace Web.Utils
 	public static class Utils
 	{
 		public static List<SneakerProductViewModel> ToViewModel(this List<SneakerProduct> entities) =>
-			entities.Select(CastExtend<SneakerProductViewModel>).ToList();
+			entities.CastExtend<SneakerProduct, SneakerProductViewModel>();
 
 		public static List<SneakerProduct> ToEntityModel(this List<SneakerProductViewModel> viewModels) =>
 			viewModels.Cast<SneakerProduct>().ToList();
 
 		public static List<UserViewModel> ToViewModel(this List<User> entities) =>
-			entities.Select(CastExtend<UserViewModel>).ToList();
+			entities.CastExtend<User, UserViewModel>();
 
 		public static List<User> ToEntityModel(this List<UserViewModel> viewModels) => viewModels.Cast<User>().ToList();
 
 		public static SneakerProductViewModel ToViewModel(this SneakerProduct entity) =>
-			CastExtend<SneakerProductViewModel>(entity);
+			entity.CastExtend<SneakerProduct, SneakerProductViewModel>();
 
-		public static UserViewModel ToViewModel(this User entity) => CastExtend<UserViewModel>(entity);
+		public static UserViewModel ToViewModel(this User entity) => entity.CastExtend<User, UserViewModel>();
 
-		private static T CastExtend<T>(object entity)
+		public static TTarget CastExtend<TSource, TTarget>(this TSource entity) where TTarget : TSource, new()
 		{
-			var instance = Activator.CreateInstance<T>();
+			var instance = Activator.CreateInstance<TTarget>();
 			var type = entity.GetType();
 			var properties = type.GetProperties();
 			foreach (var property in properties)
@@ -38,6 +38,11 @@ namespace Web.Utils
 				}
 			}
 			return instance;
+		}
+
+		public static List<TTarget> CastExtend<TSource, TTarget>(this List<TSource> entities) where TTarget : TSource, new()
+		{
+			return entities.Select(CastExtend<TSource, TTarget>).ToList();
 		}
 	}
 

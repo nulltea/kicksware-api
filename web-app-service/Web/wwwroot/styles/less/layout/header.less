@@ -116,19 +116,9 @@
 				color: inherit;
 			}
 
-			&:not(.active):hover {
-				& > a {
-					.with-theme({
-						color: @secondary;
-						.text-hover-elevation(@elevation);
-						.transition-properties(text-shadow 300ms ease);
-					});
-				}
-			}
-
 			&.active {
 				height: calc(~"50% + 30px");
-				padding-bottom: 20px;
+				padding: 0 8px 20px 8px;
 				border-bottom-left-radius: 10px;
 				border-bottom-right-radius: 10px;
 				z-index: 10;
@@ -142,7 +132,7 @@
 					height: calc(~"100% - 10px");
 				}
 
-				.scrolled &:hover {
+				.scrolled &:not(.expandable):hover {
 					height: calc(~"100% + 15px");
 				}
 			}
@@ -218,6 +208,7 @@
 				padding: 25px 40px 0;
 
 				h3 {
+					min-height: 26.5px;
 					margin-bottom: 15px;
 				}
 			}
@@ -242,6 +233,17 @@
 				opacity: 1;
 				top: calc(~"100%");
 				visibility: visible;
+			}
+		}
+
+		li:not(.active):hover, .sub-item:hover {
+			& > a {
+				.with-theme({
+					color: @secondary;
+					text-decoration: underline;
+					.text-elevation(@elevation);
+					.transition-properties(text-shadow 300ms ease);
+				});
 			}
 		}
 

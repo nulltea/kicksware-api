@@ -1,8 +1,4 @@
-﻿$(document).ready(function () {
-	"use strict";
-});
-
-function initAutoSearch(actionUrl) {
+﻿function initAutoSearch(actionUrl) {
 	$(window).keypress(function(event) {
 		if (event.keyCode === 13) {
 			event.preventDefault();
@@ -139,3 +135,7 @@ function createButton(model) {
 	submitButton.append(span, icon);
 	return submitButton;
 }
+
+$(document).ready(function () {
+	"use strict";
+});

@@ -11,7 +11,9 @@ namespace Web.Handlers.Menu
 
 		string Action { get; set; }
 
-		object RouteValues { get; set; }
+		string RouteValues { get; set; }
+
+		IMenuContent ParentContent { get; set; }
 
 		IHtmlContent Render(IHtmlHelper html);
 	}

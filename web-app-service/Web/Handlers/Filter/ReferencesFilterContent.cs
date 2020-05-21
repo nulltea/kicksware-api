@@ -12,10 +12,10 @@ namespace Web.Handlers.Filter
 	{
 		public override void ConfigureFilter(IFilteredModel<SneakerReference> model)
 		{
-			if (AdditionalParams != null && AdditionalParams.TryGetValue("brandId", out var brandId))
+			if (AdditionalParams != null && AdditionalParams.TryGetValue("brandID", out var brandID))
 			{
 				model.AddHiddenFilterGroup("brandname", ExpressionType.Equal)
-					.AssignParameter(Convert.ToString(brandId), Convert.ToString(brandId));
+					.AssignParameter(Convert.ToString(brandID), Convert.ToString(brandID));
 			}
 			else
 			{

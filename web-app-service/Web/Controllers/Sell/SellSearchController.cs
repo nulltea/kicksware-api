@@ -12,7 +12,7 @@ namespace Web.Controllers
 	{
 		[HttpGet]
 		[Breadcrumb("Sell", FromAction = "Index", FromController = typeof(HomeController))]
-		public JsonResult SearchAuto([FromServices] IReferenceSearchService service, [FromQuery]string prefix)
+		public JsonResult SearchAuto([FromServices] IReferenceSearchService service, [FromQuery] string prefix)
 		{
 			var references = service.Search(prefix);
 			return Json(references);

@@ -6,7 +6,6 @@
     {
       "Caption": "Nike",
       "Action": "Brand",
-      "RouteValues": "nike",
       "InnerContent": [
         {
           "Caption": "Basketball",
@@ -14,142 +13,120 @@
           "InnerContent": [
             {
               "Caption": "LeBron James",
-              "RouteValues": ""
+              "RouteValues": "LeBron"
             },
             {
-              "Caption": "Kobe Bryant",
-              "RouteValues": ""
+              "Caption": "Kobe Bryant"
             },
             {
-              "Caption": "Kevin Durant",
-              "RouteValues": ""
+              "Caption": "Kevin Durant"
             },
             {
-              "Caption": "Kyrie Irving",
-              "RouteValues": ""
+              "Caption": "Kyrie Irving"
             },
             {
-              "Caption": "Penny Hardaway",
-              "RouteValues": ""
+              "Caption": "Penny Hardaway"
             },
             {
-              "Caption": "Uptempo",
-              "RouteValues": ""
+              "Caption": "Air More Uptempo"
             },
             {
-              "Caption": "More",
+              "Caption": "More Basketball Shoes",
               "RouteValues": ""
             }
           ]
         },
         {
           "Caption": "Lifestyle",
+          "Action": "Model",
           "InnerContent": [
             {
-              "Caption": "Air Force 1",
-              "RouteValues": ""
+              "Caption": "Air Force 1"
             },
             {
-              "Caption": "React",
-              "RouteValues": ""
+              "Caption": "React"
             },
             {
-              "Caption": "Presto",
-              "RouteValues": ""
+              "Caption": "Presto"
             },
             {
-              "Caption": "Huarache",
-              "RouteValues": ""
+              "Caption": "Huarache"
             },
             {
-              "Caption": "Blazer",
-              "RouteValues": ""
+              "Caption": "Blazer"
             },
             {
-              "Caption": "Trainer",
-              "RouteValues": ""
+              "Caption": "Trainer"
             },
             {
-              "Caption": "Nike Off-White",
-              "RouteValues": ""
+              "Caption": "Nike Off-White"
             },
             {
               "Caption": "More",
-              "RouteValues": ""
+              "RouteValues": "More-Nike"
             }
           ]
         },
         {
           "Caption": "Air Max",
+          "Action": "Model",
           "InnerContent": [
             {
-              "Caption": "Air Max 1",
-              "RouteValues": ""
+              "Caption": "Air Max 1"
             },
             {
-              "Caption": "Air Max 90",
-              "RouteValues": ""
+              "Caption": "Air Max 90"
             },
             {
-              "Caption": "Air Max 95",
-              "RouteValues": ""
+              "Caption": "Air Max 95"
             },
             {
-              "Caption": "Air Max 97",
-              "RouteValues": ""
+              "Caption": "Air Max 97"
             },
             {
-              "Caption": "Air Max 98",
-              "RouteValues": ""
+              "Caption": "Air Max 98"
             },
             {
-              "Caption": "Air Max 98",
-              "RouteValues": ""
+              "Caption": "Air Max 98"
             },
             {
-              "Caption": "Air Max 270",
-              "RouteValues": ""
+              "Caption": "Air Max 270"
             },
             {
-              "Caption": "Air Max 720",
-              "RouteValues": ""
+              "Caption": "Air Max 720"
             },
             {
               "Caption": "VaporMax",
-              "RouteValues": ""
+              "RouteValues": "Vapormax"
             },
             {
-              "Caption": "More",
-              "RouteValues": ""
+              "Caption": "Other Air Max",
+              "RouteValues": "Air Max"
             }
           ]
         },
         {
           "Caption": "Nike SB",
+          "Action": "Model",
           "InnerContent": [
             {
-              "Caption": "Dunk Low",
-              "RouteValues": ""
+              "Caption": "Dunk Low"
             },
             {
-              "Caption": "Dunk Mid",
-              "RouteValues": ""
+              "Caption": "Dunk Mid"
             },
             {
-              "Caption": "Dunk High",
-              "RouteValues": ""
+              "Caption": "Dunk High"
             },
             {
-              "Caption": "Blazer",
-              "RouteValues": ""
+              "Caption": "Blazer"
             },
             {
-              "Caption": "Stefan Janoski",
-              "RouteValues": ""
+              "Caption": "Stefan Janoski"
             },
             {
-              "Caption": "More",
-              "RouteValues": ""
+              "Caption": "More Nike SB",
+              "RouteValues": "More-Nike-SB"
             }
           ]
         }
@@ -158,101 +135,90 @@
     {
       "Caption": "Jordan",
       "Action": "Brand",
-      "RouteValues": "jordan",
       "InnerContent": [
         {
+          "Caption": "Classic",
           "Action": "Model",
           "InnerContent": [
             {
-              "Caption": "Jordan 1",
-              "RouteValues": ""
+              "Caption": "Jordan 1"
             },
             {
-              "Caption": "Jordan 2",
-              "RouteValues": ""
+              "Caption": "Jordan 2"
             },
             {
-              "Caption": "Jordan 3",
-              "RouteValues": ""
+              "Caption": "Jordan 3"
             },
             {
-              "Caption": "Jordan 4",
-              "RouteValues": ""
+              "Caption": "Jordan 4"
             },
             {
-              "Caption": "Jordan 5",
-              "RouteValues": ""
+              "Caption": "Jordan 5"
             }
           ]
         },
         {
+          "Caption": "\r\n",
           "Action": "Model",
           "InnerContent": [
             {
-              "Caption": "Jordan 6",
-              "RouteValues": ""
+              "Caption": "Jordan 6"
             },
             {
-              "Caption": "Jordan 7",
-              "RouteValues": ""
+              "Caption": "Jordan 7"
             },
             {
-              "Caption": "Jordan 8",
-              "RouteValues": ""
+              "Caption": "Jordan 8"
             },
             {
-              "Caption": "Jordan 9",
-              "RouteValues": ""
+              "Caption": "Jordan 9"
             },
             {
-              "Caption": "Jordan 10",
-              "RouteValues": ""
+              "Caption": "Jordan 10"
             }
           ]
         },
         {
+          "Caption": "\r\n",
           "Action": "Model",
           "InnerContent": [
             {
-              "Caption": "Jordan 11",
-              "RouteValues": ""
+              "Caption": "Jordan 11"
             },
             {
-              "Caption": "Jordan 12",
-              "RouteValues": ""
+              "Caption": "Jordan 12"
             },
             {
-              "Caption": "Jordan 13",
-              "RouteValues": ""
+              "Caption": "Jordan 13"
             },
             {
-              "Caption": "Jordan 14",
-              "RouteValues": ""
+              "Caption": "Jordan 14"
             },
             {
-              "Caption": "Jordan 15 to Present",
-              "RouteValues": ""
+              "Caption": "Jordan 15+",
+              "RouteValues": "Jordan-15+"
             }
           ]
         },
         {
+          "Caption": "Other Jordans",
           "Action": "Model",
           "InnerContent": [
             {
               "Caption": "Future",
-              "RouteValues": ""
+              "RouteValues": "Jordan-Future"
             },
             {
               "Caption": "Spiz'ike",
-              "RouteValues": ""
+              "RouteValues": "Jordan-Spizike"
             },
             {
               "Caption": "Son Of Mars",
-              "RouteValues": ""
+              "RouteValues": "Jordan-Son-Of-Mars"
             },
             {
               "Caption": "Why Not Zer0",
-              "RouteValues": ""
+              "RouteValues": "Jordan-Why-Not-Zer0"
             },
             {
               "Caption": "More",
@@ -265,55 +231,46 @@
     {
       "Caption": "Adidas",
       "Action": "Brand",
-      "RouteValues": "adidas",
       "InnerContent": [
         {
           "Caption": "Adidas Originals",
+          "Action": "Model",
           "InnerContent": [
             {
-              "Caption": "Ultra-Boost",
-              "RouteValues": ""
+              "Caption": "Ultra-Boost"
             },
             {
-              "Caption": "NDM",
-              "RouteValues": ""
+              "Caption": "NDM"
             },
             {
-              "Caption": "Tubular",
-              "RouteValues": ""
+              "Caption": "Tubular"
             },
             {
-              "Caption": "EQT",
-              "RouteValues": ""
+              "Caption": "EQT"
             },
             {
-              "Caption": "Superstar",
-              "RouteValues": ""
+              "Caption": "Superstar"
             },
             {
-              "Caption": "Crazy BYW",
-              "RouteValues": ""
+              "Caption": "Crazy BYW"
             }
           ]
         },
         {
-          "Caption": "Collaboration",
+          "Caption": "Collabs",
+          "Action": "Model",
           "InnerContent": [
             {
-              "Caption": "Y-3",
-              "RouteValues": ""
+              "Caption": "Y-3"
             },
             {
-              "Caption": "Pharrell",
-              "RouteValues": ""
+              "Caption": "Pharrell"
             },
             {
-              "Caption": "Raf Simons",
-              "RouteValues": ""
+              "Caption": "Raf Simons"
             },
             {
-              "Caption": "Stan Smith",
-              "RouteValues": ""
+              "Caption": "Stan Smith"
             }
           ]
         }
@@ -322,47 +279,41 @@
     {
       "Caption": "Yeezy",
       "Action": "Brand",
-      "RouteValues": "yeezy",
       "InnerContent": [
         {
           "Caption": "Addidas Yeezy",
+          "Action": "Model",
           "InnerContent": [
             {
-              "Caption": "Yeezy Boost",
-              "RouteValues": ""
+              "Caption": "Yeezy Boost"
             },
             {
-              "Caption": "Yeezy 350",
-              "RouteValues": ""
+              "Caption": "Yeezy 350"
             },
             {
-              "Caption": "Yeezy 500",
-              "RouteValues": ""
+              "Caption": "Yeezy 500"
             },
             {
-              "Caption": "Yeezy 700",
-              "RouteValues": ""
+              "Caption": "Yeezy 700"
             },
             {
-              "Caption": "Yeezy 750",
-              "RouteValues": ""
+              "Caption": "Yeezy 750"
             },
             {
-              "Caption": "Yeezy 950",
-              "RouteValues": ""
+              "Caption": "Yeezy 950"
             },
             {
               "Caption": "More Yeezy",
-              "RouteValues": ""
+              "RouteValues": "Yeezy"
             }
           ]
         },
         {
           "Caption": "Nike Yeezy",
+          "Action": "Model",
           "InnerContent": [
             {
-              "Caption": "Air Yeezy",
-              "RouteValues": ""
+              "Caption": "Air Yeezy"
             }
           ]
         }
@@ -371,64 +322,56 @@
     {
       "Caption": "Puma",
       "Action": "Brand",
-      "RouteValues": "puma",
       "InnerContent": [
         {
+          "Action": "Model",
           "InnerContent": [
             {
-              "Caption": "RS",
-              "RouteValues": ""
+              "Caption": "Venom"
             },
             {
-              "Caption": "Venom",
-              "RouteValues": ""
+              "Caption": "Thunder"
             },
             {
-              "Caption": "",
-              "RouteValues": "Thunder"
+              "Caption": "CELL"
             },
             {
-              "Caption": "",
-              "RouteValues": "CELL"
+              "Caption": "RS-X"
+            },
+            {
+              "Caption": "Flight"
             }
           ]
         }
       ]
     },
     {
-      "Caption": "Rebook",
+      "Caption": "Reebok",
       "Action": "Brand",
-      "RouteValues": "reebok",
       "InnerContent": [
         {
+          "Action": "Model",
           "InnerContent": [
             {
-              "Caption": "Instapump",
-              "RouteValues": ""
+              "Caption": "Instapump"
             },
             {
-              "Caption": "Kamikaze",
-              "RouteValues": ""
+              "Caption": "Kamikaze"
             },
             {
-              "Caption": "Killshot",
-              "RouteValues": "Thunder"
+              "Caption": "Killshot"
             },
             {
-              "Caption": "Question Mid",
-              "RouteValues": ""
+              "Caption": "Question Mid"
             },
             {
-              "Caption": "Shaq Attaq",
-              "RouteValues": ""
+              "Caption": "Shaq Attaq"
             },
             {
-              "Caption": "Shaqnosis",
-              "RouteValues": ""
+              "Caption": "Shaqnosis"
             },
             {
-              "Caption": "Aztrek",
-              "RouteValues": ""
+              "Caption": "Aztrek"
             }
           ]
         }
@@ -437,21 +380,18 @@
     {
       "Caption": "Asics",
       "Action": "Brand",
-      "RouteValues": "asics",
       "InnerContent": [
         {
+          "Action": "Model",
           "InnerContent": [
             {
-              "Caption": "GEL-Kayano",
-              "RouteValues": ""
+              "Caption": "GEL-Kayano"
             },
             {
-              "Caption": "GEL-LYTE",
-              "RouteValues": ""
+              "Caption": "GEL-LYTE"
             },
             {
-              "Caption": "GEL-SAGA",
-              "RouteValues": "Thunder"
+              "Caption": "GEL-SAGA"
             }
           ]
         }
@@ -459,8 +399,69 @@
     },
     {
       "Caption": "New Balance",
+      "Action": "Brand"
+    },
+    {
+      "Caption": "More",
       "Action": "Brand",
-      "RouteValues": "new_balance"
+      "InnerContent": [
+        {
+          "InnerContent": [
+            {
+              "Action": "Brand",
+              "Caption": "Under Armour"
+            },
+            {
+              "Action": "Brand",
+              "Caption": "Converse"
+            },
+            {
+              "Action": "Brand",
+              "Caption": "Fila"
+            },
+            {
+              "Action": "Brand",
+              "Caption": "Bape"
+            },
+            {
+              "Action": "Brand",
+              "Caption": "Vans"
+            },
+            {
+              "Action": "Brand",
+              "Caption": "Timberland"
+            },
+            {
+              "Action": "Brand",
+              "Caption": "Lacoste"
+            },
+            {
+              "Action": "Brand",
+              "Caption": "Ewing"
+            },
+            {
+              "Action": "Brand",
+              "Caption": "Clarks"
+            },
+            {
+              "Action": "Brand",
+              "Caption": "Dr Martens"
+            },
+            {
+              "Action": "Brand",
+              "Caption": "Diadora"
+            },
+            {
+              "Action": "Brand",
+              "Caption": "KARHU"
+            },
+            {
+              "Action": "Brand",
+              "Caption": "Lacoste"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

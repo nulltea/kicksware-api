@@ -52,11 +52,11 @@ function themeInit() {
 function activePageInit(){
 	let baseRoute = window.location.pathname.split("/")[1];
 	if (baseRoute){
-		$(`.main_nav a[href*='/${window.location.pathname.split("/")[1]}/']`)
+		$(`.main_nav > ul > li > a[href*='/${window.location.pathname.split("/")[1]}']`)
 			.parent()
 			.toggleClass("active");
 	} else {
-		$(`.main_nav a[href$='/']`).parent()
+		$(`.main_nav> ul > li > a[href$='/']`).parent()
 			.toggleClass("active");
 	}
 }

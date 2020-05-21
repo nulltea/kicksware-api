@@ -13,7 +13,7 @@ namespace Web.Controllers
 		{
 			HeroBreadSubTitle = "Tell us about your sneakers. In details - the more the better";
 
-			return this.ViewStep(1, model);
+			return this.ViewStep(1, model ?? new SneakerProductViewModel());
 		}
 
 		[HttpPost]

@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Text.RegularExpressions;
 using Core.Attributes;
+using Core.Extension;
 
 namespace Core.Entities.References
 {
@@ -29,7 +30,7 @@ namespace Core.Entities.References
 		public SneakerBrand(string name)
 		{
 			Name = name;
-			UniqueID = new Regex("[\\n\\t;,.\\s()\\/]").Replace(Convert.ToString(name), "_").ToLower();
+			UniqueID = Convert.ToString(name)?.ToFormattedID().ToLower();
 			Logo = $"logos/{UniqueID}-logo.svg";
 			HeroPath = $"/images/heroes/{UniqueID}-hero.jpg";
 		}

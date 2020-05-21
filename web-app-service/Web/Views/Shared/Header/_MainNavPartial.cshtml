@@ -1,0 +1,67 @@
+﻿@using Web.Handlers.Menu
+@inject MenuBuilder<ShopMenuContent> ShopMenuBuilder;
+
+<nav class="main_nav">
+	<ul>
+		<li>
+			<a asp-controller="Home" asp-action="Index">HOME</a>
+		</li>
+		<li class="expandable">
+			<a asp-controller="Profile" asp-action="Profile">PROFILE</a>
+			<div class="sub-panel">
+				<ul>
+					<li>
+						<a asp-action="Profile" asp-controller="Profile">ACCOUNT</a>
+					</li>
+					<li>
+						<a asp-action="Profile" asp-controller="Profile" asp-route-mode="buying">BUYING</a>
+					</li>
+					<li>
+						<a asp-action="Profile" asp-controller="Profile" asp-route-mode="selling">SELLING</a>
+					</li>
+					<li>
+						<a asp-action="Profile" asp-controller="Profile" asp-route-mode="favorite">FAVORITE</a>
+					</li>
+					<li>
+						<a asp-action="Profile" asp-controller="Profile" asp-route-mode="payment">PAYMENT</a>
+					</li>
+					<li>
+						<a asp-action="Profile" asp-controller="Profile" asp-route-mode="settings">SETTINGS</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+		<li class="expandable">
+			<a asp-controller="Shop" asp-action="References">SHOP</a>
+			@ShopMenuBuilder.RenderMenu(Html)
+		</li>
+		<li class="expandable">
+			<a asp-controller="Sell" asp-action="NewProduct">SELL</a>
+			<div class="sub-panel">
+				<ul>
+					<li>
+						<a asp-action="NewProduct" asp-controller="Sell">FIND YOUR KICKS</a>
+					</li>
+					<li>
+						<a asp-action="SetDetails" asp-controller="Sell">START FROM SCRATCH</a>
+					</li>
+					<li>
+						<a asp-action="Profile" asp-controller="Profile" asp-route-mode="selling">SOLD PRODUCTS</a>
+					</li>
+					<li>
+						<a asp-action="Profile" asp-controller="Profile" asp-route-mode="selling">ALL PRODUCTS</a>
+					</li>
+					<li>
+						<a asp-action="Profile" asp-controller="Profile" asp-route-mode="payment">PAYMENT</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+		<li>
+			<a asp-controller="About" asp-action="About">ABOUT</a>
+		</li>
+		<li>
+			<a asp-controller="Contact" asp-action="Contact">CONTACT</a>
+		</li>
+	</ul>
+</nav>

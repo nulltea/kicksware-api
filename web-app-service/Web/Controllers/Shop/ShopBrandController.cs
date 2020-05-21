@@ -9,15 +9,15 @@ namespace Web.Controllers
 	public partial class ShopController
 	{
 		[HttpGet]
-		[Route("shop/brand/{brandId}")]
+		[Route("shop/brand/{brandID}")]
 		[Breadcrumb("Shop", FromAction = "Index", FromController = typeof(HomeController))]
-		public IActionResult Brand(string brandId, int page = 1, string sortBy = default)
+		public IActionResult Brand(string brandID, int page = 1, string sortBy = default)
 		{
-			var references = InitFilterHandler<SneakerReference>(new {brandId}); // TODO custom builder
+			var references = InitFilterHandler<SneakerReference>(new {brandID}); // TODO custom builder
 			if (!string.IsNullOrEmpty(sortBy)) references.ChooseSortParameter(sortBy);
 			references.FetchPage(page);
 
-			var brand = references.FirstOrDefault()?.Brand ?? new SneakerBrand(brandId);
+			var brand = references.FirstOrDefault()?.Brand ?? new SneakerBrand(brandID);
 
 			HeroCoverPath = brand.HeroPath;
 			HeroBreadTitle = brand.Name;

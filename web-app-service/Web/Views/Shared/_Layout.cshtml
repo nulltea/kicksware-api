@@ -27,86 +27,28 @@
 <div class="header_container">
 	<div class="header_content">
 		<div class="logo">
-			<a asp-controller="Home" asp-action="Index">Kicksware</a>
+			<a asp-controller="Home" asp-action="Index">KICKSWARE</a>
 		</div>
 		@{
-			await Html.RenderPartialAsync("Header/_MainNav");
-			await Html.RenderPartialAsync("Header/_IconNav");
+			await Html.RenderPartialAsync("Header/_MainNavPartial");
+			await Html.RenderPartialAsync("Header/_IconNavPartial");
 		}
 	</div>
 </div>
 <!-- Search Panel -->
-<div class="search_panel trans_500">
-	<div class="search_panel_content">
-		<form action="#">
-			@Html.VectorIconRender("search.svg")
-			<input type="search" class="search_input" required="required">
-			<button type="button" class="close-button"></button>
-		</form>
-	</div>
-</div>
+@{
+	await Html.RenderPartialAsync("Header/_SearchPartial");
+}
+
 <!-- Slider Menu -->
 <div class="hamburger">
 	<span></span>
 	<span></span>
 	<span></span>
 </div>
-<div class="menu trans_400">
-	<div class="menu-container">
-		<div class="slider-menu-content">
-			<div class="slider-menu-search">
-				<form action="#">
-					@Html.VectorIconRender("search.svg")
-					<input type="search" required="required" class="menu-search-input">
-				</form>
-			</div>
-			<ul class="slider-menu-nav">
-				<li class="slider-menu-item">
-					<a asp-controller="Home" asp-action="Index">Home</a>
-				</li>
-				<li class="slider-menu-item">
-					<a asp-controller="Home" asp-action="Index">Profile</a>
-				</li>
-				<li class="slider-menu-item">
-					<a asp-controller="Shop" asp-action="References">Shop</a>
-				</li>
-				<li class="slider-menu-item">
-					<a asp-controller="Sell" asp-action="NewProduct">Sell</a>
-				</li>
-				<li class="slider-menu-item">
-					<a asp-controller="Home" asp-action="Index">About</a>
-				</li>
-				<li class="slider-menu-item">
-					<a asp-controller="Contact" asp-action="Contact">Contacts</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<div class="menu_social">
-		<ul>
-			<li>
-				<a href="#">
-					<i class="fa fa-pinterest" aria-hidden="true"></i>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<i class="fa fa-instagram" aria-hidden="true"></i>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<i class="fa fa-facebook" aria-hidden="true"></i>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<i class="fa fa-twitter" aria-hidden="true"></i>
-				</a>
-			</li>
-		</ul>
-	</div>
-</div>
+@{
+	await Html.RenderPartialAsync("Header/_MobileMenuPartial");
+}
 </header>
 <div id="scroll-trigger"></div>
 
@@ -154,7 +96,7 @@
 <footer class="footer">
 	<div class="footer_content">
 		<div class="footer_logo">
-			<a asp-action="Index" asp-controller="Home">Kicksware</a>
+			<a asp-action="Index" asp-controller="Home">KICKSWARE</a>
 		</div>
 		<div class="copyright">
 			Copyright &copy; @Convert.ToString(DateTime.Today.Year) All rights reserved

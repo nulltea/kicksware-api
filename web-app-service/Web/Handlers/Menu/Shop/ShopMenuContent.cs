@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Core.Extension;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -17,12 +18,7 @@ namespace Web.Handlers.Menu
 	{
 		public override IHtmlContent Render(IHtmlHelper html)
 		{
-			//var expandableItem = new TagBuilder("li");
-			//expandableItem.AddCssClass("expandable");
-			//expandableItem.Attributes["id"] = $"{Caption.ToLower()}-models";
-
-			//var link = html.ActionLink(Caption, Action, Controller, RouteValues);
-			//expandableItem.InnerHtml.AppendHtml(link);
+			FillMissingAttributes();
 
 			var subPanel = new TagBuilder("div");
 			subPanel.AddCssClass("sub-panel");
@@ -49,11 +45,13 @@ namespace Web.Handlers.Menu
 	{
 		public override IHtmlContent Render(IHtmlHelper html)
 		{
+			FillMissingAttributes();
+
 			var expandableItem = new TagBuilder("li");
 			expandableItem.AddCssClass("expandable");
 			expandableItem.Attributes["id"] = $"{Caption.ToLower()}-models";
 
-			var link = html.ActionLink(Caption.ToUpper(), Action, Controller, RouteValues);
+			var link = html.ActionLink(Caption.ToUpper(), Action, Controller, new {brandID = RouteValues});
 			expandableItem.InnerHtml.AppendHtml(link);
 
 			if (InnerContent is null) return expandableItem;
@@ -80,6 +78,12 @@ namespace Web.Handlers.Menu
 
 			return expandableItem;
 		}
+
+		public override void FillMissingAttributes()
+		{
+			if (string.IsNullOrEmpty(RouteValues) && !string.IsNullOrEmpty(Caption)) RouteValues = Caption.ToFormattedID(" "); // TODO
+			base.FillMissingAttributes();
+		}
 	}
 
 	/// <div class="sub-group">
@@ -90,6 +94,8 @@ namespace Web.Handlers.Menu
 	{
 		public override IHtmlContent Render(IHtmlHelper html)
 		{
+			FillMissingAttributes();
+
 			var subGroup = new TagBuilder("div");
 			subGroup.AddCssClass("sub-group");
 
@@ -108,6 +114,16 @@ namespace Web.Handlers.Menu
 
 			return subGroup;
 		}
+
+		public override void FillMissingAttributes()
+		{
+			foreach (var sub in InnerContent)
+			{
+				if (string.IsNullOrEmpty(sub.Controller)) sub.Controller = Controller;
+				if (string.IsNullOrEmpty(sub.Action)) sub.Action = Action;
+				sub.ParentContent = ParentContent ?? this;
+			}
+		}
 	}
 
 	/// <div class="sub-item">
@@ -117,13 +133,38 @@ namespace Web.Handlers.Menu
 	{
 		public override IHtmlContent Render(IHtmlHelper html)
 		{
+			FillMissingAttributes();
+
 			var subItem = new TagBuilder("div");
 			subItem.AddCssClass("sub-item");
 
-			var link = html.ActionLink(Caption, Action, Controller, RouteValues);
+			object routeValues = new {modelID = RouteValues};
+
+			if (Action == "Brand")
+			{
+				routeValues = new {brandID = RouteValues};
+			}
+
+			var link = html.ActionLink(Caption, Action, Controller, routeValues);
 			subItem.InnerHtml.AppendHtml(link);
 
 			return subItem;
 		}
+
+		public override void FillMissingAttributes()
+		{
+			if (string.IsNullOrEmpty(RouteValues) && !string.IsNullOrEmpty(Caption))
+			{
+				if (!string.IsNullOrEmpty(ParentContent?.RouteValues))
+				{
+					RouteValues = string.Join("_", ParentContent?.RouteValues, Caption.ToFormattedID());
+					return;
+				}
+
+				RouteValues = Caption.ToFormattedID(Action == "Brand" ? " " : "-");
+			}
+		}
 	}
+
+
 }
