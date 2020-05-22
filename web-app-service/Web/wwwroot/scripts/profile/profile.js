@@ -57,7 +57,7 @@ function resetAlert(callback) {
 
 function favouriteInit(){
 	loading($(".product-cell"))
-	$(".favorite input[type=checkbox]").change(function () {
+	$(".product-cell .favorite input[type=checkbox]").change(function () {
 		let id = $(this).closest(".product-cell").attr("id")
 		let checked = $(this).is(":checked");
 		$.get(`/shop/${checked ? "like" : "unlike"}/${id}`);

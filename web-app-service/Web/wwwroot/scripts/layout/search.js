@@ -10,9 +10,11 @@
 			panel.toggleClass("active");
 			setTimeout(function () {
 				searchInput.focus();
+				$("body").css("overflow", "hidden");
 			}, 1200);
 		});
 		dismiss.on("click", function () {
+			$("body").css("overflow", "auto");
 			panel.toggleClass("active");
 		});
 		window.addEventListener("click", function (event) {
@@ -49,12 +51,35 @@ function submitSearch(actionUrl, prefix) {
 			return;
 		}
 		$(".search-results").html(response["content"]);
+		loadingSearch($(".result-cell"));
+		searchFavoriteInit();
 	})
 }
 
+
+function loadingSearch(items){
+	TweenMax.staggerFrom(items, 1, {
+		scale: 0.6,
+		opacity: 0,
+		delay: .1,
+		ease: Elastic.easeOut,
+		force3D: true,
+		clearProps: "all"
+	}, 0.05);
+}
+
+function searchFavoriteInit(){
+	$(".result-cell .favorite input[type=checkbox]").click(function () {
+		let id = $(this).closest(".result-cell").attr("id")
+		let checked = $(this).is(":checked");
+		$.get(`/shop/${checked ? "like" : "unlike"}/${id}`);
+	})
+}
 
 $(document).ready(function () {
 	searchPanelInit();
 
 	mainSearchInit();
+
+	searchFavoriteInit();
 });

@@ -15,53 +15,48 @@
 }
 
 <div class="sell">
-	<div class="container">
-		<div class="sell_form_container">
-			<div class="step-progress-panel">
-				<ul>
-					@if (steps != null)
-					{
-						foreach (var step in steps)
-						{
-							@step.RenderStep()
-						}
-					}
-				</ul>
-			</div>
-			@* TODO HERO PARALLAX *@
-			@* MAIN FORM *@
-			<form asp-action="@steps?.ActiveStep.Name" id="sell_form" class="sell_form" autocomplete="off" enctype="multipart/form-data">
-				<div class="container">
-					<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-					<div class="row page_title"> @steps?.ActiveStep.Name.ToUpper()</div>
-					<div class="row">
-						@RenderBody()
-						@if (Model != null)
-						{
-							@foreach (var hidden in Html.HiddenForWizardStep(steps?.ActiveStep, model => model, ModelExpressionProvider))
-							{
-								@hidden
-							}
-						}
-					</div>
-					<div class="form-actions">
-						@if (steps != null)
-						{
-							var start = steps.ActiveStep.PreviousStep is null;
-							var finish = steps.ActiveStep.NextStep is null;
-							@if (!start)
-							{
-								<button type="submit" class="button cancel prev" CausesValidation="False" name="rollback" value="True">
-									<span>@steps.ActiveStep.PreviousStep!.Name.ToUpper()</span>@Html.VectorIconRender("arrow.svg")</button>
-							}
-							<button type="submit" class="button next">
-								<span>@(finish ? "SUBMIT" : steps.ActiveStep.NextStep?.Name.ToUpper())</span>@Html.VectorIconRender(finish ? "upload.svg" : "arrow.svg")</button>
-						}
-					</div>
-				</div>
-			</form>
-		</div>
+	<div class="step-progress-panel">
+		<ul>
+			@if (steps != null)
+			{
+				foreach (var step in steps)
+				{
+					@step.RenderStep()
+				}
+			}
+		</ul>
 	</div>
+	<div class="step-content">
+		<form asp-action="@steps?.ActiveStep.Name" class="sell-form" autocomplete="off" enctype="multipart/form-data">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="page_title">@steps?.ActiveStep.Name.ToUpper()</div>
+			@RenderBody()
+			@if (Model != null)
+			{
+				@foreach (var hidden in Html.HiddenForWizardStep(steps?.ActiveStep, model => model, ModelExpressionProvider))
+				{
+					@hidden
+				}
+			}
+			<div class="form-actions">
+				@if (steps != null)
+				{
+					var start = steps.ActiveStep.PreviousStep is null;
+					var finish = steps.ActiveStep.NextStep is null;
+					@if (!start)
+					{
+						<button type="submit" class="button cancel prev" CausesValidation="False" name="rollback" value="True">
+							<span>@steps.ActiveStep.PreviousStep!.Name.ToUpper()</span>@Html.VectorIconRender("arrow.svg")
+						</button>
+					}
+					<button type="submit" class="button next">
+						<span>@(finish ? "SUBMIT" : steps.ActiveStep.NextStep?.Name.ToUpper())</span>@Html.VectorIconRender(finish ? "upload.svg" : "arrow.svg")
+					</button>
+				}
+			</div>
+		</form>
+	</div>
+
 </div>
 
 @section Scripts

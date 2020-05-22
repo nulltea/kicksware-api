@@ -1,11 +1,14 @@
 package service
 
-import "search-service/core/model"
+import (
+	"search-service/core/meta"
+	"search-service/core/model"
+)
 
 type ReferenceSearchService interface {
-	Search(query string) ([]*model.SneakerReference, error)
-	SearchBy(field, query string) ([]*model.SneakerReference, error)
-	SearchSKU(sku string) ([]*model.SneakerReference, error)
-	SearchBrand(brand string) ([]*model.SneakerReference, error)
-	SearchModel(model string) ([]*model.SneakerReference, error)
+	Search(query string, params meta.RequestParams) ([]*model.SneakerReference, error)
+	SearchBy(field, query string, params meta.RequestParams) ([]*model.SneakerReference, error)
+	SearchSKU(sku string, params meta.RequestParams) ([]*model.SneakerReference, error)
+	SearchBrand(brand string, params meta.RequestParams) ([]*model.SneakerReference, error)
+	SearchModel(model string, params meta.RequestParams) ([]*model.SneakerReference, error)
 }

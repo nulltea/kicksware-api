@@ -8,7 +8,7 @@ import (
 )
 
 func ProvideReferenceSearchService(config env.ServiceConfig) service.ReferenceSearchService {
-	return business.NewReferenceSearchService(config.Elastic)
+	return business.NewReferenceSearchService(config.Elastic, config.Search)
 }
 
 func ProvideReferenceSyncService(pipe pipe.SneakerReferencePipe, config env.ServiceConfig) service.ReferenceSyncService {

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Entities.References;
+using Core.Gateway;
 
 namespace Core.Services
 {
@@ -8,21 +9,21 @@ namespace Core.Services
 	{
 		#region Sync
 
-		List<SneakerReference> SearchSKU(string skuQuery);
+		List<SneakerReference> SearchSKU(string skuQuery, RequestParams requestParams = default);
 
-		List<SneakerReference> SearchBrand(string brandQuery);
+		List<SneakerReference> SearchBrand(string brandQuery, RequestParams requestParams = default);
 
-		List<SneakerReference> SearchModel(string modelQuery);
+		List<SneakerReference> SearchModel(string modelQuery, RequestParams requestParams = default);
 
 		#endregion
 
 		#region Async
 
-		Task<List<SneakerReference>> SearchAsyncSKU(string skuQuery);
+		Task<List<SneakerReference>> SearchAsyncSKU(string skuQuery, RequestParams requestParams = default);
 
-		Task<List<SneakerReference>> SearchAsyncBrand(string brandQuery);
+		Task<List<SneakerReference>> SearchAsyncBrand(string brandQuery, RequestParams requestParams = default);
 
-		Task<List<SneakerReference>> SearchAsyncModel(string modelQuery);
+		Task<List<SneakerReference>> SearchAsyncModel(string modelQuery, RequestParams requestParams = default);
 
 		#endregion
 	}

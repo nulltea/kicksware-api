@@ -31,10 +31,11 @@ namespace Web.Utils.Helpers
 			{
 				if (value is IList list && value.GetType().IsGenericType)
 				{
-					foreach (var valueItem in list)
+					for (var index = 0; index < list.Count; index++)
 					{
-						yield return helper.Hidden(property, valueItem);
+						yield return helper.Hidden($"{property}[{index}]", list[index]);
 					}
+
 					continue;
 				}
 				yield return helper.Hidden(property, value);

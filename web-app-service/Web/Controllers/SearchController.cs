@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Core.Entities.References;
+using Core.Gateway;
 using Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using Web.Models;
@@ -15,7 +15,7 @@ namespace Web.Controllers
 		[HttpGet]
 		public async Task<JsonResult> Search([FromServices] IReferenceSearchService service, [FromQuery] string prefix)
 		{
-			var results = service.Search(prefix);
+			var results = service.Search(prefix, new RequestParams{Limit = 12});
 			return Json(new
 			{
 				Success = true,

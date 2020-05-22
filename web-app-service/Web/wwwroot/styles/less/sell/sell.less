@@ -30,108 +30,109 @@
 		margin-left: 14px;
 	}
 
-	.sell_form_container {
-		width: 100%;
 
-		.step-progress-panel {
+	.step-progress-panel {
+		display: flex;
+		justify-content: center;
+		height: 80px;
+		margin: 10px 400px;
+
+		ul {
+			width: 90%;
+			height: inherit;
 			display: flex;
-			justify-content: center;
-			height: 80px;
-			margin-bottom: 60px;
-
-			ul {
-				width: 90%;
-				height: inherit;
-				display: flex;
-				justify-content: space-evenly;
-			}
-
-			li {
-				display: flex;
-				align-items: center;
-			}
-
-			li.active span,
-			li.passed span {
-				.with-theme({
-					background: @secondary;
-				});
-				cursor: pointer;
-			}
-
-			li svg {
-				.with-theme({
-					fill: @secondary;
-				});
-			}
-
-			li.active svg,
-			li.passed svg {
-				.with-theme({
-					fill: @primary;
-				});
-			}
-
-			li:not(:last-child) {
-				flex: 1;
-			}
-
-			li:not(:last-child):after {
-				content: "";
-				.with-theme({
-					background: @primary;
-					outline: 3px solid @secondary;
-					box-shadow: 3px 5px 6px 0 fade(@elevation, 40%);
-				});
-
-				height: 3px;
-				width: calc(~"100% - 50px");
-			}
-
-			li.passed:after {
-				.with-theme({
-					background: @secondary;
-				});
-			}
-
-			span {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				width: 50px;
-				height: 50px;
-				border-radius: 50%;
-				.with-theme({
-					background: @primary;
-					border: 3px solid @secondary;
-					box-shadow: 3px 3px 9px -1px fade(@elevation, 30%);
-				});
-			}
-
-			svg {
-				width: 25px;
-				height: 25px;
-			}
+			justify-content: space-evenly;
 		}
-		form {
-			border-radius: 10px;
-			padding: 20px 40px;
+
+		li {
+			display: flex;
+			align-items: center;
+		}
+
+		li.active span,
+		li.passed span {
+			.with-theme({
+				background: @secondary;
+			});
+			cursor: pointer;
+		}
+
+		li svg {
+			.with-theme({
+				fill: @secondary;
+			});
+		}
+
+		li.active svg,
+		li.passed svg {
+			.with-theme({
+				fill: @primary;
+			});
+		}
+
+		li:not(:last-child) {
+			flex: 1;
+		}
+
+		li:not(:last-child):after {
+			content: "";
 			.with-theme({
 				background: @primary;
-				.elevation(6, @elevation);
+				outline: 3px solid @secondary;
+				box-shadow: 3px 5px 6px 0 fade(@elevation, 40%);
 			});
 
-			> div:not(:last-child) {
-				margin-bottom: 14px;
-			}
+			height: 3px;
+			width: calc(~"100% - 50px");
+		}
 
-			label {
-				font-size: 14px;
-				font-weight: 500;
-				.with-theme({
-					color: @passive;
-				});
-			}
+		li.passed:after {
+			.with-theme({
+				background: @secondary;
+			});
+		}
+
+		span {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			.with-theme({
+				background: @primary;
+				border: 3px solid @secondary;
+				box-shadow: 3px 3px 9px -1px fade(@elevation, 30%);
+			});
+		}
+
+		svg {
+			width: 25px;
+			height: 25px;
+		}
+	}
+
+	.step-content {
+		margin: 50px 100px;
+		padding: 20px 40px;
+		border-radius: 10px;
+		.with-theme({
+			background: @primary;
+			.elevation(6, @elevation);
+		});
+	}
+
+	.sell-form {
+		& > div:not(:last-child) {
+			margin-bottom: 14px;
+		}
+
+		label {
+			font-size: 14px;
+			font-weight: 500;
+			.with-theme({
+				color: @passive;
+			});
 		}
 	}
 

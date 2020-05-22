@@ -116,7 +116,7 @@ function createButton(model) {
 
 	//custom submit action handler
 	$(submitButton).click(function (event) {
-		$.post($("#sell_form").attr("action"), model, function(response) {
+		$.post($(".sell-form").attr("action"), model, function(response) {
 			window.location.href = response.redirectUrl;
 		});
 		event.preventDefault();

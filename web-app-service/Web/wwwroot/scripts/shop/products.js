@@ -328,7 +328,7 @@ function loading(items){
 }
 
 function favoriteInit(){
-	$(".favorite input[type=checkbox]").change(function () {
+	$(".product-cell .favorite input[type=checkbox]").off("change").change(function () {
 		let id = $(this).closest(".product-cell").attr("id")
 		let checked = $(this).is(":checked");
 		$.get(`/shop/${checked ? "like" : "unlike"}/${id}`);

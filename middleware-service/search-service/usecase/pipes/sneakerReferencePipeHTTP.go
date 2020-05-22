@@ -5,32 +5,48 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"net/url"
 	"strconv"
 	"strings"
 
 	"github.com/fatih/structs"
+	"github.com/pkg/errors"
 
 	"search-service/core/meta"
 	"search-service/core/model"
 	"search-service/core/pipe"
+	"search-service/core/service"
 	"search-service/env"
 )
 
 type referencePipe struct {
+	client               http.Client
+	auth                 service.AuthService
 	contentType          string
 	bindingServiceFormat string
 	bindingServiceName   string
 }
 
-func NewSneakerReferencePipe(config env.CommonConfig) pipe.SneakerReferencePipe {
+func NewSneakerReferencePipe(auth service.AuthService, config env.CommonConfig) pipe.SneakerReferencePipe {
 	return &referencePipe{
+		http.Client{},
+		auth,
 		config.ContentType,
 		config.InnerServiceFormat,
 		"references-service",
 	}
 }
+
+func (p *referencePipe) authenticate() (string, error) {
+	token, err := p.auth.Authenticate(); if err != nil {
+		log.Fatalln(errors.Wrap(err, "search-service::startup.InnerServiceAuth: authenticate failed"))
+		return "", err
+	}
+	return token, nil
+}
+
 
 func (p *referencePipe) FetchOne(code string) (ref *model.SneakerReference, err error) {
 	err = p.getFromDataService(p.requestResource("/", code), ref)
@@ -56,7 +72,7 @@ func (p *referencePipe) FetchAll(params meta.RequestParams) (refs []*model.Sneak
 		err = p.getFromDataService(p.requestResource("?", paramValues.Encode()), &refs)
 		return
 	}
-	err = p.getFromDataService(p.requestResource("/"), refs)
+	err = p.getFromDataService(p.requestResource("/"), &refs)
 	return
 }
 
@@ -70,7 +86,14 @@ func (p *referencePipe) FetchQuery(query meta.RequestQuery, params meta.RequestP
 }
 
 func (p *referencePipe) getFromDataService(service string, target interface{}) error {
-	resp, err := http.Get(service); if err != nil {
+	req, err := http.NewRequest("GET", service, nil); if err != nil {
+		return err
+	}
+	token, err := p.authenticate(); if err != nil {
+		return err
+	}
+	req.Header.Set("Authorization", token)
+	resp, err := p.client.Do(req); if err != nil {
 		return err
 	}
 	defer resp.Body.Close()
@@ -89,8 +112,15 @@ func (p *referencePipe) postOnDataService(service string, query interface{}) (re
 	body, err := json.Marshal(query); if err != nil {
 		return
 	}
-	resp, err := http.Post(service, p.contentType, bytes.NewBuffer(body))
-	if err != nil {
+	req, err := http.NewRequest("POST", service, bytes.NewBuffer(body)); if err != nil {
+		return nil, err
+	}
+	token, err := p.authenticate(); if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Authorization", token)
+	req.Header.Set("Content-Type", p.contentType)
+	resp, err := p.client.Do(req); if err != nil {
 		return
 	}
 	defer resp.Body.Close()
@@ -140,4 +170,3 @@ func requestParamValues(params meta.RequestParams) url.Values {
 	}
 	return values
 }
-

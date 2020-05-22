@@ -9,6 +9,7 @@
 	await Html.RenderPartialAsync("Header/_SearchNoResultsPartial");
 	return;
 }
+<div class="results-view grid">
 @foreach (var result in Model)
 {
 	if (result == null)
@@ -16,7 +17,7 @@
 		continue;
 	}
 	var price = result.Price != 0m ? $"${result.Price}" : string.Empty;
-	<div class="product-cell" id="@result.UniqueID">
+	<div class="result-cell" id="@result.UniqueID">
 		<div class="info-header">
 			<div class="price">@price</div>
 		</div>
@@ -48,3 +49,4 @@
 		</div>
 	</div>
 }
+</div>

@@ -319,7 +319,7 @@
 	}
 }
 
-.product-item {
+.product-item, .preview-content {
 	width: 100%;
 	background: transparent;
 	z-index: 2;
@@ -355,9 +355,12 @@
 		}
 
 		section.product-header {
+
 			.product-gallery{
 				padding: 20px;
+
 				.image-carousel{
+					min-height: 300px;
 					max-height: 500px;
 					overflow-y: auto;
 
@@ -399,6 +402,15 @@
 						input[type=checkbox] {
 							z-index: 1;
 						}
+					}
+
+					.price-title {
+						font-size: 18px;
+						font-weight: 400;
+						letter-spacing: 3px;
+						.with-theme({
+							color: fade(@secondary, 80%);
+						})
 					}
 				}
 

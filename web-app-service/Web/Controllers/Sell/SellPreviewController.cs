@@ -19,8 +19,10 @@ namespace Web.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult Preview([FromServices] ISneakerProductService service, [FromForm] SneakerProductViewModel model)
+		public ActionResult Preview([FromServices] ISneakerProductService service, [FromForm] SneakerProductViewModel model, bool rollback)
 		{
+			if (rollback) return SetShipping(model);
+
 			var sneakerProduct = model as SneakerProduct;
 			var response = service.Store(sneakerProduct);
 

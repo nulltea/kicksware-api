@@ -16,29 +16,50 @@ namespace Infrastructure.Usecase
 
 		#region Sync
 
-		public List<SneakerReference> Search(string query) =>_client.Request<List<SneakerReference>>(new SearchReferenceRequest(query));
+		public List<SneakerReference> Search(string query, RequestParams requestParams = default) =>
+			_client.Request<List<SneakerReference>>(new SearchReferenceRequest(query) {RequestParams = requestParams});
 
-		public List<SneakerReference> SearchBy(string field, object query) => _client.Request<List<SneakerReference>>(new SearchReferenceByRequest(field, query));
+		public List<SneakerReference> SearchBy(string field, object query, RequestParams requestParams = default) =>
+			_client.Request<List<SneakerReference>>(
+				new SearchReferenceByRequest(field, query) {RequestParams = requestParams});
 
-		public List<SneakerReference> SearchSKU(string skuQuery) => _client.Request<List<SneakerReference>>(new SearchReferenceBySKU(skuQuery));
+		public List<SneakerReference> SearchSKU(string skuQuery, RequestParams requestParams = default) =>
+			_client.Request<List<SneakerReference>>(new SearchReferenceBySKU(skuQuery) {RequestParams = requestParams});
 
-		public List<SneakerReference> SearchBrand(string brandQuery) => _client.Request<List<SneakerReference>>(new SearchReferenceByBrandRequest(brandQuery));
+		public List<SneakerReference> SearchBrand(string brandQuery, RequestParams requestParams = default) =>
+			_client.Request<List<SneakerReference>>(
+				new SearchReferenceByBrandRequest(brandQuery) {RequestParams = requestParams});
 
-		public List<SneakerReference> SearchModel(string modelQuery) => _client.Request<List<SneakerReference>>(new SearchReferenceByModelRequest(modelQuery));
+		public List<SneakerReference> SearchModel(string modelQuery, RequestParams requestParams = default) =>
+			_client.Request<List<SneakerReference>>(
+				new SearchReferenceByModelRequest(modelQuery) {RequestParams = requestParams});
 
 		#endregion
 
 		#region Async
 
-		public Task<List<SneakerReference>> SearchAsync(string query) => _client.RequestAsync<List<SneakerReference>>(new SearchReferenceRequest(query));
+		public Task<List<SneakerReference>> SearchAsync(string query, RequestParams requestParams = default) =>
+			_client.RequestAsync<List<SneakerReference>>(
+				new SearchReferenceRequest(query) {RequestParams = requestParams});
 
-		public Task<List<SneakerReference>> SearchAsyncBy(string field, object query) => _client.RequestAsync<List<SneakerReference>>(new SearchReferenceByRequest(field, query));
+		public Task<List<SneakerReference>>
+			SearchAsyncBy(string field, object query, RequestParams requestParams = default) =>
+			_client.RequestAsync<List<SneakerReference>>(
+				new SearchReferenceByRequest(field, query) {RequestParams = requestParams});
 
-		public Task<List<SneakerReference>> SearchAsyncSKU(string skuQuery) => _client.RequestAsync<List<SneakerReference>>(new SearchReferenceBySKU(skuQuery));
+		public Task<List<SneakerReference>> SearchAsyncSKU(string skuQuery, RequestParams requestParams = default) =>
+			_client.RequestAsync<List<SneakerReference>>(
+				new SearchReferenceBySKU(skuQuery) {RequestParams = requestParams});
 
-		public Task<List<SneakerReference>> SearchAsyncBrand(string brandQuery) => _client.RequestAsync<List<SneakerReference>>(new SearchReferenceByBrandRequest(brandQuery));
+		public Task<List<SneakerReference>>
+			SearchAsyncBrand(string brandQuery, RequestParams requestParams = default) =>
+			_client.RequestAsync<List<SneakerReference>>(
+				new SearchReferenceByBrandRequest(brandQuery) {RequestParams = requestParams});
 
-		public Task<List<SneakerReference>> SearchAsyncModel(string modelQuery) => _client.RequestAsync<List<SneakerReference>>(new SearchReferenceByModelRequest(modelQuery));
+		public Task<List<SneakerReference>>
+			SearchAsyncModel(string modelQuery, RequestParams requestParams = default) =>
+			_client.RequestAsync<List<SneakerReference>>(
+				new SearchReferenceByModelRequest(modelQuery) {RequestParams = requestParams});
 
 		#endregion
 	}

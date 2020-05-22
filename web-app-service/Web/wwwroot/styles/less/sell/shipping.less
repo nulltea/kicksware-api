@@ -5,19 +5,31 @@
 @import "../mixins/mixins";
 
 .sell {
+	.shipping-content {
+		display: grid;
+		grid-auto-flow: row;
+		grid-template-columns: repeat(2, 1fr);
+		grid-gap: 15px 15px;
+	}
+
 	.shipping-row {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		padding: 15px;
+		margin: 10px 10px;
 		.with-theme({
+			background: @hint;
+			.elevation(3);
 			border-bottom: 3px solid @secondary;
 		});
 
 		span {
+			font-size: 20px;
+			font-weight: 600;
 			.with-theme({
 				color: @secondary;
 			});
-			font-weight: 600;
 		}
 
 		.shipping-info {

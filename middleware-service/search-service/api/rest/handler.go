@@ -50,7 +50,9 @@ func NewHandler(search service.ReferenceSearchService, sync service.ReferenceSyn
 
 func (h *handler) Get(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()["query"][0]
-	ref, err := h.search.Search(query)
+	params := NewRequestParams(r)
+
+	ref, err := h.search.Search(query, params)
 	if err != nil {
 		if errors.Cause(err) == business.ErrReferenceNotFound {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
@@ -65,7 +67,9 @@ func (h *handler) Get(w http.ResponseWriter, r *http.Request) {
 func (h *handler) GetBy(w http.ResponseWriter, r *http.Request) {
 	field := chi.URLParam(r,"field")
 	query := r.URL.Query()["query"][0]
-	refs, err := h.search.SearchBy(field, query)
+	params := NewRequestParams(r)
+
+	refs, err := h.search.SearchBy(field, query, params)
 	if err != nil {
 		if errors.Cause(err) == business.ErrReferenceNotFound {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
@@ -79,7 +83,9 @@ func (h *handler) GetBy(w http.ResponseWriter, r *http.Request) {
 
 func (h *handler) GetSKU(w http.ResponseWriter, r *http.Request) {
 	sku := chi.URLParam(r, "sku")
-	refs, err := h.search.SearchSKU(sku)
+	params := NewRequestParams(r)
+
+	refs, err := h.search.SearchSKU(sku, params)
 	if err != nil {
 		if errors.Cause(err) == business.ErrReferenceNotFound {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
@@ -93,7 +99,9 @@ func (h *handler) GetSKU(w http.ResponseWriter, r *http.Request) {
 
 func (h *handler) GetBrand(w http.ResponseWriter, r *http.Request) {
 	brand := chi.URLParam(r, "brand")
-	refs, err := h.search.SearchBrand(brand)
+	params := NewRequestParams(r)
+
+	refs, err := h.search.SearchBrand(brand, params)
 	if err != nil {
 		if errors.Cause(err) == business.ErrReferenceNotFound {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
@@ -107,7 +115,9 @@ func (h *handler) GetBrand(w http.ResponseWriter, r *http.Request) {
 
 func (h *handler) GetModel(w http.ResponseWriter, r *http.Request) {
 	model := chi.URLParam(r, "model")
-	refs, err := h.search.SearchModel(model)
+	params := NewRequestParams(r)
+
+	refs, err := h.search.SearchModel(model, params)
 	if err != nil {
 		if errors.Cause(err) == business.ErrReferenceNotFound {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)

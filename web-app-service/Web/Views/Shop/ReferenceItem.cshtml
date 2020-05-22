@@ -4,7 +4,6 @@
 @{
 	ViewBag.Title = Model.ModelName;
 	Layout = "~/Views/Shared/_Layout.cshtml";
-	//var images = Model.Photos.Select(image => "/files/" + image).ToList();
 	var relatedReferences = ViewBag.RelatedReferences as List<SneakerReference>;
 }
 
@@ -36,7 +35,7 @@
 				<div class="title-header">
 
 					<div class="favorite-product">
-						<input type="checkbox"/>
+						<input type="checkbox" @(Model.Liked ? "checked" : "")/>
 						@Html.VectorIconRender("favorite.svg")
 					</div>
 				</div>
@@ -117,7 +116,7 @@
 			</div>
 		</section>
 
-		@if (!string.IsNullOrEmpty(@Model.Description))
+		@if (!string.IsNullOrEmpty(Model.Description))
 		{
 			<section class="row product-description elevated">
 				<h3 class="description_title">DESCRIPTION</h3>
@@ -153,7 +152,7 @@
 									</a>
 								</div>
 								<div class="favorite-product">
-									<input type="checkbox"/>
+									<input type="checkbox" @(reference.Liked ? "checked" : "")/>
 									@Html.VectorIconRender("favorite.svg")
 								</div>
 							</div>

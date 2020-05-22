@@ -19,9 +19,7 @@ namespace Web.Controllers
 		[HttpPost]
 		public ActionResult Details(SneakerProductViewModel model, bool rollback)
 		{
-			if (rollback) return RedirectToAction("NewProduct");
-
-			return SetPhotos(model);
+			return rollback ? RedirectToAction("NewProduct") : SetPhotos(model);
 		}
 	}
 }

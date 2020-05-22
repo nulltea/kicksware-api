@@ -1,79 +1,75 @@
 ﻿@{
-    ViewBag.Title = "Contact";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "Contact";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section Styles
 {
-    <link href="~/styles/css/contact/contact.css" rel="stylesheet" />
-    <link href="~/styles/css/responsive/contact.responsive.css" rel="stylesheet" />
+	<link href="~/styles/css/contact/contact.css" rel="stylesheet"/>
+	<link href="~/styles/css/responsive/contact.responsive.css" rel="stylesheet"/>
 }
 
 <div class="contact">
-    <div class="container">
-        <div class="row">
-            <!-- Get in touch -->
-            <div class="col-lg-8 contact_col">
-                <div class="section_title">Get in Touch</div>
-                <div class="section_subtitle">Say hello</div>
-                <div class="contact_form_container">
-                    <form action="#" id="contact_form" class="contact_form">
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <!-- Name -->
-                                <label for="contact_name">First Name*</label>
-                                <input type="text" id="contact_name" class="contact_input" required="required">
-                            </div>
-                            <div class="col-xl-6 last_name_col">
-                                <!-- Last Name -->
-                                <label for="contact_last_name">Last Name*</label>
-                                <input type="text" id="contact_last_name" class="contact_input" required="required">
-                            </div>
-                        </div>
-                        <div>
-                            <!-- Subject -->
-                            <label for="contact_company">Subject</label>
-                            <input type="text" id="contact_company" class="contact_input">
-                        </div>
-                        <div>
-                            <label for="contact_textarea">Message*</label>
-                            <textarea id="contact_textarea" class="contact_input contact_textarea" required="required"></textarea>
-                        </div>
-                        <div class="button contact_button"><a asp-action="Contact">Send Message</a></div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Contact Info -->
-            <div class="col-lg-3 offset-xl-1 contact_col">
-                <div class="contact_info">
-                    <div class="contact_info_section">
-                        <div class="contact_info_title">Marketing</div>
-                        <ul>
-                            <li>Phone: <span>+53 345 7953 3245</span></li>
-                            <li>Email: <span>yourmail@gmail.com</span></li>
-                        </ul>
-                    </div>
-                    <div class="contact_info_section">
-                        <div class="contact_info_title">Shipping & Returns</div>
-                        <ul>
-                            <li>Phone: <span>+53 345 7953 3245</span></li>
-                            <li>Email: <span>yourmail@gmail.com</span></li>
-                        </ul>
-                    </div>
-                    <div class="contact_info_section">
-                        <div class="contact_info_title">Information</div>
-                        <ul>
-                            <li>Phone: <span>+53 345 7953 3245</span></li>
-                            <li>Email: <span>yourmail@gmail.com</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="contact-content">
+		<div class="contact-form">
+			<div class="section_title">Get in Touch</div>
+			<form action="#">
+				<div class="row">
+					<div class="col-xl-6">
+						<!-- Name -->
+						<label for="contact_name">First Name*</label>
+						<input type="text" id="contact_name" class="contact_input" required="required">
+					</div>
+					<div class="col-xl-6 last_name_col">
+						<!-- Last Name -->
+						<label for="contact_last_name">Last Name*</label>
+						<input type="text" id="contact_last_name" class="contact_input" required="required">
+					</div>
+				</div>
+				<div>
+					<!-- Subject -->
+					<label for="contact_company">Subject</label>
+					<input type="text" id="contact_company" class="contact_input">
+				</div>
+				<div>
+					<label for="contact_textarea">Message*</label>
+					<textarea id="contact_textarea" class="contact_input contact_textarea" required="required"></textarea>
+				</div>
+				<div class="button contact_button">
+					<a asp-action="Contact">Send Message</a>
+				</div>
+			</form>
+		</div>
+		<div class="contact-map" id="map">
+		</div>
+		<div class="contact-info">
+			<div class="contact_info_section">
+				<div class="contact_info_title">Marketing</div>
+				<ul>
+					<li>Phone: <span>+53 345 7953 3245</span></li>
+					<li>Email: <span>yourmail@gmail.com</span></li>
+				</ul>
+			</div>
+			<div class="contact_info_section">
+				<div class="contact_info_title">Shipping & Returns</div>
+				<ul>
+					<li>Phone: <span>+53 345 7953 3245</span></li>
+					<li>Email: <span>yourmail@gmail.com</span></li>
+				</ul>
+			</div>
+			<div class="contact_info_section">
+				<div class="contact_info_title">Information</div>
+				<ul>
+					<li>Phone: <span>+53 345 7953 3245</span></li>
+					<li>Email: <span>yourmail@gmail.com</span></li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </div>
 
 @section Scripts
 {
+	<script src="~/scripts/contact/contact.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1yXB0hjLko7lWNASurCfV_4DA1eWB2v8&callback=mapInit"></script>
 }

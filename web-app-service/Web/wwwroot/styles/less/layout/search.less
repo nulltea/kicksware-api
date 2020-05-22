@@ -7,7 +7,7 @@
 
 .search-panel {
 	position: absolute;
-	width: 100vw;
+	width: calc(~"100vw + 6px");
 	height: 110px;
 	padding-left: inherit;
 	padding-right: inherit;
@@ -50,6 +50,7 @@
 		.with-theme({
 			background: @hint;
 		});
+		z-index: 50;
 
 		form {
 			position: absolute;
@@ -114,13 +115,18 @@
 	}
 
 	.search-results {
-		width: inherit;
+		height: calc(~"100vh - 110px");
+		width: 100vw;
+		margin: 0 -100px;
+		padding: 30px 100px;
+		overflow-y: ~"overlay";
+	}
+
+	.results-view {
 		display: grid;
 		grid-auto-rows: 1fr;
 		grid-gap: 15px;
-		margin-top: 30px;
 		.transition-properties(all 500ms cubic-bezier(.155,1.105,.295,1.12));
-
 
 		&.changing {
 			margin-top: 80%;
@@ -187,7 +193,7 @@
 			}
 		}
 
-		.product-cell {
+		.result-cell {
 			display: flex;
 			flex-direction: column;
 			justify-content: space-between;

@@ -1,4 +1,5 @@
 ﻿using Core.Entities.References;
+using Core.Gateway;
 using Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using SmartBreadcrumbs.Attributes;
@@ -14,7 +15,7 @@ namespace Web.Controllers
 		[Breadcrumb("Sell", FromAction = "Index", FromController = typeof(HomeController))]
 		public JsonResult SearchAuto([FromServices] IReferenceSearchService service, [FromQuery] string prefix)
 		{
-			var references = service.Search(prefix);
+			var references = service.Search(prefix, new RequestParams{Limit = 12});
 			return Json(references);
 		}
 

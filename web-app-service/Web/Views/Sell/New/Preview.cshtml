@@ -1,5 +1,4 @@
-﻿@using Core.Reference
-@using Web.Data.Catalog
+﻿@using Core.Constants
 @model SneakerProductViewModel
 
 @{
@@ -10,45 +9,96 @@
 @section Styles
 {
 	<link rel="stylesheet" type="text/css" href="~/styles/css/sell/preview.css"/>
+	<link rel="stylesheet" type="text/css" href="~/styles/css/shop/product-item.css"/>
+	<link href="~/styles/css/responsive/product-item.responsive.css" rel="stylesheet"/>
+	<link href="~/plugins/flickity/flickity.css" rel="stylesheet"/>
 }
 
-<div class="container search-content">
-	<div class="row">
-		<div class="col-sm">
-			<div class="product-gallery">
-				@foreach (var image in Model.Photos)
-				{
-					<div class="product-gallery-image">
-						<img src="@image" itemprop="image" alt="@Model.ModelName" title="@Model.ModelName">
-					</div>
-				}
+<div class="preview-content">
+	<div class="product-content">
+		<section class="row product-header elevated">
+			<div class="col-sm product-gallery">
+				<div class="image-carousel">
+					@foreach (var image in Model.Photos)
+					{
+						var imageLink = System.IO.Path.GetRelativePath(Constants.WebRootPath, image);
+						<picture>
+							<source srcset="\@imageLink" media="(min-width: 600px)">
+							<img src="\@imageLink" alt="">
+						</picture>
+					}
+				</div>
 			</div>
-		</div>
-		<div class="col-sm">
-			<div class="product-info">
-				@foreach (var image in Model.Photos)
-				{
-					<div class="product-top">
-						<span class="brand-title">@Model.BrandName</span>
-						<span class="model-title">@Model.ModelName</span>
-						<span class="color-title">@Model.Color</span>
-						<span class="color-title">@Model.Size</span>
-					</div>
-					<div class="product-details">
-						<span class="brand-title">@Model.Description</span>
-						<span class="model-title">@Model.Condition</span>
-						<span class="color-title">@Model.ModelSKU</span>
-					</div>
-					<div class="product-price">
-						<span>@Model.Price</span>
-					</div>
-				}
+
+			<!-- Reference Content -->
+			<div class="col-sm product-title">
+				<div class="title-header">
+					<div class="price-title">@Html.DisplayFor(model => Model.Price)</div>
+				</div>
+				<div class="title-body">
+					<div class="brand-title">@Html.DisplayFor(model => Model.BrandName)</div>
+					<div class="model-title">@Html.DisplayFor(model => Model.ModelName)</div>
+
+					<div class="sku-title">SKU: @Html.DisplayFor(model => Model.ModelSKU)</div>
+				</div>
+				<div class="title-footer">
+				</div>
 			</div>
-		</div>
+		</section>
+		<section class="row product-details carousel">
+			<h3 class="carousel-title">DETAILS</h3>
+			<div class="carousel-wrapper js-flickity" data-flickity-options='{ "wrapAround": true }'>
+				<div class="carousel-cell">
+					<div class="details-caption">BRAND</div>
+					<a class="underline details-info">@Model.BrandName</a>
+				</div>
+				<div class="carousel-cell">
+					<div class="details-caption">SKU</div>
+					<a class="underline details-info">@Model.ModelSKU</a>
+				</div>
+				<div class="carousel-cell">
+					<div class="details-caption">SIZE</div>
+					<a class="underline details-info">@Model.Size.ToString()</a>
+				</div>
+				<div class="carousel-cell">
+					<div class="details-caption">CONDITION</div>
+					<a class="underline details-info">@Model.Condition</a>
+				</div>
+				<div class="carousel-cell">
+					<div class="details-caption">COLORWAY</div>
+					<a class="underline details-info">@Model.Color</a>
+				</div>
+				<div class="carousel-cell">
+					<div class="details-caption">TYPE</div>
+					<a class="underline details-info">@Model.Type</a>
+				</div>
+				<div class="carousel-cell">
+					<div class="details-caption">DESIGNER</div>
+					<a class="underline details-info">@Model.BrandName</a>
+				</div>
+
+				<div class="carousel-cell">
+					<div class="details-caption">ADDED DATE</div>
+					<a class="underline details-info">@DateTime.Today.ToShortDateString()</a>
+				</div>
+			</div>
+		</section>
+
+		@if (!string.IsNullOrEmpty(Model.Description))
+		{
+			<section class="row product-description elevated">
+				<h3 class="description_title">DESCRIPTION</h3>
+				<div class="description-content">
+					@Model.Description
+				</div>
+			</section>
+		}
 	</div>
 </div>
 
 @section Scripts
 {
 	<script src="~/scripts/sell/preview.js"></script>
+	<script src="~/scripts/shop/productItem.js"></script>
+	<script src="~/plugins/flickity/flickity.min.js"></script>
 }

@@ -12,7 +12,7 @@
 				<button type="button" class="close-button"></button>
 			</form>
 		</div>
-		<div class="search-results grid">
+		<div class="search-results">
 			@{
 				await Html.RenderPartialAsync("Header/_SearchResultsPartial", new List<SearchResultViewModel>());
 			}

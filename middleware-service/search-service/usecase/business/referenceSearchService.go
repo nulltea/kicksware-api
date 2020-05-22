@@ -8,6 +8,7 @@ import (
 	"github.com/olivere/elastic/v7"
 	"github.com/pkg/errors"
 
+	"search-service/core/meta"
 	"search-service/core/model"
 	"search-service/core/service"
 	"search-service/env"
@@ -23,9 +24,10 @@ type referenceSearchService struct {
 	client             *elastic.Client
 	serializer         service.SneakerSearchSerializer
 	index              string
+	params 	           env.SearchConfig
 }
 
-func NewReferenceSearchService(config env.ElasticConfig) service.ReferenceSearchService {
+func NewReferenceSearchService(config env.ElasticConfig, params env.SearchConfig) service.ReferenceSearchService {
 	client, err := initElasticSearchClient(config); if err != nil {
 		log.Fatalln(err)
 		return nil
@@ -34,6 +36,7 @@ func NewReferenceSearchService(config env.ElasticConfig) service.ReferenceSearch
 		client,
 		json.NewSerializer(),
 		config.Index,
+		params,
 	}
 }
 
@@ -55,25 +58,34 @@ func initElasticSearchClient(config env.ElasticConfig) (*elastic.Client, error) 
 	return client, nil
 }
 
-func (s *referenceSearchService) Search(query string) ([]*model.SneakerReference, error) {
+func (s *referenceSearchService) Search(query string, params meta.RequestParams) ([]*model.SneakerReference, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	matchQuery := elastic.NewMultiMatchQuery(query)
+	matchQuery := elastic.NewMultiMatchQuery(query, s.params.Fields...).
+		Type(s.params.Type).
+		Slop(s.params.Slop)
+
+		sortBy := "Price"
+
+		if params != nil && len(params.SortBy()) != 0 {
+			sortBy = params.SortBy()
+		}
+
 	results, err := s.client.Search().
 		Index(s.index).
 		Query(matchQuery).
-		Sort("Price", false).
-		From(0).
-		Size(10).
+		Sort(sortBy, params.SortBy() == "asc").
+		From(params.Offset()).
+		Size(params.Limit()).
 		Do(ctx)
 
 	if err != nil {
 		return nil, errors.Wrap(err, "service.Search")
 	}
-	log.Printf(		"Query on %v took %d milliseconds\n found total %v",
-		query, results.TotalHits(), results.TookInMillis,
-	)
+	// log.Printf(		"Query on %v took %d milliseconds\n found total %v",
+	//		query, results.TotalHits(), results.TookInMillis,
+	// )
 
 	refs := make([]*model.SneakerReference, 0)
 	if results.TotalHits() < 0 {
@@ -87,7 +99,7 @@ func (s *referenceSearchService) Search(query string) ([]*model.SneakerReference
 	return refs, nil
 }
 
-func (s *referenceSearchService) SearchBy(field, value string) ([]*model.SneakerReference, error) {
+func (s *referenceSearchService) SearchBy(field, value string, params meta.RequestParams) ([]*model.SneakerReference, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
@@ -95,7 +107,9 @@ func (s *referenceSearchService) SearchBy(field, value string) ([]*model.Sneaker
 	results, err := s.client.Search().
 		Index(s.index).
 		Query(matchQuery).
-		Sort("Price", false).
+		Sort(params.SortBy(), params.SortBy() == "asc").
+		From(params.Offset()).
+		Size(params.Limit()).
 		Do(ctx)
 	if err != nil {
 		return nil, errors.Wrap(err, "service.searchBy")
@@ -117,22 +131,22 @@ func (s *referenceSearchService) SearchBy(field, value string) ([]*model.Sneaker
 	return refs, nil
 }
 
-func (s *referenceSearchService) SearchSKU(sku string) (refs []*model.SneakerReference, err error) {
-	if refs, err = s.SearchBy("ManufactureSku", sku); err != nil {
+func (s *referenceSearchService) SearchSKU(sku string, params meta.RequestParams) (refs []*model.SneakerReference, err error) {
+	if refs, err = s.SearchBy("ManufactureSku", sku, params); err != nil {
 		return nil, errors.Wrap(err, "service.SearchSKU")
 	}
 	return
 }
 
-func (s *referenceSearchService) SearchBrand(brand string) (refs []*model.SneakerReference, err error) {
-	if refs, err = s.SearchBy("BrandName", brand); err != nil {
+func (s *referenceSearchService) SearchBrand(brand string, params meta.RequestParams) (refs []*model.SneakerReference, err error) {
+	if refs, err = s.SearchBy("BrandName", brand, params); err != nil {
 		return nil, errors.Wrap(err, "service.SearchBrand")
 	}
 	return
 }
 
-func (s *referenceSearchService) SearchModel(model string) (refs []*model.SneakerReference, err error) {
-	if refs, err = s.SearchBy("ModelName", model); err != nil {
+func (s *referenceSearchService) SearchModel(model string, params meta.RequestParams) (refs []*model.SneakerReference, err error) {
+	if refs, err = s.SearchBy("ModelName", model, params); err != nil {
 		return nil, errors.Wrap(err, "service.SearchModel")
 	}
 	return

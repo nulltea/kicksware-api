@@ -90,7 +90,7 @@
 								<a class="underline" asp-action="ReferenceItem" asp-controller="Shop" asp-route-referenceId=@reference.UniqueID>@reference.ModelName</a>
 							</div>
 							<div class="favorite-product">
-								<input type="checkbox"/>
+								<input type="checkbox" @(reference.Liked ? "checked" : "")/>
 								@Html.VectorIconRender("favorite.svg")
 							</div>
 						</div>

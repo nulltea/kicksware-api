@@ -10,6 +10,7 @@ type ServiceConfig struct {
 	Common  CommonConfig  `yaml:"commonConfig"`
 	Auth    AuthConfig    `yaml:"authConfig"`
 	Elastic ElasticConfig `yaml:"elasticConfig"`
+	Search  SearchConfig  `yaml:"searchConfig"`
 }
 
 type CommonConfig struct {
@@ -27,7 +28,15 @@ type ElasticConfig struct {
 }
 
 type AuthConfig struct {
-	PublicKeyPath        string `yaml:"publicKeyPath"`
+	PublicKeyPath string `yaml:"publicKeyPath"`
+	AuthEndpoint string `yaml:"authEndpoint"`
+}
+
+type SearchConfig struct {
+	Type      string   `yaml:"type"`
+	Fuzziness string   `yaml:"fuzziness"`
+	Slop      int      `yaml:"slop"`
+	Fields    []string `yaml:"Fields"`
 }
 
 func ReadServiceConfig(filename string) (sc ServiceConfig, err error) {

@@ -26,7 +26,7 @@ services:
       # - traefik.http.middlewares.traefik-https-redirect.redirectscheme.permanent=true
       # - traefik.http.routers.traefik-secure.middlewares=traefik-auth
       # - traefik.http.middlewares.traefik-auth.basicauth.users=USER:PASSWORD
-      - traefik.docker.network=middleware-service_web
+      - traefik.docker.network=kicksware-middleware_web
     ports:
       - 80:80
       - 443:443
@@ -50,7 +50,7 @@ services:
       - traefik.http.routers.product-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/products`)
       # - traefik.http.routers.product-service.tls=true
       # - traefik.http.routers.product-service.tls.certresolver=le
-      - traefik.docker.network=middleware-service_web
+      - traefik.docker.network=kicksware-middleware_web
     networks:
       - web
       - data
@@ -76,7 +76,7 @@ services:
         PathPrefix(`/api/mail`) || PathPrefix(`/api/interact`)
       # - traefik.http.routers.user-service.tls=true
       # - traefik.http.routers.user-service.tls.certresolver=le
-      - traefik.docker.network=middleware-service_web
+      - traefik.docker.network=kicksware-middleware_web
     networks:
       - web
       - data
@@ -102,7 +102,7 @@ services:
       - traefik.http.routers.reference-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/references`)
       # - traefik.http.routers.reference-service.tls=true
       # - traefik.http.routers.reference-service.tls.certresolver=le
-      - traefik.docker.network=middleware-service_web
+      - traefik.docker.network=kicksware-middleware_web
     volumes:
       - ./reference-service/env:/dist/env
       - ./key:/key
@@ -127,7 +127,7 @@ services:
       - traefik.http.routers.search-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/search`)
       # - traefik.http.routers.search-service.tls=true
       # - traefik.http.routers.search-service.tls.certresolver=le
-      - traefik.docker.network=middleware-service_web
+      - traefik.docker.network=kicksware-middleware_web
     networks:
       - web
       - elastic

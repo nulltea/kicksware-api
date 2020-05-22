@@ -20,8 +20,7 @@ namespace Web.Controllers
 		[HttpPost]
 		public ActionResult Payment(SneakerProductViewModel model, bool rollback)
 		{
-			if (rollback) SetPhotos(model);
-			return SetShipping(model);
+			return rollback ? SetPhotos(model) : SetShipping(model);
 		}
 	}
 }
