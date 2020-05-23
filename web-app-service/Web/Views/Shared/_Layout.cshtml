@@ -78,13 +78,13 @@
 			<source srcset="@heroCoverPath" media="(min-width: 600px)">
 			<img src="@heroCoverPath" alt="">
 		</picture>
-		<div class="hero-content" data-scrollax="properties: { 'top': '75%'}" data-scr>
+		<div class="hero-content" data-scrollax="properties: { 'top': '75%'}">
 			@if (!string.IsNullOrEmpty(heroLogoPath))
 			{
 				@Html.VectorIconRender(heroLogoPath, "logo")
 			}
-			<span class="bread">@heroBreadTitle</span>
-			<span class="sub-bread">@heroBreadSubTitle</span>
+			<span class="bread">@heroBreadTitle?.ToUpper()</span>
+			<span class="sub-bread">@heroBreadSubTitle?.ToUpper()</span>
 			<breadcrumb></breadcrumb>
 		</div>
 	</div>

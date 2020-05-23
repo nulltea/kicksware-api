@@ -366,6 +366,8 @@
             <e p="ResetPasswordViewModel.cs" t="Include" />
             <e p="SignUpViewModel.cs" t="Include" />
           </e>
+          <e p="ContactInfoViewModel.cs" t="Include" />
+          <e p="ContactViewModel.cs" t="Include" />
           <e p="ErrorViewModel.cs" t="Include" />
           <e p="HomePageInfoViewModel.cs" t="Include" />
           <e p="SearchResultViewModel.cs" t="Include" />
@@ -486,85 +488,39 @@
           <e p="favicon.ico" t="Include" />
           <e p="files" t="Include">
             <e p="photos" t="Include">
-              <e p="Products" t="Include">
-                <e p="22svwq43.jpg" t="Include" />
-                <e p="4lpnketb.jpg" t="Include" />
-                <e p="4vr3qwzb.jpeg" t="Include" />
-                <e p="50qqfqbx.jpeg" t="Include" />
-                <e p="5f2kfu1g.jpg" t="Include" />
-                <e p="a2oy5cec.jpeg" t="Include" />
-                <e p="az1w24ow.jpg" t="Include" />
-                <e p="azpj3afc.jpeg" t="Include" />
-                <e p="cob1cmai.jpeg" t="Include" />
-                <e p="f1eku1rz.jpg" t="Include" />
-                <e p="f1oruqm5.jpeg" t="Include" />
-                <e p="fqlnxawa.jpeg" t="Include" />
-                <e p="irefgque.jpeg" t="Include" />
-                <e p="kcovjuyd.jpg" t="Include" />
-                <e p="mlzlcxxb.jpeg" t="Include" />
-                <e p="nfdfrpca.jpeg" t="Include" />
-                <e p="q0d4t14v.jpg" t="Include" />
-                <e p="q5mjeitk.jpeg" t="Include" />
-                <e p="qez5gs2d.jpg" t="Include" />
-                <e p="qz5my3l3.jpeg" t="Include" />
-                <e p="r10s2qza.jpg" t="Include" />
-                <e p="r5z5jh0w.jpg" t="Include" />
-                <e p="rgachjf2.jpg" t="Include" />
-                <e p="rvfd4ovy.jpeg" t="Include" />
-                <e p="sjc2wsab.jpg" t="Include" />
-                <e p="upqbg03b.jpg" t="Include" />
-                <e p="vcas4knk.jpg" t="Include" />
-                <e p="w4k1djwl.jpg" t="Include" />
-                <e p="w5vank3o.jpg" t="Include" />
-                <e p="x3aoivjs.jpg" t="Include" />
-                <e p="z4wgxh5r.jpg" t="Include" />
-                <e p="z4yap12a.jpg" t="Include" />
-                <e p="zck5psi2.jpeg" t="Include" />
-                <e p="zo223hor.jpg" t="Include" />
-                <e p="zvfyoovg.jpg" t="Include" />
-              </e>
               <e p="References" t="Include">
-                <e p="130209-051_1.png" t="Include" />
-                <e p="314210-261_1_1.png" t="Include" />
-                <e p="32119-002_1.png" t="Include" />
-                <e p="366724-071_1.png" t="Include" />
-                <e p="392386-141_1.png" t="Include" />
-                <e p="399207-101_1.png" t="Include" />
-                <e p="472490_001_1.png" t="Include" />
-                <e p="538416-300_1.png" t="Include" />
-                <e p="575441-170_1.png" t="Include" />
-                <e p="6041b_2740_1.png" t="Include" />
-                <e p="634773-220_1.png" t="Include" />
-                <e p="652792-001_1.png" t="Include" />
-                <e p="652792_600_21_1.png" t="Include" />
-                <e p="653996-660_1.png" t="Include" />
-                <e p="684808-001_1.png" t="Include" />
-                <e p="875943-100_1.png" t="Include" />
-                <e p="884421_001_1.png" t="Include" />
-                <e p="897808-001_1.png" t="Include" />
-                <e p="914681_300_1.png" t="Include" />
-                <e p="917704-601_1.png" t="Include" />
-                <e p="921733-003_001.png" t="Include" />
-                <e p="921826-201_1.png" t="Include" />
-                <e p="942206_001_1.png" t="Include" />
-                <e p="942303_001_1.png" t="Include" />
-                <e p="aa0871_212_1.png" t="Include" />
-                <e p="AA1233-200_1.png" t="Include" />
-                <e p="AA1294-005_1.png" t="Include" />
-                <e p="AA1294-021_1.png" t="Include" />
-                <e p="aa1294_004_1.png" t="Include" />
-                <e p="AA3963-102_1.png" t="Include" />
-                <e p="aa3993_034_1.png" t="Include" />
-                <e p="AH6772-002_1.png" t="Include" />
-                <e p="AH8144-600_1.png" t="Include" />
-                <e p="AQ2567-005_1.png" t="Include" />
-                <e p="AQ6156-300_1.png" t="Include" />
-                <e p="AQ9333-226_1.png" t="Include" />
-                <e p="BQ6580-900_2.png" t="Include" />
-                <e p="CJ7197-102_1.png" t="Include" />
-                <e p="cj7197_004_4.png" t="Include" />
-                <e p="CQ6549-100_1.png" t="Include" />
-                <e p="TB0A1UUQ_1.png" t="Include" />
+                <e p="163862C_1.png" t="Include" />
+                <e p="309096-063_1.png" t="Include" />
+                <e p="313124_991_1m.png" t="Include" />
+                <e p="318429-231_1.png" t="Include" />
+                <e p="417098-401_1.png" t="Include" />
+                <e p="455614-005_1.png" t="Include" />
+                <e p="541100-100_1.png" t="Include" />
+                <e p="616175-004_1.png" t="Include" />
+                <e p="616175-700_1.png" t="Include" />
+                <e p="616175_100_1_1.png" t="Include" />
+                <e p="626376-800_1.png" t="Include" />
+                <e p="642849-078_1.png" t="Include" />
+                <e p="647780_735_1.png" t="Include" />
+                <e p="650884_400_1.png" t="Include" />
+                <e p="679083-301_1.png" t="Include" />
+                <e p="683252-074_1.png" t="Include" />
+                <e p="683818-003_1.png" t="Include" />
+                <e p="686203-002_1.png" t="Include" />
+                <e p="695224_970_1.png" t="Include" />
+                <e p="700878-600_1.png" t="Include" />
+                <e p="705159-601_1_1.png" t="Include" />
+                <e p="808643-100_1.png" t="Include" />
+                <e p="834668_441_1.png" t="Include" />
+                <e p="853940_114_1.png" t="Include" />
+                <e p="878223-710_1.png" t="Include" />
+                <e p="898634_700_1.png" t="Include" />
+                <e p="bq0864_601_1.png" t="Include" />
+                <e p="F36426_1.png" t="Include" />
+                <e p="lebron_11_616175-006_1.png" t="Include" />
+                <e p="lebron_11_616175-401_1.png" t="Include" />
+                <e p="lebron_11_gs621712-600_1_1.png" t="Include" />
+                <e p="lebron_xi_premium_650884-674_1.png" t="Include" />
               </e>
             </e>
           </e>
@@ -813,6 +769,9 @@
             </e>
           </e>
           <e p="scripts" t="Include">
+            <e p="About" t="Include">
+              <e p="about.js" t="Include" />
+            </e>
             <e p="common" t="Include">
               <e p="common.js" t="Include" />
             </e>

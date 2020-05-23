@@ -1,23 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using SmartBreadcrumbs.Attributes;
 
 namespace Web.Controllers
 {
 	public class AboutController : Controller
 	{
-		[ViewData]
-		public string HeroCoverPath { get; set; } = "/images/heroes/about-hero.jpg";
-
-		[ViewData]
-		public string HeroBreadTitle { get; set; } = "About us";
-
-		[ViewData]
-		public string HeroBreadSubTitle { get; set; } = "Get to know us better";
-
 		[Breadcrumb("About", FromAction = "Index", FromController = typeof(HomeController))]
 		public IActionResult About()
 		{
-			return View();
+			return View(new List<string>
+			{
+				"/images/heroes/about-hero.jpg",
+				"/images/heroes/seller-hero.jpg",
+				"/images/heroes/shop-hero.jpg",
+				"/images/heroes/seller-hero2.jpg",
+				"/images/heroes/contact-hero.jpg",
+			});
 		}
 	}
 }

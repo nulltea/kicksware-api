@@ -53,7 +53,7 @@
 			margin: .5rem 0;
 		}
 
-		.contact_input {
+		.contact-input {
 			width: 100%;
 			height: 40px;
 			.with-theme({
@@ -66,7 +66,7 @@
 			padding-left: 15px;
 		}
 
-		.contact_textarea {
+		.contact-textarea {
 			height: 200px;
 			padding-top: 15px;
 			.with-theme({
@@ -100,52 +100,58 @@
 	}
 
 	.contact-info {
+		.flex-col();
 		width: 250px;
-		padding: 15px 20px 30px 20px;
 		margin-right: 50px;
-		border-radius: 10px;
-		.with-theme({
-			background: @primary;
-			.elevation(8, @elevation);
-		});
 
-		.contact_info_section:not(:first-child) {
-			margin-top: 74px;
+		.contact-info-section {
+			width: 100%;
+			border-radius: 10px;
+			padding: 20px;
+			.transition-properties(all 400ms cubic-bezier(.15, 1.2, .3, 1.2));
+			.with-theme({
+				background: @hint;
+				.elevation(6, @elevation);
+			});
+
+			&:hover {
+				.elevation(12);
+				.transform-properties(scale(1.05));
+			}
+
+			&:not(:last-child) {
+				margin-bottom: 15px;
+			}
 		}
 
-		.contact_info_title {
-			font-size: 18px;
-			font-weight: 500;
+		.h4 {
+			font-size: 20px;
+			font-weight: 600;
 			.with-theme({
 				color: @secondary;
 			});
 		}
 
-		.contact_info_section ul {
-			margin-top: 46px;
-		}
+		ul {
+			li {
+				.flex-col(@align: flex-start);
+				font-size: 14px;
+				font-weight: 400;
+				.with-theme({
+					color: @secondary;
+				});
 
-		.contact_info_section ul li {
-			font-size: 14px;
-			font-weight: 400;
-			.with-theme({
-				color: @secondary;
-			});
-		}
+				span {
+					font-weight: 500;
+				}
 
-		.contact_info_section ul li:not(:last-child) {
-			margin-bottom: 7px;
-		}
-
-		.contact_info_section ul li span {
-			color: #6C6A74;
-			margin-left: 8px;
+			}
 		}
 	}
 
 	.contact-map {
 		display: flex;
-		width: 800px;
+		width: 1200px;
 		margin-right: 50px;
 		border-radius: 10px;
 		.with-theme({

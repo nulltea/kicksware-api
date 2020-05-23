@@ -23,6 +23,7 @@ function changeTheme() {
 
 	$.get(`/Profile/SetTheme?theme=${theme}`)
 	saveTheme(theme)
+	fireThemeEvent();
 }
 
 function saveTheme(theme) {
@@ -42,10 +43,16 @@ function getTheme() {
 function setTheme(theme) {
 	$("body").removeClass("theme-light theme-dark").addClass(`theme-${theme}`);
 	$(".theme").removeClass("light dark").addClass(theme);
+	fireThemeEvent();
+}
+
+function fireThemeEvent() {
+	window.dispatchEvent(new CustomEvent("theme-change", { detail: { theme: $(".theme")[0].classList[1] }}));
 }
 
 function themeInit() {
-	$(".theme").click(changeTheme);
+	let theme = $(".theme");
+	theme.click(changeTheme);
 	setTheme(getTheme());
 }
 

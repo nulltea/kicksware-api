@@ -1,14 +1,186 @@
-﻿@model Web.Models.SneakerProductViewModel
+﻿@using Web.Utils.Helpers
+@model List<string>
 @{
 	ViewBag.Title = "About us";
 	Layout = "~/Views/Shared/_Layout.cshtml";
+	var coverParallaxProperties = "{ 'translateY': '50%', 'opacity': 0.5}";
+	var contentParallaxProperties = "{ 'translateY': '150%', 'opacity': 0.5}";
 }
 
 @section Styles
 {
-	<link href="~/styles/css/about/about.css" rel="stylesheet" />
-	<link href="~/styles/css/responsive/about.responsive.css" rel="stylesheet" />
+	<link href="~/styles/css/about/about.css" rel="stylesheet"/>
+	<link href="~/styles/css/responsive/about.responsive.css" rel="stylesheet"/>
 }
+
+<section class="about-section title-section hero-parallax" data-scrollax-parent="true">
+	<picture class="section-cover" data-scrollax="properties: @coverParallaxProperties">
+		<source srcset="@Model[0]" media="(min-width: 600px)">
+		<img src="@Model[0]" alt="">
+	</picture>
+	<div class="hero-content" data-scrollax="properties: @contentParallaxProperties">
+		<span class="bread">ABOUT US</span>
+		<span class="sub-bread">GET TO KNOW US BETTER</span>
+		<breadcrumb></breadcrumb>
+	</div>
+</section>
+<section class="about-section title-section" data-scrollax-parent="true">
+	<picture class="section-cover" data-scrollax="properties: @coverParallaxProperties">
+		<source srcset="@Model[4]" media="(min-width: 600px)">
+		<img src="@Model[4]" alt="">
+	</picture>
+	<div class="section-content" data-scrollax="properties: @contentParallaxProperties">
+		<h1 class="section-title">WHAT?</h1>
+		<hr/>
+		<h4 class="section-subtitle">NOT WHAT YOU THINK IT IS (YET)</h4>
+	</div>
+</section>
+<section class="about-section info-section" data-scrollax-parent="true">
+	<div class="section-content" data-scrollax="properties: @contentParallaxProperties">
+		<p class="search-info">
+			<strong>Kicksware</strong> can become an all-in-one modular end-to-end platform designed <b>by and for</b> the sneakerheads around the globe as part of the luxury fashion worldwide ecosystem.
+		</p>
+		<p>
+			It can provide opportunity, place, and service to not only be a passionate buyer or a prosperous seller
+			but a place to encourage authenticity, sustain individuality,
+			and help in seeking like-minded personalities to further cooperation and collaboration.
+		</p>
+		<p>
+			Support use of modern technology in nowadays fashion industry for help building better, more comfortable,
+			more authentic and more creative ecosystem - it can be our main goal and mission.
+		</p>
+		<p>And although Kicksware have a potential to become and pursue one or all of these things as for now it is not.</p>
+		<p>Not yet...</p>
+	</div>
+</section>
+<section class="about-section title-section" data-scrollax-parent="true">
+	<picture class="section-cover" data-scrollax="properties: @coverParallaxProperties">
+		<source srcset="@Model[1]" media="(min-width: 600px)">
+		<img src="@Model[1]" alt="">
+	</picture>
+	<div class="section-content" data-scrollax="properties: @contentParallaxProperties">
+		<h1 class="section-title">WHO?</h1>
+		<hr/>
+		<h4 class="section-subtitle">«THE ONE»</h4>
+	</div>
+</section>
+<section class="about-section info-section" data-scrollax-parent="true">
+	<div class="section-content" data-scrollax="properties: @contentParallaxProperties">
+		<p>
+			Before we jump into the story behind creating and explanation of our purpose and goals the right thing to do
+			will telling some essential information about us or you might say about me:
+		</p>
+		<p>
+			I'm <strong>Timothy Yalugin</strong> and the first thing I say about myself is that I am a developer.
+			Developing always was my number one goal and as a consequence of having it I also acquired such skills as futurism, ...
+		</p>
+		<p>
+			The passion for creating and building <b>new</b> as well as discovering <b>new</b> knowledge and gaining <b>new</b> experience
+			let me to this point.
+		</p>
+	</div>
+</section>
+<section class="about-section title-section" data-scrollax-parent="true">
+	<picture class="section-cover" data-scrollax="properties: @coverParallaxProperties">
+		<source srcset="@Model[2]" media="(min-width: 600px)">
+		<img src="@Model[2]" alt="">
+	</picture>
+	<div class="section-content" data-scrollax="properties: @contentParallaxProperties">
+		<h1 class="section-title">WHY?</h1>
+		<hr/>
+		<h4 class="section-subtitle">THE SHORT STORY LONG</h4>
+	</div>
+</section>
+<section class="about-section info-section" data-scrollax-parent="true">
+	<div class="section-content" data-scrollax="properties: @contentParallaxProperties">
+		<p>
+			Same as any other new thing it all started as an idea (project idea) - building an app using microservice architecture.
+		</p>
+		<p>
+			If you're wondering the sense behind putting a few common words in such fancy new way this is not the right place for it.
+			Although I might give you a hint - <a href="https://martinfowler.com/architecture/">“Architecture is about the important stuff. Whatever that is”</a>.
+		</p>
+		<p>
+			Anyway, the thing you should know is that all that you see here was created as part me discovering new technology and the
+			need behind it. <em>So is it all about kicks or not?</em> Well yes it is, no matter it started as a study project afterwards
+			I use my passion for sneakers as the soul of a future product.
+		</p>
+		<p>
+			As a result you have a web market platform such as <a href="https://www.stadiumgoods.com/">Stadium Goods</a>,
+			<a href="https://www.grailed.com/">Grailed</a>,
+			<a href="https://www.goat.com/">GOAT</a> or <a href="https://stockx.com/">StockX</a> and you know what?
+			There are plenty more of these. So is there any difference and why should you care?
+		</p>
+		<p>
+			Being a software developer taught me that no matter how many succeeded before you, but who of them provide <strong>better now</strong>.
+			Let me tell you an example: in web development we have a shit-load of javascript frameworks that all do the same thing.
+			However, every year we are witnessing the rise of new and the downfall of a predecessor. The same with programming languages,
+			architectures and anything that have the potential to progress.
+		</p>
+		<p>
+			And by saying this I don't mean this is the new main sneaker marketplace.
+			Just consider trying new...
+		</p>
+	</div>
+</section>
+<section class="about-section title-section" data-scrollax-parent="true">
+	<picture class="section-cover" data-scrollax="properties: @coverParallaxProperties">
+		<source srcset="@Model[3]" media="(min-width: 600px)">
+		<img src="@Model[3]" alt="">
+	</picture>
+	<div class="section-content" data-scrollax="properties: @contentParallaxProperties">
+		<h1 class="section-title">NEXT</h1>
+		<hr/>
+		<h4 class="section-subtitle">HINT: YOU</h4>
+	</div>
+</section>
+<section class="about-section info-section" data-scrollax-parent="true">
+	<div class="section-content" data-scrollax="properties: @contentParallaxProperties">
+		<p>
+			The original goal of this charade is actually already successfully achieved.
+		</p>
+		<p>
+			I've discovered the crazy amount of new priceless knowledge that is not only useful now but also will become a core for the future projects
+			I've acquired skills of use and get to know plenty of new, crazy powerful technologies as well as architectures,
+			design patterns and principles of web service and system development.
+		</p>
+		<p>
+			So my work here can be called done. However, like any parent wants his child to have a better future,
+			I also have a hope for Kicksware to become a thing.
+		</p>
+		<p>
+			And I could use another hothead to level up the game. So if you have some ideas of how to take advantage of this
+			well-designed, build and ready to use platform - feel free to contact with me and I hope together we'll make it work!
+		</p>
+	</div>
+</section>
+<section class="about-section title-section" data-scrollax-parent="true">
+	<picture class="section-cover" data-scrollax="properties: @coverParallaxProperties">
+		<source srcset="@Model[4]" media="(min-width: 600px)">
+		<img src="@Model[4]" alt="">
+	</picture>
+	<div class="section-content" data-scrollax="properties: @contentParallaxProperties">
+		<h1 class="section-title">SO</h1>
+		<hr/>
+		<h4 class="section-subtitle">THE LESSON</h4>
+	</div>
+</section>
+<section class="about-section info-section" data-scrollax-parent="true">
+	<div class="section-content" data-scrollax="properties: @contentParallaxProperties">
+
+		<p>
+			I hope the example of Kicksware will encourage you to start creating now matter what
+		</p>
+	</div>
+</section>
+<section class="about-section title-section" data-scrollax-parent="true">
+	<picture class="section-cover" data-scrollax="properties: @coverParallaxProperties">
+		<source srcset="@Model[4]" media="(min-width: 600px)">
+		<img src="@Model[4]" alt="">
+	</picture>
+	<div class="section-content" data-scrollax="properties: @contentParallaxProperties">
+	</div>
+</section>
 
 @section Scripts
 {
