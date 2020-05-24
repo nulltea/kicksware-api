@@ -1,4 +1,7 @@
 ﻿@using Web.Utils.Helpers
+@using Microsoft.AspNetCore.Identity
+@using Core.Entities.Users
+@inject SignInManager<User> SignInManager
 
 <nav class="icon-nav">
 	<ul>
@@ -7,14 +10,17 @@
 		</li>
 		<li class="account expandable">
 			@Html.VectorIconRender("user.svg")
-			<ul>
-				<li class="button header-button" id="login-btn">
-					<span>Login</span>
-				</li>
-				<li class="button header-button-strong" id="sign-up-btn">
-					<span>Sing Up</span>
-				</li>
-			</ul>
+			@if (!SignInManager.IsSignedIn(User))
+			{
+				<ul>
+					<li class="button header-button" id="login-btn">
+						<span>Login</span>
+					</li>
+					<li class="button header-button-strong" id="sign-up-btn">
+						<span>Sing Up</span>
+					</li>
+				</ul>
+			}
 		</li>
 		<li class="favorite">
 			<a asp-controller="Profile" asp-action="Profile" asp-route-mode="favorite">

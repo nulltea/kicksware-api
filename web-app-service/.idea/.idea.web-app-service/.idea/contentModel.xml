@@ -486,44 +486,6 @@
         <e p="Web.csproj" t="IncludeRecursive" />
         <e p="wwwroot" t="Include">
           <e p="favicon.ico" t="Include" />
-          <e p="files" t="Include">
-            <e p="photos" t="Include">
-              <e p="References" t="Include">
-                <e p="163862C_1.png" t="Include" />
-                <e p="309096-063_1.png" t="Include" />
-                <e p="313124_991_1m.png" t="Include" />
-                <e p="318429-231_1.png" t="Include" />
-                <e p="417098-401_1.png" t="Include" />
-                <e p="455614-005_1.png" t="Include" />
-                <e p="541100-100_1.png" t="Include" />
-                <e p="616175-004_1.png" t="Include" />
-                <e p="616175-700_1.png" t="Include" />
-                <e p="616175_100_1_1.png" t="Include" />
-                <e p="626376-800_1.png" t="Include" />
-                <e p="642849-078_1.png" t="Include" />
-                <e p="647780_735_1.png" t="Include" />
-                <e p="650884_400_1.png" t="Include" />
-                <e p="679083-301_1.png" t="Include" />
-                <e p="683252-074_1.png" t="Include" />
-                <e p="683818-003_1.png" t="Include" />
-                <e p="686203-002_1.png" t="Include" />
-                <e p="695224_970_1.png" t="Include" />
-                <e p="700878-600_1.png" t="Include" />
-                <e p="705159-601_1_1.png" t="Include" />
-                <e p="808643-100_1.png" t="Include" />
-                <e p="834668_441_1.png" t="Include" />
-                <e p="853940_114_1.png" t="Include" />
-                <e p="878223-710_1.png" t="Include" />
-                <e p="898634_700_1.png" t="Include" />
-                <e p="bq0864_601_1.png" t="Include" />
-                <e p="F36426_1.png" t="Include" />
-                <e p="lebron_11_616175-006_1.png" t="Include" />
-                <e p="lebron_11_616175-401_1.png" t="Include" />
-                <e p="lebron_11_gs621712-600_1_1.png" t="Include" />
-                <e p="lebron_xi_premium_650884-674_1.png" t="Include" />
-              </e>
-            </e>
-          </e>
           <e p="fonts" t="Include">
             <e p="Orbitron" t="Include">
               <e p="OFL.txt" t="Include" />
@@ -554,6 +516,15 @@
             <e p="account.svg" t="Include" />
             <e p="address.svg" t="Include" />
             <e p="arrow.svg" t="Include" />
+            <e p="assets" t="Include">
+              <e p="window-air-max-180.png" t="Include" />
+              <e p="window-air-max-270.png" t="Include" />
+              <e p="window-air-max-93.png" t="Include" />
+              <e p="window-air-max-97-vapormax.png" t="Include" />
+              <e p="window-air-max-97.png" t="Include" />
+              <e p="window-vapormax-plus.png" t="Include" />
+              <e p="window-vapormax.png" t="Include" />
+            </e>
             <e p="bookmark.svg" t="Include" />
             <e p="box.svg" t="Include" />
             <e p="buy.svg" t="Include" />
