@@ -3,9 +3,9 @@
 @{
 	ViewBag.Title = "About us";
 	Layout = "~/Views/Shared/_Layout.cshtml";
-	var coverParallaxProperties = "{ 'translateY': '50%', 'opacity': 0.5}";
-	var contentParallaxProperties = "{ 'translateY': '150%', 'opacity': 0.5}";
-	var windowAssetProperties = "{ 'translateY': '-100%' }";
+	var coverParallax = "{ 'translateY': '50%', 'opacity': 0.5}";
+	var contentParallax = "{ 'opacity': 0.5}";
+	var windowAssetParallax = "{ 'translateY': '50%' }";
 }
 
 @section Styles
@@ -15,67 +15,69 @@
 }
 
 <section class="about-section title-section hero-parallax" data-scrollax-parent="true">
-	<picture class="section-cover" data-scrollax="properties: @coverParallaxProperties">
+	<picture class="section-cover" data-scrollax="properties: @coverParallax">
 		<source srcset="@Model[0]" media="(min-width: 600px)">
-		<img src="@Model[0]" alt="">
+		<img src="@Model[0]" alt>
 	</picture>
-	<div class="hero-content" data-scrollax="properties: @contentParallaxProperties">
+	<div class="hero-content" data-scrollax="properties: @contentParallax">
 		<span class="bread">ABOUT US</span>
 		<span class="sub-bread">GET TO KNOW US BETTER</span>
 		<breadcrumb></breadcrumb>
 	</div>
 </section>
 <section class="about-section title-section" data-scrollax-parent="true">
-	<picture class="section-cover" data-scrollax="properties: @coverParallaxProperties">
+	<picture class="section-cover" data-scrollax="properties: @coverParallax">
 		<source srcset="@Model[4]" media="(min-width: 600px)">
-		<img src="@Model[4]" alt="">
+		<img src="@Model[4]" alt>
 	</picture>
-	<div class="section-content" data-scrollax="properties: @contentParallaxProperties">
+	<div class="section-content" data-scrollax="properties: @contentParallax">
 		<h1 class="section-title">WHAT?</h1>
 		<hr/>
 		<h4 class="section-subtitle">NOT WHAT YOU THINK IT IS (YET)</h4>
 	</div>
 </section>
 <section class="about-section info-section" data-scrollax-parent="true">
-	<article class="section-content" data-scrollax="properties: @contentParallaxProperties">
+	<article class="section-content" data-scrollax="properties: @contentParallax">
 		<p class="search-info">
-			<span class="kicksware">Kicksware</span> can become an all-in-one modular end-to-end platform designed <b>by and for</b> the sneakerheads around the globe as part of the luxury fashion worldwide ecosystem.
+			<span class="kicksware">Kicksware</span> <em>can</em> become an all-in-one modular end-to-end platform designed <b>by and for</b> the sneakerheads around the globe as part of the luxury fashion worldwide ecosystem.
 		</p>
 		<p>
-			It can provide opportunity, place, and service to not only be a passionate buyer or a prosperous seller
-			but a place to encourage authenticity, sustain individuality,
-			and help in seeking like-minded personalities to further cooperation and collaboration.
+			It <em>can</em> provide opportunity, place and services not only to a passionate buyer or a prosperous seller
+			but those who encourage authenticity, sustain individuality,
+			and seeking like-minded personalities to further cooperation and collaboration.
 		</p>
 		<p>
 			Support use of modern technology in nowadays fashion industry for help building better, more comfortable,
-			more authentic and more creative ecosystem - it can be our main goal and mission.
+			more authentic and more creative ecosystem - it <em>can</em> be our main goal and mission.
 		</p>
 		<p>And although <span class="kicksware">Kicksware</span> have a potential to become and pursue one or all of these things as for now it is not.</p>
 		<p>Not yet...</p>
 	</article>
+	<div class="trigger"></div>
 	<div class="figure" data-scrollax="properties: {'translateY': '100%'}"></div>
-	<img class="window-asset" data-scrollax="properties: @windowAssetProperties"
+	<img class="window-asset" data-scrollax="properties: @windowAssetParallax"
 		src="/images/assets/window-air-max-97.png" alt/>
+	<img class="hand-asset" src="/images/assets/hand-air-max-90-3.png" alt/>
 </section>
 <section class="about-section title-section" data-scrollax-parent="true">
-	<picture class="section-cover" data-scrollax="properties: @coverParallaxProperties">
+	<picture class="section-cover" data-scrollax="properties: @coverParallax">
 		<source srcset="@Model[1]" media="(min-width: 600px)">
-		<img src="@Model[1]" alt="">
+		<img src="@Model[1]" alt>
 	</picture>
-	<div class="section-content" data-scrollax="properties: @contentParallaxProperties">
+	<div class="section-content" data-scrollax="properties: @contentParallax">
 		<h1 class="section-title">WHO?</h1>
 		<hr/>
 		<h4 class="section-subtitle">«THE ONE»</h4>
 	</div>
 </section>
 <section class="about-section info-section" data-scrollax-parent="true">
-	<article class="section-content" data-scrollax="properties: @contentParallaxProperties">
+	<article class="section-content" data-scrollax="properties: @contentParallax">
 		<p>
 			Before we jump into the story behind creating and explanation of our purpose and goals the right thing to do
 			will telling some essential information about us or you might say about me:
 		</p>
 		<p>
-			I'm <strong>Timothy Yalugin</strong> and the first thing I say about myself is that I am a developer.
+			I'm <strong>Timothy Yalugin</strong> and the first thing you should know about myself is that I am a developer.
 			Developing always was my number one goal and as a consequence of having it I also acquired such skills as futurism, ...
 		</p>
 		<p>
@@ -83,23 +85,27 @@
 			let me to this point.
 		</p>
 	</article>
+	<div class="trigger" id="bio-trigger"></div>
 	<div class="figure" data-scrollax="properties: {'translateY': '100%'}"></div>
-	<img class="window-asset" data-scrollax="properties: @windowAssetProperties"
-		src="/images/assets/window-air-max-270.png" alt/>
+	<img class="window-asset" data-scrollax="properties: @windowAssetParallax"
+		src="/images/assets/window-react-element.png" alt/>
+	<img class="window-asset" id="creator-window" data-scrollax="properties: @windowAssetParallax"
+		src="/images/assets/window-creator.png" alt/>
+	<img class="hand-asset" src="/images/assets/hand-air-max-90-1.png" alt/>
 </section>
 <section class="about-section title-section" data-scrollax-parent="true">
-	<picture class="section-cover" data-scrollax="properties: @coverParallaxProperties">
+	<picture class="section-cover" data-scrollax="properties: @coverParallax">
 		<source srcset="@Model[2]" media="(min-width: 600px)">
-		<img src="@Model[2]" alt="">
+		<img src="@Model[2]" alt>
 	</picture>
-	<div class="section-content" data-scrollax="properties: @contentParallaxProperties">
+	<div class="section-content" data-scrollax="properties: @contentParallax">
 		<h1 class="section-title">WHY?</h1>
 		<hr/>
 		<h4 class="section-subtitle">THE SHORT STORY LONG</h4>
 	</div>
 </section>
 <section class="about-section info-section" data-scrollax-parent="true">
-	<article class="section-content" data-scrollax="properties: @contentParallaxProperties">
+	<article class="section-content" data-scrollax="properties: @contentParallax">
 		<p>
 			Same as any other new thing it all started as an idea (project idea) - building an app using microservice architecture.
 		</p>
@@ -126,28 +132,30 @@
 		</p>
 		<p>
 			And by saying this I don't mean this is the new main sneaker marketplace.
-			Just consider trying new...
+			Just consider trying new.
 		</p>
 	</article>
+	<div class="trigger"></div>
 	<div class="figure" data-scrollax="properties: {'translateY': '100%'}"></div>
-	<img class="window-asset" data-scrollax="properties: @windowAssetProperties"
+	<img class="window-asset" data-scrollax="properties: @windowAssetParallax"
 		src="/images/assets/window-air-max-97-vapormax.png" alt/>
+	<img class="hand-asset" src="/images/assets/hand-air-max-90-5.png" alt/>
 </section>
 <section class="about-section title-section" data-scrollax-parent="true">
-	<picture class="section-cover" data-scrollax="properties: @coverParallaxProperties">
+	<picture class="section-cover" data-scrollax="properties: @coverParallax">
 		<source srcset="@Model[3]" media="(min-width: 600px)">
-		<img src="@Model[3]" alt="">
+		<img src="@Model[3]" alt>
 	</picture>
-	<div class="section-content" data-scrollax="properties: @contentParallaxProperties">
+	<div class="section-content" data-scrollax="properties: @contentParallax">
 		<h1 class="section-title">NEXT</h1>
 		<hr/>
 		<h4 class="section-subtitle">HINT: YOU</h4>
 	</div>
 </section>
 <section class="about-section info-section" data-scrollax-parent="true">
-	<article class="section-content" data-scrollax="properties: @contentParallaxProperties">
+	<article class="section-content" data-scrollax="properties: @contentParallax">
 		<p>
-			The original goal of this charade is actually already successfully achieved.
+			The original goal of this campaign is actually already successfully achieved.
 		</p>
 		<p>
 			I've discovered the crazy amount of new priceless knowledge that is not only useful now but also will become a core for the future projects.
@@ -164,43 +172,54 @@
 			well-designed, build and ready to use platform - feel free to contact with me and I hope together we'll make it work!
 		</p>
 	</article>
+	<div class="contact">
+		<p>
+			If you are interested in cooperation please let us know using <a asp-action="Contact" asp-controller="Contact">Contact page</a>.
+		</p>
+		<p>
+			You can also follow me at:
+		</p>
+	</div>
+	<div class="trigger"></div>
 	<div class="figure" data-scrollax="properties: {'translateY': '100%'}"></div>
-	<img class="window-asset" data-scrollax="properties: @windowAssetProperties"
+	<img class="window-asset" data-scrollax="properties: @windowAssetParallax"
 		src="/images/assets/window-air-max-93.png" alt/>
+	<img class="hand-asset" src="/images/assets/hand-air-max-90-4.png" alt/>
 </section>
 <section class="about-section title-section" data-scrollax-parent="true">
-	<picture class="section-cover" data-scrollax="properties: @coverParallaxProperties">
+	<picture class="section-cover" data-scrollax="properties: @coverParallax">
 		<source srcset="@Model[4]" media="(min-width: 600px)">
-		<img src="@Model[4]" alt="">
+		<img src="@Model[4]" alt>
 	</picture>
-	<div class="section-content" data-scrollax="properties: @contentParallaxProperties">
+	<div class="section-content" data-scrollax="properties: @contentParallax">
 		<h1 class="section-title">SO</h1>
 		<hr/>
 		<h4 class="section-subtitle">THE LESSON</h4>
 	</div>
 </section>
 <section class="about-section info-section" data-scrollax-parent="true">
-	<article class="section-content" data-scrollax="properties: @contentParallaxProperties">
-
+	<article class="section-content" data-scrollax="properties: @contentParallax">
 		<p>
 			I hope the example of Kicksware will encourage you to start creating now matter what
 		</p>
 	</article>
+	<div class="trigger"></div>
 	<div class="figure" data-scrollax="properties: {'translateY': '100%'}"></div>
-	<img class="window-asset" data-scrollax="properties: @windowAssetProperties"
+	<img class="window-asset" data-scrollax="properties: @windowAssetParallax"
 		src="/images/assets/window-vapormax-plus.png" alt/>
+	<img class="hand-asset" src="/images/assets/hand-air-max-90-2.png" alt/>
 </section>
 <section class="about-section title-section" data-scrollax-parent="true">
-	<picture class="section-cover" data-scrollax="properties: @coverParallaxProperties">
+	<picture class="section-cover" data-scrollax="properties: @coverParallax">
 		<source srcset="@Model[4]" media="(min-width: 600px)">
-		<img src="@Model[4]" alt="">
+		<img src="@Model[4]" alt>
 	</picture>
-	<div class="section-content" data-scrollax="properties: @contentParallaxProperties">
+	<div class="section-content" data-scrollax="properties: @contentParallax">
 	</div>
 </section>
 
 @section Scripts
 {
-	<script src="scripts/about/about.js" type="text/javascript"></script>
+	<script src="~/scripts/about/about.js" type="text/javascript"></script>
 
 }

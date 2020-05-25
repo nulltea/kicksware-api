@@ -517,11 +517,19 @@
             <e p="address.svg" t="Include" />
             <e p="arrow.svg" t="Include" />
             <e p="assets" t="Include">
+              <e p="hand-air-max-90-1.png" t="Include" />
+              <e p="hand-air-max-90-2.png" t="Include" />
+              <e p="hand-air-max-90-3.png" t="Include" />
+              <e p="hand-air-max-90-4.png" t="Include" />
+              <e p="hand-air-max-90-5.png" t="Include" />
+              <e p="hand-vapormax.png" t="Include" />
               <e p="window-air-max-180.png" t="Include" />
               <e p="window-air-max-270.png" t="Include" />
               <e p="window-air-max-93.png" t="Include" />
               <e p="window-air-max-97-vapormax.png" t="Include" />
               <e p="window-air-max-97.png" t="Include" />
+              <e p="window-creator.png" t="Include" />
+              <e p="window-react-element.png" t="Include" />
               <e p="window-vapormax-plus.png" t="Include" />
               <e p="window-vapormax.png" t="Include" />
             </e>
@@ -623,6 +631,8 @@
             <e p="photo.svg" t="Include" />
             <e p="preview.svg" t="Include" />
             <e p="reset-password.svg" t="Include" />
+            <e p="robo-air-max-90.svg" t="Include" />
+            <e p="robo-air-max-95.svg" t="Include" />
             <e p="save.svg" t="Include" />
             <e p="search.svg" t="Include" />
             <e p="sell.svg" t="Include" />
