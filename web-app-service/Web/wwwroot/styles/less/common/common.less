@@ -898,6 +898,40 @@ input[type="checkbox"].regular_checkbox {
 		-webkit-animation: loadbars 0.6s ease-in-out infinite -0.4s;
 	}
 }
+.social-links {
+	display: grid;
+	grid-template-columns: repeat(4, auto);
+	grid-gap: 15px;
+
+	a.social-link {
+		height: 50px;
+		width: 50px;
+
+		svg {
+			height: inherit;
+			width: inherit;
+			.transition-properties(all 400ms cubic-bezier(.15, 1.2, .3, 1.2));
+		}
+
+		&.facebook-link svg {
+			fill: @facebook-color;
+		}
+
+		&.linkedin-link svg {
+			fill: @linkedin-color;
+		}
+
+		&.linkedin-link svg {
+			fill: @linkedin-color;
+		}
+
+		&:hover svg {
+			.transform-properties(scale(1.15));
+			-webkit-filter: drop-shadow(3px 3px 3px fade(black, 50%));
+			filter: drop-shadow(3px 3px 3px fade(black, 50%));
+		}
+	}
+}
 
 // THEME TAGS //
 .theme-bg-primary {

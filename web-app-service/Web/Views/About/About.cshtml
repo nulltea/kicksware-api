@@ -4,7 +4,8 @@
 	ViewBag.Title = "About us";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 	var coverParallax = "{ 'translateY': '50%', 'opacity': 0.5}";
-	var contentParallax = "{ 'opacity': 0.5}";
+	var contentParallax = "{ 'opacity': 0.5 }";
+	var titleParallax = "{ 'translateY': '50%', 'opacity': 0.5 }";
 	var windowAssetParallax = "{ 'translateY': '50%' }";
 }
 
@@ -19,7 +20,7 @@
 		<source srcset="@Model[0]" media="(min-width: 600px)">
 		<img src="@Model[0]" alt>
 	</picture>
-	<div class="hero-content" data-scrollax="properties: @contentParallax">
+	<div class="hero-content" data-scrollax="properties: @titleParallax">
 		<span class="bread">ABOUT US</span>
 		<span class="sub-bread">GET TO KNOW US BETTER</span>
 		<breadcrumb></breadcrumb>
@@ -30,7 +31,7 @@
 		<source srcset="@Model[4]" media="(min-width: 600px)">
 		<img src="@Model[4]" alt>
 	</picture>
-	<div class="section-content" data-scrollax="properties: @contentParallax">
+	<div class="section-content" data-scrollax="properties: @titleParallax">
 		<h1 class="section-title">WHAT?</h1>
 		<hr/>
 		<h4 class="section-subtitle">NOT WHAT YOU THINK IT IS (YET)</h4>
@@ -64,7 +65,7 @@
 		<source srcset="@Model[1]" media="(min-width: 600px)">
 		<img src="@Model[1]" alt>
 	</picture>
-	<div class="section-content" data-scrollax="properties: @contentParallax">
+	<div class="section-content" data-scrollax="properties: @titleParallax">
 		<h1 class="section-title">WHO?</h1>
 		<hr/>
 		<h4 class="section-subtitle">«THE ONE»</h4>
@@ -98,7 +99,7 @@
 		<source srcset="@Model[2]" media="(min-width: 600px)">
 		<img src="@Model[2]" alt>
 	</picture>
-	<div class="section-content" data-scrollax="properties: @contentParallax">
+	<div class="section-content" data-scrollax="properties: @titleParallax">
 		<h1 class="section-title">WHY?</h1>
 		<hr/>
 		<h4 class="section-subtitle">THE SHORT STORY LONG</h4>
@@ -111,7 +112,7 @@
 		</p>
 		<p>
 			If you're wondering the sense behind putting a few common words in such fancy new way this is not the right place for it.
-			Although I might give you a hint - <a href="https://martinfowler.com/architecture/">“Architecture is about the important stuff. Whatever that is”</a>.
+			Although I might give you a hint - <a href="https://martinfowler.com/architecture/" target="_blank">“Architecture is about the important stuff. Whatever that is”</a>.
 		</p>
 		<p>
 			Anyway, the thing you should know is that all that you see here was created as part me discovering new technology and the
@@ -119,9 +120,9 @@
 			I use my passion for sneakers as the soul of a future product.
 		</p>
 		<p>
-			As a result you have a web market platform such as <a href="https://www.stadiumgoods.com/">Stadium Goods</a>,
-			<a href="https://www.grailed.com/">Grailed</a>,
-			<a href="https://www.goat.com/">GOAT</a> or <a href="https://stockx.com/">StockX</a> and you know what?
+			As a result you have a web market platform such as <a href="https://www.stadiumgoods.com/" target="_blank">Stadium Goods</a>,
+			<a href="https://www.grailed.com/" target="_blank">Grailed</a>,
+			<a href="https://www.goat.com/" target="_blank">GOAT</a> or <a href="https://stockx.com/" target="_blank">StockX</a> and you know what?
 			There are plenty more of these. So is there any difference and why should you care?
 		</p>
 		<p>
@@ -146,7 +147,7 @@
 		<source srcset="@Model[3]" media="(min-width: 600px)">
 		<img src="@Model[3]" alt>
 	</picture>
-	<div class="section-content" data-scrollax="properties: @contentParallax">
+	<div class="section-content" data-scrollax="properties: @titleParallax">
 		<h1 class="section-title">NEXT</h1>
 		<hr/>
 		<h4 class="section-subtitle">HINT: YOU</h4>
@@ -172,26 +173,47 @@
 			well-designed, build and ready to use platform - feel free to contact with me and I hope together we'll make it work!
 		</p>
 	</article>
-	<div class="contact">
-		<p>
-			If you are interested in cooperation please let us know using <a asp-action="Contact" asp-controller="Contact">Contact page</a>.
-		</p>
-		<p>
-			You can also follow me at:
-		</p>
-	</div>
 	<div class="trigger"></div>
 	<div class="figure" data-scrollax="properties: {'translateY': '100%'}"></div>
 	<img class="window-asset" data-scrollax="properties: @windowAssetParallax"
 		src="/images/assets/window-air-max-93.png" alt/>
 	<img class="hand-asset" src="/images/assets/hand-air-max-90-4.png" alt/>
 </section>
+<section class="about-section contact-section" data-scrollax-parent="true">
+	<figure class="rectangle" data-scrollax="properties: { 'left': '100%' }"></figure>
+	<figure class="circle" data-scrollax="properties: { 'left': '100%' }"></figure>
+	<div class="section-caption">
+		<h1>LET'S COLLAB</h1>
+		<hr/>
+	</div>
+	<div class="contact-info">
+		<div class="contact-col">
+			<h3>
+				IF YOU ARE INTERESTED IN COOPERATION PLEASE LET ME KNOW
+			</h3>
+			<a href="mailto:timothy@kicksware.com">TIMOTHY@KICKSWARE.COM</a>
+			<h3>
+				OR VIA:
+			</h3>
+			<a asp-action="Contact" asp-controller="Contact">CONTACT PAGE</a>
+		</div>
+		<div class="contact-col">
+			<h3>
+				YOU CAN ALSO FOLLOW ME AT:
+			</h3>
+			@{
+				await Html.RenderPartialAsync("_SocialPartial");
+			}
+		</div>
+	</div>
+</section>
+@*
 <section class="about-section title-section" data-scrollax-parent="true">
 	<picture class="section-cover" data-scrollax="properties: @coverParallax">
 		<source srcset="@Model[4]" media="(min-width: 600px)">
 		<img src="@Model[4]" alt>
 	</picture>
-	<div class="section-content" data-scrollax="properties: @contentParallax">
+	<div class="section-content" data-scrollax="properties: @titleParallax">
 		<h1 class="section-title">SO</h1>
 		<hr/>
 		<h4 class="section-subtitle">THE LESSON</h4>
@@ -209,14 +231,7 @@
 		src="/images/assets/window-vapormax-plus.png" alt/>
 	<img class="hand-asset" src="/images/assets/hand-air-max-90-2.png" alt/>
 </section>
-<section class="about-section title-section" data-scrollax-parent="true">
-	<picture class="section-cover" data-scrollax="properties: @coverParallax">
-		<source srcset="@Model[4]" media="(min-width: 600px)">
-		<img src="@Model[4]" alt>
-	</picture>
-	<div class="section-content" data-scrollax="properties: @contentParallax">
-	</div>
-</section>
+*@
 
 @section Scripts
 {

@@ -22,111 +22,92 @@
 </head>
 <body class="theme-dark">
 <div class="super_container">
-<div class="header-spacer"></div>
-<header class="header">
-<div class="header_container">
-	<div class="header_content">
-		<div class="logo">
-			<a asp-controller="Home" asp-action="Index">KICKSWARE</a>
+	<div class="header-spacer"></div>
+	<header class="header">
+		<div class="header_container">
+			<div class="header_content">
+				<div class="logo">
+					<a asp-controller="Home" asp-action="Index">KICKSWARE</a>
+				</div>
+				@{
+					await Html.RenderPartialAsync("Header/_MainNavPartial");
+					await Html.RenderPartialAsync("Header/_IconNavPartial");
+				}
+			</div>
+		</div>
+		<!-- Search Panel -->
+		@{
+			await Html.RenderPartialAsync("Header/_SearchPartial");
+		}
+
+		<!-- Slider Menu -->
+		<div class="hamburger">
+			<span></span>
+			<span></span>
+			<span></span>
 		</div>
 		@{
-			await Html.RenderPartialAsync("Header/_MainNavPartial");
-			await Html.RenderPartialAsync("Header/_IconNavPartial");
+			await Html.RenderPartialAsync("Header/_MobileMenuPartial");
+		}
+	</header>
+	<div id="scroll-trigger"></div>
+
+	<div class="modal fade" tabindex="-1" id="auth-modal" data-keyboard="false" data-backdrop="static">
+		@{
+			await Html.RenderPartialAsync("../Auth/_AuthDialogPartial", new AuthCommonViewModel());
 		}
 	</div>
-</div>
-<!-- Search Panel -->
-@{
-	await Html.RenderPartialAsync("Header/_SearchPartial");
-}
-
-<!-- Slider Menu -->
-<div class="hamburger">
-	<span></span>
-	<span></span>
-	<span></span>
-</div>
-@{
-	await Html.RenderPartialAsync("Header/_MobileMenuPartial");
-}
-</header>
-<div id="scroll-trigger"></div>
-
-<div class="modal fade" tabindex="-1" id="auth-modal" data-keyboard="false" data-backdrop="static">
+	<div class="modal fade preloader" tabindex="-1">
+		<ul class="loader">
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
 	@{
-		await Html.RenderPartialAsync("../Auth/_AuthDialogPartial", new AuthCommonViewModel());
+		var heroCoverPath = Convert.ToString(ViewData["HeroCoverPath"]);
+		var heroBreadTitle = Convert.ToString(ViewData["HeroBreadTitle"]);
+		var heroBreadSubTitle = Convert.ToString(ViewData["HeroBreadSubTitle"]);
+		var heroLogoPath = Convert.ToString(ViewData["HeroLogoPath"]);
 	}
-</div>
-<div class="modal fade preloader" tabindex="-1">
-	<ul class="loader">
-		<li></li>
-		<li></li>
-		<li></li>
-	</ul>
-</div>
-@{
-	var heroCoverPath = Convert.ToString(ViewData["HeroCoverPath"]);
-	var heroBreadTitle = Convert.ToString(ViewData["HeroBreadTitle"]);
-	var heroBreadSubTitle = Convert.ToString(ViewData["HeroBreadSubTitle"]);
-	var heroLogoPath = Convert.ToString(ViewData["HeroLogoPath"]);
-}
-@if (!string.IsNullOrEmpty(heroCoverPath))
-{
-	var heroId = System.IO.Path.GetFileNameWithoutExtension(heroCoverPath);
-	<div class="hero-parallax" id="@heroId" data-scrollax-parent="true">
-		<picture class="hero-cover" data-scrollax="properties: { 'translateY': '50%', 'opacity': 0.5 }">
-			<source srcset="@heroCoverPath" media="(min-width: 600px)">
-			<img src="@heroCoverPath" alt="">
-		</picture>
-		<div class="hero-content" data-scrollax="properties: { 'top': '75%'}">
-			@if (!string.IsNullOrEmpty(heroLogoPath))
-			{
-				@Html.VectorIconRender(heroLogoPath, "logo")
-			}
-			<span class="bread">@heroBreadTitle?.ToUpper()</span>
-			<span class="sub-bread">@heroBreadSubTitle?.ToUpper()</span>
-			<breadcrumb></breadcrumb>
+	@if (!string.IsNullOrEmpty(heroCoverPath))
+	{
+		var heroId = System.IO.Path.GetFileNameWithoutExtension(heroCoverPath);
+		<div class="hero-parallax" id="@heroId" data-scrollax-parent="true">
+			<picture class="hero-cover" data-scrollax="properties: { 'translateY': '50%', 'opacity': 0.5 }">
+				<source srcset="@heroCoverPath" media="(min-width: 600px)">
+				<img src="@heroCoverPath" alt="">
+			</picture>
+			<div class="hero-content" data-scrollax="properties: { 'top': '75%'}">
+				@if (!string.IsNullOrEmpty(heroLogoPath))
+				{
+					@Html.VectorIconRender(heroLogoPath, "logo")
+				}
+				<span class="bread">@heroBreadTitle?.ToUpper()</span>
+				<span class="sub-bread">@heroBreadSubTitle?.ToUpper()</span>
+				<breadcrumb></breadcrumb>
+			</div>
 		</div>
+	}
+	<div class="page-content">
+		@RenderBody()
 	</div>
-}
-<div class="page-content">
-	@RenderBody()
-</div>
-<div class="footer_overlay"></div>
-<footer class="footer">
-	<div class="footer_content">
-		<div class="footer_logo">
-			<a asp-action="Index" asp-controller="Home">KICKSWARE</a>
+	<div class="footer_overlay"></div>
+	<footer class="footer">
+		<div class="footer_content">
+			<div class="footer_logo">
+				<a asp-action="Index" asp-controller="Home">KICKSWARE</a>
+			</div>
+			<div class="copyright">
+				Copyright &copy; @Convert.ToString(DateTime.Today.Year) All rights reserved
+			</div>
+			<div class="menu-social">
+				@{
+					await Html.RenderPartialAsync("_SocialPartial");
+				}
+			</div>
 		</div>
-		<div class="copyright">
-			Copyright &copy; @Convert.ToString(DateTime.Today.Year) All rights reserved
-		</div>
-		<div class="menu_social">
-			<ul>
-				<li>
-					<a href="#">
-						<i class="fa fa-pinterest" aria-hidden="true"></i>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<i class="fa fa-instagram" aria-hidden="true"></i>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<i class="fa fa-facebook" aria-hidden="true"></i>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<i class="fa fa-twitter" aria-hidden="true"></i>
-					</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-</footer>
+	</footer>
 </div>
 @* IMPORT PLUGINS *@
 <script src="~/plugins/jquery/dist/jquery.min.js"></script>

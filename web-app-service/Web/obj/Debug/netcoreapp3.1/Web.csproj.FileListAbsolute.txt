@@ -1086,3 +1086,5 @@ C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Header\_SearchNoResultsPartial.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Header\_SearchPartial.cshtml.g.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Header\_SearchResultsPartial.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_SocialPartial.cshtml.g.cs
+C:\source\repos\sneaker-resale-platform\web-app-service\Web\obj\Debug\netcoreapp3.1\Razor\Views\Shop\Partial\ModelPartial.cshtml.g.cs

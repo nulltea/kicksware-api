@@ -49,7 +49,8 @@ namespace Web.Controllers
 			{
 				"references" => InitFilterHandler<SneakerReference>(),
 				"products" => InitFilterHandler<SneakerProduct>(),
-				"brand" => InitFilterHandler<SneakerReference>(), //TODO custom builder
+				"brand" => InitFilterHandler<SneakerReference>(),
+				"model" => InitFilterHandler<SneakerReference>(),
 				_ => InitFilterHandler<SneakerReference>(),
 			};
 
