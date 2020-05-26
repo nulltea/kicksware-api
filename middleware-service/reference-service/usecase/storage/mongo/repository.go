@@ -234,7 +234,7 @@ func (r *repository) buildQueryPipeline(matchQuery bson.M, param meta.RequestPar
 		{"$lookup", bson.M {
 			"from": "brands",
 			"localField": "brand",
-			"foreignField": "_id",
+			"foreignField": "uniqueid",
 			"as": "brand",
 		}},
 	})
@@ -248,7 +248,7 @@ func (r *repository) buildQueryPipeline(matchQuery bson.M, param meta.RequestPar
 		{"$lookup", bson.M {
 			"from": "models",
 			"localField": "model",
-			"foreignField": "_id",
+			"foreignField": "uniqueid",
 			"as": "model",
 		}},
 	})
@@ -262,7 +262,7 @@ func (r *repository) buildQueryPipeline(matchQuery bson.M, param meta.RequestPar
 		{"$lookup", bson.M {
 			"from": "models",
 			"localField": "basemodel",
-			"foreignField": "_id",
+			"foreignField": "uniqueid",
 			"as": "basemodel",
 		}},
 	})

@@ -17,6 +17,11 @@ namespace Web.Handlers.Filter
 				model.AddHiddenFilterGroup("brandname", ExpressionType.Equal)
 					.AssignParameter(Convert.ToString(brandID), Convert.ToString(brandID));
 			}
+			else if (AdditionalParams != null && AdditionalParams.TryGetValue("modelID", out var modelID))
+			{
+				model.AddHiddenFilterGroup("basemodel", ExpressionType.Equal)
+					.AssignParameter(Convert.ToString(modelID), Convert.ToString(modelID));
+			}
 			else
 			{
 				model.AddFilterGroup("Brand", "brandname")

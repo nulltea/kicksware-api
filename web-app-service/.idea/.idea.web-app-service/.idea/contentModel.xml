@@ -105,7 +105,6 @@
           </e>
           <e p="UI" t="Include">
             <e p="FilterColor.cs" t="Include" />
-            <e p="SearchType.cs" t="Include" />
             <e p="SortCriteria.cs" t="Include" />
           </e>
         </e>
@@ -291,6 +290,7 @@
           <e p="Shop" t="Include">
             <e p="ShopBrandController.cs" t="Include" />
             <e p="ShopController.cs" t="Include" />
+            <e p="ShopModelController.cs" t="Include" />
             <e p="ShopProductItemController.cs" t="Include" />
             <e p="ShopProductsController.cs" t="Include" />
             <e p="ShopReferenceItemController.cs" t="Include" />
@@ -460,6 +460,7 @@
             <e p="_LockedHandlerPartial.cshtml" t="Include" />
             <e p="_LoginPartial.cshtml" t="Include" />
             <e p="_PagedPartial.cshtml" t="Include" />
+            <e p="_SocialPartial.cshtml" t="Include" />
             <e p="_ValidationScriptsPartial.cshtml" t="Include" />
             <e p="Error.cshtml" t="Include" />
             <e p="Header" t="Include">
@@ -475,6 +476,7 @@
             <e p="Partial" t="Include">
               <e p="_NoResultsPartial.cshtml" t="Include" />
               <e p="BrandPartial.cshtml" t="Include" />
+              <e p="ModelPartial.cshtml" t="Include" />
               <e p="ProductsPartial.cshtml" t="Include" />
               <e p="ReferencesPartial.cshtml" t="Include" />
             </e>
@@ -486,6 +488,91 @@
         <e p="Web.csproj" t="IncludeRecursive" />
         <e p="wwwroot" t="Include">
           <e p="favicon.ico" t="Include" />
+          <e p="files" t="Include">
+            <e p="photos" t="Include">
+              <e p="References" t="Include">
+                <e p="0169FS-001_1.png" t="Include" />
+                <e p="0171FS-001_1.png" t="Include" />
+                <e p="0179FS-018_1.png" t="Include" />
+                <e p="0205FS-018_1.png" t="Include" />
+                <e p="0252FS-001_1.png" t="Include" />
+                <e p="127196c_1_2.png" t="Include" />
+                <e p="128663c_1.png" t="Include" />
+                <e p="141754c_1.png" t="Include" />
+                <e p="141754c_1_1.png" t="Include" />
+                <e p="141829c_1.png" t="Include" />
+                <e p="143275c_1.png" t="Include" />
+                <e p="144747c_1.png" t="Include" />
+                <e p="145350c_1.png" t="Include" />
+                <e p="158601C_1.png" t="Include" />
+                <e p="163780C_1.png" t="Include" />
+                <e p="165600C_1.png" t="Include" />
+                <e p="167509C_1.png" t="Include" />
+                <e p="1E70182125-0_1AP.png" t="Include" />
+                <e p="1E70182125-8_1AP.png" t="Include" />
+                <e p="1F30191004-3_1.png" t="Include" />
+                <e p="1F30191005-0_1.png" t="Include" />
+                <e p="1F30191005-4_1.png" t="Include" />
+                <e p="1f30191005_4_1.png" t="Include" />
+                <e p="2007SFW-005_1.png" t="Include" />
+                <e p="248_1.png" t="Include" />
+                <e p="332148-011_1.png" t="Include" />
+                <e p="332148-019_1.png" t="Include" />
+                <e p="332148-022_1.png" t="Include" />
+                <e p="332148-411_1.png" t="Include" />
+                <e p="344335-051_1.png" t="Include" />
+                <e p="367516-01_1.png" t="Include" />
+                <e p="367996-01_1.png" t="Include" />
+                <e p="367996-02_1.png" t="Include" />
+                <e p="367997-03_1.png" t="Include" />
+                <e p="368024-01_1.png" t="Include" />
+                <e p="429676_401_1.png" t="Include" />
+                <e p="472665-500_1.png" t="Include" />
+                <e p="488371_200_1.png" t="Include" />
+                <e p="541100_005_1_1.png" t="Include" />
+                <e p="607078-200_1.png" t="Include" />
+                <e p="630847-077_1.png" t="Include" />
+                <e p="684593-001_1.png" t="Include" />
+                <e p="698595_109_1.png" t="Include" />
+                <e p="716616-001_1.png" t="Include" />
+                <e p="716993-600_1.png" t="Include" />
+                <e p="718763-041_1.png" t="Include" />
+                <e p="742549_190_1.png" t="Include" />
+                <e p="776652-383_1.png" t="Include" />
+                <e p="840606_192_1_1.png" t="Include" />
+                <e p="az-k109-001-2_1.png" t="Include" />
+                <e p="b24105_1_1.png" t="Include" />
+                <e p="b26367_1.png" t="Include" />
+                <e p="b27171_1.png" t="Include" />
+                <e p="B27172_1.png" t="Include" />
+                <e p="b41858_1.png" t="Include" />
+                <e p="BA9621_1.png" t="Include" />
+                <e p="BB0802_1.png" t="Include" />
+                <e p="bb4073_1.png" t="Include" />
+                <e p="BB9527_1.png" t="Include" />
+                <e p="CQ9597-401_1.png" t="Include" />
+                <e p="ct_spec_hi_123736_1_1.png" t="Include" />
+                <e p="EF3500_1.png" t="Include" />
+                <e p="eg7492_1_1.png" t="Include" />
+                <e p="F97399_1.png" t="Include" />
+                <e p="FW4849_1.png" t="Include" />
+                <e p="FX0494_1.png" t="Include" />
+                <e p="kobe_10_as_742546-097_1_1.png" t="Include" />
+                <e p="kobe_10_elite_718763-091_1.png" t="Include" />
+                <e p="kobe_9_695353-384_1_1.png" t="Include" />
+                <e p="kobe_9_em_premium_669630-604_1.png" t="Include" />
+                <e p="lebron_10_ext_qs_607078-001_1.png" t="Include" />
+                <e p="lebron_12_684593-607_1_1.png" t="Include" />
+                <e p="lebron_12_low_724557-616_1_1.png" t="Include" />
+                <e p="lebron_8_v_2_429676-002_1_1.png" t="Include" />
+                <e p="M115003_1AP.png" t="Include" />
+                <e p="M182091D-BKX_1AP.png" t="Include" />
+                <e p="M182091D-WHX_1AP.png" t="Include" />
+                <e p="S75937_1.png" t="Include" />
+                <e p="zoom_kobe_8_ext_582554-001_1.png" t="Include" />
+              </e>
+            </e>
+          </e>
           <e p="fonts" t="Include">
             <e p="Orbitron" t="Include">
               <e p="OFL.txt" t="Include" />
@@ -544,6 +631,7 @@
             <e p="favorite.svg" t="Include" />
             <e p="filter.svg" t="Include" />
             <e p="filter_used.svg" t="Include" />
+            <e p="github.svg" t="Include" />
             <e p="google.svg" t="Include" />
             <e p="grid.svg" t="Include" />
             <e p="heroes" t="Include">
@@ -597,6 +685,8 @@
             <e p="icon_1.svg" t="Include" />
             <e p="icon_2.svg" t="Include" />
             <e p="icon_3.svg" t="Include" />
+            <e p="instagram.svg" t="Include" />
+            <e p="linkedin.svg" t="Include" />
             <e p="list.svg" t="Include" />
             <e p="list_.svg" t="Include" />
             <e p="logos" t="Include">

@@ -13,7 +13,7 @@ namespace Web.Controllers
 		[Breadcrumb("Shop", FromAction = "Index", FromController = typeof(HomeController))]
 		public IActionResult Brand(string brandID, int page = 1, string sortBy = default)
 		{
-			var references = InitFilterHandler<SneakerReference>(new {brandID}); // TODO custom builder
+			var references = InitFilterHandler<SneakerReference>(new {brandID});
 			if (!string.IsNullOrEmpty(sortBy)) references.ChooseSortParameter(sortBy);
 			references.FetchPage(page);
 

@@ -13,7 +13,7 @@
           "InnerContent": [
             {
               "Caption": "LeBron James",
-              "RouteValues": "LeBron"
+              "RouteValues": "Nike_LeBron"
             },
             {
               "Caption": "Kobe Bryant"
@@ -59,6 +59,9 @@
               "Caption": "Trainer"
             },
             {
+              "Caption": "Shox"
+            },
+            {
               "Caption": "Nike Off-White"
             },
             {
@@ -97,11 +100,11 @@
             },
             {
               "Caption": "VaporMax",
-              "RouteValues": "Vapormax"
+              "RouteValues": "Nike_Vapormax"
             },
             {
               "Caption": "Other Air Max",
-              "RouteValues": "Air Max"
+              "RouteValues": "Nike_Air-Max"
             }
           ]
         },
@@ -206,19 +209,19 @@
           "InnerContent": [
             {
               "Caption": "Future",
-              "RouteValues": "Jordan-Future"
+              "RouteValues": "Jordan_Jordan-Future"
             },
             {
               "Caption": "Spiz'ike",
-              "RouteValues": "Jordan-Spizike"
+              "RouteValues": "Jordan_Jordan-Spizike"
             },
             {
               "Caption": "Son Of Mars",
-              "RouteValues": "Jordan-Son-Of-Mars"
+              "RouteValues": "Jordan_Jordan-Son-Of-Mars"
             },
             {
               "Caption": "Why Not Zer0",
-              "RouteValues": "Jordan-Why-Not-Zer0"
+              "RouteValues": "Jordan_Jordan-Why-Not-Zer0"
             },
             {
               "Caption": "More",
@@ -240,7 +243,7 @@
               "Caption": "Ultra-Boost"
             },
             {
-              "Caption": "NDM"
+              "Caption": "NMD"
             },
             {
               "Caption": "Tubular"
@@ -281,30 +284,36 @@
       "Action": "Brand",
       "InnerContent": [
         {
-          "Caption": "Addidas Yeezy",
+          "Caption": "Adidas Yeezy",
           "Action": "Model",
           "InnerContent": [
             {
-              "Caption": "Yeezy Boost"
+              "Caption": "Yeezy Boost",
+              "RouteValues": "Adidas_Yeezy-Boost"
             },
             {
-              "Caption": "Yeezy 350"
+              "Caption": "Yeezy 350",
+              "RouteValues": "Adidas_Yeezy-350"
             },
             {
-              "Caption": "Yeezy 500"
+              "Caption": "Yeezy 500",
+              "RouteValues": "Adidas_Yeezy-500"
             },
             {
-              "Caption": "Yeezy 700"
+              "Caption": "Yeezy 700",
+              "RouteValues": "Adidas_Yeezy-700"
             },
             {
-              "Caption": "Yeezy 750"
+              "Caption": "Yeezy 750",
+              "RouteValues": "Adidas_Yeezy-750"
             },
             {
-              "Caption": "Yeezy 950"
+              "Caption": "Yeezy 950",
+              "RouteValues": "Adidas_Yeezy-950"
             },
             {
               "Caption": "More Yeezy",
-              "RouteValues": "Yeezy"
+              "RouteValues": "Adidas_Yeezy"
             }
           ]
         },
@@ -313,7 +322,8 @@
           "Action": "Model",
           "InnerContent": [
             {
-              "Caption": "Air Yeezy"
+              "Caption": "Air Yeezy",
+              "RouteValues": "Nike_Air-Yeezy"
             }
           ]
         }
@@ -454,10 +464,6 @@
             {
               "Action": "Brand",
               "Caption": "KARHU"
-            },
-            {
-              "Action": "Brand",
-              "Caption": "Lacoste"
             }
           ]
         }

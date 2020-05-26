@@ -61,6 +61,7 @@ namespace Web.Handlers.Menu
 
 			if (InnerContent.Count == 1)
 			{
+				InnerContent.First().FillMissingAttributes();
 				foreach (var model in InnerContent.First().InnerContent)
 				{
 					subPanel.InnerHtml.AppendHtml(model.Render(html));
