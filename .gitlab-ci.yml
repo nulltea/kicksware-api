@@ -1,0 +1,33 @@
+image:
+    name: docker/compose:latest
+    entrypoint: ["/bin/sh", "-c"]
+
+services:
+    - docker:dind
+
+variables:
+  DOCKER_HOST: tcp://docker:2375/
+  DOCKER_DRIVER: overlay2
+
+stages:
+    - test
+    - deploy
+
+before_script:
+    - docker version
+    - docker-compose version
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+
+step-middleware-deploy:
+    stage: deploy
+    before_script:
+    - export DYNAMIC_ENV_VAR=DEVELOP
+    tags:
+      - middleware
+      - deploy
+    script:
+      - echo setting up env $DYNAMIC_ENV_VAR
+      - docker-compose -f middleware-service\docker-compose.yml down
+      - docker-compose -f middleware-service\docker-compose.yml build
+      - docker-compose -f middleware-service\docker-compose.yml up -d
+    
