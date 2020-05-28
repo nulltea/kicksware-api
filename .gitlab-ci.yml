@@ -6,7 +6,7 @@ services:
     - docker:dind
 
 variables:
-    DOCKER_HOST: http://0.0.0.0:2375/
+    DOCKER_HOST: http://docker:2375/
 
 stages:
     - test
