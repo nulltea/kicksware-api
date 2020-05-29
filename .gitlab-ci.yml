@@ -1,6 +1,8 @@
 image:
     name: docker/compose:latest
-    entrypoint: ["/bin/sh", "-c"]
+    entrypoint: ["env", "-u", "DOCKER_HOST"]
+    command: ["dockerd-entrypoint.sh"]
+
 
 services:
     - docker:dind
