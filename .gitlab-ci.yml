@@ -30,7 +30,6 @@ step-middleware-deploy:
       - middleware
       - deploy
     script:
-      - docker build middleware-service/user-service/docker
       - echo setting up env $DYNAMIC_ENV_VAR
       - su docker-compose -f middleware-service/docker-compose.yml down
       - su docker-compose -f middleware-service/docker-compose.yml build
