@@ -14,8 +14,9 @@ before_script:
     - docker version
     - docker-compose version
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
-    - export IMAGE=$CI_REGISTRY/root/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME
+    - export IMAGE=$CI_REGISTRY/$CI_REGISTRY_USER/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME
     - export MIDDLEWARE_IMAGE=$IMAGE:middleware
+    - echo $CI_REGISTRY_USER
 
 step-middleware-deploy:
     stage: deploy
@@ -29,5 +30,5 @@ step-middleware-deploy:
       - docker pull $IMAGE:middleware || true
       - docker-compose -f middleware-service/docker-compose.yml down
       - docker-compose -f middleware-service/docker-compose.yml build
-      - docker-compose -f middleware-service/docker-compose.yml push $IMAGE
+      - docker-compose -f middleware-service/docker-compose.yml push $CI_REGISTRY/$CI_REGISTRY_USER/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME
     
