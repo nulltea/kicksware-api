@@ -1,11 +1,13 @@
 image:
     name: docker/compose:latest
-    entrypoint: ["env", "-u", "DOCKER_HOST"]
-    command: ["dockerd-entrypoint.sh"]
+    entrypoint: ["/bin/sh", "-c"]
 
 
 services:
-    - docker:dind
+    - name: docker:dind
+      entrypoint: ["env", "-u", "DOCKER_HOST"]
+      command: ["dockerd-entrypoint.sh"]
+
 
 variables:
     DOCKER_HOST: docker:2375
