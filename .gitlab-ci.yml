@@ -16,6 +16,7 @@ before_script:
     - docker version
     - docker-compose version
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker info
 
 step-middleware-deploy:
     stage: deploy
@@ -25,6 +26,7 @@ step-middleware-deploy:
       - middleware
       - deploy
     script:
+      - docker build middleware-service/user-service/docker
       - echo setting up env $DYNAMIC_ENV_VAR
       - su docker-compose -f middleware-service/docker-compose.yml down
       - su docker-compose -f middleware-service/docker-compose.yml build
