@@ -29,7 +29,7 @@ services:
       - traefik.docker.network=kicksware-middleware_web
     ports:
       - 80:80
-      - 443:443
+      - 44300:44300
       - 8888:8888
     networks:
       - web
