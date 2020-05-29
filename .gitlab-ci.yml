@@ -26,8 +26,7 @@ step-middleware-deploy:
       - deploy
     script:
       - echo setting up env $DYNAMIC_ENV_VAR
-      - docker pull $IMAGE:middleware || true
-      - docker-compose -f middleware-service/docker-compose.yml down
-      - docker-compose -f middleware-service/docker-compose.yml build
-      - docker-compose -f middleware-service/docker-compose.yml push $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME
+      - docker-compose down
+      - docker-compose build
+      - docker-compose up
     
