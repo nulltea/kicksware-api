@@ -200,7 +200,6 @@ networks:
     driver: bridge
   web:
     driver: bridge
-    external: true
 
 volumes:
   elasticsearch-data:
