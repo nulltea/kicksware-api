@@ -1,16 +1,6 @@
-image:
-    name: docker/compose:latest
-    entrypoint: ["/bin/sh", "-c"]
-
-
+image: docker:latest
 services:
-    - name: docker:dind
-      entrypoint: ["env", "-u", "DOCKER_HOST"]
-      command: ["dockerd-entrypoint.sh"]
-
-
-variables:
-    DOCKER_HOST: docker:2375
+  - docker:dind
 
 stages:
     - test
@@ -32,6 +22,9 @@ step-middleware-deploy:
       - deploy
     script:
       - echo setting up env $DYNAMIC_ENV_VAR
+      - sudo apt-get install -y python-pip
+      - sudo pip install docker-compose
+      - sudo docker image prune -f
       - sudo docker-compose -f middleware-service/docker-compose.yml down
       - sudo docker-compose -f middleware-service/docker-compose.yml build
       - sudo docker-compose -f middleware-service/docker-compose.yml up -d
