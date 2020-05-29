@@ -22,7 +22,7 @@ step-middleware-deploy:
       - deploy
     script:
       - echo setting up env $DYNAMIC_ENV_VAR
-      - apk update && apk add bash && apk add git && apk update && apt-get install -y python-pip
+      - apk add py-pip
       - pip install docker-compose
       - docker image prune -f
       - docker-compose -f middleware-service/docker-compose.yml down
