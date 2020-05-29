@@ -17,6 +17,7 @@ stages:
     - deploy
 
 before_script:
+    - apk update && apk add bash
     - docker version
     - docker-compose version
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
