@@ -29,4 +29,16 @@ step-middleware-deploy:
       - docker-compose down
       - docker-compose build
       - docker-compose up
+
+step-webapp-deploy:
+    stage: deploy
+    before_script:
+    - export DYNAMIC_ENV_VAR=DEVELOP
+    tags:
+      - webapp
+      - deploy
+    script:
+      - echo setting up env $DYNAMIC_ENV_VAR
+      - docker build -f web-app-service\docker\Dockerfile -t webapp .\web-app-service
+      - docker run webapp
     
