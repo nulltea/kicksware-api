@@ -1,5 +1,5 @@
 image:
-    name: docker/compose:stable
+    name: docker/compose:latest
     entrypoint: ["/bin/sh", "-c"]
 
 
