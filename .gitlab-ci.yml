@@ -29,5 +29,5 @@ step-middleware-deploy:
       - docker pull $IMAGE:middleware || true
       - docker-compose -f middleware-service/docker-compose.yml down
       - docker-compose -f middleware-service/docker-compose.yml build
-      - docker-compose -f middleware-service/docker-compose.yml push $IMAGE:middleware
+      - docker-compose -f middleware-service/docker-compose.yml push $IMAGE
     
