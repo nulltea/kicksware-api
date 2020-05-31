@@ -10,7 +10,7 @@ services:
       - --api.insecure
       - --api.dashboard=true
       - --providers.docker=true
-      - --entryPoints.web.address=:80
+      - --entryPoints.web.address=:88
       # - --entryPoints.websecure.address=:443
       # - --certificatesResolvers.le.acme.email=microservicego@gmail.com
       # - --certificatesResolvers.le.acme.storage=/cert/acme.json
