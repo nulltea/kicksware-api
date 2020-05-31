@@ -28,7 +28,7 @@ services:
       # - traefik.http.middlewares.traefik-auth.basicauth.users=USER:PASSWORD
       - traefik.docker.network=kicksware-middleware_web
     ports:
-      - 80:80
+      - 8008:8008
       - 443:443
       - 8888:8888
     networks:
