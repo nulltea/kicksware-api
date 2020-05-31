@@ -39,7 +39,7 @@ step-webapp-deploy:
       - deploy
     script:
       - echo setting up env $DYNAMIC_ENV_VAR
-      - docker container stop $(docker container ps -q --filter ancestor=webapp)
+      - docker rm -f webapp 2>/dev/null || true
       - docker build -f web-app-service/docker/Dockerfile -t webapp ./web-app-service
       - docker run -d webapp
     
