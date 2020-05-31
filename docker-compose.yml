@@ -11,7 +11,6 @@ services:
       - --api.dashboard=true
       - --providers.docker=true
       - --entryPoints.web.address=:80
-      - --entryPoints.webapp.address=:88
       # - --entryPoints.websecure.address=:443
       # - --certificatesResolvers.le.acme.email=microservicego@gmail.com
       # - --certificatesResolvers.le.acme.storage=/cert/acme.json
@@ -19,7 +18,7 @@ services:
       # - --certificatesResolvers.le.acme.dnsChallenge.provider=digitalocean
     labels:
       - traefik.http.routers.traefik.entrypoints=web
-      - traefik.http.routers.traefik.rule=Host(`kicksware.com`)
+      # - traefik.http.routers.traefik.rule=Host(`kicksware.com`)
       # - traefik.http.routers.traefik-secure.entrypoints=websecure
       # - traefik.http.routers.traefik-secure.rule=Host(`kicksware.com`)
       # - traefik.http.routers.traefik.middlewares=traefik-https-redirect
@@ -27,156 +26,16 @@ services:
       # - traefik.http.middlewares.traefik-https-redirect.redirectscheme.permanent=true
       # - traefik.http.routers.traefik-secure.middlewares=traefik-auth
       # - traefik.http.middlewares.traefik-auth.basicauth.users=USER:PASSWORD
-      - traefik.docker.network=sneaker-resale-platform_web
+      - traefik.docker.network=kicksware-middleware_web
     ports:
-      - 80:80
+      - 88:88
       - 443:443
-      - 8888:8888
     networks:
       - web
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./cert:/cert
 
-  product-service:
-    build:
-      context: ./middleware-service/product-service
-      dockerfile: ./docker/Dockerfile
-      target: dev
-    env_file: ./middleware-service/product-service/env/.env
-    image: product-service
-    restart: always
-    labels:
-      - traefik.http.routers.product-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/products`)
-      # - traefik.http.routers.product-service.tls=true
-      # - traefik.http.routers.product-service.tls.certresolver=le
-      - traefik.docker.network=sneaker-resale-platform_web
-    networks:
-      - web
-      - data
-    links:
-      - mongodb
-    depends_on:
-      - mongodb
-
-  user-service:
-    build:
-      context: ./middleware-service/user-service
-      dockerfile: ./docker/Dockerfile
-      target: dev
-    env_file: ./middleware-service/user-service/env/.env
-    image: user-service
-    restart: always
-    labels:
-      - traefik.http.routers.user-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/users`)
-      # - traefik.http.routers.user-service.tls=true
-      # - traefik.http.routers.user-service.tls.certresolver=le
-      - traefik.docker.network=sneaker-resale-platform_web
-    networks:
-      - web
-      - data
-    links:
-      - mongodb
-    depends_on:
-      - mongodb
-
-  search-service:
-    build:
-      context: ./middleware-service/elastic-search-service
-      dockerfile: ./docker/Dockerfile
-      target: dev
-    image: search-service
-    restart: always
-    env_file: ./middleware-service/elastic-search-service/env/.env
-    labels:
-      - traefik.http.routers.search-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/search`)
-      # - traefik.http.routers.search-service.tls=true
-      # - traefik.http.routers.search-service.tls.certresolver=le
-      - traefik.docker.network=sneaker-resale-platform_web
-    networks:
-      - web
-      - elastic
-      - data
-    links:
-      - mongodb
-      - elasticsearch
-      - kibana
-    depends_on:
-      - mongodb
-      - elasticsearch
-      - kibana
-
-  web-app:
-    build:
-      context: ./web-app-service
-      dockerfile: ./docker/Dockerfile
-    image: web-app
-    restart: always
-    env_file: ./web-app-service/env/.env
-    labels:
-      - traefik.http.routers.web-app.rule=Host(`kicksware.com`)
-      # - traefik.http.routers.web-app.tls=true
-      # - traefik.http.routers.web-app.tls.certresolver=le
-      - traefik.docker.network=sneaker-resale-platform_web
-    networks:
-      - web
-
-  mongodb:
-    image: mongo:3.6.17
-    restart: always
-    ports:
-      - 27017:27017
-      - 27018:27017
-    environment:
-      - MONGO_INITDB_DATABASE=sneakerResaleDB
-    volumes:
-      - ./backup/mongo:/backup/mongo
-      - ./backup/mongo/init.sh:/docker-entrypoint-initdb.d/init.sh
-    networks:
-      - data
-    logging:
-      driver: none
-
-  elasticsearch:
-    container_name: elasticsearch
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.1
-    restart: always
-    ports:
-      - 9200:9200
-      - 9300:9300
-    volumes:
-      - elasticsearch-data:/usr/share/elasticsearch/data
-    environment:
-      - xpack.monitoring.enabled=true
-      - xpack.watcher.enabled=false
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - discovery.type=single-node
-    networks:
-      - elastic
-    logging:
-      driver: none
-
-  kibana:
-    container_name: kibana
-    image: docker.elastic.co/kibana/kibana:7.6.1
-    ports:
-      - 5601:5601
-    depends_on:
-      - elasticsearch
-    environment:
-      - ELASTICSEARCH_URL=http://elasticsearch:9200
-    networks:
-      - elastic
-    logging:
-      driver: none
-
 networks:
-  elastic:
-    driver: bridge
-  data:
-    driver: bridge
   web:
-    driver: bridge
-
-volumes:
-  elasticsearch-data:
+    external: true

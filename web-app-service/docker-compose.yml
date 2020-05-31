@@ -1,42 +1,5 @@
 version: '3.7'
 services:
-  traefik:
-    container_name: traefik
-    image:  traefik:v2.0
-    restart: always
-    command:
-      - --log.level=INFO
-      - --api=true
-      - --api.insecure
-      - --api.dashboard=true
-      - --providers.docker=true
-      - --entryPoints.web.address=:80
-      - --entryPoints.webapp.address=:88
-      # - --entryPoints.websecure.address=:443
-      # - --certificatesResolvers.le.acme.email=microservicego@gmail.com
-      # - --certificatesResolvers.le.acme.storage=/cert/acme.json
-      # - --certificatesResolvers.le.acme.dnsChallenge=true
-      # - --certificatesResolvers.le.acme.dnsChallenge.provider=digitalocean
-    labels:
-      - traefik.http.routers.traefik.entrypoints=web
-      # - traefik.http.routers.traefik-secure.entrypoints=websecure
-      # - traefik.http.routers.traefik-secure.rule=Host(`kicksware.com`)
-      # - traefik.http.routers.traefik.middlewares=traefik-https-redirect
-      # - traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https
-      # - traefik.http.middlewares.traefik-https-redirect.redirectscheme.permanent=true
-      # - traefik.http.routers.traefik-secure.middlewares=traefik-auth
-      # - traefik.http.middlewares.traefik-auth.basicauth.users=USER:PASSWORD
-      - traefik.docker.network=sneaker-resale-platform_web
-    ports:
-      - 80:80
-      - 443:443
-      - 8080:8080
-    networks:
-      - web
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./cert:/cert
-
   web-app:
     build:
       context: ./web-app-service
@@ -55,7 +18,4 @@ services:
 
 networks:
   web:
-    driver: bridge
-
-volumes:
-  elasticsearch-data:
+    external: true

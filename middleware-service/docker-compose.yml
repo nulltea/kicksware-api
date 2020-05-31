@@ -1,42 +1,5 @@
 version: '3.7'
 services:
-  traefik:
-    container_name: traefik
-    image:  traefik:v2.0
-    restart: always
-    command:
-      - --log.level=INFO
-      - --api=true
-      - --api.insecure
-      - --api.dashboard=true
-      - --providers.docker=true
-      - --entryPoints.web.address=:80
-      # - --entryPoints.websecure.address=:443
-      # - --certificatesResolvers.le.acme.email=microservicego@gmail.com
-      # - --certificatesResolvers.le.acme.storage=/cert/acme.json
-      # - --certificatesResolvers.le.acme.dnsChallenge=true
-      # - --certificatesResolvers.le.acme.dnsChallenge.provider=digitalocean
-    labels:
-      - traefik.http.routers.traefik.entrypoints=web
-      # - traefik.http.routers.traefik.rule=Host(`kicksware.com`)
-      # - traefik.http.routers.traefik-secure.entrypoints=websecure
-      # - traefik.http.routers.traefik-secure.rule=Host(`kicksware.com`)
-      # - traefik.http.routers.traefik.middlewares=traefik-https-redirect
-      # - traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https
-      # - traefik.http.middlewares.traefik-https-redirect.redirectscheme.permanent=true
-      # - traefik.http.routers.traefik-secure.middlewares=traefik-auth
-      # - traefik.http.middlewares.traefik-auth.basicauth.users=USER:PASSWORD
-      - traefik.docker.network=kicksware-middleware_web
-    ports:
-      - 0.0.0.0:8008:8008
-      - 0.0.0.0:44300:44300
-      - 0.0.0.0:8888:8888
-    networks:
-      - web
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./cert:/cert
-
   products-service:
     build:
       context: ./product-service
@@ -50,7 +13,7 @@ services:
       - traefik.http.routers.product-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/products`)
       # - traefik.http.routers.product-service.tls=true
       # - traefik.http.routers.product-service.tls.certresolver=le
-      - traefik.docker.network=kicksware-middleware_web
+      - traefik.docker.network=web
     networks:
       - web
       - data
@@ -76,7 +39,7 @@ services:
         PathPrefix(`/api/mail`) || PathPrefix(`/api/interact`)
       # - traefik.http.routers.user-service.tls=true
       # - traefik.http.routers.user-service.tls.certresolver=le
-      - traefik.docker.network=kicksware-middleware_web
+      - traefik.docker.network=web
     networks:
       - web
       - data
@@ -102,7 +65,7 @@ services:
       - traefik.http.routers.reference-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/references`)
       # - traefik.http.routers.reference-service.tls=true
       # - traefik.http.routers.reference-service.tls.certresolver=le
-      - traefik.docker.network=kicksware-middleware_web
+      - traefik.docker.network=web
     volumes:
       - ./reference-service/env:/dist/env
       - ./key:/key
@@ -127,7 +90,7 @@ services:
       - traefik.http.routers.search-service.rule=Host(`kicksware.com`) && PathPrefix(`/api/search`)
       # - traefik.http.routers.search-service.tls=true
       # - traefik.http.routers.search-service.tls.certresolver=le
-      - traefik.docker.network=kicksware-middleware_web
+      - traefik.docker.network=web
     networks:
       - web
       - elastic
@@ -151,8 +114,8 @@ services:
     image: mongo:3.6.17
     restart: always
     ports:
-      - 0.0.0.0:27017:27017
-      - 0.0.0.0:27018:27017
+      - 27017:27017
+      - 27018:27017
     environment:
       - MONGO_INITDB_DATABASE=sneakerResaleDB
     networks:
@@ -165,8 +128,8 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.6.1
     restart: always
     ports:
-      - 0.0.0.0:9200:9200
-      - 0.0.0.0:9300:9300
+      - 9200:9200
+      - 9300:9300
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
     environment:
@@ -183,7 +146,7 @@ services:
     container_name: kibana
     image: docker.elastic.co/kibana/kibana:7.6.1
     ports:
-      - 0.0.0.0:5601:5601
+      - 5601:5601
     depends_on:
       - elasticsearch
     environment:
@@ -199,7 +162,7 @@ networks:
   data:
     driver: bridge
   web:
-    driver: bridge
+    external: true
 
 volumes:
   elasticsearch-data:

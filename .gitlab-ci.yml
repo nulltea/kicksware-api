@@ -17,6 +17,19 @@ before_script:
     - export IMAGE=$CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME
     - export MIDDLEWARE_IMAGE=$IMAGE:middleware
 
+step-proxy-deploy:
+    stage: deploy
+    before_script:
+    - export DYNAMIC_ENV_VAR=DEVELOP
+    tags:
+      - deploy
+      - proxy
+    script:
+      - echo setting up env $DYNAMIC_ENV_VAR
+      - docker-compose down
+      - docker-compose build
+      - docker-compose up -d
+
 step-middleware-deploy:
     stage: deploy
     before_script:
@@ -39,7 +52,7 @@ step-webapp-deploy:
       - deploy
     script:
       - echo setting up env $DYNAMIC_ENV_VAR
-      - docker rm -f webapp 2>/dev/null || true
-      - docker build -f web-app-service/docker/Dockerfile -t webapp ./web-app-service
-      - docker run -d -p 0.0.0.0:88:80 -p 0.0.0.0:443:443 webapp
+      - docker-compose -f web-app-service/docker-compose.yml down
+      - docker-compose -f web-app-service/docker-compose.yml build
+      - docker-compose -f web-app-service/docker-compose.yml up -d
     
