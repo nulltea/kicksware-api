@@ -101,13 +101,13 @@ namespace Web
 				.AddMiddlewareAuth<AuthService>(ConfigureAuthOptions)
 				.AddFacebook(facebookOptions =>
 				{
-					facebookOptions.AppId = Environment.GetEnvironmentVariable("Authentication:Facebook:AppId");
-					facebookOptions.AppSecret = Environment.GetEnvironmentVariable("Authentication:Facebook:AppSecret");
+					facebookOptions.AppId = Environment.GetEnvironmentVariable("AUTH_FACEBOOK_ID");
+					facebookOptions.AppSecret = Environment.GetEnvironmentVariable("AUTH_FACEBOOK_SECRET");
 				})
 				.AddGoogle(options =>
 				{
-					options.ClientId = Environment.GetEnvironmentVariable("Authentication:Google:ClientId");
-					options.ClientSecret = Environment.GetEnvironmentVariable("Authentication:Google:ClientSecret");
+					options.ClientId = Environment.GetEnvironmentVariable("AUTH_GOOGLE_ID");
+					options.ClientSecret = Environment.GetEnvironmentVariable("AUTH_GOOGLE_SECRET");
 				});
 
 			services.AddAuthorization(ConfigureAuthOptions);
