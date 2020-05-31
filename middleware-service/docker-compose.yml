@@ -28,9 +28,9 @@ services:
       # - traefik.http.middlewares.traefik-auth.basicauth.users=USER:PASSWORD
       - traefik.docker.network=kicksware-middleware_web
     ports:
-      - 8008:8008
-      - 44300:44300
-      - 8888:8888
+      - 0.0.0.0:8008:8008
+      - 0.0.0.0:44300:44300
+      - 0.0.0.0:8888:8888
     networks:
       - web
     volumes:
@@ -151,8 +151,8 @@ services:
     image: mongo:3.6.17
     restart: always
     ports:
-      - 27017:27017
-      - 27018:27017
+      - 0.0.0.0:27017:27017
+      - 0.0.0.0:27018:27017
     environment:
       - MONGO_INITDB_DATABASE=sneakerResaleDB
     networks:
@@ -165,8 +165,8 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.6.1
     restart: always
     ports:
-      - 9200:9200
-      - 9300:9300
+      - 0.0.0.0:9200:9200
+      - 0.0.0.0:9300:9300
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
     environment:
@@ -183,7 +183,7 @@ services:
     container_name: kibana
     image: docker.elastic.co/kibana/kibana:7.6.1
     ports:
-      - 5601:5601
+      - 0.0.0.0:5601:5601
     depends_on:
       - elasticsearch
     environment:
