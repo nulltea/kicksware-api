@@ -40,5 +40,5 @@ step-webapp-deploy:
     script:
       - echo setting up env $DYNAMIC_ENV_VAR
       - docker build -f web-app-service/docker/Dockerfile -t webapp ./web-app-service
-      - docker run webapp -d
+      - docker run -d webapp
     
