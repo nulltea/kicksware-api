@@ -41,5 +41,5 @@ step-webapp-deploy:
       - echo setting up env $DYNAMIC_ENV_VAR
       - docker rm -f webapp 2>/dev/null || true
       - docker build -f web-app-service/docker/Dockerfile -t webapp ./web-app-service
-      - docker run -d -p 0.0.0.0:8420:80 -p 0.0.0.0:443:443 webapp
+      - docker run -d -p 0.0.0.0:88:80 -p 0.0.0.0:443:443 webapp
     
