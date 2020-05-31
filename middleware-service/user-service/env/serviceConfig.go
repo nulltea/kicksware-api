@@ -7,12 +7,12 @@ import (
 )
 
 type ServiceConfig struct {
-	Common      CommonConfig    `yaml:"commonConfig"`
-	Auth        AuthConfig      `yaml:"authConfig"`
-	Mail        MailConfig      `yaml:"mailConfig"`
-	Mongo       DataStoreConfig `yaml:"mongoConfig"`
-	Postgres    DataStoreConfig `yaml:"postgresConfig"`
-	Redis       DataStoreConfig `yaml:"redisConfig"`
+	Common   CommonConfig    `yaml:"commonConfig"`
+	Auth     AuthConfig      `yaml:"authConfig"`
+	Mail     MailConfig      `yaml:"mailConfig"`
+	Mongo    DataStoreConfig `yaml:"mongoConfig"`
+	Postgres DataStoreConfig `yaml:"postgresConfig"`
+	Redis    DataStoreConfig `yaml:"redisConfig"`
 }
 
 type CommonConfig struct {
@@ -24,13 +24,14 @@ type CommonConfig struct {
 }
 
 type DataStoreConfig struct {
-	URL             string `yaml:"URL"`
-	Database        string `yaml:"database"`
-	Collection      string `yaml:"collection"`
-	LikesCollection string `yaml:"likesCollection"`
-	Login           string `yaml:"login"`
-	Password        string `yaml:"password"`
-	Timeout         int    `yaml:"timeout"`
+	URL              string `yaml:"URL"`
+	Database         string `yaml:"database"`
+	Collection       string `yaml:"collection"`
+	LikesCollection  string `yaml:"likesCollection"`
+	RemoteCollection string `yaml:"remoteCollection"`
+	Login            string `yaml:"login"`
+	Password         string `yaml:"password"`
+	Timeout          int    `yaml:"timeout"`
 }
 
 type AuthConfig struct {

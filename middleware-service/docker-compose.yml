@@ -10,7 +10,7 @@ services:
       - --api.insecure
       - --api.dashboard=true
       - --providers.docker=true
-      - --entryPoints.web.address=:8008 
+      - --entryPoints.web.address=:80
       # - --entryPoints.websecure.address=:443
       # - --certificatesResolvers.le.acme.email=microservicego@gmail.com
       # - --certificatesResolvers.le.acme.storage=/cert/acme.json
@@ -28,8 +28,8 @@ services:
       # - traefik.http.middlewares.traefik-auth.basicauth.users=USER:PASSWORD
       - traefik.docker.network=kicksware-middleware_web
     ports:
-      - 8008:8008 
-      - 44300:44300
+      - 80:80
+      - 443:443
       - 8888:8888
     networks:
       - web
@@ -155,6 +155,11 @@ services:
       - 27018:27017
     environment:
       - MONGO_INITDB_DATABASE=sneakerResaleDB
+    volumes:
+      - type: bind
+        source: ./backup/mongo
+        target: /backup/mongo
+      - ./backup/mongo/init.sh:/docker-entrypoint-initdb.d/init.sh
     networks:
       - data
     logging:

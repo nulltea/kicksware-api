@@ -14,11 +14,13 @@ namespace Web.Handlers.Authentication
 
 		public static readonly PathString UnauthorisedPath = "/Account/Unauthorised";
 
-		public static readonly string ReturnUrlParameter = "ReturnUrl";
+		public const string ReturnUrlParameter = "ReturnUrl";
 
-		public static readonly string CookiePrefix = "Kicksware.";
+		public const string CookiePrefix = "Kicksware.";
 
-		public static readonly string TokenPrefix = "auth.token";
+		public const string TokenPrefix = "auth.token";
+
+		public const string RemoteAuthSchemeKey = ".AuthScheme";
 
 		public static string AuthCookieName => string.Concat(CookiePrefix, AuthenticationScheme);
 	}

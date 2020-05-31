@@ -9,6 +9,8 @@ namespace Core.Services
 
 		bool Login(AuthCredentials credentials, out AuthToken token);
 
+		bool Remote(User user, out AuthToken token);
+
 		bool Guest(out AuthToken token);
 
 		void Logout(AuthToken token);
@@ -20,6 +22,8 @@ namespace Core.Services
 		Task<AuthToken> SingUpAsync(User user);
 
 		Task<AuthToken> LoginAsync(AuthCredentials credentials);
+
+		Task<AuthToken> RemoteAsync(User user);
 
 		Task<AuthToken> GuestAsync();
 

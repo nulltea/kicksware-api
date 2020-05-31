@@ -263,8 +263,9 @@ function bindRequestUpdateEvent(element, page=1, event="change") {
 		let pathValues = window.location.pathname.split("/");
 		let controller = pathValues[1];
 		let entity = pathValues[2];
+		let entityID = pathValues[3];
 		toggleLoadOverlay();
-		$.post(`/${controller}/${entity}/requestUpdate`, {filterInputs: formFilterParameters(), page: page, sortBy: formSortParameter() }, function(response) {
+		$.post(`/${controller}/${entity}/requestUpdate/${entityID}`, {filterInputs: formFilterParameters(), page: page, sortBy: formSortParameter() }, function(response) {
 			$(".result-content").html(response["content"]);
 			$(".count span").text(`Showing ${(page - 1) * response["pageSize"]}-${Math.min(response["pageSize"], response["length"])} / ${response["length"]} results`);
 			setLayoutMode();

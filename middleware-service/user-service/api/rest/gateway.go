@@ -38,6 +38,7 @@ func authRoutes(rest RestfulHandler) (r *chi.Mux) {
 	r = chi.NewRouter()
 	r.Post("/sign-up", rest.SingUp)
 	r.Post("/login", rest.Login)
+	r.Post("/remote", rest.Remote)
 	r.Get("/guest", rest.Guest)
 	r.Get("/token-refresh", rest.RefreshToken)
 	r.Get("/logout", rest.Logout)

@@ -1,4 +1,7 @@
-﻿using Core.Attributes;
+﻿using System.Collections.Generic;
+using Core.Attributes;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Core.Entities.Users
 {
@@ -25,7 +28,8 @@ namespace Core.Entities.Users
 
 		public bool Confirmed { get; set; }
 
-		public string Role { get; set; }
+		[JsonConverter(typeof(StringEnumConverter))]
+		public UserRole Role { get; set; }
 
 		public PaymentInfo PaymentInfo { get; set; } = new PaymentInfo();
 
@@ -33,6 +37,13 @@ namespace Core.Entities.Users
 
 		public Settings Settings { get; set; } = new Settings();
 
+		[JsonConverter(typeof(StringEnumConverter))]
+		public UserProvider Provider { get; set; }
+
+		public Dictionary<UserProvider, string> ConnectedProviders { get; set; } = new Dictionary<UserProvider, string>();
+
 		public bool Equals(User other) => other != null && UniqueID == other.UniqueID;
+
+		public bool IsEmpty() => string.IsNullOrEmpty(UniqueID) && string.IsNullOrEmpty(Email) && string.IsNullOrEmpty(Username);
 	}
 }

@@ -24,3 +24,4 @@ middleware-service/user-service/keys/
 middleware-service/backup/mongo/
 middleware-service/key/
 middleware-service/user-service/key/
+*.cd

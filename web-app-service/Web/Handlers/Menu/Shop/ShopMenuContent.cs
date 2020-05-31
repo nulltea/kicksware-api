@@ -156,7 +156,7 @@ namespace Web.Handlers.Menu
 		{
 			if (string.IsNullOrEmpty(RouteValues) && !string.IsNullOrEmpty(Caption))
 			{
-				if (!string.IsNullOrEmpty(ParentContent?.RouteValues))
+				if (!string.IsNullOrEmpty(ParentContent?.RouteValues) && !new[]{"More"}.Contains(ParentContent?.RouteValues))
 				{
 					RouteValues = string.Join("_", ParentContent?.RouteValues, Caption.ToFormattedID());
 					return;

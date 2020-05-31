@@ -22,6 +22,7 @@ type repository struct {
 	client     *mongo.Client
 	database   *mongo.Database
 	collection *mongo.Collection
+	remoteCollection *mongo.Collection
 	timeout    time.Duration
 }
 

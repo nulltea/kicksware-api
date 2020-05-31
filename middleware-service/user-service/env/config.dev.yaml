@@ -21,6 +21,7 @@ mongoConfig:
   database: sneakerResaleDB
   collection: users
   likesCollection: likes
+  remoteCollection: remotes
   login: admin
   password: admin
   timeout: 30

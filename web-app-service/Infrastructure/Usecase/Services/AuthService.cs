@@ -19,6 +19,9 @@ namespace Infrastructure.Usecase
 		public bool Login(AuthCredentials credentials, out AuthToken token) =>
 			(token = _client.Request<AuthToken>(new AuthLoginRequest(credentials))) != null;
 
+		public bool Remote(User user, out AuthToken token) =>
+			(token = _client.Request<AuthToken>(new AuthRemoteRequest(user))) != null;
+
 		public bool Guest(out AuthToken token) =>
 			(token = _client.Request<AuthToken>(new AuthGuestRequest())) != null;
 
@@ -34,6 +37,9 @@ namespace Infrastructure.Usecase
 
 		public Task<AuthToken> LoginAsync(AuthCredentials credentials) =>
 			_client.RequestAsync<AuthToken>(new AuthLoginRequest(credentials));
+
+		public Task<AuthToken> RemoteAsync(User user) =>
+			_client.RequestAsync<AuthToken>(new AuthRemoteRequest(user));
 
 		public Task<AuthToken> GuestAsync() =>
 			 _client.RequestAsync<AuthToken>(new AuthGuestRequest());

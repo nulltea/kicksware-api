@@ -150,13 +150,13 @@ section.about-section {
 		#creator-window {
 			max-width: 350px;
 			z-index: 3;
-			left: unset;
+			left: 100%;
 			bottom: 100%;
 			right: 0;
-			.transition-properties(right 600ms ease, bottom 600ms ease;);
+			.transition-properties(left 600ms ease, bottom 600ms ease;);
 
 			&.active {
-				right: 1050px;
+				left: 350px;
 				bottom: 175px;
 			}
 		}
@@ -238,13 +238,14 @@ section.about-section {
 			padding: 0 30px;
 			.with-theme({
 				h1 {
-					font-weight: 600;
+					font-family: Audiowide, sans-serif;
+					font-weight: 500;
 					letter-spacing: 2px;
 					color: @secondary;
 				}
 
 				hr {
-					width: calc(~"100vw - 600px");
+					width: 69vw;
 					height: 5px;
 					background: @secondary;
 				}

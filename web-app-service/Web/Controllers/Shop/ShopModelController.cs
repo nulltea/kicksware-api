@@ -16,13 +16,15 @@ namespace Web.Controllers
 			if (!string.IsNullOrEmpty(sortBy)) references.ChooseSortParameter(sortBy);
 			references.FetchPage(page);
 
-			var brand = references.FirstOrDefault()?.Brand ?? new SneakerBrand(modelID);
-			var baseModel = references.FirstOrDefault()?.Model ?? new SneakerModel(modelID);
+			var brand = references.FirstOrDefault()?.Brand
+					?? new SneakerBrand(modelID.Split("_")[0]);
+			var baseModel = references.FirstOrDefault()?.Model
+					?? new SneakerModel((modelID.Split("_").ElementAtOrDefault(1) ?? modelID).Replace("-", " "));
 
 			HeroCoverPath = baseModel.HeroPath ?? brand.HeroPath;
 			HeroBreadTitle = baseModel.Name;
-			HeroBreadSubTitle = brand.Description;
-			HeroLogoPath = brand.HeroPath;
+			HeroBreadSubTitle = brand.Name;
+			HeroLogoPath = brand.Logo;
 
 			AddBreadcrumbNode(nameof(Model), brand.Name);
 			return View("References", references);

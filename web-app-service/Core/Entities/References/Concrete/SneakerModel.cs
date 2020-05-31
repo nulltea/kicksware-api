@@ -36,7 +36,7 @@ namespace Core.Entities.References
 		public SneakerModel(string name, SneakerBrand brand) : this(name)
 		{
 			Brand = brand;
-			var predictedBase = name.Split(new[] {' ', '_', '-'}, StringSplitOptions.RemoveEmptyEntries)[0];
+			var predictedBase = name?.Split(new[] {' ', '_', '-'}, StringSplitOptions.RemoveEmptyEntries)[0];
 			if (predictedBase != name) BaseModel = new SneakerModel(predictedBase, brand);
 		}
 

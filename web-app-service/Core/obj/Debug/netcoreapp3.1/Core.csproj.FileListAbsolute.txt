@@ -71,7 +71,6 @@ C:\source\repos\sneaker-resale-platform\web-app-service\Core\bin\Debug\netcoreap
 C:\source\repos\sneaker-resale-platform\web-app-service\Core\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Hosting.Server.Abstractions.xml
 C:\source\repos\sneaker-resale-platform\web-app-service\Core\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Hosting.Abstractions.xml
 C:\source\repos\sneaker-resale-platform\web-app-service\Core\obj\Debug\netcoreapp3.1\Core.csprojAssemblyReference.cache
-C:\source\repos\sneaker-resale-platform\web-app-service\Core\obj\Debug\netcoreapp3.1\Core.csproj.CoreCompileInputs.cache
 C:\source\repos\sneaker-resale-platform\web-app-service\Core\obj\Debug\netcoreapp3.1\Core.AssemblyInfoInputs.cache
 C:\source\repos\sneaker-resale-platform\web-app-service\Core\obj\Debug\netcoreapp3.1\Core.AssemblyInfo.cs
 C:\source\repos\sneaker-resale-platform\web-app-service\Core\obj\Debug\netcoreapp3.1\Core.csproj.CopyComplete

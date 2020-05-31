@@ -33,6 +33,13 @@ namespace Core.Entities.Products
 
 		public string ModelName { get; set; }
 
+		public SneakerModel Model
+		{
+			get => _model ??= new SneakerModel(ModelName, Brand);
+			private set => _model = value;
+		}
+		private SneakerModel _model;
+
 		public string ModelSKU { get; set; }
 
 		public string ReferenceID { get; set; }
@@ -60,7 +67,7 @@ namespace Core.Entities.Products
 
 		public string Description { get; set; }
 
-		public User Owner { get; set; }
+		public string Owner { get; set; }
 
 		[JsonIgnore]
 		public List<string> Photos { get; set; } = new List<string>();
@@ -82,10 +89,10 @@ namespace Core.Entities.Products
 		[OnDeserialized]
 		internal void OnDeserialized(StreamingContext context)
 		{
-			foreach (var image in Images.Keys.Reverse())
+			foreach (var image in Images.Keys)
 			{
 				File.WriteAllBytes(Path.Combine(Constants.Constants.FileStoragePath, image), Images[image]);
-				Photos.Add(image);
+				Photos.Add(Path.Combine("/files/photos/products", image));
 			}
 		}
 

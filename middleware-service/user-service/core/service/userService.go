@@ -12,9 +12,11 @@ type UserService interface {
 	FetchByUsername(username string) (*model.User, error)
 	FetchAll(params meta.RequestParams) ([]*model.User, error)
 	FetchQuery(query meta.RequestQuery, params meta.RequestParams) ([]*model.User, error)
+	FetchRemote(remoteID string, provider model.UserProvider) (*model.User, error)
 	Register(user *model.User) error
 	GenerateUsername(user *model.User, save bool) (string, error)
 	Modify(user *model.User) error
+	ConnectProvider(userID string, remoteID string, provider model.UserProvider) error
 	Replace(user *model.User) error
 	Remove(code string) error
 	Count(query meta.RequestQuery, params meta.RequestParams) (int, error)

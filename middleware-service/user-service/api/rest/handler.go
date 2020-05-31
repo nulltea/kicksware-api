@@ -30,6 +30,7 @@ type RestfulHandler interface {
 	// Auth
 	SingUp(http.ResponseWriter, *http.Request)
 	Login(http.ResponseWriter, *http.Request)
+	Remote(w http.ResponseWriter, r *http.Request)
 	Guest(http.ResponseWriter, *http.Request)
 	RefreshToken(http.ResponseWriter, *http.Request)
 	Logout(http.ResponseWriter, *http.Request)

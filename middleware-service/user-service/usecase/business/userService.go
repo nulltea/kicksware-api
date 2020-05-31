@@ -2,6 +2,9 @@ package business
 
 import (
 	"errors"
+	"fmt"
+	"math/rand"
+	"strconv"
 	"strings"
 	"time"
 
@@ -22,12 +25,14 @@ var (
 )
 
 type userService struct {
-	repo repo.UserRepository
+	repo       repo.UserRepository
+	remoteRepo repo.RemoteRepository
 }
 
-func NewUserService(userRepo repo.UserRepository) service.UserService {
+func NewUserService(userRepo repo.UserRepository, remoteRepo repo.RemoteRepository) service.UserService {
 	return &userService{
 		userRepo,
+		remoteRepo,
 	}
 }
 
@@ -63,6 +68,13 @@ func (s *userService) FetchQuery(query meta.RequestQuery, params meta.RequestPar
 	return s.repo.FetchQuery(query, params)
 }
 
+func (s *userService) FetchRemote(remoteID string, provider model.UserProvider) (*model.User, error) {
+	userID, err := s.remoteRepo.Track(remoteID, provider); if err != nil {
+		return nil, err
+	}
+	return s.FetchOne(userID)
+}
+
 func (s *userService) GenerateUsername(user *model.User, save bool) (string, error) {
 	if len(user.Email) == 0 {
 		return "", ErrEmailInvalid
@@ -71,7 +83,8 @@ func (s *userService) GenerateUsername(user *model.User, save bool) (string, err
 	if another, _ := s.FetchByUsername(username); another != nil {
 		baseUsername := username
 		for another != nil {
-			username = baseUsername + xid.New().String()[:3]
+			rand.Seed(user.RegisterDate.Unix())
+			username = fmt.Sprintf("%v_%v", baseUsername, strconv.Itoa(rand.Int())[:3])
 			another, _ = s.FetchByUsername(username)
 		}
 	}
@@ -109,11 +122,27 @@ func (s *userService) Register(user *model.User) error {
 		return errs.Wrap(ErrUserInvalid, "service.repo.Register")
 	}
 	user.RegisterDate = time.Now()
-	user.UniqueID = xid.NewWithTime(user.RegisterDate).String()
+	if len(user.UniqueID) < 8 {
+		user.UniqueID = xid.NewWithTime(user.RegisterDate).String()
+	}
 	if len(user.Username) == 0 {
 		s.GenerateUsername(user, false)
 	}
-	return s.repo.Store(user)
+
+	if err := s.repo.Store(user); err != nil {
+		return err
+	}
+
+	if user.ConnectedProviders != nil && len(user.ConnectedProviders) != 0 {
+		if err := s.remoteRepo.Sync(user.UniqueID, user.ConnectedProviders); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func (s *userService) ConnectProvider(userID string, remoteID string, provider model.UserProvider) error {
+	return s.remoteRepo.Connect(userID, remoteID, provider)
 }
 
 

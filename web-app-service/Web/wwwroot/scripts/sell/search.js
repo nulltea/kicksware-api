@@ -116,9 +116,7 @@ function createButton(model) {
 
 	//custom submit action handler
 	$(submitButton).click(function (event) {
-		$.post($(".sell-form").attr("action"), model, function(response) {
-			window.location.href = response.redirectUrl;
-		});
+		window.location.href = `SetDetails?referenceID=${model.uniqueID}`;
 		event.preventDefault();
 	});
 

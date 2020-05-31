@@ -1,5 +1,7 @@
 ﻿function menuButtonInit() {
-	$(".account").off("click").click(function () {
+	$(".account, .account li").off("click").click(function (event) {
+		event.stopPropagation();
+		let target = $(this)
 		$.get("/Auth/Auth", function(response) {
 			if (response["logged"]) {
 				window.location.href = response["redirectUrl"];
@@ -7,8 +9,10 @@
 			}
 			$("#auth-modal").html(response["content"]);
 			window.redirectURL = response["redirectUrl"];
-			showDialog();
+			let mode = target.closest("#login-btn").length ? "login" : "sign-up";
+			showDialog(mode);
 		});
+
 	});
 }
 
@@ -225,8 +229,15 @@ function showDialog(mode) {
 	menuButtonInit();
 	modalInit();
 	verifyInit();
-	singUpOAuthInit();
-	singUpManualInit();
+
+	if (mode === "login") {
+		loginOAuthInit();
+		loginManualInit()
+	} else {
+		singUpOAuthInit();
+		singUpManualInit();
+	}
+
 	verifyInit();
 	commonInit();
 	resetAuthAlert();

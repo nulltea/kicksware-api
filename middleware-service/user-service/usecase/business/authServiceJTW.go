@@ -25,8 +25,6 @@ type authService struct {
 	publicKey *rsa.PublicKey
 }
 
-
-
 func NewAuthServiceJWT(userService service.UserService, authConfig env.AuthConfig) service.AuthService {
 	return &authService{
 		userService,
@@ -57,6 +55,31 @@ func (s *authService) Login(user *model.User) (*meta.AuthToken, error) {
 	// }
 
 	return s.GenerateToken(registered)
+}
+
+func (s *authService) Remote(user *model.User) (*meta.AuthToken, error) {
+	if user == nil || len(user.UniqueID) == 0 {
+		return nil, service.ErrInvalidRemoteID
+	} else if len(user.Provider) == 0 || user.Provider == model.Internal {
+		return nil, service.ErrInvalidRemoteProvider
+	}
+	remoteID := user.UniqueID
+	provider := user.Provider
+
+	if connected, err := s.userService.FetchRemote(remoteID, provider); err == nil && connected != nil {
+		return s.GenerateToken(connected)
+	}
+
+	if len(user.Email) != 0 {
+		if connected, err := s.userService.FetchByEmail(user.Email); err == nil && connected != nil {
+			if err = s.userService.ConnectProvider(connected.UniqueID, remoteID, provider); err != nil {
+				return nil, err
+			}
+			return s.GenerateToken(connected)
+		}
+	}
+
+	return s.SingUp(user)
 }
 
 func (s *authService) Guest() (*meta.AuthToken, error) {

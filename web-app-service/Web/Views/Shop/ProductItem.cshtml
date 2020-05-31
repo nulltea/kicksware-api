@@ -1,134 +1,140 @@
-﻿@model Core.Entities.References.SneakerReference
+﻿@using Core.Constants
+@using Web.Utils.Helpers
+@model SneakerProductViewModel
 @{
-    ViewBag.Title = Model.ModelName;
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    //var images = Model.Photos.Select(image => "/files/" + image).ToList();
-    var relatedProducts = ViewBag.RelatedProducts as List<SneakerProductViewModel>;
+	ViewBag.Title = Model.ModelName;
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	var relatedProducts = ViewBag.RelatedProducts as List<SneakerProductViewModel>;
 }
 
 @section Styles
 {
-   <link href="~/styles/css/shop/product-item.css" rel="stylesheet" />
-   <link href="~/styles/css/responsive/product-item.responsive.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="~/styles/css/shop/product-item.css"/>
+	<link href="~/styles/css/responsive/product-item.responsive.css" rel="stylesheet"/>
+	<link href="~/plugins/flickity/flickity.css" rel="stylesheet"/>
 }
 
-<!-- Product Details -->
 <div class="product-item">
-    <div class="container">
-        <div class="row details_row">
-            <!-- Product Image -->
-            <div class="col-lg-6">
-                <div class="details_image">
-                    <div class="details_image_large">
-                        <img src="@Model.ImagePath" alt="">
-                    </div>
-                    <div class="details_image_thumbnails d-flex flex-row align-items-start justify-content-between">
-                         @*@foreach (var image in images)
-                         {
-                             <div class="details_image_thumbnail" data-image=@image><img src=@image alt=""></div>
-                         }*@
-                    </div>
-                </div>
-            </div>
+	<div class="product-content">
+		<section class="row product-header elevated">
+			<div class="col-sm product-gallery">
+				<div class="image-carousel">
+					@foreach (var image in Model.Photos)
+					{
+						<picture>
+							<source srcset="@image" media="(min-width: 600px)">
+							<img src="@image" alt="">
+						</picture>
+					}
+				</div>
+			</div>
 
-            <!-- Product Content -->
-            <div class="col-lg-6">
-                <div class="details_content">
-                    <div class="details_name">@Html.DisplayFor(model => Model.BrandName)</div>
-                    <div class="details_name">@Html.DisplayFor(model => Model.ModelName)</div>
-                    <div class="details_price">@Html.DisplayFor(model => Model.Price)</div>
+			<!-- Reference Content -->
+			<div class="col-sm product-title">
+				<div class="title-header">
+					<div class="price-title">@Html.DisplayFor(model => Model.Price)</div>
+				</div>
+				<div class="title-body">
+					<div class="brand-title">@Html.DisplayFor(model => Model.BrandName)</div>
+					<div class="model-title">@Html.DisplayFor(model => Model.ModelName)</div>
 
-                    <!-- In Stock -->
-                    <div class="in_stock_container">
-                        <div class="availability">Availability:</div>
-                        <span>In Stock</span>
-                    </div>
-                    <div class="details_text">
-                        <p>@Model.Description</p>
-                    </div>
+					<div class="sku-title">SKU: @Html.DisplayFor(model => Model.ModelSKU)</div>
+				</div>
+				<div class="title-footer">
+					<button class="button">
+						<a asp-action="Checkout" asp-controller="Checkout">BUY</a>
+					</button>
+				</div>
+			</div>
+		</section>
+		<section class="row product-details carousel">
+			<h3 class="carousel-title">DETAILS</h3>
+			<div class="carousel-wrapper js-flickity" data-flickity-options='{ "wrapAround": true }'>
+				<div class="carousel-cell">
+					<div class="details-caption">BRAND</div>
+					<a class="underline details-info">@Model.BrandName</a>
+				</div>
+				<div class="carousel-cell">
+					<div class="details-caption">SKU</div>
+					<a class="underline details-info">@Model.ModelSKU</a>
+				</div>
+				<div class="carousel-cell">
+					<div class="details-caption">SIZE</div>
+					<a class="underline details-info">@Model.Size.ToString()</a>
+				</div>
+				<div class="carousel-cell">
+					<div class="details-caption">CONDITION</div>
+					<a class="underline details-info">@Model.Condition</a>
+				</div>
+				<div class="carousel-cell">
+					<div class="details-caption">COLORWAY</div>
+					<a class="underline details-info">@Model.Color</a>
+				</div>
+				<div class="carousel-cell">
+					<div class="details-caption">TYPE</div>
+					<a class="underline details-info">@Model.Type</a>
+				</div>
+				<div class="carousel-cell">
+					<div class="details-caption">DESIGNER</div>
+					<a class="underline details-info">@Model.BrandName</a>
+				</div>
 
-                    <!-- Product Quantity -->
-                    <div class="product_quantity_container">
-                        <div class="button cart_button"><a asp-controller="Checkout" asp-action="Checkout">Add to cart</a></div>
-                    </div>
+				<div class="carousel-cell">
+					<div class="details-caption">ADDED DATE</div>
+					<a class="underline details-info">@DateTime.Today.ToShortDateString()</a>
+				</div>
+			</div>
+		</section>
 
-                    <!-- Share -->
-                    <div class="details_share">
-                        <span>Share:</span>
-                        <ul>
-                            <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row description_row">
-            <div class="col">
-                <div class="description_title_container">
-                    <div class="description_title">Description</div>
-                    <div class="reviews_title"><a href="#">Reviews <span>(1)</span></a></div>
-                </div>
-                <div class="description_text">
-                    <p>@Model.Description</p>
-                </div>
-            </div>
-        </div>
-    </div>
+		@if (!string.IsNullOrEmpty(Model.Description))
+		{
+			<section class="row product-description elevated">
+				<h3 class="description_title">DESCRIPTION</h3>
+				<div class="description-content">
+					@Model.Description
+				</div>
+			</section>
+		}
+		@if (relatedProducts != null && relatedProducts.Any())
+		{
+			<section class="row product-related carousel reference-carousel">
+				<h3 class="carousel-title">RELATED PRODUCTS</h3>
+				<div class="carousel-wrapper js-flickity" data-flickity-options='{"wrapAround": true}'>
+					@foreach (var reference in relatedProducts)
+					{
+						<div class="carousel-cell" id="@reference.UniqueID">
+							<div class="info-header">
+								<div class="price">@(reference.Price != 0m ? $"${reference.Price}" : string.Empty)</div>
+							</div>
+							<div class="thumb">
+								<img src="@reference.Photos.FirstOrDefault()" alt="">
+							</div>
+							<div class="info-footer">
+								<div class="brand-title">
+									<a class="underline" asp-action="Brand" asp-route-brandID=@reference.Brand.Name>
+										@reference.BrandName
+									</a>
+								</div>
+								<div class="model-title">
+									<a class="underline" asp-action="ReferenceItem" asp-route-referenceId=@reference.UniqueID>
+										@reference.ModelName
+									</a>
+								</div>
+								<div class="favorite-product">
+									<input type="checkbox" @(reference.Liked ? "checked" : "")/>
+									@Html.VectorIconRender("favorite.svg")
+								</div>
+							</div>
+						</div>
+					}
+				</div>
+			</section>
+		}
+	</div>
 </div>
-
-<!-- Related Products -->
-@if (relatedProducts != null && relatedProducts.Any())
-{
-    <div class="products">
-        <div class="container">
-            <div class="row">
-                <div class="col text-center">
-                    <div class="products_title">Related Products</div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="product_grid">
-                        @for (var y = 0; y < @relatedProducts.Count; y++)
-                        {
-                            <div class="row">
-                                @for (var x = 0; x <= 4; x++)
-                                {
-                                    if (y >= @relatedProducts.Count)
-                                    {
-                                        break;
-                                    }
-                                    var product = @relatedProducts[y++];
-                                    var image = "/files/" + product.Photos.FirstOrDefault() ?? string.Empty;
-                                    var price = $"{product.Price}$";
-                                    <!-- Product -->
-                                    <div class="col-sm product">
-                                        <div class="product_image"><img src=@image alt=""></div>
-                                        @if (DateTime.Today.Subtract(product.AddedAt).Days < 5)
-                                        {
-                                            <div class="product_extra product_new"><a>New</a></div>
-                                        }
-                                        <div class="product_content">
-                                            <div class="product_title"><a asp-area="" asp-controller="Shop" asp-action="ReferenceItem" asp-route-productId=@product.UniqueID>@Html.DisplayFor(modelItem => product.ModelName)</a></div>
-                                            <div class="product_price">@price</div>
-                                        </div>
-                                    </div>
-                                }
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-}
-
 
 @section Scripts
 {
-    <script src="~/scripts/shop/productItem.js"></script>
+	<script src="~/scripts/shop/productItem.js"></script>
+	<script src="~/plugins/flickity/flickity.min.js"></script>
 }

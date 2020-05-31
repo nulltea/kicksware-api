@@ -51,6 +51,26 @@ func (h *handler) Login(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, token, http.StatusOK)
 }
 
+func (h *handler) Remote(w http.ResponseWriter, r *http.Request) {
+	user, err := h.getRequestBody(r); if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	token, err := h.auth.Remote(user); if err != nil {
+		if errors.Cause(err) == service.ErrInvalidRemoteID {
+			http.Error(w, err.Error(), http.StatusUnauthorized)
+			return
+		} else if errors.Cause(err) == service.ErrInvalidRemoteProvider {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	h.setupAuthCookie(w, token)
+	h.setupResponse(w, token, http.StatusOK)
+}
+
 func (h *handler) Guest(w http.ResponseWriter, r *http.Request) {
 	token, err := h.auth.Guest(); if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

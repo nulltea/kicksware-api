@@ -46,3 +46,14 @@ func ProvideLikesRepository(config env.ServiceConfig) repo.LikesRepository {
 	}
 	return nil
 }
+
+func ProvideRemotesRepository(config env.ServiceConfig) repo.RemoteRepository {
+	switch config.Common.UsedDB {
+	case "mongo":
+		repo, err := mongo.NewRemoteRepository(config.Mongo); if err != nil {
+			log.Fatal(err)
+		}
+		return repo
+	}
+	return nil
+}

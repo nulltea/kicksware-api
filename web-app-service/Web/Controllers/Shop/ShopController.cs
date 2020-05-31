@@ -44,21 +44,23 @@ namespace Web.Controllers
 			return handler;
 		}
 
-		private IFilteredModel<IBaseEntity> InitFilterHandler(string entity) =>
+		private IFilteredModel<IBaseEntity> InitFilterHandler(string entity, object additionalParams = default) =>
 			entity switch
 			{
-				"references" => InitFilterHandler<SneakerReference>(),
-				"products" => InitFilterHandler<SneakerProduct>(),
-				"brand" => InitFilterHandler<SneakerReference>(),
-				"model" => InitFilterHandler<SneakerReference>(),
-				_ => InitFilterHandler<SneakerReference>(),
+				"references" => InitFilterHandler<SneakerReference>(additionalParams),
+				"products" => InitFilterHandler<SneakerProduct>(additionalParams),
+				"brand" => InitFilterHandler<SneakerReference>(additionalParams),
+				"model" => InitFilterHandler<SneakerReference>(additionalParams),
+				_ => InitFilterHandler<SneakerReference>(additionalParams),
 			};
 
-		[Route("shop/{entity}/requestUpdate")]
-		public async Task<IActionResult> RequestUpdate(string entity, List<FilterInput> filterInputs, int page = 1,
+		[Route("shop/{entity}/requestUpdate/{entityID?}")]
+		public async Task<IActionResult> RequestUpdate(string entity, string entityID, List<FilterInput> filterInputs, int page = 1,
 														string sortBy = default)
 		{
-			var handler = InitFilterHandler(entity);
+			var additionalParams = new Dictionary<string, object>();
+			if (!string.IsNullOrEmpty(entityID)) additionalParams.Add($"{entity}ID", entityID);
+			var handler = InitFilterHandler(entity, additionalParams);
 			if (filterInputs != null && filterInputs.Any())
 			{
 				handler.ApplyUserInputs(filterInputs);

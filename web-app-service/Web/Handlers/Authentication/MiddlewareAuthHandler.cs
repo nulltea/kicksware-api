@@ -6,8 +6,10 @@ using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Core.Entities.Users;
+using Core.Extension;
 using Core.Services;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Facebook;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -76,7 +78,23 @@ namespace Web.Handlers.Authentication
 
 			var user = await ProvideClaimsUser(claims);
 
-			var fetchedToken = await RequestLogin(user);
+			AuthenticateResult fetchedToken;
+
+			if (properties.Items.TryGetValue(MiddlewareAuthDefaults.RemoteAuthSchemeKey, out var oauthProvider))
+			{
+				var provider = oauthProvider.GetEnumByMemberValue<UserProvider>();
+				if (user?.IsEmpty() ?? true)
+				{
+					user = FormUser(claims);
+					user.Provider = provider;
+					user.ConnectedProviders.Add(provider, user.UniqueID);
+				}
+				fetchedToken = await RequestRemote(user);
+			}
+			else
+			{
+				fetchedToken = await RequestLogin(user);
+			}
 
 			if (!fetchedToken.Succeeded) return;
 
@@ -141,6 +159,17 @@ namespace Web.Handlers.Authentication
 				: AuthenticateResult.Success(ProvideTokenAuthTicket(token));
 		}
 
+		private async Task<AuthenticateResult> RequestRemote(User user)
+		{
+			if (_service is null) return AuthenticateResult.Fail("Auth service not configured");
+
+			var token = await _service.RemoteAsync(user);
+
+			return string.IsNullOrEmpty(token)
+				? AuthenticateResult.Fail("Access forbidden")
+				: AuthenticateResult.Success(ProvideTokenAuthTicket(token));
+		}
+
 		#endregion
 
 		#region Service methods
@@ -174,6 +203,17 @@ namespace Web.Handlers.Authentication
 		}
 
 		private Task<User> ProvideClaimsUser(ClaimsPrincipal claims) => _userManager.GetUserAsync(claims);
+
+		private User FormUser(ClaimsPrincipal claims)
+		{
+			return new User
+			{
+				UniqueID = claims.FindFirstValue(ClaimTypes.NameIdentifier),
+				Email = claims.FindFirstValue(ClaimTypes.Email),
+				FirstName = claims.FindFirstValue(ClaimTypes.GivenName),
+				LastName =claims.FindFirstValue(ClaimTypes.Surname)
+			};
+		}
 
 		private ClaimsPrincipal ReadTokenPayload(AuthToken token)
 		{

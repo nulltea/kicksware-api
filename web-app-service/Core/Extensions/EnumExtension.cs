@@ -21,5 +21,16 @@ namespace Core.Extension
 			var attr = field.GetCustomAttribute<T>(true);
 			return attr;
 		}
+
+		public static T GetEnumByMemberValue<T>(this string memberValue) where T : Enum
+		{
+			var values = (T[]) Enum.GetValues(typeof(T));
+			foreach (var enumValue in values)
+			{
+				if (enumValue.ToString().ToUpper().Equals(memberValue.ToUpper())) return enumValue;
+			}
+
+			return values[0];
+		}
 	}
 }

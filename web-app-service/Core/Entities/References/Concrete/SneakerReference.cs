@@ -77,7 +77,15 @@ namespace Core.Entities.References
 				if (File.Exists(storagePath)) return string.Concat(@"\", Path.GetRelativePath(Constants.Constants.WebRootPath, storagePath));
 
 				using var client = new WebClient();
-				client.DownloadFile(new Uri(ImageLink), storagePath);
+				try
+				{
+					client.DownloadFile(new Uri(ImageLink), storagePath);
+				}
+				catch
+				{
+					return ImageLink;
+				}
+
 				return string.Concat(@"\", Path.GetRelativePath(Constants.Constants.WebRootPath, storagePath));
 			}
 		}

@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Core.Entities.Users;
 using Core.Services;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Facebook;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -142,14 +144,14 @@ namespace Web.Controllers
 
 		public IActionResult Facebook()
 		{
-			var authProperties = new AuthenticationProperties {RedirectUri = Url.Action("Index", "Home")};
-			return Challenge(authProperties, "Facebook");
+			var authProperties = new AuthenticationProperties {RedirectUri = Url.Action("Profile", "Profile")};
+			return Challenge(authProperties, FacebookDefaults.AuthenticationScheme);
 		}
 
 		public IActionResult Google()
 		{
-			var authProperties = new AuthenticationProperties {RedirectUri = Url.Action("Index", "Home")};
-			return Challenge(authProperties, "Google");
+			var authProperties = new AuthenticationProperties {RedirectUri = Url.Action("Profile", "Profile")};
+			return Challenge(authProperties, GoogleDefaults.AuthenticationScheme);
 		}
 
 		public async Task<IActionResult> Logout()

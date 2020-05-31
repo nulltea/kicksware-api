@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SmartBreadcrumbs.Attributes;
 using Web.Models;
@@ -19,9 +21,11 @@ namespace Web.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult Photos(SneakerProductViewModel model, bool rollback)
+		public async Task<ActionResult> Photos(SneakerProductViewModel model, bool rollback)
 		{
-			if (rollback) return SetDetails(model);
+			if (model == null) throw new ArgumentNullException(nameof(model));
+
+			if (rollback) return await SetDetails(model.ReferenceID);
 			if (model.FormFiles != null && model.FormFiles.Any())
 			{
 				foreach (var formFile in model.FormFiles)

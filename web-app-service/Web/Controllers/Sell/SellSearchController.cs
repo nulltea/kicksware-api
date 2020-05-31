@@ -20,23 +20,9 @@ namespace Web.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult Search(SneakerReference reference)
+		public ActionResult Search([FromBody] string referenceID)
 		{
-			if (reference is null || string.IsNullOrWhiteSpace(reference.UniqueID)) return this.ViewStep(1, new SneakerProductViewModel());
-
-;			var sneakerProduct = new SneakerProductViewModel
-			{
-				ReferenceID = reference.UniqueID,
-				ModelSKU = reference.ManufactureSku,
-				ModelName = reference.ModelName,
-				BrandName = reference.BrandName,
-				Description = reference.Description,
-				Color = reference.Color,
-				Price = reference.Price,
-				Size = Catalog.SneakerSizesList[11]
-			};
-
-			return new JsonResult(new {redirectUrl = Url.Action("SetDetails", sneakerProduct)});
+			return new JsonResult(new {redirectUrl = Url.Action("SetDetails"), }); //TODO SPA
 		}
 	}
 }

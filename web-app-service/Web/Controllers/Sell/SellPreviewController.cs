@@ -28,7 +28,7 @@ namespace Web.Controllers
 
 			if (response == null) return Problem();
 
-			return RedirectToAction("Index", "Home");
+			return RedirectToAction("ProductItem", "Shop", new {productId = sneakerProduct.UniqueID});
 		}
 
 	}

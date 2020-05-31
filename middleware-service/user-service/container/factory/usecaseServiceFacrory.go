@@ -7,8 +7,8 @@ import (
 	"user-service/usecase/business"
 )
 
-func ProvideDataService(repository repo.UserRepository) service.UserService {
-	return business.NewUserService(repository)
+func ProvideDataService(repository repo.UserRepository, remoteRepository repo.RemoteRepository) service.UserService {
+	return business.NewUserService(repository, remoteRepository)
 }
 
 func ProvideAuthService(service service.UserService, config env.ServiceConfig) service.AuthService {
