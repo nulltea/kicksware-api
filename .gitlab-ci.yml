@@ -44,7 +44,7 @@ step-middleware-deploy:
       # - docker-compose -f middleware-service/docker-compose.yml up -d
 
 step-webapp-style:
-  stage: build
+  stage: deploy
   image: node:8-alpine
   variables:
     NODE_ENV: "development"
@@ -54,6 +54,9 @@ step-webapp-style:
     - npm install
   script:
     - npm install -g less
+  artifacts:
+    paths:
+      - node_modules/
 
 step-webapp-deploy:
     stage: deploy
@@ -67,6 +70,4 @@ step-webapp-deploy:
       - docker-compose -f web-app-service/docker-compose.yml down
       - docker-compose -f web-app-service/docker-compose.yml build
       - docker-compose -f web-app-service/docker-compose.yml up -d
-    artifacts:
-        paths:
-          - node_modules/
+
