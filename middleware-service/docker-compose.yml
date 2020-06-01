@@ -165,10 +165,10 @@ networks:
     external: true
 
 volumes:
-  keys-data:
-    driver: local
-    driver_opts:
-       o: bind
-       type: none
-       device: /source/keys
+  #keys-data:
+  #  driver: local
+  #  driver_opts:
+  #     o: bind
+  #     type: none
+  #     device: /source/keys
   elasticsearch-data:
