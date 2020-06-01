@@ -14,7 +14,7 @@ services:
       - --entryPoints.websecure.address=:443
       - --certificatesResolvers.le.acme.email=timothy@kicksware.com
       - --certificatesResolvers.le.acme.storage=/proxy-service/acme.json
-      - --certificatesResolvers.le.acme.tlschallenge=true
+      - --certificatesResolvers.le.acme.dnsChallenge=true
       # - --certificatesResolvers.le.acme.dnsChallenge.provider=digitalocean
     labels:
       - traefik.http.routers.traefik.entrypoints=web
@@ -34,6 +34,7 @@ services:
     ports:
       - 88:88
       - 443:443
+      - 8008:80
     networks:
       - web
     volumes:
