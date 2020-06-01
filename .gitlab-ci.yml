@@ -39,9 +39,10 @@ step-middleware-deploy:
       - deploy
     script:
       - echo setting up env $DYNAMIC_ENV_VAR
-      - docker-compose -f middleware-service/docker-compose.yml down
-      - docker-compose -f middleware-service/docker-compose.yml build
-      - docker-compose -f middleware-service/docker-compose.yml up -d
+      # - docker-compose -f middleware-service/docker-compose.yml down
+      # - docker-compose -f middleware-service/docker-compose.yml build
+      # - docker-compose -f middleware-service/docker-compose.yml up -d
+
 step-webapp-style:
   stage: build
   image: node:8-alpine
@@ -51,6 +52,7 @@ step-webapp-style:
     - apk add --update bash
     - apk add --update git && rm -rf /tmp/* /var/cache/apk/*
     - npm install
+  script:
     - npm install -g less
 
 step-webapp-deploy:
@@ -62,7 +64,6 @@ step-webapp-deploy:
       - deploy
     script:
       - echo setting up env $DYNAMIC_ENV_VAR
-      - npm install
       - docker-compose -f web-app-service/docker-compose.yml down
       - docker-compose -f web-app-service/docker-compose.yml build
       - docker-compose -f web-app-service/docker-compose.yml up -d
