@@ -55,8 +55,13 @@ step-webapp-style:
     - apk add --update bash
     - apk add --update git && rm -rf /tmp/* /var/cache/apk/*
     - npm install
+    - npm install -g lessc-each
   script:
-    - npm install -g less
+    - for dir in Web/wwwroot/styles/less/*
+      do
+          lessc-each Web\wwwroot\styles\less\${dir} Web\wwwroot\styles\css\${dir}
+      done
+
   artifacts:
     paths:
       - node_modules/
