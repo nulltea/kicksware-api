@@ -60,8 +60,7 @@ step-webapp-style:
     - mkdir web-app-service/Web/wwwroot/styles/css
     - lessc-each web-app-service/Web/wwwroot/styles/less/home web-app-service/Web/wwwroot/styles/css/home
     - for dir in web-app-service/Web/wwwroot/styles/less/*;
-          do echo 'web-app-service/Web/wwwroot/styles/less/${dir}'
-          do lessc-each 'web-app-service/Web/wwwroot/styles/less/${dir}' web-app-service/Web/wwwroot/styles/css/${dir}; 
+          do lessc-each dir web-app-service/Web/wwwroot/styles/css/${basename dir}; 
       done
   artifacts:
     paths:
