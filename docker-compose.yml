@@ -13,10 +13,10 @@ services:
       - --entryPoints.web.address=:88
       - --entryPoints.websecure.address=:443
       - --certificatesResolvers.le.acme.email=timothy@kicksware.com
-      - --certificatesResolvers.le.acme.storage=./proxy-service/acme.json
+      - --certificatesResolvers.le.acme.storage=/proxy-service/acme.json
       - --certificatesResolvers.le.acme.dnsChallenge=true
       - --certificatesResolvers.le.acme.dnsChallenge.provider=digitalocean
-      - --providers.file.directory=./proxy-service/
+      - --providers.file.directory=/proxy-service
     labels:
       - traefik.http.routers.traefik.entrypoints=web
       - traefik.http.routers.traefik.rule=Host(`kicksware.com`)
@@ -37,7 +37,7 @@ services:
       - web
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./cert:/cert
+      - ./proxy-service:/proxy-service
 
 networks:
   web:
