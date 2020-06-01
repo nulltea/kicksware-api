@@ -10,7 +10,7 @@ services:
       - --api.insecure
       - --api.dashboard=true
       - --providers.docker=true
-      - --entryPoints.web.address=:80
+      - --entryPoints.web.address=:88
       - --entryPoints.websecure.address=:443
       - --certificatesResolvers.le.acme.email=timothy@kicksware.com
       - --certificatesResolvers.le.acme.storage=/proxy-service/acme.json
@@ -18,9 +18,9 @@ services:
       - --certificatesResolvers.le.acme.dnsChallenge.provider=digitalocean
     labels:
       - traefik.http.routers.traefik.entrypoints=web
-      - traefik.http.routers.traefik.rule=Host(`api.kicksware.com`) # && PathPrefix(`/dashboard`)
+      - traefik.http.routers.traefik.rule=Host(`api.kicksware.com`)
       - traefik.http.routers.traefik-secure.entrypoints=websecure
-      - traefik.http.routers.traefik-secure.rule=Host(`api.kicksware.com`) # && PathPrefix(`/dashboard`)
+      - traefik.http.routers.traefik-secure.rule=Host(`api.kicksware.com`)
       - traefik.http.routers.traefik-secure.tls=true
       - traefik.http.routers.traefik-secure.tls.domains[0].main=kicksware.com
       - traefik.http.routers.traefik-secure.tls.domains[0].sans=*.kicksware.com
@@ -36,7 +36,7 @@ services:
     environment:
       - DO_AUTH_TOKEN=618afae928af7a41e3bf3199fa69f260fb3bde473b9a06184f7c659836a6eb35
     ports:
-      - 80:80
+      - 88:88
       - 443:443
       - 8080:8080
     networks:
