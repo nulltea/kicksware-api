@@ -48,6 +48,9 @@ step-webapp-style:
   image: node:8-alpine
   variables:
     NODE_ENV: "development"
+  tags:
+    - webapp
+    - deploy
   before_script:
     - apk add --update bash
     - apk add --update git && rm -rf /tmp/* /var/cache/apk/*
