@@ -19,7 +19,7 @@ services:
       - data
     volumes:
       - ./product-service/env:/dist/env
-      - ./key:/key
+      - ./key:/source/keys
     links:
       - mongodb
     depends_on:
@@ -45,9 +45,9 @@ services:
       - data
     volumes:
       - ./user-service/env:/dist/env
-      - ./user-service/key:/dist/key
+      - ./user-service/key:/source/keys
       - ./user-service/template:/dist/template
-      - ./key:/key
+      - ./key:/source/keys
     links:
       - mongodb
     depends_on:
@@ -68,7 +68,7 @@ services:
       - traefik.docker.network=web
     volumes:
       - ./reference-service/env:/dist/env
-      - ./key:/key
+      - ./key:/source/keys
     networks:
       - web
       - data
@@ -97,7 +97,7 @@ services:
       - data
     volumes:
       - ./search-service/env:/dist/env
-      - ./key:/key
+      - ./key:/source/keys
     links:
       - references-service
       - products-service
