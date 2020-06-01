@@ -57,7 +57,9 @@ step-webapp-style:
     - npm install
     - npm install -g lessc-each
   script:
-    - for dir in Web/wwwroot/styles/less/*; do lessc-each Web\wwwroot\styles\less\${dir} Web\wwwroot\styles\css\${dir}; done
+    - lessc-each \Web\wwwroot\styles\less\home Web\wwwroot\styles\css\home
+    - lessc-each \Web\wwwroot\styles\less\sell Web\wwwroot\styles\css\sell
+    - for dir in Web/wwwroot/styles/less/*; do lessc-each \Web\wwwroot\styles\less\${dir} Web\wwwroot\styles\css\${dir}; done
 
   artifacts:
     paths:
