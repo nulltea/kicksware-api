@@ -5,7 +5,7 @@ services:
     image:  traefik:v2.0
     restart: always
     command:
-      - --log.level=INFO
+      - --log.level=DEBUG
       - --api=true
       - --api.insecure
       - --api.dashboard=true
@@ -16,7 +16,6 @@ services:
       - --certificatesResolvers.le.acme.storage=/proxy-service/acme.json
       - --certificatesResolvers.le.acme.dnsChallenge=true
       - --certificatesResolvers.le.acme.dnsChallenge.provider=digitalocean
-      - --providers.file.directory=/proxy-service
     labels:
       - traefik.http.routers.traefik.entrypoints=web
       - traefik.http.routers.traefik.rule=Host(`kicksware.com`)
