@@ -11,22 +11,25 @@ services:
       - --api.dashboard=true
       - --providers.docker=true
       - --entryPoints.web.address=:88
-      # - --entryPoints.websecure.address=:443
-      # - --certificatesResolvers.le.acme.email=microservicego@gmail.com
-      # - --certificatesResolvers.le.acme.storage=/cert/acme.json
-      # - --certificatesResolvers.le.acme.dnsChallenge=true
-      # - --certificatesResolvers.le.acme.dnsChallenge.provider=digitalocean
+      - --entryPoints.websecure.address=:443
+      - --certificatesResolvers.le.acme.email=timothy@kicksware.com
+      - --certificatesResolvers.le.acme.storage=/proxy-service/acme.json
+      - --certificatesResolvers.le.acme.dnsChallenge=true
+      - --certificatesResolvers.le.acme.dnsChallenge.provider=digitalocean
+      - --providers.file.directory=/proxy-service/
     labels:
       - traefik.http.routers.traefik.entrypoints=web
-      # - traefik.http.routers.traefik.rule=Host(`kicksware.com`)
-      # - traefik.http.routers.traefik-secure.entrypoints=websecure
-      # - traefik.http.routers.traefik-secure.rule=Host(`kicksware.com`)
-      # - traefik.http.routers.traefik.middlewares=traefik-https-redirect
-      # - traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https
-      # - traefik.http.middlewares.traefik-https-redirect.redirectscheme.permanent=true
+      - traefik.http.routers.traefik.rule=Host(`kicksware.com`)
+      - traefik.http.routers.traefik-secure.entrypoints=websecure
+      - traefik.http.routers.traefik-secure.rule=Host(`kicksware.com`)
+      - traefik.http.routers.traefik.middlewares=traefik-https-redirect
+      - traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https
+      - traefik.http.middlewares.traefik-https-redirect.redirectscheme.permanent=true
       # - traefik.http.routers.traefik-secure.middlewares=traefik-auth
       # - traefik.http.middlewares.traefik-auth.basicauth.users=USER:PASSWORD
       - traefik.docker.network=web
+    environment:
+      DO_AUTH_TOKEN=618afae928af7a41e3bf3199fa69f260fb3bde473b9a06184f7c659836a6eb35
     ports:
       - 88:88
       - 443:443
