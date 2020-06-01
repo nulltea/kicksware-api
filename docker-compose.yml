@@ -18,6 +18,7 @@ services:
       - --certificatesResolvers.le.acme.dnsChallenge.provider=digitalocean
     labels:
       - traefik.http.routers.traefik-secure.entrypoints=websecure
+      - traefik.http.routers.traefik-secure.rule=Host(`kicksware.com`)
       - traefik.http.routers.traefik.tls.certresolver=le
       - traefik.http.routers.traefik-secure.tls.certresolver=le
       # - traefik.http.routers.traefik-secure.middlewares=traefik-auth
