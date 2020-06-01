@@ -20,6 +20,7 @@ services:
       - traefik.http.routers.traefik-secure.entrypoints=websecure
       - traefik.http.routers.traefik-secure.rule=Host(`kicksware.com`)
       - traefik.http.routers.traefik-secure.tls.certresolver=le
+      - traefik.http.services.traefik-secure.loadbalancer.server.port=88
       # - traefik.http.routers.traefik-secure.middlewares=traefik-auth
       # - traefik.http.middlewares.traefik-auth.basicauth.users=USER:PASSWORD
       - traefik.docker.network=web
