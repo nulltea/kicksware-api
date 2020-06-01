@@ -14,8 +14,8 @@ services:
       - --entryPoints.websecure.address=:443
       - --certificatesResolvers.le.acme.email=timothy@kicksware.com
       - --certificatesResolvers.le.acme.storage=/proxy-service/acme.json
-      - --certificatesResolvers.le.acme.dnsChallenge=true
-      - --certificatesResolvers.le.acme.dnsChallenge.provider=digitalocean
+      - --certificatesResolvers.le.acme.tlschallenge=true
+      # - --certificatesResolvers.le.acme.dnsChallenge.provider=digitalocean
     labels:
       - traefik.http.routers.traefik.entrypoints=web
       - traefik.http.routers.traefik.rule=Host(`kicksware.com`)
