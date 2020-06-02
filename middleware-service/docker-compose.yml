@@ -19,7 +19,7 @@ services:
       - data
     volumes:
       - ./product-service/env:/dist/env
-      # - keys-data:/key
+      - key-source:/key
     links:
       - mongodb
     depends_on:
@@ -45,9 +45,9 @@ services:
       - data
     volumes:
       - ./user-service/env:/dist/env
-     #  - keys-data:/dist/key
+      - key-source:/dist/key
       - ./user-service/template:/dist/template
-      # - keys-data:/key
+      - key-source:/key
     links:
       - mongodb
     depends_on:
@@ -68,7 +68,7 @@ services:
       - traefik.docker.network=web
     volumes:
       - ./reference-service/env:/dist/env
-      # - keys-data:/key
+      - key-source:/key
     networks:
       - web
       - data
@@ -97,7 +97,7 @@ services:
       - data
     volumes:
       - ./search-service/env:/dist/env
-      # - keys-data:/key
+      - key-source:/key
     links:
       - references-service
       - products-service
@@ -165,10 +165,10 @@ networks:
     external: true
 
 volumes:
-  #keys-data:
-  #  driver: local
-  #  driver_opts:
-  #     o: bind
-  #     type: none
-  #     device: /source/keys
+  key-source:
+    driver: local
+    driver_opts:
+       o: bind
+       type: none
+       device: /source/keys
   elasticsearch-data:
