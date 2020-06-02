@@ -79,7 +79,6 @@ step-webapp-deploy:
       - docker-compose -f web-app-service/docker-compose.yml down
       - docker-compose -f web-app-service/docker-compose.yml build
       - docker-compose -f web-app-service/docker-compose.yml up -d
-    artifacts:
-      paths:
-        - web-app-service/Web/wwwroot/styles/css
+    dependencies:
+      - step-webapp-style
 
