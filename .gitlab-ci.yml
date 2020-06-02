@@ -2,7 +2,6 @@ image:
     name: docker/compose:1.24.0
     entrypoint: [""]
 
-
 services:
     - docker:stable-dind
 
