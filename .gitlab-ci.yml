@@ -7,6 +7,7 @@ services:
     - docker:stable-dind
 
 stages:
+    - build
     - test
     - deploy
 
@@ -44,13 +45,12 @@ step-middleware-deploy:
       # - docker-compose -f middleware-service/docker-compose.yml up -d
 
 step-webapp-style:
-  stage: deploy
+  stage: build
   image: node:8-alpine
   variables:
     NODE_ENV: "development"
   tags:
     - webapp
-    - deploy
   before_script:
     - apk add --update bash
     - apk add --update git && rm -rf /tmp/* /var/cache/apk/*
