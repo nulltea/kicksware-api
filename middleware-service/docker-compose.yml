@@ -18,7 +18,7 @@ services:
       - web
       - data
     volumes:
-      - ./product-service/env:/dist/env
+      - ./middleware-service/product-service/env:/dist/env
       - key-source:/key
     links:
       - mongodb
@@ -44,9 +44,9 @@ services:
       - web
       - data
     volumes:
-      - ./user-service/env:/dist/env
+      - /user-service/env:/dist/env
       - key-source:/dist/key
-      - ./user-service/template:/dist/template
+      - /user-service/template:/dist/template
       - key-source:/key
     links:
       - mongodb
@@ -67,7 +67,7 @@ services:
       - traefik.http.routers.reference-service.tls.certresolver=le
       - traefik.docker.network=web
     volumes:
-      - ./reference-service/env:/dist/env
+      - ./env:/dist/env
       - key-source:/key
     networks:
       - web
@@ -96,7 +96,7 @@ services:
       - elastic
       - data
     volumes:
-      - ./search-service/env:/dist/env
+      - /env:/dist/env
       - key-source:/key
     links:
       - references-service
