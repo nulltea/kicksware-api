@@ -64,12 +64,13 @@ step-webapp-style:
       done
   artifacts:
     paths:
-      - web-app-service/Web/wwwroot/styles/css/
+      - web-app-service/Web/wwwroot/styles/css
 
 step-webapp-deploy:
     stage: deploy
     before_script:
     - export DYNAMIC_ENV_VAR=DEVELOP
+    - mkdir web-app-service/Web/wwwroot/styles/css
     tags:
       - webapp
       - deploy
@@ -80,5 +81,5 @@ step-webapp-deploy:
       - docker-compose -f web-app-service/docker-compose.yml up -d
     artifacts:
       paths:
-        - web-app-service/Web/wwwroot/styles/css/
+        - web-app-service/Web/wwwroot/styles/css
 
