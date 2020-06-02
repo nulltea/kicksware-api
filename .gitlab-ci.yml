@@ -51,6 +51,8 @@ step-webapp-style:
     NODE_ENV: "development"
   tags:
     - webapp
+    - build
+    - deploy
   before_script:
     - apk add --update bash
     - apk add --update git && rm -rf /tmp/* /var/cache/apk/*
