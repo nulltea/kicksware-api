@@ -72,7 +72,6 @@ step-webapp-deploy:
     stage: deploy
     before_script:
     - export DYNAMIC_ENV_VAR=DEVELOP
-    - mkdir web-app-service/Web/wwwroot/styles/css
     tags:
       - webapp
       - deploy
