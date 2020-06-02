@@ -1,5 +1,5 @@
 image:
-    name: docker/compose:1.24.0
+    name: docker/compose:1.25.0
     entrypoint: [""]
 
 services:
@@ -38,6 +38,7 @@ step-middleware-deploy:
       - middleware
       - deploy
     script:
+      - ls middleware-service/reference-service/env
       - echo setting up env $DYNAMIC_ENV_VAR
       - docker-compose -f middleware-service/docker-compose.yml down
       - docker-compose -f middleware-service/docker-compose.yml build
