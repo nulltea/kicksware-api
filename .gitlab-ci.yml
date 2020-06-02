@@ -64,7 +64,7 @@ step-webapp-style:
       done
   artifacts:
     paths:
-      - node_modules/
+      - web-app-service/Web/wwwroot/styles/css/
 
 step-webapp-deploy:
     stage: deploy
