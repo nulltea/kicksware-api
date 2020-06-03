@@ -9,4 +9,4 @@
 [http.services]
   [http.services.gitlab-ci.loadBalancer]
       [[http.services.gitlab-ci.loadBalancer.servers]]
-        address = "https://ci.kicksware.com:44321"
+        url = "https://ci.kicksware.com:44321"
