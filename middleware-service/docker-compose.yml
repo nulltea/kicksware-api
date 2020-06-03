@@ -18,7 +18,7 @@ services:
       - web
       - data
     volumes:
-      - ./../product-service/env:/dist/env
+      - ${CI_PROJECT_DIR}/middleware-service/product-service/env:/dist/env
       - key-source:/key
     links:
       - mongodb
@@ -44,7 +44,7 @@ services:
       - web
       - data
     volumes:
-      - ../env:/dist/env
+      - ${CI_PROJECT_DIR}/middleware-service/user-service/env:/dist/env
       - key-source:/dist/key
       - /user-service/template:/dist/template
       - key-source:/key
@@ -99,7 +99,7 @@ services:
       - data
     volumes:
       - type: bind
-        source: /reference-service/env
+        source: ${CI_PROJECT_DIR}/middleware-service/search-service/env
         target: /dist/env
       - key-source:/key
     links:
