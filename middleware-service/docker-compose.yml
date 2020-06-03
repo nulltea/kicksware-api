@@ -18,7 +18,7 @@ services:
       - web
       - data
     volumes:
-      - ${CI_PROJECT_DIR}/middleware-service/product-service/env:/dist/env
+      - /builds/root/kicksware-platform/middleware-service/product-service/env:/dist/env
       - key-source:/key
     links:
       - mongodb
@@ -44,7 +44,7 @@ services:
       - web
       - data
     volumes:
-      - ${CI_PROJECT_DIR}/middleware-service/user-service/env:/dist/env
+      - /builds/root/kicksware-platform/middleware-service/user-service/env:/dist/env
       - key-source:/dist/key
       - /user-service/template:/dist/template
       - key-source:/key
@@ -68,7 +68,7 @@ services:
       - traefik.docker.network=web
     volumes:
       - type: bind
-        source: ${CI_PROJECT_DIR}/middleware-service/reference-service/env/config.prod.yaml
+        source: /builds/root/kicksware-platform/middleware-service/reference-service/env/config.prod.yaml
         target: /dist/env/config.prod.yaml
       - key-source:/key
     networks:
@@ -99,7 +99,7 @@ services:
       - data
     volumes:
       - type: bind
-        source: ${CI_PROJECT_DIR}/middleware-service/search-service/env
+        source: /builds/root/kicksware-platform/middleware-service/search-service/env
         target: /dist/env
       - key-source:/key
     links:
