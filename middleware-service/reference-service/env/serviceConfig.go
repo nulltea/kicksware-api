@@ -3,8 +3,6 @@ package env
 import (
 	"io/ioutil"
 	"log"
-	"os"
-	"path/filepath"
 	"gopkg.in/yaml.v2"
 )
 
@@ -39,7 +37,6 @@ type AuthConfig struct {
 
 func ReadServiceConfig(filename string) (sc ServiceConfig, err error) {
 	file, err := ioutil.ReadFile(filename); if err != nil {
-		lsR(ProjectDirectory)
 		log.Fatalln(err)
 		return
 	}
@@ -49,23 +46,4 @@ func ReadServiceConfig(filename string) (sc ServiceConfig, err error) {
 		return
 	}
 	return
-}
-
-func lsR(searchDir string) ([]string, error) {
-
-	fileList := make([]string, 0)
-	e := filepath.Walk(searchDir, func(path string, f os.FileInfo, err error) error {
-		fileList = append(fileList, path)
-		return err
-	})
-	
-	if e != nil {
-		panic(e)
-	}
-
-	for _, file := range fileList {
-		log.Println(file)
-	}
-
-	return fileList, nil
 }

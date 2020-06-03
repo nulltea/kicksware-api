@@ -18,7 +18,7 @@ services:
       - web
       - data
     volumes:
-      - /builds/root/kicksware-platform/middleware-service/product-service/env:/dist/env
+      - ./product-service/env:/dist/env
       - key-source:/key
     links:
       - mongodb
@@ -44,7 +44,7 @@ services:
       - web
       - data
     volumes:
-      - /builds/root/kicksware-platform/middleware-service/user-service/env:/dist/env
+      - ./user-service/env:/dist/env
       - key-source:/dist/key
       - /user-service/template:/dist/template
       - key-source:/key
@@ -67,9 +67,7 @@ services:
       - traefik.http.routers.reference-service.tls.certresolver=le
       - traefik.docker.network=web
     volumes:
-      - type: bind
-        source: /builds/root/kicksware-platform/middleware-service/reference-service/env/config.prod.yaml
-        target: /dist/env/config.prod.yaml
+      - ./reference-service/env:/dist/env
       - key-source:/key
     networks:
       - web
@@ -98,9 +96,7 @@ services:
       - elastic
       - data
     volumes:
-      - type: bind
-        source: /builds/root/kicksware-platform/middleware-service/search-service/env
-        target: /dist/env
+      - ./search-service/env:/dist/env
       - key-source:/key
     links:
       - references-service
@@ -175,4 +171,10 @@ volumes:
        o: bind
        type: none
        device: /source/keys
+  builds:
+    driver: local
+    driver_opts:
+       o: bind
+       type: none
+       device: /builds/root/kicksware-platform
   elasticsearch-data:
