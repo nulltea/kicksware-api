@@ -21,9 +21,6 @@ step-proxy-deploy:
     stage: deploy
     before_script:
       - export DYNAMIC_ENV_VAR=DEVELOP
-      - echo ${CI_PROJECT_DIR}
-      - echo ${CI_PROJECT_NAME}
-      - mkdir /source/repos/${CI_PROJECT_NAME}
       - ls -r /builds/root/
       - cp -r /builds/root/. /source/repos/
     tags:
