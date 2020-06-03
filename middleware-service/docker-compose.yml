@@ -68,7 +68,7 @@ services:
       - traefik.docker.network=web
     volumes:
       - type: bind
-        source: /reference-service/env/config.prod.yaml
+        source: ./reference-service/env/config.prod.yaml
         target: /dist/env/config.prod.yaml
       - key-source:/key
     networks:
