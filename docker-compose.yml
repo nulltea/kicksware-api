@@ -45,7 +45,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./proxy-service:/proxy-service
-      - ./proxy-config.toml:/source/repos/kicksware-platform/proxy-config.toml
+      - ./proxy-config.toml:/../../../source/repos/kicksware-platform/proxy-config.toml
 
 networks:
   web:
