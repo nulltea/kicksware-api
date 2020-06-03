@@ -13,7 +13,7 @@ services:
       - --providers.file=true
       - --providers.file.filename=/proxy-config.toml
       - --providers.file.watch=true
-      - --entryPoints.web.address=:88
+      - --entryPoints.web.address=:80
       - --entryPoints.websecure.address=:443
       - --certificatesResolvers.le.acme.email=timothy@kicksware.com
       - --certificatesResolvers.le.acme.storage=/proxy-service/acme.json
@@ -39,7 +39,7 @@ services:
     environment:
       - DO_AUTH_TOKEN=618afae928af7a41e3bf3199fa69f260fb3bde473b9a06184f7c659836a6eb35
     ports:
-      - 88:88
+      - 80:80
       - 443:443
     networks:
       - web
