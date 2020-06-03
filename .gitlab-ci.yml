@@ -23,8 +23,9 @@ step-middleware-deploy:
     - export DYNAMIC_ENV_VAR=DEVELOP
     - echo ${CI_PROJECT_DIR}
     - ls -s
-    - ls ${CI_PROJECT_DIR} -s
-    - ls ${CI_PROJECT_DIR}/middleware-service/ -s
+    - ls ${CI_PROJECT_DIR} -r
+    - ls ${CI_PROJECT_DIR}/middleware-service/reference-service -s
+    - ls ${CI_PROJECT_DIR}/middleware-service/reference-service/env -s
     - ls ../ -s
     tags:
       - middleware
