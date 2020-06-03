@@ -21,6 +21,8 @@ step-middleware-deploy:
     stage: deploy
     before_script:
     - export DYNAMIC_ENV_VAR=DEVELOP
+    - ls -r
+    - ls ${CI_PROJECT}
     tags:
       - middleware
       - deploy
