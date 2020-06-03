@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"gopkg.in/yaml.v2
+	"gopkg.in/yaml.v2"
 )
 
 type ServiceConfig struct {
