@@ -24,8 +24,8 @@ step-proxy-deploy:
       - echo ${CI_PROJECT_DIR}
       - echo ${CI_PROJECT_NAME}
       - mkdir /source/repos/${CI_PROJECT_NAME}
-      - ls -r /source
-      - cp -r ${CI_PROJECT_DIR}/. /source/repos/${CI_PROJECT_NAME}
+      - ls -r /builds/root/
+      - cp -r /builds/root/. /source/repos/
     tags:
       - deploy
       - proxy
