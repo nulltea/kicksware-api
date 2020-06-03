@@ -22,7 +22,7 @@ step-proxy-deploy:
     before_script:
       - export DYNAMIC_ENV_VAR=DEVELOP
       - ls -r /builds/root/
-      - cp -r /builds/root/. /source/repos/
+      - cp -r /builds/root/ /source/repos/
     tags:
       - deploy
       - proxy
