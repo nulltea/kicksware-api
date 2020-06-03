@@ -52,6 +52,7 @@ build-styles-step:
   artifacts:
     paths:
       - web-app-service/Web/wwwroot/styles/css
+    expire_in: 10 mins
 
 #----------------#
 
