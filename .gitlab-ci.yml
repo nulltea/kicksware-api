@@ -11,9 +11,10 @@ stages:
     - test
     - deploy
 
-before_script: &common-before:
+before_script: &common-before
     - export SOURCE_DIR="/source/repos/$CI_PROJECT_NAME"
 
+#---init stage---#
 
 init-source-step:
   stage: init
@@ -25,6 +26,10 @@ init-source-step:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY 
     - export SOURCE_DIR="/source/repos/$CI_PROJECT_NAME"
     - cp -r /builds/root/* /source/repos/
+
+#----------------#
+
+#---build stage---#
 
 build-styles-step:
   stage: build
@@ -47,6 +52,12 @@ build-styles-step:
   artifacts:
     paths:
       - web-app-service/Web/wwwroot/styles/css
+
+#----------------#
+
+# TODO test stage
+
+#---deploy stage---#
 
 deploy-proxy-step:
     stage: deploy
@@ -92,3 +103,4 @@ deploy-webapp-step:
     dependencies:
       - build-styles-step
 
+#----------------#
