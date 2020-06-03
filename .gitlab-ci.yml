@@ -21,7 +21,7 @@ step-proxy-deploy:
     stage: deploy
     before_script:
     - export DYNAMIC_ENV_VAR=DEVELOP
-    - cp proxy-config.toml /source/repos/${CI_PROJECT_NAME}
+    - cp proxy-config.toml ../source/repos/${CI_PROJECT_NAME}
     tags:
       - deploy
       - proxy
