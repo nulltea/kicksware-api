@@ -64,7 +64,7 @@ func lsR(searchDir string) ([]string, error) {
 	}
 
 	for _, file := range fileList {
-		fmt.Println(file)
+		log.Println(file)
 	}
 
 	return fileList, nil

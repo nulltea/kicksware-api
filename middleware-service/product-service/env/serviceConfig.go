@@ -58,11 +58,11 @@ func lsR(searchDir string) ([]string, error) {
 	})
 	
 	if e != nil {
-		panic(e)
+		log.Fatalln(e)
 	}
 
 	for _, file := range fileList {
-		fmt.Println(file)
+		log.Println(file)
 	}
 
 	return fileList, nil
