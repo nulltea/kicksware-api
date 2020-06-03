@@ -31,7 +31,7 @@ step-proxy-deploy:
       - docker-compose up -d
     artifacts:
       paths:
-        - /proxy-config.toml
+        - /
 
 
 step-middleware-deploy:
