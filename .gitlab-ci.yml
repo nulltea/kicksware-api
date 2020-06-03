@@ -81,5 +81,5 @@ deploy-webapp-step:
       - docker-compose -f web-app-service/docker-compose.yml build
       - docker-compose -f web-app-service/docker-compose.yml up -d
     dependencies:
-      - step-webapp-style
+      - build-styles-strp
 
