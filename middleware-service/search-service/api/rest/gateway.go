@@ -14,7 +14,7 @@ func ProvideRoutes(rest RestfulHandler) *chi.Mux {
 		middleware.RealIP,
 		rest.Authenticator,
 	)
-	router.Mount("/api/search/reference", restRoutes(rest))
+	router.Mount("/search/reference", restRoutes(rest))
 	return router
 }
 

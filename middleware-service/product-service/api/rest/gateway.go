@@ -15,7 +15,7 @@ func ProvideRoutes(rest RestfulHandler) *chi.Mux {
 		rest.Authenticator,
 		rest.Authorizer,
 	)
-	router.Mount("/api/products/sneakers", restRoutes(rest))
+	router.Mount("/products/sneakers", restRoutes(rest))
 	return router
 }
 

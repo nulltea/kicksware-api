@@ -10,7 +10,7 @@ services:
     image: products-service
     restart: always
     labels:
-      - traefik.http.routers.product-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/api/products`)
+      - traefik.http.routers.product-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/products`)
       - traefik.http.routers.product-service.tls=true
       - traefik.http.routers.product-service.tls.certresolver=le
       - traefik.docker.network=web
@@ -18,7 +18,7 @@ services:
       - web
       - data
     volumes:
-      - ./product-service/env:/dist/env
+      - ./${SOURCE_DIR}/middleware-service/product-service/env:/dist/env
       - key-source:/key
     links:
       - mongodb
@@ -35,8 +35,8 @@ services:
     image: users-service
     restart: always
     labels:
-      - traefik.http.routers.user-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/api/users`) || PathPrefix(`/api/auth`) ||
-        PathPrefix(`/api/mail`) || PathPrefix(`/api/interact`)
+      - traefik.http.routers.user-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/users`) || PathPrefix(`/auth`) ||
+        PathPrefix(`/mail`) || PathPrefix(`/interact`)
       - traefik.http.routers.user-service.tls=true
       - traefik.http.routers.user-service.tls.certresolver=le
       - traefik.docker.network=web
@@ -44,9 +44,9 @@ services:
       - web
       - data
     volumes:
-      - ./user-service/env:/dist/env
+      - ./${SOURCE_DIR}/middleware-service/user-service/env:/dist/env
+      - ./${SOURCE_DIR}/middleware-service/user-service/template:/dist/template
       - key-source:/dist/key
-      - /user-service/template:/dist/template
       - key-source:/key
     links:
       - mongodb
@@ -62,12 +62,12 @@ services:
     image: references-service
     restart: always
     labels:
-      - traefik.http.routers.reference-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/api/references`)
+      - traefik.http.routers.reference-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/references`)
       - traefik.http.routers.reference-service.tls=true
       - traefik.http.routers.reference-service.tls.certresolver=le
       - traefik.docker.network=web
     volumes:
-      - ./reference-service/env:/dist/env
+      - ./${SOURCE_DIR}/middleware-service/reference-service/env:/dist/env
       - key-source:/key
     networks:
       - web
@@ -87,7 +87,7 @@ services:
     restart: always
     env_file: ./search-service/env/.env.prod
     labels:
-      - traefik.http.routers.search-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/api/search`)
+      - traefik.http.routers.search-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/search`)
       - traefik.http.routers.search-service.tls=true
       - traefik.http.routers.search-service.tls.certresolver=le
       - traefik.docker.network=web
@@ -96,7 +96,7 @@ services:
       - elastic
       - data
     volumes:
-      - ./search-service/env:/dist/env
+      - ./${SOURCE_DIR}/middleware-service/search-service/env:/dist/env
       - key-source:/key
     links:
       - references-service
@@ -118,6 +118,14 @@ services:
       - 27018:27017
     environment:
       - MONGO_INITDB_DATABASE=sneakerResaleDB
+    labels:
+      - traefik.http.routers.mongodb.rule=Host(`db.kicksware.com`) && PathPrefix(`/mongo`)
+      - traefik.http.routers.mongodb.tls=true
+      - traefik.http.routers.mongodb.tls.certresolver=le
+      - traefik.docker.network=web
+    volumes:
+      - backup-source/mongo:/backup/mongo
+      - ./backup/mongo/init.sh:/docker-entrypoint-initdb.d/init.sh
     networks:
       - data
     logging:
@@ -137,6 +145,11 @@ services:
       - xpack.watcher.enabled=false
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - discovery.type=single-node
+    labels:
+      - traefik.http.routers.elasticsearch.rule=Host(`ops.kicksware.com`) && PathPrefix(`/elastic`)
+      - traefik.http.routers.elasticsearch.tls=true
+      - traefik.http.routers.elasticsearch.tls.certresolver=le
+      - traefik.docker.network=web
     networks:
       - elastic
     logging:
@@ -151,6 +164,11 @@ services:
       - elasticsearch
     environment:
       - ELASTICSEARCH_URL=http://elasticsearch:9200
+    labels:
+      - traefik.http.routers.kibana.rule=Host(`ops.kicksware.com`) && PathPrefix(`/kibana`)
+      - traefik.http.routers.kibana.tls=true
+      - traefik.http.routers.kibana.tls.certresolver=le
+      - traefik.docker.network=web
     networks:
       - elastic
     logging:
@@ -171,10 +189,10 @@ volumes:
        o: bind
        type: none
        device: /source/keys
-  builds:
+  backup-source:
     driver: local
     driver_opts:
        o: bind
        type: none
-       device: /builds/root/kicksware-platform
+       device: /source/backup
   elasticsearch-data:
