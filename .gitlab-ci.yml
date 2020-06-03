@@ -21,7 +21,6 @@ step-proxy-deploy:
     stage: deploy
     before_script:
     - export DYNAMIC_ENV_VAR=DEVELOP
-    - docker cp -R ./build/* ${CI_PROJECT_NAME}
     tags:
       - deploy
       - proxy
@@ -30,6 +29,10 @@ step-proxy-deploy:
       - docker-compose down
       - docker-compose build
       - docker-compose up -d
+    artifacts:
+      paths:
+        - /proxy-config.toml
+
 
 step-middleware-deploy:
     stage: deploy
