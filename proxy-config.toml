@@ -1,7 +1,7 @@
 [http.routers]
   [http.routers.gitlab-ci]
     rule = "Host(`ci.kicksware.com`)"
-    entrypoints = ["web-secure"]
+    entrypoints = ["websecure"]
     service = "gitlab-ci"
   [http.routers.gitlab-ci.tls]
     certResolver = "le"
@@ -9,4 +9,4 @@
 [http.services]
   [http.services.gitlab-ci.loadBalancer]
       [[http.services.gitlab-ci.loadBalancer.servers]]
-        address = "http://0.0.0.0:88"
+        address = "https://ci.kicksware.com:44321"
