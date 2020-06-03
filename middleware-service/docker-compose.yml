@@ -8,7 +8,7 @@ services:
     env_file: ./product-service/env/.env.prod
     hostname: kicksware.com
     image: products-service
-    restart: always
+    # restart: always
     labels:
       - traefik.http.routers.product-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/api/products`)
       - traefik.http.routers.product-service.tls=true
@@ -33,7 +33,7 @@ services:
     env_file: ./user-service/env/.env.prod
     hostname: kicksware.com
     image: users-service
-    restart: always
+    # restart: always
     labels:
       - traefik.http.routers.user-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/api/users`) || PathPrefix(`/api/auth`) ||
         PathPrefix(`/api/mail`) || PathPrefix(`/api/interact`)
@@ -60,14 +60,14 @@ services:
       target: dev
     env_file: ./reference-service/env/.env.prod
     image: references-service
-    restart: always
+    # restart: always
     labels:
       - traefik.http.routers.reference-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/api/references`)
       - traefik.http.routers.reference-service.tls=true
       - traefik.http.routers.reference-service.tls.certresolver=le
       - traefik.docker.network=web
     volumes:
-      - ./env:/dist/env
+      - ./reference-service/env:/env
       - key-source:/key
     networks:
       - web
@@ -84,7 +84,7 @@ services:
       dockerfile: ./docker/Dockerfile
       target: dev
     image: search-service
-    restart: always
+    # restart: always
     env_file: ./search-service/env/.env.prod
     labels:
       - traefik.http.routers.search-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/api/search`)
