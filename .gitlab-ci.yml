@@ -23,6 +23,7 @@ step-proxy-deploy:
       - export DYNAMIC_ENV_VAR=DEVELOP
       - ls -r /builds/root/
       - cp -r /builds/root/ /source/repos/
+      - ls /source/repos/
     tags:
       - deploy
       - proxy
