@@ -21,6 +21,7 @@ step-proxy-deploy:
     stage: deploy
     before_script:
     - export DYNAMIC_ENV_VAR=DEVELOP
+    - cp -R ./build/* ${CI_PROJECT_NAME}
     tags:
       - deploy
       - proxy
