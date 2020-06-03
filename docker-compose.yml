@@ -10,6 +10,9 @@ services:
       - --api.insecure
       - --api.dashboard=true
       - --providers.docker=true
+      - --providers.file=true
+      - --providers.file.filename=/proxy-config.toml
+      - --providers.file.watch=true
       - --entryPoints.web.address=:88
       - --entryPoints.websecure.address=:443
       - --certificatesResolvers.le.acme.email=timothy@kicksware.com
@@ -43,6 +46,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./proxy-service:/proxy-service
+      - ./proxy-config.toml:/proxy-config.toml
 
 networks:
   web:
