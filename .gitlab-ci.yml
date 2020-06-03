@@ -23,8 +23,8 @@ step-proxy-deploy:
       - export DYNAMIC_ENV_VAR=DEVELOP
       - echo ${CI_PROJECT_DIR}
       - echo ${CI_PROJECT_NAME}
-      - ls /
-      - cp -r /${CI_PROJECT_DIR}/. /source/repos/${CI_PROJECT_NAME}/
+      - ls /source
+      - cp -r ${CI_PROJECT_DIR}/. /source/repos/${CI_PROJECT_NAME}/
     tags:
       - deploy
       - proxy
