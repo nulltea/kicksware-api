@@ -2,10 +2,10 @@ commonConfig:
   host: localhost:8080
   hostname: kicksware.com
   contentType: application/json
-  innerServiceFormat: http://%s:8080/api/references/sneakers%s
+  innerServiceFormat: http://%s:8080/references/sneakers%s
 authConfig:
   publicKeyPath: ../key/public.key.pub
-  authEndpoint: http://localhost:8080/api/auth/guest
+  authEndpoint: https://api.kicksware.com/auth/guest
 elasticConfig:
   URL: http://localhost:9200
   index: sneaker_reference
