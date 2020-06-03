@@ -33,7 +33,7 @@ services:
       - traefik.http.routers.traefik.tls.certresolver=le
       - traefik.http.routers.traefik-secure.tls.certresolver=le
       - traefik.http.routers.traefik-secure.middlewares=traefik-auth
-      - traefik.http.middlewares.traefik-auth.basicauth.users=timothy:traefik
+      - traefik.http.middlewares.traefik-auth.basicauth.users=root:traefik
       - traefik.docker.network=web
     ports:
       - 80:80

@@ -11,6 +11,10 @@ stages:
     - test
     - deploy
 
+before_script: &common-before:
+    - export SOURCE_DIR="/source/repos/$CI_PROJECT_NAME"
+
+
 init-source-step:
   stage: init
   tags:
@@ -47,6 +51,7 @@ build-styles-step:
 deploy-proxy-step:
     stage: deploy
     before_script:
+      - *common-before
       - export DYNAMIC_ENV_VAR=PROD
     tags:
       - deploy
@@ -60,6 +65,7 @@ deploy-proxy-step:
 deploy-middleware-step:
     stage: deploy
     before_script: 
+    - *common-before
     - export DYNAMIC_ENV_VAR=PROD
     tags:
       - middleware
@@ -73,7 +79,8 @@ deploy-middleware-step:
 deploy-webapp-step:
     stage: deploy
     before_script:
-    - export DYNAMIC_ENV_VAR=PROD
+      - *common-before
+      - export DYNAMIC_ENV_VAR=PROD
     tags:
       - webapp
       - deploy
