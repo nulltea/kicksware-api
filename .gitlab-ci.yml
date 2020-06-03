@@ -6,48 +6,21 @@ services:
     - docker:stable-dind
 
 stages:
+    - init
     - build
     - test
     - deploy
 
-before_script: &source-init 
+init-source-step:
+  stage: init  
+  script: 
     - docker version
     - docker-compose version
-    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY 
     - export SOURCE_DIR="/source/repos/$CI_PROJECT_NAME"
-    - ls -r /builds/root/*
     - cp -r /builds/root/* /source/repos/
-    - ls /source/repos/
 
-step-proxy-deploy:
-    stage: deploy
-    before_script:
-      - *source-init 
-      - export DYNAMIC_ENV_VAR=DEVELOP
-    tags:
-      - deploy
-      - proxy
-    script:
-      - echo setting up env $DYNAMIC_ENV_VAR
-      - docker-compose down
-      - docker-compose build
-      - docker-compose up -d
-
-
-step-middleware-deploy:
-    stage: deploy
-    before_script: 
-    - export DYNAMIC_ENV_VAR=DEVELOP
-    tags:
-      - middleware
-      - deploy
-    script:
-      - echo setting up env $DYNAMIC_ENV_VAR
-      # - docker-compose -f middleware-service/docker-compose.yml down
-      # - docker-compose -f middleware-service/docker-compose.yml build
-      # - docker-compose -f middleware-service/docker-compose.yml up -d
-
-step-webapp-style:
+build-styles-step:
   stage: build
   image: node:8-alpine
   variables:
@@ -55,7 +28,6 @@ step-webapp-style:
   tags:
     - webapp
     - build
-    - deploy
   before_script:
     - apk add --update bash
     - apk add --update git && rm -rf /tmp/* /var/cache/apk/*
@@ -70,10 +42,36 @@ step-webapp-style:
     paths:
       - web-app-service/Web/wwwroot/styles/css
 
-step-webapp-deploy:
+deploy-proxy-step:
     stage: deploy
     before_script:
-    - export DYNAMIC_ENV_VAR=DEVELOP
+      - export DYNAMIC_ENV_VAR=PROD
+    tags:
+      - deploy
+      - proxy
+    script:
+      - echo setting up env $DYNAMIC_ENV_VAR
+      - docker-compose down
+      - docker-compose build
+      - docker-compose up -d
+
+deploy-middleware-step:
+    stage: deploy
+    before_script: 
+    - export DYNAMIC_ENV_VAR=PROD
+    tags:
+      - middleware
+      - deploy
+    script:
+      - echo setting up env $DYNAMIC_ENV_VAR
+      - docker-compose -f middleware-service/docker-compose.yml down
+      - docker-compose -f middleware-service/docker-compose.yml build
+      - docker-compose -f middleware-service/docker-compose.yml up -d
+
+deploy-webapp-step:
+    stage: deploy
+    before_script:
+    - export DYNAMIC_ENV_VAR=PROD
     tags:
       - webapp
       - deploy
