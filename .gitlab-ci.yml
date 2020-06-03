@@ -16,17 +16,15 @@ before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
     - export IMAGE=$CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME
     - export MIDDLEWARE_IMAGE=$IMAGE:middleware
-    - echo ${CI_PROJECT_DIR}
-    - ${CI_PROJECT_NAME}
-    - ls /
-    - cp -r /${CI_PROJECT_DIR}/. /source/repos/${CI_PROJECT_NAME}/
 
 step-proxy-deploy:
     stage: deploy
     before_script:
-    - export DYNAMIC_ENV_VAR=DEVELOP
-    - ls ../../../ -r
-    - cp -a /* ../../../source/repos/${CI_PROJECT_NAME}
+      - export DYNAMIC_ENV_VAR=DEVELOP
+      - echo ${CI_PROJECT_DIR}
+      - ${CI_PROJECT_NAME}
+      - ls /
+      - cp -r /${CI_PROJECT_DIR}/. /source/repos/${CI_PROJECT_NAME}/
     tags:
       - deploy
       - proxy
