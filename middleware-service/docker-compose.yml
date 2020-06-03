@@ -67,7 +67,7 @@ services:
       - traefik.http.routers.reference-service.tls.certresolver=le
       - traefik.docker.network=web
     volumes:
-      - ./reference-service/env:/dist/env
+      - ./reference-service/env/config.prod.yaml:/dist/env/config.prod.yaml
       - key-source:/key
     networks:
       - web
