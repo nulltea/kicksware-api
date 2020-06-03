@@ -12,7 +12,9 @@ stages:
     - deploy
 
 init-source-step:
-  stage: init  
+  stage: init
+  tags:
+    - init
   script: 
     - docker version
     - docker-compose version
