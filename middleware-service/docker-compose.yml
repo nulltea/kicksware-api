@@ -124,7 +124,7 @@ services:
       - traefik.http.routers.mongodb.tls.certresolver=le
       - traefik.docker.network=web
     volumes:
-      - backup-source/mongo:/backup/mongo
+      - backup-source:/backup
       - ./backup/mongo/init.sh:/docker-entrypoint-initdb.d/init.sh
     networks:
       - data
