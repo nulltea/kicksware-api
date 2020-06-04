@@ -20,9 +20,9 @@ services:
       - --certificatesResolvers.le.acme.tlschallenge=true
     labels:
       - traefik.http.routers.traefik.entrypoints=web
-      - traefik.http.routers.traefik.rule=Host(`monitor.kicksware.com`)
+      - traefik.http.routers.traefik.rule=Host(`monitor.kicksware.com`) && PathPrefix(`/`)
       - traefik.http.routers.traefik-secure.entrypoints=websecure
-      - traefik.http.routers.traefik-secure.rule=Host(`monitor.kicksware.com`)
+      - traefik.http.routers.traefik-secure.rule=Host(`monitor.kicksware.com`) && PathPrefix(`/`)
       - traefik.http.routers.traefik-secure.tls=true
       - traefik.http.routers.traefik-secure.tls.domains[0].main=kicksware.com
       - traefik.http.routers.traefik-secure.tls.domains[0].sans=*.kicksware.com

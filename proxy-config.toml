@@ -1,6 +1,6 @@
 [http.routers]
   [http.routers.gitlab-ci]
-    rule = "Host(`ci.kicksware.com`)"
+    rule = "Host(`ci.kicksware.com`) && PathPrefix(`/`)"
     entrypoints = ["websecure"]
     service = "gitlab-ci"
   [http.routers.gitlab-ci.tls]
