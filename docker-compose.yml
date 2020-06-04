@@ -18,6 +18,9 @@ services:
       - --certificatesResolvers.le.acme.email=timothy@kicksware.com
       - --certificatesResolvers.le.acme.storage=/proxy-service/acme.json
       - --certificatesResolvers.le.acme.tlschallenge=true
+      - --accesslog=true
+      - --tracing.instana=true
+      - --metrics.datadog=true
     labels:
       - traefik.http.routers.traefik.entrypoints=web
       - traefik.http.routers.traefik.rule=Host(`monitor.kicksware.com`)
