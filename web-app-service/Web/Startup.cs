@@ -115,7 +115,7 @@ namespace Web
 			services.AddAuthorization(ConfigureAuthOptions);
 
 			services.AddDataProtection()
-				.PersistKeysToFileSystem(new DirectoryInfo(@"\source\keys\"))
+				.PersistKeysToFileSystem(new DirectoryInfo(@"\keys\"))
 				.SetApplicationName("kicksware");
 
 			#endregion

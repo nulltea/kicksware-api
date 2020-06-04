@@ -17,10 +17,10 @@ services:
     volumes:
       - type: bind
         source: /source/storage
-        target: /source/storage
+        target: /app/wwwroot/storage
       - type: bind
         source: /source/keys
-        target: /source/keys
+        target: /keys
 
 networks:
   web:
