@@ -27,13 +27,13 @@ services:
       - traefik.http.routers.traefik-secure.tls.domains[0].main=kicksware.com
       - traefik.http.routers.traefik-secure.tls.domains[0].sans=*.kicksware.com
       - traefik.http.routers.traefik-secure.service=api@internal
-      - traefik.http.routers.traefik.middlewares=traefik-https-redirect, add-dashboard
+      - traefik.http.routers.traefik.middlewares=traefik-https-redirect
       - traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https
       - traefik.http.middlewares.traefik-https-redirect.redirectscheme.permanent=true
       - traefik.http.middlewares.add-dashboard.addprefix.prefix=/dashboard/#/
       - traefik.http.routers.traefik.tls.certresolver=le
       - traefik.http.routers.traefik-secure.tls.certresolver=le
-      - traefik.http.routers.traefik-secure.middlewares=traefik-auth, add-dashboard
+      - traefik.http.routers.traefik-secure.middlewares=traefik-auth
       - traefik.http.middlewares.traefik-auth.basicauth.users=root:$$apr1$$hnXmcCx0$$hTmrK2ZX5sKWiqE9IR6E6/
       - traefik.docker.network=web
     ports:
