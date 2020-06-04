@@ -1,10 +1,10 @@
-﻿using System.IO;
+using System.IO;
 
 namespace Core.Constants
 {
 	public static class Constants
 	{
-		public const string GatewayBaseUrl = "https://api.kicksware.com/api";
+		public const string GatewayBaseUrl = "https://api.kicksware.com";
 
 		public static readonly string WebRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
 
