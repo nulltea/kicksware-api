@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Core.Entities.Products;
 using Core.Entities.References;
 using Core.Entities.Users;
@@ -15,6 +16,7 @@ using Infrastructure.Usecase;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -98,19 +100,23 @@ namespace Web
 
 			services
 				.AddAuthentication(ConfigureAuthOptions)
-				.AddMiddlewareAuth<AuthService>(ConfigureAuthOptions);
-				//.AddFacebook(facebookOptions =>
-				//{
-				//	facebookOptions.AppId = Environment.GetEnvironmentVariable("AUTH_FACEBOOK_ID");
-				//	facebookOptions.AppSecret = Environment.GetEnvironmentVariable("AUTH_FACEBOOK_SECRET");
-				//})
-				//.AddGoogle(options =>
-				//{
-				//	options.ClientId = Environment.GetEnvironmentVariable("AUTH_GOOGLE_ID");
-				//	options.ClientSecret = Environment.GetEnvironmentVariable("AUTH_GOOGLE_SECRET");
-				//});
+				.AddMiddlewareAuth<AuthService>(ConfigureAuthOptions)
+				.AddFacebook(facebookOptions =>
+				{
+					facebookOptions.AppId = Environment.GetEnvironmentVariable("AUTH_FACEBOOK_ID");
+					facebookOptions.AppSecret = Environment.GetEnvironmentVariable("AUTH_FACEBOOK_SECRET");
+				})
+				.AddGoogle(options =>
+				{
+					options.ClientId = Environment.GetEnvironmentVariable("AUTH_GOOGLE_ID");
+					options.ClientSecret = Environment.GetEnvironmentVariable("AUTH_GOOGLE_SECRET");
+				});
 
 			services.AddAuthorization(ConfigureAuthOptions);
+
+			services.AddDataProtection()
+				.PersistKeysToFileSystem(new DirectoryInfo(@"\source\keys\"))
+				.SetApplicationName("kicksware");
 
 			#endregion
 		}

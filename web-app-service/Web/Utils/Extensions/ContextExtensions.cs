@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Core.Constants;
 using Core.Entities.Users;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
@@ -34,7 +35,7 @@ namespace Web.Utils.Extensions
 
 		internal static string GetTlsTokenBinding(this HttpContext context)
 		{
-			var binding = context.Features.Get<ITlsTokenBindingFeature>()?.GetProvidedTokenBindingId();
+			var binding = context.Features.Get<ITlsTokenBindingFeature>()?.GetProvidedTokenBindingId();// ?? Constants.AlternativeTlsBinding;
 			return binding == null ? null : Convert.ToBase64String(binding);
 		}
 

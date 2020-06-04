@@ -8,18 +8,12 @@
     ".NETCoreApp,Version=v3.1": {
       "Core/1.0.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.Html.Abstractions": "2.2.0",
           "Newtonsoft.Json": "12.0.3",
-          "Microsoft.AspNetCore.Html.Abstractions.Reference": "3.1.0.0",
+          "Microsoft.AspNetCore.Html.Abstractions": "3.1.0.0",
           "Microsoft.AspNetCore.Mvc.ViewFeatures": "3.1.0.0"
         },
         "runtime": {
           "Core.dll": {}
-        }
-      },
-      "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
-        "dependencies": {
-          "System.Text.Encodings.Web": "4.5.0"
         }
       },
       "Newtonsoft.Json/12.0.3": {
@@ -30,8 +24,7 @@
           }
         }
       },
-      "System.Text.Encodings.Web/4.5.0": {},
-      "Microsoft.AspNetCore.Html.Abstractions.Reference/3.1.0.0": {
+      "Microsoft.AspNetCore.Html.Abstractions/3.1.0.0": {
         "runtime": {
           "Microsoft.AspNetCore.Html.Abstractions.dll": {
             "assemblyVersion": "3.1.0.0",
@@ -287,13 +280,6 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-Y4rs5aMEXY8G7wJo5S3EEt6ltqyOTr/qOeZzfn+hw/fuQj5GppGckMY5psGLETo1U9hcT5MmAhaT5xtusM1b5g==",
-      "path": "microsoft.aspnetcore.html.abstractions/2.2.0",
-      "hashPath": "microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512"
-    },
     "Newtonsoft.Json/12.0.3": {
       "type": "package",
       "serviceable": true,
@@ -301,14 +287,7 @@
       "path": "newtonsoft.json/12.0.3",
       "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
     },
-    "System.Text.Encodings.Web/4.5.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-Xg4G4Indi4dqP1iuAiMSwpiWS54ZghzR644OtsRCm/m/lBMG8dUBhLVN7hLm8NNrNTR+iGbshCPTwrvxZPlm4g==",
-      "path": "system.text.encodings.web/4.5.0",
-      "hashPath": "system.text.encodings.web.4.5.0.nupkg.sha512"
-    },
-    "Microsoft.AspNetCore.Html.Abstractions.Reference/3.1.0.0": {
+    "Microsoft.AspNetCore.Html.Abstractions/3.1.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
