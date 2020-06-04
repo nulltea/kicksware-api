@@ -11,7 +11,7 @@ services:
       - traefik.http.routers.web-app.rule=Host(`kicksware.com`)
       - traefik.http.routers.web-app.tls=true
       - traefik.http.routers.web-app.tls.certresolver=le
-      - traefik.docker.network=sneaker-resale-platform_web
+      - traefik.docker.network=web
     networks:
       - web
 
