@@ -164,6 +164,7 @@ services:
       - traefik.http.routers.kibana.tls.certresolver=le
       - traefik.docker.network=web
       - traefik.http.middlewares.add-app.addprefix.prefix=/app/
+      - traefik.http.routers.kibana.middlewares=add-app
     networks:
       - web
       - elastic
