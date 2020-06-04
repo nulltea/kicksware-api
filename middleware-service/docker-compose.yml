@@ -126,8 +126,8 @@ services:
     networks:
       - web
       - data
-    logging:
-      driver: none
+    # logging:
+    #  driver: none
 
   elasticsearch:
     container_name: elasticsearch
@@ -148,8 +148,8 @@ services:
     networks:
       - web
       - elastic
-    logging:
-      driver: none
+    #logging:
+    #  driver: none
 
   kibana:
     container_name: kibana
