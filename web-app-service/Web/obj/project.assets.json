@@ -10241,11 +10241,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Web.csproj",
+      "projectUniqueName": "C:\\source\\repos\\kicksware-platform\\web-app-service\\Web\\Web.csproj",
       "projectName": "Web",
-      "projectPath": "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\Web.csproj",
+      "projectPath": "C:\\source\\repos\\kicksware-platform\\web-app-service\\Web\\Web.csproj",
       "packagesPath": "C:\\Users\\tyalu\\.nuget\\packages\\",
-      "outputPath": "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Web\\obj\\",
+      "outputPath": "C:\\source\\repos\\kicksware-platform\\web-app-service\\Web\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet",
@@ -10266,11 +10266,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\Core.csproj": {
-              "projectPath": "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\Core.csproj"
+            "C:\\source\\repos\\kicksware-platform\\web-app-service\\Core\\Core.csproj": {
+              "projectPath": "C:\\source\\repos\\kicksware-platform\\web-app-service\\Core\\Core.csproj"
             },
-            "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Infrastructure\\Infrastructure.csproj": {
-              "projectPath": "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Infrastructure\\Infrastructure.csproj"
+            "C:\\source\\repos\\kicksware-platform\\web-app-service\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "C:\\source\\repos\\kicksware-platform\\web-app-service\\Infrastructure\\Infrastructure.csproj"
             }
           }
         }

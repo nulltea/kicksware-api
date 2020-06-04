@@ -72,14 +72,14 @@ namespace Core.Entities.References
 				if (string.IsNullOrEmpty(ImageLink)) return string.Empty; // TODO no image available icon
 				var uri = new Uri(ImageLink);
 				var imageName = Path.GetFileName(uri.LocalPath);
-				var storagePath = Path.Combine(Constants.Constants.FileStoragePath, "photos/references", imageName);
+				var storagePath = Path.Combine(Constants.Constants.FileStoragePath, "/references", imageName);
 
 				if (File.Exists(storagePath)) return string.Concat(@"\", Path.GetRelativePath(Constants.Constants.WebRootPath, storagePath));
 
 				using var client = new WebClient();
 				try
 				{
-					client.DownloadFile(new Uri(ImageLink), storagePath);
+					// client.DownloadFile(new Uri(ImageLink), storagePath); TODO download manually
 				}
 				catch
 				{

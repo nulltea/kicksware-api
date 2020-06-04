@@ -1,4 +1,6 @@
-﻿using Core.Services;
+﻿using System.Reflection.Metadata;
+using Core.Constants;
+using Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +19,7 @@ namespace Web.Controllers
 		private readonly IWebHostEnvironment _environment;
 
 		[ViewData]
-		public string HeroCoverPath { get; set; } = "/images/heroes/seller-hero.jpg";
+		public string HeroCoverPath { get; set; } = $"/{Constants.FileStoragePath}/heroes/seller-hero.jpg";
 
 		[ViewData]
 		public string HeroBreadTitle { get; set; } = "Add product listing";

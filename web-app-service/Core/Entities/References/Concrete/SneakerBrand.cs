@@ -31,8 +31,8 @@ namespace Core.Entities.References
 		{
 			Name = name;
 			UniqueID = Convert.ToString(name)?.ToFormattedID().ToLower();
-			Logo = $"logos/{UniqueID}-logo.svg";
-			HeroPath = $"/images/heroes/{UniqueID}-hero.jpg";
+			Logo = $"/{Constants.Constants.FileStoragePath}/logos/{UniqueID}-logo.svg";
+			HeroPath = $"/{Constants.Constants.FileStoragePath}/heroes/{UniqueID}-hero.jpg";
 		}
 
 		public override string ToString() => Name;

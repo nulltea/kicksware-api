@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
+using Core.Constants;
 using Core.Entities.Users;
 using Core.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -15,7 +16,7 @@ namespace Web.Controllers
 	public class ProfileController : Controller
 	{
 		[ViewData]
-		public string HeroCoverPath { get; set; } = "/images/heroes/profile-hero.jpg";
+		public string HeroCoverPath { get; set; } = $"/{Constants.FileStoragePath}/heroes/profile-hero.jpg";
 
 		[ViewData]
 		public string HeroBreadTitle { get; set; } = "Profile";

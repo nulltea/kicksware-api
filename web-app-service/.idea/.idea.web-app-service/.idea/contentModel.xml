@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\source\repos\sneaker-resale-platform\web-app-service" t="IncludeFlat">
+    <e p="C:\source\repos\kicksware-platform\web-app-service" t="IncludeFlat">
       <e p=".dockerignore" t="Include" />
       <e p="Core" t="IncludeRecursive">
         <e p="Algorithms" t="Include">
@@ -264,7 +264,6 @@
           </e>
         </e>
         <e p="bin" t="ExcludeRecursive" />
-        <e p="ClassDiagram.cd" t="Include" />
         <e p="Config" t="Include">
           <e p="AppSettings.cs" t="Include" />
         </e>
@@ -521,23 +520,6 @@
             <e p="account.svg" t="Include" />
             <e p="address.svg" t="Include" />
             <e p="arrow.svg" t="Include" />
-            <e p="assets" t="Include">
-              <e p="hand-air-max-90-1.png" t="Include" />
-              <e p="hand-air-max-90-2.png" t="Include" />
-              <e p="hand-air-max-90-3.png" t="Include" />
-              <e p="hand-air-max-90-4.png" t="Include" />
-              <e p="hand-air-max-90-5.png" t="Include" />
-              <e p="hand-vapormax.png" t="Include" />
-              <e p="window-air-max-180.png" t="Include" />
-              <e p="window-air-max-270.png" t="Include" />
-              <e p="window-air-max-93.png" t="Include" />
-              <e p="window-air-max-97-vapormax.png" t="Include" />
-              <e p="window-air-max-97.png" t="Include" />
-              <e p="window-creator.png" t="Include" />
-              <e p="window-react-element.png" t="Include" />
-              <e p="window-vapormax-plus.png" t="Include" />
-              <e p="window-vapormax.png" t="Include" />
-            </e>
             <e p="bookmark.svg" t="Include" />
             <e p="box.svg" t="Include" />
             <e p="buy.svg" t="Include" />
@@ -552,49 +534,6 @@
             <e p="github.svg" t="Include" />
             <e p="google.svg" t="Include" />
             <e p="grid.svg" t="Include" />
-            <e p="heroes" t="Include">
-              <e p="about-hero.jpg" t="Include" />
-              <e p="adidas-4d-hero.jpg" t="Include" />
-              <e p="adidas-hero.jpg" t="Include" />
-              <e p="adidas_y-3-hero.jpg" t="Include" />
-              <e p="asics-hero.jpg" t="Include" />
-              <e p="asics-hero2.jpg" t="Include" />
-              <e p="bape-hero.jpg" t="Include" />
-              <e p="contact-hero.jpg" t="Include" />
-              <e p="converse-hero.jpg" t="Include" />
-              <e p="jordan-hero.jpg" t="Include" />
-              <e p="jordan-hero3.jpg" t="Include" />
-              <e p="new-balance-hero.jpg" t="Include" />
-              <e p="new_balance-hero2.jpg" t="Include" />
-              <e p="nike-adapt-hero.jpg" t="Include" />
-              <e p="nike-air_force-hero.jpg" t="Include" />
-              <e p="nike-air_force_high-hero.jpg" t="Include" />
-              <e p="nike-air_max_90-hero.jpg" t="Include" />
-              <e p="nike-air_max_90-hero2.jpg" t="Include" />
-              <e p="nike-air_yeezy-hero.jpg" t="Include" />
-              <e p="nike-hero.jpg" t="Include" />
-              <e p="nike-kobe-hero.jpg" t="Include" />
-              <e p="nike-off_white-hero.jpg" t="Include" />
-              <e p="nike-react-hero.jpg" t="Include" />
-              <e p="nike-stock-hero.jpg" t="Include" />
-              <e p="nike-uptempo-hero.jpg" t="Include" />
-              <e p="nike-x-sacai-hero.jpg" t="Include" />
-              <e p="nike-x-sacai-hero2.jpg" t="Include" />
-              <e p="profile-hero.jpg" t="Include" />
-              <e p="profile-hero2.jpg" t="Include" />
-              <e p="puma-hero.jpg" t="Include" />
-              <e p="puma-hero2.jpg" t="Include" />
-              <e p="reebok-hero.jpg" t="Include" />
-              <e p="reebok-hero2.jpg" t="Include" />
-              <e p="seller-hero.jpg" t="Include" />
-              <e p="seller-hero2.jpg" t="Include" />
-              <e p="shop-hero.jpg" t="Include" />
-              <e p="vans-hero.jpg" t="Include" />
-              <e p="yeezy-500-hero.jpg" t="Include" />
-              <e p="yeezy-700-hero.jpg" t="Include" />
-              <e p="yeezy-hero.jpg" t="Include" />
-              <e p="yeezy-hero2.jpg" t="Include" />
-            </e>
             <e p="hightop_sneakers.svg" t="Include" />
             <e p="home_addidas_4d.jpg" t="Include" />
             <e p="home_air_max_plus_3.jpg" t="Include" />
@@ -607,31 +546,6 @@
             <e p="linkedin.svg" t="Include" />
             <e p="list.svg" t="Include" />
             <e p="list_.svg" t="Include" />
-            <e p="logos" t="Include">
-              <e p="adidas-logo.svg" t="Include" />
-              <e p="adidas-logo2.svg" t="Include" />
-              <e p="adidas-y-3-logo.svg" t="Include" />
-              <e p="asics-logo.svg" t="Include" />
-              <e p="balenciaga-logo.svg" t="Include" />
-              <e p="bape-logo.svg" t="Include" />
-              <e p="converse-logo.svg" t="Include" />
-              <e p="fila-logo.svg" t="Include" />
-              <e p="jordan-logo.svg" t="Include" />
-              <e p="kappa-logo.svg" t="Include" />
-              <e p="lacoste-logo.svg" t="Include" />
-              <e p="new-balance-logo.svg" t="Include" />
-              <e p="nike-logo.svg" t="Include" />
-              <e p="off-white-logo.svg" t="Include" />
-              <e p="puma-logo.svg" t="Include" />
-              <e p="reebok-logo.svg" t="Include" />
-              <e p="stone_island-logo.svg" t="Include" />
-              <e p="stussy-logo.svg" t="Include" />
-              <e p="the_north_face-logo.svg" t="Include" />
-              <e p="under-armour-logo.svg" t="Include" />
-              <e p="vans-logo.svg" t="Include" />
-              <e p="versace-logo.svg" t="Include" />
-              <e p="yeezy-logo.svg" t="Include" />
-            </e>
             <e p="logout.svg" t="Include" />
             <e p="mail.svg" t="Include" />
             <e p="others.svg" t="Include" />
@@ -793,94 +707,7 @@
             </e>
           </e>
           <e p="styles" t="Include">
-            <e p="css" t="Include">
-              <e p="About" t="Include">
-                <e p="about.css" t="Include" />
-                <e p="about.css.map" t="Include" />
-              </e>
-              <e p="Checkout" t="Include">
-                <e p="checkout.css" t="Include" />
-                <e p="checkout.css.map" t="Include" />
-              </e>
-              <e p="common" t="Include">
-                <e p="common.css" t="Include" />
-                <e p="common.css.map" t="Include" />
-              </e>
-              <e p="Contact" t="Include">
-                <e p="contact.css" t="Include" />
-                <e p="contact.css.map" t="Include" />
-              </e>
-              <e p="Home" t="Include">
-                <e p="home.css" t="Include" />
-                <e p="home.css.map" t="Include" />
-              </e>
-              <e p="layout" t="Include">
-                <e p="footer.css" t="Include" />
-                <e p="footer.css.map" t="Include" />
-                <e p="header.css" t="Include" />
-                <e p="header.css.map" t="Include" />
-                <e p="menu.css" t="Include" />
-                <e p="menu.css.map" t="Include" />
-                <e p="search.css" t="Include" />
-                <e p="search.css.map" t="Include" />
-                <e p="social.css" t="Include" />
-                <e p="social.css.map" t="Include" />
-              </e>
-              <e p="Profile" t="Include">
-                <e p="profile.css" t="Include" />
-                <e p="profile.css.map" t="Include" />
-              </e>
-              <e p="responsive" t="Include">
-                <e p="about.responsive.css" t="Include" />
-                <e p="about.responsive.css.map" t="Include" />
-                <e p="checkout.responsive.css" t="Include" />
-                <e p="checkout.responsive.css.map" t="Include" />
-                <e p="contact.responsive.css" t="Include" />
-                <e p="contact.responsive.css.map" t="Include" />
-                <e p="home.responsive.css" t="Include" />
-                <e p="home.responsive.css.map" t="Include" />
-                <e p="layout.responsive.css" t="Include" />
-                <e p="layout.responsive.css.map" t="Include" />
-                <e p="product-item.responsive.css" t="Include" />
-                <e p="product-item.responsive.css.map" t="Include" />
-                <e p="products.responsive.css" t="Include" />
-                <e p="products.responsive.css.map" t="Include" />
-                <e p="profile.responsive.css" t="Include" />
-                <e p="profile.responsive.css.map" t="Include" />
-                <e p="sell.responsive.css" t="Include" />
-                <e p="sell.responsive.css.map" t="Include" />
-              </e>
-              <e p="Sell" t="Include">
-                <e p="details.css" t="Include" />
-                <e p="details.css.map" t="Include" />
-                <e p="payment.css" t="Include" />
-                <e p="payment.css.map" t="Include" />
-                <e p="photos.css" t="Include" />
-                <e p="photos.css.map" t="Include" />
-                <e p="preview.css" t="Include" />
-                <e p="preview.css.map" t="Include" />
-                <e p="search.css" t="Include" />
-                <e p="search.css.map" t="Include" />
-                <e p="sell.css" t="Include" />
-                <e p="sell.css.map" t="Include" />
-                <e p="shipping.css" t="Include" />
-                <e p="shipping.css.map" t="Include" />
-              </e>
-              <e p="Shop" t="Include">
-                <e p="filter.css" t="Include" />
-                <e p="filter.css.map" t="Include" />
-                <e p="product-item.css" t="Include" />
-                <e p="product-item.css.map" t="Include" />
-                <e p="products.css" t="Include" />
-                <e p="products.css.map" t="Include" />
-                <e p="results.css" t="Include" />
-                <e p="results.css.map" t="Include" />
-              </e>
-              <e p="user" t="Include">
-                <e p="modal.css" t="Include" />
-                <e p="modal.css.map" t="Include" />
-              </e>
-            </e>
+            <e p="css" t="Include" />
             <e p="less" t="Include">
               <e p="About" t="Include">
                 <e p="about.less" t="Include" />
@@ -950,7 +777,7 @@
       <e p="web-app-service.sln" t="IncludeFlat" />
     </e>
     <e p="C:\Users\tyalu\AppData\local\JetBrains\Rider2019.3\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\tyalu\AppData\local\JetBrains\Rider2019.3\resharper-host\local\Transient\ReSharperHost\v201\SolutionCaches\_web-app-service.-481469185.00" t="ExcludeRecursive" />
+    <e p="C:\Users\tyalu\AppData\local\JetBrains\Rider2019.3\resharper-host\local\Transient\ReSharperHost\v201\SolutionCaches\_web-app-service.-753222801.00" t="ExcludeRecursive" />
     <e p="C:\Users\tyalu\AppData\Roaming\JetBrains\Rider2019.3\scratches" t="IncludeRecursive" />
   </component>
 </project>

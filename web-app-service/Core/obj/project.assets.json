@@ -6307,11 +6307,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\Core.csproj",
+      "projectUniqueName": "C:\\source\\repos\\kicksware-platform\\web-app-service\\Core\\Core.csproj",
       "projectName": "Core",
-      "projectPath": "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\Core.csproj",
+      "projectPath": "C:\\source\\repos\\kicksware-platform\\web-app-service\\Core\\Core.csproj",
       "packagesPath": "C:\\Users\\tyalu\\.nuget\\packages\\",
-      "outputPath": "C:\\source\\repos\\sneaker-resale-platform\\web-app-service\\Core\\obj\\",
+      "outputPath": "C:\\source\\repos\\kicksware-platform\\web-app-service\\Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet",

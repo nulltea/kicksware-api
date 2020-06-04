@@ -8,8 +8,8 @@ namespace Core.Constants
 
 		public static readonly string WebRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
 
-		public static readonly string FileStoragePath = Path.Combine(WebRootPath, "files");
+		public static readonly string FileStoragePath = "/source/storage/files";
 
-		public static readonly string ImagesPath = Path.Combine(WebRootPath, "images");
+		public static readonly string ImagesPath = Path.Combine("/source/storage", "images");
 	}
 }
