@@ -1,6 +1,6 @@
 [http.routers]
   [http.routers.gitlab-ci]
-    rule = "Host(`ci.kicksware.com`) && PathPrefix(`/`)"  
+    rule = "Host(`ci.kicksware.com`)"  
     entrypoints = ["websecure"]
     service = "gitlab-ci"
   [http.routers.gitlab-ci.tls]
@@ -10,3 +10,4 @@
   [http.services.gitlab-ci.loadBalancer]
       [[http.services.gitlab-ci.loadBalancer.servers]]
         url = "https://ci.kicksware.com:44321"
+        # /var/opt/gitlab/nginx/conf/gitlab-http.conf --> server { listen *:88 }

@@ -30,6 +30,7 @@ services:
       - traefik.http.routers.traefik.middlewares=traefik-https-redirect
       - traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https
       - traefik.http.middlewares.traefik-https-redirect.redirectscheme.permanent=true
+      - traefik.http.middlewares.add-dashboard.addprefix.prefix=/dashboard/#/
       - traefik.http.routers.traefik.tls.certresolver=le
       - traefik.http.routers.traefik-secure.tls.certresolver=le
       - traefik.http.routers.traefik-secure.middlewares=traefik-auth
