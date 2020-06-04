@@ -19,8 +19,8 @@ services:
         source: /source/storage
         target: /source/storage
       - type: bind
-          source: /source/keys
-          target: /source/keys
+        source: /source/keys
+        target: /source/keys
 
 networks:
   web:
