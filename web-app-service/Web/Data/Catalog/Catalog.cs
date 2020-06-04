@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Core.Constants;
 using Core.Reference;
 using Newtonsoft.Json;
 
@@ -14,19 +15,19 @@ namespace Web.Data.Catalog
 		/// <summary>
 		///
 		/// </summary>
-		public static readonly SneakerSize[] SneakerSizesList = JsonConvert.DeserializeObject<SneakerSize[]>(File.ReadAllText(@"Data\Json\sizes.json"));
+		public static readonly SneakerSize[] SneakerSizesList = JsonConvert.DeserializeObject<SneakerSize[]>(File.ReadAllText(@$"{Constants.FileStoragePath}\meta\sizes.json"));
 
 		/// <summary>
 		///
 		/// </summary>
-		public static readonly string[] SneakerBrandsList = JsonConvert.DeserializeObject<string[]>(File.ReadAllText(@"Data\Json\sneaker_brands.json"));
+		public static readonly string[] SneakerBrandsList = JsonConvert.DeserializeObject<string[]>(File.ReadAllText(@$"{Constants.FileStoragePath}\meta\sneaker_brands.json"));
 
 		/// <summary>
 		///
 		/// </summary>
-		public static readonly string[] ColorsList = JsonConvert.DeserializeObject<string[]>(File.ReadAllText(@"Data\Json\colors.json"));
+		public static readonly string[] ColorsList = JsonConvert.DeserializeObject<string[]>(File.ReadAllText(@$"{Constants.FileStoragePath}\meta\colors.json"));
 
-		public static FilterColor[] FilterColors = JsonConvert.DeserializeObject<FilterColor[]>(File.ReadAllText(@"Data\Json\filter-colors.json"));
+		public static FilterColor[] FilterColors = JsonConvert.DeserializeObject<FilterColor[]>(File.ReadAllText(@$"{Constants.FileStoragePath}\meta\filter-colors.json"));
 
 		public static Dictionary<string, string> CurrencySigns { get; } = Enum.GetValues(typeof(Currency)).OfType<Currency>().Select(value =>
 		{

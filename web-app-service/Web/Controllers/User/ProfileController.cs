@@ -16,7 +16,7 @@ namespace Web.Controllers
 	public class ProfileController : Controller
 	{
 		[ViewData]
-		public string HeroCoverPath { get; set; } = $"/{Constants.FileStoragePath}/heroes/profile-hero.jpg";
+		public string HeroCoverPath { get; set; } = $"{Constants.FileStoragePath}/heroes/profile-hero.jpg";
 
 		[ViewData]
 		public string HeroBreadTitle { get; set; } = "Profile";

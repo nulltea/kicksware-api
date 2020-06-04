@@ -10,6 +10,6 @@ namespace Core.Constants
 
 		public static readonly string FileStoragePath = "/source/storage/files";
 
-		public static readonly string ImagesPath = Path.Combine("/source/storage", "images");
+		public static readonly string ImagesPath = Path.Combine("source/storage", "images");
 	}
 }
