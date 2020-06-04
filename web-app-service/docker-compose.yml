@@ -16,16 +16,8 @@ services:
       - web
     volumes:
       - type: bind
-        source: storage-volume
+        source: /source/storage
         target: /source/storage
-
-volumes:
-  storage-volume:
-    driver: local
-    driver_opts:
-       o: bind
-       type: none
-       device: /source/storage
 
 networks:
   web:
