@@ -118,8 +118,8 @@ services:
     restart: always
     environment:
       - MONGO_INITDB_DATABASE=sneakerResaleDB
-      - MONGO_USER_ROOT_NAME=root
-      - MONGO_USER_ROOT_PASSWORD=greenJordans
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=greenJordans
     ports:
       - 27017:27017
       - 27018:27017
