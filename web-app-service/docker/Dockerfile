@@ -14,7 +14,7 @@ COPY Core/*.csproj ./Core/
 COPY Infrastructure/*.csproj ./Infrastructure/
 COPY Web/*.csproj ./Web/
 # Run projects restore cmd
-RUN dotnet restore --disable-parallel
+RUN dotnet restore
 COPY . .
 # Build projects
 WORKDIR "/src/Core"
