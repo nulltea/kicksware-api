@@ -41,7 +41,7 @@ services:
       - traefik.http.middlewares.traefik-auth.basicauth.users=root:$$apr1$$hnXmcCx0$$hTmrK2ZX5sKWiqE9IR6E6/
       - traefik.docker.network=web
     environment:
-      - DO_AUTH_TOKEN: "6229b9e18dd51158da31da743bcf36262a11e8075a8ea2847d555cb9a3e47bf4"
+      - DO_AUTH_TOKEN=6229b9e18dd51158da31da743bcf36262a11e8075a8ea2847d555cb9a3e47bf4
     ports:
       - 80:80
       - 443:443
