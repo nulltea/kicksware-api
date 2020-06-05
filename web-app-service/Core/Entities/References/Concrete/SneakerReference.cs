@@ -86,7 +86,7 @@ namespace Core.Entities.References
 					return ImageLink;
 				}
 
-				return string.Concat(@"\", Path.GetRelativePath(Constants.Constants.WebRootPath, storagePath));
+				return storagePath;
 			}
 		}
 
