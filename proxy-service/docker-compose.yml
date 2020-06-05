@@ -17,7 +17,8 @@ services:
       - --entryPoints.websecure.address=:443
       - --certificatesResolvers.le.acme.email=timothy@kicksware.com
       - --certificatesResolvers.le.acme.storage=/proxy-service/acme.json
-      - --certificatesResolvers.le.acme.tlschallenge=true
+      - --certificatesResolvers.le.acme.dnschallenge=true
+      - --certificatesResolvers.le.acme.dnschallenge.provider=digitalocean
       - --accesslog=true
       # - --tracing.instana=true
       # - --metrics.datadog=true
@@ -39,6 +40,8 @@ services:
       - traefik.http.routers.traefik-secure.middlewares=traefik-auth
       - traefik.http.middlewares.traefik-auth.basicauth.users=root:$$apr1$$hnXmcCx0$$hTmrK2ZX5sKWiqE9IR6E6/
       - traefik.docker.network=web
+    environment:
+      - DO_AUTH_TOKEN=6229b9e18dd51158da31da743bcf36262a11e8075a8ea2847d555cb9a3e47bf4
     ports:
       - 80:80
       - 443:443
