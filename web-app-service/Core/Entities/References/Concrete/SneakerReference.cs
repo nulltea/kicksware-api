@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
@@ -74,7 +74,7 @@ namespace Core.Entities.References
 				var imageName = Path.GetFileName(uri.LocalPath);
 				var storagePath = Path.Combine(Constants.Constants.FileStoragePath, "/references", imageName);
 
-				if (File.Exists(storagePath)) return string.Concat(@"\", Path.GetRelativePath(Constants.Constants.WebRootPath, storagePath));
+				if (File.Exists(storagePath)) return storagePath;
 
 				using var client = new WebClient();
 				try
