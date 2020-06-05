@@ -47,7 +47,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - type: bind
-        source: /source/cert/acme.json
+        source: /${SOURCE_DIR}/proxy-service/acme.json
         target: /cert/acme.json
       - type: bind
         source: /${SOURCE_DIR}/proxy-service/proxy-config.toml
