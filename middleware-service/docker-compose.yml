@@ -128,7 +128,7 @@ services:
       - data
     volumes:
       - type: bind
-        source: /source/backup
+        source: /source/backup/mongo
         target: /backup
 
     # logging:
