@@ -1,2 +1,2 @@
 #! /bin/bash
-mongodump --db=sneakerResaleDB  --out=/backup/mongo
+mongodump --uri="mongodb://root:greenJordans@mongodb:27017" --db=sneakerResaleDB  --out=/backup/mongo

@@ -1,2 +1,2 @@
 #! /bin/bash
-mongorestore --db=sneakerResaleDB  ./backup/mongo/sneakerResaleDB
+mongorestore --uri="mongodb://root:greenJordans@mongodb:27017" --db=sneakerResaleDB  ./backup/mongo/sneakerResaleDB
