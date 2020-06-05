@@ -77,8 +77,9 @@ deploy-proxy-step:
 deploy-middleware-step:
     stage: deploy
     before_script: 
-    - *common-before
-    - export DYNAMIC_ENV_VAR=PROD
+      - *common-before
+      - export DYNAMIC_ENV_VAR=PROD
+      - docker exec mongo sh /backup/mongo/backup.sh
     tags:
       - middleware
       - deploy
@@ -87,6 +88,8 @@ deploy-middleware-step:
       - docker-compose -f middleware-service/docker-compose.yml down
       - docker-compose -f middleware-service/docker-compose.yml build
       - docker-compose -f middleware-service/docker-compose.yml up -d
+    after_script:
+      - docker exec mongo sh /backup/mongo/init.sh
 
 deploy-webapp-step:
     stage: deploy
