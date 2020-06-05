@@ -72,7 +72,7 @@ namespace Core.Entities.References
 				if (string.IsNullOrEmpty(ImageLink)) return string.Empty; // TODO no image available icon
 				var uri = new Uri(ImageLink);
 				var imageName = Path.GetFileName(uri.LocalPath);
-				var storagePath = Path.Combine(Constants.Constants.FileStoragePath, "/references", imageName);
+				var storagePath = Path.Combine(Constants.Constants.FileStoragePath, "references", imageName);
 
 				if (File.Exists(storagePath)) return storagePath;
 
