@@ -16,11 +16,11 @@ services:
       - --entryPoints.web.address=:80
       - --entryPoints.websecure.address=:443
       - --certificatesResolvers.le.acme.email=timothy@kicksware.com
-      - --certificatesResolvers.le.acme.storage=/cert/acme.json
+      - --certificatesResolvers.le.acme.storage=/proxy-service/acme.json
       - --certificatesResolvers.le.acme.tlschallenge=true
       - --accesslog=true
-      - --tracing.instana=true
-      - --metrics.datadog=true
+      # - --tracing.instana=true
+      # - --metrics.datadog=true
     labels:
       - traefik.http.routers.traefik.entrypoints=web
       - traefik.http.routers.traefik.rule=Host(`monitor.kicksware.com`)
@@ -46,9 +46,7 @@ services:
       - web
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - type: bind
-        source: /${SOURCE_DIR}/proxy-service/acme.json
-        target: /cert/acme.json
+      - ./proxy-service:/proxy-service
       - type: bind
         source: /${SOURCE_DIR}/proxy-service/proxy-config.toml
         target: /proxy-config.toml
