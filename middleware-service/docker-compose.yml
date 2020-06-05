@@ -126,6 +126,8 @@ services:
     networks:
       - web
       - data
+    volumes:
+      - backup-volume:/backup
     # logging:
     #  driver: none
 
