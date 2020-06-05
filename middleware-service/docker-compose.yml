@@ -127,7 +127,10 @@ services:
       - web
       - data
     volumes:
-      - backup-volume:/backup
+      - type: bind
+        source: /source/backup
+        target: /backup
+
     # logging:
     #  driver: none
 
@@ -188,10 +191,4 @@ volumes:
        o: bind
        type: none
        device: /source/keys
-  backup-volume:
-    driver: local
-    driver_opts:
-       o: bind
-       type: none
-       device: /source/backup
   elasticsearch-data:
