@@ -16,7 +16,7 @@ services:
       - --entryPoints.web.address=:80
       - --entryPoints.websecure.address=:443
       - --certificatesResolvers.le.acme.email=timothy@kicksware.com
-      - --certificatesResolvers.le.acme.storage=/proxy-service/acme.json
+      - --certificatesResolvers.le.acme.storage=/cert/acme.json
       - --certificatesResolvers.le.acme.dnsChallenge=true
       - --certificatesResolvers.le.acme.dnsChallenge.provider=digitalocean
       - --accesslog=true
@@ -49,7 +49,7 @@ services:
       - web
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./proxy-service:/proxy-service
+      - /source/cert:/cert
       - type: bind
         source: /${SOURCE_DIR}/proxy-service/proxy-config.toml
         target: /proxy-config.toml

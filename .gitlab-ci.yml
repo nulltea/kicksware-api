@@ -79,7 +79,7 @@ deploy-middleware-step:
     before_script: 
       - *common-before
       - export DYNAMIC_ENV_VAR=PROD
-      - docker exec mongo sh /backup/mongo/backup.sh
+      # - docker exec mongo sh /backup/mongo/backup.sh
     tags:
       - middleware
       - deploy
