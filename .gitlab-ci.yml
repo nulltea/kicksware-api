@@ -79,7 +79,7 @@ deploy-middleware-step:
     before_script: 
       - *common-before
       - export DYNAMIC_ENV_VAR=PROD
-      # - docker exec mongo sh /backup/mongo/backup.sh
+      # - mongodump -u root -p greenJordans --authenticationDatabase admin --db=sneakerResaleDB  --out=/backup
     tags:
       - middleware
       - deploy
@@ -89,7 +89,7 @@ deploy-middleware-step:
       - docker-compose -f middleware-service/docker-compose.yml build
       - docker-compose -f middleware-service/docker-compose.yml up -d
     after_script:
-      - docker exec mongo sh /backup/init.sh
+      - docker exec mongo mongorestore -u root -p greenJordans --authenticationDatabase admin ./backup
 
 deploy-webapp-step:
     stage: deploy
