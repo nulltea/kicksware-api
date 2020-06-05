@@ -5,9 +5,9 @@ services:
       context: ./product-service
       dockerfile: ./docker/Dockerfile
       target: dev
-    env_file: ./product-service/env/.env.prod
-    hostname: kicksware.com
     image: products-service
+    container_name: products
+    env_file: ./product-service/env/.env.prod
     restart: always
     labels:
       - traefik.http.routers.product-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/products`)
@@ -30,9 +30,9 @@ services:
       context: ./user-service
       dockerfile: ./docker/Dockerfile
       target: dev
-    env_file: ./user-service/env/.env.prod
-    hostname: kicksware.com
     image: users-service
+    container_name: users
+    env_file: ./user-service/env/.env.prod
     restart: always
     labels:
       - traefik.http.routers.user-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/users`) || PathPrefix(`/auth`) ||
@@ -58,8 +58,9 @@ services:
       context: ./reference-service
       dockerfile: ./docker/Dockerfile
       target: dev
-    env_file: ./reference-service/env/.env.prod
     image: references-service
+    container_name: references
+    env_file: ./reference-service/env/.env.prod
     restart: always
     labels:
       - traefik.http.routers.reference-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/references`)
@@ -84,8 +85,9 @@ services:
       dockerfile: ./docker/Dockerfile
       target: dev
     image: search-service
-    restart: always
+    container_name: search
     env_file: ./search-service/env/.env.prod
+    restart: always
     labels:
       - traefik.http.routers.search-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/search`)
       - traefik.http.routers.search-service.tls=true
