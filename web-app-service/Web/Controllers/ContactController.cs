@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +12,7 @@ namespace Web.Controllers
 	public class ContactController : Controller
 	{
 		[ViewData]
-		public string HeroCoverPath { get; set; } = $"/{Constants.FileStoragePath}/heroes/contact-hero.jpg";
+		public string HeroCoverPath { get; set; } = $"{Constants.FileStoragePath}/heroes/contact-hero.jpg";
 
 		[ViewData]
 		public string HeroBreadTitle { get; set; } = "Get in touch with us";

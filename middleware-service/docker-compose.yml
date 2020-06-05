@@ -114,6 +114,7 @@ services:
 
   mongodb:
     image: mongo:3.6.17
+    container_name: mongo
     restart: always
     environment:
       - MONGO_INITDB_DATABASE=sneakerResaleDB
@@ -152,8 +153,8 @@ services:
   #   driver: none
 
   kibana:
-    container_name: kibana
     image: docker.elastic.co/kibana/kibana:7.6.1
+    container_name: kibana
     depends_on:
       - elasticsearch
     environment:
