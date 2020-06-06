@@ -100,8 +100,13 @@ function handleHeroBrightness(imageSrc, callback) {
 	}
 }
 
+function isMobile() {
+	return /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+		(/CriOS/i.test(navigator.userAgent) && /iphone|ipod|ipad/i.test(navigator.userAgent))
+}
+
 function mobileResponsiveInit(){
-	if(/Mobi|Android|webOS|CriOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+	if (isMobile()){
 		$("body").addClass("mobile");
 	}
 }
