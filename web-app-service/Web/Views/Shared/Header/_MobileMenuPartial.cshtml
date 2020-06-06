@@ -1,20 +1,29 @@
 ﻿@using Web.Utils.Helpers
 
-<div class="menu trans_400">
+<div class="menu">
+	<nav class="icon-nav">
+		<ul>
+			<li class="theme dark">
+				@Html.VectorIconRender("theme.svg") @*TODO Nastya sunny easter egg*@
+			</li>
+			<li class="account">
+				@Html.VectorIconRender("user.svg")
+			</li>
+			<li class="favorite">
+				<a asp-controller="Profile" asp-action="Profile" asp-route-mode="favorite">
+					@Html.VectorIconRender("favorite.svg")
+				</a>
+			</li>
+		</ul>
+	</nav>
 	<div class="menu-container">
 		<div class="slider-menu-content">
-			<div class="slider-menu-search">
-				<form action="#">
-					@Html.VectorIconRender("search.svg")
-					<input type="search" required="required" class="menu-search-input">
-				</form>
-			</div>
 			<ul class="slider-menu-nav">
 				<li class="slider-menu-item">
 					<a asp-controller="Home" asp-action="Index">Home</a>
 				</li>
 				<li class="slider-menu-item">
-					<a asp-controller="Home" asp-action="Index">Profile</a>
+					<a asp-controller="Profile" asp-action="Profile">Profile</a>
 				</li>
 				<li class="slider-menu-item">
 					<a asp-controller="Shop" asp-action="References">Shop</a>
@@ -23,17 +32,17 @@
 					<a asp-controller="Sell" asp-action="NewProduct">Sell</a>
 				</li>
 				<li class="slider-menu-item">
-					<a asp-controller="Home" asp-action="Index">About</a>
+					<a asp-controller="About" asp-action="About">About</a>
 				</li>
 				<li class="slider-menu-item">
 					<a asp-controller="Contact" asp-action="Contact">Contacts</a>
 				</li>
 			</ul>
 		</div>
-	</div>
-	<div class="menu-social">
-		@{
-			await Html.RenderPartialAsync("_SocialPartial");
-		}
+		<div class="menu-social">
+			@{
+				await Html.RenderPartialAsync("_SocialPartial");
+			}
+		</div>
 	</div>
 </div>

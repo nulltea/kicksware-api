@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
 	<meta http-equiv="Pragma" content="no-cache"/>
 	<meta http-equiv="Expires" content="0"/>
@@ -18,6 +18,8 @@
 	<link rel="stylesheet" type="text/css" href="~/styles/css/layout/social.css">
 	<link rel="stylesheet" type="text/css" href="~/styles/css/user/modal.css">
 	<link rel="stylesheet" type="text/css" href="~/styles/css/responsive/layout.responsive.css">
+	<link rel="stylesheet" type="text/css" href="~/styles/css/responsive/search.responsive.css">
+	<link rel="stylesheet" type="text/css" href="~/styles/css/responsive/auth.responsive.css">
 	@await RenderSectionAsync("Styles", false)
 </head>
 <body class="theme-dark">
@@ -25,6 +27,9 @@
 	<div class="header-spacer"></div>
 	<header class="header">
 		<div class="header_container">
+			<button class="search mobile-search">
+				@Html.VectorIconRender("search.svg")
+			</button>
 			<div class="header_content">
 				<div class="logo">
 					<a asp-controller="Home" asp-action="Index">KICKSWARE</a>
