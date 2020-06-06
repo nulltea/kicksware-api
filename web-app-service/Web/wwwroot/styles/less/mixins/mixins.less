@@ -99,6 +99,20 @@
 	.--;
 }
 
+/*----MOBILE----*/
+.with-mobile(@rules) {
+	body.mobile & {
+		@rules();
+	}
+}
+
+.with-desktop(@rules) {
+	body:not(.mobile) & {
+		@rules();
+	}
+}
+
+
 /*----ELEVATION----*/
 .elevation(@dp, @color: black) when (@dp = 0) {
 	box-shadow: none;

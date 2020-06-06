@@ -336,6 +336,10 @@ function favoriteInit(){
 	})
 }
 
+function mobileResponsivePerform(){
+	$(".count").appendTo($(".filter-summary"));
+}
+
 $(document).ready(function () {
 	initFilterPanel();
 
@@ -352,4 +356,8 @@ $(document).ready(function () {
 	paginationInit();
 
 	favoriteInit();
+
+	if ($("body").hasClass("mobile") && window.screen.width < 500){
+		mobileResponsivePerform();
+	}
 });

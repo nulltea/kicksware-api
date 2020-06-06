@@ -19,7 +19,7 @@
         "AUTH_GOOGLE_ID": "917344982147-ajsvlej2om85fnnkah05fq8o6c9cb530.apps.googleusercontent.com",
         "ASPNETCORE_ENVIRONMENT": "Development",
         "GATEWAY_API_URL": "https://api.kicksware.com",
-        "STORAGE_PATH": "/source/storage"
+        "STORAGE_PATH": "\\storage"
       }
     },
     "web_app_service": {

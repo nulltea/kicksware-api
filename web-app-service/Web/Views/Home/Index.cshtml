@@ -71,32 +71,9 @@
 	{
 		<section class="carousel reference-carousel">
 			<h3 class="carousel-title">FEATURED MODELS</h3>
-			<div class="carousel-wrapper js-flickity" data-flickity-options='{ "wrapAround": true }'>
-				@foreach (var reference in featuredReferences)
-				{
-					<div class="carousel-cell" id="@reference.UniqueID">
-						<div class="info-header">
-							<div class="price">@(reference.Price != 0m ? $"${reference.Price}" : string.Empty)</div>
-						</div>
-						<div class="thumb">
-							<img src="@reference.ImagePath" alt="">
-						</div>
-						<div class="info-footer">
-							<div class="brand-title">
-								<a class="underline" asp-action="Brand" asp-controller="Shop" asp-route-brandID=@reference.Brand.Name>@reference.BrandName</a>
-							</div>
-							<div class="model-title">
-								@*TODO link to model page*@
-								<a class="underline" asp-action="ReferenceItem" asp-controller="Shop" asp-route-referenceId=@reference.UniqueID>@reference.ModelName</a>
-							</div>
-							<div class="favorite-product">
-								<input type="checkbox" @(reference.Liked ? "checked" : "")/>
-								@Html.VectorIconRender("favorite.svg")
-							</div>
-						</div>
-					</div>
-				}
-			</div>
+			@{
+				await Html.RenderPartialAsync("_ReferenceCarouselPartial", featuredReferences);
+			}
 		</section>
 	}
 
