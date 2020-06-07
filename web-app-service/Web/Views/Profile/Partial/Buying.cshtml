@@ -12,8 +12,8 @@
 		if (Model?.UniqueID != null)
 		{
 			var purchasedSneakers = new FilteredModel<SneakerReference>(Service);
-			purchasedSneakers.AddHiddenFilterGroup<Order>("user_id", ExpressionType.Equal).AssignParameter(Model.UniqueID);
-			await purchasedSneakers.FetchPageAsync(1);
+			// purchasedSneakers.AddHiddenFilterGroup<Order>("user_id", ExpressionType.Equal).AssignParameter(Model.UniqueID);
+			// await purchasedSneakers.FetchPageAsync(1); TODO orders foreign key filtering
 			await Html.RenderPartialAsync("../Shop/Partial/ReferencesPartial", purchasedSneakers);
 		}
 	}
