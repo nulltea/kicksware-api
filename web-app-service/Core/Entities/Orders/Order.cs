@@ -3,7 +3,7 @@ using Core.Attributes;
 
 namespace Core.Entities
 {
-	[EntityService(Resource = "api/orders")]
+	[EntityService(Resource = "orders")]
 	public class Order
 	{
 		public string UserID { get; set; }

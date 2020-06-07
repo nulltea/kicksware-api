@@ -3,7 +3,7 @@ using Core.Attributes;
 
 namespace Core.Entities.References
 {
-	[EntityService(Resource = "api/references")]
+	[EntityService(Resource = "references")]
 	public interface IReference : IBaseEntity
 	{
 		string ManufactureSku { get; set; }

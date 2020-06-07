@@ -7,7 +7,7 @@ using Core.Extension;
 
 namespace Core.Entities.References
 {
-	[EntityService(Resource = "api/references/brands")]
+	[EntityService(Resource = "references/brands")]
 	public class SneakerBrand : IBrand
 	{
 		[Key]

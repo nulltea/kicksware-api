@@ -78,6 +78,30 @@ services:
     depends_on:
       - mongodb
 
+  orders-service:
+    build:
+      context: ./order-service
+      dockerfile: ./docker/Dockerfile
+      target: dev
+    image: orders-service
+    container_name: orders
+    env_file: ./order-service/env/.env.prod
+    restart: always
+    labels:
+      - traefik.http.routers.reference-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/orders`)
+      - traefik.http.routers.reference-service.tls=true
+      - traefik.http.routers.reference-service.tls.certresolver=le
+      - traefik.docker.network=web
+    volumes:
+      - /${SOURCE_DIR}/middleware-service/reference-service/env:/dist/env
+      - key-volume:/key
+    networks:
+      - web
+      - data
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
 
   search-service:
     build:

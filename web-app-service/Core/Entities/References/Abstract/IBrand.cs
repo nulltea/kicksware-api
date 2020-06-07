@@ -2,7 +2,7 @@
 
 namespace Core.Entities.References
 {
-	[EntityService(Resource = "api/references")]
+	[EntityService(Resource = "references/brands")]
 	public interface IBrand : IBaseEntity
 	{
 		string Name { get; set; }

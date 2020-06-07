@@ -10,7 +10,7 @@ using Core.Reference;
 
 namespace Core.Entities.References
 {
-	[EntityService(Resource = "api/references/sneakers")]
+	[EntityService(Resource = "references/sneakers")]
 	public class SneakerReference : IReference
 	{
 		[Key]

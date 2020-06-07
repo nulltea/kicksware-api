@@ -16,7 +16,7 @@ namespace Core.Entities.Products
 	/// <summary>
 	/// Sneaker product entities
 	/// </summary>
-	[EntityService(Resource = "api/products/sneakers")]
+	[EntityService(Resource = "products/sneakers")]
 	public class SneakerProduct : IProduct
 	{
 		[Key]

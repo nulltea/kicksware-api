@@ -2,6 +2,6 @@
 
 namespace Core.Entities
 {
-	[EntityService(Resource = "api/orders")]
+	[EntityService(Resource = "orders")]
 	public interface IOrder : IBaseEntity { }
 }

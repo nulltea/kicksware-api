@@ -5,7 +5,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Core.Entities.Users
 {
-	[EntityService(Resource = "api/users")]
+	[EntityService(Resource = "users")]
 	public class User : AuthCredentials, IBaseEntity
 	{
 		public string UniqueID { get; set; }

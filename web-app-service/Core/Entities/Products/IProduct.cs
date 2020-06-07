@@ -2,6 +2,6 @@
 
 namespace Core.Entities.Products
 {
-	[EntityService(Resource = "api/products")]
+	[EntityService(Resource = "products")]
 	public interface IProduct : IBaseEntity { }
 }
