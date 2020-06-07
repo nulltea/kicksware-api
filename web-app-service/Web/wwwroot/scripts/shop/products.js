@@ -338,6 +338,7 @@ function favoriteInit(){
 
 function mobileResponsivePerform(){
 	$(".count").appendTo($(".filter-summary"));
+	$(".toggle-menu").prependTo($(".control-group"));
 }
 
 $(document).ready(function () {
