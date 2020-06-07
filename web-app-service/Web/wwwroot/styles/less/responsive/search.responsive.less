@@ -47,7 +47,20 @@
 			padding: 20px;
 
 			.results-view.grid {
-				grid-template-columns: 1fr;
+				grid-template-columns: repeat(2, 1fr);
+				grid-gap: 10px;
+
+				.result-cell {
+					padding: 10px;
+
+					.info-footer {
+						justify-content: flex-end;
+					}
+
+					.favorite {
+						display: block;
+					}
+				}
 			}
 		}
 	}

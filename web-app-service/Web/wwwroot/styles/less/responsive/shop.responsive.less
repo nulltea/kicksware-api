@@ -70,7 +70,6 @@
 
 					.info-footer {
 						justify-content: flex-start;
-						min-height: 100px;
 					}
 
 					.favorite {
@@ -89,15 +88,16 @@
 			.filter-summary {
 				.sort_type {
 					width: 150px;
+					justify-self: flex-end;
+				}
+
+				.layout-toggle {
+					display: none;
 				}
 
 				.count {
 					text-align: center;
 					margin-left: 0;
-				}
-
-				.layout-toggle {
-					display: none;
 				}
 			}
 		}
@@ -107,7 +107,9 @@
 		.products-content {
 			.control-group {
 				width: 100%;
-				flex-wrap: nowrap;
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				justify-content: space-between;
 			}
 			.filter-summary {
 				.count {
