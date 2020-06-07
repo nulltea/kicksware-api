@@ -10,18 +10,18 @@
 {
 	<link rel="stylesheet" type="text/css" href="~/styles/css/sell/preview.css"/>
 	<link rel="stylesheet" type="text/css" href="~/styles/css/shop/product-item.css"/>
-	<link href="~/styles/css/responsive/product-item.responsive.css" rel="stylesheet"/>
+	<link href="~/styles/css/responsive/shop-item.responsive.css" rel="stylesheet"/>
 	<link href="~/plugins/flickity/flickity.css" rel="stylesheet"/>
 }
 
 <div class="preview-content">
 	<div class="product-content">
 		<section class="row product-header elevated">
-			<div class="col-sm product-gallery">
+			<div class="col-sm product-gallery desktop-gallery">
 				<div class="image-carousel">
-					@foreach (var image in Model.Photos)
+					@foreach (var photo in Model.Photos)
 					{
-						var imageLink = System.IO.Path.GetRelativePath(Constants.WebRootPath, image);
+						var imageLink = System.IO.Path.GetRelativePath(Constants.WebRootPath, photo);
 						<picture>
 							<source srcset="\@imageLink" media="(min-width: 600px)">
 							<img src="\@imageLink" alt="">
@@ -40,6 +40,18 @@
 					<div class="model-title">@Html.DisplayFor(model => Model.ModelName)</div>
 
 					<div class="sku-title">SKU: @Html.DisplayFor(model => Model.ModelSKU)</div>
+				</div>
+				<div class="col-sm product-gallery mobile-gallery carousel">
+					<div class="carousel-wrapper js-flickity" data-flickity-options='{ "wrapAround": true }'>
+						@foreach (var photo in Model.Photos)
+						{
+							var imageLink = System.IO.Path.GetRelativePath(Constants.WebRootPath, photo);
+							<picture>
+								<source srcset="@imageLink" media="(min-width: 600px)">
+								<img src="@imageLink" alt="">
+							</picture>
+						}
+					</div>
 				</div>
 				<div class="title-footer">
 				</div>

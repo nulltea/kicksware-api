@@ -64,8 +64,12 @@
 @section Scripts
 {
 	<script>
-        $(".drag-and-drop input").on("change", function (event) {
-            event.target.parentElement.classList.add("filled");
-        });
-    </script>
+		$(".drag-and-drop input").on("change", function (event) {
+			event.target.parentElement.classList.add("filled");
+		});
+
+		if (isMobile()) {
+			$(".drag-and-drop:first-child").prependTo($(".photo-grid")).css("padding", "25px");
+		}
+	</script>
 }
