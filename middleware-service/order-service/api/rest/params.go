@@ -96,17 +96,17 @@ func (p *params) SetUserID(userID string) {
 	p.userID = userID
 }
 
-func (p *params) ApplyParams(references []*model.Order) []*model.Order {
+func (p *params) ApplyParams(orders []*model.Order) []*model.Order {
 	if p.sortBy != "" {
-		business.NewSorter(references, p.sortBy).Sort(p.sortDirection == "desc")
+		business.NewSorter(orders, p.sortBy).Sort(p.sortDirection == "desc")
 	}
 	if p.offset != 0 {
-		references = references[p.offset:]
+		orders = orders[p.offset:]
 	}
-	if p.limit != 0 && p.limit < len(references) {
-		references = references[:p.limit]
+	if p.limit != 0 && p.limit < len(orders) {
+		orders = orders[:p.limit]
 	}
-	return references
+	return orders
 }
 
 func setPrivateField(field reflect.Value, value interface{}) {
