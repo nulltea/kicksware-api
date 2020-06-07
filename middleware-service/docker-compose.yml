@@ -88,12 +88,12 @@ services:
     env_file: ./order-service/env/.env.prod
     restart: always
     labels:
-      - traefik.http.routers.reference-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/orders`)
-      - traefik.http.routers.reference-service.tls=true
-      - traefik.http.routers.reference-service.tls.certresolver=le
+      - traefik.http.routers.order-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/orders`)
+      - traefik.http.routers.order-service.tls=true
+      - traefik.http.routers.order-service.tls.certresolver=le
       - traefik.docker.network=web
     volumes:
-      - /${SOURCE_DIR}/middleware-service/reference-service/env:/dist/env
+      - /${SOURCE_DIR}/middleware-service/order-service/env:/dist/env
       - key-volume:/key
     networks:
       - web
