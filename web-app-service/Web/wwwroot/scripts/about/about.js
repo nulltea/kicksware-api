@@ -16,7 +16,7 @@ function creatorWindowInit(){
 
 	new ScrollMagic.Scene({
 		triggerElement: "#bio-trigger",
-		offset: -200
+		offset: isMobile() ? -1100 : -200
 	}).setClassToggle("#creator-window", "active")
 		// .addIndicators()
 		.addTo(controller);
