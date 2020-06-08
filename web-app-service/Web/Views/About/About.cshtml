@@ -181,8 +181,10 @@
 	<img class="hand-asset" src=@($"{Constants.FileStoragePath}/assets/hand-air-max-90-4.png") alt/>
 </section>
 <section class="about-section contact-section" data-scrollax-parent="true">
-	<figure class="rectangle" data-scrollax="properties: { 'top': '75%' }"></figure>
-	<figure class="circle" data-scrollax="properties: { 'top': '75%' }"></figure>
+	<figure class="rectangle" data-scrollax="properties: { 'left': '100%' }"></figure>
+	<figure class="circle" data-scrollax="properties: { 'left': '100%' }"></figure>
+	<figure class="square mobile" data-scrollax="properties: { 'top': '100%' }"></figure>
+	<figure class="square mobile" data-scrollax="properties: { 'top': '100%' }"></figure>
 	<div class="section-caption">
 		<h1>LET'S COLLAB</h1>
 		<hr/>
@@ -208,31 +210,6 @@
 		</div>
 	</div>
 </section>
-@*
-<section class="about-section title-section" data-scrollax-parent="true">
-	<picture class="section-cover" data-scrollax="properties: @coverParallax">
-		<source srcset="@Model[4]" media="(min-width: 600px)">
-		<img src="@Model[4]" alt>
-	</picture>
-	<div class="section-content" data-scrollax="properties: @titleParallax">
-		<h1 class="section-title">SO</h1>
-		<hr/>
-		<h4 class="section-subtitle">THE LESSON</h4>
-	</div>
-</section>
-<section class="about-section info-section" data-scrollax-parent="true">
-	<article class="section-content" data-scrollax="properties: @contentParallax">
-		<p>
-			I hope the example of Kicksware will encourage you to start creating now matter what
-		</p>
-	</article>
-	<div class="trigger"></div>
-	<div class="figure" data-scrollax="properties: {'translateY': '100%'}"></div>
-	<img class="window-asset" data-scrollax="properties: @windowAssetParallax"
-		src=@($"{Constants.FileStoragePath}/assets/window-vapormax-plus.png") alt/>
-	<img class="hand-asset" src=@($"{Constants.FileStoragePath}/assets/hand-air-max-90-2.png") alt/>
-</section>
-*@
 
 @section Scripts
 {

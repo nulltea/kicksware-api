@@ -12,7 +12,6 @@
 			let mode = target.closest("#login-btn").length ? "login" : "sign-up";
 			showDialog(mode);
 		});
-
 	});
 }
 
@@ -242,6 +241,10 @@ function showDialog(mode) {
 	commonInit();
 	resetAuthAlert();
 	$("#auth-modal").modal("show");
+
+	if (isMobile()) {
+		$(".info-control .close-button").prependTo($(".form-controls"));
+	}
 }
 
 function closeDialog() {

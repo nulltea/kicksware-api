@@ -90,34 +90,12 @@
 			justify-content: flex-start;
 
 			figure {
-				&.circle {
-					height: 130vw;
-					width: 130vw;
-					left: -65vw;
-					margin-top: 65vh;
-					margin-left: 0;
-					border-radius: 0;
-					transform: rotate(45deg);
-					.with-theme({
-						background: @hint;
-						.elevation(16);
-					});
+				&.circle, &.rectangle {
+					display: none;
 				}
 
-				&.rectangle {
-					height: 130vw;
-					width: 130vw;
-					right: -65vw;
-					left: unset;
-					margin-top: 65vh;
-					margin-left: 0;
-					border-radius: 0;
-					transform: rotate(45deg);
-					.with-theme({
-						background: @hint;
-						.elevation(0);
-					});
-
+				&.square.mobile {
+					display: block;
 				}
 			}
 

@@ -210,6 +210,26 @@ section.about-section {
 				background: @hint;
 			});
 
+			&.square {
+				display: none;
+				height: 130vw;
+				width: 130vw;
+				left: -65vw;
+				margin-top: 65vh;
+				transform: rotate(45deg);
+				z-index: 3;
+				.with-theme({
+					background: @hint;
+					.elevation(16);
+				});
+
+				&:last-of-type {
+					z-index: 0;
+					right: -65vw;
+					left: unset;
+				}
+			}
+
 
 			&.rectangle {
 				width: 100vw;
