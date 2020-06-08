@@ -1,100 +1,102 @@
-﻿@media only screen and (max-width: 1600px)
-{
-}
+﻿.contact {
+	@media only screen and (max-width: 1600px) {
 
-@media only screen and (max-width: 1440px)
-{
-
-}
-
-@media only screen and (max-width: 1380px)
-{
-
-}
-
-@media only screen and (max-width: 1280px)
-{
-
-}
-
-@media only screen and (max-width: 1199px)
-{
-	.last_name_col
-	{
-		margin-top: 15px;
 	}
-}
 
-@media only screen and (max-width: 1100px)
-{
+	@media only screen and (max-width: 1440px) {
 
-}
-
-@media only screen and (max-width: 1024px)
-{
-
-}
-
-@media only screen and (max-width: 991px)
-{
-	.contact_col:first-child
-	{
-		margin-bottom: 90px;
 	}
-}
 
-@media only screen and (max-width: 959px)
-{
+	@media only screen and (max-width: 1380px) {
 
-}
-
-
-@media only screen and (max-width: 880px)
-{
-
-}
-
-@media only screen and (max-width: 768px)
-{
-
-}
-
-@media only screen and (max-width: 767px)
-{
-}
-
-@media only screen and (max-width: 575px)
-{
-	.contact_form label
-	{
-		font-size: 13px;
 	}
-	.contact-input
-	{
-		height: 41px;
+
+	@media only screen and (max-width: 1280px) {
+
 	}
-	.google_map
-	{
-		height: 350px;
+
+	@media only screen and (max-width: 1100px) {
+		.contact-content {
+			flex-direction: column;
+
+			.contact-info {
+				display: grid;
+				grid-auto-flow: column;
+				justify-content: stretch;
+				width: 100%;
+				margin: 30px 0;
+				grid-gap: 30px;
+
+				.contact-info-section {
+					margin: 0;
+				}
+			}
+
+			.contact-map {
+				height: 50vw;
+				width: 100%;
+			}
+		}
 	}
-}
 
-@media only screen and (max-width: 539px)
-{
+	@media only screen and (max-width: 1024px) {
 
-}
+	}
 
-@media only screen and (max-width: 480px)
-{
+	@media only screen and (max-width: 991px) {
 
-}
+	}
 
-@media only screen and (max-width: 479px)
-{
+	@media only screen and (max-width: 959px) {
 
-}
+	}
 
-@media only screen and (max-width: 400px)
-{
 
+	@media only screen and (max-width: 880px) {
+
+	}
+
+	@media only screen and (max-width: 768px) {
+
+	}
+
+	@media only screen and (max-width: 767px) {
+	}
+
+	@media only screen and (max-width: 575px) {
+		.contact-content {
+			.contact-map {
+				height: 100vw;
+				width: 100%;
+			}
+		}
+	}
+
+	@media only screen and (max-width: 539px) {
+
+	}
+
+	@media only screen and (max-width: 480px) {
+		.contact-content {
+			.contact-info {
+				display: grid;
+				grid-auto-flow: row;
+
+				.contact-info-section {
+					ul {
+						display: flex;
+						justify-content: space-between;
+					}
+				}
+			}
+		}
+	}
+
+	@media only screen and (max-width: 479px) {
+
+	}
+
+	@media only screen and (max-width: 400px) {
+
+	}
 }
