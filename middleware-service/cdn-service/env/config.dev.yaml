@@ -1,0 +1,15 @@
+commonConfig:
+  host: localhost:8080
+  hostname: cdn.kicksware.com
+  usedDB: mongo
+  contentType: application/json
+  innerServiceFormat: http://%s:8080/%s/
+authConfig:
+  publicKeyPath: ../key/public.key.pub
+mongoConfig:
+  URL: mongodb://localhost:27017
+  database: sneakerResaleDB
+  collection: orders
+  timeout: 30
+redisConfig:
+  URL: redis://localhost:6379
