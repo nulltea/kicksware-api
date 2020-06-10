@@ -152,6 +152,10 @@ services:
     volumes:
       - /${SOURCE_DIR}/middleware-service/cdn-service/env:/dist/env
       - key-volume:/key
+      - type: bind
+        source: /source/storage
+        target: /storage
+
     networks:
       - web
       - data
