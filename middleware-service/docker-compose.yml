@@ -141,7 +141,7 @@ services:
       dockerfile: ./docker/Dockerfile
       target: dev
     image: cdn-service
-    container_name: orders
+    container_name: cdn
     env_file: ./cdn-service/env/.env.prod
     restart: always
     labels:

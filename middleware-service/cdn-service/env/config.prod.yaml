@@ -7,7 +7,7 @@ commonConfig:
 authConfig:
   publicKeyPath: ../key/public.key.pub
 filesConfig:
-  URL: ../storage
+  URL: /storage
 mongoConfig:
   URL: mongodb://root:greenJordans@mongodb:27017
   database: sneakerResaleDB
