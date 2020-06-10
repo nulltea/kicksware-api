@@ -1,8 +1,6 @@
 package repo
 
-import "os"
-
 type ContentRepository interface {
-	Download(from, filename string) (*os.File, error)
+	Download(from, filename string) ([]byte, error)
 	Upload(to string, filename string, content []byte) (string, error)
 }

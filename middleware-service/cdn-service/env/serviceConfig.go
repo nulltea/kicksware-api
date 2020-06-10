@@ -10,6 +10,7 @@ import (
 type ServiceConfig struct {
 	Common CommonConfig    `yaml:"commonConfig"`
 	Auth   AuthConfig      `yaml:"authConfig"`
+	Files  DataStoreConfig `yaml:"filesConfig"`
 	Mongo  DataStoreConfig `yaml:"mongoConfig"`
 	Redis  DataStoreConfig `yaml:"redisConfig"`
 }

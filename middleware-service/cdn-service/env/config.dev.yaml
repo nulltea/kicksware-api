@@ -1,11 +1,13 @@
 commonConfig:
   host: localhost:8080
   hostname: cdn.kicksware.com
-  usedDB: mongo
+  usedDB: files
   contentType: application/json
   innerServiceFormat: http://%s:8080/%s/
 authConfig:
   publicKeyPath: ../key/public.key.pub
+filesConfig:
+  URL: /source/storage
 mongoConfig:
   URL: mongodb://localhost:27017
   database: sneakerResaleDB

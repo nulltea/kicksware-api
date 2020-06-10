@@ -5,7 +5,6 @@ import (
 	"context"
 	"fmt"
 	"io/ioutil"
-	"os"
 	"time"
 
 	"github.com/golang/glog"
@@ -57,7 +56,7 @@ func newMongoClient(mongoURL string, mongoTimeout int) (*mongo.Client, error) {
 }
 
 
-func (r *repository) Download(from string, filename string) (*os.File, error) {
+func (r *repository) Download(from string, filename string) ([]byte, error) {
 	file, err := ioutil.TempFile("tmp", fmt.Sprintf("%v.%v", from, filename))
 	if err != nil {
 		glog.Errorln(err)
@@ -67,7 +66,7 @@ func (r *repository) Download(from string, filename string) (*os.File, error) {
 		glog.Fatalln(err)
 		return nil, err
 	}
-	return file, nil
+	return ioutil.ReadAll(file)
 }
 
 func (r *repository) Upload(to string, filename string, content []byte) (string, error) {
