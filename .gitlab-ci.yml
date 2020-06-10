@@ -56,7 +56,22 @@ build-styles-step:
 
 #----------------#
 
-# TODO test stage
+#---test stage---#
+
+test-sonar-step:
+    stage: test
+    image: gradle:alpine
+    variables:
+      SONAR_TOKEN: "1388d72f33827c374c8fc6f0dfb28b851e7203c8"
+      SONAR_HOST_URL: "https://test.kicksware.com"
+      GIT_DEPTH: 0
+    script: gradle sonarqube -Dsonar.qualitygate.wait=true
+    allow_failure: true
+    only:
+      - merge_requests
+      - master
+
+#----------------#
 
 #---deploy stage---#
 
