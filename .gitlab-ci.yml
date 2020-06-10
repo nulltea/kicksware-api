@@ -61,8 +61,10 @@ build-styles-step:
 test-sonar-step:
     stage: test
     image: gradle:alpine
+    tags:
+      - test
     variables:
-      SONAR_TOKEN: "1388d72f33827c374c8fc6f0dfb28b851e7203c8"
+      SONAR_TOKEN: "8d26b9c30a611a96a53eb1f6e30326a17e186a83"
       SONAR_HOST_URL: "https://test.kicksware.com"
       GIT_DEPTH: 0
     script: 
