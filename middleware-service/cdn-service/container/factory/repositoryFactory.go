@@ -5,7 +5,7 @@ import (
 
 	"cdn-service/core/repo"
 	"cdn-service/env"
-	"cdn-service/usecase/storage/files"
+	"cdn-service/usecase/storage/disk"
 	"cdn-service/usecase/storage/mongo"
 )
 
@@ -16,8 +16,8 @@ func ProvideRepository(config env.ServiceConfig) repo.ContentRepository {
 			glog.Fatal(err)
 		}
 		return repo
-	case "files":
-		repo, err := files.NewRepository(config.Files); if err != nil {
+	case "disk":
+		repo, err := disk.NewRepository(config.Files); if err != nil {
 			glog.Fatal(err)
 		}
 		return repo

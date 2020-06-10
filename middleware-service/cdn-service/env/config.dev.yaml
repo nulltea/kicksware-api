@@ -1,7 +1,7 @@
 commonConfig:
   host: localhost:8080
   hostname: cdn.kicksware.com
-  usedDB: files
+  usedDB: disk
   contentType: application/json
   innerServiceFormat: http://%s:8080/%s/
 authConfig:
