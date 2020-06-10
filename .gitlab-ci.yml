@@ -65,7 +65,17 @@ test-sonar-step:
       SONAR_TOKEN: "1388d72f33827c374c8fc6f0dfb28b851e7203c8"
       SONAR_HOST_URL: "https://test.kicksware.com"
       GIT_DEPTH: 0
-    script: gradle sonarqube -Dsonar.qualitygate.wait=true
+    script: 
+      - gradle sonarqube -Dsonar.qualitygate.wait=true
+  -Dsonar.host.url=$SONAR_HOST_URL 
+  -Dsonar.login=$SONAR_TOKEN 
+  -Dsonar.projectName=kicksware Platform 
+  -Dsonar.projectKey=kicksware-platform 
+  -Dsonar.gitlab.user_token=-4RBQMsLdqYUDvDdhK2K
+  -Dsonar.gitlab.project_id=$CI_PROJECT_PATH 
+  -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA 
+  -Dsonar.gitlab.ref_name=$CI_COMMIT_REF_NAME 
+  -Dsonar.analysis.mode=publish
     allow_failure: true
     only:
       - merge_requests
