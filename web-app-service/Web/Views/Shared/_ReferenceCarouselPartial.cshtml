@@ -12,7 +12,9 @@
 				<div class="price">@(reference.Price != 0m ? $"${reference.Price}" : string.Empty)</div>
 			</div>
 			<div class="thumb">
-				<img src="@reference.ImagePath" alt="">
+				<a class="underline" asp-action="ReferenceItem" asp-route-referenceId="@reference.UniqueID" asp-controller="Shop">
+					<img src="@reference.ImagePath" alt="">
+				</a>
 			</div>
 			<div class="info-footer">
 				<div class="brand-title">

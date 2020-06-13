@@ -22,7 +22,9 @@
 				<div class="price">@price</div>
 			</div>
 			<div class="thumb">
-				<img src="@product.Photos.FirstOrDefault()" alt="">
+				<a class="underline" asp-action="ProductItem" asp-route-productID="@product.UniqueID" asp-controller="Shop">
+					<img src="@product.Photos.FirstOrDefault()" alt="">
+				</a>
 			</div>
 			@*@if (DateTime.Today.Subtract(reference.AddedAt).Days < 5)
 			{

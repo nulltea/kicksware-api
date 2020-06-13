@@ -10,43 +10,45 @@
 	return;
 }
 <div class="results-view grid">
-@foreach (var result in Model)
-{
-	if (result == null)
+	@foreach (var result in Model)
 	{
-		continue;
-	}
-	var price = result.Price != 0m ? $"${result.Price}" : string.Empty;
-	<div class="result-cell" id="@result.UniqueID">
-		<div class="info-header">
-			<div class="price">@price</div>
-		</div>
-		<div class="thumb">
-			<img src="@result.ImagePath" alt="">
-		</div>
-		<div class="info-footer">
-			<div class="brand-title">
-				<a class="underline" asp-action="Brand" asp-route-brandID=@result.Brand.Name asp-controller="Shop">
-					@Html.DisplayFor(modelItem => result.BrandName)
+		if (result == null)
+		{
+			continue;
+		}
+		var price = result.Price != 0m ? $"${result.Price}" : string.Empty;
+		<div class="result-cell" id="@result.UniqueID">
+			<div class="info-header">
+				<div class="price">@price</div>
+			</div>
+			<div class="thumb">
+				<a class="underline" asp-action="ReferenceItem" asp-route-referenceId="@reference.UniqueID" asp-controller="Shop">
+					<img src="@result.ImagePath" alt="">
 				</a>
 			</div>
-			<div class="model-title">
-				@*TODO link to model page*@
-				<a class="underline" asp-action="ReferenceItem" asp-route-referenceId=@result.UniqueID asp-controller="Shop">
-					@Html.DisplayFor(modelItem => result.ModelName)
-				</a>
-			</div>
-			<div class="description">
-				@result.Description
-			</div>
-			@if (SignInManager.IsSignedIn(Context.User))
-			{
-				<div class="favorite">
-					<input type="checkbox" value="true" @(result.Liked ? "checked" : "")/>
-					@Html.VectorIconRender("favorite.svg")
+			<div class="info-footer">
+				<div class="brand-title">
+					<a class="underline" asp-action="Brand" asp-route-brandID=@result.Brand.Name asp-controller="Shop">
+						@Html.DisplayFor(modelItem => result.BrandName)
+					</a>
 				</div>
-			}
+				<div class="model-title">
+					@*TODO link to model page*@
+					<a class="underline" asp-action="ReferenceItem" asp-route-referenceId=@result.UniqueID asp-controller="Shop">
+						@Html.DisplayFor(modelItem => result.ModelName)
+					</a>
+				</div>
+				<div class="description">
+					@result.Description
+				</div>
+				@if (SignInManager.IsSignedIn(Context.User))
+				{
+					<div class="favorite">
+						<input type="checkbox" value="true" @(result.Liked ? "checked" : "")/>
+						@Html.VectorIconRender("favorite.svg")
+					</div>
+				}
+			</div>
 		</div>
-	</div>
-}
+	}
 </div>
