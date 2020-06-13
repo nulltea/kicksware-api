@@ -11,6 +11,7 @@ require (
 	github.com/joho/godotenv v1.3.0
 	github.com/pkg/errors v0.9.1
 	github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200601222250-c7ed428a12f5
+	github.com/victorspringer/http-cache v0.0.0-20190721184638-fe78e97af707
 	go.mongodb.org/mongo-driver v1.3.3
 	gopkg.in/yaml.v2 v2.2.2
 )

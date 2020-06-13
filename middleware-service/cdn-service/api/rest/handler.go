@@ -8,6 +8,8 @@ import (
 	"github.com/golang/glog"
 	"github.com/pkg/errors"
 
+	"github.com/victorspringer/http-cache"
+
 	"cdn-service/core/meta"
 	"cdn-service/core/model"
 	"cdn-service/core/service"
@@ -24,17 +26,20 @@ type RestfulHandler interface {
 	// Middleware:
 	Authenticator(next http.Handler) http.Handler
 	Authorizer(next http.Handler) http.Handler
+	CacheController(next http.Handler) http.Handler
 }
 
 type handler struct {
 	service     service.ContentService
 	auth        service.AuthService
+	cache       *cache.Client
 }
 
 func NewHandler(service service.ContentService, auth service.AuthService, config env.CommonConfig) RestfulHandler {
 	return &handler{
 		service,
 		auth,
+		newCacheClient(),
 	}
 }
 

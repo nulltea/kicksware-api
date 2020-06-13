@@ -14,6 +14,7 @@ func ProvideRoutes(rest RestfulHandler) *chi.Mux {
 		middleware.Recoverer,
 		middleware.RequestID,
 		middleware.RealIP,
+		rest.CacheController,
 	)
 	router.Mount("/", restRoutes(rest))
 	return router
