@@ -71,9 +71,9 @@ namespace Web
 
 			services.AddTransient<IGatewayClient<IGatewayRestRequest>, RestfulClient>(ServiceFactory.ProvideRestClient);
 
-			services.AddSingleton<ISneakerProductRepository, SneakerProductsRestRepository>();
-			services.AddSingleton<ISneakerReferenceRepository, SneakerReferencesRestRepository>();
-			services.AddSingleton<IUserRepository, UserRestRepository>();
+			services.AddTransient<ISneakerProductRepository, SneakerProductsRestRepository>();
+			services.AddTransient<ISneakerReferenceRepository, SneakerReferencesRestRepository>();
+			services.AddTransient<IUserRepository, UserRestRepository>();
 
 			services.AddTransient<ICommonService<SneakerReference>, SneakerReferenceService>();
 			services.AddTransient<ICommonService<SneakerProduct>, SneakerProductService>();

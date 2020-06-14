@@ -1,6 +1,9 @@
 ﻿@using Core.Entities.References
+@using Core.Entities.Users
+@using Microsoft.AspNetCore.Identity
 @using Web.Utils.Helpers
 @model Core.Entities.References.SneakerReference
+@inject SignInManager<User> SignInManager
 @{
 	ViewBag.Title = Model.ModelName;
 	Layout = "~/Views/Shared/_Layout.cshtml";
@@ -29,16 +32,16 @@
 					}
 				</div>
 			</div>
-
-
 			<!-- Reference Content -->
 			<div class="col-sm product-title">
 				<div class="title-header">
-
-					<div class="favorite-product">
-						<input type="checkbox" @(Model.Liked ? "checked" : "")/>
-						@Html.VectorIconRender("favorite.svg")
-					</div>
+					@if (SignInManager.IsSignedIn(Context.User))
+					{
+						<div class="favorite-product">
+							<input type="checkbox" @(Model.Liked ? "checked" : "")/>
+							@Html.VectorIconRender("favorite.svg")
+						</div>
+					}
 				</div>
 				<div class="title-body">
 					<div class="brand-title">@Html.DisplayFor(model => Model.BrandName)</div>
@@ -107,10 +110,10 @@
 					<div class="details-caption">DESIGNER</div>
 					<a class="underline details-info">@Model.BrandName</a>
 				</div>
-				<div class="carousel-cell">
+				@*<div class="carousel-cell">
 					<div class="details-caption">TECHNOLOGY</div>
 					<a class="underline details-info">Model.Technology</a>
-				</div>
+				</div>*@
 				@if (Model.Materials != null && Model.Materials.Any())
 				{
 					<div class="carousel-cell">

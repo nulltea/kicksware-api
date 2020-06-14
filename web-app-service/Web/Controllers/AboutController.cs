@@ -7,6 +7,7 @@ namespace Web.Controllers
 {
 	public class AboutController : Controller
 	{
+		[Route("about")]
 		[Breadcrumb("About", FromAction = "Index", FromController = typeof(HomeController))]
 		public IActionResult About()
 		{

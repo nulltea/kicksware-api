@@ -29,6 +29,7 @@ namespace Web.Controllers
 
 		public SellController(ISneakerProductService service, IWebHostEnvironment env) => (_service, _environment) = (service, env);
 
+		[Route("sell/new")]
 		[Breadcrumb("Sell", FromAction = "Index", FromController = typeof(HomeController))]
 		public ActionResult NewProduct([FromServices] IReferenceSearchService service)
 		{

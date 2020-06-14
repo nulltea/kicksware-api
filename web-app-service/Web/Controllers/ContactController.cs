@@ -21,6 +21,7 @@ namespace Web.Controllers
 		public string HeroBreadSubTitle { get; set; } = "We are thrilled to meet with you";
 
 		[HttpGet]
+		[Route("contacts")]
 		[Breadcrumb("Contact", FromAction = "Index", FromController = typeof(HomeController))]
 		public IActionResult Contact()
 		{
