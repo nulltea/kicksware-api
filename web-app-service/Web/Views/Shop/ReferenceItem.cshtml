@@ -50,7 +50,7 @@
 				</div>
 				<div class="col-sm product-gallery mobile-gallery carousel">
 					<div class="carousel-wrapper js-flickity" data-flickity-options='{ "wrapAround": true }'>
-						@foreach (var imageLink in new[] {Model.ImageLink}.Union(Model.ImageLinks).Distinct())
+						@foreach (var imageLink in new[] {Model.ImagePath}.Union(Model.OtherImages).Distinct())
 						{
 							<picture>
 								<source srcset="@imageLink" media="(min-width: 600px)">
