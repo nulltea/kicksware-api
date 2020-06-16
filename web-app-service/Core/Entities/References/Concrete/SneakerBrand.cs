@@ -19,9 +19,13 @@ namespace Core.Entities.References
 
 		public string Logo { get; set; }
 
-		public decimal Relevance { get; set; }
+		public string LogoPath => $"{Constants.Constants.FileStoragePath}/logos/{Logo ?? $"{UniqueID.ToLower()}-logo.svg"}";
 
-		public string HeroPath { get; set; }
+		public string Hero { get; set; }
+
+		public string HeroPath => $"{Constants.Constants.FileStoragePath}/heroes/{Hero ?? $"{UniqueID.ToLower()}-hero.jpg"}";
+
+		public decimal Relevance { get; set; }
 
 		public static implicit operator SneakerBrand(string field) => new SneakerBrand(field);
 
@@ -31,8 +35,6 @@ namespace Core.Entities.References
 		{
 			Name = name;
 			UniqueID = Convert.ToString(name)?.ToFormattedID().ToLower();
-			Logo = $"{Constants.Constants.FileStoragePath}/logos/{UniqueID}-logo.svg";
-			HeroPath = $"{Constants.Constants.FileStoragePath}/heroes/{UniqueID}-hero.jpg";
 		}
 
 		public override string ToString() => Name;

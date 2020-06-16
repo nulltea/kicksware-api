@@ -22,7 +22,7 @@ namespace Web.Controllers
 			HeroCoverPath = brand.HeroPath;
 			HeroBreadTitle = brand.Name;
 			HeroBreadSubTitle = brand.Description;
-			HeroLogoPath = brand.Logo;
+			HeroLogoPath = brand.LogoPath;
 
 			AddBreadcrumbNode(nameof(Brand), brand.Name);
 			return View("References", references);

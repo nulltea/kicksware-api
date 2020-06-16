@@ -21,7 +21,7 @@ namespace Web.Controllers
 			HeroCoverPath = reference.Brand.HeroPath;
 			HeroBreadTitle = reference.Brand.Name;
 			HeroBreadSubTitle = reference.Brand.Description;
-			HeroLogoPath = reference.Brand.Logo;
+			HeroLogoPath = reference.Brand.LogoPath;
 
 			ViewBag.RelatedReferences = service.GetRelated(reference, new RequestParams {Limit = 12});
 			AddBreadcrumbNode(nameof(ReferenceItem), reference.ModelName);

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Runtime.Serialization;
 using Core.Attributes;
@@ -70,25 +71,11 @@ namespace Core.Entities.References
 			get
 			{
 				if (string.IsNullOrEmpty(ImageLink)) return string.Empty; // TODO no image available icon
-				var uri = new Uri(ImageLink);
-				var imageName = Path.GetFileName(uri.LocalPath);
-				var storagePath = Path.Combine(Constants.Constants.FileStoragePath, "references", imageName);
-
-				if (File.Exists(storagePath)) return storagePath;
-
-				using var client = new WebClient();
-				try
-				{
-					// client.DownloadFile(new Uri(ImageLink), storagePath); TODO download manually
-				}
-				catch
-				{
-					return ImageLink;
-				}
-
-				return storagePath;
+				return Path.Combine(Constants.Constants.FileStoragePath, "references", ImageLink);
 			}
 		}
+
+		public List<string> OtherImages => ImageLinks.Select(img => Path.Combine(Constants.Constants.FileStoragePath, "references", img)).ToList();
 
 		public DateTime ReleaseDate { get; set; }
 

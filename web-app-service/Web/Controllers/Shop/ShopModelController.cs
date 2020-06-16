@@ -24,7 +24,7 @@ namespace Web.Controllers
 			HeroCoverPath = baseModel.HeroPath ?? brand.HeroPath;
 			HeroBreadTitle = baseModel.Name;
 			HeroBreadSubTitle = brand.Name;
-			HeroLogoPath = brand.Logo;
+			HeroLogoPath = brand.LogoPath;
 
 			AddBreadcrumbNode(nameof(Model), brand.Name);
 			return View("References", references);

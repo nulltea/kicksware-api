@@ -31,7 +31,7 @@ namespace Web.Controllers
 			HeroCoverPath = baseModel.HeroPath ?? brand.HeroPath;
 			HeroBreadTitle = product.ModelName;
 			HeroBreadSubTitle = brand.Name;
-			HeroLogoPath = brand.Logo;
+			HeroLogoPath = brand.LogoPath;
 
 			AddBreadcrumbNode(nameof(ProductItem), product.ModelName);
 

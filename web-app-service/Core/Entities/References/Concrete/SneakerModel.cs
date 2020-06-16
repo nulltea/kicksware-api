@@ -21,7 +21,9 @@ namespace Core.Entities.References
 
 		public string Description { get; set; }
 
-		public string HeroPath { get; set; }
+		public string Hero { get; set; }
+
+		public string HeroPath => null;// $"{Constants.Constants.FileStoragePath}/heroes/{Hero ?? $"{UniqueID}-hero.jpg"}";
 
 		public static implicit operator SneakerModel(string field) => new SneakerModel(field);
 
