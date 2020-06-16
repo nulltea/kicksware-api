@@ -97,7 +97,7 @@ deploy-middleware-step:
     before_script: 
       - *common-before
       - export DYNAMIC_ENV_VAR=PROD
-      - mongodump -u root -p greenJordans --authenticationDatabase admin --db=sneakerResaleDB  --out=/backup
+      - docker exec mongo mongodump -u root -p greenJordans --authenticationDatabase admin --db=sneakerResaleDB  --out=/backup
     tags:
       - middleware
       - deploy
