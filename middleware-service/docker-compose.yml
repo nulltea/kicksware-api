@@ -220,8 +220,8 @@ services:
       - traefik.http.routers.kibana.tls=true
       - traefik.http.routers.kibana.tls.certresolver=le
       - traefik.docker.network=web
-      - traefik.http.middlewares.add-app.addprefix.prefix=/app/
-      - traefik.http.routers.kibana.middlewares=add-app
+    ports:
+      - 5601:5601
     networks:
       - web
       - elastic
