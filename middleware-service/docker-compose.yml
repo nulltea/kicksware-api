@@ -214,14 +214,14 @@ services:
     depends_on:
       - elasticsearch
     environment:
-      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - ELASTICSEARCH_URL=https://ops.kicksware.com/elastic
     labels:
       - traefik.http.routers.kibana.rule=Host(`ops.kicksware.com`) && PathPrefix(`/app/kibana`)
       - traefik.http.routers.kibana.tls=true
       - traefik.http.routers.kibana.tls.certresolver=le
       - traefik.docker.network=web
-      - traefik.http.middlewares.add-app.addprefix.prefix=/app/
-      - traefik.http.routers.kibana.middlewares=add-app
+    ports:
+      - 5601:5601
     networks:
       - web
       - elastic
