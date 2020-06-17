@@ -26,7 +26,7 @@ type referencePipe struct {
 	auth                 service.AuthService
 	contentType          string
 	bindingServiceFormat string
-	bindingServiceName   string
+	bindingServiceEndpoint   string
 }
 
 func NewSneakerReferencePipe(auth service.AuthService, config env.CommonConfig) pipe.SneakerReferencePipe {
@@ -35,7 +35,7 @@ func NewSneakerReferencePipe(auth service.AuthService, config env.CommonConfig) 
 		auth,
 		config.ContentType,
 		config.InnerServiceFormat,
-		"references-service",
+		"references/sneakers",
 	}
 }
 
@@ -135,7 +135,7 @@ func (p *referencePipe) postOnDataService(service string, query interface{}) (re
 }
 
 func (p *referencePipe) requestResource(res ...string) string {
-	return fmt.Sprintf(p.bindingServiceFormat, p.bindingServiceName, strings.Join(res, ""))
+	return fmt.Sprintf(p.bindingServiceFormat, p.bindingServiceEndpoint, strings.Join(res, ""))
 }
 
 func requestParamValues(params meta.RequestParams) url.Values {
