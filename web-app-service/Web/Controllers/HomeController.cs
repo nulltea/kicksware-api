@@ -76,7 +76,7 @@ namespace Web.Controllers
 		private List<SneakerReference> GetFeatured()
 		{
 			var service = HttpContext.RequestServices.GetService<ISneakerReferenceService>();
-			return service.GetFeatured(new[] {"Question Mid", "Crazy 97", "JS Wings", "Alien Stomper Hi", "Zoom KD 4"},
+			return service.GetFeatured(new[] {"Air Fear Of God 1", "LDWaffle", "Dunk High Premium SB", "Air Jordan 1 Mid SE (GS)", "Yeezy 700 V3", "Air Max 97"},
 				new RequestParams {Limit = 15,});
 		}
 	}
