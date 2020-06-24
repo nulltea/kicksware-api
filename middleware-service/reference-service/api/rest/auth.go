@@ -9,6 +9,7 @@ import (
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/dgrijalva/jwt-go/request"
+	"github.com/golang/glog"
 )
 
 var (
@@ -44,14 +45,14 @@ func (h *handler) Authenticator(next http.Handler) http.Handler {
 func (h *handler) Authorizer(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		token, err := h.getRequestToken(r); if err != nil {
-			http.Error(w, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
-			fmt.Println()
+			http.Error(w, err.Error(), http.StatusUnauthorized)
+			glog.Errorln(err)
 			return
 		}
 
 		claims, err := getClaims(token); if err != nil {
 			http.Error(w, errInvalidTokenClaims.Error(), http.StatusInternalServerError)
-			fmt.Println()
+			glog.Errorln(err)
 			return
 		}
 		if claims != nil && claims.Role != guestRole {

@@ -8,15 +8,14 @@ require (
 	github.com/fatih/structs v1.1.0
 	github.com/go-chi/chi v4.1.1+incompatible
 	github.com/go-sql-driver/mysql v1.5.0 // indirect
+	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
 	github.com/golang/protobuf v1.3.1 // indirect
 	github.com/google/go-cmp v0.4.0 // indirect
 	github.com/jackc/pgx/v4 v4.6.0
-	github.com/jfeliu007/goplantuml v1.5.0 // indirect
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/joho/godotenv v1.3.0
 	github.com/pkg/errors v0.9.1
 	github.com/rs/xid v1.2.1
-	github.com/spf13/afero v1.2.2 // indirect
 	github.com/thoas/go-funk v0.6.0
 	github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200507015606-23d009a93609
 	github.com/vmihailenco/msgpack v3.3.3+incompatible
