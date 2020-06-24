@@ -21,6 +21,7 @@ type AuthService interface {
 	Remote(user *model.User) (*meta.AuthToken, error)
 	Guest() (*meta.AuthToken, error)
 	GenerateToken(user *model.User) (*meta.AuthToken, error)
+	Refresh(token string) (*meta.AuthToken, error)
 	PublicKey() *rsa.PublicKey
 	Logout(token string) error
 }

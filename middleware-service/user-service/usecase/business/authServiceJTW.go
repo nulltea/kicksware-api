@@ -4,7 +4,9 @@ import (
 	"bufio"
 	"crypto/rsa"
 	"crypto/x509"
+	"encoding/json"
 	"encoding/pem"
+	"fmt"
 	"os"
 	"time"
 
@@ -107,12 +109,38 @@ func (s *authService) GenerateToken(user *model.User) (*meta.AuthToken, error) {
 	return meta.NewAuthToken(tokenString, expiresAt), nil
 }
 
+func (s *authService) Refresh(raw string) (*meta.AuthToken, error) {
+	token, _ := s.parse(raw); if token == nil {
+		return s.Guest()
+	}
+	claims, err := GetClaims(token); if err != nil {
+		return s.Guest()
+	}
+
+	user, err := s.userService.FetchOne(claims.UniqueID); if err != nil {
+		return s.Guest()
+	}
+
+	return s.GenerateToken(user)
+}
+
+
 func (s *authService) PublicKey() *rsa.PublicKey {
 	return s.publicKey
 }
 
 func (s *authService) Logout(token string) error {
 	panic("implement me")
+}
+
+func (s *authService) parse(raw string) (token *jwt.Token, err error) {
+	token, err = jwt.Parse(raw, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodRSA); ok {
+			return s.PublicKey(), nil
+		}
+		return nil, fmt.Errorf("authenticator: unexpected signing method: %q", token.Header["alg"])
+	})
+	return
 }
 
 func getPrivateKey(keyPath string) *rsa.PrivateKey {
@@ -167,4 +195,16 @@ func getPublicKey(keyPath string) *rsa.PublicKey {
 	}
 
 	return publicKey
+}
+
+func GetClaims(token *jwt.Token) (*meta.AuthClaims, error) {
+	payload, err := json.Marshal(token.Claims); if err != nil {
+		return nil, err
+	}
+	claims := &meta.AuthClaims{}
+
+	if err = json.Unmarshal(payload, claims); err != nil {
+		return nil, err
+	}
+	return claims, nil
 }

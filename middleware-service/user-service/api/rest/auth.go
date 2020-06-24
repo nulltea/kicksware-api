@@ -14,6 +14,7 @@ import (
 	"user-service/core/meta"
 	"user-service/core/model"
 	"user-service/core/service"
+	"user-service/usecase/business"
 )
 
 var (
@@ -81,11 +82,7 @@ func (h *handler) Guest(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *handler) RefreshToken(w http.ResponseWriter, r *http.Request) {
-	user, err := h.getRequestBody(r); if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-	token, err := h.auth.GenerateToken(user); if err != nil {
+	token, err := h.auth.Refresh(chi.URLParam(r,"token")); if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -129,7 +126,7 @@ func (h *handler) Authorizer(next http.Handler) http.Handler {
 			return
 		}
 
-		claims, err := getClaims(token); if err != nil  {
+		claims, err := business.GetClaims(token); if err != nil  {
 			http.Error(w, ErrInvalidTokenClaims.Error(), http.StatusInternalServerError)
 			fmt.Println()
 			return
