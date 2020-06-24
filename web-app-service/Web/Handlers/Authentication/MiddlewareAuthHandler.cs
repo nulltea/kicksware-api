@@ -135,6 +135,11 @@ namespace Web.Handlers.Authentication
 
 			if (string.IsNullOrEmpty(token)) return AuthenticateResult.NoResult();
 
+			if (token.Expires < DateTime.Today && !_service.RefreshToken(ref token))
+			{
+				return AuthenticateResult.Fail("Refresh token failed");
+			}
+
 			return AuthenticateResult.Success(ProvideTokenAuthTicket(token));
 		}
 
