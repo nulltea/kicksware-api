@@ -13,20 +13,19 @@ namespace Web.Utils.Extensions
 	{
 		public static AuthToken RetrieveCookieAuthToken(this HttpContext context)
 		{
-			// Request cookie
-			if (!context.Request.Cookies.TryGetValue(MiddlewareAuthDefaults.AuthCookieName, out var protectedToken))
+			// response cookie
+			var setCookieHeaders = context.Response.GetTypedHeaders().SetCookie;
+
+			if (setCookieHeaders == null) return string.Empty;
+
+			var tokenCookie = setCookieHeaders.FirstOrDefault(cookie => cookie.Name.Equals(MiddlewareAuthDefaults.AuthCookieName));
+
+			var protectedToken = tokenCookie?.Value.Value;
+
+			if (string.IsNullOrEmpty(protectedToken))
 			{
-				// If else user response set cookie header
-				var setCookieHeaders = context.Response.GetTypedHeaders().SetCookie;
-
-				if (setCookieHeaders == null) return string.Empty;
-
-				var tokenCookie = setCookieHeaders.FirstOrDefault(cookie => cookie.Name.Equals(MiddlewareAuthDefaults.AuthCookieName));
-
-				protectedToken = tokenCookie?.Value.Value;
+				if (context.Request.Cookies.TryGetValue(MiddlewareAuthDefaults.AuthCookieName, out protectedToken)) return string.Empty;
 			}
-
-			if (string.IsNullOrEmpty(protectedToken)) return protectedToken;
 
 			var unprotectedToken = protectedToken.UnprotectToken(context);
 
