@@ -135,13 +135,11 @@ namespace Web.Handlers.Authentication
 
 			if (string.IsNullOrEmpty(token)) return AuthenticateResult.NoResult();
 
-			if (token.Expires < DateTime.Today)
+			if (token.Expires < DateTime.Today && !_service.RefreshToken(ref token))
 			{
-				if (!_service.RefreshToken(ref token)) return AuthenticateResult.Fail("Refresh token failed");
-
-				StoreCookieToken(token);
+				return AuthenticateResult.Fail("Refresh token failed");
 			}
-
+			StoreCookieToken(token);
 			return AuthenticateResult.Success(ProvideTokenAuthTicket(token));
 		}
 
@@ -184,7 +182,6 @@ namespace Web.Handlers.Authentication
 
 		private void StoreCookieToken(AuthToken token)
 		{
-			var cookies = Context.Request.Cookies;
 			var cookieValue = Options.TokenDataFormat.Protect(token, Context.GetTlsTokenBinding());
 
 			Options.CookieManager.AppendResponseCookie(
@@ -192,7 +189,6 @@ namespace Web.Handlers.Authentication
 				Options.Cookie.Name,
 				cookieValue,
 				Options.Cookie.Build(Context));
-			cookies = Context.Request.Cookies;
 		}
 
 		private void RemoveCookieToken()
