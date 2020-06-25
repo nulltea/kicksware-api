@@ -27,13 +27,14 @@ type authClaims struct {
 func (h *handler) Authenticator(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		token, err := h.getRequestToken(r); if err != nil {
-			http.Error(w, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
-			fmt.Println()
+			http.Error(w, err.Error(), http.StatusUnauthorized)
+			glog.Errorln(err)
 			return
 		}
 
 		if token == nil || !token.Valid {
-			http.Error(w, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
+			http.Error(w, errInvalidTokenClaims.Error(), http.StatusInternalServerError)
+			glog.Errorln(err)
 			return
 		}
 
@@ -70,8 +71,8 @@ func (h *handler) Authorizer(next http.Handler) http.Handler {
 func (h *handler) UserSetter(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		token, err := h.getRequestToken(r); if err != nil {
-			http.Error(w, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
-			fmt.Println()
+			http.Error(w, err.Error(), http.StatusUnauthorized)
+			glog.Errorln(err)
 			return
 		}
 
