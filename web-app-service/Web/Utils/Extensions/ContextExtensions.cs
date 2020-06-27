@@ -24,7 +24,7 @@ namespace Web.Utils.Extensions
 
 			if (string.IsNullOrEmpty(protectedToken))
 			{
-				if (context.Request.Cookies.TryGetValue(MiddlewareAuthDefaults.AuthCookieName, out protectedToken)) return string.Empty;
+				if (!context.Request.Cookies.TryGetValue(MiddlewareAuthDefaults.AuthCookieName, out protectedToken)) return string.Empty;
 			}
 
 			var unprotectedToken = protectedToken.UnprotectToken(context);
