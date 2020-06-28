@@ -139,6 +139,7 @@ namespace Web.Handlers.Authentication
 			{
 				return AuthenticateResult.Fail("Refresh token failed");
 			}
+			Console.WriteLine(token);
 			StoreCookieToken(token);
 			return AuthenticateResult.Success(ProvideTokenAuthTicket(token));
 		}

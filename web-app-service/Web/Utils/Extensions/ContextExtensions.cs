@@ -34,7 +34,7 @@ namespace Web.Utils.Extensions
 
 		internal static string GetTlsTokenBinding(this HttpContext context)
 		{
-			var binding = context.Features.Get<ITlsTokenBindingFeature>()?.GetProvidedTokenBindingId();// ?? Constants.AlternativeTlsBinding;
+			var binding = context.Features.Get<ITlsTokenBindingFeature>()?.GetProvidedTokenBindingId();
 			return binding == null ? null : Convert.ToBase64String(binding);
 		}
 

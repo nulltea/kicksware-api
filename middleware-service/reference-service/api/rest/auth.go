@@ -29,6 +29,8 @@ func (h *handler) Authenticator(next http.Handler) http.Handler {
 		token, err := h.getRequestToken(r); if err != nil {
 			http.Error(w, err.Error(), http.StatusUnauthorized)
 			glog.Errorln(err)
+			glog.Errorln(token.Raw)
+			glog.Errorln(token.Claims)
 			return
 		}
 
