@@ -8,4 +8,5 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/thoas/go-funk v0.6.0
 	go.mongodb.org/mongo-driver v1.3.3
+	google.golang.org/grpc v1.30.0
 )

@@ -3,41 +3,65 @@ package server
 import (
 	"context"
 	"fmt"
+	"net"
 	"net/http"
 	"os"
 	"os/signal"
 	"time"
 
 	"github.com/go-chi/chi"
+	"github.com/golang/glog"
+	"google.golang.org/grpc"
 	"github.com/pkg/errors"
 
 	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/core"
 )
 
 type instance struct {
-	Server *http.Server
+	Listener *net.Listener
 	Address string
+	REST *http.Server
+	GRPC *grpc.Server
 }
 
 func NewInstance(addr string) core.Server {
 	return &instance{
-		Server: &http.Server{
+		REST: &http.Server{
 			Addr:      addr,
 		},
+		GRPC: grpc.NewServer(),
 		Address: addr,
 	}
 }
 
+func (s *instance) SetupREST(router chi.Router) {
+	s.REST.Handler = router;
+}
+
 func (s *instance) SetupRoutes(router chi.Router) {
-	s.Server.Handler = router;
+	s.SetupREST(router)
+}
+
+func (s *instance) SetupGRPC(fn func(srv *grpc.Server)) {
+	fn(s.GRPC)
 }
 
 func (s *instance) Start() {
 	errs := make(chan error, 2)
-	fmt.Println(fmt.Sprintf("Listening on port http://%v", s.Address))
+
+	if lstn, err := net.Listen("tcp", fmt.Sprintf(":%d", 9000)); err == nil {
+		s.Listener = &lstn
+		fmt.Println(fmt.Sprintf("Microservice launched to address http://%v", s.Address))
+	} else {
+		glog.Fatalf("Failed to listen on %v: %q", s.Address, err)
+	}
 
 	go func() {
-		errs <- s.Server.ListenAndServe()
+		errs <- s.REST.Serve(*s.Listener)
+	}()
+
+	go func() {
+		errs <- s.GRPC.Serve(*s.Listener)
 	}()
 
 	go func() {
