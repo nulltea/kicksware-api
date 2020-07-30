@@ -75,12 +75,16 @@ func (s *instance) Start() {
 }
 
 func (s *instance) Shutdown() {
-	if s.Server != nil {
+	if s.REST != nil {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 		defer cancel()
-		err := s.Server.Shutdown(ctx)
+		err := s.REST.Shutdown(ctx)
 		if err != nil {
 			errors.Wrap(err, "Failed to shutdown rest server gracefully")
 		}
+	}
+
+	if s.GRPC != nil {
+		s.GRPC.GracefulStop()
 	}
 }

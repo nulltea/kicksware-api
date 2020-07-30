@@ -4,7 +4,6 @@ import (
 	"strings"
 
 	"user-service/core/model"
-	"user-service/usecase/business"
 )
 
 type RequestParams struct {
@@ -50,7 +49,7 @@ func (p *RequestParams) SetSortDirection(direction string) {
 
 func (p *RequestParams) ApplyParams(users []*model.User) []*model.User {
 	if p.sortBy != "" {
-		business.NewSorter(users, p.sortBy).Sort(p.sortDirection == "desc")
+		// business.NewSorter(users, p.sortBy).Sort(p.sortDirection == "desc")
 	}
 	if p.offset != 0 {
 		users = users[p.offset:]
