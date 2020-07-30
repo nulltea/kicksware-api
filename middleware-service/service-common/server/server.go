@@ -49,7 +49,7 @@ func (s *instance) SetupGRPC(fn func(srv *grpc.Server)) {
 func (s *instance) Start() {
 	errs := make(chan error, 2)
 
-	if lstn, err := net.Listen("tcp", fmt.Sprintf(":%d", 9000)); err == nil {
+	if lstn, err := net.Listen("tcp", fmt.Sprintf(":%d", 8080)); err == nil {
 		s.Listener = &lstn
 		fmt.Println(fmt.Sprintf("Microservice launched to address http://%v", s.Address))
 	} else {
