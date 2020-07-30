@@ -7,12 +7,13 @@ import (
 )
 
 type ServiceConfig struct {
-	Common   CommonConfig    `yaml:"commonConfig"`
-	Auth     AuthConfig      `yaml:"authConfig"`
-	Mail     MailConfig      `yaml:"mailConfig"`
-	Mongo    DataStoreConfig `yaml:"mongoConfig"`
-	Postgres DataStoreConfig `yaml:"postgresConfig"`
-	Redis    DataStoreConfig `yaml:"redisConfig"`
+	Common       CommonConfig    `yaml:"commonConfig"`
+	Auth         AuthConfig      `yaml:"authConfig"`
+	Mail         MailConfig      `yaml:"mailConfig"`
+	FallbackMail MailConfig      `yaml:"fallbackMailConfig"`
+	Mongo        DataStoreConfig `yaml:"mongoConfig"`
+	Postgres     DataStoreConfig `yaml:"postgresConfig"`
+	Redis        DataStoreConfig `yaml:"redisConfig"`
 }
 
 type CommonConfig struct {

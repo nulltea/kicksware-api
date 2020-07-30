@@ -18,35 +18,7 @@ import (
 	"user-service/usecase/serializer/msg"
 )
 
-type RestfulHandler interface {
-	// Endpoint handlers:
-	// CRUD
-	GetOne(http.ResponseWriter, *http.Request)
-	Get(http.ResponseWriter, *http.Request)
-	Post(http.ResponseWriter, *http.Request)
-	Patch(http.ResponseWriter, *http.Request)
-	Put(http.ResponseWriter, *http.Request)
-	Delete(http.ResponseWriter, *http.Request)
-	// Auth
-	SingUp(http.ResponseWriter, *http.Request)
-	Login(http.ResponseWriter, *http.Request)
-	Remote(w http.ResponseWriter, r *http.Request)
-	Guest(http.ResponseWriter, *http.Request)
-	RefreshToken(http.ResponseWriter, *http.Request)
-	Logout(http.ResponseWriter, *http.Request)
-	// Mail
-	SendEmailConfirmation(http.ResponseWriter, *http.Request)
-	SendResetPassword(http.ResponseWriter, *http.Request)
-	SendNotification(http.ResponseWriter, *http.Request)
-	// Interaction
-	Like(http.ResponseWriter, *http.Request)
-	Unlike(http.ResponseWriter, *http.Request)
-	// Middleware:
-	Authenticator(next http.Handler) http.Handler
-	Authorizer(next http.Handler) http.Handler
-}
-
-type handler struct {
+type Handler struct {
 	service     service.UserService
 	auth        service.AuthService
 	mail        service.MailService
@@ -55,8 +27,8 @@ type handler struct {
 }
 
 func NewHandler(service service.UserService, auth service.AuthService, mail service.MailService,
-	interact service.InteractService, config env.CommonConfig) RestfulHandler {
-	return &handler{
+	interact service.InteractService, config env.CommonConfig) *Handler {
+	return &Handler{
 		service,
 		auth,
 		mail,
@@ -65,7 +37,7 @@ func NewHandler(service service.UserService, auth service.AuthService, mail serv
 	}
 }
 
-func (h *handler) GetOne(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) GetOne(w http.ResponseWriter, r *http.Request) {
 	userID := chi.URLParam(r,"userID")
 	user, err := h.service.FetchOne(userID)
 	if err != nil {
@@ -79,7 +51,7 @@ func (h *handler) GetOne(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, user, http.StatusOK)
 }
 
-func (h *handler) Get(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Get(w http.ResponseWriter, r *http.Request) {
 	var users []*model.User
 	var err error
 	params := NewRequestParams(r)
@@ -110,7 +82,7 @@ func (h *handler) Get(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, users, http.StatusOK)
 }
 
-func (h *handler) Post(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	user, err := h.getRequestBody(r); if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -127,7 +99,7 @@ func (h *handler) Post(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, user, http.StatusOK)
 }
 
-func (h *handler) Patch(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Patch(w http.ResponseWriter, r *http.Request) {
 	user, err := h.getRequestBody(r); if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -144,7 +116,7 @@ func (h *handler) Patch(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, nil, http.StatusOK)
 }
 
-func (h *handler) Put(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Put(w http.ResponseWriter, r *http.Request) {
 	user, err := h.getRequestBody(r); if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -161,7 +133,7 @@ func (h *handler) Put(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, nil, http.StatusOK)
 }
 
-func (h *handler) Delete(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Delete(w http.ResponseWriter, r *http.Request) {
 	code := chi.URLParam(r,"userID")
 	err := h.service.Remove(code)
 	if err != nil {
@@ -175,7 +147,7 @@ func (h *handler) Delete(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, nil, http.StatusOK)
 }
 
-func (h *handler) setupResponse(w http.ResponseWriter, body interface{}, statusCode int) {
+func (h *Handler) setupResponse(w http.ResponseWriter, body interface{}, statusCode int) {
 	w.Header().Set("Content-Type", h.contentType)
 	w.WriteHeader(statusCode)
 	if body != nil {
@@ -190,7 +162,7 @@ func (h *handler) setupResponse(w http.ResponseWriter, body interface{}, statusC
 	}
 }
 
-func (h *handler) setupAuthCookie(w http.ResponseWriter, token *meta.AuthToken) {
+func (h *Handler) setupAuthCookie(w http.ResponseWriter, token *meta.AuthToken) {
 	cookie := &http.Cookie{
 		Name: "AuthToken",
 		Value: token.Token,
@@ -199,7 +171,7 @@ func (h *handler) setupAuthCookie(w http.ResponseWriter, token *meta.AuthToken) 
 	http.SetCookie(w, cookie)
 }
 
-func (h *handler) recallAuthCookie(w http.ResponseWriter) {
+func (h *Handler) recallAuthCookie(w http.ResponseWriter) {
 	cookie := &http.Cookie{
 		Name: "AuthToken",
 		Expires: time.Now(),
@@ -208,7 +180,7 @@ func (h *handler) recallAuthCookie(w http.ResponseWriter) {
 	http.SetCookie(w, cookie)
 }
 
-func (h *handler) getRequestBody(r *http.Request) (*model.User, error) {
+func (h *Handler) getRequestBody(r *http.Request) (*model.User, error) {
 	contentType := r.Header.Get("Content-Type")
 	requestBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -221,7 +193,7 @@ func (h *handler) getRequestBody(r *http.Request) (*model.User, error) {
 	return body, nil
 }
 
-func (h *handler) getRequestQuery(r *http.Request) (meta.RequestQuery, error) {
+func (h *Handler) getRequestQuery(r *http.Request) (meta.RequestQuery, error) {
 	contentType := r.Header.Get("Content-Type")
 	requestBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -234,7 +206,7 @@ func (h *handler) getRequestQuery(r *http.Request) (meta.RequestQuery, error) {
 	return body, nil
 }
 
-func (h *handler) serializer(contentType string) service.UserSerializer {
+func (h *Handler) serializer(contentType string) service.UserSerializer {
 	if contentType == "application/x-msgpack" {
 		return msg.NewSerializer()
 	}

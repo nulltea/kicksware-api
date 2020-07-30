@@ -15,27 +15,27 @@ import (
 )
 
 type mailService struct {
-	userService service.UserService
-	config env.MailConfig
-	auth smtp.Auth
+	userService    service.UserService
+	config         env.MailConfig
+	fallbackConfig env.MailConfig
 }
 
-func NewMailService(userService service.UserService, config env.MailConfig) service.MailService {
+func NewMailService(userService service.UserService, config env.MailConfig, fallbackConfig env.MailConfig) service.MailService {
 	return &mailService {
 		userService,
 		config,
-		newEmailAuth(config),
+		fallbackConfig,
 	}
 }
 
-func (s *mailService) mailClient() (*smtp.Client, error) {
+func mailClient(config env.MailConfig) (*smtp.Client, error) {
 	host, _, _ := net.SplitHostPort(s.config.Server)
 	tlsConfig := &tls.Config {
 		InsecureSkipVerify: true,
-		ServerName: s.config.Server,
+		ServerName: config.Server,
 	}
 
-	conn, err := tls.Dial("tcp", s.config.Server, tlsConfig); if err != nil {
+	conn, err := tls.Dial("tcp", config.Server, tlsConfig); if err != nil {
 		return nil, err
 	}
 
@@ -43,7 +43,7 @@ func (s *mailService) mailClient() (*smtp.Client, error) {
 		return nil, err
 	}
 
-	if err := client.Auth(s.auth); err != nil {
+	if err := client.Auth(newEmailAuth(config)); err != nil {
 		return nil, err
 	}
 
@@ -86,7 +86,7 @@ func (s *mailService) SendNotification(userID, notificationContent string) error
 }
 
 func (s *mailService) sendMail(subject string, msg string, to string) error {
-	client, err := s.mailClient(); if err != nil {
+	client, err := mailClient(s.config); if err != nil {
 		return err
 	}
 

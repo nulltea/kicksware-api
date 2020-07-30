@@ -1,6 +1,8 @@
 package model
 
-import "time"
+import (
+	"time"
+)
 
 type User struct {
 	UniqueID           string                  `json:"UniqueID" bson:"unique_id"`
@@ -23,3 +25,4 @@ type User struct {
 	Provider           UserProvider            `json:"Provider" bson:"provider"`
 	ConnectedProviders map[UserProvider]string `json:"ConnectedProviders" bson:"-"`
 }
+

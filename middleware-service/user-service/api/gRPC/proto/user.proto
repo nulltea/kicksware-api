@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package proto;
+
+import "google/protobuf/timestamp.proto";
+
+message User {
+  string uniqueID = 1;
+  string username = 2;
+  string usernameN = 3;
+  string email = 4;
+  string emailN = 5;
+  string passwordHash = 6;
+  string firstName = 7;
+  string lastName = 8;
+  string phoneNumber = 9;
+  string avatar = 10;
+  string location = 11;
+  PaymentInfo paymentInfo = 12;
+  repeated string liked = 13;
+  UserSettings settings = 14;
+  bool confirmed = 15;
+  string role = 16;
+  google.protobuf.Timestamp registerDate = 17;
+  string provider = 18;
+  map<string,string> connectedProviders = 19;
+}
+
+message AddressInfo {
+  string country = 1;
+  string city = 2;
+  string address = 3;
+  string address2 = 4;
+  string region = 5;
+  string postalCode = 6;
+}
+
+message PaymentInfo {
+  string cardNumber = 1;
+  string expires = 2;
+  string cVV = 3;
+  AddressInfo billingInfo = 4;
+}
+
+message UserSettings {
+  string theme = 1;
+}
+
+service UserService {
+  rpc GetUsers(UserFilter) returns (UserResponse) {}
+  rpc CountUsers(UserFilter) returns (UserResponse) {}
+  rpc AddUsers(UserInput) returns (UserResponse) {}
+  rpc EditUsers(UserInput) returns (UserResponse) {}
+}
+
+message UserFilter {
+  repeated string UserID = 1;
+  map<string, string> RequestQuery = 2;
+  RequestParams RequestParams = 3;
+}
+
+message UserInput {
+  repeated User Users = 1;
+  RequestParams RequestParams = 2;
+}
+
+message UserResponse {
+  repeated User Users = 1;
+  int64 Count = 2;
+}
+
+message RequestParams {
+  int32 Limit = 1;
+  int32 Offset = 2;
+  string SortBy = 3;
+  string SortDirection = 4;
+}

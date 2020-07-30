@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-func (h *handler) SendEmailConfirmation(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) SendEmailConfirmation(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
 	userID := query.Get("userID")
 	callbackURL := query.Get("callbackURL")
@@ -16,7 +16,7 @@ func (h *handler) SendEmailConfirmation(w http.ResponseWriter, r *http.Request) 
 	h.setupResponse(w, nil, http.StatusOK)
 }
 
-func (h *handler) SendResetPassword(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) SendResetPassword(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
 	userID := query.Get("userID")
 	callbackURL := query.Get("callbackURL")
@@ -28,7 +28,7 @@ func (h *handler) SendResetPassword(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, nil, http.StatusOK)
 }
 
-func (h *handler) SendNotification(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) SendNotification(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
 	userID := query.Get("userID")
 	callbackURL := query.Get("content")

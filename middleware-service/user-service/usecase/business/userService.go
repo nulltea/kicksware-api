@@ -56,15 +56,15 @@ func (s *userService) FetchByUsername(username string) (*model.User, error) {
 	return users[0], nil
 }
 
-func (s *userService) Fetch(codes []string, params meta.RequestParams) ([]*model.User, error) {
+func (s *userService) Fetch(codes []string, params *meta.RequestParams) ([]*model.User, error) {
 	return s.repo.Fetch(codes, params)
 }
 
-func (s *userService) FetchAll(params meta.RequestParams) ([]*model.User, error) {
+func (s *userService) FetchAll(params *meta.RequestParams) ([]*model.User, error) {
 	return s.repo.FetchAll(params)
 }
 
-func (s *userService) FetchQuery(query meta.RequestQuery, params meta.RequestParams) ([]*model.User, error) {
+func (s *userService) FetchQuery(query meta.RequestQuery, params *meta.RequestParams) ([]*model.User, error) {
 	return s.repo.FetchQuery(query, params)
 }
 
@@ -109,7 +109,7 @@ func (s *userService) Remove(code string) error {
 	return s.repo.Remove(code)
 }
 
-func (s *userService) Count(query meta.RequestQuery, params meta.RequestParams) (int, error) {
+func (s *userService) Count(query meta.RequestQuery, params *meta.RequestParams) (int, error) {
 	return s.repo.Count(query, params)
 }
 

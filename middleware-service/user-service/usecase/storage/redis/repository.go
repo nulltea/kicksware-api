@@ -62,7 +62,7 @@ func (r *repository) FetchOne(code string) (*model.User, error) {
 	return user, nil
 }
 
-func (r *repository) Fetch(codes []string, params meta.RequestParams) ([]*model.User, error) {
+func (r *repository) Fetch(codes []string, params *meta.RequestParams) ([]*model.User, error) {
 	keys := funk.Map(codes, r.generateKey).([]string)
 	data, err := r.client.MGet(keys...).Result()
 	if err != nil {
@@ -78,7 +78,7 @@ func (r *repository) Fetch(codes []string, params meta.RequestParams) ([]*model.
 	return users, nil
 }
 
-func (r *repository) FetchAll(params meta.RequestParams) ([]*model.User, error) {
+func (r *repository) FetchAll(params *meta.RequestParams) ([]*model.User, error) {
 	keys := r.client.Keys("user*").Val()
 	if len(keys) == 0 {
 		return nil, errors.Wrap(business.ErrUserNotFound, "repository.User.FetchAll")
@@ -97,7 +97,7 @@ func (r *repository) FetchAll(params meta.RequestParams) ([]*model.User, error) 
 	return users, nil
 }
 
-func (r *repository) FetchQuery(query meta.RequestQuery, params meta.RequestParams) ([]*model.User, error) {
+func (r *repository) FetchQuery(query meta.RequestQuery, params *meta.RequestParams) ([]*model.User, error) {
 	return r.FetchAll(params) // todo querying
 }
 
@@ -142,7 +142,7 @@ func (r *repository) RemoveObj(user *model.User) error {
 	return nil
 }
 
-func (r *repository) Count(query meta.RequestQuery, params meta.RequestParams) (int, error) {
+func (r *repository) Count(query meta.RequestQuery, params *meta.RequestParams) (int, error) {
 	return r.CountAll()
 }
 

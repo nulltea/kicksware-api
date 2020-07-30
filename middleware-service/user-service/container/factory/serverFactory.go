@@ -10,6 +10,7 @@ import (
 
 func ProvideServer(config env.ServiceConfig, router chi.Router) core.Server {
 	srv := server.NewInstance(config.Common.Host)
-	srv.SetupRoutes(router)
+	srv.SetupREST(router)
+	// srv.SetupGRPC(grpc.ProvideRemoteSetup(gRpc))
 	return srv
 }

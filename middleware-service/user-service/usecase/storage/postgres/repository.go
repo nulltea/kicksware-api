@@ -61,7 +61,7 @@ func (r *repository) FetchOne(code string) (*model.User, error) {
 	return user, nil
 }
 
-func (r *repository) Fetch(codes []string, params meta.RequestParams) ([]*model.User, error) {
+func (r *repository) Fetch(codes []string, params *meta.RequestParams) ([]*model.User, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	users := make([]*model.User, 0)
@@ -79,7 +79,7 @@ func (r *repository) Fetch(codes []string, params meta.RequestParams) ([]*model.
 	return users, nil
 }
 
-func (r *repository) FetchAll(params meta.RequestParams) ([]*model.User, error) {
+func (r *repository) FetchAll(params *meta.RequestParams) ([]*model.User, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	users := make([]*model.User, 0)
@@ -96,7 +96,7 @@ func (r *repository) FetchAll(params meta.RequestParams) ([]*model.User, error) 
 	return users, nil
 }
 
-func (r *repository) FetchQuery(query meta.RequestQuery, params meta.RequestParams) ([]*model.User, error) {
+func (r *repository) FetchQuery(query meta.RequestQuery, params *meta.RequestParams) ([]*model.User, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	users := make([]*model.User, 0)
@@ -164,7 +164,7 @@ func (r *repository) Remove(code string) error {
 	return nil
 }
 
-func (r *repository) Count(query meta.RequestQuery, params meta.RequestParams) (count int, err error) {
+func (r *repository) Count(query meta.RequestQuery, params *meta.RequestParams) (count int, err error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 

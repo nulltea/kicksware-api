@@ -21,7 +21,7 @@ var (
 	ErrInvalidTokenClaims = errors.New("invalid token claims")
 )
 
-func (h *handler) SingUp(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) SingUp(w http.ResponseWriter, r *http.Request) {
 	user, err := h.getRequestBody(r); if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -34,7 +34,7 @@ func (h *handler) SingUp(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, token, http.StatusOK)
 }
 
-func (h *handler) Login(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 	user, err := h.getRequestBody(r); if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -52,7 +52,7 @@ func (h *handler) Login(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, token, http.StatusOK)
 }
 
-func (h *handler) Remote(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Remote(w http.ResponseWriter, r *http.Request) {
 	user, err := h.getRequestBody(r); if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -72,7 +72,7 @@ func (h *handler) Remote(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, token, http.StatusOK)
 }
 
-func (h *handler) Guest(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Guest(w http.ResponseWriter, r *http.Request) {
 	token, err := h.auth.Guest(); if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -81,7 +81,7 @@ func (h *handler) Guest(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, token, http.StatusOK)
 }
 
-func (h *handler) RefreshToken(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) RefreshToken(w http.ResponseWriter, r *http.Request) {
 	token, err := h.auth.Refresh(chi.URLParam(r,"token")); if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -90,7 +90,7 @@ func (h *handler) RefreshToken(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, token, http.StatusOK)
 }
 
-func (h *handler) Logout(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Logout(w http.ResponseWriter, r *http.Request) {
 	token := chi.URLParam(r,"token")
 	if err := h.auth.Logout(token); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -100,7 +100,7 @@ func (h *handler) Logout(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, token, http.StatusOK)
 }
 
-func (h *handler) Authenticator(next http.Handler) http.Handler {
+func (h *Handler) Authenticator(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		token, err := h.getRequestToken(r); if err != nil {
 			http.Error(w, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
@@ -118,7 +118,7 @@ func (h *handler) Authenticator(next http.Handler) http.Handler {
 	})
 }
 
-func (h *handler) Authorizer(next http.Handler) http.Handler {
+func (h *Handler) Authorizer(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		token, err := h.getRequestToken(r); if err != nil {
 			http.Error(w, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
@@ -143,7 +143,7 @@ func (h *handler) Authorizer(next http.Handler) http.Handler {
 	})
 }
 
-func (h *handler) getRequestToken(r *http.Request) (token *jwt.Token, err error) {
+func (h *Handler) getRequestToken(r *http.Request) (token *jwt.Token, err error) {
 	token, err = request.ParseFromRequest(r, request.OAuth2Extractor, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodRSA); ok {
 			return h.auth.PublicKey(), nil

@@ -5,7 +5,7 @@ import (
 	"github.com/go-chi/chi/middleware"
 )
 
-func ProvideRoutes(rest RestfulHandler) *chi.Mux {
+func ProvideRoutes(rest Handler) *chi.Mux {
 	router := chi.NewRouter()
 	router.Use(
 		middleware.Logger,
@@ -20,7 +20,7 @@ func ProvideRoutes(rest RestfulHandler) *chi.Mux {
 	return router
 }
 
-func restRoutes(rest RestfulHandler) (r *chi.Mux) {
+func restRoutes(rest Handler) (r *chi.Mux) {
 	r = chi.NewRouter()
 	r.Use(rest.Authenticator)
 	// r.Use(rest.Authorizer)
@@ -34,7 +34,7 @@ func restRoutes(rest RestfulHandler) (r *chi.Mux) {
 	return
 }
 
-func authRoutes(rest RestfulHandler) (r *chi.Mux) {
+func authRoutes(rest Handler) (r *chi.Mux) {
 	r = chi.NewRouter()
 	r.Post("/sign-up", rest.SingUp)
 	r.Post("/login", rest.Login)
@@ -45,7 +45,7 @@ func authRoutes(rest RestfulHandler) (r *chi.Mux) {
 	return
 }
 
-func mailRoutes(rest RestfulHandler) (r *chi.Mux) {
+func mailRoutes(rest Handler) (r *chi.Mux) {
 	r = chi.NewRouter()
 	r.Use(rest.Authenticator)
 	r.Use(rest.Authorizer)
@@ -55,7 +55,7 @@ func mailRoutes(rest RestfulHandler) (r *chi.Mux) {
 	return
 }
 
-func interactRoutes(rest RestfulHandler) (r *chi.Mux) {
+func interactRoutes(rest Handler) (r *chi.Mux) {
 	r = chi.NewRouter()
 	r.Use(rest.Authenticator)
 	r.Use(rest.Authorizer)

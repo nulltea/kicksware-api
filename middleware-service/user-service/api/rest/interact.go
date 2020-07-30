@@ -6,7 +6,7 @@ import (
 	"github.com/go-chi/chi"
 )
 
-func (h *handler) Like(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Like(w http.ResponseWriter, r *http.Request) {
 	userID := r.URL.User.Username()
 	entityID := chi.URLParam(r, "entityID")
 	err := h.interact.Like(userID, entityID)
@@ -17,7 +17,7 @@ func (h *handler) Like(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, nil, http.StatusOK)
 }
 
-func (h *handler) Unlike(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Unlike(w http.ResponseWriter, r *http.Request) {
 	userID := r.URL.User.Username()
 	entityID := chi.URLParam(r, "entityID")
 	err := h.interact.Unlike(userID, entityID)

@@ -18,7 +18,8 @@ func ConfigureContainer(container container.ServiceContainer, config env.Service
 		BindSingleton(factory.ProvideMailService).
 		BindSingleton(factory.ProvideInteractService).
 
-		BindSingleton(factory.ProvideGatewayHandler).
+		BindSingleton(factory.ProvideRESTGatewayHandler).
+		BindSingleton(factory.ProvideGRPCGatewayHandler).
 		BindTransient(factory.ProvideEndpointRouter).
 
 		BindTransient(factory.ProvideServer)
