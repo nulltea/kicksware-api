@@ -22,6 +22,7 @@ func ProvideMailService(service service.UserService, config env.ServiceConfig) s
 	return business.NewMailService(
 		service,
 		config.Mail,
+		config.FallbackMail,
 	)
 }
 

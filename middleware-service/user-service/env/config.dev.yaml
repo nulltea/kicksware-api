@@ -13,9 +13,13 @@ mailConfig:
   server: smtp.zoho.eu:465
   address: accounts@kicksware.com
   password: Er2PQRQc
-  fallbackServer: smtp.gmail.com:465
-  fallbackAddress: users.kicksware@gmail.com
-  fallbackPassword: Er2PQRQc
+  verifyEmailTemplate: template/verify.template.html
+  resetPasswordTemplate: template/reset.template.html
+  notificationTemplate: template/notification.template.html
+fallbackMailConfig:
+  server: smtp.gmail.com:465
+  address: users.kicksware@gmail.com
+  password: Er2PQRQc
   verifyEmailTemplate: template/verify.template.html
   resetPasswordTemplate: template/reset.template.html
   notificationTemplate: template/notification.template.html

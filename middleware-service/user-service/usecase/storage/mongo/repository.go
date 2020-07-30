@@ -224,7 +224,7 @@ func (r *repository) CountAll() (int, error) {
 	return int(count), nil
 }
 
-func (r *repository) buildQueryPipeline(matchQuery bson.M, param meta.RequestParams) mongo.Pipeline {
+func (r *repository) buildQueryPipeline(matchQuery bson.M, param *meta.RequestParams) mongo.Pipeline {
 	pipe := mongo.Pipeline{}
 	pipe = append(pipe, bson.D{{"$match", matchQuery}})
 

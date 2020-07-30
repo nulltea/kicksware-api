@@ -31,6 +31,6 @@ func ProvideGRPCGatewayHandler(service service.UserService, authService service.
 	)
 }
 
-func ProvideEndpointRouter(handler rest.Handler) chi.Router {
+func ProvideEndpointRouter(handler *rest.Handler) chi.Router {
 	return rest.ProvideRoutes(handler)
 }

@@ -22,7 +22,7 @@ require (
 	github.com/rs/xid v1.2.1
 	github.com/src-d/proteus v1.3.3 // indirect
 	github.com/thoas/go-funk v0.6.0
-	github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200730005803-8e65da304c07
+	github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200730014613-a9bc7a1aa063
 	github.com/vektah/gqlparser/v2 v2.0.1
 	github.com/vmihailenco/msgpack v3.3.3+incompatible
 	go.mongodb.org/mongo-driver v1.3.3

@@ -29,7 +29,7 @@ func NewMailService(userService service.UserService, config env.MailConfig, fall
 }
 
 func mailClient(config env.MailConfig) (*smtp.Client, error) {
-	host, _, _ := net.SplitHostPort(s.config.Server)
+	host, _, _ := net.SplitHostPort(config.Server)
 	tlsConfig := &tls.Config {
 		InsecureSkipVerify: true,
 		ServerName: config.Server,
