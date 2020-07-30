@@ -10,9 +10,8 @@ import (
 	"time"
 
 	"github.com/go-chi/chi"
-	"github.com/golang/glog"
-	"google.golang.org/grpc"
 	"github.com/pkg/errors"
+	"google.golang.org/grpc"
 
 	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/core"
 )
@@ -49,16 +48,20 @@ func (s *instance) SetupGRPC(fn func(srv *grpc.Server)) {
 func (s *instance) Start() {
 	errs := make(chan error, 2)
 
-	if lstn, err := net.Listen("tcp", s.Address); err == nil {
-		s.Listener = &lstn
-		fmt.Println(fmt.Sprintf("Microservice launched to address http://%v", s.Address))
-	} else {
-		glog.Fatalf("Failed to listen on %v: %q", s.Address, err)
-	}
+	//if lstn, err := net.Listen("tcp", s.Address); err == nil {
+	//	s.Listener = &lstn
+	//	fmt.Println(fmt.Sprintf("Microservice launched to address http://%v", s.Address))
+	//} else {
+	//	glog.Fatalf("Failed to listen on %v: %q", s.Address, err)
+	//}
 
 	go func() {
 		errs <- s.REST.ListenAndServe()
 	}()
+
+	//go func() {
+	//	errs <- s.REST.Serve(*s.Listener)
+	//}()
 
 	go func() {
 		errs <- s.GRPC.Serve(*s.Listener)
