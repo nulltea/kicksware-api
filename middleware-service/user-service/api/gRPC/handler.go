@@ -1,4 +1,4 @@
-package grpc
+package gRPC
 
 //go:generate protoc --go_out=plugins=grpc:. proto/user.proto
 
@@ -34,7 +34,7 @@ func NewHandler(service service.UserService, auth service.AuthService, mail serv
 func (h* Handler) GetUsers(ctx context.Context, filter *proto.UserFilter) (r *proto.UserResponse, err error) {
 	var users []*model.User
 
-	if filter == nil {
+	if filter == nil || (len(filter.UserID) == 0 && filter.RequestQuery == nil) {
 		users, err = h.service.FetchAll(nil)
 	} else if filter.RequestQuery != nil {
 		query, _ := meta.NewRequestQuery(filter.RequestQuery)

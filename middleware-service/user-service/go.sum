@@ -234,6 +234,8 @@ github.com/shurcooL/vfsgen v0.0.0-20180121065927-ffb13db8def0/go.mod h1:TrYk7fJV
 github.com/sirupsen/logrus v1.4.0/go.mod h1:LxeOpSwHxABJmUn/MG1IvRgCAasNZTLOkJPxbbu5VWo=
 github.com/sirupsen/logrus v1.4.1/go.mod h1:ni0Sbl8bgC9z8RoU9G6nDWqqs/fq4eDPysMBDgk/93Q=
 github.com/sirupsen/logrus v1.4.2/go.mod h1:tLMulIdttU9McNUspp0xgXVQah82FyeX6MwdIuYE2rE=
+github.com/soheilhy/cmux v0.1.4 h1:0HKaf1o97UwFjHH9o5XsHUOF+tqmdA7KEzXLpiyaw0E=
+github.com/soheilhy/cmux v0.1.4/go.mod h1:IM3LyeVVIOuxMH7sFAkER9+bJ4dT7Ms6E4xg4kGIyLM=
 github.com/spf13/cobra v0.0.3/go.mod h1:1l0Ry5zgKvJasoi3XT1TypsSe7PqH0Sj9dhYf7v3XqQ=
 github.com/spf13/pflag v1.0.3/go.mod h1:DYY7MBk1bdzusC3SYhjObp+wFpr4gzcvqqNjLnInEg4=
 github.com/src-d/proteus v1.3.3 h1:8hHuzbrQx/YxBfFBHr5QZdtAgTcKPsZw8RDYreBQS4o=
@@ -266,6 +268,8 @@ github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0
 github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200730104331-486043bdc789/go.mod h1:y7wmG0z+DG6YcYSB0D8ejlA6koKghW4KjKw6YQ/stlI=
 github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200730220201-cb40ad601998 h1:GEx8P+Kammi9wHL5uCgbi9rEoRTagM5Rz+fcqnKApcg=
 github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200730220201-cb40ad601998/go.mod h1:y7wmG0z+DG6YcYSB0D8ejlA6koKghW4KjKw6YQ/stlI=
+github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200730223230-3661008a1e25 h1:LzZpAbti4ILh/MzDK9mBQam1L1dUfYlRZqG2YaNDrpo=
+github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200730223230-3661008a1e25/go.mod h1:y7wmG0z+DG6YcYSB0D8ejlA6koKghW4KjKw6YQ/stlI=
 github.com/urfave/cli/v2 v2.1.1 h1:Qt8FeAtxE/vfdrLmR3rxR6JRE0RoVmbXu8+6kZtYU4k=
 github.com/urfave/cli/v2 v2.1.1/go.mod h1:SE9GqnLQmjVa0iPEY0f1w3ygNIYcIJ0OKPMoW2caLfQ=
 github.com/vektah/dataloaden v0.2.1-0.20190515034641-a19b9a6e7c9e h1:+w0Zm/9gaWpEAyDlU1eKOuk5twTjAjuevXqcJJw8hrg=

@@ -9,9 +9,9 @@ import (
 	"user-service/env"
 )
 
-func ProvideServer(config env.ServiceConfig, router chi.Router, gRpc *grpc.Handler) core.Server {
+func ProvideServer(config env.ServiceConfig, router chi.Router, handler *grpc.Handler) core.Server {
 	srv := server.NewInstance(config.Common.Host)
 	srv.SetupREST(router)
-	// srv.SetupGRPC(grpc.ProvideRemoteSetup(gRpc))
+	srv.SetupGRPC(grpc.ProvideRemoteSetup(handler))
 	return srv
 }

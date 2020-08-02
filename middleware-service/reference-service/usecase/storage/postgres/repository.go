@@ -46,7 +46,7 @@ func newPostgresClient(url string) (*sqlx.DB, error) {
 	return db, nil
 }
 
-func (r *repository) FetchOne(code string, params meta.RequestParams) (*model.SneakerReference, error) {
+func (r *repository) FetchOne(code string, params *meta.RequestParams) (*model.SneakerReference, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	sneakerReference := &model.SneakerReference{}
@@ -61,7 +61,7 @@ func (r *repository) FetchOne(code string, params meta.RequestParams) (*model.Sn
 	return sneakerReference, nil
 }
 
-func (r *repository) Fetch(codes []string, params meta.RequestParams) ([]*model.SneakerReference, error) {
+func (r *repository) Fetch(codes []string, params *meta.RequestParams) ([]*model.SneakerReference, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	sneakerReferences := make([]*model.SneakerReference, 0)
@@ -79,7 +79,7 @@ func (r *repository) Fetch(codes []string, params meta.RequestParams) ([]*model.
 	return sneakerReferences, nil
 }
 
-func (r *repository) FetchAll(params meta.RequestParams) ([]*model.SneakerReference, error) {
+func (r *repository) FetchAll(params *meta.RequestParams) ([]*model.SneakerReference, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	sneakerReferences := make([]*model.SneakerReference, 0)
@@ -95,7 +95,7 @@ func (r *repository) FetchAll(params meta.RequestParams) ([]*model.SneakerRefere
 	return sneakerReferences, nil
 }
 
-func (r *repository) FetchQuery(query meta.RequestQuery, params meta.RequestParams) ([]*model.SneakerReference, error) {
+func (r *repository) FetchQuery(query meta.RequestQuery, params *meta.RequestParams) ([]*model.SneakerReference, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	sneakerReferences := make([]*model.SneakerReference, 0)
@@ -156,7 +156,7 @@ func (r *repository) Modify(sneakerReference *model.SneakerReference) error {
 	return nil
 }
 
-func (r *repository) Count(query meta.RequestQuery, params meta.RequestParams) (count int, err error) {
+func (r *repository) Count(query meta.RequestQuery, params *meta.RequestParams) (count int, err error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	where, err := query.ToSql(); if err != nil {

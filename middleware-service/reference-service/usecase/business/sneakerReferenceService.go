@@ -37,19 +37,19 @@ func NewSneakerReferenceService(sneakerReferenceRepo repo.SneakerReferenceReposi
 	}
 }
 
-func (s *referenceService) FetchOne(code string, params meta.RequestParams) (*model.SneakerReference, error) {
+func (s *referenceService) FetchOne(code string, params *meta.RequestParams) (*model.SneakerReference, error) {
 	return s.repo.FetchOne(code, params)
 }
 
-func (s *referenceService) Fetch(codes []string, params meta.RequestParams) ([]*model.SneakerReference, error) {
+func (s *referenceService) Fetch(codes []string, params *meta.RequestParams) ([]*model.SneakerReference, error) {
 	return s.repo.Fetch(codes, params)
 }
 
-func (s *referenceService) FetchAll(params meta.RequestParams) ([]*model.SneakerReference, error) {
+func (s *referenceService) FetchAll(params *meta.RequestParams) ([]*model.SneakerReference, error) {
 	return s.repo.FetchAll(params)
 }
 
-func (s *referenceService) FetchQuery(query meta.RequestQuery, params meta.RequestParams) (refs []*model.SneakerReference, err error) {
+func (s *referenceService) FetchQuery(query meta.RequestQuery, params *meta.RequestParams) (refs []*model.SneakerReference, err error) {
 	foreignKeys, is := s.handleForeignSubquery(query)
 	refs, err = s.repo.FetchQuery(query, params)
 	if err == nil && is {
@@ -83,7 +83,7 @@ func (s *referenceService) CountAll() (int, error) {
 	return s.repo.CountAll()
 }
 
-func (s *referenceService) Count(query meta.RequestQuery, params meta.RequestParams) (int, error) {
+func (s *referenceService) Count(query meta.RequestQuery, params *meta.RequestParams) (int, error) {
 	foreignKeys, is := s.handleForeignSubquery(query); if is {
 		refs, err := s.repo.FetchQuery(query, params)
 		if err == nil && is {

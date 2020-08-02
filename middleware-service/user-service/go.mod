@@ -20,9 +20,10 @@ require (
 	github.com/onsi/gomega v1.9.0 // indirect
 	github.com/pkg/errors v0.9.1
 	github.com/rs/xid v1.2.1
+	github.com/soheilhy/cmux v0.1.4 // indirect
 	github.com/src-d/proteus v1.3.3 // indirect
 	github.com/thoas/go-funk v0.6.0
-	github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200730220201-cb40ad601998
+	github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200730223230-3661008a1e25
 	github.com/vektah/gqlparser/v2 v2.0.1
 	github.com/vmihailenco/msgpack v3.3.3+incompatible
 	go.mongodb.org/mongo-driver v1.3.3

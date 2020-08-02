@@ -52,7 +52,7 @@ func newMongoClient(mongoURL string, mongoTimeout int) (*mongo.Client, error) {
 	return client, nil
 }
 
-func (r *repository) FetchOne(code string, params meta.RequestParams) (*model.SneakerReference, error) {
+func (r *repository) FetchOne(code string, params *meta.RequestParams) (*model.SneakerReference, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 
@@ -75,7 +75,7 @@ func (r *repository) FetchOne(code string, params meta.RequestParams) (*model.Sn
 	return sneakerReferences[0], nil
 }
 
-func (r *repository) Fetch(codes []string, params meta.RequestParams) ([]*model.SneakerReference, error) {
+func (r *repository) Fetch(codes []string, params *meta.RequestParams) ([]*model.SneakerReference, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 
@@ -98,7 +98,7 @@ func (r *repository) Fetch(codes []string, params meta.RequestParams) ([]*model.
 	return sneakerReferences, nil
 }
 
-func (r *repository) FetchAll(params meta.RequestParams) ([]*model.SneakerReference, error) {
+func (r *repository) FetchAll(params *meta.RequestParams) ([]*model.SneakerReference, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 
@@ -118,7 +118,7 @@ func (r *repository) FetchAll(params meta.RequestParams) ([]*model.SneakerRefere
 	return sneakerReference, nil
 }
 
-func (r *repository) FetchQuery(query meta.RequestQuery, params meta.RequestParams) ([]*model.SneakerReference, error) {
+func (r *repository) FetchQuery(query meta.RequestQuery, params *meta.RequestParams) ([]*model.SneakerReference, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 
@@ -182,7 +182,7 @@ func (r *repository) Modify(sneakerReference *model.SneakerReference) error {
 	return nil
 }
 
-func (r *repository) Count(query meta.RequestQuery, params meta.RequestParams) (int, error) {
+func (r *repository) Count(query meta.RequestQuery, params *meta.RequestParams) (int, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 
@@ -208,7 +208,7 @@ func (r *repository) CountAll() (int, error) {
 }
 
 
-func (r *repository) buildQueryPipeline(matchQuery bson.M, param meta.RequestParams) mongo.Pipeline {
+func (r *repository) buildQueryPipeline(matchQuery bson.M, param *meta.RequestParams) mongo.Pipeline {
 	pipe := mongo.Pipeline{}
 	pipe = append(pipe, bson.D{{"$match", matchQuery}})
 
