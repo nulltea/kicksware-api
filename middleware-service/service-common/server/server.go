@@ -30,7 +30,9 @@ func NewInstance(addr string) core.Server {
 		REST: &http.Server{
 			Addr:      addr,
 		},
-		GRPC: grpc.NewServer(),
+		GRPC: grpc.NewServer(
+			grpc.MaxSendMsgSize(20 * 1024 * 1024),
+		),
 		Address: addr,
 	}
 }
