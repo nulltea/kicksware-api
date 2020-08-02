@@ -10,17 +10,19 @@ import (
 	"time"
 
 	"github.com/go-chi/chi"
+	"github.com/golang/glog"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
 
 	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/core"
+	"github.com/soheilhy/cmux"
 )
 
 type instance struct {
-	Listener *net.Listener
 	Address string
 	REST *http.Server
 	GRPC *grpc.Server
+	Gateway cmux.CMux
 }
 
 func NewInstance(addr string) core.Server {
@@ -48,23 +50,22 @@ func (s *instance) SetupGRPC(fn func(srv *grpc.Server)) {
 func (s *instance) Start() {
 	errs := make(chan error, 2)
 
-	//if lstn, err := net.Listen("tcp", s.Address); err == nil {
-	//	s.Listener = &lstn
-	//	fmt.Println(fmt.Sprintf("Microservice launched to address http://%v", s.Address))
-	//} else {
-	//	glog.Fatalf("Failed to listen on %v: %q", s.Address, err)
-	//}
+	lstn, err := net.Listen("tcp", s.Address); if err == nil {
+		fmt.Println(fmt.Sprintf("Microservice launched to address http://%v", s.Address))
+	} else {
+		glog.Fatalf("Failed to listen on %v: %q", s.Address, err)
+	}
+
+	s.Gateway = cmux.New(lstn)
+	grpcL := s.Gateway.Match(cmux.HTTP2())
+	restL := s.Gateway.Match(cmux.HTTP1Fast())
 
 	go func() {
-		errs <- s.REST.ListenAndServe()
+		errs <- s.REST.Serve(restL)
 	}()
 
-	//go func() {
-	//	errs <- s.REST.Serve(*s.Listener)
-	//}()
-
 	go func() {
-		errs <- s.GRPC.Serve(*s.Listener)
+		errs <- s.GRPC.Serve(grpcL)
 	}()
 
 	go func() {
@@ -73,6 +74,8 @@ func (s *instance) Start() {
 		errs <- fmt.Errorf("%s", <-c)
 		s.Shutdown()
 	}()
+
+	s.Gateway.Serve()
 
 	fmt.Printf("Terminated %s", <-errs)
 }
