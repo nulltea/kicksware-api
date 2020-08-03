@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package proto;
+
+import "google/protobuf/timestamp.proto";
+
+message SneakerProduct {
+  string uniqueId = 1;
+  string brandName = 2;
+  string modelName = 3;
+  string modelSKU = 4;
+  string referenceId = 5;
+  double price = 6;
+  string type = 7;
+  SneakerSize size = 8;
+  string color = 9;
+  string condition = 10;
+  string description = 11;
+  string owner = 12;
+  double conditionIndex = 14;
+  google.protobuf.Timestamp addedAt = 15;
+}
+
+message SneakerSize {
+  double europe = 1;
+  double unitedStates = 2;
+  double unitedKingdom = 3;
+  double centimeters = 4;
+}
+
+service ProductService {
+  rpc GetProducts(ProductFilter) returns (stream ProductResponse) {}
+  rpc CountProducts(ProductFilter) returns (stream ProductResponse) {}
+  rpc AddProducts(ProductInput) returns (stream ProductResponse) {}
+  rpc EditProducts(ProductInput) returns (stream ProductResponse) {}
+}
+
+message ProductFilter {
+  repeated string ProductID = 1;
+  map<string, string> RequestQuery = 2;
+  RequestParams RequestParams = 3;
+}
+
+message ProductInput {
+  repeated SneakerProduct Products = 1;
+  RequestParams RequestParams = 2;
+}
+
+message ProductResponse {
+  repeated SneakerProduct Products = 1;
+  int64 Count = 2;
+}
+
+message RequestParams {
+  int32 Limit = 1;
+  int32 Offset = 2;
+  string SortBy = 3;
+  string SortDirection = 4;
+}
+

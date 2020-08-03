@@ -99,7 +99,7 @@ deploy-middleware-step:
     before_script: 
       - *common-before
       - export DYNAMIC_ENV_VAR=PROD
-      - docker exec mongo mongodump -u root -p greenJordans --authenticationDatabase admin --db=sneakerResaleDB  --out=/backup || echi "mongo down - buckup impossible"
+      - docker exec mongo mongodump -u root -p greenJordans --authenticationDatabase admin --db=sneakerResaleDB  --out=/backup || echo "mongo down - buckup impossible"
     tags:
       - middleware
       - deploy
