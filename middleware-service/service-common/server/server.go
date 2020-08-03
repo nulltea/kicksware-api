@@ -13,6 +13,7 @@ import (
 	"github.com/golang/glog"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 
 	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/core"
 	"github.com/soheilhy/cmux"
@@ -47,6 +48,7 @@ func (s *instance) SetupRoutes(router chi.Router) {
 
 func (s *instance) SetupGRPC(fn func(srv *grpc.Server)) {
 	fn(s.GRPC)
+	reflection.Register(s.GRPC)
 }
 
 func (s *instance) Start() {
