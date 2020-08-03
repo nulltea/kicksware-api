@@ -18,7 +18,7 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/rs/xid v1.2.1
 	github.com/thoas/go-funk v0.6.0
-	github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200802111055-4de3b7766a3f
+	github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200803132833-f1c60ff855f6
 	github.com/vmihailenco/msgpack v3.3.3+incompatible
 	go.mongodb.org/mongo-driver v1.3.3
 	golang.org/x/net v0.0.0-20200202094626-16171245cfb2 // indirect

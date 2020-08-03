@@ -33,19 +33,22 @@ func NewHandler(service service.UserService, auth service.AuthService, mail serv
 
 func (h* Handler) GetUsers(ctx context.Context, filter *proto.UserFilter) (r *proto.UserResponse, err error) {
 	var users []*model.User
+	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
+		params = filter.RequestParams.ToNative()
+	}
 
-	if filter == nil || (len(filter.UserID) == 0 && filter.RequestQuery == nil) {
-		users, err = h.service.FetchAll(nil)
+	if len(filter.UserID) == 0 && filter.RequestQuery == nil  {
+		users, err = h.service.FetchAll(params)
 	} else if filter.RequestQuery != nil {
 		query, _ := meta.NewRequestQuery(filter.RequestQuery)
-		users, err = h.service.FetchQuery(query, filter.RequestParams.ToNative())
+		users, err = h.service.FetchQuery(query, params)
 	} else if len(filter.UserID) == 1 {
 		user, e := h.service.FetchOne(filter.UserID[0]); if e != nil {
 			err = e
 		}
 		users = []*model.User {user}
 	} else {
-		users, err = h.service.Fetch(filter.UserID, filter.RequestParams.ToNative())
+		users, err = h.service.Fetch(filter.UserID, params)
 	}
 
 	r = &proto.UserResponse{

@@ -62,7 +62,7 @@ func (r *repository) FetchOne(code string) (*model.SneakerProduct, error) {
 	return sneakerProduct, nil
 }
 
-func (r *repository) Fetch(codes []string, params meta.RequestParams) ([]*model.SneakerProduct, error) {
+func (r *repository) Fetch(codes []string, params *meta.RequestParams) ([]*model.SneakerProduct, error) {
 	keys := funk.Map(codes, r.generateKey).([]string)
 	data, err := r.client.MGet(keys...).Result()
 	if err != nil {
@@ -78,7 +78,7 @@ func (r *repository) Fetch(codes []string, params meta.RequestParams) ([]*model.
 	return sneakerProducts, nil
 }
 
-func (r *repository) FetchAll(params meta.RequestParams) ([]*model.SneakerProduct, error) {
+func (r *repository) FetchAll(params *meta.RequestParams) ([]*model.SneakerProduct, error) {
 	keys := r.client.Keys("sneakerProduct*").Val()
 	if len(keys) == 0 {
 		return nil, errors.Wrap(business.ErrProductNotFound, "repository.SneakerProduct.FetchAll")
@@ -97,7 +97,7 @@ func (r *repository) FetchAll(params meta.RequestParams) ([]*model.SneakerProduc
 	return sneakerProducts, nil
 }
 
-func (r *repository) FetchQuery(query meta.RequestQuery, params meta.RequestParams) ([]*model.SneakerProduct, error) {
+func (r *repository) FetchQuery(query meta.RequestQuery, params *meta.RequestParams) ([]*model.SneakerProduct, error) {
 	return r.FetchAll(params) //todo querying
 }
 
@@ -135,7 +135,7 @@ func (r *repository) Remove(code string) error {
 	return nil
 }
 
-func (r *repository) Count(query meta.RequestQuery, params meta.RequestParams) (int, error) {
+func (r *repository) Count(query meta.RequestQuery, params *meta.RequestParams) (int, error) {
 	return r.CountAll()
 }
 

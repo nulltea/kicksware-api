@@ -70,7 +70,7 @@ func (r *repository) FetchOne(code string) (*model.SneakerProduct, error) {
 	return sneakerProduct, nil
 }
 
-func (r *repository) Fetch(codes []string, params meta.RequestParams) ([]*model.SneakerProduct, error) {
+func (r *repository) Fetch(codes []string, params *meta.RequestParams) ([]*model.SneakerProduct, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 	filter := bson.M{"uniqueid": bson.M{"$in": codes}}
@@ -94,7 +94,7 @@ func (r *repository) Fetch(codes []string, params meta.RequestParams) ([]*model.
 	return sneakerProducts, nil
 }
 
-func (r *repository) FetchAll(params meta.RequestParams) ([]*model.SneakerProduct, error) {
+func (r *repository) FetchAll(params *meta.RequestParams) ([]*model.SneakerProduct, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 
@@ -114,7 +114,7 @@ func (r *repository) FetchAll(params meta.RequestParams) ([]*model.SneakerProduc
 	return sneakerProduct, nil
 }
 
-func (r *repository) FetchQuery(query meta.RequestQuery, params meta.RequestParams) ([]*model.SneakerProduct, error) {
+func (r *repository) FetchQuery(query meta.RequestQuery, params *meta.RequestParams) ([]*model.SneakerProduct, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 
@@ -190,7 +190,7 @@ func (r *repository) Remove(code string) error {
 	return nil
 }
 
-func (r *repository) Count(query meta.RequestQuery, params meta.RequestParams) (int, error) {
+func (r *repository) Count(query meta.RequestQuery, params *meta.RequestParams) (int, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 

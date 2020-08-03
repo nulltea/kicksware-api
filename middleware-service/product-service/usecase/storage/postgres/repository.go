@@ -62,7 +62,7 @@ func (r *repository) FetchOne(code string) (*model.SneakerProduct, error) {
 	return sneakerProduct, nil
 }
 
-func (r *repository) Fetch(codes []string, params meta.RequestParams) ([]*model.SneakerProduct, error) {
+func (r *repository) Fetch(codes []string, params *meta.RequestParams) ([]*model.SneakerProduct, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	sneakerProducts := make([]*model.SneakerProduct, 0)
@@ -80,7 +80,7 @@ func (r *repository) Fetch(codes []string, params meta.RequestParams) ([]*model.
 	return sneakerProducts, nil
 }
 
-func (r *repository) FetchAll(params meta.RequestParams) ([]*model.SneakerProduct, error) {
+func (r *repository) FetchAll(params *meta.RequestParams) ([]*model.SneakerProduct, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	sneakerProducts := make([]*model.SneakerProduct, 0)
@@ -97,7 +97,7 @@ func (r *repository) FetchAll(params meta.RequestParams) ([]*model.SneakerProduc
 	return sneakerProducts, nil
 }
 
-func (r *repository) FetchQuery(query meta.RequestQuery, params meta.RequestParams) ([]*model.SneakerProduct, error) {
+func (r *repository) FetchQuery(query meta.RequestQuery, params *meta.RequestParams) ([]*model.SneakerProduct, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	sneakerProducts := make([]*model.SneakerProduct, 0)
@@ -165,7 +165,7 @@ func (r *repository) Remove(code string) error {
 	return nil
 }
 
-func (r *repository) Count(query meta.RequestQuery, params meta.RequestParams) (count int, err error) {
+func (r *repository) Count(query meta.RequestQuery, params *meta.RequestParams) (count int, err error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	where, err := query.ToSql(); if err != nil {

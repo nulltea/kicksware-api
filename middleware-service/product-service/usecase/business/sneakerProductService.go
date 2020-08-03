@@ -43,15 +43,15 @@ func (s *productService) FetchOne(code string) (*model.SneakerProduct, error) {
 	return s.repo.FetchOne(code)
 }
 
-func (s *productService) Fetch(codes []string, params meta.RequestParams) ([]*model.SneakerProduct, error) {
+func (s *productService) Fetch(codes []string, params *meta.RequestParams) ([]*model.SneakerProduct, error) {
 	return s.repo.Fetch(codes, params)
 }
 
-func (s *productService) FetchAll(params meta.RequestParams) ([]*model.SneakerProduct, error) {
+func (s *productService) FetchAll(params *meta.RequestParams) ([]*model.SneakerProduct, error) {
 	return s.repo.FetchAll(params)
 }
 
-func (s *productService) FetchQuery(query meta.RequestQuery, params meta.RequestParams) (products[]*model.SneakerProduct, err error) {
+func (s *productService) FetchQuery(query meta.RequestQuery, params *meta.RequestParams) (products[]*model.SneakerProduct, err error) {
 	foreignKeys, is := s.handleForeignSubquery(query)
 	products, err = s.repo.FetchQuery(query, params)
 	if err == nil && is {
@@ -62,7 +62,7 @@ func (s *productService) FetchQuery(query meta.RequestQuery, params meta.Request
 	return
 }
 
-func (s *productService) Store(sneakerProduct *model.SneakerProduct, params meta.RequestParams) error {
+func (s *productService) Store(sneakerProduct *model.SneakerProduct, params *meta.RequestParams) error {
 	if err := validate.Validate(sneakerProduct); err != nil {
 		return errs.Wrap(ErrProductInvalid, "service.repo.Store")
 	}
@@ -90,7 +90,7 @@ func (s *productService) CountAll() (int, error) {
 	return s.repo.CountAll()
 }
 
-func (s *productService) Count(query meta.RequestQuery, params meta.RequestParams) (int, error) {
+func (s *productService) Count(query meta.RequestQuery, params *meta.RequestParams) (int, error) {
 	foreignKeys, is := s.handleForeignSubquery(query); if is {
 		products, err := s.repo.FetchQuery(query, params)
 		if err == nil && is {

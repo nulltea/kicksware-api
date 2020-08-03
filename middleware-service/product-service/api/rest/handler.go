@@ -17,35 +17,21 @@ import (
 	"product-service/usecase/serializer/msg"
 )
 
-type RestfulHandler interface {
-	// Endpoint handlers:
-	GetOne(http.ResponseWriter, *http.Request)
-	Get(http.ResponseWriter, *http.Request)
-	Post(http.ResponseWriter, *http.Request)
-	PutImages(http.ResponseWriter, *http.Request)
-	Patch(http.ResponseWriter, *http.Request)
-	Put(http.ResponseWriter, *http.Request)
-	Delete(http.ResponseWriter, *http.Request)
-	// Middleware:
-	Authenticator(next http.Handler) http.Handler
-	Authorizer(next http.Handler) http.Handler
-}
-
-type handler struct {
+type Handler struct {
 	service     service.SneakerProductService
 	auth        service.AuthService
 	contentType string
 }
 
-func NewHandler(service service.SneakerProductService, auth service.AuthService, config env.CommonConfig) RestfulHandler {
-	return &handler{
+func NewHandler(service service.SneakerProductService, auth service.AuthService, config env.CommonConfig) *Handler {
+	return &Handler{
 		service,
 		auth,
 		config.ContentType,
 	}
 }
 
-func (h *handler) GetOne(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) GetOne(w http.ResponseWriter, r *http.Request) {
 	code := chi.URLParam(r,"sneakerId")
 	sneakerProduct, err := h.service.FetchOne(code)
 	if err != nil {
@@ -59,7 +45,7 @@ func (h *handler) GetOne(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, sneakerProduct, http.StatusOK)
 }
 
-func (h *handler) Get(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Get(w http.ResponseWriter, r *http.Request) {
 	var sneakerProducts []*model.SneakerProduct
 	var err error
 	params := NewRequestParams(r)
@@ -90,7 +76,7 @@ func (h *handler) Get(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, sneakerProducts, http.StatusOK)
 }
 
-func (h *handler) Post(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	sneakerProduct, err := h.getRequestBody(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -109,7 +95,7 @@ func (h *handler) Post(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, sneakerProduct, http.StatusOK)
 }
 
-func (h *handler) PutImages(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) PutImages(w http.ResponseWriter, r *http.Request) {
 	files, err := h.getRequestFiles(r)
 	if err != nil || len(files) == 0 {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -130,7 +116,7 @@ func (h *handler) PutImages(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, nil, http.StatusOK)
 }
 
-func (h *handler) Patch(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Patch(w http.ResponseWriter, r *http.Request) {
 	sneakerProduct, err := h.getRequestBody(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -148,7 +134,7 @@ func (h *handler) Patch(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, nil, http.StatusOK)
 }
 
-func (h *handler) Put(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Put(w http.ResponseWriter, r *http.Request) {
 	sneakerProduct, err := h.getRequestBody(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -166,7 +152,7 @@ func (h *handler) Put(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, nil, http.StatusOK)
 }
 
-func (h *handler) Delete(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Delete(w http.ResponseWriter, r *http.Request) {
 	code := chi.URLParam(r,"sneakerId")
 	err := h.service.Remove(code)
 	if err != nil {
@@ -180,7 +166,7 @@ func (h *handler) Delete(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, nil, http.StatusOK)
 }
 
-func (h *handler) setupResponse(w http.ResponseWriter, body interface{}, statusCode int) {
+func (h *Handler) setupResponse(w http.ResponseWriter, body interface{}, statusCode int) {
 	w.Header().Set("Content-Type", h.contentType)
 	w.WriteHeader(statusCode)
 	if body != nil {
@@ -195,7 +181,7 @@ func (h *handler) setupResponse(w http.ResponseWriter, body interface{}, statusC
 	}
 }
 
-func (h *handler) getRequestBody(r *http.Request) (*model.SneakerProduct, error) {
+func (h *Handler) getRequestBody(r *http.Request) (*model.SneakerProduct, error) {
 	contentType := r.Header.Get("Content-Type")
 	requestBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -208,7 +194,7 @@ func (h *handler) getRequestBody(r *http.Request) (*model.SneakerProduct, error)
 	return body, nil
 }
 
-func (h *handler) getRequestFiles(r *http.Request) (files map[string][]byte, err error) {
+func (h *Handler) getRequestFiles(r *http.Request) (files map[string][]byte, err error) {
 	files = map[string][]byte{}
 	if err := r.ParseMultipartForm(32 << 20 ); err != nil {
 		return nil, err
@@ -230,7 +216,7 @@ func (h *handler) getRequestFiles(r *http.Request) (files map[string][]byte, err
 	return
 }
 
-func (h *handler) getRequestQueryBody(r *http.Request) (map[string]interface{}, error) {
+func (h *Handler) getRequestQueryBody(r *http.Request) (map[string]interface{}, error) {
 	contentType := r.Header.Get("Content-Type")
 	requestBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -243,7 +229,7 @@ func (h *handler) getRequestQueryBody(r *http.Request) (map[string]interface{}, 
 	return body, nil
 }
 
-func (h *handler) getRequestQuery(r *http.Request) (meta.RequestQuery, error) {
+func (h *Handler) getRequestQuery(r *http.Request) (meta.RequestQuery, error) {
 	contentType := r.Header.Get("Content-Type")
 	requestBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -256,7 +242,7 @@ func (h *handler) getRequestQuery(r *http.Request) (meta.RequestQuery, error) {
 	return body, nil
 }
 
-func (h *handler) serializer(contentType string) service.SneakerProductSerializer {
+func (h *Handler) serializer(contentType string) service.SneakerProductSerializer {
 	if contentType == "application/x-msgpack" {
 		return msg.NewSerializer()
 	}

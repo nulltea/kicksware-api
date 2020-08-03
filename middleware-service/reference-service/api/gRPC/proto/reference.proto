@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+package proto;
+
+import "google/protobuf/timestamp.proto";
+
+message BaseModel {
+  string uniqueId = 1;
+  string name = 2;
+  string brand = 3;
+  string baseModel = 4;
+  string hero = 5;
+  string description = 6;
+}
+
+message Brand {
+  string uniqueId = 1;
+  string name = 2;
+  string logo = 3;
+  string hero = 4;
+  string description = 5;
+}
+
+message Model {
+  string uniqueId = 1;
+  string name = 2;
+  string brand = 3;
+  string baseModel = 4;
+  string hero = 5;
+  string description = 6;
+}
+
+message SneakerBrand {
+  string uniqueId = 1;
+  string name = 2;
+  string logo = 3;
+  string hero = 4;
+  string description = 5;
+}
+
+message SneakerModel {
+  string uniqueId = 1;
+  string name = 2;
+  string brand = 3;
+  string baseModel = 4;
+  string hero = 5;
+  string description = 6;
+}
+
+message SneakerReference {
+  string uniqueId = 1;
+  string manufactureSku = 2;
+  string brandName = 3;
+  SneakerBrand brand = 4;
+  string modelName = 5;
+  SneakerModel model = 6;
+  string baseModelName = 7;
+  SneakerModel baseModel = 8;
+  string description = 9;
+  string color = 10;
+  string gender = 11;
+  string nickname = 12;
+  repeated string materials = 13;
+  repeated string categories = 14;
+  google.protobuf.Timestamp releaseDate = 15;
+  double price = 16;
+  string imageLink = 17;
+  repeated string imageLinks = 18;
+  string stadiumUrl = 19;
+  int64 likes = 20;
+  bool liked = 21;
+}
+
+service ReferenceService {
+  rpc GetReferences(ReferenceFilter) returns (stream ReferenceResponse) {}
+  rpc CountReferences(ReferenceFilter) returns (stream ReferenceResponse) {}
+  rpc AddReferences(ReferenceInput) returns (stream ReferenceResponse) {}
+  rpc EditReferences(ReferenceInput) returns (stream ReferenceResponse) {}
+}
+
+message ReferenceFilter {
+  repeated string ReferenceID = 1;
+  map<string, string> RequestQuery = 2;
+  RequestParams RequestParams = 3;
+}
+
+message ReferenceInput {
+  repeated SneakerReference References = 1;
+  RequestParams RequestParams = 2;
+}
+
+message ReferenceResponse {
+  repeated SneakerReference References = 1;
+  int64 Count = 2;
+}
+
+message RequestParams {
+  int32 Limit = 1;
+  int32 Offset = 2;
+  string SortBy = 3;
+  string SortDirection = 4;
+}

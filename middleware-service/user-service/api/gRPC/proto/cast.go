@@ -1,6 +1,8 @@
 package proto
 
 import (
+	"google.golang.org/protobuf/types/known/timestamppb"
+
 	"user-service/core/meta"
 	"user-service/core/model"
 )
@@ -40,11 +42,11 @@ func (m *User) FromNative(n *model.User) *User {
 	m.PhoneNumber = n.PhoneNumber
 	m.Avatar = n.Avatar
 	m.Location = n.Location
-	// m.PaymentInfo = n.PaymentInfo.ToNative()
+	m.PaymentInfo = PaymentInfo{}.FromNative(n.PaymentInfo)
 	m.Liked = n.Liked
 	m.Confirmed = n.Confirmed
 	// model.UserRole(m.Role) = model.UserRole(m.Role)
-	// m.RegisterDate.AsTime() = n.RegisterDate.AsTime()
+	m.RegisterDate = timestamppb.New(n.RegisterDate)
 	// model.UserProvider(m.Provider) = model.UserProvider(m.Provider)
 	return m
 }
@@ -76,6 +78,16 @@ func (m *AddressInfo) ToNative() model.AddressInfo {
 	}
 }
 
+func (m AddressInfo) FromNative(n model.AddressInfo) *AddressInfo {
+	m.Country      = n.Country
+	m.City         = n.City
+	m.Address      = n.Address
+	m.Address2     = n.Address2
+	m.Region       = n.Region
+	m.PostalCode   = n.PostalCode
+	return &m
+}
+
 func (m *PaymentInfo) ToNative() model.PaymentInfo {
 	return model.PaymentInfo{
 		CardNumber: m.CardNumber,
@@ -83,6 +95,14 @@ func (m *PaymentInfo) ToNative() model.PaymentInfo {
 		CVV: m.CVV,
 		BillingInfo: m.BillingInfo.ToNative(),
 	}
+}
+
+func (m PaymentInfo) FromNative(n model.PaymentInfo) *PaymentInfo {
+	m.CardNumber   = n.CardNumber
+	m.Expires      = n.Expires
+	m.CVV          = n.CVV
+	m.BillingInfo  = AddressInfo{}.FromNative(n.BillingInfo)
+	return &m
 }
 
 func (m *RequestParams) ToNative() *meta.RequestParams {
