@@ -121,3 +121,11 @@ func (m *RequestParams) ToNative() *meta.RequestParams {
 	n.SetSortDirection(m.SortDirection)
 	return n
 }
+
+func (m RequestParams) FromNative(n *meta.RequestParams) *RequestParams {
+	m.Limit = int32(n.Limit())
+	m.Offset = int32(n.Offset())
+	m.SortBy = n.SortBy()
+	m.SortDirection = n.SortDirection()
+	return &m
+}

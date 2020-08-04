@@ -155,7 +155,6 @@ services:
       - type: bind
         source: /source/storage
         target: /storage
-
     networks:
       - web
       - data

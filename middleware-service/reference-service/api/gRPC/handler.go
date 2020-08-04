@@ -36,10 +36,10 @@ func (h *Handler) GetReferences(filter *proto.ReferenceFilter, srv proto.Referen
 		query, _ := meta.NewRequestQuery(filter.RequestQuery)
 		references, err = h.service.FetchQuery(query, params)
 	} else if len(filter.ReferenceID) == 1 {
-		user, e := h.service.FetchOne(filter.ReferenceID[0], params); if e != nil {
+		ref, e := h.service.FetchOne(filter.ReferenceID[0], params); if e != nil {
 			err = e
 		}
-		references = []*model.SneakerReference {user}
+		references = []*model.SneakerReference {ref}
 	} else {
 		references, err = h.service.Fetch(filter.ReferenceID, params)
 	}

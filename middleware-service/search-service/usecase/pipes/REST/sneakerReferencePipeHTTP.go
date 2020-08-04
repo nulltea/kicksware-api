@@ -1,4 +1,4 @@
-package pipes
+package REST
 
 import (
 	"bytes"
@@ -53,7 +53,7 @@ func (p *referencePipe) FetchOne(code string) (ref *model.SneakerReference, err 
 	return
 }
 
-func (p *referencePipe) Fetch(codes []string, params meta.RequestParams) (refs []*model.SneakerReference, err error) {
+func (p *referencePipe) Fetch(codes []string, params *meta.RequestParams) (refs []*model.SneakerReference, err error) {
 	values := url.Values{}
 	for _, code := range codes {
 		values.Add("referenceId", code)
@@ -67,7 +67,7 @@ func (p *referencePipe) Fetch(codes []string, params meta.RequestParams) (refs [
 	return
 }
 
-func (p *referencePipe) FetchAll(params meta.RequestParams) (refs []*model.SneakerReference, err error) {
+func (p *referencePipe) FetchAll(params *meta.RequestParams) (refs []*model.SneakerReference, err error) {
 	if paramValues := requestParamValues(params); paramValues != nil && len(paramValues) != 0 {
 		err = p.getFromDataService(p.requestResource("?", paramValues.Encode()), &refs)
 		return
@@ -76,7 +76,7 @@ func (p *referencePipe) FetchAll(params meta.RequestParams) (refs []*model.Sneak
 	return
 }
 
-func (p *referencePipe) FetchQuery(query meta.RequestQuery, params meta.RequestParams) (refs[]*model.SneakerReference, err error) {
+func (p *referencePipe) FetchQuery(query meta.RequestQuery, params *meta.RequestParams) (refs[]*model.SneakerReference, err error) {
 	resource := p.requestResource("/query")
 	if paramValues := requestParamValues(params); paramValues != nil && len(paramValues) != 0 {
 		resource = p.requestResource("/query", "?", paramValues.Encode())
@@ -138,7 +138,7 @@ func (p *referencePipe) requestResource(res ...string) string {
 	return fmt.Sprintf(p.bindingServiceFormat, p.bindingServiceEndpoint, strings.Join(res, ""))
 }
 
-func requestParamValues(params meta.RequestParams) url.Values {
+func requestParamValues(params *meta.RequestParams) url.Values {
 	if params == nil {
 		return nil
 	}

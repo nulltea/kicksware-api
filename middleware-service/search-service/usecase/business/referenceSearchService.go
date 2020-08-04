@@ -58,7 +58,7 @@ func initElasticSearchClient(config env.ElasticConfig) (*elastic.Client, error) 
 	return client, nil
 }
 
-func (s *referenceSearchService) Search(query string, params meta.RequestParams) ([]*model.SneakerReference, error) {
+func (s *referenceSearchService) Search(query string, params *meta.RequestParams) ([]*model.SneakerReference, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
@@ -99,7 +99,7 @@ func (s *referenceSearchService) Search(query string, params meta.RequestParams)
 	return refs, nil
 }
 
-func (s *referenceSearchService) SearchBy(field, value string, params meta.RequestParams) ([]*model.SneakerReference, error) {
+func (s *referenceSearchService) SearchBy(field, value string, params *meta.RequestParams) ([]*model.SneakerReference, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
@@ -131,21 +131,21 @@ func (s *referenceSearchService) SearchBy(field, value string, params meta.Reque
 	return refs, nil
 }
 
-func (s *referenceSearchService) SearchSKU(sku string, params meta.RequestParams) (refs []*model.SneakerReference, err error) {
+func (s *referenceSearchService) SearchSKU(sku string, params *meta.RequestParams) (refs []*model.SneakerReference, err error) {
 	if refs, err = s.SearchBy("ManufactureSku", sku, params); err != nil {
 		return nil, errors.Wrap(err, "service.SearchSKU")
 	}
 	return
 }
 
-func (s *referenceSearchService) SearchBrand(brand string, params meta.RequestParams) (refs []*model.SneakerReference, err error) {
+func (s *referenceSearchService) SearchBrand(brand string, params *meta.RequestParams) (refs []*model.SneakerReference, err error) {
 	if refs, err = s.SearchBy("BrandName", brand, params); err != nil {
 		return nil, errors.Wrap(err, "service.SearchBrand")
 	}
 	return
 }
 
-func (s *referenceSearchService) SearchModel(model string, params meta.RequestParams) (refs []*model.SneakerReference, err error) {
+func (s *referenceSearchService) SearchModel(model string, params *meta.RequestParams) (refs []*model.SneakerReference, err error) {
 	if refs, err = s.SearchBy("ModelName", model, params); err != nil {
 		return nil, errors.Wrap(err, "service.SearchModel")
 	}

@@ -1,16 +1,53 @@
 package meta
 
-type RequestParams interface {
-	Limit() int
-	SetLimit(limit int)
+import "strings"
 
-	Offset() int
-	SetOffset(offset int)
+type RequestParams struct {
+	limit int
+	offset int
+	sortBy string
+	sortDirection string
+	userID string
+}
 
-	SortBy() string
-	SetSortBy(sortBy string)
+func (p *RequestParams) Limit() int {
+	return p.limit
+}
+func (p *RequestParams) SetLimit(limit int) {
+	p.limit = limit
+}
 
-	SortDirection() string
-	SortDirectionNum() int
-	SetSortDirection(direction string)
+func (p *RequestParams) Offset() int {
+	return p.offset
+}
+func (p *RequestParams) SetOffset(offset int) {
+	p.offset = offset
+}
+
+func (p *RequestParams) SortBy() string {
+	return strings.ToLower(p.sortBy)
+}
+func (p *RequestParams) SetSortBy(sortBy string) {
+	p.sortBy = sortBy
+}
+
+func (p *RequestParams) SortDirection() string {
+	return p.sortDirection
+}
+func (p *RequestParams) SortDirectionNum() int {
+	if p.sortDirection == "desc" {
+		return -1
+	}
+	return 1
+}
+func (p *RequestParams) SetSortDirection(direction string) {
+	p.sortDirection = direction
+}
+
+func (p *RequestParams) UserID() string {
+	return p.userID
+}
+
+func (p *RequestParams) SetUserID(userID string) {
+	p.userID = userID
 }

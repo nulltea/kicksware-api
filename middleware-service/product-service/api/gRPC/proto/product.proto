@@ -4,6 +4,8 @@ package proto;
 
 import "google/protobuf/timestamp.proto";
 
+option go_package = "proto";
+
 message SneakerProduct {
   string uniqueId = 1;
   string brandName = 2;

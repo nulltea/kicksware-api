@@ -17,30 +17,15 @@ import (
 	"search-service/usecase/serializer/msg"
 )
 
-type RestfulHandler interface {
-	// Endpoint handlers:
-	Get(http.ResponseWriter, *http.Request)
-	GetBy(http.ResponseWriter, *http.Request)
-	GetSKU(http.ResponseWriter, *http.Request)
-	GetBrand(http.ResponseWriter, *http.Request)
-	GetModel(http.ResponseWriter, *http.Request)
-	PostOne(http.ResponseWriter, *http.Request)
-	Post(http.ResponseWriter, *http.Request)
-	PostAll(http.ResponseWriter, *http.Request)
-	PostQuery(http.ResponseWriter, *http.Request)
-	// Middleware:
-	Authenticator(next http.Handler) http.Handler
-}
-
-type handler struct {
+type Handler struct {
 	search      service.ReferenceSearchService
 	sync        service.ReferenceSyncService
 	auth        service.AuthService
 	contentType string
 }
 
-func NewHandler(search service.ReferenceSearchService, sync service.ReferenceSyncService, auth service.AuthService, config env.CommonConfig) RestfulHandler {
-	return &handler{
+func NewHandler(search service.ReferenceSearchService, sync service.ReferenceSyncService, auth service.AuthService, config env.CommonConfig) *Handler {
+	return &Handler{
 		search,
 		sync,
 		auth,
@@ -48,7 +33,7 @@ func NewHandler(search service.ReferenceSearchService, sync service.ReferenceSyn
 	}
 }
 
-func (h *handler) Get(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Get(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()["query"][0]
 	params := NewRequestParams(r)
 
@@ -64,7 +49,7 @@ func (h *handler) Get(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, ref, http.StatusOK)
 }
 
-func (h *handler) GetBy(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) GetBy(w http.ResponseWriter, r *http.Request) {
 	field := chi.URLParam(r,"field")
 	query := r.URL.Query()["query"][0]
 	params := NewRequestParams(r)
@@ -81,7 +66,7 @@ func (h *handler) GetBy(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, refs, http.StatusOK)
 }
 
-func (h *handler) GetSKU(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) GetSKU(w http.ResponseWriter, r *http.Request) {
 	sku := chi.URLParam(r, "sku")
 	params := NewRequestParams(r)
 
@@ -97,7 +82,7 @@ func (h *handler) GetSKU(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, refs, http.StatusOK)
 }
 
-func (h *handler) GetBrand(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) GetBrand(w http.ResponseWriter, r *http.Request) {
 	brand := chi.URLParam(r, "brand")
 	params := NewRequestParams(r)
 
@@ -113,7 +98,7 @@ func (h *handler) GetBrand(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, refs, http.StatusOK)
 }
 
-func (h *handler) GetModel(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) GetModel(w http.ResponseWriter, r *http.Request) {
 	model := chi.URLParam(r, "model")
 	params := NewRequestParams(r)
 
@@ -129,7 +114,7 @@ func (h *handler) GetModel(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, refs, http.StatusOK)
 }
 
-func (h *handler) PostOne(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) PostOne(w http.ResponseWriter, r *http.Request) {
 	code := chi.URLParam(r, "referenceId")
 	if err := h.sync.SyncOne(code);  err != nil {
 		if errors.Cause(err) == business.ErrReferenceNotFound {
@@ -142,7 +127,7 @@ func (h *handler) PostOne(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, nil, http.StatusOK)
 }
 
-func (h *handler) Post(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	codes := r.URL.Query()["referenceId"]
 	params := NewRequestParams(r)
 	if err := h.sync.Sync(codes, params);  err != nil {
@@ -156,7 +141,7 @@ func (h *handler) Post(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, nil, http.StatusOK)
 }
 
-func (h *handler) PostAll(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) PostAll(w http.ResponseWriter, r *http.Request) {
 	params := NewRequestParams(r)
 	if err := h.sync.SyncAll(params);  err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -165,7 +150,7 @@ func (h *handler) PostAll(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, nil, http.StatusOK)
 }
 
-func (h *handler) PostQuery(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) PostQuery(w http.ResponseWriter, r *http.Request) {
 	query, err := h.getRequestQuery(r); if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -182,7 +167,7 @@ func (h *handler) PostQuery(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, nil, http.StatusOK)
 }
 
-func (h *handler) setupResponse(w http.ResponseWriter, body interface{}, statusCode int) {
+func (h *Handler) setupResponse(w http.ResponseWriter, body interface{}, statusCode int) {
 	w.Header().Set("Content-Type", h.contentType)
 	w.WriteHeader(statusCode)
 	if body != nil {
@@ -197,7 +182,7 @@ func (h *handler) setupResponse(w http.ResponseWriter, body interface{}, statusC
 	}
 }
 
-func (h *handler) getRequestBody(r *http.Request) (*model.SneakerReference, error) {
+func (h *Handler) getRequestBody(r *http.Request) (*model.SneakerReference, error) {
 	contentType := r.Header.Get("Content-Type")
 	requestBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -210,7 +195,7 @@ func (h *handler) getRequestBody(r *http.Request) (*model.SneakerReference, erro
 	return body, nil
 }
 
-func (h *handler) getRequestQuery(r *http.Request) (meta.RequestQuery, error) {
+func (h *Handler) getRequestQuery(r *http.Request) (meta.RequestQuery, error) {
 	contentType := r.Header.Get("Content-Type")
 	requestBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -223,7 +208,7 @@ func (h *handler) getRequestQuery(r *http.Request) (meta.RequestQuery, error) {
 	return body, nil
 }
 
-func (h *handler) serializer(contentType string) service.SneakerSearchSerializer {
+func (h *Handler) serializer(contentType string) service.SneakerSearchSerializer {
 	if contentType == "application/x-msgpack" {
 		return msg.NewSerializer()
 	}

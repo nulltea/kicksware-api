@@ -4,32 +4,6 @@ package proto;
 
 import "google/protobuf/timestamp.proto";
 
-message BaseModel {
-  string uniqueId = 1;
-  string name = 2;
-  string brand = 3;
-  string baseModel = 4;
-  string hero = 5;
-  string description = 6;
-}
-
-message Brand {
-  string uniqueId = 1;
-  string name = 2;
-  string logo = 3;
-  string hero = 4;
-  string description = 5;
-}
-
-message Model {
-  string uniqueId = 1;
-  string name = 2;
-  string brand = 3;
-  string baseModel = 4;
-  string hero = 5;
-  string description = 6;
-}
-
 message SneakerBrand {
   string uniqueId = 1;
   string name = 2;

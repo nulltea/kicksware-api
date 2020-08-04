@@ -9,8 +9,8 @@ import (
 
 func ConfigureContainer(container container.ServiceContainer, config env.ServiceConfig) {
 	container.BindInstance(config).
-		BindSingleton(factory.ProvideReferencePipe).
-		BindSingleton(factory.ProvideProductPipe).
+		BindSingleton(factory.ProvideReferenceGRPCPipe).
+		// BindSingleton(factory.ProvideProductGRPCPipe).
 
 		BindSingleton(factory.ProvideReferenceSearchService).
 		BindSingleton(factory.ProvideProductSearchService).
@@ -20,8 +20,9 @@ func ConfigureContainer(container container.ServiceContainer, config env.Service
 
 		BindSingleton(factory.ProvideAuthService).
 
-		BindSingleton(factory.ProvideGatewayHandler).
+		BindSingleton(factory.ProvideRESTGatewayHandler).
 		BindTransient(factory.ProvideEndpointRouter).
+		BindSingleton(factory.ProvideGRPCGatewayHandler).
 
 		BindTransient(factory.ProvideServer)
 }

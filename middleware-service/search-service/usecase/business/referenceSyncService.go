@@ -57,28 +57,28 @@ func (s *referenceSyncService) SyncOne(code string) (err error) {
 	return nil
 }
 
-func (s *referenceSyncService) Sync(codes []string, params meta.RequestParams) (err error) {
+func (s *referenceSyncService) Sync(codes []string, params *meta.RequestParams) (err error) {
 	if err = s.sync(codes, params); err != nil {
 		return
 	}
 	return
 }
 
-func (s *referenceSyncService) SyncAll(params meta.RequestParams) (err error) {
+func (s *referenceSyncService) SyncAll(params *meta.RequestParams) (err error) {
 	if err = s.sync(nil, params); err != nil {
 		return
 	}
 	return
 }
 
-func (s *referenceSyncService) SyncQuery(query meta.RequestQuery, params meta.RequestParams) (err error) {
+func (s *referenceSyncService) SyncQuery(query meta.RequestQuery, params *meta.RequestParams) (err error) {
 	if err = s.sync(query, params); err != nil {
 		return
 	}
 	return
 }
 
-func (s *referenceSyncService) sync(query interface{}, params meta.RequestParams) (err error) {
+func (s *referenceSyncService) sync(query interface{}, params *meta.RequestParams) (err error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
