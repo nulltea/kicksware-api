@@ -23,7 +23,7 @@ require (
 	github.com/soheilhy/cmux v0.1.4 // indirect
 	github.com/src-d/proteus v1.3.3 // indirect
 	github.com/thoas/go-funk v0.6.0
-	github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200730223230-3661008a1e25
+	github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200804183827-6559af4f2e0d
 	github.com/vektah/gqlparser/v2 v2.0.1
 	github.com/vmihailenco/msgpack v3.3.3+incompatible
 	go.mongodb.org/mongo-driver v1.3.3
