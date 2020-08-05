@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package proto;
+
+message Beta {
+  string uniqueID = 1;
+  string feature = 2;
+  bool done = 3;
+}
+
+service BetaService {
+  rpc GetBetas(BetaFilter) returns (BetaResponse) {}
+  rpc CountBetas(BetaFilter) returns (BetaResponse) {}
+  rpc AddBetas(BetaInput) returns (BetaResponse) {}
+  rpc EditBetas(BetaInput) returns (BetaResponse) {}
+}
+
+message BetaFilter {
+  repeated string BetaID = 1;
+  map<string, string> RequestQuery = 2;
+  RequestParams RequestParams = 3;
+}
+
+message BetaInput {
+  repeated Beta Betas = 1;
+  RequestParams RequestParams = 2;
+}
+
+message BetaResponse {
+  repeated Beta Betas = 1;
+  int64 Count = 2;
+}
+
+message RequestParams {
+  int32 Limit = 1;
+  int32 Offset = 2;
+  string SortBy = 3;
+  string SortDirection = 4;
+}

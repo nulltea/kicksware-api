@@ -1,0 +1,206 @@
+version: '3.7'
+services:
+  products-service:
+    build:
+      context: ./product-service
+      dockerfile: ./docker/Dockerfile
+      target: dev
+    image: products-service
+    container_name: products
+    env_file: ./product-service/env/.env.prod
+    restart: always
+    labels:
+      - traefik.http.routers.product-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/products`)
+      - traefik.http.routers.product-service.tls=true
+      - traefik.http.routers.product-service.tls.certresolver=le
+      - traefik.http.routers.product-service-grpc.rule=Host(`localhost`) && PathPrefix(`/proto.ProductService`)
+      - traefik.http.routers.product-service-grpc.entrypoints=grpc
+      - traefik.http.services.product-service-grpc.loadbalancer.server.scheme=h2c
+      - traefik.docker.network=web
+    networks:
+      - web
+      - data
+    volumes:
+      - ./product-service/env:/dist/env
+      - key-volume:/key
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+
+  users-service:
+    build:
+      context: ./user-service
+      dockerfile: ./docker/Dockerfile
+      target: dev
+    image: users-service
+    container_name: users
+    env_file: ./user-service/env/.env.prod
+    restart: always
+    labels:
+      - traefik.http.routers.user-service.rule=Host(`localhost`) && PathPrefix(`/users`) || PathPrefix(`/auth`) ||
+        PathPrefix(`/mail`) || PathPrefix(`/interact`)
+      - traefik.http.routers.user-service.tls=true
+      - traefik.http.routers.user-service.tls.certresolver=le
+      - traefik.http.routers.user-service-grpc.rule=Host(`localhost`) && PathPrefix(`/proto.UserService`)
+      - traefik.http.routers.user-service-grpc.entrypoints=grpc
+      - traefik.http.services.user-service-grpc.loadbalancer.server.scheme=h2c
+      - traefik.docker.network=web
+    networks:
+      - web
+      - data
+    volumes:
+      - ./user-service/env:/dist/env
+      - ./user-service/template:/dist/template
+      - key-volume:/dist/key
+      - key-volume:/key
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+
+  references-service:
+    build:
+      context: ./reference-service
+      dockerfile: ./docker/Dockerfile
+      target: dev
+    image: references-service
+    container_name: references
+    env_file: ./reference-service/env/.env.prod
+    restart: always
+    labels:
+      - traefik.http.routers.reference-service-rest.rule=Host(`localhost`) && PathPrefix(`/references`)
+      - traefik.http.routers.reference-service-rest.entrypoints=web
+      - traefik.http.routers.reference-service-rest.tls=true
+      - traefik.http.routers.reference-service-rest.tls.certresolver=le
+      - traefik.http.routers.reference-service-grpc.rule=Host(`localhost`) && PathPrefix(`/proto.ReferenceService`)
+      - traefik.http.routers.reference-service-grpc.entrypoints=grpc
+      - traefik.http.services.reference-service-grpc.loadbalancer.server.scheme=h2c
+      - traefik.docker.network=web
+    # command: /bin/sh -c "dlv debug --headless --listen=:4000 --api-version=2 --accept-multiclient ."
+    volumes:
+      - ./reference-service/env:/dist/env
+      - key-volume:/key
+    networks:
+      - web
+      - data
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+
+  search-service:
+    build:
+      context: ./search-service
+      dockerfile: ./docker/Dockerfile
+      target: dev
+    image: search-service
+    container_name: search
+    env_file: ./search-service/env/.env.prod
+    restart: always
+    labels:
+      - traefik.http.routers.search-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/search`)
+      - traefik.http.routers.search-service.tls=true
+      - traefik.http.routers.search-service.tls.certresolver=le
+      - traefik.http.routers.search-service-grpc.rule=Host(`localhost`) && PathPrefix(`/proto.SearchService`)
+      - traefik.http.routers.search-service-grpc.entrypoints=grpc
+      - traefik.http.services.search-service-grpc.loadbalancer.server.scheme=h2c
+      - traefik.docker.network=web
+    networks:
+      - web
+      - elastic
+      - data
+    volumes:
+      - ./search-service/env:/dist/env
+      - key-volume:/key
+    links:
+      - references-service
+      - products-service
+      - elasticsearch
+      - kibana
+    depends_on:
+      - references-service
+      - products-service
+      - elasticsearch
+      - kibana
+
+  mongodb:
+    image: mongo:3.6.17
+    container_name: mongo
+    restart: always
+    environment:
+      - MONGO_INITDB_DATABASE=sneakerResaleDB
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=greenJordans
+    ports:
+      - 27017:27017
+      - 27018:27017
+    networks:
+      - web
+      - data
+    volumes:
+      - type: bind
+        source: ./source/backup/mongo
+        target: /backup
+
+    # logging:
+    #  driver: none
+
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.1
+    restart: always
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    environment:
+      - xpack.monitoring.enabled=true
+      - xpack.watcher.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - discovery.type=single-node
+    labels:
+      - traefik.http.routers.elasticsearch.rule=Host(`ops.kicksware.com`) && PathPrefix(`/elastic`)
+      - traefik.http.routers.elasticsearch.tls=true
+      - traefik.http.routers.elasticsearch.tls.certresolver=le
+      - traefik.docker.network=web
+    networks:
+      - web
+      - elastic
+  # logging:
+  #   driver: none
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.6.1
+    container_name: kibana
+    depends_on:
+      - elasticsearch
+    environment:
+      - ELASTICSEARCH_URL=https://ops.kicksware.com/elastic
+    labels:
+      - traefik.http.routers.kibana.rule=Host(`ops.kicksware.com`) && PathPrefix(`/app/kibana`)
+      - traefik.http.routers.kibana.tls=true
+      - traefik.http.routers.kibana.tls.certresolver=le
+      - traefik.docker.network=web
+    ports:
+      - 5601:5601
+    networks:
+      - web
+      - elastic
+    logging:
+      driver: none
+
+networks:
+  elastic:
+    driver: bridge
+  data:
+    driver: bridge
+  web:
+    external: true
+
+volumes:
+  key-volume:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /host_mnt/c/source/keys
+  elasticsearch-data:
