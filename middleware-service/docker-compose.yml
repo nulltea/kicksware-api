@@ -14,7 +14,6 @@ services:
       - traefik.http.routers.product-service.tls=true
       - traefik.http.routers.product-service.tls.certresolver=le
       - traefik.http.routers.product-service-grpc.rule=Host(`api.kicksware.com`) && PathPrefix(`/proto.ProductService`)
-      - traefik.http.routers.product-service-grpc.entrypoints=grpc
       - traefik.http.services.product-service-grpc.loadbalancer.server.scheme=h2c
       - traefik.docker.network=web
     networks:
@@ -43,7 +42,6 @@ services:
       - traefik.http.routers.user-service.tls=true
       - traefik.http.routers.user-service.tls.certresolver=le
       - traefik.http.routers.user-service-grpc.rule=Host(`api.kicksware.com`) && PathPrefix(`/proto.UserService`)
-      - traefik.http.routers.user-service-grpc.entrypoints=grpc
       - traefik.http.services.user-service-grpc.loadbalancer.server.scheme=h2c
       - traefik.docker.network=web
     networks:
@@ -70,11 +68,9 @@ services:
     restart: always
     labels:
       - traefik.http.routers.reference-service-rest.rule=Host(`api.kicksware.com`) && PathPrefix(`/references`)
-      - traefik.http.routers.reference-service-rest.entrypoints=web
       - traefik.http.routers.reference-service-rest.tls=true
       - traefik.http.routers.reference-service-rest.tls.certresolver=le
       - traefik.http.routers.reference-service-grpc.rule=Host(`api.kicksware.com`) && PathPrefix(`/proto.ReferenceService`)
-      - traefik.http.routers.reference-service-grpc.entrypoints=grpc
       - traefik.http.services.reference-service-grpc.loadbalancer.server.scheme=h2c
       - traefik.docker.network=web
     # command: /bin/sh -c "dlv debug --headless --listen=:4000 --api-version=2 --accept-multiclient ."
@@ -128,7 +124,6 @@ services:
       - traefik.http.routers.search-service.tls=true
       - traefik.http.routers.search-service.tls.certresolver=le
       - traefik.http.routers.search-service-grpc.rule=Host(`api.kicksware.com`) && PathPrefix(`/proto.SearchService`)
-      - traefik.http.routers.search-service-grpc.entrypoints=grpc
       - traefik.http.services.search-service-grpc.loadbalancer.server.scheme=h2c
       - traefik.docker.network=web
     networks:
