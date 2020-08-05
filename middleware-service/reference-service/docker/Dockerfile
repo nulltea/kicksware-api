@@ -17,10 +17,11 @@ COPY go.sum .
 RUN go mod download
 # Build the service
 RUN go build -o main .
+RUN go get github.com/go-delve/delve/cmd/dlv
 # Move to /dist directory - place for resulting binaries
 WORKDIR /dist
 # Copy binary from build to main folder
-RUN cp /build/main .
+RUN cp -a /build/. .
 # Export necessary port
 EXPOSE 8080
 # Command to run service container when the container starts
@@ -31,6 +32,8 @@ CMD ["/dist/main"]
 FROM alpine:3.9.2 as prod
 # Setup working directory /root/
 WORKDIR /root/
+# Add code
+ADD . /dist
 # Copy service resulting binaries
 COPY --from=dev /dist .
 # Service listens on port 8080.

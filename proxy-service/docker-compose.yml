@@ -14,14 +14,14 @@ services:
       - --providers.file.filename=/proxy-config.toml
       - --providers.file.watch=true
       - --entryPoints.web.address=:80
+      - --entryPoints.grpc.address=:88
       - --entryPoints.websecure.address=:443
+      # - --entryPoints.debug.address=:4000
       - --certificatesResolvers.le.acme.email=timothy@kicksware.com
       - --certificatesResolvers.le.acme.storage=/cert/acme.json
       - --certificatesResolvers.le.acme.dnsChallenge=true
       - --certificatesResolvers.le.acme.dnsChallenge.provider=digitalocean
       - --accesslog=true
-      # - --tracing.instana=true
-      # - --metrics.datadog=true
     labels:
       - traefik.http.routers.traefik.entrypoints=web
       - traefik.http.routers.traefik.rule=Host(`monitor.kicksware.com`)
@@ -44,6 +44,7 @@ services:
       - DO_AUTH_TOKEN=6229b9e18dd51158da31da743bcf36262a11e8075a8ea2847d555cb9a3e47bf4
     ports:
       - 80:80
+      - 88:88
       - 443:443
     networks:
       - web
@@ -53,7 +54,7 @@ services:
       - type: bind
         source: /${SOURCE_DIR}/proxy-service/proxy-config.toml
         target: /proxy-config.toml
- 
+
 
 networks:
   web:

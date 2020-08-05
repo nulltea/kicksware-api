@@ -7,7 +7,7 @@ commonConfig:
 authConfig:
   publicKeyPath: ../key/public.key.pub
 mongoConfig:
-  URL: mongodb://localhost:27017
+  URL: mongodb://root:greenJordans@localhost:27017
   database: sneakerResaleDB
   collection: references
   timeout: 30
