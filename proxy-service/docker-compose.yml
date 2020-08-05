@@ -14,7 +14,7 @@ services:
       - --providers.file.filename=/proxy-config.toml
       - --providers.file.watch=true
       - --entryPoints.web.address=:80
-      - --entryPoints.grpc.address=:88
+      - --entryPoints.grpc.address=:442
       - --entryPoints.websecure.address=:443
       # - --entryPoints.debug.address=:4000
       - --certificatesResolvers.le.acme.email=timothy@kicksware.com
@@ -44,7 +44,7 @@ services:
       - DO_AUTH_TOKEN=6229b9e18dd51158da31da743bcf36262a11e8075a8ea2847d555cb9a3e47bf4
     ports:
       - 80:80
-      - 88:88
+      - 442:442
       - 443:443
     networks:
       - web
