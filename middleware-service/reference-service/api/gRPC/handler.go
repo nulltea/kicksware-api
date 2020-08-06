@@ -8,6 +8,7 @@ import (
 	"reference-service/core/model"
 	"reference-service/core/service"
 	"reference-service/env"
+	"reference-service/usecase/business"
 )
 
 //go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. common.proto
@@ -45,6 +46,12 @@ func (h *Handler) GetReferences(ctx context.Context, filter *proto.ReferenceFilt
 		references = []*model.SneakerReference {ref}
 	} else {
 		references, err = h.service.Fetch(filter.ReferenceID, params)
+	}
+
+	if err == business.ErrReferenceNotFound {
+		return &proto.ReferenceResponse{
+			Count: 0,
+		}, nil
 	}
 
 	resp = &proto.ReferenceResponse{

@@ -54,7 +54,7 @@ message ProductInput {
 
 message ProductResponse {
   repeated SneakerProduct products = 1;
-  int64 vount = 2;
+  int64 count = 2;
 }
 
 

@@ -14,6 +14,7 @@ import (
 	"user-service/core/model"
 	"user-service/core/service"
 	"user-service/env"
+	"user-service/usecase/business"
 )
 
 type Handler struct {
@@ -55,6 +56,12 @@ func (h* Handler) GetUsers(ctx context.Context, filter *proto.UserFilter) (r *pr
 		users, err = h.service.Fetch(filter.UserID, params)
 	}
 
+	if err == business.ErrUserNotFound {
+		return &proto.UserResponse{
+			Count: 0,
+		}, nil
+	}
+
 	r = &proto.UserResponse{
 		Users: proto.NativeToUsers(users),
 		Count: int64(len(users)),
@@ -64,12 +71,15 @@ func (h* Handler) GetUsers(ctx context.Context, filter *proto.UserFilter) (r *pr
 
 func (h* Handler) CountUsers(ctx context.Context, filter *proto.UserFilter) (r *proto.UserResponse, err error) {
 	var count int = 0
+	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
+		params = filter.RequestParams.ToNative()
+	}
 
 	if filter == nil {
 		count, err = h.service.CountAll()
 	} else if filter.RequestQuery != nil {
 		query, _ := meta.NewRequestQuery(filter.RequestQuery)
-		count, err = h.service.Count(query, filter.RequestParams.ToNative())
+		count, err = h.service.Count(query, params)
 	}
 
 	r = &proto.UserResponse{
