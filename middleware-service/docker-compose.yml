@@ -79,7 +79,7 @@ services:
       - traefik.http.routers.reference-router-rest.tls.certresolver=le
       - traefik.http.services.reference-service-rest.loadbalancer.server.scheme=http
       - traefik.http.routers.reference-router-grpc.rule=Host(`api.kicksware.com`) && PathPrefix(`/proto.ReferenceService`)
-      - traefik.http.routers.reference-router-grpc.service=user-service-grpc
+      - traefik.http.routers.reference-router-grpc.service=reference-service-grpc
       - traefik.http.services.reference-service-grpc.loadbalancer.server.scheme=h2c
       - traefik.docker.network=web
     # command: /bin/sh -c "dlv debug --headless --listen=:4000 --api-version=2 --accept-multiclient ."

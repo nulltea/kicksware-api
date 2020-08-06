@@ -3,6 +3,7 @@ syntax = "proto3";
 package proto;
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
 
 option go_package = "proto";
 
@@ -39,7 +40,7 @@ service ProductService {
 
 message ProductFilter {
   repeated string ProductID = 1;
-  map<string, string> RequestQuery = 2;
+  google.protobuf.Struct RequestQuery = 2;
   RequestParams RequestParams = 3;
 }
 

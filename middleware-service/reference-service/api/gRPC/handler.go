@@ -1,6 +1,8 @@
 package gRPC
 
 import (
+	"context"
+
 	"reference-service/api/gRPC/proto"
 	"reference-service/core/meta"
 	"reference-service/core/model"
@@ -24,7 +26,7 @@ func NewHandler(service service.SneakerReferenceService, auth service.AuthServic
 	}
 }
 
-func (h *Handler) GetReferences(filter *proto.ReferenceFilter, srv proto.ReferenceService_GetReferencesServer) (err error) {
+func (h *Handler) GetReferences(ctx context.Context, filter *proto.ReferenceFilter) (resp *proto.ReferenceResponse, err error) {
 	var references []*model.SneakerReference
 	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
 		params = filter.RequestParams.ToNative()
@@ -44,14 +46,14 @@ func (h *Handler) GetReferences(filter *proto.ReferenceFilter, srv proto.Referen
 		references, err = h.service.Fetch(filter.ReferenceID, params)
 	}
 
-	srv.Send(&proto.ReferenceResponse{
+	resp = &proto.ReferenceResponse{
 		References: proto.NativeToReferences(references),
 	 	Count: int64(len(references)),
-	})
+	}
 	return
 }
 
-func (h *Handler) CountReferences(filter *proto.ReferenceFilter, srv proto.ReferenceService_CountReferencesServer) (err error) {
+func (h *Handler) CountReferences(ctx context.Context, filter *proto.ReferenceFilter) (resp *proto.ReferenceResponse, err error) {
 	var count int = 0
 
 	if filter == nil {
@@ -61,14 +63,14 @@ func (h *Handler) CountReferences(filter *proto.ReferenceFilter, srv proto.Refer
 		count, err = h.service.Count(query, filter.RequestParams.ToNative())
 	}
 
-	go srv.Send(&proto.ReferenceResponse{
+	resp = &proto.ReferenceResponse{
 		References: nil,
 		Count: int64(count),
-	})
+	}
 	return
 }
 
-func (h *Handler) AddReferences(input *proto.ReferenceInput, srv proto.ReferenceService_AddReferencesServer) (err error) {
+func (h *Handler) AddReferences(ctx context.Context, input *proto.ReferenceInput) (resp *proto.ReferenceResponse, err error) {
 	var succeeded int64
 	var references []*model.SneakerReference
 
@@ -80,14 +82,14 @@ func (h *Handler) AddReferences(input *proto.ReferenceInput, srv proto.Reference
 		}
 	}
 
-	go srv.Send(&proto.ReferenceResponse{
+	resp = &proto.ReferenceResponse{
 		References: proto.NativeToReferences(references),
 		Count: succeeded,
-	})
+	}
 	return
 }
 
-func (h *Handler) EditReferences(input *proto.ReferenceInput, srv proto.ReferenceService_EditReferencesServer) (err error) {
+func (h *Handler) EditReferences(ctx context.Context, input *proto.ReferenceInput) (resp *proto.ReferenceResponse, err error) {
 	var succeeded int64
 
 	for _, user := range input.References {
@@ -96,6 +98,6 @@ func (h *Handler) EditReferences(input *proto.ReferenceInput, srv proto.Referenc
 		}
 	}
 
-	go srv.Send(&proto.ReferenceResponse{Count: succeeded})
+	resp = &proto.ReferenceResponse{Count: succeeded}
 	return
 }

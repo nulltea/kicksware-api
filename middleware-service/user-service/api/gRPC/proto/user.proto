@@ -3,6 +3,9 @@ syntax = "proto3";
 package proto;
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+
+option go_package = "proto";
 
 message User {
   string uniqueID = 1;
@@ -55,7 +58,7 @@ service UserService {
 
 message UserFilter {
   repeated string UserID = 1;
-  map<string, string> RequestQuery = 2;
+  google.protobuf.Struct RequestQuery = 2;
   RequestParams RequestParams = 3;
 }
 

@@ -5,6 +5,9 @@ package proto;
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/struct.proto";
 
+option go_package = "proto";
+option csharp_namespace = "proto";
+
 message SneakerProduct {
   string uniqueId = 1;
   string brandName = 2;

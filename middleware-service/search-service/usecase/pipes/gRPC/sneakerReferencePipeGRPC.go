@@ -24,7 +24,7 @@ type referencePipe struct {
 
 func NewSneakerReferencePipe(auth service.AuthService, config env.CommonConfig) pipe.SneakerReferencePipe {
 	return &referencePipe{
-		newRemoteClient(""),
+		newRemoteClient(config.InnerServiceFormat),
 		auth,
 	}
 }

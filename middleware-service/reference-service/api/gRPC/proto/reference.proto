@@ -3,6 +3,7 @@ syntax = "proto3";
 package proto;
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
 
 message SneakerBrand {
   string uniqueId = 1;
@@ -46,15 +47,15 @@ message SneakerReference {
 }
 
 service ReferenceService {
-  rpc GetReferences(ReferenceFilter) returns (stream ReferenceResponse) {}
-  rpc CountReferences(ReferenceFilter) returns (stream ReferenceResponse) {}
-  rpc AddReferences(ReferenceInput) returns (stream ReferenceResponse) {}
-  rpc EditReferences(ReferenceInput) returns (stream ReferenceResponse) {}
+  rpc GetReferences(ReferenceFilter) returns (ReferenceResponse) {}
+  rpc CountReferences(ReferenceFilter) returns (ReferenceResponse) {}
+  rpc AddReferences(ReferenceInput) returns (ReferenceResponse) {}
+  rpc EditReferences(ReferenceInput) returns (ReferenceResponse) {}
 }
 
 message ReferenceFilter {
   repeated string ReferenceID = 1;
-  map<string, string> RequestQuery = 2;
+  google.protobuf.Struct RequestQuery = 2;
   RequestParams RequestParams = 3;
 }
 
