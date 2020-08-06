@@ -3,6 +3,8 @@ package gRPC
 import (
 	"context"
 
+	"github.com/pkg/errors"
+
 	"reference-service/api/gRPC/proto"
 	"reference-service/core/meta"
 	"reference-service/core/model"
@@ -48,7 +50,7 @@ func (h *Handler) GetReferences(ctx context.Context, filter *proto.ReferenceFilt
 		references, err = h.service.Fetch(filter.ReferenceID, params)
 	}
 
-	if err == business.ErrReferenceNotFound {
+	if errors.Cause(err) == business.ErrReferenceNotFound {
 		return &proto.ReferenceResponse{
 			Count: 0,
 		}, nil

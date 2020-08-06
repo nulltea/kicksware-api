@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/golang/glog"
+	"github.com/pkg/errors"
 
 	"product-service/api/gRPC/proto"
 	"product-service/core/meta"
@@ -50,7 +51,7 @@ func (h *Handler) GetProducts(ctx context.Context, filter *proto.ProductFilter) 
 		products, err = h.service.Fetch(filter.ProductID, params)
 	}
 
-	if err == business.ErrProductNotFound {
+	if errors.Cause(err) == business.ErrProductNotFound {
 		return &proto.ProductResponse{
 			Count: 0,
 		}, nil

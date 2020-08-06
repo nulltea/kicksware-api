@@ -9,6 +9,8 @@ package gRPC
 import (
 	"context"
 
+	"github.com/pkg/errors"
+
 	"user-service/api/gRPC/proto"
 	"user-service/core/meta"
 	"user-service/core/model"
@@ -56,7 +58,7 @@ func (h* Handler) GetUsers(ctx context.Context, filter *proto.UserFilter) (r *pr
 		users, err = h.service.Fetch(filter.UserID, params)
 	}
 
-	if err == business.ErrUserNotFound {
+	if errors.Cause(err) == business.ErrUserNotFound {
 		return &proto.UserResponse{
 			Count: 0,
 		}, nil
