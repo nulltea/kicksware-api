@@ -91,7 +91,10 @@ func (m AddressInfo) FromNative(n model.AddressInfo) *AddressInfo {
 func (m *PaymentInfo) ToNative() model.PaymentInfo {
 	return model.PaymentInfo{
 		CardNumber: m.CardNumber,
-		Expires: m.Expires,
+		Expires: model.YearMonth{
+			Year: m.Expires.Year,
+			Month: m.Expires.Month,
+		},
 		CVV: m.CVV,
 		BillingInfo: m.BillingInfo.ToNative(),
 	}
@@ -99,7 +102,10 @@ func (m *PaymentInfo) ToNative() model.PaymentInfo {
 
 func (m PaymentInfo) FromNative(n model.PaymentInfo) *PaymentInfo {
 	m.CardNumber   = n.CardNumber
-	m.Expires      = n.Expires
+	m.Expires      = &YearMonth{
+		Year: n.Expires.Year,
+		Month: n.Expires.Month,
+	}
 	m.CVV          = n.CVV
 	m.BillingInfo  = AddressInfo{}.FromNative(n.BillingInfo)
 	return &m

@@ -1,6 +1,7 @@
 package gRPC
 
-//go:generate protoc --go_out=plugins=grpc:. proto/user.proto
+//go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. common.proto
+//go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. user.proto
 
 import (
 	"context"
@@ -105,3 +106,6 @@ func (h* Handler) EditUsers(ctx context.Context, input *proto.UserInput) (*proto
 	return &proto.UserResponse{Count: succeeded}, nil
 }
 
+func (h Handler) DeleteUsers(ctx context.Context, filter *proto.UserFilter) (*proto.UserResponse, error) {
+	panic("implement me")
+}

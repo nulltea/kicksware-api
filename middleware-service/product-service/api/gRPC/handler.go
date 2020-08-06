@@ -1,6 +1,10 @@
 package gRPC
 
 import (
+	"context"
+
+	"github.com/golang/glog"
+
 	"product-service/api/gRPC/proto"
 	"product-service/core/meta"
 	"product-service/core/model"
@@ -8,7 +12,8 @@ import (
 	"product-service/env"
 )
 
-//go:generate protoc --go_out=plugins=grpc:. proto/product.proto
+//go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. common.proto
+//go:generate protoc --proto_path=../../../service-protos --go_out=plugins=grpc:proto/. product.proto
 
 type Handler struct {
 	service     service.SneakerProductService
@@ -24,7 +29,7 @@ func NewHandler(service service.SneakerProductService, auth service.AuthService,
 	}
 }
 
-func (h *Handler) GetProducts(filter *proto.ProductFilter, srv proto.ProductService_GetProductsServer) (err error) {
+func (h *Handler) GetProducts(ctx context.Context, filter *proto.ProductFilter) (resp *proto.ProductResponse, err error) {
 	var products []*model.SneakerProduct
 	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
 		params = filter.RequestParams.ToNative()
@@ -44,14 +49,14 @@ func (h *Handler) GetProducts(filter *proto.ProductFilter, srv proto.ProductServ
 		products, err = h.service.Fetch(filter.ProductID, params)
 	}
 
-	srv.Send(&proto.ProductResponse{
+	resp = &proto.ProductResponse{
 		Products: proto.NativeToProducts(products),
 		Count: int64(len(products)),
-	})
+	}
 	return
 }
 
-func (h *Handler) CountProducts(filter *proto.ProductFilter, srv proto.ProductService_CountProductsServer) (err error) {
+func (h *Handler) CountProducts(ctx context.Context, filter *proto.ProductFilter) (resp *proto.ProductResponse, err error) {
 	var count int = 0
 
 	if filter == nil {
@@ -61,14 +66,14 @@ func (h *Handler) CountProducts(filter *proto.ProductFilter, srv proto.ProductSe
 		count, err = h.service.Count(query, filter.RequestParams.ToNative())
 	}
 
-	go srv.Send(&proto.ProductResponse{
+	resp = &proto.ProductResponse{
 		Products: nil,
 		Count: int64(count),
-	})
+	}
 	return
 }
 
-func (h *Handler) AddProducts(input *proto.ProductInput, srv proto.ProductService_AddProductsServer) (err error) {
+func (h *Handler) AddProducts(ctx context.Context, input *proto.ProductInput) (resp *proto.ProductResponse, err error) {
 	var succeeded int64
 	var products []*model.SneakerProduct
 
@@ -80,14 +85,14 @@ func (h *Handler) AddProducts(input *proto.ProductInput, srv proto.ProductServic
 		}
 	}
 
-	go srv.Send(&proto.ProductResponse{
+	resp = &proto.ProductResponse{
 		Products: proto.NativeToProducts(products),
 		Count: succeeded,
-	})
+	}
 	return
 }
 
-func (h *Handler) EditProducts(input *proto.ProductInput, srv proto.ProductService_EditProductsServer) (err error) {
+func (h *Handler) EditProducts(ctx context.Context, input *proto.ProductInput) (resp *proto.ProductResponse, err error) {
 	var succeeded int64
 
 	for _, user := range input.Products {
@@ -96,6 +101,28 @@ func (h *Handler) EditProducts(input *proto.ProductInput, srv proto.ProductServi
 		}
 	}
 
-	go srv.Send(&proto.ProductResponse{Count: succeeded})
+	resp = &proto.ProductResponse{Count: succeeded}
+	return
+}
+
+func (h *Handler) DeleteProducts(ctx context.Context, filter *proto.ProductFilter) (resp *proto.ProductResponse, err error) {
+	var count int = 0
+
+	if len(filter.ProductID) == 0 && filter.RequestQuery == nil {
+		glog.Errorln("Could not delete all products")
+	} else if filter.RequestQuery != nil {
+		glog.Errorln("Could not delete products by condition")
+	} else if len(filter.ProductID) == 1 {
+		e := h.service.Remove(filter.ProductID[0]); if e != nil {
+			err = e
+		}
+		count = 1
+	} else {
+		glog.Errorln("Could not delete all reference")
+	}
+
+	resp = &proto.ProductResponse{
+		Count: int64(count),
+	}
 	return
 }

@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package proto;
+
+import "common.proto";
+import "reference.proto";
+import "product.proto";
+
+option go_package = ".;proto";
+option csharp_namespace = "Proto";
+
+service SearchReferencesService {
+  rpc Search(SearchTag) returns (ReferenceResponse) {}
+  rpc SearchBy(SearchFilter) returns (ReferenceResponse) {}
+  rpc Sync(ReferenceFilter) returns (ReferenceResponse) {}
+}
+
+service SearchProductService {
+  rpc Search(SearchTag) returns (ProductResponse) {}
+  rpc SearchBy(SearchFilter) returns (ProductResponse) {}
+  rpc Sync(ProductFilter) returns (ProductResponse) {}
+}
+message SearchTag {
+  string Tag = 1;
+  RequestParams RequestParams = 2;
+}
+
+message SearchFilter {
+  string Field = 1;
+  string Value = 2;
+  string SKU = 3;
+  string Model = 4;
+  string Brand = 5;
+  RequestParams RequestParams = 6;
+}

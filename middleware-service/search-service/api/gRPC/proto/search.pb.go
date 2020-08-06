@@ -2,15 +2,13 @@
 // versions:
 // 	protoc-gen-go v1.25.0
 // 	protoc        v3.12.3
-// source: proto/search.proto
+// source: search.proto
 
 package proto
 
 import (
 	context "context"
 	proto "github.com/golang/protobuf/proto"
-	_struct "github.com/golang/protobuf/ptypes/struct"
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -31,1018 +29,6 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-type SneakerProduct struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	UniqueId       string               `protobuf:"bytes,1,opt,name=uniqueId,proto3" json:"uniqueId,omitempty"`
-	BrandName      string               `protobuf:"bytes,2,opt,name=brandName,proto3" json:"brandName,omitempty"`
-	ModelName      string               `protobuf:"bytes,3,opt,name=modelName,proto3" json:"modelName,omitempty"`
-	ModelSKU       string               `protobuf:"bytes,4,opt,name=modelSKU,proto3" json:"modelSKU,omitempty"`
-	ReferenceId    string               `protobuf:"bytes,5,opt,name=referenceId,proto3" json:"referenceId,omitempty"`
-	Price          float64              `protobuf:"fixed64,6,opt,name=price,proto3" json:"price,omitempty"`
-	Type           string               `protobuf:"bytes,7,opt,name=type,proto3" json:"type,omitempty"`
-	Size           *SneakerSize         `protobuf:"bytes,8,opt,name=size,proto3" json:"size,omitempty"`
-	Color          string               `protobuf:"bytes,9,opt,name=color,proto3" json:"color,omitempty"`
-	Condition      string               `protobuf:"bytes,10,opt,name=condition,proto3" json:"condition,omitempty"`
-	Description    string               `protobuf:"bytes,11,opt,name=description,proto3" json:"description,omitempty"`
-	Owner          string               `protobuf:"bytes,12,opt,name=owner,proto3" json:"owner,omitempty"`
-	ConditionIndex float64              `protobuf:"fixed64,14,opt,name=conditionIndex,proto3" json:"conditionIndex,omitempty"`
-	AddedAt        *timestamp.Timestamp `protobuf:"bytes,15,opt,name=addedAt,proto3" json:"addedAt,omitempty"`
-}
-
-func (x *SneakerProduct) Reset() {
-	*x = SneakerProduct{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_search_proto_msgTypes[0]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *SneakerProduct) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SneakerProduct) ProtoMessage() {}
-
-func (x *SneakerProduct) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_search_proto_msgTypes[0]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SneakerProduct.ProtoReflect.Descriptor instead.
-func (*SneakerProduct) Descriptor() ([]byte, []int) {
-	return file_proto_search_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *SneakerProduct) GetUniqueId() string {
-	if x != nil {
-		return x.UniqueId
-	}
-	return ""
-}
-
-func (x *SneakerProduct) GetBrandName() string {
-	if x != nil {
-		return x.BrandName
-	}
-	return ""
-}
-
-func (x *SneakerProduct) GetModelName() string {
-	if x != nil {
-		return x.ModelName
-	}
-	return ""
-}
-
-func (x *SneakerProduct) GetModelSKU() string {
-	if x != nil {
-		return x.ModelSKU
-	}
-	return ""
-}
-
-func (x *SneakerProduct) GetReferenceId() string {
-	if x != nil {
-		return x.ReferenceId
-	}
-	return ""
-}
-
-func (x *SneakerProduct) GetPrice() float64 {
-	if x != nil {
-		return x.Price
-	}
-	return 0
-}
-
-func (x *SneakerProduct) GetType() string {
-	if x != nil {
-		return x.Type
-	}
-	return ""
-}
-
-func (x *SneakerProduct) GetSize() *SneakerSize {
-	if x != nil {
-		return x.Size
-	}
-	return nil
-}
-
-func (x *SneakerProduct) GetColor() string {
-	if x != nil {
-		return x.Color
-	}
-	return ""
-}
-
-func (x *SneakerProduct) GetCondition() string {
-	if x != nil {
-		return x.Condition
-	}
-	return ""
-}
-
-func (x *SneakerProduct) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
-func (x *SneakerProduct) GetOwner() string {
-	if x != nil {
-		return x.Owner
-	}
-	return ""
-}
-
-func (x *SneakerProduct) GetConditionIndex() float64 {
-	if x != nil {
-		return x.ConditionIndex
-	}
-	return 0
-}
-
-func (x *SneakerProduct) GetAddedAt() *timestamp.Timestamp {
-	if x != nil {
-		return x.AddedAt
-	}
-	return nil
-}
-
-type SneakerSize struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Europe        float64 `protobuf:"fixed64,1,opt,name=europe,proto3" json:"europe,omitempty"`
-	UnitedStates  float64 `protobuf:"fixed64,2,opt,name=unitedStates,proto3" json:"unitedStates,omitempty"`
-	UnitedKingdom float64 `protobuf:"fixed64,3,opt,name=unitedKingdom,proto3" json:"unitedKingdom,omitempty"`
-	Centimeters   float64 `protobuf:"fixed64,4,opt,name=centimeters,proto3" json:"centimeters,omitempty"`
-}
-
-func (x *SneakerSize) Reset() {
-	*x = SneakerSize{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_search_proto_msgTypes[1]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *SneakerSize) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SneakerSize) ProtoMessage() {}
-
-func (x *SneakerSize) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_search_proto_msgTypes[1]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SneakerSize.ProtoReflect.Descriptor instead.
-func (*SneakerSize) Descriptor() ([]byte, []int) {
-	return file_proto_search_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *SneakerSize) GetEurope() float64 {
-	if x != nil {
-		return x.Europe
-	}
-	return 0
-}
-
-func (x *SneakerSize) GetUnitedStates() float64 {
-	if x != nil {
-		return x.UnitedStates
-	}
-	return 0
-}
-
-func (x *SneakerSize) GetUnitedKingdom() float64 {
-	if x != nil {
-		return x.UnitedKingdom
-	}
-	return 0
-}
-
-func (x *SneakerSize) GetCentimeters() float64 {
-	if x != nil {
-		return x.Centimeters
-	}
-	return 0
-}
-
-type SneakerBrand struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	UniqueId    string `protobuf:"bytes,1,opt,name=uniqueId,proto3" json:"uniqueId,omitempty"`
-	Name        string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Logo        string `protobuf:"bytes,3,opt,name=logo,proto3" json:"logo,omitempty"`
-	Hero        string `protobuf:"bytes,4,opt,name=hero,proto3" json:"hero,omitempty"`
-	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-}
-
-func (x *SneakerBrand) Reset() {
-	*x = SneakerBrand{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_search_proto_msgTypes[2]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *SneakerBrand) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SneakerBrand) ProtoMessage() {}
-
-func (x *SneakerBrand) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_search_proto_msgTypes[2]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SneakerBrand.ProtoReflect.Descriptor instead.
-func (*SneakerBrand) Descriptor() ([]byte, []int) {
-	return file_proto_search_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *SneakerBrand) GetUniqueId() string {
-	if x != nil {
-		return x.UniqueId
-	}
-	return ""
-}
-
-func (x *SneakerBrand) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *SneakerBrand) GetLogo() string {
-	if x != nil {
-		return x.Logo
-	}
-	return ""
-}
-
-func (x *SneakerBrand) GetHero() string {
-	if x != nil {
-		return x.Hero
-	}
-	return ""
-}
-
-func (x *SneakerBrand) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
-type SneakerModel struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	UniqueId    string `protobuf:"bytes,1,opt,name=uniqueId,proto3" json:"uniqueId,omitempty"`
-	Name        string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Brand       string `protobuf:"bytes,3,opt,name=brand,proto3" json:"brand,omitempty"`
-	BaseModel   string `protobuf:"bytes,4,opt,name=baseModel,proto3" json:"baseModel,omitempty"`
-	Hero        string `protobuf:"bytes,5,opt,name=hero,proto3" json:"hero,omitempty"`
-	Description string `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
-}
-
-func (x *SneakerModel) Reset() {
-	*x = SneakerModel{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_search_proto_msgTypes[3]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *SneakerModel) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SneakerModel) ProtoMessage() {}
-
-func (x *SneakerModel) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_search_proto_msgTypes[3]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SneakerModel.ProtoReflect.Descriptor instead.
-func (*SneakerModel) Descriptor() ([]byte, []int) {
-	return file_proto_search_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *SneakerModel) GetUniqueId() string {
-	if x != nil {
-		return x.UniqueId
-	}
-	return ""
-}
-
-func (x *SneakerModel) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *SneakerModel) GetBrand() string {
-	if x != nil {
-		return x.Brand
-	}
-	return ""
-}
-
-func (x *SneakerModel) GetBaseModel() string {
-	if x != nil {
-		return x.BaseModel
-	}
-	return ""
-}
-
-func (x *SneakerModel) GetHero() string {
-	if x != nil {
-		return x.Hero
-	}
-	return ""
-}
-
-func (x *SneakerModel) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
-type SneakerReference struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	UniqueId       string               `protobuf:"bytes,1,opt,name=uniqueId,proto3" json:"uniqueId,omitempty"`
-	ManufactureSku string               `protobuf:"bytes,2,opt,name=manufactureSku,proto3" json:"manufactureSku,omitempty"`
-	BrandName      string               `protobuf:"bytes,3,opt,name=brandName,proto3" json:"brandName,omitempty"`
-	Brand          *SneakerBrand        `protobuf:"bytes,4,opt,name=brand,proto3" json:"brand,omitempty"`
-	ModelName      string               `protobuf:"bytes,5,opt,name=modelName,proto3" json:"modelName,omitempty"`
-	Model          *SneakerModel        `protobuf:"bytes,6,opt,name=model,proto3" json:"model,omitempty"`
-	BaseModelName  string               `protobuf:"bytes,7,opt,name=baseModelName,proto3" json:"baseModelName,omitempty"`
-	BaseModel      *SneakerModel        `protobuf:"bytes,8,opt,name=baseModel,proto3" json:"baseModel,omitempty"`
-	Description    string               `protobuf:"bytes,9,opt,name=description,proto3" json:"description,omitempty"`
-	Color          string               `protobuf:"bytes,10,opt,name=color,proto3" json:"color,omitempty"`
-	Gender         string               `protobuf:"bytes,11,opt,name=gender,proto3" json:"gender,omitempty"`
-	Nickname       string               `protobuf:"bytes,12,opt,name=nickname,proto3" json:"nickname,omitempty"`
-	Materials      []string             `protobuf:"bytes,13,rep,name=materials,proto3" json:"materials,omitempty"`
-	Categories     []string             `protobuf:"bytes,14,rep,name=categories,proto3" json:"categories,omitempty"`
-	ReleaseDate    *timestamp.Timestamp `protobuf:"bytes,15,opt,name=releaseDate,proto3" json:"releaseDate,omitempty"`
-	Price          float64              `protobuf:"fixed64,16,opt,name=price,proto3" json:"price,omitempty"`
-	ImageLink      string               `protobuf:"bytes,17,opt,name=imageLink,proto3" json:"imageLink,omitempty"`
-	ImageLinks     []string             `protobuf:"bytes,18,rep,name=imageLinks,proto3" json:"imageLinks,omitempty"`
-	StadiumUrl     string               `protobuf:"bytes,19,opt,name=stadiumUrl,proto3" json:"stadiumUrl,omitempty"`
-	Likes          int64                `protobuf:"varint,20,opt,name=likes,proto3" json:"likes,omitempty"`
-	Liked          bool                 `protobuf:"varint,21,opt,name=liked,proto3" json:"liked,omitempty"`
-}
-
-func (x *SneakerReference) Reset() {
-	*x = SneakerReference{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_search_proto_msgTypes[4]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *SneakerReference) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SneakerReference) ProtoMessage() {}
-
-func (x *SneakerReference) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_search_proto_msgTypes[4]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SneakerReference.ProtoReflect.Descriptor instead.
-func (*SneakerReference) Descriptor() ([]byte, []int) {
-	return file_proto_search_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *SneakerReference) GetUniqueId() string {
-	if x != nil {
-		return x.UniqueId
-	}
-	return ""
-}
-
-func (x *SneakerReference) GetManufactureSku() string {
-	if x != nil {
-		return x.ManufactureSku
-	}
-	return ""
-}
-
-func (x *SneakerReference) GetBrandName() string {
-	if x != nil {
-		return x.BrandName
-	}
-	return ""
-}
-
-func (x *SneakerReference) GetBrand() *SneakerBrand {
-	if x != nil {
-		return x.Brand
-	}
-	return nil
-}
-
-func (x *SneakerReference) GetModelName() string {
-	if x != nil {
-		return x.ModelName
-	}
-	return ""
-}
-
-func (x *SneakerReference) GetModel() *SneakerModel {
-	if x != nil {
-		return x.Model
-	}
-	return nil
-}
-
-func (x *SneakerReference) GetBaseModelName() string {
-	if x != nil {
-		return x.BaseModelName
-	}
-	return ""
-}
-
-func (x *SneakerReference) GetBaseModel() *SneakerModel {
-	if x != nil {
-		return x.BaseModel
-	}
-	return nil
-}
-
-func (x *SneakerReference) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
-func (x *SneakerReference) GetColor() string {
-	if x != nil {
-		return x.Color
-	}
-	return ""
-}
-
-func (x *SneakerReference) GetGender() string {
-	if x != nil {
-		return x.Gender
-	}
-	return ""
-}
-
-func (x *SneakerReference) GetNickname() string {
-	if x != nil {
-		return x.Nickname
-	}
-	return ""
-}
-
-func (x *SneakerReference) GetMaterials() []string {
-	if x != nil {
-		return x.Materials
-	}
-	return nil
-}
-
-func (x *SneakerReference) GetCategories() []string {
-	if x != nil {
-		return x.Categories
-	}
-	return nil
-}
-
-func (x *SneakerReference) GetReleaseDate() *timestamp.Timestamp {
-	if x != nil {
-		return x.ReleaseDate
-	}
-	return nil
-}
-
-func (x *SneakerReference) GetPrice() float64 {
-	if x != nil {
-		return x.Price
-	}
-	return 0
-}
-
-func (x *SneakerReference) GetImageLink() string {
-	if x != nil {
-		return x.ImageLink
-	}
-	return ""
-}
-
-func (x *SneakerReference) GetImageLinks() []string {
-	if x != nil {
-		return x.ImageLinks
-	}
-	return nil
-}
-
-func (x *SneakerReference) GetStadiumUrl() string {
-	if x != nil {
-		return x.StadiumUrl
-	}
-	return ""
-}
-
-func (x *SneakerReference) GetLikes() int64 {
-	if x != nil {
-		return x.Likes
-	}
-	return 0
-}
-
-func (x *SneakerReference) GetLiked() bool {
-	if x != nil {
-		return x.Liked
-	}
-	return false
-}
-
-type ReferenceFilter struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	ReferenceID   []string        `protobuf:"bytes,1,rep,name=ReferenceID,proto3" json:"ReferenceID,omitempty"`
-	RequestQuery  *_struct.Struct `protobuf:"bytes,2,opt,name=RequestQuery,proto3" json:"RequestQuery,omitempty"`
-	RequestParams *RequestParams  `protobuf:"bytes,3,opt,name=RequestParams,proto3" json:"RequestParams,omitempty"`
-}
-
-func (x *ReferenceFilter) Reset() {
-	*x = ReferenceFilter{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_search_proto_msgTypes[5]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ReferenceFilter) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ReferenceFilter) ProtoMessage() {}
-
-func (x *ReferenceFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_search_proto_msgTypes[5]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ReferenceFilter.ProtoReflect.Descriptor instead.
-func (*ReferenceFilter) Descriptor() ([]byte, []int) {
-	return file_proto_search_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *ReferenceFilter) GetReferenceID() []string {
-	if x != nil {
-		return x.ReferenceID
-	}
-	return nil
-}
-
-func (x *ReferenceFilter) GetRequestQuery() *_struct.Struct {
-	if x != nil {
-		return x.RequestQuery
-	}
-	return nil
-}
-
-func (x *ReferenceFilter) GetRequestParams() *RequestParams {
-	if x != nil {
-		return x.RequestParams
-	}
-	return nil
-}
-
-type ReferenceInput struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	References    []*SneakerReference `protobuf:"bytes,1,rep,name=References,proto3" json:"References,omitempty"`
-	RequestParams *RequestParams      `protobuf:"bytes,2,opt,name=RequestParams,proto3" json:"RequestParams,omitempty"`
-}
-
-func (x *ReferenceInput) Reset() {
-	*x = ReferenceInput{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_search_proto_msgTypes[6]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ReferenceInput) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ReferenceInput) ProtoMessage() {}
-
-func (x *ReferenceInput) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_search_proto_msgTypes[6]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ReferenceInput.ProtoReflect.Descriptor instead.
-func (*ReferenceInput) Descriptor() ([]byte, []int) {
-	return file_proto_search_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *ReferenceInput) GetReferences() []*SneakerReference {
-	if x != nil {
-		return x.References
-	}
-	return nil
-}
-
-func (x *ReferenceInput) GetRequestParams() *RequestParams {
-	if x != nil {
-		return x.RequestParams
-	}
-	return nil
-}
-
-type ReferenceResponse struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	References []*SneakerReference `protobuf:"bytes,1,rep,name=References,proto3" json:"References,omitempty"`
-	Count      int64               `protobuf:"varint,2,opt,name=Count,proto3" json:"Count,omitempty"`
-}
-
-func (x *ReferenceResponse) Reset() {
-	*x = ReferenceResponse{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_search_proto_msgTypes[7]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ReferenceResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ReferenceResponse) ProtoMessage() {}
-
-func (x *ReferenceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_search_proto_msgTypes[7]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ReferenceResponse.ProtoReflect.Descriptor instead.
-func (*ReferenceResponse) Descriptor() ([]byte, []int) {
-	return file_proto_search_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *ReferenceResponse) GetReferences() []*SneakerReference {
-	if x != nil {
-		return x.References
-	}
-	return nil
-}
-
-func (x *ReferenceResponse) GetCount() int64 {
-	if x != nil {
-		return x.Count
-	}
-	return 0
-}
-
-type RequestParams struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Limit         int32  `protobuf:"varint,1,opt,name=Limit,proto3" json:"Limit,omitempty"`
-	Offset        int32  `protobuf:"varint,2,opt,name=Offset,proto3" json:"Offset,omitempty"`
-	SortBy        string `protobuf:"bytes,3,opt,name=SortBy,proto3" json:"SortBy,omitempty"`
-	SortDirection string `protobuf:"bytes,4,opt,name=SortDirection,proto3" json:"SortDirection,omitempty"`
-}
-
-func (x *RequestParams) Reset() {
-	*x = RequestParams{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_search_proto_msgTypes[8]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *RequestParams) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RequestParams) ProtoMessage() {}
-
-func (x *RequestParams) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_search_proto_msgTypes[8]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RequestParams.ProtoReflect.Descriptor instead.
-func (*RequestParams) Descriptor() ([]byte, []int) {
-	return file_proto_search_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *RequestParams) GetLimit() int32 {
-	if x != nil {
-		return x.Limit
-	}
-	return 0
-}
-
-func (x *RequestParams) GetOffset() int32 {
-	if x != nil {
-		return x.Offset
-	}
-	return 0
-}
-
-func (x *RequestParams) GetSortBy() string {
-	if x != nil {
-		return x.SortBy
-	}
-	return ""
-}
-
-func (x *RequestParams) GetSortDirection() string {
-	if x != nil {
-		return x.SortDirection
-	}
-	return ""
-}
-
-type ProductFilter struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	ProductID     []string        `protobuf:"bytes,1,rep,name=ProductID,proto3" json:"ProductID,omitempty"`
-	RequestQuery  *_struct.Struct `protobuf:"bytes,2,opt,name=RequestQuery,proto3" json:"RequestQuery,omitempty"`
-	RequestParams *RequestParams  `protobuf:"bytes,3,opt,name=RequestParams,proto3" json:"RequestParams,omitempty"`
-}
-
-func (x *ProductFilter) Reset() {
-	*x = ProductFilter{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_search_proto_msgTypes[9]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ProductFilter) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ProductFilter) ProtoMessage() {}
-
-func (x *ProductFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_search_proto_msgTypes[9]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ProductFilter.ProtoReflect.Descriptor instead.
-func (*ProductFilter) Descriptor() ([]byte, []int) {
-	return file_proto_search_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *ProductFilter) GetProductID() []string {
-	if x != nil {
-		return x.ProductID
-	}
-	return nil
-}
-
-func (x *ProductFilter) GetRequestQuery() *_struct.Struct {
-	if x != nil {
-		return x.RequestQuery
-	}
-	return nil
-}
-
-func (x *ProductFilter) GetRequestParams() *RequestParams {
-	if x != nil {
-		return x.RequestParams
-	}
-	return nil
-}
-
-type ProductInput struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Products      []*SneakerProduct `protobuf:"bytes,1,rep,name=Products,proto3" json:"Products,omitempty"`
-	RequestParams *RequestParams    `protobuf:"bytes,2,opt,name=RequestParams,proto3" json:"RequestParams,omitempty"`
-}
-
-func (x *ProductInput) Reset() {
-	*x = ProductInput{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_search_proto_msgTypes[10]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ProductInput) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ProductInput) ProtoMessage() {}
-
-func (x *ProductInput) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_search_proto_msgTypes[10]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ProductInput.ProtoReflect.Descriptor instead.
-func (*ProductInput) Descriptor() ([]byte, []int) {
-	return file_proto_search_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *ProductInput) GetProducts() []*SneakerProduct {
-	if x != nil {
-		return x.Products
-	}
-	return nil
-}
-
-func (x *ProductInput) GetRequestParams() *RequestParams {
-	if x != nil {
-		return x.RequestParams
-	}
-	return nil
-}
-
-type ProductResponse struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Products []*SneakerProduct `protobuf:"bytes,1,rep,name=Products,proto3" json:"Products,omitempty"`
-	Count    int64             `protobuf:"varint,2,opt,name=Count,proto3" json:"Count,omitempty"`
-}
-
-func (x *ProductResponse) Reset() {
-	*x = ProductResponse{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_search_proto_msgTypes[11]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ProductResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ProductResponse) ProtoMessage() {}
-
-func (x *ProductResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_search_proto_msgTypes[11]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ProductResponse.ProtoReflect.Descriptor instead.
-func (*ProductResponse) Descriptor() ([]byte, []int) {
-	return file_proto_search_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *ProductResponse) GetProducts() []*SneakerProduct {
-	if x != nil {
-		return x.Products
-	}
-	return nil
-}
-
-func (x *ProductResponse) GetCount() int64 {
-	if x != nil {
-		return x.Count
-	}
-	return 0
-}
-
 type SearchTag struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1055,7 +41,7 @@ type SearchTag struct {
 func (x *SearchTag) Reset() {
 	*x = SearchTag{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_search_proto_msgTypes[12]
+		mi := &file_search_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1068,7 +54,7 @@ func (x *SearchTag) String() string {
 func (*SearchTag) ProtoMessage() {}
 
 func (x *SearchTag) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_search_proto_msgTypes[12]
+	mi := &file_search_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1081,7 +67,7 @@ func (x *SearchTag) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchTag.ProtoReflect.Descriptor instead.
 func (*SearchTag) Descriptor() ([]byte, []int) {
-	return file_proto_search_proto_rawDescGZIP(), []int{12}
+	return file_search_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *SearchTag) GetTag() string {
@@ -1114,7 +100,7 @@ type SearchFilter struct {
 func (x *SearchFilter) Reset() {
 	*x = SearchFilter{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_search_proto_msgTypes[13]
+		mi := &file_search_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1127,7 +113,7 @@ func (x *SearchFilter) String() string {
 func (*SearchFilter) ProtoMessage() {}
 
 func (x *SearchFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_search_proto_msgTypes[13]
+	mi := &file_search_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1140,7 +126,7 @@ func (x *SearchFilter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchFilter.ProtoReflect.Descriptor instead.
 func (*SearchFilter) Descriptor() ([]byte, []int) {
-	return file_proto_search_proto_rawDescGZIP(), []int{13}
+	return file_search_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *SearchFilter) GetField() string {
@@ -1185,493 +171,113 @@ func (x *SearchFilter) GetRequestParams() *RequestParams {
 	return nil
 }
 
-var File_proto_search_proto protoreflect.FileDescriptor
+var File_search_proto protoreflect.FileDescriptor
 
-var file_proto_search_proto_rawDesc = []byte{
-	0x0a, 0x12, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x12, 0x05, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1f, 0x67, 0x6f, 0x6f,
-	0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x69, 0x6d,
-	0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1c, 0x67, 0x6f,
-	0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x73, 0x74,
-	0x72, 0x75, 0x63, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xc2, 0x03, 0x0a, 0x0e, 0x53,
-	0x6e, 0x65, 0x61, 0x6b, 0x65, 0x72, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x12, 0x1a, 0x0a,
-	0x08, 0x75, 0x6e, 0x69, 0x71, 0x75, 0x65, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x08, 0x75, 0x6e, 0x69, 0x71, 0x75, 0x65, 0x49, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x62, 0x72, 0x61,
-	0x6e, 0x64, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x62, 0x72,
-	0x61, 0x6e, 0x64, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x6d, 0x6f, 0x64, 0x65, 0x6c,
-	0x4e, 0x61, 0x6d, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x6d, 0x6f, 0x64, 0x65,
-	0x6c, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x53, 0x4b,
-	0x55, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x53, 0x4b,
-	0x55, 0x12, 0x20, 0x0a, 0x0b, 0x72, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x49, 0x64,
-	0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x72, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63,
-	0x65, 0x49, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x70, 0x72, 0x69, 0x63, 0x65, 0x18, 0x06, 0x20, 0x01,
-	0x28, 0x01, 0x52, 0x05, 0x70, 0x72, 0x69, 0x63, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70,
-	0x65, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x26, 0x0a,
-	0x04, 0x73, 0x69, 0x7a, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x2e, 0x53, 0x6e, 0x65, 0x61, 0x6b, 0x65, 0x72, 0x53, 0x69, 0x7a, 0x65, 0x52,
-	0x04, 0x73, 0x69, 0x7a, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x63, 0x6f, 0x6c, 0x6f, 0x72, 0x18, 0x09,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x63, 0x6f, 0x6c, 0x6f, 0x72, 0x12, 0x1c, 0x0a, 0x09, 0x63,
-	0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09,
-	0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73,
-	0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b,
-	0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x14, 0x0a, 0x05, 0x6f,
-	0x77, 0x6e, 0x65, 0x72, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x6f, 0x77, 0x6e, 0x65,
-	0x72, 0x12, 0x26, 0x0a, 0x0e, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x6e,
-	0x64, 0x65, 0x78, 0x18, 0x0e, 0x20, 0x01, 0x28, 0x01, 0x52, 0x0e, 0x63, 0x6f, 0x6e, 0x64, 0x69,
-	0x74, 0x69, 0x6f, 0x6e, 0x49, 0x6e, 0x64, 0x65, 0x78, 0x12, 0x34, 0x0a, 0x07, 0x61, 0x64, 0x64,
-	0x65, 0x64, 0x41, 0x74, 0x18, 0x0f, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f,
-	0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d,
-	0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x07, 0x61, 0x64, 0x64, 0x65, 0x64, 0x41, 0x74, 0x22,
-	0x91, 0x01, 0x0a, 0x0b, 0x53, 0x6e, 0x65, 0x61, 0x6b, 0x65, 0x72, 0x53, 0x69, 0x7a, 0x65, 0x12,
-	0x16, 0x0a, 0x06, 0x65, 0x75, 0x72, 0x6f, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x01, 0x52,
-	0x06, 0x65, 0x75, 0x72, 0x6f, 0x70, 0x65, 0x12, 0x22, 0x0a, 0x0c, 0x75, 0x6e, 0x69, 0x74, 0x65,
-	0x64, 0x53, 0x74, 0x61, 0x74, 0x65, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x01, 0x52, 0x0c, 0x75,
-	0x6e, 0x69, 0x74, 0x65, 0x64, 0x53, 0x74, 0x61, 0x74, 0x65, 0x73, 0x12, 0x24, 0x0a, 0x0d, 0x75,
-	0x6e, 0x69, 0x74, 0x65, 0x64, 0x4b, 0x69, 0x6e, 0x67, 0x64, 0x6f, 0x6d, 0x18, 0x03, 0x20, 0x01,
-	0x28, 0x01, 0x52, 0x0d, 0x75, 0x6e, 0x69, 0x74, 0x65, 0x64, 0x4b, 0x69, 0x6e, 0x67, 0x64, 0x6f,
-	0x6d, 0x12, 0x20, 0x0a, 0x0b, 0x63, 0x65, 0x6e, 0x74, 0x69, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73,
-	0x18, 0x04, 0x20, 0x01, 0x28, 0x01, 0x52, 0x0b, 0x63, 0x65, 0x6e, 0x74, 0x69, 0x6d, 0x65, 0x74,
-	0x65, 0x72, 0x73, 0x22, 0x88, 0x01, 0x0a, 0x0c, 0x53, 0x6e, 0x65, 0x61, 0x6b, 0x65, 0x72, 0x42,
-	0x72, 0x61, 0x6e, 0x64, 0x12, 0x1a, 0x0a, 0x08, 0x75, 0x6e, 0x69, 0x71, 0x75, 0x65, 0x49, 0x64,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x75, 0x6e, 0x69, 0x71, 0x75, 0x65, 0x49, 0x64,
-	0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
-	0x6e, 0x61, 0x6d, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x6c, 0x6f, 0x67, 0x6f, 0x18, 0x03, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x04, 0x6c, 0x6f, 0x67, 0x6f, 0x12, 0x12, 0x0a, 0x04, 0x68, 0x65, 0x72, 0x6f,
-	0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x68, 0x65, 0x72, 0x6f, 0x12, 0x20, 0x0a, 0x0b,
-	0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x05, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0xa8,
-	0x01, 0x0a, 0x0c, 0x53, 0x6e, 0x65, 0x61, 0x6b, 0x65, 0x72, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x12,
-	0x1a, 0x0a, 0x08, 0x75, 0x6e, 0x69, 0x71, 0x75, 0x65, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x08, 0x75, 0x6e, 0x69, 0x71, 0x75, 0x65, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e,
-	0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12,
-	0x14, 0x0a, 0x05, 0x62, 0x72, 0x61, 0x6e, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05,
-	0x62, 0x72, 0x61, 0x6e, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x62, 0x61, 0x73, 0x65, 0x4d, 0x6f, 0x64,
-	0x65, 0x6c, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x62, 0x61, 0x73, 0x65, 0x4d, 0x6f,
-	0x64, 0x65, 0x6c, 0x12, 0x12, 0x0a, 0x04, 0x68, 0x65, 0x72, 0x6f, 0x18, 0x05, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x04, 0x68, 0x65, 0x72, 0x6f, 0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72,
-	0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65,
-	0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0xc9, 0x05, 0x0a, 0x10, 0x53, 0x6e,
-	0x65, 0x61, 0x6b, 0x65, 0x72, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x12, 0x1a,
-	0x0a, 0x08, 0x75, 0x6e, 0x69, 0x71, 0x75, 0x65, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x08, 0x75, 0x6e, 0x69, 0x71, 0x75, 0x65, 0x49, 0x64, 0x12, 0x26, 0x0a, 0x0e, 0x6d, 0x61,
-	0x6e, 0x75, 0x66, 0x61, 0x63, 0x74, 0x75, 0x72, 0x65, 0x53, 0x6b, 0x75, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x0e, 0x6d, 0x61, 0x6e, 0x75, 0x66, 0x61, 0x63, 0x74, 0x75, 0x72, 0x65, 0x53,
-	0x6b, 0x75, 0x12, 0x1c, 0x0a, 0x09, 0x62, 0x72, 0x61, 0x6e, 0x64, 0x4e, 0x61, 0x6d, 0x65, 0x18,
-	0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x62, 0x72, 0x61, 0x6e, 0x64, 0x4e, 0x61, 0x6d, 0x65,
-	0x12, 0x29, 0x0a, 0x05, 0x62, 0x72, 0x61, 0x6e, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x13, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x53, 0x6e, 0x65, 0x61, 0x6b, 0x65, 0x72, 0x42,
-	0x72, 0x61, 0x6e, 0x64, 0x52, 0x05, 0x62, 0x72, 0x61, 0x6e, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x6d,
-	0x6f, 0x64, 0x65, 0x6c, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09,
-	0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x29, 0x0a, 0x05, 0x6d, 0x6f, 0x64,
-	0x65, 0x6c, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x2e, 0x53, 0x6e, 0x65, 0x61, 0x6b, 0x65, 0x72, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x52, 0x05, 0x6d,
-	0x6f, 0x64, 0x65, 0x6c, 0x12, 0x24, 0x0a, 0x0d, 0x62, 0x61, 0x73, 0x65, 0x4d, 0x6f, 0x64, 0x65,
-	0x6c, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x62, 0x61, 0x73,
-	0x65, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x31, 0x0a, 0x09, 0x62, 0x61,
-	0x73, 0x65, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x53, 0x6e, 0x65, 0x61, 0x6b, 0x65, 0x72, 0x4d, 0x6f, 0x64,
-	0x65, 0x6c, 0x52, 0x09, 0x62, 0x61, 0x73, 0x65, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x12, 0x20, 0x0a,
-	0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x09, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12,
-	0x14, 0x0a, 0x05, 0x63, 0x6f, 0x6c, 0x6f, 0x72, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05,
-	0x63, 0x6f, 0x6c, 0x6f, 0x72, 0x12, 0x16, 0x0a, 0x06, 0x67, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x18,
-	0x0b, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x67, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x12, 0x1a, 0x0a,
-	0x08, 0x6e, 0x69, 0x63, 0x6b, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x08, 0x6e, 0x69, 0x63, 0x6b, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x6d, 0x61, 0x74,
-	0x65, 0x72, 0x69, 0x61, 0x6c, 0x73, 0x18, 0x0d, 0x20, 0x03, 0x28, 0x09, 0x52, 0x09, 0x6d, 0x61,
-	0x74, 0x65, 0x72, 0x69, 0x61, 0x6c, 0x73, 0x12, 0x1e, 0x0a, 0x0a, 0x63, 0x61, 0x74, 0x65, 0x67,
-	0x6f, 0x72, 0x69, 0x65, 0x73, 0x18, 0x0e, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0a, 0x63, 0x61, 0x74,
-	0x65, 0x67, 0x6f, 0x72, 0x69, 0x65, 0x73, 0x12, 0x3c, 0x0a, 0x0b, 0x72, 0x65, 0x6c, 0x65, 0x61,
-	0x73, 0x65, 0x44, 0x61, 0x74, 0x65, 0x18, 0x0f, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67,
-	0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54,
-	0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x0b, 0x72, 0x65, 0x6c, 0x65, 0x61, 0x73,
-	0x65, 0x44, 0x61, 0x74, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x70, 0x72, 0x69, 0x63, 0x65, 0x18, 0x10,
-	0x20, 0x01, 0x28, 0x01, 0x52, 0x05, 0x70, 0x72, 0x69, 0x63, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x69,
-	0x6d, 0x61, 0x67, 0x65, 0x4c, 0x69, 0x6e, 0x6b, 0x18, 0x11, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09,
-	0x69, 0x6d, 0x61, 0x67, 0x65, 0x4c, 0x69, 0x6e, 0x6b, 0x12, 0x1e, 0x0a, 0x0a, 0x69, 0x6d, 0x61,
-	0x67, 0x65, 0x4c, 0x69, 0x6e, 0x6b, 0x73, 0x18, 0x12, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0a, 0x69,
-	0x6d, 0x61, 0x67, 0x65, 0x4c, 0x69, 0x6e, 0x6b, 0x73, 0x12, 0x1e, 0x0a, 0x0a, 0x73, 0x74, 0x61,
-	0x64, 0x69, 0x75, 0x6d, 0x55, 0x72, 0x6c, 0x18, 0x13, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x73,
-	0x74, 0x61, 0x64, 0x69, 0x75, 0x6d, 0x55, 0x72, 0x6c, 0x12, 0x14, 0x0a, 0x05, 0x6c, 0x69, 0x6b,
-	0x65, 0x73, 0x18, 0x14, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x6c, 0x69, 0x6b, 0x65, 0x73, 0x12,
-	0x14, 0x0a, 0x05, 0x6c, 0x69, 0x6b, 0x65, 0x64, 0x18, 0x15, 0x20, 0x01, 0x28, 0x08, 0x52, 0x05,
-	0x6c, 0x69, 0x6b, 0x65, 0x64, 0x22, 0xac, 0x01, 0x0a, 0x0f, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65,
-	0x6e, 0x63, 0x65, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x12, 0x20, 0x0a, 0x0b, 0x52, 0x65, 0x66,
-	0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x49, 0x44, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0b,
-	0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x49, 0x44, 0x12, 0x3b, 0x0a, 0x0c, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x51, 0x75, 0x65, 0x72, 0x79, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x0b, 0x32, 0x17, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x62, 0x75, 0x66, 0x2e, 0x53, 0x74, 0x72, 0x75, 0x63, 0x74, 0x52, 0x0c, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x51, 0x75, 0x65, 0x72, 0x79, 0x12, 0x3a, 0x0a, 0x0d, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x50,
-	0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x0d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x50, 0x61,
-	0x72, 0x61, 0x6d, 0x73, 0x22, 0x85, 0x01, 0x0a, 0x0e, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e,
-	0x63, 0x65, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x12, 0x37, 0x0a, 0x0a, 0x52, 0x65, 0x66, 0x65, 0x72,
-	0x65, 0x6e, 0x63, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x2e, 0x53, 0x6e, 0x65, 0x61, 0x6b, 0x65, 0x72, 0x52, 0x65, 0x66, 0x65, 0x72,
-	0x65, 0x6e, 0x63, 0x65, 0x52, 0x0a, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x73,
-	0x12, 0x3a, 0x0a, 0x0d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d,
-	0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x0d, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x22, 0x62, 0x0a, 0x11,
-	0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x12, 0x37, 0x0a, 0x0a, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x73, 0x18,
-	0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x53, 0x6e,
-	0x65, 0x61, 0x6b, 0x65, 0x72, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x52, 0x0a,
-	0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x73, 0x12, 0x14, 0x0a, 0x05, 0x43, 0x6f,
-	0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x43, 0x6f, 0x75, 0x6e, 0x74,
-	0x22, 0x7b, 0x0a, 0x0d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d,
-	0x73, 0x12, 0x14, 0x0a, 0x05, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05,
-	0x52, 0x05, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x4f, 0x66, 0x66, 0x73, 0x65,
-	0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12,
-	0x16, 0x0a, 0x06, 0x53, 0x6f, 0x72, 0x74, 0x42, 0x79, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x06, 0x53, 0x6f, 0x72, 0x74, 0x42, 0x79, 0x12, 0x24, 0x0a, 0x0d, 0x53, 0x6f, 0x72, 0x74, 0x44,
-	0x69, 0x72, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d,
-	0x53, 0x6f, 0x72, 0x74, 0x44, 0x69, 0x72, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0xa6, 0x01,
-	0x0a, 0x0d, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x12,
-	0x1c, 0x0a, 0x09, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x49, 0x44, 0x18, 0x01, 0x20, 0x03,
-	0x28, 0x09, 0x52, 0x09, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x49, 0x44, 0x12, 0x3b, 0x0a,
-	0x0c, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x51, 0x75, 0x65, 0x72, 0x79, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x53, 0x74, 0x72, 0x75, 0x63, 0x74, 0x52, 0x0c, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x51, 0x75, 0x65, 0x72, 0x79, 0x12, 0x3a, 0x0a, 0x0d, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28,
-	0x0b, 0x32, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x0d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x22, 0x7d, 0x0a, 0x0c, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63,
-	0x74, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x12, 0x31, 0x0a, 0x08, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63,
-	0x74, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x15, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x2e, 0x53, 0x6e, 0x65, 0x61, 0x6b, 0x65, 0x72, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52,
-	0x08, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x73, 0x12, 0x3a, 0x0a, 0x0d, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b,
+var file_search_proto_rawDesc = []byte{
+	0x0a, 0x0c, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x05,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x0c, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x1a, 0x0f, 0x72, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x2e, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x0d, 0x70, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x2e, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x22, 0x59, 0x0a, 0x09, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x54, 0x61, 0x67,
+	0x12, 0x10, 0x0a, 0x03, 0x54, 0x61, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x54,
+	0x61, 0x67, 0x12, 0x3a, 0x0a, 0x0d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x50, 0x61, 0x72,
+	0x61, 0x6d, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52,
+	0x0d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x22, 0xb4,
+	0x01, 0x0a, 0x0c, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x12,
+	0x14, 0x0a, 0x05, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05,
+	0x46, 0x69, 0x65, 0x6c, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x53,
+	0x4b, 0x55, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x53, 0x4b, 0x55, 0x12, 0x14, 0x0a,
+	0x05, 0x4d, 0x6f, 0x64, 0x65, 0x6c, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x4d, 0x6f,
+	0x64, 0x65, 0x6c, 0x12, 0x14, 0x0a, 0x05, 0x42, 0x72, 0x61, 0x6e, 0x64, 0x18, 0x05, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x05, 0x42, 0x72, 0x61, 0x6e, 0x64, 0x12, 0x3a, 0x0a, 0x0d, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0b,
 	0x32, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
 	0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x0d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x50,
-	0x61, 0x72, 0x61, 0x6d, 0x73, 0x22, 0x5a, 0x0a, 0x0f, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x31, 0x0a, 0x08, 0x50, 0x72, 0x6f, 0x64,
-	0x75, 0x63, 0x74, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x15, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x2e, 0x53, 0x6e, 0x65, 0x61, 0x6b, 0x65, 0x72, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63,
-	0x74, 0x52, 0x08, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x73, 0x12, 0x14, 0x0a, 0x05, 0x43,
-	0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x43, 0x6f, 0x75, 0x6e,
-	0x74, 0x22, 0x59, 0x0a, 0x09, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x54, 0x61, 0x67, 0x12, 0x10,
-	0x0a, 0x03, 0x54, 0x61, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x54, 0x61, 0x67,
-	0x12, 0x3a, 0x0a, 0x0d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d,
-	0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x0d, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x22, 0xb4, 0x01, 0x0a,
-	0x0c, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x12, 0x14, 0x0a,
-	0x05, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x46, 0x69,
-	0x65, 0x6c, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x05, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x53, 0x4b, 0x55,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x53, 0x4b, 0x55, 0x12, 0x14, 0x0a, 0x05, 0x4d,
-	0x6f, 0x64, 0x65, 0x6c, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x4d, 0x6f, 0x64, 0x65,
-	0x6c, 0x12, 0x14, 0x0a, 0x05, 0x42, 0x72, 0x61, 0x6e, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x05, 0x42, 0x72, 0x61, 0x6e, 0x64, 0x12, 0x3a, 0x0a, 0x0d, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14,
-	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x50, 0x61,
-	0x72, 0x61, 0x6d, 0x73, 0x52, 0x0d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x50, 0x61, 0x72,
-	0x61, 0x6d, 0x73, 0x32, 0xce, 0x01, 0x0a, 0x17, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x52, 0x65,
-	0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x73, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12,
-	0x38, 0x0a, 0x06, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x12, 0x10, 0x2e, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x2e, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x54, 0x61, 0x67, 0x1a, 0x18, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x2e, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x30, 0x01, 0x12, 0x3d, 0x0a, 0x08, 0x53, 0x65, 0x61,
+	0x61, 0x72, 0x61, 0x6d, 0x73, 0x32, 0xca, 0x01, 0x0a, 0x17, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68,
+	0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x73, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x12, 0x36, 0x0a, 0x06, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x12, 0x10, 0x2e, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x2e, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x54, 0x61, 0x67, 0x1a, 0x18, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x3b, 0x0a, 0x08, 0x53, 0x65, 0x61,
 	0x72, 0x63, 0x68, 0x42, 0x79, 0x12, 0x13, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x53, 0x65,
 	0x61, 0x72, 0x63, 0x68, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x1a, 0x18, 0x2e, 0x70, 0x72, 0x6f,
 	0x74, 0x6f, 0x2e, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x30, 0x01, 0x12, 0x3a, 0x0a, 0x04, 0x53, 0x79, 0x6e, 0x63,
-	0x12, 0x16, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e,
-	0x63, 0x65, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x1a, 0x18, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x2e, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x22, 0x00, 0x32, 0xb3, 0x02, 0x0a, 0x14, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e,
-	0x63, 0x65, 0x50, 0x69, 0x70, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x45, 0x0a,
-	0x0d, 0x47, 0x65, 0x74, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x73, 0x12, 0x16,
+	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x3a, 0x0a, 0x04, 0x53, 0x79, 0x6e, 0x63, 0x12, 0x16,
 	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65,
 	0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x1a, 0x18, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x52,
 	0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x22, 0x00, 0x30, 0x01, 0x12, 0x47, 0x0a, 0x0f, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x66,
-	0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x73, 0x12, 0x16, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e,
-	0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x1a,
-	0x18, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63,
-	0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x30, 0x01, 0x12, 0x44, 0x0a,
-	0x0d, 0x41, 0x64, 0x64, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x73, 0x12, 0x15,
-	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65,
-	0x49, 0x6e, 0x70, 0x75, 0x74, 0x1a, 0x18, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x52, 0x65,
-	0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
-	0x00, 0x30, 0x01, 0x12, 0x45, 0x0a, 0x0e, 0x45, 0x64, 0x69, 0x74, 0x52, 0x65, 0x66, 0x65, 0x72,
-	0x65, 0x6e, 0x63, 0x65, 0x73, 0x12, 0x15, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x52, 0x65,
-	0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x1a, 0x18, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x30, 0x01, 0x32, 0xc3, 0x01, 0x0a, 0x14, 0x53,
-	0x65, 0x61, 0x72, 0x63, 0x68, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x53, 0x65, 0x72, 0x76,
-	0x69, 0x63, 0x65, 0x12, 0x36, 0x0a, 0x06, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x12, 0x10, 0x2e,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x54, 0x61, 0x67, 0x1a,
-	0x16, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x30, 0x01, 0x12, 0x3b, 0x0a, 0x08, 0x53,
-	0x65, 0x61, 0x72, 0x63, 0x68, 0x42, 0x79, 0x12, 0x13, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e,
-	0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x1a, 0x16, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x30, 0x01, 0x12, 0x36, 0x0a, 0x04, 0x53, 0x79, 0x6e, 0x63,
-	0x12, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74,
-	0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x1a, 0x16, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x50,
-	0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00,
-	0x32, 0x99, 0x02, 0x0a, 0x12, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x50, 0x69, 0x70, 0x65,
-	0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x3f, 0x0a, 0x0b, 0x47, 0x65, 0x74, 0x50, 0x72,
-	0x6f, 0x64, 0x75, 0x63, 0x74, 0x73, 0x12, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x50,
-	0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x1a, 0x16, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x30, 0x01, 0x12, 0x41, 0x0a, 0x0d, 0x43, 0x6f, 0x75, 0x6e,
-	0x74, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x73, 0x12, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x1a,
-	0x16, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x30, 0x01, 0x12, 0x3e, 0x0a, 0x0b, 0x41,
-	0x64, 0x64, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x73, 0x12, 0x13, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x1a,
-	0x16, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x30, 0x01, 0x12, 0x3f, 0x0a, 0x0c, 0x45,
-	0x64, 0x69, 0x74, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x73, 0x12, 0x13, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x49, 0x6e, 0x70, 0x75, 0x74,
-	0x1a, 0x16, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x30, 0x01, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x22, 0x00, 0x32, 0xbf, 0x01, 0x0a, 0x14, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x50, 0x72, 0x6f,
+	0x64, 0x75, 0x63, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x34, 0x0a, 0x06, 0x53,
+	0x65, 0x61, 0x72, 0x63, 0x68, 0x12, 0x10, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x53, 0x65,
+	0x61, 0x72, 0x63, 0x68, 0x54, 0x61, 0x67, 0x1a, 0x16, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e,
+	0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
+	0x00, 0x12, 0x39, 0x0a, 0x08, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x42, 0x79, 0x12, 0x13, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x46, 0x69, 0x6c, 0x74,
+	0x65, 0x72, 0x1a, 0x16, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75,
+	0x63, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x36, 0x0a, 0x04,
+	0x53, 0x79, 0x6e, 0x63, 0x12, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x50, 0x72, 0x6f,
+	0x64, 0x75, 0x63, 0x74, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x1a, 0x16, 0x2e, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x22, 0x00, 0x42, 0x11, 0x5a, 0x07, 0x2e, 0x3b, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0xaa,
+	0x02, 0x05, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
-	file_proto_search_proto_rawDescOnce sync.Once
-	file_proto_search_proto_rawDescData = file_proto_search_proto_rawDesc
+	file_search_proto_rawDescOnce sync.Once
+	file_search_proto_rawDescData = file_search_proto_rawDesc
 )
 
-func file_proto_search_proto_rawDescGZIP() []byte {
-	file_proto_search_proto_rawDescOnce.Do(func() {
-		file_proto_search_proto_rawDescData = protoimpl.X.CompressGZIP(file_proto_search_proto_rawDescData)
+func file_search_proto_rawDescGZIP() []byte {
+	file_search_proto_rawDescOnce.Do(func() {
+		file_search_proto_rawDescData = protoimpl.X.CompressGZIP(file_search_proto_rawDescData)
 	})
-	return file_proto_search_proto_rawDescData
+	return file_search_proto_rawDescData
 }
 
-var file_proto_search_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
-var file_proto_search_proto_goTypes = []interface{}{
-	(*SneakerProduct)(nil),      // 0: proto.SneakerProduct
-	(*SneakerSize)(nil),         // 1: proto.SneakerSize
-	(*SneakerBrand)(nil),        // 2: proto.SneakerBrand
-	(*SneakerModel)(nil),        // 3: proto.SneakerModel
-	(*SneakerReference)(nil),    // 4: proto.SneakerReference
-	(*ReferenceFilter)(nil),     // 5: proto.ReferenceFilter
-	(*ReferenceInput)(nil),      // 6: proto.ReferenceInput
-	(*ReferenceResponse)(nil),   // 7: proto.ReferenceResponse
-	(*RequestParams)(nil),       // 8: proto.RequestParams
-	(*ProductFilter)(nil),       // 9: proto.ProductFilter
-	(*ProductInput)(nil),        // 10: proto.ProductInput
-	(*ProductResponse)(nil),     // 11: proto.ProductResponse
-	(*SearchTag)(nil),           // 12: proto.SearchTag
-	(*SearchFilter)(nil),        // 13: proto.SearchFilter
-	(*timestamp.Timestamp)(nil), // 14: google.protobuf.Timestamp
-	(*_struct.Struct)(nil),      // 15: google.protobuf.Struct
+var file_search_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_search_proto_goTypes = []interface{}{
+	(*SearchTag)(nil),         // 0: proto.SearchTag
+	(*SearchFilter)(nil),      // 1: proto.SearchFilter
+	(*RequestParams)(nil),     // 2: proto.RequestParams
+	(*ReferenceFilter)(nil),   // 3: proto.ReferenceFilter
+	(*ProductFilter)(nil),     // 4: proto.ProductFilter
+	(*ReferenceResponse)(nil), // 5: proto.ReferenceResponse
+	(*ProductResponse)(nil),   // 6: proto.ProductResponse
 }
-var file_proto_search_proto_depIdxs = []int32{
-	1,  // 0: proto.SneakerProduct.size:type_name -> proto.SneakerSize
-	14, // 1: proto.SneakerProduct.addedAt:type_name -> google.protobuf.Timestamp
-	2,  // 2: proto.SneakerReference.brand:type_name -> proto.SneakerBrand
-	3,  // 3: proto.SneakerReference.model:type_name -> proto.SneakerModel
-	3,  // 4: proto.SneakerReference.baseModel:type_name -> proto.SneakerModel
-	14, // 5: proto.SneakerReference.releaseDate:type_name -> google.protobuf.Timestamp
-	15, // 6: proto.ReferenceFilter.RequestQuery:type_name -> google.protobuf.Struct
-	8,  // 7: proto.ReferenceFilter.RequestParams:type_name -> proto.RequestParams
-	4,  // 8: proto.ReferenceInput.References:type_name -> proto.SneakerReference
-	8,  // 9: proto.ReferenceInput.RequestParams:type_name -> proto.RequestParams
-	4,  // 10: proto.ReferenceResponse.References:type_name -> proto.SneakerReference
-	15, // 11: proto.ProductFilter.RequestQuery:type_name -> google.protobuf.Struct
-	8,  // 12: proto.ProductFilter.RequestParams:type_name -> proto.RequestParams
-	0,  // 13: proto.ProductInput.Products:type_name -> proto.SneakerProduct
-	8,  // 14: proto.ProductInput.RequestParams:type_name -> proto.RequestParams
-	0,  // 15: proto.ProductResponse.Products:type_name -> proto.SneakerProduct
-	8,  // 16: proto.SearchTag.RequestParams:type_name -> proto.RequestParams
-	8,  // 17: proto.SearchFilter.RequestParams:type_name -> proto.RequestParams
-	12, // 18: proto.SearchReferencesService.Search:input_type -> proto.SearchTag
-	13, // 19: proto.SearchReferencesService.SearchBy:input_type -> proto.SearchFilter
-	5,  // 20: proto.SearchReferencesService.Sync:input_type -> proto.ReferenceFilter
-	5,  // 21: proto.ReferencePipeService.GetReferences:input_type -> proto.ReferenceFilter
-	5,  // 22: proto.ReferencePipeService.CountReferences:input_type -> proto.ReferenceFilter
-	6,  // 23: proto.ReferencePipeService.AddReferences:input_type -> proto.ReferenceInput
-	6,  // 24: proto.ReferencePipeService.EditReferences:input_type -> proto.ReferenceInput
-	12, // 25: proto.SearchProductService.Search:input_type -> proto.SearchTag
-	13, // 26: proto.SearchProductService.SearchBy:input_type -> proto.SearchFilter
-	9,  // 27: proto.SearchProductService.Sync:input_type -> proto.ProductFilter
-	9,  // 28: proto.ProductPipeService.GetProducts:input_type -> proto.ProductFilter
-	9,  // 29: proto.ProductPipeService.CountProducts:input_type -> proto.ProductFilter
-	10, // 30: proto.ProductPipeService.AddProducts:input_type -> proto.ProductInput
-	10, // 31: proto.ProductPipeService.EditProducts:input_type -> proto.ProductInput
-	7,  // 32: proto.SearchReferencesService.Search:output_type -> proto.ReferenceResponse
-	7,  // 33: proto.SearchReferencesService.SearchBy:output_type -> proto.ReferenceResponse
-	7,  // 34: proto.SearchReferencesService.Sync:output_type -> proto.ReferenceResponse
-	7,  // 35: proto.ReferencePipeService.GetReferences:output_type -> proto.ReferenceResponse
-	7,  // 36: proto.ReferencePipeService.CountReferences:output_type -> proto.ReferenceResponse
-	7,  // 37: proto.ReferencePipeService.AddReferences:output_type -> proto.ReferenceResponse
-	7,  // 38: proto.ReferencePipeService.EditReferences:output_type -> proto.ReferenceResponse
-	11, // 39: proto.SearchProductService.Search:output_type -> proto.ProductResponse
-	11, // 40: proto.SearchProductService.SearchBy:output_type -> proto.ProductResponse
-	11, // 41: proto.SearchProductService.Sync:output_type -> proto.ProductResponse
-	11, // 42: proto.ProductPipeService.GetProducts:output_type -> proto.ProductResponse
-	11, // 43: proto.ProductPipeService.CountProducts:output_type -> proto.ProductResponse
-	11, // 44: proto.ProductPipeService.AddProducts:output_type -> proto.ProductResponse
-	11, // 45: proto.ProductPipeService.EditProducts:output_type -> proto.ProductResponse
-	32, // [32:46] is the sub-list for method output_type
-	18, // [18:32] is the sub-list for method input_type
-	18, // [18:18] is the sub-list for extension type_name
-	18, // [18:18] is the sub-list for extension extendee
-	0,  // [0:18] is the sub-list for field type_name
+var file_search_proto_depIdxs = []int32{
+	2, // 0: proto.SearchTag.RequestParams:type_name -> proto.RequestParams
+	2, // 1: proto.SearchFilter.RequestParams:type_name -> proto.RequestParams
+	0, // 2: proto.SearchReferencesService.Search:input_type -> proto.SearchTag
+	1, // 3: proto.SearchReferencesService.SearchBy:input_type -> proto.SearchFilter
+	3, // 4: proto.SearchReferencesService.Sync:input_type -> proto.ReferenceFilter
+	0, // 5: proto.SearchProductService.Search:input_type -> proto.SearchTag
+	1, // 6: proto.SearchProductService.SearchBy:input_type -> proto.SearchFilter
+	4, // 7: proto.SearchProductService.Sync:input_type -> proto.ProductFilter
+	5, // 8: proto.SearchReferencesService.Search:output_type -> proto.ReferenceResponse
+	5, // 9: proto.SearchReferencesService.SearchBy:output_type -> proto.ReferenceResponse
+	5, // 10: proto.SearchReferencesService.Sync:output_type -> proto.ReferenceResponse
+	6, // 11: proto.SearchProductService.Search:output_type -> proto.ProductResponse
+	6, // 12: proto.SearchProductService.SearchBy:output_type -> proto.ProductResponse
+	6, // 13: proto.SearchProductService.Sync:output_type -> proto.ProductResponse
+	8, // [8:14] is the sub-list for method output_type
+	2, // [2:8] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
-func init() { file_proto_search_proto_init() }
-func file_proto_search_proto_init() {
-	if File_proto_search_proto != nil {
+func init() { file_search_proto_init() }
+func file_search_proto_init() {
+	if File_search_proto != nil {
 		return
 	}
+	file_common_proto_init()
+	file_reference_proto_init()
+	file_product_proto_init()
 	if !protoimpl.UnsafeEnabled {
-		file_proto_search_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SneakerProduct); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_proto_search_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SneakerSize); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_proto_search_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SneakerBrand); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_proto_search_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SneakerModel); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_proto_search_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SneakerReference); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_proto_search_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReferenceFilter); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_proto_search_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReferenceInput); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_proto_search_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReferenceResponse); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_proto_search_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RequestParams); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_proto_search_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ProductFilter); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_proto_search_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ProductInput); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_proto_search_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ProductResponse); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_proto_search_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+		file_search_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SearchTag); i {
 			case 0:
 				return &v.state
@@ -1683,7 +289,7 @@ func file_proto_search_proto_init() {
 				return nil
 			}
 		}
-		file_proto_search_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+		file_search_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SearchFilter); i {
 			case 0:
 				return &v.state
@@ -1700,20 +306,20 @@ func file_proto_search_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_proto_search_proto_rawDesc,
+			RawDescriptor: file_search_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   2,
 			NumExtensions: 0,
-			NumServices:   4,
+			NumServices:   2,
 		},
-		GoTypes:           file_proto_search_proto_goTypes,
-		DependencyIndexes: file_proto_search_proto_depIdxs,
-		MessageInfos:      file_proto_search_proto_msgTypes,
+		GoTypes:           file_search_proto_goTypes,
+		DependencyIndexes: file_search_proto_depIdxs,
+		MessageInfos:      file_search_proto_msgTypes,
 	}.Build()
-	File_proto_search_proto = out.File
-	file_proto_search_proto_rawDesc = nil
-	file_proto_search_proto_goTypes = nil
-	file_proto_search_proto_depIdxs = nil
+	File_search_proto = out.File
+	file_search_proto_rawDesc = nil
+	file_search_proto_goTypes = nil
+	file_search_proto_depIdxs = nil
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -1728,8 +334,8 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type SearchReferencesServiceClient interface {
-	Search(ctx context.Context, in *SearchTag, opts ...grpc.CallOption) (SearchReferencesService_SearchClient, error)
-	SearchBy(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (SearchReferencesService_SearchByClient, error)
+	Search(ctx context.Context, in *SearchTag, opts ...grpc.CallOption) (*ReferenceResponse, error)
+	SearchBy(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*ReferenceResponse, error)
 	Sync(ctx context.Context, in *ReferenceFilter, opts ...grpc.CallOption) (*ReferenceResponse, error)
 }
 
@@ -1741,68 +347,22 @@ func NewSearchReferencesServiceClient(cc grpc.ClientConnInterface) SearchReferen
 	return &searchReferencesServiceClient{cc}
 }
 
-func (c *searchReferencesServiceClient) Search(ctx context.Context, in *SearchTag, opts ...grpc.CallOption) (SearchReferencesService_SearchClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_SearchReferencesService_serviceDesc.Streams[0], "/proto.SearchReferencesService/Search", opts...)
+func (c *searchReferencesServiceClient) Search(ctx context.Context, in *SearchTag, opts ...grpc.CallOption) (*ReferenceResponse, error) {
+	out := new(ReferenceResponse)
+	err := c.cc.Invoke(ctx, "/proto.SearchReferencesService/Search", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &searchReferencesServiceSearchClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
+	return out, nil
 }
 
-type SearchReferencesService_SearchClient interface {
-	Recv() (*ReferenceResponse, error)
-	grpc.ClientStream
-}
-
-type searchReferencesServiceSearchClient struct {
-	grpc.ClientStream
-}
-
-func (x *searchReferencesServiceSearchClient) Recv() (*ReferenceResponse, error) {
-	m := new(ReferenceResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *searchReferencesServiceClient) SearchBy(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (SearchReferencesService_SearchByClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_SearchReferencesService_serviceDesc.Streams[1], "/proto.SearchReferencesService/SearchBy", opts...)
+func (c *searchReferencesServiceClient) SearchBy(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*ReferenceResponse, error) {
+	out := new(ReferenceResponse)
+	err := c.cc.Invoke(ctx, "/proto.SearchReferencesService/SearchBy", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &searchReferencesServiceSearchByClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type SearchReferencesService_SearchByClient interface {
-	Recv() (*ReferenceResponse, error)
-	grpc.ClientStream
-}
-
-type searchReferencesServiceSearchByClient struct {
-	grpc.ClientStream
-}
-
-func (x *searchReferencesServiceSearchByClient) Recv() (*ReferenceResponse, error) {
-	m := new(ReferenceResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
+	return out, nil
 }
 
 func (c *searchReferencesServiceClient) Sync(ctx context.Context, in *ReferenceFilter, opts ...grpc.CallOption) (*ReferenceResponse, error) {
@@ -1816,8 +376,8 @@ func (c *searchReferencesServiceClient) Sync(ctx context.Context, in *ReferenceF
 
 // SearchReferencesServiceServer is the server API for SearchReferencesService service.
 type SearchReferencesServiceServer interface {
-	Search(*SearchTag, SearchReferencesService_SearchServer) error
-	SearchBy(*SearchFilter, SearchReferencesService_SearchByServer) error
+	Search(context.Context, *SearchTag) (*ReferenceResponse, error)
+	SearchBy(context.Context, *SearchFilter) (*ReferenceResponse, error)
 	Sync(context.Context, *ReferenceFilter) (*ReferenceResponse, error)
 }
 
@@ -1825,11 +385,11 @@ type SearchReferencesServiceServer interface {
 type UnimplementedSearchReferencesServiceServer struct {
 }
 
-func (*UnimplementedSearchReferencesServiceServer) Search(*SearchTag, SearchReferencesService_SearchServer) error {
-	return status.Errorf(codes.Unimplemented, "method Search not implemented")
+func (*UnimplementedSearchReferencesServiceServer) Search(context.Context, *SearchTag) (*ReferenceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
 }
-func (*UnimplementedSearchReferencesServiceServer) SearchBy(*SearchFilter, SearchReferencesService_SearchByServer) error {
-	return status.Errorf(codes.Unimplemented, "method SearchBy not implemented")
+func (*UnimplementedSearchReferencesServiceServer) SearchBy(context.Context, *SearchFilter) (*ReferenceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchBy not implemented")
 }
 func (*UnimplementedSearchReferencesServiceServer) Sync(context.Context, *ReferenceFilter) (*ReferenceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Sync not implemented")
@@ -1839,46 +399,40 @@ func RegisterSearchReferencesServiceServer(s *grpc.Server, srv SearchReferencesS
 	s.RegisterService(&_SearchReferencesService_serviceDesc, srv)
 }
 
-func _SearchReferencesService_Search_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SearchTag)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
+func _SearchReferencesService_Search_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchTag)
+	if err := dec(in); err != nil {
+		return nil, err
 	}
-	return srv.(SearchReferencesServiceServer).Search(m, &searchReferencesServiceSearchServer{stream})
-}
-
-type SearchReferencesService_SearchServer interface {
-	Send(*ReferenceResponse) error
-	grpc.ServerStream
-}
-
-type searchReferencesServiceSearchServer struct {
-	grpc.ServerStream
-}
-
-func (x *searchReferencesServiceSearchServer) Send(m *ReferenceResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _SearchReferencesService_SearchBy_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SearchFilter)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
+	if interceptor == nil {
+		return srv.(SearchReferencesServiceServer).Search(ctx, in)
 	}
-	return srv.(SearchReferencesServiceServer).SearchBy(m, &searchReferencesServiceSearchByServer{stream})
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.SearchReferencesService/Search",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SearchReferencesServiceServer).Search(ctx, req.(*SearchTag))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
-type SearchReferencesService_SearchByServer interface {
-	Send(*ReferenceResponse) error
-	grpc.ServerStream
-}
-
-type searchReferencesServiceSearchByServer struct {
-	grpc.ServerStream
-}
-
-func (x *searchReferencesServiceSearchByServer) Send(m *ReferenceResponse) error {
-	return x.ServerStream.SendMsg(m)
+func _SearchReferencesService_SearchBy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchFilter)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SearchReferencesServiceServer).SearchBy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.SearchReferencesService/SearchBy",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SearchReferencesServiceServer).SearchBy(ctx, req.(*SearchFilter))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _SearchReferencesService_Sync_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -1904,319 +458,28 @@ var _SearchReferencesService_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*SearchReferencesServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "Search",
+			Handler:    _SearchReferencesService_Search_Handler,
+		},
+		{
+			MethodName: "SearchBy",
+			Handler:    _SearchReferencesService_SearchBy_Handler,
+		},
+		{
 			MethodName: "Sync",
 			Handler:    _SearchReferencesService_Sync_Handler,
 		},
 	},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "Search",
-			Handler:       _SearchReferencesService_Search_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "SearchBy",
-			Handler:       _SearchReferencesService_SearchBy_Handler,
-			ServerStreams: true,
-		},
-	},
-	Metadata: "proto/search.proto",
-}
-
-// ReferencePipeServiceClient is the client API for ReferencePipeService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type ReferencePipeServiceClient interface {
-	GetReferences(ctx context.Context, in *ReferenceFilter, opts ...grpc.CallOption) (ReferencePipeService_GetReferencesClient, error)
-	CountReferences(ctx context.Context, in *ReferenceFilter, opts ...grpc.CallOption) (ReferencePipeService_CountReferencesClient, error)
-	AddReferences(ctx context.Context, in *ReferenceInput, opts ...grpc.CallOption) (ReferencePipeService_AddReferencesClient, error)
-	EditReferences(ctx context.Context, in *ReferenceInput, opts ...grpc.CallOption) (ReferencePipeService_EditReferencesClient, error)
-}
-
-type referencePipeServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewReferencePipeServiceClient(cc grpc.ClientConnInterface) ReferencePipeServiceClient {
-	return &referencePipeServiceClient{cc}
-}
-
-func (c *referencePipeServiceClient) GetReferences(ctx context.Context, in *ReferenceFilter, opts ...grpc.CallOption) (ReferencePipeService_GetReferencesClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_ReferencePipeService_serviceDesc.Streams[0], "/proto.ReferencePipeService/GetReferences", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &referencePipeServiceGetReferencesClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type ReferencePipeService_GetReferencesClient interface {
-	Recv() (*ReferenceResponse, error)
-	grpc.ClientStream
-}
-
-type referencePipeServiceGetReferencesClient struct {
-	grpc.ClientStream
-}
-
-func (x *referencePipeServiceGetReferencesClient) Recv() (*ReferenceResponse, error) {
-	m := new(ReferenceResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *referencePipeServiceClient) CountReferences(ctx context.Context, in *ReferenceFilter, opts ...grpc.CallOption) (ReferencePipeService_CountReferencesClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_ReferencePipeService_serviceDesc.Streams[1], "/proto.ReferencePipeService/CountReferences", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &referencePipeServiceCountReferencesClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type ReferencePipeService_CountReferencesClient interface {
-	Recv() (*ReferenceResponse, error)
-	grpc.ClientStream
-}
-
-type referencePipeServiceCountReferencesClient struct {
-	grpc.ClientStream
-}
-
-func (x *referencePipeServiceCountReferencesClient) Recv() (*ReferenceResponse, error) {
-	m := new(ReferenceResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *referencePipeServiceClient) AddReferences(ctx context.Context, in *ReferenceInput, opts ...grpc.CallOption) (ReferencePipeService_AddReferencesClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_ReferencePipeService_serviceDesc.Streams[2], "/proto.ReferencePipeService/AddReferences", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &referencePipeServiceAddReferencesClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type ReferencePipeService_AddReferencesClient interface {
-	Recv() (*ReferenceResponse, error)
-	grpc.ClientStream
-}
-
-type referencePipeServiceAddReferencesClient struct {
-	grpc.ClientStream
-}
-
-func (x *referencePipeServiceAddReferencesClient) Recv() (*ReferenceResponse, error) {
-	m := new(ReferenceResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *referencePipeServiceClient) EditReferences(ctx context.Context, in *ReferenceInput, opts ...grpc.CallOption) (ReferencePipeService_EditReferencesClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_ReferencePipeService_serviceDesc.Streams[3], "/proto.ReferencePipeService/EditReferences", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &referencePipeServiceEditReferencesClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type ReferencePipeService_EditReferencesClient interface {
-	Recv() (*ReferenceResponse, error)
-	grpc.ClientStream
-}
-
-type referencePipeServiceEditReferencesClient struct {
-	grpc.ClientStream
-}
-
-func (x *referencePipeServiceEditReferencesClient) Recv() (*ReferenceResponse, error) {
-	m := new(ReferenceResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-// ReferencePipeServiceServer is the server API for ReferencePipeService service.
-type ReferencePipeServiceServer interface {
-	GetReferences(*ReferenceFilter, ReferencePipeService_GetReferencesServer) error
-	CountReferences(*ReferenceFilter, ReferencePipeService_CountReferencesServer) error
-	AddReferences(*ReferenceInput, ReferencePipeService_AddReferencesServer) error
-	EditReferences(*ReferenceInput, ReferencePipeService_EditReferencesServer) error
-}
-
-// UnimplementedReferencePipeServiceServer can be embedded to have forward compatible implementations.
-type UnimplementedReferencePipeServiceServer struct {
-}
-
-func (*UnimplementedReferencePipeServiceServer) GetReferences(*ReferenceFilter, ReferencePipeService_GetReferencesServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetReferences not implemented")
-}
-func (*UnimplementedReferencePipeServiceServer) CountReferences(*ReferenceFilter, ReferencePipeService_CountReferencesServer) error {
-	return status.Errorf(codes.Unimplemented, "method CountReferences not implemented")
-}
-func (*UnimplementedReferencePipeServiceServer) AddReferences(*ReferenceInput, ReferencePipeService_AddReferencesServer) error {
-	return status.Errorf(codes.Unimplemented, "method AddReferences not implemented")
-}
-func (*UnimplementedReferencePipeServiceServer) EditReferences(*ReferenceInput, ReferencePipeService_EditReferencesServer) error {
-	return status.Errorf(codes.Unimplemented, "method EditReferences not implemented")
-}
-
-func RegisterReferencePipeServiceServer(s *grpc.Server, srv ReferencePipeServiceServer) {
-	s.RegisterService(&_ReferencePipeService_serviceDesc, srv)
-}
-
-func _ReferencePipeService_GetReferences_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ReferenceFilter)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ReferencePipeServiceServer).GetReferences(m, &referencePipeServiceGetReferencesServer{stream})
-}
-
-type ReferencePipeService_GetReferencesServer interface {
-	Send(*ReferenceResponse) error
-	grpc.ServerStream
-}
-
-type referencePipeServiceGetReferencesServer struct {
-	grpc.ServerStream
-}
-
-func (x *referencePipeServiceGetReferencesServer) Send(m *ReferenceResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _ReferencePipeService_CountReferences_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ReferenceFilter)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ReferencePipeServiceServer).CountReferences(m, &referencePipeServiceCountReferencesServer{stream})
-}
-
-type ReferencePipeService_CountReferencesServer interface {
-	Send(*ReferenceResponse) error
-	grpc.ServerStream
-}
-
-type referencePipeServiceCountReferencesServer struct {
-	grpc.ServerStream
-}
-
-func (x *referencePipeServiceCountReferencesServer) Send(m *ReferenceResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _ReferencePipeService_AddReferences_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ReferenceInput)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ReferencePipeServiceServer).AddReferences(m, &referencePipeServiceAddReferencesServer{stream})
-}
-
-type ReferencePipeService_AddReferencesServer interface {
-	Send(*ReferenceResponse) error
-	grpc.ServerStream
-}
-
-type referencePipeServiceAddReferencesServer struct {
-	grpc.ServerStream
-}
-
-func (x *referencePipeServiceAddReferencesServer) Send(m *ReferenceResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _ReferencePipeService_EditReferences_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ReferenceInput)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ReferencePipeServiceServer).EditReferences(m, &referencePipeServiceEditReferencesServer{stream})
-}
-
-type ReferencePipeService_EditReferencesServer interface {
-	Send(*ReferenceResponse) error
-	grpc.ServerStream
-}
-
-type referencePipeServiceEditReferencesServer struct {
-	grpc.ServerStream
-}
-
-func (x *referencePipeServiceEditReferencesServer) Send(m *ReferenceResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-var _ReferencePipeService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "proto.ReferencePipeService",
-	HandlerType: (*ReferencePipeServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "GetReferences",
-			Handler:       _ReferencePipeService_GetReferences_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "CountReferences",
-			Handler:       _ReferencePipeService_CountReferences_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "AddReferences",
-			Handler:       _ReferencePipeService_AddReferences_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "EditReferences",
-			Handler:       _ReferencePipeService_EditReferences_Handler,
-			ServerStreams: true,
-		},
-	},
-	Metadata: "proto/search.proto",
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "search.proto",
 }
 
 // SearchProductServiceClient is the client API for SearchProductService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type SearchProductServiceClient interface {
-	Search(ctx context.Context, in *SearchTag, opts ...grpc.CallOption) (SearchProductService_SearchClient, error)
-	SearchBy(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (SearchProductService_SearchByClient, error)
+	Search(ctx context.Context, in *SearchTag, opts ...grpc.CallOption) (*ProductResponse, error)
+	SearchBy(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*ProductResponse, error)
 	Sync(ctx context.Context, in *ProductFilter, opts ...grpc.CallOption) (*ProductResponse, error)
 }
 
@@ -2228,68 +491,22 @@ func NewSearchProductServiceClient(cc grpc.ClientConnInterface) SearchProductSer
 	return &searchProductServiceClient{cc}
 }
 
-func (c *searchProductServiceClient) Search(ctx context.Context, in *SearchTag, opts ...grpc.CallOption) (SearchProductService_SearchClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_SearchProductService_serviceDesc.Streams[0], "/proto.SearchProductService/Search", opts...)
+func (c *searchProductServiceClient) Search(ctx context.Context, in *SearchTag, opts ...grpc.CallOption) (*ProductResponse, error) {
+	out := new(ProductResponse)
+	err := c.cc.Invoke(ctx, "/proto.SearchProductService/Search", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &searchProductServiceSearchClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
+	return out, nil
 }
 
-type SearchProductService_SearchClient interface {
-	Recv() (*ProductResponse, error)
-	grpc.ClientStream
-}
-
-type searchProductServiceSearchClient struct {
-	grpc.ClientStream
-}
-
-func (x *searchProductServiceSearchClient) Recv() (*ProductResponse, error) {
-	m := new(ProductResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *searchProductServiceClient) SearchBy(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (SearchProductService_SearchByClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_SearchProductService_serviceDesc.Streams[1], "/proto.SearchProductService/SearchBy", opts...)
+func (c *searchProductServiceClient) SearchBy(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*ProductResponse, error) {
+	out := new(ProductResponse)
+	err := c.cc.Invoke(ctx, "/proto.SearchProductService/SearchBy", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &searchProductServiceSearchByClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type SearchProductService_SearchByClient interface {
-	Recv() (*ProductResponse, error)
-	grpc.ClientStream
-}
-
-type searchProductServiceSearchByClient struct {
-	grpc.ClientStream
-}
-
-func (x *searchProductServiceSearchByClient) Recv() (*ProductResponse, error) {
-	m := new(ProductResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
+	return out, nil
 }
 
 func (c *searchProductServiceClient) Sync(ctx context.Context, in *ProductFilter, opts ...grpc.CallOption) (*ProductResponse, error) {
@@ -2303,8 +520,8 @@ func (c *searchProductServiceClient) Sync(ctx context.Context, in *ProductFilter
 
 // SearchProductServiceServer is the server API for SearchProductService service.
 type SearchProductServiceServer interface {
-	Search(*SearchTag, SearchProductService_SearchServer) error
-	SearchBy(*SearchFilter, SearchProductService_SearchByServer) error
+	Search(context.Context, *SearchTag) (*ProductResponse, error)
+	SearchBy(context.Context, *SearchFilter) (*ProductResponse, error)
 	Sync(context.Context, *ProductFilter) (*ProductResponse, error)
 }
 
@@ -2312,11 +529,11 @@ type SearchProductServiceServer interface {
 type UnimplementedSearchProductServiceServer struct {
 }
 
-func (*UnimplementedSearchProductServiceServer) Search(*SearchTag, SearchProductService_SearchServer) error {
-	return status.Errorf(codes.Unimplemented, "method Search not implemented")
+func (*UnimplementedSearchProductServiceServer) Search(context.Context, *SearchTag) (*ProductResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
 }
-func (*UnimplementedSearchProductServiceServer) SearchBy(*SearchFilter, SearchProductService_SearchByServer) error {
-	return status.Errorf(codes.Unimplemented, "method SearchBy not implemented")
+func (*UnimplementedSearchProductServiceServer) SearchBy(context.Context, *SearchFilter) (*ProductResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchBy not implemented")
 }
 func (*UnimplementedSearchProductServiceServer) Sync(context.Context, *ProductFilter) (*ProductResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Sync not implemented")
@@ -2326,46 +543,40 @@ func RegisterSearchProductServiceServer(s *grpc.Server, srv SearchProductService
 	s.RegisterService(&_SearchProductService_serviceDesc, srv)
 }
 
-func _SearchProductService_Search_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SearchTag)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
+func _SearchProductService_Search_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchTag)
+	if err := dec(in); err != nil {
+		return nil, err
 	}
-	return srv.(SearchProductServiceServer).Search(m, &searchProductServiceSearchServer{stream})
-}
-
-type SearchProductService_SearchServer interface {
-	Send(*ProductResponse) error
-	grpc.ServerStream
-}
-
-type searchProductServiceSearchServer struct {
-	grpc.ServerStream
-}
-
-func (x *searchProductServiceSearchServer) Send(m *ProductResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _SearchProductService_SearchBy_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SearchFilter)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
+	if interceptor == nil {
+		return srv.(SearchProductServiceServer).Search(ctx, in)
 	}
-	return srv.(SearchProductServiceServer).SearchBy(m, &searchProductServiceSearchByServer{stream})
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.SearchProductService/Search",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SearchProductServiceServer).Search(ctx, req.(*SearchTag))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
-type SearchProductService_SearchByServer interface {
-	Send(*ProductResponse) error
-	grpc.ServerStream
-}
-
-type searchProductServiceSearchByServer struct {
-	grpc.ServerStream
-}
-
-func (x *searchProductServiceSearchByServer) Send(m *ProductResponse) error {
-	return x.ServerStream.SendMsg(m)
+func _SearchProductService_SearchBy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchFilter)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SearchProductServiceServer).SearchBy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.SearchProductService/SearchBy",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SearchProductServiceServer).SearchBy(ctx, req.(*SearchFilter))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _SearchProductService_Sync_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -2391,309 +602,18 @@ var _SearchProductService_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*SearchProductServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "Search",
+			Handler:    _SearchProductService_Search_Handler,
+		},
+		{
+			MethodName: "SearchBy",
+			Handler:    _SearchProductService_SearchBy_Handler,
+		},
+		{
 			MethodName: "Sync",
 			Handler:    _SearchProductService_Sync_Handler,
 		},
 	},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "Search",
-			Handler:       _SearchProductService_Search_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "SearchBy",
-			Handler:       _SearchProductService_SearchBy_Handler,
-			ServerStreams: true,
-		},
-	},
-	Metadata: "proto/search.proto",
-}
-
-// ProductPipeServiceClient is the client API for ProductPipeService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type ProductPipeServiceClient interface {
-	GetProducts(ctx context.Context, in *ProductFilter, opts ...grpc.CallOption) (ProductPipeService_GetProductsClient, error)
-	CountProducts(ctx context.Context, in *ProductFilter, opts ...grpc.CallOption) (ProductPipeService_CountProductsClient, error)
-	AddProducts(ctx context.Context, in *ProductInput, opts ...grpc.CallOption) (ProductPipeService_AddProductsClient, error)
-	EditProducts(ctx context.Context, in *ProductInput, opts ...grpc.CallOption) (ProductPipeService_EditProductsClient, error)
-}
-
-type productPipeServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewProductPipeServiceClient(cc grpc.ClientConnInterface) ProductPipeServiceClient {
-	return &productPipeServiceClient{cc}
-}
-
-func (c *productPipeServiceClient) GetProducts(ctx context.Context, in *ProductFilter, opts ...grpc.CallOption) (ProductPipeService_GetProductsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_ProductPipeService_serviceDesc.Streams[0], "/proto.ProductPipeService/GetProducts", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &productPipeServiceGetProductsClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type ProductPipeService_GetProductsClient interface {
-	Recv() (*ProductResponse, error)
-	grpc.ClientStream
-}
-
-type productPipeServiceGetProductsClient struct {
-	grpc.ClientStream
-}
-
-func (x *productPipeServiceGetProductsClient) Recv() (*ProductResponse, error) {
-	m := new(ProductResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *productPipeServiceClient) CountProducts(ctx context.Context, in *ProductFilter, opts ...grpc.CallOption) (ProductPipeService_CountProductsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_ProductPipeService_serviceDesc.Streams[1], "/proto.ProductPipeService/CountProducts", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &productPipeServiceCountProductsClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type ProductPipeService_CountProductsClient interface {
-	Recv() (*ProductResponse, error)
-	grpc.ClientStream
-}
-
-type productPipeServiceCountProductsClient struct {
-	grpc.ClientStream
-}
-
-func (x *productPipeServiceCountProductsClient) Recv() (*ProductResponse, error) {
-	m := new(ProductResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *productPipeServiceClient) AddProducts(ctx context.Context, in *ProductInput, opts ...grpc.CallOption) (ProductPipeService_AddProductsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_ProductPipeService_serviceDesc.Streams[2], "/proto.ProductPipeService/AddProducts", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &productPipeServiceAddProductsClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type ProductPipeService_AddProductsClient interface {
-	Recv() (*ProductResponse, error)
-	grpc.ClientStream
-}
-
-type productPipeServiceAddProductsClient struct {
-	grpc.ClientStream
-}
-
-func (x *productPipeServiceAddProductsClient) Recv() (*ProductResponse, error) {
-	m := new(ProductResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *productPipeServiceClient) EditProducts(ctx context.Context, in *ProductInput, opts ...grpc.CallOption) (ProductPipeService_EditProductsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_ProductPipeService_serviceDesc.Streams[3], "/proto.ProductPipeService/EditProducts", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &productPipeServiceEditProductsClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type ProductPipeService_EditProductsClient interface {
-	Recv() (*ProductResponse, error)
-	grpc.ClientStream
-}
-
-type productPipeServiceEditProductsClient struct {
-	grpc.ClientStream
-}
-
-func (x *productPipeServiceEditProductsClient) Recv() (*ProductResponse, error) {
-	m := new(ProductResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-// ProductPipeServiceServer is the server API for ProductPipeService service.
-type ProductPipeServiceServer interface {
-	GetProducts(*ProductFilter, ProductPipeService_GetProductsServer) error
-	CountProducts(*ProductFilter, ProductPipeService_CountProductsServer) error
-	AddProducts(*ProductInput, ProductPipeService_AddProductsServer) error
-	EditProducts(*ProductInput, ProductPipeService_EditProductsServer) error
-}
-
-// UnimplementedProductPipeServiceServer can be embedded to have forward compatible implementations.
-type UnimplementedProductPipeServiceServer struct {
-}
-
-func (*UnimplementedProductPipeServiceServer) GetProducts(*ProductFilter, ProductPipeService_GetProductsServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetProducts not implemented")
-}
-func (*UnimplementedProductPipeServiceServer) CountProducts(*ProductFilter, ProductPipeService_CountProductsServer) error {
-	return status.Errorf(codes.Unimplemented, "method CountProducts not implemented")
-}
-func (*UnimplementedProductPipeServiceServer) AddProducts(*ProductInput, ProductPipeService_AddProductsServer) error {
-	return status.Errorf(codes.Unimplemented, "method AddProducts not implemented")
-}
-func (*UnimplementedProductPipeServiceServer) EditProducts(*ProductInput, ProductPipeService_EditProductsServer) error {
-	return status.Errorf(codes.Unimplemented, "method EditProducts not implemented")
-}
-
-func RegisterProductPipeServiceServer(s *grpc.Server, srv ProductPipeServiceServer) {
-	s.RegisterService(&_ProductPipeService_serviceDesc, srv)
-}
-
-func _ProductPipeService_GetProducts_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ProductFilter)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ProductPipeServiceServer).GetProducts(m, &productPipeServiceGetProductsServer{stream})
-}
-
-type ProductPipeService_GetProductsServer interface {
-	Send(*ProductResponse) error
-	grpc.ServerStream
-}
-
-type productPipeServiceGetProductsServer struct {
-	grpc.ServerStream
-}
-
-func (x *productPipeServiceGetProductsServer) Send(m *ProductResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _ProductPipeService_CountProducts_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ProductFilter)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ProductPipeServiceServer).CountProducts(m, &productPipeServiceCountProductsServer{stream})
-}
-
-type ProductPipeService_CountProductsServer interface {
-	Send(*ProductResponse) error
-	grpc.ServerStream
-}
-
-type productPipeServiceCountProductsServer struct {
-	grpc.ServerStream
-}
-
-func (x *productPipeServiceCountProductsServer) Send(m *ProductResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _ProductPipeService_AddProducts_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ProductInput)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ProductPipeServiceServer).AddProducts(m, &productPipeServiceAddProductsServer{stream})
-}
-
-type ProductPipeService_AddProductsServer interface {
-	Send(*ProductResponse) error
-	grpc.ServerStream
-}
-
-type productPipeServiceAddProductsServer struct {
-	grpc.ServerStream
-}
-
-func (x *productPipeServiceAddProductsServer) Send(m *ProductResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _ProductPipeService_EditProducts_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ProductInput)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ProductPipeServiceServer).EditProducts(m, &productPipeServiceEditProductsServer{stream})
-}
-
-type ProductPipeService_EditProductsServer interface {
-	Send(*ProductResponse) error
-	grpc.ServerStream
-}
-
-type productPipeServiceEditProductsServer struct {
-	grpc.ServerStream
-}
-
-func (x *productPipeServiceEditProductsServer) Send(m *ProductResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-var _ProductPipeService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "proto.ProductPipeService",
-	HandlerType: (*ProductPipeServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "GetProducts",
-			Handler:       _ProductPipeService_GetProducts_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "CountProducts",
-			Handler:       _ProductPipeService_CountProducts_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "AddProducts",
-			Handler:       _ProductPipeService_AddProducts_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "EditProducts",
-			Handler:       _ProductPipeService_EditProducts_Handler,
-			ServerStreams: true,
-		},
-	},
-	Metadata: "proto/search.proto",
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "search.proto",
 }

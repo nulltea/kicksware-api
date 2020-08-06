@@ -10,7 +10,8 @@ import (
 	"reference-service/env"
 )
 
-//go:generate protoc --go_out=plugins=grpc:. proto/reference.proto
+//go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. common.proto
+//go:generate protoc --proto_path=../../../service-protos --go_out=plugins=grpc:proto/. reference.proto
 
 type Handler struct {
 	service     service.SneakerReferenceService
@@ -32,10 +33,10 @@ func (h *Handler) GetReferences(ctx context.Context, filter *proto.ReferenceFilt
 		params = filter.RequestParams.ToNative()
 	}
 
-	if len(filter.ReferenceID) == 0 && filter.RequestQuery == nil  {
+	if len(filter.ReferenceID) == 0 && filter.RequestQuery == nil {
 		references, err = h.service.FetchAll(params)
 	} else if filter.RequestQuery != nil {
-		query, _ := meta.NewRequestQuery(filter.RequestQuery)
+		query := filter.RequestQuery.AsMap()
 		references, err = h.service.FetchQuery(query, params)
 	} else if len(filter.ReferenceID) == 1 {
 		ref, e := h.service.FetchOne(filter.ReferenceID[0], params); if e != nil {
@@ -55,12 +56,15 @@ func (h *Handler) GetReferences(ctx context.Context, filter *proto.ReferenceFilt
 
 func (h *Handler) CountReferences(ctx context.Context, filter *proto.ReferenceFilter) (resp *proto.ReferenceResponse, err error) {
 	var count int = 0
+	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
+		params = filter.RequestParams.ToNative()
+	}
 
-	if filter == nil {
+	if len(filter.ReferenceID) == 0 && filter.RequestQuery == nil {
 		count, err = h.service.CountAll()
 	} else if filter.RequestQuery != nil {
-		query, _ := meta.NewRequestQuery(filter.RequestQuery)
-		count, err = h.service.Count(query, filter.RequestParams.ToNative())
+		query := filter.RequestQuery.AsMap()
+		count, err = h.service.Count(query, params)
 	}
 
 	resp = &proto.ReferenceResponse{
@@ -100,4 +104,8 @@ func (h *Handler) EditReferences(ctx context.Context, input *proto.ReferenceInpu
 
 	resp = &proto.ReferenceResponse{Count: succeeded}
 	return
+}
+
+func (h *Handler) DeleteReferences(ctx context.Context, filter *proto.ReferenceFilter) (resp *proto.ReferenceResponse, err error) {
+	panic("implement me")
 }

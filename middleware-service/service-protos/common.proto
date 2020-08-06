@@ -1,0 +1,13 @@
+﻿syntax = "proto3";
+
+package proto;
+
+option go_package = ".;proto";
+option csharp_namespace = "Proto";
+
+message RequestParams {
+  int32 Limit = 1;
+  int32 Offset = 2;
+  string SortBy = 3;
+  string SortDirection = 4;
+}

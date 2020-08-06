@@ -10,7 +10,11 @@ import (
 	"search-service/env"
 )
 
-//go:generate protoc --go_out=plugins=grpc:. proto/search.proto
+//go:generate protoc --proto_path=../../../service-protos --go_out=plugins=grpc:proto/. reference.proto
+//go:generate protoc --proto_path=../../../service-protos --go_out=plugins=grpc:proto/. product.proto
+//go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. common.proto
+//go:generate protoc --proto_path=../../../service-protos --go_out=plugins=grpc:proto/. search.proto
+
 
 type Handler struct {
 	search      service.ReferenceSearchService
@@ -28,18 +32,18 @@ func NewHandler(search service.ReferenceSearchService, sync service.ReferenceSyn
 	}
 }
 
-func (h *Handler) Search(tag *proto.SearchTag, srv proto.SearchReferencesService_SearchServer) error {
+func (h *Handler) Search(ctx context.Context, tag *proto.SearchTag) (resp *proto.ReferenceResponse, err error) {
 	refs, err :=  h.search.Search(tag.Tag, tag.RequestParams.ToNative()); if err != nil {
-		return err
+		return
 	}
-	srv.Send(&proto.ReferenceResponse{
+	resp = &proto.ReferenceResponse{
 		References: proto.NativeToReferences(refs),
 		Count: int64(len(refs)),
-	})
-	return nil
+	}
+	return
 }
 
-func (h *Handler) SearchBy(filter *proto.SearchFilter, srv proto.SearchReferencesService_SearchByServer) (err error){
+func (h *Handler) SearchBy(ctx context.Context, filter *proto.SearchFilter) (resp *proto.ReferenceResponse, err error) {
 	var refs []*model.SneakerReference
 	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
 		params = filter.RequestParams.ToNative()
@@ -47,26 +51,26 @@ func (h *Handler) SearchBy(filter *proto.SearchFilter, srv proto.SearchReference
 
 	if len(filter.SKU) > 0 {
 		refs, err =  h.search.SearchSKU(filter.SKU, params); if err != nil {
-			return err
+			return
 		}
 	} else if len(filter.Model) > 0 {
 		refs, err =  h.search.SearchModel(filter.Model, params); if err != nil {
-			return err
+			return
 		}
 	} else if len(filter.Brand) > 0 {
 		refs, err =  h.search.SearchBrand(filter.Brand, params); if err != nil {
-			return err
+			return
 		}
 	} else {
 		refs, err =  h.search.SearchBy(filter.Field, filter.Value, params); if err != nil {
-			return err
+			return
 		}
 	}
 
-	srv.Send(&proto.ReferenceResponse{
+	resp = &proto.ReferenceResponse{
 		References: proto.NativeToReferences(refs),
 		Count: int64(len(refs)),
-	})
+	}
 	return
 }
 

@@ -18,7 +18,7 @@ import (
 )
 
 type referencePipe struct {
-	client               proto.ReferencePipeServiceClient
+	client               proto.ReferenceServiceClient
 	auth                 service.AuthService
 }
 
@@ -29,7 +29,7 @@ func NewSneakerReferencePipe(auth service.AuthService, config env.CommonConfig) 
 	}
 }
 
-func newRemoteClient(serviceEndpoint string) proto.ReferencePipeServiceClient {
+func newRemoteClient(serviceEndpoint string) proto.ReferenceServiceClient {
 	opts := []grpc.DialOption{
 		grpc.WithInsecure(),
 	}
@@ -39,7 +39,7 @@ func newRemoteClient(serviceEndpoint string) proto.ReferencePipeServiceClient {
 
 	defer conn.Close()
 
-	return proto.NewReferencePipeServiceClient(conn)
+	return proto.NewReferenceServiceClient(conn)
 }
 
 func (p *referencePipe) authenticate() (string, error) {
@@ -56,10 +56,7 @@ func (p *referencePipe) FetchOne(code string) (ref *model.SneakerReference, err 
 	filter := &proto.ReferenceFilter{
 		ReferenceID: []string{code},
 	}
-	ctl, err := p.client.GetReferences(ctx, filter); if err != nil {
-		return nil, err
-	}
-	resp, err := ctl.Recv(); if err != nil {
+	resp, err := p.client.GetReferences(ctx, filter); if err != nil {
 		return nil, err
 	}
 	ref = resp.References[0].ToNative()
@@ -71,10 +68,7 @@ func (p *referencePipe) Fetch(codes []string, params *meta.RequestParams) (refs 
 	filter := &proto.ReferenceFilter{
 		ReferenceID: codes,
 	}
-	ctl, err := p.client.GetReferences(ctx, filter); if err != nil {
-		return nil, err
-	}
-	resp, err := ctl.Recv(); if err != nil {
+	resp, err := p.client.GetReferences(ctx, filter); if err != nil {
 		return nil, err
 	}
 	refs = proto.ReferencesToNative(resp.References)
@@ -83,10 +77,7 @@ func (p *referencePipe) Fetch(codes []string, params *meta.RequestParams) (refs 
 
 func (p *referencePipe) FetchAll(params *meta.RequestParams) (refs []*model.SneakerReference, err error) {
 	ctx := context.Background()
-	ctl, err := p.client.GetReferences(ctx, nil); if err != nil {
-		return nil, err
-	}
-	resp, err := ctl.Recv(); if err != nil {
+	resp, err := p.client.GetReferences(ctx, nil); if err != nil {
 		return nil, err
 	}
 	refs = proto.ReferencesToNative(resp.References)
@@ -102,10 +93,7 @@ func (p *referencePipe) FetchQuery(query meta.RequestQuery, params *meta.Request
 		RequestQuery: str,
 		RequestParams: proto.RequestParams{}.FromNative(params),
 	}
-	ctl, err := p.client.GetReferences(ctx, filter); if err != nil {
-		return nil, err
-	}
-	resp, err := ctl.Recv(); if err != nil {
+	resp, err := p.client.GetReferences(ctx, filter); if err != nil {
 		return nil, err
 	}
 	refs = proto.ReferencesToNative(resp.References)

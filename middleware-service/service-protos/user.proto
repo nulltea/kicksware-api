@@ -4,8 +4,10 @@ package proto;
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/struct.proto";
+import "common.proto";
 
-option go_package = "proto";
+option go_package = ".;proto";
+option csharp_namespace = "Proto";
 
 message User {
   string uniqueID = 1;
@@ -40,9 +42,14 @@ message AddressInfo {
 
 message PaymentInfo {
   string cardNumber = 1;
-  string expires = 2;
+  YearMonth expires = 2;
   string cVV = 3;
   AddressInfo billingInfo = 4;
+}
+
+message YearMonth {
+  int32 year = 1;
+  int32 month = 2;
 }
 
 message UserSettings {
@@ -54,27 +61,21 @@ service UserService {
   rpc CountUsers(UserFilter) returns (UserResponse) {}
   rpc AddUsers(UserInput) returns (UserResponse) {}
   rpc EditUsers(UserInput) returns (UserResponse) {}
+  rpc DeleteUsers(UserFilter) returns (UserResponse) {}
 }
 
 message UserFilter {
   repeated string UserID = 1;
   google.protobuf.Struct RequestQuery = 2;
-  RequestParams RequestParams = 3;
+  proto.RequestParams RequestParams = 3;
 }
 
 message UserInput {
   repeated User Users = 1;
-  RequestParams RequestParams = 2;
+  proto.RequestParams RequestParams = 2;
 }
 
 message UserResponse {
   repeated User Users = 1;
   int64 Count = 2;
-}
-
-message RequestParams {
-  int32 Limit = 1;
-  int32 Offset = 2;
-  string SortBy = 3;
-  string SortDirection = 4;
 }

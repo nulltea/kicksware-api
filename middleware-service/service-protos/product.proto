@@ -4,8 +4,10 @@ package proto;
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/struct.proto";
+import "common.proto";
 
-option go_package = "proto";
+option go_package = ".;proto";
+option csharp_namespace = "Proto";
 
 message SneakerProduct {
   string uniqueId = 1;
@@ -32,10 +34,11 @@ message SneakerSize {
 }
 
 service ProductService {
-  rpc GetProducts(ProductFilter) returns (stream ProductResponse) {}
-  rpc CountProducts(ProductFilter) returns (stream ProductResponse) {}
-  rpc AddProducts(ProductInput) returns (stream ProductResponse) {}
-  rpc EditProducts(ProductInput) returns (stream ProductResponse) {}
+  rpc GetProducts(ProductFilter) returns (ProductResponse) {}
+  rpc CountProducts(ProductFilter) returns (ProductResponse) {}
+  rpc AddProducts(ProductInput) returns (ProductResponse) {}
+  rpc EditProducts(ProductInput) returns (ProductResponse) {}
+  rpc DeleteProducts(ProductFilter) returns (ProductResponse) {}
 }
 
 message ProductFilter {
@@ -54,10 +57,4 @@ message ProductResponse {
   int64 Count = 2;
 }
 
-message RequestParams {
-  int32 Limit = 1;
-  int32 Offset = 2;
-  string SortBy = 3;
-  string SortDirection = 4;
-}
 
