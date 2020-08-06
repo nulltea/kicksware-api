@@ -109,7 +109,8 @@ services:
       - traefik.http.routers.search-router-rest.tls=true
       - traefik.http.routers.search-router-rest.tls.certresolver=le
       - traefik.http.services.search-service-rest.loadbalancer.server.scheme=http
-      - traefik.http.routers.search-router-grpc.rule=Host(`api.kicksware.com`) && PathPrefix(`/proto.SearchService`)
+      - traefik.http.routers.search-router-grpc.rule=Host(`api.kicksware.com`) &&
+        PathPrefix(`/proto.SearchReferencesService`) || PathPrefix(`/proto.SearchProductService`)
       - traefik.http.routers.search-router-grpc.service=search-service-grpc
       - traefik.http.services.search-service-grpc.loadbalancer.server.scheme=h2c
       - traefik.docker.network=web

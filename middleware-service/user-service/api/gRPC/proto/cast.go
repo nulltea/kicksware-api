@@ -54,6 +54,9 @@ func (m *User) FromNative(n *model.User) *User {
 func NativeToUsers(native []*model.User) []*User {
 	users := make([]*User, 0)
 	for _, user := range native {
+		if user == nil {
+			continue;
+		}
 		users = append(users, (&User{}).FromNative(user))
 	}
 	return users
