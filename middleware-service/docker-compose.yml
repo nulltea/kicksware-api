@@ -46,7 +46,8 @@ services:
       - traefik.http.routers.user-router-rest.tls=true
       - traefik.http.routers.user-router-rest.tls.certresolver=le
       - traefik.http.services.user-service-rest.loadbalancer.server.scheme=http
-      - traefik.http.routers.user-router-grpc.rule=Host(`api.kicksware.com`) && PathPrefix(`/proto.UserService`)
+      - traefik.http.routers.user-router-grpc.rule=Host(`api.kicksware.com`) && PathPrefix(`/proto.UserService`) ||
+        PathPrefix(`/proto.AuthService`) || PathPrefix(`/proto.MailService`) || PathPrefix(`/proto.InteractService`)
       - traefik.http.routers.user-router-grpc.service=user-service-grpc
       - traefik.http.services.user-service-grpc.loadbalancer.server.scheme=h2c
       - traefik.docker.network=web
