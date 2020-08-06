@@ -32,12 +32,13 @@ func NewSneakerReferencePipe(auth service.AuthService, config env.CommonConfig) 
 func newRemoteClient(serviceEndpoint string) proto.ReferenceServiceClient {
 	opts := []grpc.DialOption{
 		grpc.WithInsecure(),
+		grpc.WithDefaultCallOptions(
+			grpc.MaxCallRecvMsgSize(1024 * 1024 * 50),
+		),
 	}
 	conn, err := grpc.Dial(serviceEndpoint, opts...); if err != nil {
 		glog.Fatalf("fail to dial: %v", err)
 	}
-
-	defer conn.Close()
 
 	return proto.NewReferenceServiceClient(conn)
 }
@@ -77,7 +78,7 @@ func (p *referencePipe) Fetch(codes []string, params *meta.RequestParams) (refs 
 
 func (p *referencePipe) FetchAll(params *meta.RequestParams) (refs []*model.SneakerReference, err error) {
 	ctx := context.Background()
-	resp, err := p.client.GetReferences(ctx, nil); if err != nil {
+	resp, err := p.client.GetReferences(ctx, &proto.ReferenceFilter{}); if err != nil {
 		return nil, err
 	}
 	refs = proto.ReferencesToNative(resp.References)

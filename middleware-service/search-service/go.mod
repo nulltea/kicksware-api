@@ -15,7 +15,7 @@ require (
 	github.com/olivere/elastic/v7 v7.0.12
 	github.com/pkg/errors v0.9.1
 	github.com/thoas/go-funk v0.6.0
-	github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200803150159-a80128b9c4e0
+	github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200806211258-2c5a1e1d24bd
 	github.com/vmihailenco/msgpack v3.3.3+incompatible
 	go.mongodb.org/mongo-driver v1.3.3
 	google.golang.org/grpc v1.30.0

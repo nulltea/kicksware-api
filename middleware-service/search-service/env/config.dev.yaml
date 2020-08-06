@@ -2,7 +2,7 @@ commonConfig:
   host: localhost:8080
   hostname: kicksware.com
   contentType: application/json
-  innerServiceFormat: api.kicksware.com
+  innerServiceFormat: api.kicksware.com:80
 authConfig:
   publicKeyPath: ../key/public.key.pub
   authEndpoint: https://api.kicksware.com/auth/guest
