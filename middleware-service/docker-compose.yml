@@ -10,10 +10,13 @@ services:
     env_file: ./product-service/env/.env.prod
     restart: always
     labels:
-      - traefik.http.routers.product-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/products`)
-      - traefik.http.routers.product-service.tls=true
-      - traefik.http.routers.product-service.tls.certresolver=le
-      - traefik.http.routers.product-service-grpc.rule=Host(`api.kicksware.com`) && PathPrefix(`/proto.ProductService`)
+      - traefik.http.routers.product-router-rest.rule=Host(`api.kicksware.com`) && PathPrefix(`/products`)
+      - traefik.http.routers.product-router-rest.service=product-service-rest
+      - traefik.http.routers.product-router-rest.tls=true
+      - traefik.http.routers.product-router-rest.tls.certresolver=le
+      - traefik.http.services.product-service-rest.loadbalancer.server.scheme=http
+      - traefik.http.routers.product-router-grpc.rule=Host(`api.kicksware.com`) && PathPrefix(`/proto.ProductService`)
+      - traefik.http.routers.product-router-grpc.service=product-service-grpc
       - traefik.http.services.product-service-grpc.loadbalancer.server.scheme=h2c
       - traefik.docker.network=web
     networks:
@@ -37,11 +40,14 @@ services:
     env_file: ./user-service/env/.env.prod
     restart: always
     labels:
-      - traefik.http.routers.user-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/users`) || PathPrefix(`/auth`) ||
+      - traefik.http.routers.user-router-rest.rule=Host(`api.kicksware.com`) && PathPrefix(`/users`) || PathPrefix(`/auth`) ||
         PathPrefix(`/mail`) || PathPrefix(`/interact`)
-      - traefik.http.routers.user-service.tls=true
-      - traefik.http.routers.user-service.tls.certresolver=le
-      - traefik.http.routers.user-service-grpc.rule=Host(`api.kicksware.com`) && PathPrefix(`/proto.UserService`)
+      - traefik.http.routers.user-router-rest.service=user-service-rest
+      - traefik.http.routers.user-router-rest.tls=true
+      - traefik.http.routers.user-router-rest.tls.certresolver=le
+      - traefik.http.services.user-service-rest.loadbalancer.server.scheme=http
+      - traefik.http.routers.user-router-grpc.rule=Host(`api.kicksware.com`) && PathPrefix(`/proto.UserService`)
+      - traefik.http.routers.user-router-grpc.service=user-service-grpc
       - traefik.http.services.user-service-grpc.loadbalancer.server.scheme=h2c
       - traefik.docker.network=web
     networks:
@@ -67,40 +73,18 @@ services:
     env_file: ./reference-service/env/.env.prod
     restart: always
     labels:
-      - traefik.http.routers.reference-service-rest.rule=Host(`api.kicksware.com`) && PathPrefix(`/references`)
-      - traefik.http.routers.reference-service-rest.tls=true
-      - traefik.http.routers.reference-service-rest.tls.certresolver=le
-      - traefik.http.routers.reference-service-grpc.rule=Host(`api.kicksware.com`) && PathPrefix(`/proto.ReferenceService`)
+      - traefik.http.routers.reference-router-rest.rule=Host(`api.kicksware.com`) && PathPrefix(`/references`)
+      - traefik.http.routers.reference-router-rest.service=reference-service-rest
+      - traefik.http.routers.reference-router-rest.tls=true
+      - traefik.http.routers.reference-router-rest.tls.certresolver=le
+      - traefik.http.services.reference-service-rest.loadbalancer.server.scheme=http
+      - traefik.http.routers.reference-router-grpc.rule=Host(`api.kicksware.com`) && PathPrefix(`/proto.ReferenceService`)
+      - traefik.http.routers.reference-router-grpc.service=user-service-grpc
       - traefik.http.services.reference-service-grpc.loadbalancer.server.scheme=h2c
       - traefik.docker.network=web
     # command: /bin/sh -c "dlv debug --headless --listen=:4000 --api-version=2 --accept-multiclient ."
     volumes:
       - /${SOURCE_DIR}/middleware-service/reference-service/env:/dist/env
-      - key-volume:/key
-    networks:
-      - web
-      - data
-    links:
-      - mongodb
-    depends_on:
-      - mongodb
-
-  orders-service:
-    build:
-      context: ./order-service
-      dockerfile: ./docker/Dockerfile
-      target: dev
-    image: orders-service
-    container_name: orders
-    env_file: ./order-service/env/.env.prod
-    restart: always
-    labels:
-      - traefik.http.routers.order-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/orders`)
-      - traefik.http.routers.order-service.tls=true
-      - traefik.http.routers.order-service.tls.certresolver=le
-      - traefik.docker.network=web
-    volumes:
-      - /${SOURCE_DIR}/middleware-service/order-service/env:/dist/env
       - key-volume:/key
     networks:
       - web
@@ -120,10 +104,13 @@ services:
     env_file: ./search-service/env/.env.prod
     restart: always
     labels:
-      - traefik.http.routers.search-service.rule=Host(`api.kicksware.com`) && PathPrefix(`/search`)
-      - traefik.http.routers.search-service.tls=true
-      - traefik.http.routers.search-service.tls.certresolver=le
-      - traefik.http.routers.search-service-grpc.rule=Host(`api.kicksware.com`) && PathPrefix(`/proto.SearchService`)
+      - traefik.http.routers.search-router-rest.rule=Host(`api.kicksware.com`) && PathPrefix(`/search`)
+      - traefik.http.routers.search-router-rest.service=search-service-rest
+      - traefik.http.routers.search-router-rest.tls=true
+      - traefik.http.routers.search-router-rest.tls.certresolver=le
+      - traefik.http.services.search-service-rest.loadbalancer.server.scheme=http
+      - traefik.http.routers.search-router-grpc.rule=Host(`api.kicksware.com`) && PathPrefix(`/proto.SearchService`)
+      - traefik.http.routers.search-router-grpc.service=search-service-grpc
       - traefik.http.services.search-service-grpc.loadbalancer.server.scheme=h2c
       - traefik.docker.network=web
     networks:
@@ -144,6 +131,36 @@ services:
       - elasticsearch
       - kibana
 
+  orders-service:
+    build:
+      context: ./order-service
+      dockerfile: ./docker/Dockerfile
+      target: dev
+    image: orders-service
+    container_name: orders
+    env_file: ./order-service/env/.env.prod
+    restart: always
+    labels:
+      - traefik.http.routers.order-router-rest.rule=Host(`api.kicksware.com`) && PathPrefix(`/orders`)
+      - traefik.http.routers.order-router-rest.service=order-service-rest
+      - traefik.http.routers.order-router-rest.tls=true
+      - traefik.http.routers.order-router-rest.tls.certresolver=le
+      - traefik.http.services.order-service-rest.loadbalancer.server.scheme=http
+      - traefik.http.routers.order-router-grpc.rule=Host(`api.kicksware.com`) && PathPrefix(`/proto.OrderService`)
+      - traefik.http.routers.order-router-grpc.service=order-service-grpc
+      - traefik.http.services.order-service-grpc.loadbalancer.server.scheme=h2c
+      - traefik.docker.network=web
+    volumes:
+      - /${SOURCE_DIR}/middleware-service/order-service/env:/dist/env
+      - key-volume:/key
+    networks:
+      - web
+      - data
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+
   cdn-service:
     build:
       context: ./cdn-service
@@ -154,9 +171,14 @@ services:
     env_file: ./cdn-service/env/.env.prod
     restart: always
     labels:
-      - traefik.http.routers.cdn-service.rule=Host(`cdn.kicksware.com`)
-      - traefik.http.routers.cdn-service.tls=true
-      - traefik.http.routers.cdn-service.tls.certresolver=le
+      - traefik.http.routers.cdn-router-rest.rule=Host(`cdn.kicksware.com`)
+      - traefik.http.routers.cdn-router-rest.service=cdn-service-rest
+      - traefik.http.routers.cdn-router-rest.tls=true
+      - traefik.http.routers.cdn-router-rest.tls.certresolver=le
+      - traefik.http.services.cdn-service-rest.loadbalancer.server.scheme=http
+      - traefik.http.routers.cdn-router-grpc.rule=Host(`cdn.kicksware.com`)
+      - traefik.http.routers.cdn-router-grpc.service=cdn-service-grpc
+      - traefik.http.services.cdn-service-grpc.loadbalancer.server.scheme=h2c
       - traefik.docker.network=web
     volumes:
       - /${SOURCE_DIR}/middleware-service/cdn-service/env:/dist/env
@@ -213,6 +235,8 @@ services:
     networks:
       - web
       - elastic
+    ports:
+    - 9200:9200
   # logging:
   #   driver: none
 

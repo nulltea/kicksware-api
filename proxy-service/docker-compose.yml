@@ -14,7 +14,6 @@ services:
       - --providers.file.filename=/proxy-config.toml
       - --providers.file.watch=true
       - --entryPoints.web.address=:80
-      - --entryPoints.grpc.address=:442
       - --entryPoints.websecure.address=:443
       # - --entryPoints.debug.address=:4000
       - --certificatesResolvers.le.acme.email=timothy@kicksware.com
@@ -30,6 +29,7 @@ services:
       - traefik.http.routers.traefik-secure.tls=true
       - traefik.http.routers.traefik-secure.tls.domains[0].main=kicksware.com
       - traefik.http.routers.traefik-secure.tls.domains[0].sans=*.kicksware.com
+      - traefik.http.routers.traefik.service=api@internal
       - traefik.http.routers.traefik-secure.service=api@internal
       - traefik.http.routers.traefik.middlewares=traefik-https-redirect
       - traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https
@@ -44,8 +44,8 @@ services:
       - DO_AUTH_TOKEN=6229b9e18dd51158da31da743bcf36262a11e8075a8ea2847d555cb9a3e47bf4
     ports:
       - 80:80
-      - 442:442
       - 443:443
+      # - 4000:4000
     networks:
       - web
     volumes:
@@ -54,7 +54,6 @@ services:
       - type: bind
         source: /${SOURCE_DIR}/proxy-service/proxy-config.toml
         target: /proxy-config.toml
-
 
 networks:
   web:
