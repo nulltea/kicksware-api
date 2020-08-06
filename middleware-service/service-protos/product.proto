@@ -42,19 +42,19 @@ service ProductService {
 }
 
 message ProductFilter {
-  repeated string ProductID = 1;
-  google.protobuf.Struct RequestQuery = 2;
-  RequestParams RequestParams = 3;
+  repeated string productID = 1;
+  google.protobuf.Struct requestQuery = 2;
+  RequestParams requestParams = 3;
 }
 
 message ProductInput {
-  repeated SneakerProduct Products = 1;
-  RequestParams RequestParams = 2;
+  repeated SneakerProduct products = 1;
+  RequestParams requestParams = 2;
 }
 
 message ProductResponse {
-  repeated SneakerProduct Products = 1;
-  int64 Count = 2;
+  repeated SneakerProduct products = 1;
+  int64 vount = 2;
 }
 
 

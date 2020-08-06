@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = ".;proto";
+option csharp_namespace = "Proto";
+
+message MailRequest {
+  string userID = 1;
+  string callbackURL = 2;
+  string messageContent = 3;
+}
+
+message MailResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+service MailService {
+  rpc SendEmailConfirmation(MailRequest) returns (MailResponse);
+  rpc SendResetPassword(MailRequest) returns (MailResponse);
+  rpc SendNotification(MailRequest) returns (MailResponse);
+}

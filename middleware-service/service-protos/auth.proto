@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package proto;
+
+import "user.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = ".;proto";
+option csharp_namespace = "Proto";
+
+message AuthToken {
+  string token = 1;
+  bool success = 2;
+  google.protobuf.Timestamp expires = 3;
+}
+
+service AuthService {
+  rpc SignUp(User) returns (AuthToken);
+  rpc Login(User) returns (AuthToken);
+  rpc Remote(User) returns (AuthToken);
+  rpc Guest(google.protobuf.Empty) returns (AuthToken);
+  rpc GenerateToken(User) returns (AuthToken);
+  rpc Refresh(AuthToken) returns (AuthToken);
+  rpc Logout(AuthToken) returns (AuthToken);
+}

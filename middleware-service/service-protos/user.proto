@@ -65,17 +65,17 @@ service UserService {
 }
 
 message UserFilter {
-  repeated string UserID = 1;
-  google.protobuf.Struct RequestQuery = 2;
-  proto.RequestParams RequestParams = 3;
+  repeated string userID = 1;
+  google.protobuf.Struct requestQuery = 2;
+  proto.RequestParams requestParams = 3;
 }
 
 message UserInput {
-  repeated User Users = 1;
-  proto.RequestParams RequestParams = 2;
+  repeated User users = 1;
+  proto.RequestParams requestParams = 2;
 }
 
 message UserResponse {
-  repeated User Users = 1;
-  int64 Count = 2;
+  repeated User users = 1;
+  int64 count = 2;
 }

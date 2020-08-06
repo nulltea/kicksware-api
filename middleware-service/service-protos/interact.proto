@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = ".;proto";
+option csharp_namespace = "Proto";
+
+message LikeRequest {
+  string userID = 1;
+  string entityID = 2;
+}
+
+message LikeResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+service InteractService {
+  rpc Like(LikeRequest) returns (LikeResponse);
+  rpc Unlike(LikeRequest) returns (LikeResponse);
+}

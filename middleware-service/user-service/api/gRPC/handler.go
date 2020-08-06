@@ -2,6 +2,9 @@ package gRPC
 
 //go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. common.proto
 //go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. user.proto
+//go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. auth.proto
+//go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. mail.proto
+//go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. interact.proto
 
 import (
 	"context"

@@ -130,3 +130,18 @@ func (m RequestParams) FromNative(n *meta.RequestParams) *RequestParams {
 	m.SortDirection = n.SortDirection()
 	return &m
 }
+
+func (m *AuthToken) ToNative() *meta.AuthToken {
+	return &meta.AuthToken{
+		Token: m.Token,
+		Success: m.Success,
+		Expires: m.Expires.AsTime(),
+	}
+}
+
+func (m AuthToken) FromNative(n *meta.AuthToken) *AuthToken {
+	m.Token = n.Token
+	m.Success = n.Success
+	m.Expires = timestamppb.New(n.Expires)
+	return &m
+}

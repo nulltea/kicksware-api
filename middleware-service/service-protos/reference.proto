@@ -59,17 +59,17 @@ service ReferenceService {
 }
 
 message ReferenceFilter {
-  repeated string ReferenceID = 1;
-  google.protobuf.Struct RequestQuery = 2;
-  RequestParams RequestParams = 3;
+  repeated string referenceID = 1;
+  google.protobuf.Struct requestQuery = 2;
+  RequestParams requestParams = 3;
 }
 
 message ReferenceInput {
-  repeated SneakerReference References = 1;
-  RequestParams RequestParams = 2;
+  repeated SneakerReference references = 1;
+  RequestParams requestParams = 2;
 }
 
 message ReferenceResponse {
-  repeated SneakerReference References = 1;
-  int64 Count = 2;
+  repeated SneakerReference references = 1;
+  int64 count = 2;
 }
