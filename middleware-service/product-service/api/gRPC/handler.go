@@ -58,12 +58,15 @@ func (h *Handler) GetProducts(ctx context.Context, filter *proto.ProductFilter) 
 
 func (h *Handler) CountProducts(ctx context.Context, filter *proto.ProductFilter) (resp *proto.ProductResponse, err error) {
 	var count int = 0
+	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
+		params = filter.RequestParams.ToNative()
+	}
 
 	if filter == nil {
 		count, err = h.service.CountAll()
 	} else if filter.RequestQuery != nil {
 		query, _ := meta.NewRequestQuery(filter.RequestQuery)
-		count, err = h.service.Count(query, filter.RequestParams.ToNative())
+		count, err = h.service.Count(query, params)
 	}
 
 	resp = &proto.ProductResponse{
