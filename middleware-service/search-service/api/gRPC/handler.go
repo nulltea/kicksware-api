@@ -33,7 +33,11 @@ func NewHandler(search service.ReferenceSearchService, sync service.ReferenceSyn
 }
 
 func (h *Handler) Search(ctx context.Context, tag *proto.SearchTag) (resp *proto.ReferenceResponse, err error) {
-	refs, err :=  h.search.Search(tag.Tag, tag.RequestParams.ToNative()); if err != nil {
+	var params *meta.RequestParams; if tag != nil && tag.RequestParams != nil {
+		params = tag.RequestParams.ToNative()
+	}
+
+	refs, err :=  h.search.Search(tag.Tag, params); if err != nil {
 		return
 	}
 	resp = &proto.ReferenceResponse{

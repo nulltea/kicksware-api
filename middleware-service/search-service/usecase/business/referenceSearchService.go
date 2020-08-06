@@ -66,16 +66,17 @@ func (s *referenceSearchService) Search(query string, params *meta.RequestParams
 		Type(s.params.Type).
 		Slop(s.params.Slop)
 
-		sortBy := "Price"
-
-		if params != nil && len(params.SortBy()) != 0 {
-			sortBy = params.SortBy()
-		}
+	if params == nil {
+		params = &meta.RequestParams{}
+	}
+	sortBy := params.SortBy(); if len(sortBy) == 0 {
+		sortBy = "Price"
+	}
 
 	results, err := s.client.Search().
 		Index(s.index).
 		Query(matchQuery).
-		Sort(sortBy, params.SortBy() == "asc").
+		Sort(sortBy, params.SortDirection() == "asc").
 		From(params.Offset()).
 		Size(params.Limit()).
 		Do(ctx)
@@ -83,9 +84,6 @@ func (s *referenceSearchService) Search(query string, params *meta.RequestParams
 	if err != nil {
 		return nil, errors.Wrap(err, "service.Search")
 	}
-	// log.Printf(		"Query on %v took %d milliseconds\n found total %v",
-	//		query, results.TotalHits(), results.TookInMillis,
-	// )
 
 	refs := make([]*model.SneakerReference, 0)
 	if results.TotalHits() < 0 {
@@ -104,6 +102,13 @@ func (s *referenceSearchService) SearchBy(field, value string, params *meta.Requ
 	defer cancel()
 
 	matchQuery := elastic.NewMatchQuery(field, value)
+	if params == nil {
+		params = &meta.RequestParams{}
+	}
+	sortBy := params.SortBy(); if len(sortBy) != 0 {
+		sortBy = "Price"
+	}
+
 	results, err := s.client.Search().
 		Index(s.index).
 		Query(matchQuery).

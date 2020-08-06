@@ -12,7 +12,7 @@ import (
 
 func ProvideServer(config env.ServiceConfig, router chi.Router, handler *gRPC.Handler) core.Server {
 	srv := server.NewInstance(config.Common.Host)
-	srv.SetupREST( router)
+	srv.SetupREST(router)
 	srv.SetupGRPC(gRPC.ProvideRemoteSetup(handler))
 	return srv
 }
