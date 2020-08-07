@@ -2,12 +2,14 @@
 
 package proto;
 
+import "google/protobuf/wrappers.proto";
+
 option go_package = ".;proto";
 option csharp_namespace = "Proto";
 
 message RequestParams {
   int32 Limit = 1;
   int32 Offset = 2;
-  string SortBy = 3;
-  string SortDirection = 4;
+  google.protobuf.StringValue SortBy = 3;
+  google.protobuf.StringValue SortDirection = 4;
 }

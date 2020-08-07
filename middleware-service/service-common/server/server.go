@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"crypto/rsa"
 	"fmt"
 	"net"
 	"net/http"
@@ -16,14 +17,18 @@ import (
 	"google.golang.org/grpc/reflection"
 
 	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/core"
+	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/service/gRPC"
+	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/service/jwt"
+
 	"github.com/soheilhy/cmux"
 )
 
 type instance struct {
 	Address string
+	Gateway cmux.CMux
 	REST *http.Server
 	GRPC *grpc.Server
-	Gateway cmux.CMux
+	Auth *gRPC.AuthInterceptor
 }
 
 func NewInstance(addr string) core.Server {
@@ -31,22 +36,31 @@ func NewInstance(addr string) core.Server {
 		REST: &http.Server{
 			Addr:      addr,
 		},
-		GRPC: grpc.NewServer(
-			grpc.MaxSendMsgSize(20 * 1024 * 1024),
-		),
 		Address: addr,
 	}
+}
+
+func (s *instance) SetupAuth(pb *rsa.PublicKey, accessRoles map[string][]string) {
+	jwtManager := &jwt.TokenManager{
+		PublicKey: pb,
+	}
+	s.Auth = gRPC.NewAuthInterceptor(jwtManager, accessRoles)
 }
 
 func (s *instance) SetupREST(router chi.Router) {
 	s.REST.Handler = router;
 }
 
-func (s *instance) SetupRoutes(router chi.Router) {
-	s.SetupREST(router)
-}
-
 func (s *instance) SetupGRPC(fn func(srv *grpc.Server)) {
+	options := []grpc.ServerOption{
+		grpc.MaxSendMsgSize(25 * 1024 * 1024),
+		grpc.MaxRecvMsgSize(25 * 1024 * 1024),
+	}; if s.Auth != nil {
+		options = append(options, grpc.UnaryInterceptor(s.Auth.Unary()), grpc.StreamInterceptor(s.Auth.Stream()))
+	}
+
+	s.GRPC = grpc.NewServer(options...)
+
 	fn(s.GRPC)
 	reflection.Register(s.GRPC)
 }
