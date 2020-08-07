@@ -29,7 +29,7 @@ type instance struct {
 	Gateway cmux.CMux
 	REST *http.Server
 	GRPC *grpc.Server
-	Auth *gRPC.AuthInterceptor
+	Auth *gRPC.AuthServerInterceptor
 }
 
 func NewInstance(addr string) core.Server {
@@ -42,7 +42,7 @@ func (s *instance) SetupAuth(pb *rsa.PublicKey, accessRoles map[string][]model.U
 	jwtManager := &jwt.TokenManager{
 		PublicKey: pb,
 	}
-	s.Auth = gRPC.NewAuthInterceptor(jwtManager, accessRoles)
+	s.Auth = gRPC.NewAuthServerInterceptor(jwtManager, accessRoles)
 }
 
 func (s *instance) SetupREST(router chi.Router) {

@@ -19,20 +19,20 @@ const (
 	UserContextKey = "user_id"
 )
 
-type AuthInterceptor struct {
+type AuthServerInterceptor struct {
 	jwtManager *jwt.TokenManager
 	accessRoles map[string][]model.UserRole
 }
 
-func NewAuthInterceptor(jwt *jwt.TokenManager, accessRoles map[string][]model.UserRole) *AuthInterceptor {
-	return &AuthInterceptor{
+func NewAuthServerInterceptor(jwt *jwt.TokenManager, accessRoles map[string][]model.UserRole) *AuthServerInterceptor {
+	return &AuthServerInterceptor{
 		jwtManager: jwt,
 		accessRoles: accessRoles,
 	}
 }
 
 // Unary returns a server interceptor function to authenticate and authorize unary RPC
-func (i *AuthInterceptor) Unary() grpc.UnaryServerInterceptor {
+func (i *AuthServerInterceptor) Unary() grpc.UnaryServerInterceptor {
 	return func(
 		ctx context.Context,
 		req interface{},
@@ -52,7 +52,7 @@ func (i *AuthInterceptor) Unary() grpc.UnaryServerInterceptor {
 }
 
 // Stream returns a server interceptor function to authenticate and authorize stream RPC
-func (i *AuthInterceptor) Stream() grpc.StreamServerInterceptor {
+func (i *AuthServerInterceptor) Stream() grpc.StreamServerInterceptor {
 	return func(
 		srv interface{},
 		stream grpc.ServerStream,
@@ -71,7 +71,7 @@ func (i *AuthInterceptor) Stream() grpc.StreamServerInterceptor {
 	}
 }
 
-func (i *AuthInterceptor) authenticate(ctx context.Context) (*meta.AuthClaims, error) {
+func (i *AuthServerInterceptor) authenticate(ctx context.Context) (*meta.AuthClaims, error) {
 	meta, ok := metadata.FromIncomingContext(ctx); if !ok {
 		return nil, status.Errorf(codes.Unauthenticated, "metadata is not provided")
 	}
@@ -88,7 +88,7 @@ func (i *AuthInterceptor) authenticate(ctx context.Context) (*meta.AuthClaims, e
 	return claims, nil
 }
 
-func (i *AuthInterceptor) authorize(claims *meta.AuthClaims, method string) error {
+func (i *AuthServerInterceptor) authorize(claims *meta.AuthClaims, method string) error {
 	accessibleRoles, ok := i.accessRoles[method]; if !ok {
 		return nil
 	}
