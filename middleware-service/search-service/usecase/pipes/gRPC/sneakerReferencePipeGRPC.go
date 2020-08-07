@@ -2,54 +2,46 @@ package gRPC
 
 import (
 	"context"
-	"log"
 
 	"github.com/golang/glog"
-	"github.com/pkg/errors"
+
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/types/known/structpb"
 
 	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/model"
+	intercept "github.com/timoth-y/kicksware-platform/middleware-service/service-common/service/gRPC"
 
 	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/api/gRPC/proto"
 	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/meta"
 	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/pipe"
-	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/service"
 	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/env"
 )
 
 type referencePipe struct {
 	client               proto.ReferenceServiceClient
-	auth                 service.AuthService
+	auth                 *intercept.AuthClientInterceptor
 }
 
-func NewSneakerReferencePipe(auth service.AuthService, config env.CommonConfig) pipe.SneakerReferencePipe {
+func NewSneakerReferencePipe(config env.CommonConfig) pipe.SneakerReferencePipe {
+	auth := intercept.NewAuthClientInterceptor(config.InnerServiceFormat)
 	return &referencePipe{
-		newRemoteClient(config.InnerServiceFormat),
-		auth,
+		client: newRemoteClient(config.InnerServiceFormat, auth),
+		auth: auth,
 	}
 }
 
-func newRemoteClient(serviceEndpoint string) proto.ReferenceServiceClient {
+func newRemoteClient(serviceEndpoint string, auth *intercept.AuthClientInterceptor) proto.ReferenceServiceClient {
 	opts := []grpc.DialOption{
-		grpc.WithInsecure(),
 		grpc.WithDefaultCallOptions(
 			grpc.MaxCallRecvMsgSize(1024 * 1024 * 50),
 		),
+		grpc.WithUnaryInterceptor(auth.Unary()),
 	}
 	conn, err := grpc.Dial(serviceEndpoint, opts...); if err != nil {
 		glog.Fatalf("fail to dial: %v", err)
 	}
 
 	return proto.NewReferenceServiceClient(conn)
-}
-
-func (p *referencePipe) authenticate() (string, error) {
-	token, err := p.auth.Authenticate(); if err != nil {
-		log.Fatalln(errors.Wrap(err, "search-service::startup.InnerServiceAuth: authenticate failed"))
-		return "", err
-	}
-	return token, nil
 }
 
 
