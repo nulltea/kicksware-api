@@ -5,8 +5,7 @@ import (
 	"fmt"
 
 	"github.com/dgrijalva/jwt-go"
-
-	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/core"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/meta"
 )
 
 type TokenManager struct {
@@ -19,10 +18,10 @@ func NewJWTManager(pb *rsa.PublicKey) *TokenManager {
 	}
 }
 
-func (m *TokenManager) Verify(accessToken string) (*core.AuthClaims, error) {
+func (m *TokenManager) Verify(accessToken string) (*meta.AuthClaims, error) {
 	token, err := jwt.ParseWithClaims(
 		accessToken,
-		&core.AuthClaims{},
+		&meta.AuthClaims{},
 		func(token *jwt.Token) (interface{}, error) {
 			if _, ok := token.Method.(*jwt.SigningMethodRSA); ok {
 				return m.PublicKey, nil
@@ -33,7 +32,7 @@ func (m *TokenManager) Verify(accessToken string) (*core.AuthClaims, error) {
 		return nil, fmt.Errorf("access token is invalid: %w", err)
 	}
 
-	if claims, ok := token.Claims.(*core.AuthClaims); ok {
+	if claims, ok := token.Claims.(*meta.AuthClaims); ok {
 		return claims, nil
 	}
 

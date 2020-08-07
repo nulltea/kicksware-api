@@ -13,6 +13,7 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/golang/glog"
 	"github.com/pkg/errors"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/model"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 
@@ -40,7 +41,7 @@ func NewInstance(addr string) core.Server {
 	}
 }
 
-func (s *instance) SetupAuth(pb *rsa.PublicKey, accessRoles map[string][]string) {
+func (s *instance) SetupAuth(pb *rsa.PublicKey, accessRoles map[string][]model.UserRole) {
 	jwtManager := &jwt.TokenManager{
 		PublicKey: pb,
 	}

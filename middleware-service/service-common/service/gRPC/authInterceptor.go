@@ -3,12 +3,14 @@ package gRPC
 import (
 	"context"
 
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/model"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/core"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/meta"
+
 	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/service/jwt"
 )
 
@@ -19,10 +21,10 @@ const (
 
 type AuthInterceptor struct {
 	jwtManager *jwt.TokenManager
-	accessRoles map[string][]string
+	accessRoles map[string][]model.UserRole
 }
 
-func NewAuthInterceptor(jwt *jwt.TokenManager, accessRoles map[string][]string) *AuthInterceptor {
+func NewAuthInterceptor(jwt *jwt.TokenManager, accessRoles map[string][]model.UserRole) *AuthInterceptor {
 	return &AuthInterceptor{
 		jwtManager: jwt,
 		accessRoles: accessRoles,
@@ -69,7 +71,7 @@ func (i *AuthInterceptor) Stream() grpc.StreamServerInterceptor {
 	}
 }
 
-func (i *AuthInterceptor) authenticate(ctx context.Context) (*core.AuthClaims, error) {
+func (i *AuthInterceptor) authenticate(ctx context.Context) (*meta.AuthClaims, error) {
 	meta, ok := metadata.FromIncomingContext(ctx); if !ok {
 		return nil, status.Errorf(codes.Unauthenticated, "metadata is not provided")
 	}
@@ -86,13 +88,13 @@ func (i *AuthInterceptor) authenticate(ctx context.Context) (*core.AuthClaims, e
 	return claims, nil
 }
 
-func (i *AuthInterceptor) authorize(claims *core.AuthClaims, method string) error {
+func (i *AuthInterceptor) authorize(claims *meta.AuthClaims, method string) error {
 	accessibleRoles, ok := i.accessRoles[method]; if !ok {
 		return nil
 	}
 
 	for _, role := range accessibleRoles {
-		if role == claims.Role {
+		if string(role) == claims.Role {
 			return nil
 		}
 	}
