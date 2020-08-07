@@ -34,9 +34,6 @@ type instance struct {
 
 func NewInstance(addr string) core.Server {
 	return &instance{
-		REST: &http.Server{
-			Addr:      addr,
-		},
 		Address: addr,
 	}
 }
@@ -49,6 +46,9 @@ func (s *instance) SetupAuth(pb *rsa.PublicKey, accessRoles map[string][]model.U
 }
 
 func (s *instance) SetupREST(router chi.Router) {
+	s.REST = &http.Server{
+		Addr: s.Address,
+	}
 	s.REST.Handler = router;
 }
 
@@ -79,13 +79,17 @@ func (s *instance) Start() {
 	grpcL := s.Gateway.Match(cmux.HTTP2())
 	restL := s.Gateway.Match(cmux.HTTP1Fast())
 
-	go func() {
-		errs <- s.REST.Serve(restL)
-	}()
+	if s.REST != nil {
+		go func() {
+			errs <- s.REST.Serve(restL)
+		}()
+	}
 
-	go func() {
-		errs <- s.GRPC.Serve(grpcL)
-	}()
+	if s.GRPC != nil {
+		go func() {
+			errs <- s.GRPC.Serve(grpcL)
+		}()
+	}
 
 	go func() {
 		c := make(chan os.Signal, 1)
