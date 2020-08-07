@@ -1,8 +1,9 @@
 package pipe
 
 import (
+	model "github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/model"
+
 	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/meta"
-	model "github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/model"
 )
 
 type SneakerReferencePipe interface {

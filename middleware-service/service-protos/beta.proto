@@ -2,6 +2,11 @@ syntax = "proto3";
 
 package proto;
 
+import "common.proto";
+
+option go_package = ".;proto";
+option csharp_namespace = "Proto";
+
 message Beta {
   string uniqueID = 1;
   string feature = 2;
@@ -29,11 +34,4 @@ message BetaInput {
 message BetaResponse {
   repeated Beta Betas = 1;
   int64 Count = 2;
-}
-
-message RequestParams {
-  int32 Limit = 1;
-  int32 Offset = 2;
-  string SortBy = 3;
-  string SortDirection = 4;
 }

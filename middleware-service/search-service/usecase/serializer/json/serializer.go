@@ -5,7 +5,9 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/model"
+	prod "github.com/timoth-y/kicksware-platform/middleware-service/product-service/core/model"
+	ref "github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/model"
+
 	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/service"
 )
 
@@ -15,28 +17,28 @@ func NewSerializer() service.SneakerSearchSerializer {
 	return &serializer{}
 }
 
-func (r *serializer) DecodeReference(input []byte) (ref *model.SneakerReference, err error) {
+func (r *serializer) DecodeReference(input []byte) (ref *ref.SneakerReference, err error) {
 	if err = json.Unmarshal(input, &ref); err != nil {
 		return nil, errors.Wrap(err, "serializer.Search.DecodeReference")
 	}
 	return
 }
 
-func (r *serializer) DecodeProduct(input []byte) (prod *model.SneakerProduct, err error) {
+func (r *serializer) DecodeProduct(input []byte) (prod *prod.SneakerProduct, err error) {
 	if err = json.Unmarshal(input, &prod); err != nil {
 		return nil, errors.Wrap(err, "serializer.Search.DecodeProduct")
 	}
 	return
 }
 
-func (r *serializer) DecodeReferences(input []byte) (refs []*model.SneakerReference, err error) {
+func (r *serializer) DecodeReferences(input []byte) (refs []*ref.SneakerReference, err error) {
 	if err = json.Unmarshal(input, &refs); err != nil {
 		return nil, errors.Wrap(err, "serializer.Search.DecodeReferences")
 	}
 	return
 }
 
-func (r *serializer) DecodeProducts(input []byte) (products []*model.SneakerProduct, err error) {
+func (r *serializer) DecodeProducts(input []byte) (products []*prod.SneakerProduct, err error) {
 	if err = json.Unmarshal(input, &products); err != nil {
 		return nil, errors.Wrap(err, "serializer.Search.DecodeProducts")
 	}

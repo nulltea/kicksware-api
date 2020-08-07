@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/container"
+	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/container"
 
 	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/container/factory"
 	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/env"

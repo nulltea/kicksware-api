@@ -1,6 +1,6 @@
 package service
 
-import "github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/model"
+import "github.com/timoth-y/kicksware-platform/middleware-service/product-service/core/model"
 
 type ProductSearchService interface {
 	Search(query string) ([]*model.SneakerProduct, error)

@@ -10,7 +10,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 
-	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/util"
+	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/util"
 
 	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/core/meta"
 	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/core/model"

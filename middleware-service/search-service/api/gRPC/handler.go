@@ -3,9 +3,10 @@ package gRPC
 import (
 	"context"
 
+	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/model"
+
 	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/api/gRPC/proto"
 	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/meta"
-	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/model"
 	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/service"
 	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/env"
 )

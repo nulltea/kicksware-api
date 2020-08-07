@@ -3,7 +3,7 @@ package business
 import (
 	"crypto/rsa"
 
-	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/util"
+	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/util"
 
 	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/core/service"
 	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/env"

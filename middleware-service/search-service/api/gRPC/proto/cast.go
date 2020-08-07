@@ -3,12 +3,14 @@ package proto
 import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 
+	prod "github.com/timoth-y/kicksware-platform/middleware-service/product-service/core/model"
+	ref "github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/model"
+
 	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/meta"
-	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/model"
 )
 
-func (m *SneakerReference) ToNative() *model.SneakerReference {
-	return &model.SneakerReference{
+func (m *SneakerReference) ToNative() *ref.SneakerReference {
+	return &ref.SneakerReference{
 		UniqueId:       m.UniqueId,
 		ManufactureSku: m.ManufactureSku,
 		BrandName:      m.BrandName,
@@ -28,7 +30,7 @@ func (m *SneakerReference) ToNative() *model.SneakerReference {
 	}
 }
 
-func (m *SneakerReference) FromNative(n *model.SneakerReference) *SneakerReference {
+func (m *SneakerReference) FromNative(n *ref.SneakerReference) *SneakerReference {
 	m.UniqueId = n.UniqueId
 	m.UniqueId = n.UniqueId
 	m.ManufactureSku = n.ManufactureSku
@@ -49,7 +51,7 @@ func (m *SneakerReference) FromNative(n *model.SneakerReference) *SneakerReferen
 	return m
 }
 
-func NativeToReferences(native []*model.SneakerReference) []*SneakerReference {
+func NativeToReferences(native []*ref.SneakerReference) []*SneakerReference {
 	users := make([]*SneakerReference, 0)
 	for _, user := range native {
 		users = append(users, (&SneakerReference{}).FromNative(user))
@@ -57,16 +59,16 @@ func NativeToReferences(native []*model.SneakerReference) []*SneakerReference {
 	return users
 }
 
-func ReferencesToNative(in []*SneakerReference) []*model.SneakerReference {
-	users := make([]*model.SneakerReference, 0)
+func ReferencesToNative(in []*SneakerReference) []*ref.SneakerReference {
+	users := make([]*ref.SneakerReference, 0)
 	for _, user := range in {
 		users = append(users, user.ToNative())
 	}
 	return users
 }
 
-func (m *SneakerProduct) ToNative() *model.SneakerProduct {
-	return &model.SneakerProduct{
+func (m *SneakerProduct) ToNative() *prod.SneakerProduct {
+	return &prod.SneakerProduct{
 		UniqueId:       m.UniqueId,
 		BrandName:      m.BrandName,
 		ModelName:      m.ModelName,
@@ -85,7 +87,7 @@ func (m *SneakerProduct) ToNative() *model.SneakerProduct {
 	}
 }
 
-func (m *SneakerProduct) FromNative(n *model.SneakerProduct) *SneakerProduct {
+func (m *SneakerProduct) FromNative(n *prod.SneakerProduct) *SneakerProduct {
 	m.UniqueId = n.UniqueId
 	m.BrandName = n.BrandName
 	m.ModelName = n.ModelName
@@ -104,8 +106,8 @@ func (m *SneakerProduct) FromNative(n *model.SneakerProduct) *SneakerProduct {
 	return m
 }
 
-func (m *SneakerSize) ToNative() model.SneakerSize {
-	return model.SneakerSize{
+func (m *SneakerSize) ToNative() prod.SneakerSize {
+	return prod.SneakerSize{
 		Europe:        m.Europe,
 		UnitedStates:  m.UnitedStates,
 		UnitedKingdom: m.UnitedKingdom,
@@ -113,7 +115,7 @@ func (m *SneakerSize) ToNative() model.SneakerSize {
 	}
 }
 
-func (m SneakerSize) FromNative(n model.SneakerSize) *SneakerSize {
+func (m SneakerSize) FromNative(n prod.SneakerSize) *SneakerSize {
 	m.Europe = n.Europe
 	m.UnitedStates = n.UnitedStates
 	m.UnitedKingdom = n.UnitedKingdom
@@ -121,7 +123,7 @@ func (m SneakerSize) FromNative(n model.SneakerSize) *SneakerSize {
 	return &m
 }
 
-func NativeToProducts(native []*model.SneakerProduct) []*SneakerProduct {
+func NativeToProducts(native []*prod.SneakerProduct) []*SneakerProduct {
 	users := make([]*SneakerProduct, 0)
 	for _, user := range native {
 		users = append(users, (&SneakerProduct{}).FromNative(user))
@@ -129,8 +131,8 @@ func NativeToProducts(native []*model.SneakerProduct) []*SneakerProduct {
 	return users
 }
 
-func ProductsToNative(in []*SneakerProduct) []*model.SneakerProduct {
-	users := make([]*model.SneakerProduct, 0)
+func ProductsToNative(in []*SneakerProduct) []*prod.SneakerProduct {
+	users := make([]*prod.SneakerProduct, 0)
 	for _, user := range in {
 		users = append(users, user.ToNative())
 	}

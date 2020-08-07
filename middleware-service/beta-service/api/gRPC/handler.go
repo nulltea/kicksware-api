@@ -10,7 +10,8 @@ import (
 	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/env"
 )
 
-//go:generate protoc --go_out=plugins=grpc:. proto/beta.proto
+//go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. common.proto
+//go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. beta.proto
 
 type Handler struct {
 	service     service.BetaService

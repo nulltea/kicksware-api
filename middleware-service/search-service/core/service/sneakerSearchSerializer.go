@@ -1,12 +1,15 @@
 package service
 
-import model "github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/model"
+import (
+	ref "github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/model"
+	prod "github.com/timoth-y/kicksware-platform/middleware-service/product-service/core/model"
+)
 
 type SneakerSearchSerializer interface {
-	DecodeReference(input []byte) (*model.SneakerReference, error)
-	DecodeReferences(input []byte) ([]*model.SneakerReference, error)
-	DecodeProduct(input []byte) (*model.SneakerProduct, error)
-	DecodeProducts(input []byte) ([]*model.SneakerProduct, error)
+	DecodeReference(input []byte) (*ref.SneakerReference, error)
+	DecodeReferences(input []byte) ([]*ref.SneakerReference, error)
+	DecodeProduct(input []byte) (*prod.SneakerProduct, error)
+	DecodeProducts(input []byte) ([]*prod.SneakerProduct, error)
 	DecodeMap(input []byte) (map[string]interface{}, error)
 	DecodeInto(input []byte, target interface{}) error
 	Encode(input interface{}) ([]byte, error)

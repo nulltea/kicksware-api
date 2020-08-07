@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
-	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/util"
+	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/util"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"

@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/util"
+	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/util"
 
 	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/service"
 	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/env"
