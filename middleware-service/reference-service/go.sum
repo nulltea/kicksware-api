@@ -211,6 +211,10 @@ github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0
 github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200802111055-4de3b7766a3f/go.mod h1:uXEXvG4qAE0UYi6gbMrLYeSzZZNO75MIODA16RVKs9k=
 github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200803132833-f1c60ff855f6 h1:gN7a/V9YBYGonoYyptH5wEHwHNT5px8NTmqSMKNsDlQ=
 github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200803132833-f1c60ff855f6/go.mod h1:uXEXvG4qAE0UYi6gbMrLYeSzZZNO75MIODA16RVKs9k=
+github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200806234935-61069256c899 h1:OVsNi+SK3WM121c3txZ6iEgsZHGZcFDYbkfcOTGMfKs=
+github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200806234935-61069256c899/go.mod h1:uXEXvG4qAE0UYi6gbMrLYeSzZZNO75MIODA16RVKs9k=
+github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200807020027-413f102dbd89 h1:G3Hw1GtDbSk/F8KE9JKlD7dBUrT1fffsjfnqjut/GFY=
+github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common v0.0.0-20200807020027-413f102dbd89/go.mod h1:SMYyexTuxEzZUxZc5ykr+OTfQzp1iP/WFtZUemsEBfg=
 github.com/vmihailenco/msgpack v3.3.3+incompatible h1:wapg9xDUZDzGCNFlwc5SqI1rvcciqcxEHac4CYj89xI=
 github.com/vmihailenco/msgpack v3.3.3+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
 github.com/xdg/scram v0.0.0-20180814205039-7eeb5667e42c h1:u40Z8hqBAAQyv+vATcGgV0YCnDjqSL7/q/JyPhhJSPk=

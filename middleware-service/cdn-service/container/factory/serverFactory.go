@@ -6,7 +6,7 @@ import (
 	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/core"
 	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/server"
 
-	"cdn-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/env"
 )
 
 func ProvideServer(config env.ServiceConfig, router chi.Router) core.Server {

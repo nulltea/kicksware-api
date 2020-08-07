@@ -8,11 +8,11 @@ import (
 	"github.com/disintegration/imaging"
 	"github.com/golang/glog"
 
-	"cdn-service/core/meta"
-	"cdn-service/core/model"
-	"cdn-service/core/repo"
-	"cdn-service/core/service"
-	"cdn-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/core/meta"
+	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/core/repo"
+	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/env"
 )
 
 type contentService struct {

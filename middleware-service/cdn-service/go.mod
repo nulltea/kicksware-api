@@ -1,4 +1,4 @@
-module cdn-service
+module github.com/timoth-y/kicksware-platform/middleware-service/cdn-service
 
 go 1.14
 

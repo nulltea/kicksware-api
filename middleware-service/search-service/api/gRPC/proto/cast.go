@@ -3,8 +3,8 @@ package proto
 import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	"search-service/core/meta"
-	"search-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/meta"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/model"
 )
 
 func (m *SneakerReference) ToNative() *model.SneakerReference {

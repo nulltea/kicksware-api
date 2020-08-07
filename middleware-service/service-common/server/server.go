@@ -16,9 +16,9 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 
-	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/core"
-	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/service/gRPC"
-	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/service/jwt"
+	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/core"
+	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/service/gRPC"
+	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/service/jwt"
 
 	"github.com/soheilhy/cmux"
 )

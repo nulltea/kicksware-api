@@ -3,10 +3,10 @@ package factory
 import (
 	"github.com/go-chi/chi"
 
-	"search-service/api/REST"
-	"search-service/api/gRPC"
-	"search-service/core/service"
-	"search-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/api/REST"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/api/gRPC"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/env"
 )
 
 func ProvideRESTGatewayHandler(search service.ReferenceSearchService, sync service.ReferenceSyncService, auth service.AuthService, config env.ServiceConfig) *rest.Handler {

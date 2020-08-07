@@ -9,13 +9,13 @@ import (
 	"github.com/pkg/errors"
 	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/util"
 
-	"reference-service/core/meta"
-	"reference-service/core/model"
-	"reference-service/core/service"
-	"reference-service/env"
-	"reference-service/usecase/business"
-	"reference-service/usecase/serializer/json"
-	"reference-service/usecase/serializer/msg"
+	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/meta"
+	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/usecase/business"
+	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/usecase/serializer/json"
+	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/usecase/serializer/msg"
 )
 
 type Handler struct {

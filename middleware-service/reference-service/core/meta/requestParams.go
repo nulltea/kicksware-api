@@ -3,7 +3,7 @@ package meta
 import (
 	"strings"
 
-	"reference-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/model"
 )
 
 type RequestParams struct {

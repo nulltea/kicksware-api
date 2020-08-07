@@ -9,11 +9,11 @@ import (
 	"github.com/pkg/errors"
 	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/util"
 
-	"reference-service/core/meta"
-	"reference-service/core/model"
-	"reference-service/core/repo"
-	"reference-service/env"
-	"reference-service/usecase/business"
+	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/meta"
+	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/repo"
+	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/usecase/business"
 )
 
 type repository struct {

@@ -1,6 +1,6 @@
 package main
 
-import "user-service/startup"
+import "github.com/timoth-y/kicksware-platform/middleware-service/user-service/startup"
 
 func main() {
 	srv := startup.InitializeServer()

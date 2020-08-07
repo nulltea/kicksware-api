@@ -1,10 +1,10 @@
 package factory
 
 import (
-	"beta-service/core/repo"
-	"beta-service/core/service"
-	"beta-service/env"
-	"beta-service/usecase/business"
+	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/core/repo"
+	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/usecase/business"
 )
 
 func ProvideDataService(repository repo.BetaRepository, config env.ServiceConfig) service.BetaService {

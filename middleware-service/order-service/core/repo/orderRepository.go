@@ -1,8 +1,8 @@
 package repo
 
 import (
-	"order-service/core/meta"
-	"order-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/core/meta"
+	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/core/model"
 )
 
 

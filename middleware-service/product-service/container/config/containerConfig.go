@@ -3,8 +3,8 @@ package config
 import (
 	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/container"
 
-	"product-service/container/factory"
-	"product-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/container/factory"
+	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/env"
 )
 
 func ConfigureContainer(container container.ServiceContainer, config env.ServiceConfig) {

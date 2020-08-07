@@ -4,15 +4,15 @@ import (
 	"crypto/rsa"
 	"errors"
 
-	"user-service/core/meta"
-	"user-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/meta"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/model"
 )
 
 var (
-	ErrPasswordInvalid       = errors.New("user-service/authService: invalid user password")
-	ErrNotConfirmed          = errors.New("user-service/authService: user email not confirmed")
-	ErrInvalidRemoteID       = errors.New("user-service/authService: invalid remote OAuth identifier")
-	ErrInvalidRemoteProvider = errors.New("user-service/authService: invalid remote OAuth provider")
+	ErrPasswordInvalid       = errors.New("github.com/timoth-y/kicksware-platform/middleware-service/user-service/authService: invalid user password")
+	ErrNotConfirmed          = errors.New("github.com/timoth-y/kicksware-platform/middleware-service/user-service/authService: user email not confirmed")
+	ErrInvalidRemoteID       = errors.New("github.com/timoth-y/kicksware-platform/middleware-service/user-service/authService: invalid remote OAuth identifier")
+	ErrInvalidRemoteProvider = errors.New("github.com/timoth-y/kicksware-platform/middleware-service/user-service/authService: invalid remote OAuth provider")
 )
 
 type AuthService interface {

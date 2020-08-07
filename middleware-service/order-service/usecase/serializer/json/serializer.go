@@ -5,8 +5,8 @@ import (
 
 	"github.com/pkg/errors"
 
-	"order-service/core/model"
-	"order-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/core/service"
 )
 
 type serializer struct{}

@@ -5,8 +5,8 @@ import (
 
 	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/util"
 
-	"beta-service/core/service"
-	"beta-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/env"
 )
 
 type authService struct {

@@ -1,8 +1,8 @@
 package service
 
 import (
-	"search-service/core/meta"
-	"search-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/meta"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/model"
 )
 
 type ReferenceSearchService interface {

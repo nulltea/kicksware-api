@@ -14,8 +14,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 
-	"cdn-service/core/repo"
-	"cdn-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/core/repo"
+	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/env"
 )
 
 type repository struct {

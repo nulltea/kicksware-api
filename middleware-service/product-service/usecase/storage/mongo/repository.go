@@ -12,11 +12,11 @@ import (
 
 	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/util"
 
-	"product-service/core/meta"
-	"product-service/core/model"
-	"product-service/core/repo"
-	"product-service/env"
-	"product-service/usecase/business"
+	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/core/meta"
+	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/core/repo"
+	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/usecase/business"
 )
 
 type repository struct {

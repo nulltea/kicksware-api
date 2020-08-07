@@ -4,8 +4,8 @@ import (
 	"github.com/pkg/errors"
 	"github.com/vmihailenco/msgpack"
 
-	"user-service/core/model"
-	"user-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/service"
 )
 
 type serializer struct{}

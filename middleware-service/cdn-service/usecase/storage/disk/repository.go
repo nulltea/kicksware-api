@@ -7,8 +7,8 @@ import (
 
 	"github.com/golang/glog"
 
-	"cdn-service/core/repo"
-	"cdn-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/core/repo"
+	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/env"
 )
 
 type repository struct {

@@ -1,4 +1,4 @@
-module order-service
+module github.com/timoth-y/kicksware-platform/middleware-service/order-service
 
 go 1.14
 

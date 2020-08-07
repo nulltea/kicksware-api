@@ -6,8 +6,8 @@ import (
 	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/core"
 	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/server"
 
-	"product-service/api/gRPC"
-	"product-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/api/gRPC"
+	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/env"
 )
 
 func ProvideServer(config env.ServiceConfig, router chi.Router, handler *gRPC.Handler) core.Server {

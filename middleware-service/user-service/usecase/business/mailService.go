@@ -10,8 +10,8 @@ import (
 
 	"github.com/pkg/errors"
 
-	"user-service/core/service"
-	"user-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/env"
 )
 
 type mailService struct {

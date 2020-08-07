@@ -3,9 +3,9 @@ package factory
 import (
 	"github.com/go-chi/chi"
 
-	"cdn-service/api/rest"
-	"cdn-service/core/service"
-	"cdn-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/api/rest"
+	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/env"
 )
 
 func ProvideGatewayHandler(service service.ContentService, auth service.AuthService, config env.ServiceConfig) rest.RestfulHandler {

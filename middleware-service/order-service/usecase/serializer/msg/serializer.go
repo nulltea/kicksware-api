@@ -1,8 +1,8 @@
 package msg
 
 import (
-	"order-service/core/model"
-	"order-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/core/service"
 
 	"github.com/pkg/errors"
 	"github.com/vmihailenco/msgpack"

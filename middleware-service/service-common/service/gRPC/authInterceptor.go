@@ -8,8 +8,8 @@ import (
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 
-	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/core"
-	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/service/jwt"
+	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/core"
+	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/service/jwt"
 )
 
 const (

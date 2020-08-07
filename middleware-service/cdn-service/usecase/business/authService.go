@@ -5,8 +5,8 @@ import (
 
 	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/util"
 
-	"cdn-service/core/service"
-	"cdn-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/env"
 )
 
 type authService struct {

@@ -1,6 +1,6 @@
 package pipe
 
-import "search-service/core/model"
+import "github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/model"
 
 type SneakerProductPipe interface {
 	FetchOne(uniqueId string) (*model.SneakerProduct, error)

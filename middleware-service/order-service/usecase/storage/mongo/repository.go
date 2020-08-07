@@ -11,11 +11,11 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 
-	"order-service/core/meta"
-	"order-service/core/model"
-	"order-service/core/repo"
-	"order-service/env"
-	"order-service/usecase/business"
+	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/core/meta"
+	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/core/repo"
+	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/usecase/business"
 )
 
 type repository struct {

@@ -4,7 +4,7 @@ import (
 	"sort"
 	"strings"
 
-	"search-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/model"
 )
 
 type ReferenceSorter struct {

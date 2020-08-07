@@ -11,10 +11,10 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/pkg/errors"
 
-	"user-service/core/meta"
-	"user-service/core/model"
-	"user-service/core/service"
-	"user-service/usecase/business"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/meta"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/usecase/business"
 )
 
 var (

@@ -1,10 +1,10 @@
 package factory
 
 import (
-	"order-service/core/repo"
-	"order-service/core/service"
-	"order-service/env"
-	"order-service/usecase/business"
+	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/core/repo"
+	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/usecase/business"
 )
 
 func ProvideDataService(repository repo.OrderRepository, config env.ServiceConfig) service.OrderService {

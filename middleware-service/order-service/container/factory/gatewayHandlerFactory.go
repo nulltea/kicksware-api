@@ -3,9 +3,9 @@ package factory
 import (
 	"github.com/go-chi/chi"
 
-	"order-service/api/rest"
-	"order-service/core/service"
-	"order-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/api/rest"
+	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/env"
 )
 
 func ProvideGatewayHandler(service service.OrderService, auth service.AuthService, config env.ServiceConfig) rest.RestfulHandler {

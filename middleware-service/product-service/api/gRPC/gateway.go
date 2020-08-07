@@ -3,7 +3,7 @@ package gRPC
 import (
 	"google.golang.org/grpc"
 
-	"product-service/api/gRPC/proto"
+	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/api/gRPC/proto"
 )
 
 func ProvideRemoteSetup(handler *Handler) func(server *grpc.Server) {

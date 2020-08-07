@@ -1,4 +1,4 @@
-module search-service
+module github.com/timoth-y/kicksware-platform/middleware-service/search-service
 
 go 1.14
 

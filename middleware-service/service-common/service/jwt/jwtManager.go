@@ -6,7 +6,7 @@ import (
 
 	"github.com/dgrijalva/jwt-go"
 
-	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/core"
+	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/core"
 )
 
 type TokenManager struct {

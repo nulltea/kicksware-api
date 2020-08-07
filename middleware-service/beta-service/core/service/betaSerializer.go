@@ -1,6 +1,6 @@
 package service
 
-import model "beta-service/core/model"
+import model "github.com/timoth-y/kicksware-platform/middleware-service/beta-service/core/model"
 
 type BetaSerializer interface {
 	Decode(input []byte) (*model.Beta, error)

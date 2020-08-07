@@ -14,11 +14,11 @@ import (
 	"github.com/fatih/structs"
 	"github.com/pkg/errors"
 
-	"search-service/core/meta"
-	"search-service/core/model"
-	"search-service/core/pipe"
-	"search-service/core/service"
-	"search-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/meta"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/pipe"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/env"
 )
 
 type referencePipe struct {

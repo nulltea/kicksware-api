@@ -1,7 +1,7 @@
 package service
 
 import (
-	"search-service/core/meta"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/meta"
 )
 
 type ProductSyncService interface {

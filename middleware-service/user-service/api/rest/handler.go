@@ -9,13 +9,13 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/pkg/errors"
 
-	"user-service/core/meta"
-	"user-service/core/model"
-	"user-service/core/service"
-	"user-service/env"
-	"user-service/usecase/business"
-	"user-service/usecase/serializer/json"
-	"user-service/usecase/serializer/msg"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/meta"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/usecase/business"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/usecase/serializer/json"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/usecase/serializer/msg"
 )
 
 type Handler struct {

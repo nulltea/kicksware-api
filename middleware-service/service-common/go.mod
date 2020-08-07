@@ -1,4 +1,4 @@
-module github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common
+module github.com/timoth-y/kicksware-platform/middleware-service/service-common
 
 go 1.14
 

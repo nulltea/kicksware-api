@@ -4,8 +4,8 @@ import (
 	di "github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/container"
 	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/core"
 
-	conf "cdn-service/container/config"
-	"cdn-service/env"
+	conf "github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/container/config"
+	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/env"
 )
 
 func InitializeServer() (srv core.Server) {

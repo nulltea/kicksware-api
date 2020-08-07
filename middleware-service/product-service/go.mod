@@ -1,4 +1,4 @@
-module product-service
+module github.com/timoth-y/kicksware-platform/middleware-service/product-service
 
 go 1.14
 

@@ -1,6 +1,6 @@
 package repo
 
-import "user-service/core/model"
+import "github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/model"
 
 type RemoteRepository interface {
 	Connect(userID string, remoteID string, provider model.UserProvider) error

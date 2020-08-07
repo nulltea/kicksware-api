@@ -7,9 +7,9 @@ import (
 	di "github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/container"
 	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/core"
 
-	conf "search-service/container/config"
-	"search-service/core/service"
-	"search-service/env"
+	conf "github.com/timoth-y/kicksware-platform/middleware-service/search-service/container/config"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/env"
 )
 
 func InitializeServer() (srv core.Server, container di.ServiceContainer) {

@@ -3,11 +3,11 @@ package grpc
 import (
 	"context"
 
-	"beta-service/api/gRPC/proto"
-	"beta-service/core/meta"
-	"beta-service/core/model"
-	"beta-service/core/service"
-	"beta-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/api/gRPC/proto"
+	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/core/meta"
+	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/env"
 )
 
 //go:generate protoc --go_out=plugins=grpc:. proto/beta.proto

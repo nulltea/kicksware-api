@@ -13,10 +13,10 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/rs/xid"
 
-	"user-service/core/meta"
-	"user-service/core/model"
-	"user-service/core/service"
-	"user-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/meta"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/env"
 )
 
 type authService struct {

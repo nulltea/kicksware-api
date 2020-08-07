@@ -1,6 +1,6 @@
 package service
 
-import model "search-service/core/model"
+import model "github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/model"
 
 type SneakerSearchSerializer interface {
 	DecodeReference(input []byte) (*model.SneakerReference, error)

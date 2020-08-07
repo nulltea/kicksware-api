@@ -1,4 +1,4 @@
-module beta-service
+module github.com/timoth-y/kicksware-platform/middleware-service/beta-service
 
 go 1.14
 

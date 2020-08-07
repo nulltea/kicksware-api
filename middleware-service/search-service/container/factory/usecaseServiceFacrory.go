@@ -1,10 +1,10 @@
 package factory
 
 import (
-	"search-service/core/pipe"
-	"search-service/core/service"
-	"search-service/env"
-	"search-service/usecase/business"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/pipe"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/usecase/business"
 )
 
 func ProvideReferenceSearchService(config env.ServiceConfig) service.ReferenceSearchService {

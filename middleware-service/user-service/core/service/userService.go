@@ -1,8 +1,8 @@
 package service
 
 import (
-	"user-service/core/meta"
-	"user-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/meta"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/model"
 )
 
 type UserService interface {

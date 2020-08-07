@@ -8,9 +8,9 @@ import (
 	"github.com/pkg/errors"
 	"github.com/timoth-y/sneaker-resale-platform/middleware-service/service-common/util"
 
-	"user-service/core/model"
-	"user-service/core/repo"
-	"user-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/repo"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/env"
 )
 
 type likesRepository struct {

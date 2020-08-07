@@ -1,8 +1,8 @@
 package proto
 
 import (
-	"beta-service/core/meta"
-	"beta-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/core/meta"
+	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/core/model"
 )
 
 func (m *Beta) ToNative() *model.Beta {

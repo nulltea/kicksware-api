@@ -13,11 +13,11 @@ import (
 	"github.com/thoas/go-funk"
 	"gopkg.in/dealancer/validate.v2"
 
-	"beta-service/core/meta"
-	"beta-service/core/model"
-	"beta-service/core/repo"
-	"beta-service/core/service"
-	"beta-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/core/meta"
+	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/core/repo"
+	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/env"
 )
 
 var (

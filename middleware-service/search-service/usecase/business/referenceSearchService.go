@@ -8,11 +8,11 @@ import (
 	"github.com/olivere/elastic/v7"
 	"github.com/pkg/errors"
 
-	"search-service/core/meta"
-	"search-service/core/model"
-	"search-service/core/service"
-	"search-service/env"
-	"search-service/usecase/serializer/json"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/meta"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/usecase/serializer/json"
 )
 
 var (

@@ -3,11 +3,11 @@ package factory
 import (
 	"log"
 
-	"user-service/core/repo"
-	"user-service/env"
-	"user-service/usecase/storage/mongo"
-	"user-service/usecase/storage/postgres"
-	"user-service/usecase/storage/redis"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/repo"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/usecase/storage/mongo"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/usecase/storage/postgres"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/usecase/storage/redis"
 )
 
 func ProvideRepository(config env.ServiceConfig) repo.UserRepository {

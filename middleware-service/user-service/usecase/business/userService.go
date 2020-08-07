@@ -12,10 +12,10 @@ import (
 	"github.com/rs/xid"
 	"gopkg.in/dealancer/validate.v2"
 
-	"user-service/core/meta"
-	"user-service/core/model"
-	"user-service/core/repo"
-	"user-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/meta"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/model"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/repo"
+	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/service"
 )
 
 var (

@@ -1,10 +1,10 @@
 package factory
 
 import (
-	"cdn-service/core/repo"
-	"cdn-service/core/service"
-	"cdn-service/env"
-	"cdn-service/usecase/business"
+	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/core/repo"
+	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/core/service"
+	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/usecase/business"
 )
 
 func ProvideContentService(repository repo.ContentRepository, config env.ServiceConfig) service.ContentService {

@@ -3,10 +3,10 @@ package factory
 import (
 	"log"
 
-	"reference-service/core/repo"
-	"reference-service/env"
-	"reference-service/usecase/storage/mongo"
-	"reference-service/usecase/storage/postgres"
+	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/repo"
+	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/env"
+	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/usecase/storage/mongo"
+	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/usecase/storage/postgres"
 )
 
 func ProvideRepository(config env.ServiceConfig) repo.SneakerReferenceRepository {
