@@ -1,7 +1,7 @@
 package meta
 
 type TLSCertificate struct {
-	CertFile   string
-	KeyFile    string
-	CACertFile string
+	CACertFile string `yaml:"caCertFile"`
+	CertFile   string `yaml:"certFile"`
+	KeyFile    string `yaml:"keyFile"`
 }
