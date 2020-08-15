@@ -15,9 +15,11 @@ import (
 	"github.com/pkg/errors"
 	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/model"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/reflection"
 
 	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/core"
+	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/core/meta"
 	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/service/gRPC"
 	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/service/jwt"
 
@@ -29,6 +31,7 @@ type instance struct {
 	Gateway cmux.CMux
 	REST *http.Server
 	GRPC *grpc.Server
+	TLS credentials.TransportCredentials
 	Auth *gRPC.AuthServerInterceptor
 }
 
@@ -36,6 +39,13 @@ func NewInstance(addr string) core.Server {
 	return &instance{
 		Address: addr,
 	}
+}
+
+func (s instance) SetupEncryption(cert *meta.TLSCertificate) {
+	cred, err := gRPC.LoadServerTLSCredentials(cert); if err != nil {
+		panic(err)
+	}
+	s.TLS = cred
 }
 
 func (s *instance) SetupAuth(pb *rsa.PublicKey, accessRoles map[string][]model.UserRole) {
@@ -56,6 +66,8 @@ func (s *instance) SetupGRPC(fn func(srv *grpc.Server)) {
 	options := []grpc.ServerOption{
 		grpc.MaxSendMsgSize(25 * 1024 * 1024),
 		grpc.MaxRecvMsgSize(25 * 1024 * 1024),
+	}; if s.TLS != nil {
+		options = append(options, grpc.Creds(s.TLS))
 	}; if s.Auth != nil {
 		options = append(options, grpc.UnaryInterceptor(s.Auth.Unary()), grpc.StreamInterceptor(s.Auth.Stream()))
 	}
