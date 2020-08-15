@@ -1,6 +1,8 @@
 package proto
 
 import (
+	"github.com/golang/protobuf/ptypes/wrappers"
+
 	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/core/meta"
 	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/core/model"
 )
@@ -40,7 +42,15 @@ func (m *RequestParams) ToNative() *meta.RequestParams {
 	n := &meta.RequestParams{}
 	n.SetLimit(int(m.Limit))
 	n.SetOffset(int(m.Offset))
-	n.SetSortBy(m.SortBy)
-	n.SetSortDirection(m.SortDirection)
+	n.SetSortBy(m.SortBy.Value)
+	n.SetSortDirection(m.SortDirection.Value)
 	return n
+}
+
+func (m RequestParams) FromNative(n *meta.RequestParams) *RequestParams {
+	m.Limit = int32(n.Limit())
+	m.Offset = int32(n.Offset())
+	m.SortBy = &wrappers.StringValue{Value: n.SortBy()}
+	m.SortDirection = &wrappers.StringValue{Value: n.SortDirection()}
+	return &m
 }

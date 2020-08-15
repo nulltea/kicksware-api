@@ -21,6 +21,7 @@ require (
 	github.com/shopspring/decimal v0.0.0-20200227202807-02e2044944cc // indirect
 	github.com/thoas/go-funk v0.6.0
 	github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200815180450-a1cefea8db4a
+	github.com/timoth-y/kicksware-platform/middleware-service/user-service v0.0.0-20200807131113-a8928eed241c
 	github.com/vmihailenco/msgpack v3.3.3+incompatible
 	go.mongodb.org/mongo-driver v1.3.3
 	google.golang.org/appengine v1.6.5 // indirect

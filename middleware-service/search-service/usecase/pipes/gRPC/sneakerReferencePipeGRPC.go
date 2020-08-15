@@ -2,11 +2,8 @@ package gRPC
 
 import (
 	"context"
-	"log"
 
 	"github.com/golang/glog"
-	"google.golang.org/grpc/credentials"
-
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/types/known/structpb"
 
