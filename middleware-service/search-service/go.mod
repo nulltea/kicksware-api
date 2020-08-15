@@ -16,7 +16,8 @@ require (
 	github.com/thoas/go-funk v0.6.0
 	github.com/timoth-y/kicksware-platform/middleware-service/product-service v0.0.0-20200807133030-5f847defdf0b
 	github.com/timoth-y/kicksware-platform/middleware-service/reference-service v0.0.0-20200807133030-5f847defdf0b
-	github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200807175609-e0dc8484cc76
+	github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200815180450-a1cefea8db4a
+	github.com/timoth-y/kicksware-platform/middleware-service/user-service v0.0.0-20200807131113-a8928eed241c
 	github.com/vmihailenco/msgpack v3.3.3+incompatible
 	go.mongodb.org/mongo-driver v1.3.3
 	google.golang.org/grpc v1.31.0

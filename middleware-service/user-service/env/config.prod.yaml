@@ -4,6 +4,12 @@ commonConfig:
   usedDB: mongo
   contentType: application/json
   innerServiceFormat: http://%s:8080/%s/
+securityConfig:
+  tlsCertificate:
+    enableTLS: true
+    caCertFile: ../key/ca-cert.pem
+    certFile: ../key/server-cert.pem
+    keyFile: ../key/server-key.pem
 authConfig:
   issuerName: middleware/user-service
   tokenExpirationDelta: 360

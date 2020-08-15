@@ -12,8 +12,8 @@ func ProvideReferenceRESTPipe(auth service.AuthService, config env.ServiceConfig
 	return REST.NewSneakerReferencePipe(auth, config.Common)
 }
 
-func ProvideReferenceGRPCPipe(auth service.AuthService, config env.ServiceConfig) pipe.SneakerReferencePipe {
-	return gRPC.NewSneakerReferencePipe(auth, config.Common)
+func ProvideReferenceGRPCPipe(config env.ServiceConfig) pipe.SneakerReferencePipe {
+	return gRPC.NewSneakerReferencePipe(config)
 }
 
 func ProvideProductRESTPipe(config env.ServiceConfig) pipe.SneakerProductPipe {

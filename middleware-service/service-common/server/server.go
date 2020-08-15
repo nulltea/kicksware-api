@@ -42,10 +42,12 @@ func NewInstance(addr string) core.Server {
 }
 
 func (s instance) SetupEncryption(cert *meta.TLSCertificate) {
-	cred, err := gRPC.LoadServerTLSCredentials(cert); if err != nil {
-		panic(err)
+	if cert.EnableTLS {
+		cred, err := gRPC.LoadServerTLSCredentials(cert); if err != nil {
+			glog.Fatalln("cannot load TLS credentials: ", err)
+		}
+		s.TLS = cred
 	}
-	s.TLS = cred
 }
 
 func (s *instance) SetupAuth(pb *rsa.PublicKey, accessRoles map[string][]model.UserRole) {

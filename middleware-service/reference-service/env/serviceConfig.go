@@ -3,15 +3,17 @@ package env
 import (
 	"io/ioutil"
 	"log"
+	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/core/meta"
 	"gopkg.in/yaml.v2"
 )
 
 type ServiceConfig struct {
-	Common      CommonConfig    `yaml:"commonConfig"`
-	Auth        AuthConfig      `yaml:"authConfig"`
-	Mongo       DataStoreConfig `yaml:"mongoConfig"`
-	Postgres    DataStoreConfig `yaml:"postgresConfig"`
-	Redis       DataStoreConfig `yaml:"redisConfig"`
+	Common   CommonConfig    `yaml:"commonConfig"`
+	Security SecurityConfig  `yaml:"securityConfig"`
+	Auth     AuthConfig      `yaml:"authConfig"`
+	Mongo    DataStoreConfig `yaml:"mongoConfig"`
+	Postgres DataStoreConfig `yaml:"postgresConfig"`
+	Redis    DataStoreConfig `yaml:"redisConfig"`
 }
 
 type CommonConfig struct {
@@ -20,6 +22,10 @@ type CommonConfig struct {
 	UsedDB             string `yaml:"usedDB"`
 	ContentType        string `yaml:"contentType"`
 	InnerServiceFormat string `yaml:"innerServiceFormat"`
+}
+
+type SecurityConfig struct {
+	TLSCertificate     *meta.TLSCertificate `yaml:"tlsCertificate"`
 }
 
 type DataStoreConfig struct {

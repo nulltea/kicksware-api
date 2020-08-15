@@ -236,6 +236,7 @@ github.com/thoas/go-funk v0.6.0/go.mod h1:+IWnUfUmFO1+WVYQWQtIJHeRRdaIyyYglZN7xz
 github.com/tidwall/pretty v1.0.0 h1:HsD+QiTn7sK6flMKIvNmpqz1qrpP3Ps6jOKIKMooyg4=
 github.com/tidwall/pretty v1.0.0/go.mod h1:XNkn88O1ChpSDQmQeStsy+sBenx6DDtFZJxhVysOjyk=
 github.com/timoth-y/kicksware-platform v0.0.0-20200807133030-5f847defdf0b h1:eLNRjZ66MvQqc0uL2EDy9J/i01fMjZficAPggih6Nmw=
+github.com/timoth-y/kicksware-platform v0.0.0-20200815165402-ec947a9ee4dc h1:C6yJ4QkZcI1Fv0Tpy2uKrC8MCg7mdzWvHERZbivT5U4=
 github.com/timoth-y/kicksware-platform/middleware-service/product-service v0.0.0-20200807133030-5f847defdf0b h1:PLhlc/vUyX8BdN/jFH2D/IQxulPOe1g1vyAqFPs9pYI=
 github.com/timoth-y/kicksware-platform/middleware-service/product-service v0.0.0-20200807133030-5f847defdf0b/go.mod h1:fmDXWIiU+xwtBa1y5ysOyFocJgFRRxghg25nNoo1bMw=
 github.com/timoth-y/kicksware-platform/middleware-service/reference-service v0.0.0-20200807133030-5f847defdf0b h1:v9tKrQRD77zG14ugbrlfcRir6cTFnUpZiKSvAP2a4Bc=
@@ -257,6 +258,14 @@ github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-
 github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200807144932-7eaeedc6fa9f/go.mod h1:uL5asZq+OROqIDAMY+7Xy8X/+MBTY1tOPkODURGUaxI=
 github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200807175609-e0dc8484cc76 h1:5/tajEE0RGkc+MBLt+atujUASHS7zDiTDOOSL4QPZw8=
 github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200807175609-e0dc8484cc76/go.mod h1:uL5asZq+OROqIDAMY+7Xy8X/+MBTY1tOPkODURGUaxI=
+github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200815165402-ec947a9ee4dc h1:vJbZJSIA1QhFh0TC8dUVAiFlhh6bH5FAbuMhg4jOzlg=
+github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200815165402-ec947a9ee4dc/go.mod h1:uL5asZq+OROqIDAMY+7Xy8X/+MBTY1tOPkODURGUaxI=
+github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200815171942-b797b458d800 h1:RaPu1NQHCm0FOAyueFsOfjsVsODIWYEa4RNyrOieuls=
+github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200815171942-b797b458d800/go.mod h1:uL5asZq+OROqIDAMY+7Xy8X/+MBTY1tOPkODURGUaxI=
+github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200815173912-c76a3a05a6d4 h1:TjxVV1oRCfoGMyU+DXXiLUKLWB1KQxKcgW+IemiGnjU=
+github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200815173912-c76a3a05a6d4/go.mod h1:uL5asZq+OROqIDAMY+7Xy8X/+MBTY1tOPkODURGUaxI=
+github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200815180450-a1cefea8db4a h1:2GxaoSjCBCZWXpU7N2Mu+FVvxjdKrNDiNHpGhtNOYPY=
+github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200815180450-a1cefea8db4a/go.mod h1:uL5asZq+OROqIDAMY+7Xy8X/+MBTY1tOPkODURGUaxI=
 github.com/timoth-y/kicksware-platform/middleware-service/user-service v0.0.0-20200807131113-a8928eed241c h1:k41JwYuhlfvvbsS5hm3fBNIBEXsJ6Ber60ujDcUerto=
 github.com/timoth-y/kicksware-platform/middleware-service/user-service v0.0.0-20200807131113-a8928eed241c/go.mod h1:asUKM9SLltlPE1SPVnvY+fT4/SeTP9K5kCwcuszWJQM=
 github.com/timoth-y/sneaker-resale-platform v0.0.0-20200506181817-e140665325d6 h1:nBSWZCQMZgzi1rRe6hMSfMcH4NFcRI0hGPBgsRWCG4U=
@@ -329,6 +338,7 @@ golang.org/x/sys v0.0.0-20190826190057-c7b8b68b1456 h1:ng0gs1AKnRRuEMZoTLLlbOd+C
 golang.org/x/sys v0.0.0-20190826190057-c7b8b68b1456/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20191120155948-bd437916bb0e h1:N7DeIrjYszNmSW409R3frPPwglRwMkXSBzwVbkOjLLA=
 golang.org/x/sys v0.0.0-20191120155948-bd437916bb0e/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+golang.org/x/sys v0.0.0-20200116001909-b77594299b42 h1:vEOn+mP2zCOVzKckCZy6YsCtDblrpj/w7B9nxGNELpg=
 golang.org/x/sys v0.0.0-20200116001909-b77594299b42/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
 golang.org/x/text v0.3.2 h1:tW2bmiBqwgJj/UpqtC8EpXEZVYOwU0yG4iWbprSVAcs=

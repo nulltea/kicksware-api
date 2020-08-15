@@ -2,14 +2,16 @@ package gRPC
 
 import (
 	"context"
+	"log"
 
 	"github.com/golang/glog"
+	"google.golang.org/grpc/credentials"
 
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/types/known/structpb"
 
 	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/model"
-	intercept "github.com/timoth-y/kicksware-platform/middleware-service/service-common/service/gRPC"
+	gRPCSrv "github.com/timoth-y/kicksware-platform/middleware-service/service-common/service/gRPC"
 
 	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/api/gRPC/proto"
 	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/meta"
@@ -18,26 +20,33 @@ import (
 )
 
 type referencePipe struct {
-	client               proto.ReferenceServiceClient
-	auth                 *intercept.AuthClientInterceptor
+	client proto.ReferenceServiceClient
+	auth   *gRPCSrv.AuthClientInterceptor
 }
 
-func NewSneakerReferencePipe(config env.CommonConfig) pipe.SneakerReferencePipe {
-	auth := intercept.NewAuthClientInterceptor(config.InnerServiceFormat)
+func NewSneakerReferencePipe(config env.ServiceConfig) pipe.SneakerReferencePipe {
+	auth := gRPCSrv.NewAuthClientInterceptor(config.Common.InnerServiceFormat)
 	return &referencePipe{
-		client: newRemoteClient(config.InnerServiceFormat, auth),
+		client: newRemoteClient(config, auth),
 		auth: auth,
 	}
 }
 
-func newRemoteClient(serviceEndpoint string, auth *intercept.AuthClientInterceptor) proto.ReferenceServiceClient {
+func newRemoteClient(config env.ServiceConfig, auth *gRPCSrv.AuthClientInterceptor) proto.ReferenceServiceClient {
 	opts := []grpc.DialOption{
 		grpc.WithDefaultCallOptions(
 			grpc.MaxCallRecvMsgSize(1024 * 1024 * 50),
 		),
 		grpc.WithUnaryInterceptor(auth.Unary()),
 	}
-	conn, err := grpc.Dial(serviceEndpoint, opts...); if err != nil {
+	if config.Security.TLSCertificate.EnableTLS {
+		tls, err := gRPCSrv.LoadClientTLSCredentials(config.Security.TLSCertificate); if err != nil {
+			glog.Fatalln("cannot load TLS credentials: ", err)
+		}
+		opts = append(opts, grpc.WithTransportCredentials(tls))
+	}
+
+	conn, err := grpc.Dial(config.Common.InnerServiceFormat, opts...); if err != nil {
 		glog.Fatalf("fail to dial: %v", err)
 	}
 
