@@ -15,6 +15,7 @@ services:
       - --providers.file.watch=true
       - --entryPoints.web.address=:80
       - --entryPoints.websecure.address=:443
+      - --entryPoints.websecure.address=:88
       # - --entryPoints.debug.address=:4000
       - --certificatesResolvers.le.acme.email=timothy@kicksware.com
       - --certificatesResolvers.le.acme.storage=/cert/acme.json
@@ -35,7 +36,6 @@ services:
       - traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https
       - traefik.http.middlewares.traefik-https-redirect.redirectscheme.permanent=true
       - traefik.http.middlewares.add-dashboard.addprefix.prefix=/dashboard/#/
-      - traefik.http.routers.traefik.tls.certresolver=le
       - traefik.http.routers.traefik-secure.tls.certresolver=le
       - traefik.http.routers.traefik-secure.middlewares=traefik-auth
       - traefik.http.middlewares.traefik-auth.basicauth.users=root:$$apr1$$hnXmcCx0$$hTmrK2ZX5sKWiqE9IR6E6/
@@ -44,6 +44,7 @@ services:
       - DO_AUTH_TOKEN=6229b9e18dd51158da31da743bcf36262a11e8075a8ea2847d555cb9a3e47bf4
     ports:
       - 80:80
+      - 88:88
       - 443:443
       # - 4000:4000
     networks:
