@@ -6,9 +6,9 @@ commonConfig:
 securityConfig:
   tlsCertificate:
     enableTLS: true
-    caCertFile: ../key/ca-cert.pem
-    certFile: ../key/server-cert.pem
-    keyFile: ../key/server-key.pem
+    caCertFile: ../key/ca.crt
+    certFile: ../key/server.crt
+    keyFile: ../key/server.pem
 authConfig:
   publicKeyPath: ../key/public.key.pub
   authEndpoint: https://api.kicksware.com/auth/guest
