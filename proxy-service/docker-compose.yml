@@ -15,7 +15,7 @@ services:
       - --providers.file.watch=true
       - --entryPoints.web.address=:80
       - --entryPoints.websecure.address=:443
-      - --entryPoints.websecure.address=:88
+      - --entryPoints.grpc.address=:88
       # - --entryPoints.debug.address=:4000
       - --certificatesResolvers.le.acme.email=timothy@kicksware.com
       - --certificatesResolvers.le.acme.storage=/cert/acme.json
