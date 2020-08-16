@@ -39,14 +39,16 @@ func (i *AuthServerInterceptor) Unary() grpc.UnaryServerInterceptor {
 		info *grpc.UnaryServerInfo,
 		handler grpc.UnaryHandler,
 	) (interface{}, error) {
-		claims, err := i.authenticate(ctx); if err != nil {
-			return nil, err
-		}
+		if !i.zeroAccess(info.FullMethod) {
+			claims, err := i.authenticate(ctx); if err != nil {
+				return nil, err
+			}
 
-		err = i.authorize(claims, info.FullMethod); if err != nil {
-			return nil, err
+			err = i.authorize(claims, info.FullMethod); if err != nil {
+				return nil, err
+			}
+			ctx = metadata.AppendToOutgoingContext(ctx, UserContextKey, claims.UniqueID)
 		}
-		ctx = metadata.AppendToOutgoingContext(ctx, UserContextKey, claims.UniqueID)
 		return handler(ctx, req)
 	}
 }
@@ -59,14 +61,16 @@ func (i *AuthServerInterceptor) Stream() grpc.StreamServerInterceptor {
 		info *grpc.StreamServerInfo,
 		handler grpc.StreamHandler,
 	) error {
-		claims, err := i.authenticate(stream.Context()); if err != nil {
-			return err
-		}
+		if !i.zeroAccess(info.FullMethod) {
+			claims, err := i.authenticate(stream.Context()); if err != nil {
+				return err
+			}
 
-		err = i.authorize(claims, info.FullMethod); if err != nil {
-			return err
+			err = i.authorize(claims, info.FullMethod); if err != nil {
+				return err
+			}
+			stream.SetHeader(metadata.New(map[string]string{UserContextKey: claims.UniqueID}))
 		}
-		stream.SetHeader(metadata.New(map[string]string{UserContextKey: claims.UniqueID}))
 		return handler(srv, stream)
 	}
 }
@@ -100,4 +104,11 @@ func (i *AuthServerInterceptor) authorize(claims *meta.AuthClaims, method string
 	}
 
 	return status.Error(codes.PermissionDenied, "no permission to access this RPC")
+}
+
+func (i *AuthServerInterceptor) zeroAccess(method string) bool {
+	if roles := i.accessRoles[method]; roles != nil && len(roles) == 0 {
+		return true
+	}
+	return false
 }

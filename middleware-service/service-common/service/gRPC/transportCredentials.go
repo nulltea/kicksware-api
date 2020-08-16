@@ -26,7 +26,7 @@ func LoadServerTLSCredentials(cert *meta.TLSCertificate) (credentials.TransportC
 
 	config := &tls.Config{
 		Certificates: []tls.Certificate{serverCert},
-		ClientAuth:   tls.RequireAndVerifyClientCert,
+		ClientAuth:   tls.VerifyClientCertIfGiven,
 		ClientCAs:    certPool,
 	}
 	return credentials.NewTLS(config), nil

@@ -41,7 +41,7 @@ func NewInstance(addr string) core.Server {
 	}
 }
 
-func (s instance) SetupEncryption(cert *meta.TLSCertificate) {
+func (s *instance) SetupEncryption(cert *meta.TLSCertificate) {
 	if cert.EnableTLS {
 		cred, err := gRPC.LoadServerTLSCredentials(cert); if err != nil {
 			glog.Fatalln("cannot load TLS credentials: ", err)

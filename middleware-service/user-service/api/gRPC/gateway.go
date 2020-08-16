@@ -21,7 +21,7 @@ func ProvideRemoteSetup(handler *Handler) func(server *grpc.Server) {
 func (h *Handler) ProvideAccessRoles() map[string][]model.UserRole {
 	roleMap := make(map[string][]model.UserRole)
 
-	var zeroAccess []model.UserRole
+	zeroAccess := []model.UserRole{}
 	guestAccess := []model.UserRole{ model.Guest }
 	regularAccess := []model.UserRole{ model.Guest, model.Regular, model.Admin }
 	userAccess := []model.UserRole{ model.Regular, model.Admin }
