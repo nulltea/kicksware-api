@@ -90,7 +90,9 @@ func (s *instance) Start() {
 	}
 
 	s.Gateway = cmux.New(lstn)
-	grpcL := s.Gateway.Match(cmux.HTTP2())
+	grpcL := s.Gateway.Match(cmux.HTTP2()); if s.TLS != nil {
+		grpcL = s.Gateway.Match(cmux.TLS())
+	}
 	restL := s.Gateway.Match(cmux.HTTP1Fast())
 
 	if s.REST != nil {
