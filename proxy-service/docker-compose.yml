@@ -15,15 +15,11 @@ services:
       - --providers.file.watch=true
       - --entryPoints.web.address=:80
       - --entryPoints.websecure.address=:443
-      - --entryPoints.grpc.address=:886
-      - --entryPoints.grpc.tls.certificates.certfile=./keys/frontend.crt
-      - --entryPoints.grpc.tls.certificates.keyfile=./keys/frontend.key
       # - --entryPoints.debug.address=:4000
       - --certificatesResolvers.le.acme.email=timothy@kicksware.com
       - --certificatesResolvers.le.acme.storage=/cert/acme.json
       - --certificatesResolvers.le.acme.dnsChallenge=true
       - --certificatesResolvers.le.acme.dnsChallenge.provider=digitalocean
-      - --serversTransport.rootCAs=./keys/private.crt
       - --accesslog=true
     labels:
       - traefik.http.routers.traefik.entrypoints=web
