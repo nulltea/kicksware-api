@@ -9,7 +9,7 @@ http:
         certResolver: le
 
     sonarqube:
-      rule: "Host(`ci.kicksware.com`)"
+      rule: "Host(`test.kicksware.com`)"
       entrypoints:
         - websecure
       service: sonarqube
@@ -20,8 +20,8 @@ http:
     gitlab-ci:
       loadBalancer:
         servers:
-          url: https://ci.kicksware.com:44321
+          - url: https://ci.kicksware.com:44321
     sonarqube:
       loadBalancer:
         servers:
-          url: http:/kicksware:9000
+          - url: http:/kicksware:9000
