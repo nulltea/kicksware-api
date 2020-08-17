@@ -34,5 +34,4 @@ certificatesResolvers:
         provider : digitalocean
 
 serversTransport:
-  rootCAs:
-    - ./keys/server.crt
+  insecureSkipVerify: true
