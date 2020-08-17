@@ -1,4 +1,12 @@
 tls:
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /keys/client.crt
+        keyFile: /keys/client.key
+
   certificates:
-    - certFile: /keys/frontend.crt
-      keyFile: /keys/frontend.key
+    - certFile: /keys/client.crt
+      keyFile: /keys/client.key
+      stores:
+        - default

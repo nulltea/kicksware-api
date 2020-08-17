@@ -35,4 +35,4 @@ certificatesResolvers:
 
 serversTransport:
   rootCAs:
-    - ./keys/backend.cert
+    - ./keys/server.crt
