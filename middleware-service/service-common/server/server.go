@@ -89,21 +89,21 @@ func (s *instance) Start() {
 		glog.Fatalf("Failed to listen on %v: %q", s.Address, err)
 	}
 
-	s.Gateway = cmux.New(lstn)
-	grpcL := s.Gateway.Match(cmux.HTTP2()); if s.TLS != nil {
-		grpcL = s.Gateway.Match(cmux.TLS())
-	}
-	restL := s.Gateway.Match(cmux.HTTP1Fast())
+	// s.Gateway = cmux.New(lstn)
+	// grpcL := s.Gateway.Match(cmux.HTTP2()); if s.TLS != nil {
+	// 	grpcL = s.Gateway.Match(cmux.TLS())
+	// }
+	// restL := s.Gateway.Match(cmux.HTTP1Fast())
 
-	if s.REST != nil {
-		go func() {
-			errs <- s.REST.Serve(restL)
-		}()
-	}
+	// if s.REST != nil {
+	// 	go func() {
+	// 		errs <- s.REST.Serve(restL)
+	// 	}()
+	// }
 
 	if s.GRPC != nil {
 		go func() {
-			errs <- s.GRPC.Serve(grpcL)
+			errs <- s.GRPC.Serve(lstn)
 		}()
 	}
 
@@ -114,7 +114,7 @@ func (s *instance) Start() {
 		s.Shutdown()
 	}()
 
-	s.Gateway.Serve()
+	//s.Gateway.Serve()
 
 	fmt.Printf("Terminated %s", <-errs)
 }

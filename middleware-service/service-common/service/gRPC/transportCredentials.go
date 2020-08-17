@@ -11,5 +11,5 @@ func LoadServerTLSCredentials(cert *meta.TLSCertificate) (credentials.TransportC
 }
 
 func LoadClientTLSCredentials(cert *meta.TLSCertificate) (credentials.TransportCredentials, error) {
-	return credentials.NewClientTLSFromFile(cert.CACertFile, "")
+	return credentials.NewClientTLSFromFile(cert.CertFile, "")
 }
