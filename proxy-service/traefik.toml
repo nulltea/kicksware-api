@@ -1,0 +1,35 @@
+logLevel = "DEBUG"
+defaultEntryPoints = ["https", "http", "grpc"]
+
+[api]
+  insecure = true
+  dashboard = false
+
+[log]
+  level = "DEBUG"
+
+[retry]
+
+[providers]
+  [providers.docker]
+    exposedByDefault = false
+  [providers.file]
+    watch = true
+    directory = "dynamic-config"
+
+[entryPoints]
+  [entryPoints.web]
+    address = ":80"
+  [entryPoints.websecure]
+    address = ":443"
+  [entryPoints.grpc]
+    address = ":886"
+    [[entryPoints.grpc.tls.certificates]]
+      certFile = "./keys/server.crt"
+      keyFile  = "./keys/server.pem"
+
+[certificatesResolvers.le.acme]
+  email = "timothy@kicksware.com"
+  storage = "/cert/acme.json"
+  [certificatesResolvers.le.acme.dnsChallenge]
+    provider = "digitalocean"

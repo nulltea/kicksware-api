@@ -7,9 +7,8 @@ commonConfig:
 securityConfig:
   tlsCertificate:
     enableTLS: true
-    caCertFile: ../key/ca.crt
     certFile: ../key/server.crt
-    keyFile: ../key/server.pem
+    keyFile: ../key/server.key
 authConfig:
   issuerName: middleware/user-service
   tokenExpirationDelta: 360

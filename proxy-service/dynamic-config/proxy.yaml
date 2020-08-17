@@ -1,0 +1,35 @@
+http:
+  routers:
+    traefik:
+      entrypoints:
+        - web
+      rule: Host(`monitor.kicksware.com`)
+      service: api@internal
+      middlewares:
+        - https-redirect
+        # - traefik-auth
+
+    traefik-secure:
+      entrypoints:
+        - websecure
+      rule: Host(`monitor.kicksware.com`)
+      service: api@internal
+      tls:
+        certResolver: le
+        domains:
+          - main: "kicksware.com"
+            sans:
+              - "*.kicksware.com"
+      # middlewares:
+      #  - traefik-auth
+
+  middlewares:
+    https-redirect:
+      redirectScheme:
+        scheme: https
+        permanent: true
+
+    traefik-auth:
+      basicAuth:
+        users:
+          - "root:$$apr1$$hnXmcCx0$$hTmrK2ZX5sKWiqE9IR6E6/"

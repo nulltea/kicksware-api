@@ -2,43 +2,9 @@ version: '3.3'
 services:
   traefik:
     container_name: traefik
-    image:  traefik:v2.0
+    image:  traefik:latest
     restart: always
-    command:
-      - --log.level=DEBUG
-      - --api=true
-      - --api.insecure
-      - --api.dashboard=true
-      - --providers.docker=true
-      - --providers.file=true
-      - --providers.file.filename=/proxy-config.toml
-      - --providers.file.watch=true
-      - --entryPoints.web.address=:80
-      - --entryPoints.websecure.address=:443
-      # - --entryPoints.debug.address=:4000
-      - --certificatesResolvers.le.acme.email=timothy@kicksware.com
-      - --certificatesResolvers.le.acme.storage=/cert/acme.json
-      - --certificatesResolvers.le.acme.dnsChallenge=true
-      - --certificatesResolvers.le.acme.dnsChallenge.provider=digitalocean
-      - --accesslog=true
     labels:
-      - traefik.http.routers.traefik.entrypoints=web
-      - traefik.http.routers.traefik.rule=Host(`monitor.kicksware.com`)
-      - traefik.http.routers.traefik-secure.entrypoints=websecure
-      - traefik.http.routers.traefik-secure.rule=Host(`monitor.kicksware.com`)
-      - traefik.http.routers.traefik-secure.tls=true
-      - traefik.http.routers.traefik-secure.tls.domains[0].main=kicksware.com
-      - traefik.http.routers.traefik-secure.tls.domains[0].sans=*.kicksware.com
-      - traefik.http.routers.traefik.service=api@internal
-      - traefik.http.routers.traefik-secure.service=api@internal
-      - traefik.http.routers.traefik.middlewares=traefik-https-redirect
-      - traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https
-      - traefik.http.middlewares.traefik-https-redirect.redirectscheme.permanent=true
-      - traefik.http.middlewares.add-dashboard.addprefix.prefix=/dashboard/#/
-      - traefik.http.routers.traefik.tls.certresolver=le
-      - traefik.http.routers.traefik-secure.tls.certresolver=le
-      - traefik.http.routers.traefik-secure.middlewares=traefik-auth
-      - traefik.http.middlewares.traefik-auth.basicauth.users=root:$$apr1$$hnXmcCx0$$hTmrK2ZX5sKWiqE9IR6E6/
       - traefik.docker.network=web
     environment:
       - DO_AUTH_TOKEN=6229b9e18dd51158da31da743bcf36262a11e8075a8ea2847d555cb9a3e47bf4
@@ -49,11 +15,13 @@ services:
     networks:
       - web
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /source/cert:/cert
       - type: bind
-        source: /${SOURCE_DIR}/proxy-service/proxy-config.toml
-        target: /proxy-config.toml
+        source: /${SOURCE_DIR}/proxy-service/traefik.yaml
+        target: /traefik.yaml
+      - /${SOURCE_DIR}/proxy-service/dynamic-config:/dynamic-config
+      - /source/keys:/keys
+      - /source/cert:/cert
+      - /var/run/docker.sock:/var/run/docker.sock
 
 networks:
   web:

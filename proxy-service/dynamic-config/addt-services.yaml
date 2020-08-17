@@ -1,0 +1,27 @@
+http:
+  routers:
+    gitlab-ci:
+      rule: "Host(`ci.kicksware.com`)"
+      entrypoints:
+       - websecure
+      service: gitlab-ci
+      tls:
+        certResolver: le
+
+    sonarqube:
+      rule: "Host(`ci.kicksware.com`)"
+      entrypoints:
+        - websecure
+      service: sonarqube
+      tls:
+        certResolver: le
+
+  services:
+    gitlab-ci:
+      loadBalancer:
+        servers:
+          url: https://ci.kicksware.com:44321
+    sonarqube:
+      loadBalancer:
+        servers:
+          url: http:/kicksware:9000
