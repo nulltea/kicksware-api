@@ -6,7 +6,7 @@ commonConfig:
   innerServiceFormat: http://%s:8080/%s/
 securityConfig:
   tlsCertificate:
-    enableTLS: true
+    enableTLS: false
     certFile: ../key/server.crt
     keyFile: ../key/server.key
 authConfig:
