@@ -5,7 +5,7 @@ commonConfig:
   innerServiceFormat: api.kicksware.com:443
 securityConfig:
   tlsCertificate:
-    enableTLS: true
+    enableTLS: false
     certFile: ../key/server.crt
     keyFile: ../key/server.key
 authConfig:

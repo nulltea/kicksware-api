@@ -270,6 +270,8 @@ github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-
 github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200816165922-25c13d486d1e/go.mod h1:uL5asZq+OROqIDAMY+7Xy8X/+MBTY1tOPkODURGUaxI=
 github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200817154018-d881bd3c099f h1:0OeRTlzdrkmE5KnjGevRwVkKEGztDd5PqyxcS0OVrsI=
 github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200817154018-d881bd3c099f/go.mod h1:uL5asZq+OROqIDAMY+7Xy8X/+MBTY1tOPkODURGUaxI=
+github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200818142045-c68220681572 h1:PA/EGQopIaYAZkHJ+FVUWV12h6Uf8Ajeyntyr2CpVIc=
+github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200818142045-c68220681572/go.mod h1:uL5asZq+OROqIDAMY+7Xy8X/+MBTY1tOPkODURGUaxI=
 github.com/timoth-y/kicksware-platform/middleware-service/user-service v0.0.0-20200807131113-a8928eed241c h1:k41JwYuhlfvvbsS5hm3fBNIBEXsJ6Ber60ujDcUerto=
 github.com/timoth-y/kicksware-platform/middleware-service/user-service v0.0.0-20200807131113-a8928eed241c/go.mod h1:asUKM9SLltlPE1SPVnvY+fT4/SeTP9K5kCwcuszWJQM=
 github.com/timoth-y/sneaker-resale-platform v0.0.0-20200506181817-e140665325d6 h1:nBSWZCQMZgzi1rRe6hMSfMcH4NFcRI0hGPBgsRWCG4U=
