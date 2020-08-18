@@ -9,4 +9,4 @@ http:
     user-service-grpc:
       loadBalancer:
         servers:
-          url: https://user.backend:8080
+          - url: https://user.backend:8080
