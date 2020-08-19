@@ -13,6 +13,8 @@ stages:
 
 before_script: &common-before
     - export SOURCE_DIR="/source/repos/$CI_PROJECT_NAME"
+    - apk add make
+    - apt-get install build-essential
 
 #---init stage---#
 
