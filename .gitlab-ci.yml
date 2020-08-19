@@ -104,7 +104,7 @@ deploy-middleware-step:
       - echo setting up env $DYNAMIC_ENV_VAR
       - make middleware
     after_script:
-      - make mong-restore
+      - make mongo-restore
 
 deploy-webapp-step:
     stage: deploy
