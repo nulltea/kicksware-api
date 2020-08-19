@@ -27,8 +27,8 @@ mongo-restore:
 
 styles:
 	mkdir web-app-service/Web/wwwroot/styles/css;
-	for dir in web-app-service/Web/wwwroot/styles/less/*;
-		do lessc-each web-app-service/Web/wwwroot/styles/less/$(basename ${dir}) web-app-service/Web/wwwroot/styles/css/$(basename ${dir});
+	for dir in web-app-service/Web/wwwroot/styles/less/*; do \
+		lessc-each web-app-service/Web/wwwroot/styles/less/$(basename ${dir}) web-app-service/Web/wwwroot/styles/css/$(basename ${dir}); \
 	done;
 
 cert:
