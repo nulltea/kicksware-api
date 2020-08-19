@@ -7,7 +7,7 @@ http:
       service: gitlab-ci
       tls:
         certResolver: le
-
+---
     sonarqube:
       rule: "Host(`test.kicksware.com`)"
       entrypoints:
@@ -21,6 +21,7 @@ http:
       loadBalancer:
         servers:
           - url: https://ci.kicksware.com:44321
+---
     sonarqube:
       loadBalancer:
         servers:

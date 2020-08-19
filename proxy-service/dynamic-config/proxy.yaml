@@ -8,7 +8,7 @@ http:
       middlewares:
         - https-redirect
         # - traefik-auth
-
+---
     traefik-secure:
       entrypoints:
         - websecure
