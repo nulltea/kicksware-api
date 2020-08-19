@@ -6,12 +6,14 @@ proxy:
 	docker-compose up -d;
 	
 middleware:
+	cd middleware-service;
 	docker-compose down;
 	docker-compose build;
 	docker-compose push middleware-service;
 	docker-compose up -d;
 
 web-app:
+	cd web-app-service;
 	docker-compose down;
 	docker-compose build;
 	docker-compose push web-app;

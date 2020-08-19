@@ -45,10 +45,7 @@ build-styles-step:
     - npm install
     - npm install -g lessc-each
   script:
-    - mkdir web-app-service/Web/wwwroot/styles/css
-    - for dir in web-app-service/Web/wwwroot/styles/less/*;
-          do lessc-each web-app-service/Web/wwwroot/styles/less/$(basename ${dir}) web-app-service/Web/wwwroot/styles/css/$(basename ${dir}); 
-      done
+    - make styles
   artifacts:
     paths:
       - web-app-service/Web/wwwroot/styles/css
@@ -90,26 +87,22 @@ deploy-proxy-step:
       - proxy
     script:
       - echo setting up env $DYNAMIC_ENV_VAR
-      - docker-compose -f proxy-service/docker-compose.yml down
-      - docker-compose -f proxy-service/docker-compose.yml build
-      - docker-compose -f proxy-service/docker-compose.yml up -d
+      - make proxy
 
 deploy-middleware-step:
     stage: deploy
     before_script: 
       - *common-before
       - export DYNAMIC_ENV_VAR=PROD
-      - docker exec mongo mongodump -u root -p greenJordans --authenticationDatabase admin --db=sneakerResaleDB  --out=/backup || echo "mongo down - buckup impossible"
+      - make mongo-backup
     tags:
       - middleware
       - deploy
     script:
       - echo setting up env $DYNAMIC_ENV_VAR
-      - docker-compose -f middleware-service/docker-compose.yml down
-      - docker-compose -f middleware-service/docker-compose.yml build
-      - docker-compose -f middleware-service/docker-compose.yml up -d
+      - make middleware
     after_script:
-      - docker exec mongo mongorestore -u root -p greenJordans --authenticationDatabase admin ./backup
+      - make mong-restore
 
 deploy-webapp-step:
     stage: deploy
@@ -121,9 +114,7 @@ deploy-webapp-step:
       - deploy
     script:
       - echo setting up env $DYNAMIC_ENV_VAR
-      - docker-compose -f web-app-service/docker-compose.yml down
-      - docker-compose -f web-app-service/docker-compose.yml build
-      - docker-compose -f web-app-service/docker-compose.yml up -d
+      - make web-app
     dependencies:
       - build-styles-step
 
