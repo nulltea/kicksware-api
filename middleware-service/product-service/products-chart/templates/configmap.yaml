@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "chart.fullname" . }}
+  labels:
+    {{- include "chart.labels" . | nindent 4 }}
+data:
+  ENV: {{ .Values.config.enviroment}}
+  HOST: {{ .Values.config.host}}
+  HOSTNAME: {{ .Values.config.hostname}}
+  CONFIG_PATH: {{ .Values.config.configPath}}

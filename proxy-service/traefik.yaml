@@ -3,14 +3,14 @@ defaultEntryPoints:
   - web
   - websecure
   - grpc
-
+---
 api:
   insecure: true
   dashboard: true
-
+---
 log:
   level: DEBUG
-
+---
 providers:
   docker:
     watch: true
@@ -24,7 +24,7 @@ entryPoints:
     address: ":80"
   websecure:
     address: ":443"
-
+---
 certificatesResolvers:
   le:
     acme:
@@ -32,7 +32,7 @@ certificatesResolvers:
       storage: /cert/acme.json
       dnsChallenge:
         provider : digitalocean
-
+---
 serversTransport:
   rootCAs:
     - /keys/server.crt

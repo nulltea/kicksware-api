@@ -1,0 +1,48 @@
+project: kicksware
+component: references
+nameOverride: ""
+fullnameOverride: ""
+
+replicaCount: 1
+image:
+  repository: references-service
+  pullPolicy: IfNotPresent
+  tag: ""
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: false
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: users.local
+      paths: []
+  tls:
+    enabled: false
+    secrets:
+      - secretName: chart-tls
+        hosts: []
+
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 25
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+config:
+  enviroment: PROD
+  host: 0.0.0.0:8080
+  hostname: api.kicksware.com
+  configPath: /env/config.prod.yaml
