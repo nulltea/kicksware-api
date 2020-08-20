@@ -1,17 +1,20 @@
 project: kicksware
-component: products
+component: proxy
 nameOverride: ""
 fullnameOverride: ""
+namespace: kube-system
 
 replicaCount: 1
 image:
-  repository: products-service
+  repository: traefik
   pullPolicy: IfNotPresent
-  tag: ""
+  tag: v2.2
 
 service:
-  type: ClusterIP
-  port: 8080
+  type: NodePort
+  port: 80
+  securePort: 443
+  adminPort: 8080
 
 ingress:
   enabled: false
@@ -26,6 +29,39 @@ ingress:
     secrets:
       - secretName: chart-tls
         hosts: []
+
+api:
+  insecure: true
+  dashboard: true
+
+log:
+  level: DEBUG
+  accesslog: true
+
+providers:
+  file:
+    enabled: true
+    directory: /dynamic-config
+    watch: true
+  kubernetescrd:
+    enabled: true
+  kubernetesingress:
+    enabled: true
+
+acme:
+  enabled: true
+  email: timothy@kicksware.com
+  storage: /cert/acme.json
+  dnsChallenge:
+    enabled: true
+    provider: digitalocean
+    envName: DO_AUTH_TOKEN
+    token: 6229b9e18dd51158da31da743bcf36262a11e8075a8ea2847d555cb9a3e47bf4
+
+serverTransport:
+  rootCAs:
+    - /keys/server.crt
+  insecureSkipVerify: false
 
 resources: {}
 

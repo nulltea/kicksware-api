@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "chart.fullname" . }}
+  namespace: kube-system
+  labels:
+    {{- include "chart.labels" . | nindent 4 }}
+spec:
+{{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+{{- end }}
+  selector:
+    matchLabels:
+      {{- include "chart.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "chart.selectorLabels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ include "chart.serviceAccountName" . }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+            - name: https
+              containerPort: {{ .Values.service.securePort }}
+            - name: admin
+              containerPort: {{ .Values.service.adminPort }}
+          args:
+            - --api
+            - --api.insecure={{ .Values.api.insecure }}
+            - --api.dashboard={{ .Values.api.dashboard }}
+            - --log.level={{ .Values.log.level }}
+            {{- if .Values.providers.file.enabled }}
+            - --providers.file=true
+            - --providers.file.directory={{ .Values.providers.file.directory }}
+            - --providers.file.watch={{ .Values.providers.file.watch }}
+            {{- end }}
+            - --providers.kubernetescrd={{ .Values.providers.kubernetescrd.enabled }}
+            - --providers.kubernetesingress={{ .Values.providers.kubernetescrd.enabled }}
+            - --entryPoints.web.address=":{{ .Values.service.port}}"
+            - --entryPoints.websecure.address=":{{ .Values.service.securePort}}"
+            {{- if .Values.acme.enabled }}
+            - --certificatesResolvers.le.acme.email={{ .Values.acme.email}}
+            - --certificatesResolvers.le.acme.storage={{ .Values.acme.storage}}
+            - --certificatesResolvers.le.acme.dnschallenge={{ .Values.acme.dnsChallenge.enabled}}
+            - --certificatesResolvers.le.acme.dnschallenge.provider={{ .Values.acme.dnsChallenge.provider}}
+            {{- end }}
+            {{- with .Values.serverTransport }}
+              {{- with .rootCAs }}
+            - --serversTransport.rootCAs={{.}}
+              {{- end }}
+              {{- with .insecureSkipVerify }}
+            - --serversTransport.insecureSkipVerify={{.}}
+              {{- end }}
+            {{- end }}
+            - --accesslog={{ .Values.log.accesslog }}
+          env:
+            - name: {{ .Values.acme.dnsChallenge.envName}}
+              value: {{ .Values.acme.dnsChallenge.token}}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
