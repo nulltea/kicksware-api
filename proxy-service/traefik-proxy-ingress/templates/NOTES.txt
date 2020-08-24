@@ -5,5 +5,5 @@ From outside the cluster, the {{ .Values.component }} microservice is available 
  - :{{ .Values.service.adminPort }}
 For more info contact project maintainers:
 {{- range .Chart.Maintainers }}
-  - {{ . }}
+  - {{ .Name }}
 {{- end }}
