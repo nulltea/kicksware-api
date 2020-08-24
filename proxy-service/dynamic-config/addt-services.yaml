@@ -20,7 +20,7 @@ http:
     gitlab-ci:
       loadBalancer:
         servers:
-          - url: https://ci.kicksware.com:44321
+          - url: http://ci.kicksware.com:44321
 ---
     sonarqube:
       loadBalancer:
