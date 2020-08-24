@@ -4,22 +4,22 @@ kind: IngressRoute
 metadata:
   name: {{ template "chart.fullname" . }}
   labels:
-  {{- include "chart.labels" . | nindent 4 }}
+    {{- include "chart.labels" . | nindent 4 }}
 spec:
   {{- with .Values.ingress.entrypoints }}
   entryPoints:
-  {{- toYaml . | nindent 4 }}
+    {{- toYaml . | nindent 4 }}
   {{- end }}
   {{- range .Values.ingress.routes }}
   routes:
     - match: Host(`{{ .host}}`) && PathPrefix(`{{ join .paths "`) || PathPrefix(`" }}`)
       kind: Rule
       services:
-        {{- range .services }}
+      {{- range .services }}
         - name: {{ template "chart.fullname" . }}
           port: {{ .port }}
           scheme: {{ .scheme }}
-  {{- end }}
+      {{- end }}
   {{- end }}
   {{- if .Values.ingress.tls.enabled }}
   tls:

@@ -14,18 +14,23 @@ service:
   port: 8080
 
 ingress:
-  enabled: false
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: users.local
-      paths: []
+  enabled: true
+  provider: traefik.containo.us/v1alpha1
+  entrypoints:
+    - web
+    - websecure
+  routes:
+    - host: api.kicksware.com
+      paths:
+        - /references
+      middlewares: []
+      services:
+        - name: user-service
+          port: 8080
+          scheme: http
   tls:
-    enabled: false
-    secrets:
-      - secretName: chart-tls
-        hosts: []
+    enabled: true
+    certResolver: le
 
 resources: {}
 

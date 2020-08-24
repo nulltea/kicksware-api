@@ -1,36 +1,28 @@
 {{- if .Values.ingress.enabled -}}
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
+apiVersion: {{ .Values.ingress.provider }}
+kind: IngressRoute
 metadata:
   name: {{ template "chart.fullname" . }}
   labels:
-    {{- include "chart.labels" . | nindent 4 }}
-  {{- with .Values.ingress.annotations }}
-  annotations:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
+  {{- include "chart.labels" . | nindent 4 }}
 spec:
-  rules:
-    {{- $servicePort := .Values.service.port -}}
-    {{- range .Values.ingress.hosts }}
-    - host: {{ .host | quote }}
-      http:
-        paths:
-          {{- range .paths }}
-          - path: {{ . }}
-            backend:
-              serviceName: {{ template "chart.fullname" . }}
-              servicePort: {{ $servicePort }}
-          {{- end }}
-    {{- end }}
+  {{- with .Values.ingress.entrypoints }}
+  entryPoints:
+  {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- range .Values.ingress.routes }}
+  routes:
+    - match: Host(`{{ .host}}`) && PathPrefix(`{{ join .paths "`) || PathPrefix(`" }}`)
+      kind: Rule
+      services:
+        {{- range .services }}
+        - name: {{ template "chart.fullname" . }}
+          port: {{ .port }}
+          scheme: {{ .scheme }}
+  {{- end }}
+  {{- end }}
   {{- if .Values.ingress.tls.enabled }}
   tls:
-    {{- range .Values.ingress.tls.secrets }}
-    - hosts:
-        {{- range .hosts }}
-        - {{ . | quote }}
-      {{- end }}
-      secretName: {{ .secretName }}
-  {{- end }}
+    certResolver: {{ .Values.ingress.tls.certResolver }}
   {{- end }}
   {{- end }}

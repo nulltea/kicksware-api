@@ -1,7 +1,7 @@
 This is {{ .Values.component }} microservice of {{ .Values.project }} application project.
 From outside the cluster, the {{ .Values.component }} microservice is available by URL:
 {{- if .Values.ingress.enabled }}
-{{- range $host, $paths := .Values.ingress.hosts }}
+{{- range $host, $paths := .Values.ingress.routes }}
   {{- range $paths }}
   http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host }}{{ . }}
   {{- end }}
