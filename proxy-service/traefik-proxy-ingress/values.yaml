@@ -2,7 +2,7 @@ project: kicksware
 component: proxy
 nameOverride: ""
 fullnameOverride: ""
-namespace: kube-system
+sourceDir: &sourceDir /run/desktop/mnt/host/wsl/source/repos/kicksware-platform
 
 replicaCount: 1
 image:
@@ -11,24 +11,34 @@ image:
   tag: v2.2
 
 service:
-  type: NodePort
+  type: LoadBalancer
   port: 80
   securePort: 443
   adminPort: 8080
 
 ingress:
-  enabled: false
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: users.local
-      paths: []
+  enabled: true
+  provider: traefik.containo.us/v1alpha1
+  entrypoints:
+    - web
+    - websecure
+  routes:
+    - host: monitor.kicksware.com
+      paths:
+        - /
+      middlewares: []
+      services:
+        - name: api@internal
+          kind: TraefikService
+          port: 8080
+          scheme: http
   tls:
-    enabled: false
-    secrets:
-      - secretName: chart-tls
-        hosts: []
+    enabled: true
+    certResolver: le
+    domains:
+      - main: kicksware.com
+        sans:
+          - '*.kicksware.com'
 
 api:
   insecure: true
@@ -38,10 +48,27 @@ log:
   level: DEBUG
   accesslog: true
 
+volumes:
+  - name: cert
+    hostPathBase: /run/desktop/mnt/host/wsl
+    hostPath: /source/cert
+    mountPath: /cert
+    type: Directory
+  - name: keys
+    hostPathBase: /run/desktop/mnt/host/wsl
+    hostPath: /source/keys
+    mountPath: /keys
+    type: Directory
+  - name: dynamic
+    hostPathBase: *sourceDir
+    hostPath: /proxy-service/dynamic-config
+    mountPath: &dynamic-mount /dynamic-config
+    type: Directory
+
 providers:
   file:
     enabled: true
-    directory: /dynamic-config
+    directory: *dynamic-mount
     watch: true
   kubernetescrd:
     enabled: true
@@ -74,7 +101,6 @@ autoscaling:
 
 serviceAccount:
   create: true
-  annotations: {}
   name: ""
 
 config:

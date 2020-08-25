@@ -4,18 +4,20 @@ metadata:
   name: {{ include "chart.fullname" . }}
   labels:
     {{- include "chart.labels" . | nindent 4 }}
-  namespace: {{ .Values.namespace }}
 spec:
   type: {{ .Values.service.type }}
   selector:
     {{- include "chart.selectorLabels" . | nindent 4 }}
   ports:
-    - name: http
+    - name: web
       port: {{ .Values.service.port }}
+      targetPort: web
       protocol: TCP
-    - name: https
+    - name: websecure
       port: {{ .Values.service.securePort }}
+      targetPort: websecure
       protocol: TCP
     - name: admin
       port: {{ .Values.service.adminPort }}
+      targetPort: admin
       protocol: TCP

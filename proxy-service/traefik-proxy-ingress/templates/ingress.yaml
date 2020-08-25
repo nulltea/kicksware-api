@@ -1,0 +1,34 @@
+{{- if .Values.ingress.enabled -}}
+apiVersion: {{ .Values.ingress.provider }}
+kind: IngressRoute
+metadata:
+  name: {{ template "chart.fullname" . }}
+  labels:
+  {{- include "chart.labels" . | nindent 4 }}
+spec:
+  {{- with .Values.ingress.entrypoints }}
+  entryPoints:
+  {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- range .Values.ingress.routes }}
+  routes:
+    - match: Host(`{{ .host}}`) && PathPrefix(`{{ .paths | join "`) || PathPrefix(`" }}`)
+      kind: Rule
+      services:
+        {{- range .services }}
+        - name: {{ .name }}
+          kind: {{ .kind }}
+          port: {{ .port }}
+          scheme: {{ .scheme }}
+  {{- end }}
+  {{- end }}
+  {{- if .Values.ingress.tls.enabled }}
+  tls:
+    secretName: {{ template "chart.fullname" . }}
+    certResolver: {{ .Values.ingress.tls.certResolver }}
+    {{- with .Values.ingress.tls.domains }}
+    domains:
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- end }}
+  {{- end }}

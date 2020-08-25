@@ -1,8 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "chart.fullname" . }}
-  namespace: kube-system
+  name: {{ template "chart.fullname" . }}
   labels:
     {{- include "chart.labels" . | nindent 4 }}
 spec:
@@ -11,7 +10,8 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxUnavailable: 0
+      maxSurge: 1
+      maxUnavailable: 1
 {{- end }}
   selector:
     matchLabels:
@@ -27,9 +27,9 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: http
+            - name: web
               containerPort: {{ .Values.service.port }}
-            - name: https
+            - name: websecure
               containerPort: {{ .Values.service.securePort }}
             - name: admin
               containerPort: {{ .Values.service.adminPort }}
@@ -37,6 +37,7 @@ spec:
             - --api
             - --api.insecure={{ .Values.api.insecure }}
             - --api.dashboard={{ .Values.api.dashboard }}
+            - --ping=true
             - --log.level={{ .Values.log.level }}
             {{- if .Values.providers.file.enabled }}
             - --providers.file=true
@@ -45,8 +46,9 @@ spec:
             {{- end }}
             - --providers.kubernetescrd={{ .Values.providers.kubernetescrd.enabled }}
             - --providers.kubernetesingress={{ .Values.providers.kubernetescrd.enabled }}
-            - --entryPoints.web.address=":{{ .Values.service.port}}"
-            - --entryPoints.websecure.address=":{{ .Values.service.securePort}}"
+            - "--entryPoints.web.address=:{{ .Values.service.port}}"
+            - "--entryPoints.websecure.address=:{{ .Values.service.securePort}}"
+            - "--entryPoints.traefik.address=:{{ .Values.service.adminPort}}"
             {{- if .Values.acme.enabled }}
             - --certificatesResolvers.le.acme.email={{ .Values.acme.email}}
             - --certificatesResolvers.le.acme.storage={{ .Values.acme.storage}}
@@ -62,16 +64,30 @@ spec:
               {{- end }}
             {{- end }}
             - --accesslog={{ .Values.log.accesslog }}
+          volumeMounts:
+          {{- range .Values.volumes }}
+            - name: {{ .name }}
+              mountPath: {{ .mountPath }}
+          {{- end }}
           env:
-            - name: {{ .Values.acme.dnsChallenge.envName}}
+            - name:  {{ .Values.acme.dnsChallenge.envName}}
               value: {{ .Values.acme.dnsChallenge.token}}
           livenessProbe:
             httpGet:
-              path: /
-              port: http
+              path: /ping
+              port: {{ .Values.service.adminPort }}
           readinessProbe:
             httpGet:
-              path: /
-              port: http
+              path: /ping
+              port: {{ .Values.service.adminPort }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        {{- range .Values.volumes }}
+        - name: {{ .name }}
+          {{- if .hostPath }}
+          hostPath:
+            path: {{ .hostPathBase }}{{ .hostPath }}
+            type: {{ .type }}
+          {{- end }}
+        {{- end }}
