@@ -46,9 +46,9 @@ spec:
             {{- end }}
             - --providers.kubernetescrd={{ .Values.providers.kubernetescrd.enabled }}
             - --providers.kubernetesingress={{ .Values.providers.kubernetescrd.enabled }}
-            - "--entryPoints.web.address=:{{ .Values.service.port}}"
-            - "--entryPoints.websecure.address=:{{ .Values.service.securePort}}"
-            - "--entryPoints.traefik.address=:{{ .Values.service.adminPort}}"
+            - '--entryPoints.web.address=:{{ .Values.service.port}}'
+            - '--entryPoints.websecure.address=:{{ .Values.service.securePort}}'
+            - '--entryPoints.traefik.address=:{{ .Values.service.adminPort}}'
             {{- if .Values.acme.enabled }}
             - --certificatesResolvers.le.acme.email={{ .Values.acme.email}}
             - --certificatesResolvers.le.acme.storage={{ .Values.acme.storage}}
