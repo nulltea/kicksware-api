@@ -1,4 +1,4 @@
-apiVersion: apiextensions.k8s.io/v1
+apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
   name: ingressroutes.traefik.containo.us
@@ -8,9 +8,6 @@ spec:
     - name: v1alpha1
       served: true
       storage: true
-      schema:
-        openAPIV3Schema:
-          type: object
   names:
     kind: IngressRoute
     plural: ingressroutes
@@ -19,7 +16,7 @@ spec:
   preserveUnknownFields: true
 
 ---
-apiVersion: apiextensions.k8s.io/v1
+apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
   name: ingressroutetcps.traefik.containo.us
@@ -29,17 +26,15 @@ spec:
     - name: v1alpha1
       served: true
       storage: true
-      schema:
-        openAPIV3Schema:
-          type: object
   names:
     kind: IngressRouteTCP
     plural: ingressroutetcps
     singular: ingressroutetcp
   scope: Namespaced
+  preserveUnknownFields: true
 
 ---
-apiVersion: apiextensions.k8s.io/v1
+apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
   name: middlewares.traefik.containo.us
@@ -49,17 +44,15 @@ spec:
     - name: v1alpha1
       served: true
       storage: true
-      schema:
-        openAPIV3Schema:
-          type: object
   names:
     kind: Middleware
     plural: middlewares
     singular: middleware
   scope: Namespaced
+  preserveUnknownFields: true
 
 ---
-apiVersion: apiextensions.k8s.io/v1
+apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
   name: tlsoptions.traefik.containo.us
@@ -69,30 +62,18 @@ spec:
     - name: v1alpha1
       served: true
       storage: true
-      schema:
-        openAPIV3Schema:
-          type: object
-          properties:
-            spec:
-              type: object
-              properties:
-                cronSpec:
-                  type: string
-                image:
-                  type: string
-                replicas:
-                  type: integer
   names:
     kind: TLSOption
     plural: tlsoptions
     singular: tlsoption
   scope: Namespaced
+  preserveUnknownFields: true
+
 ---
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
   name: tlsstores.traefik.containo.us
-
 spec:
   group: traefik.containo.us
   version: v1alpha1
@@ -101,13 +82,13 @@ spec:
     plural: tlsstores
     singular: tlsstore
   scope: Namespaced
+  preserveUnknownFields: true
 
 ---
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
   name: traefikservices.traefik.containo.us
-
 spec:
   group: traefik.containo.us
   version: v1alpha1
@@ -116,5 +97,6 @@ spec:
     plural: traefikservices
     singular: traefikservice
   scope: Namespaced
+  preserveUnknownFields: true
 
 ---
