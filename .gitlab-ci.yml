@@ -12,6 +12,10 @@ stages:
     - deploy
 
 before_script: &common-before
+    - docker version
+    - docker-compose version
+    - echo $CI_REGISTRY
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
     - export SOURCE_DIR="/source/repos/$CI_PROJECT_NAME"
     - apk add make
 
@@ -21,11 +25,9 @@ init-source-step:
   stage: init
   tags:
     - init
-  script: 
-    - docker version
-    - docker-compose version
-    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY 
-    - export SOURCE_DIR="/source/repos/$CI_PROJECT_NAME"
+  before_script:
+    - *common-before
+  script:
     - cp -r /builds/root/* /source/repos/
 
 #----------------#
@@ -72,7 +74,7 @@ build-styles-step:
 #      SONAR_TOKEN: "8d26b9c30a611a96a53eb1f6e30326a17e186a83"
 #      SONAR_HOST_URL: "http://test.kicksware.com:9000"
 #      GIT_DEPTH: 0
-#    script: 
+#    script:
 #      - sonar-scanner -Dsonar.qualitygate.wait=true
 #    allow_failure: true
 #    only:
@@ -97,7 +99,7 @@ deploy-proxy-step:
 
 deploy-middleware-step:
     stage: deploy
-    before_script: 
+    before_script:
       - *common-before
       - export DYNAMIC_ENV_VAR=PROD
       - make mongo-backup

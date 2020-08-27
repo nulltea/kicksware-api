@@ -5,7 +5,7 @@ services:
       context: ./product-service
       dockerfile: ./docker/Dockerfile
       target: dev
-    image: products-service
+    image: ${CI_REGISTRY_PREFIX}/products-service
     container_name: products
     env_file: ./product-service/env/.env.prod
     restart: always
@@ -35,7 +35,7 @@ services:
       context: ./user-service
       dockerfile: ./docker/Dockerfile
       target: dev
-    image: users-service
+    image: ${CI_REGISTRY_PREFIX}/users-service
     container_name: users
     env_file: ./user-service/env/.env.prod
     restart: always
@@ -67,7 +67,7 @@ services:
       context: ./reference-service
       dockerfile: ./docker/Dockerfile
       target: dev
-    image: references-service
+    image: ${CI_REGISTRY_PREFIX}/references-service
     container_name: references
     env_file: ./reference-service/env/.env.prod
     restart: always
@@ -98,7 +98,7 @@ services:
       context: ./search-service
       dockerfile: ./docker/Dockerfile
       target: dev
-    image: search-service
+    image: ${CI_REGISTRY_PREFIX}/search-service
     container_name: search
     env_file: ./search-service/env/.env.prod
     restart: always
@@ -136,7 +136,7 @@ services:
       context: ./order-service
       dockerfile: ./docker/Dockerfile
       target: dev
-    image: orders-service
+    image: ${CI_REGISTRY_PREFIX}/orders-service
     container_name: orders
     env_file: ./order-service/env/.env.prod
     restart: always
@@ -166,7 +166,7 @@ services:
       context: ./cdn-service
       dockerfile: ./docker/Dockerfile
       target: dev
-    image: cdn-service
+    image: ${CI_REGISTRY_PREFIX}/cdn-service
     container_name: cdn
     env_file: ./cdn-service/env/.env.prod
     restart: always
