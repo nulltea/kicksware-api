@@ -5,7 +5,7 @@ services:
       context: ./product-service
       dockerfile: ./docker/Dockerfile
       target: dev
-    image: products-service
+    image: ci.kicksware.com:44321/root/products-service
     container_name: products
     env_file: ./product-service/env/.env.prod
     restart: always
@@ -33,7 +33,7 @@ services:
       context: ./user-service
       dockerfile: ./docker/Dockerfile
       target: dev
-    image: users-service
+    image: ci.kicksware.com:44321/root/users-service
     container_name: users
     env_file: ./user-service/env/.env.prod
     restart: always
@@ -64,7 +64,7 @@ services:
       context: ./reference-service
       dockerfile: ./docker/Dockerfile
       target: dev
-    image: references-service
+    image: ci.kicksware.com:44321/root/references-service
     container_name: references
     env_file: ./reference-service/env/.env.prod
     restart: always
@@ -77,7 +77,6 @@ services:
       - traefik.http.routers.reference-service-grpc.entrypoints=grpc
       - traefik.http.services.reference-service-grpc.loadbalancer.server.scheme=h2c
       - traefik.docker.network=web
-    # command: /bin/sh -c "dlv debug --headless --listen=:4000 --api-version=2 --accept-multiclient ."
     volumes:
       - ./reference-service/env:/dist/env
       - key-volume:/key
@@ -94,7 +93,7 @@ services:
       context: ./search-service
       dockerfile: ./docker/Dockerfile
       target: dev
-    image: search-service
+    image: ci.kicksware.com:44321/root/search-service
     container_name: search
     env_file: ./search-service/env/.env.prod
     restart: always

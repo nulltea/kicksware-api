@@ -29,7 +29,7 @@ services:
       - mongodb
     depends_on:
       - mongodb
----
+
   users-service:
     build:
       context: ./user-service
@@ -61,7 +61,7 @@ services:
       - mongodb
     depends_on:
       - mongodb
----
+
   references-service:
     build:
       context: ./reference-service
@@ -92,7 +92,7 @@ services:
       - mongodb
     depends_on:
       - mongodb
----
+
   search-service:
     build:
       context: ./search-service
@@ -130,7 +130,7 @@ services:
       - products-service
       - elasticsearch
       - kibana
----
+
   orders-service:
     build:
       context: ./order-service
@@ -160,7 +160,7 @@ services:
       - mongodb
     depends_on:
       - mongodb
----
+
   cdn-service:
     build:
       context: ./cdn-service
@@ -193,15 +193,15 @@ services:
       - mongodb
     depends_on:
       - mongodb
----
+
   mongodb:
     image: mongo:3.6.17
     container_name: mongo
     restart: always
     environment:
-      - MONGO_INITDB_DATABASE=sneakerResaleDB
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=greenJordans
+      - MONGO_INITDB_DATABASE=${MONGO_DB}
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
     ports:
       - 27017:27017
       - 27018:27017
@@ -214,7 +214,7 @@ services:
         target: /backup
     # logging:
     #  driver: none
----
+
   elasticsearch:
     container_name: elasticsearch
     image: docker.elastic.co/elasticsearch/elasticsearch:7.6.1
@@ -238,7 +238,7 @@ services:
     - 9200:9200
   # logging:
   #   driver: none
----
+
   kibana:
     image: docker.elastic.co/kibana/kibana:7.6.1
     container_name: kibana
@@ -266,7 +266,7 @@ networks:
     driver: bridge
   web:
     external: true
----
+
 volumes:
   key-volume:
     driver: local

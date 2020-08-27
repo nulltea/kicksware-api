@@ -2,7 +2,7 @@ version: '3.3'
 services:
   traefik:
     container_name: traefik
-    image:  traefik:latest
+    image: traefik:latest
     restart: always
     labels:
       - traefik.docker.network=web
