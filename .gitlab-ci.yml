@@ -14,7 +14,6 @@ stages:
 before_script: &common-before
     - docker version
     - docker-compose version
-    - echo $CI_REGISTRY
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
     - export SOURCE_DIR="/source/repos/$CI_PROJECT_NAME"
     - apk add make
@@ -25,8 +24,6 @@ init-source-step:
   stage: init
   tags:
     - init
-  before_script:
-    - *common-before
   script:
     - cp -r /builds/root/* /source/repos/
 
