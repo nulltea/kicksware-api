@@ -40,7 +40,6 @@ build-styles-step:
     - webapp
     - build
   before_script:
-    - *common-before
     - apk add --update bash
     - apk add --update git && rm -rf /tmp/* /var/cache/apk/*
     - npm install
