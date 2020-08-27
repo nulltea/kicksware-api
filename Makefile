@@ -6,7 +6,7 @@ proxy:
 middleware:
 	docker-compose -f middleware-service/docker-compose.yml down;
 	docker-compose -f middleware-service/docker-compose.yml build;
-	docker-compose -f middleware-service/docker-compose.yml push users-service references-service product-service search-service;
+	docker-compose -f middleware-service/docker-compose.yml push users-service references-service products-service search-service;
 	docker-compose -f middleware-service/docker-compose.yml up -d;
 
 web-app:
