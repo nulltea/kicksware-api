@@ -12,7 +12,7 @@ spec:
   {{- end }}
   {{- range .Values.ingress.routes }}
   routes:
-    - match: Host(`{{ .host}}`) && PathPrefix(`{{ .paths | join "`) || PathPrefix(`" }}`)
+    - match: Host(`{{ .host }}`) && PathPrefix(`{{ .paths | join "`) || PathPrefix(`" }}`)
       kind: Rule
       services:
       {{- range .services }}

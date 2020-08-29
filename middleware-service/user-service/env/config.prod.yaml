@@ -7,13 +7,13 @@ commonConfig:
 securityConfig:
   tlsCertificate:
     enableTLS: true
-    certFile: ../key/server.crt
-    keyFile: ../key/server.key
+    certFile: key/server.crt
+    keyFile: key/server.key
 authConfig:
   issuerName: middleware/user-service
   tokenExpirationDelta: 360
   privateKeyPath: key/private.key
-  publicKeyPath: ../key/public.key.pub
+  publicKeyPath: key/public.key.pub
 mailConfig:
   server: smtp.zoho.eu:465
   address: accounts@kicksware.com
@@ -29,7 +29,7 @@ fallbackMailConfig:
   resetPasswordTemplate: template/reset.template.html
   notificationTemplate: template/notification.template.html
 mongoConfig:
-  URL: mongodb://root:greenJordans@mongodb:27017
+  URL: mongodb://root:greenJordans@kicksware.com:27017
   database: sneakerResaleDB
   collection: users
   likesCollection: likes

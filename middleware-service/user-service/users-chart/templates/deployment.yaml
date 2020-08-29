@@ -23,18 +23,39 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
           livenessProbe:
             httpGet:
-              path: /
+              path: /health/live
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path: /health/ready
               port: http
+          volumeMounts:
+            - name: config
+              mountPath: {{ .Values.config.configMountPath }}
+            - name: ssh-keys
+              mountPath: /dist/key
+          envFrom:
+            - configMapRef:
+                name: {{ template "chart.fullname" . }}.env
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      imagePullSecrets:
+        - name: {{ template "chart.registrySecretName" . }}
       serviceAccountName: {{ include "chart.serviceAccountName" . }}
+      volumes:
+        - name: config
+          configMap:
+            name: {{ template "chart.fullname" . }}.config
+        - name: ssh-keys
+          projected:
+            sources:
+              - secret:
+                  name: auth-keys
+              - secret:
+                  name: grpc-tls

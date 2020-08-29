@@ -17,6 +17,7 @@ func ProvideRoutes(rest *Handler) *chi.Mux {
 	router.Mount("/auth", authRoutes(rest))
 	router.Mount("/mail", mailRoutes(rest))
 	router.Mount("/interact", interactRoutes(rest))
+	router.Mount("/health", healthRoutes(rest))
 	return router
 }
 
@@ -61,5 +62,12 @@ func interactRoutes(rest *Handler) (r *chi.Mux) {
 	r.Use(rest.Authorizer)
 	r.Get("/like/{entityID}", rest.Like)
 	r.Get("/unlike/{entityID}", rest.Unlike)
+	return
+}
+
+func healthRoutes(rest *Handler) (r *chi.Mux)  {
+	r = chi.NewRouter()
+	r.Get("/live", rest.HealthZ)
+	r.Get("/ready", rest.ReadyZ)
 	return
 }

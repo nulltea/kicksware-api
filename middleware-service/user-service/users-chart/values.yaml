@@ -2,12 +2,18 @@ project: kicksware
 component: users
 nameOverride: user-service
 fullnameOverride: user-service
-
 replicaCount: 1
+
 image:
-  repository: users-service
+  repository: ci.kicksware.com:5050/root/kicksware-platform/users-service
   pullPolicy: IfNotPresent
-  tag: ""
+  tag: latest
+
+imageCredentials:
+  secretName: registry-auth-secret
+  registry: ci.kicksware.com:5050
+  username: root
+  token: R8QYV_Bqxii9qsPfoRT6
 
 service:
   type: ClusterIP
@@ -50,7 +56,9 @@ serviceAccount:
   name: ""
 
 config:
-  enviroment: PROD
-  host: 0.0.0.0:8080
-  hostname: api.kicksware.com
-  configPath: /env/config.prod.yaml
+  environment: PROD
+  configMountPath: /dist/env
+
+environment:
+  name: PROD
+  configPath: /env/config.yaml

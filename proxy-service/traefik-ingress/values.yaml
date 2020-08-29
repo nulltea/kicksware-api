@@ -102,9 +102,3 @@ autoscaling:
 serviceAccount:
   create: true
   name: ""
-
-config:
-  enviroment: PROD
-  host: 0.0.0.0:8080
-  hostname: api.kicksware.com
-  configPath: /env/config.prod.yaml
