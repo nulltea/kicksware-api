@@ -39,6 +39,7 @@ chart: {{ include "chart.chart" . }}
 {{- if .Chart.AppVersion }}
 version: {{ .Chart.AppVersion | quote }}
 {{- end }}
+
 managed-by: {{ .Release.Service }}
 project: {{ .Values.project }}
 component: {{ .Values.component }}
@@ -62,4 +63,11 @@ Create the name of the service account to use
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
+{{- end }}
+
+{{/*
+
+*/}}
+{{- define "chart.configPath" }}
+{{- printf "../env/config.%s.yaml" (default .Values.configPath .Values.config.environment | lower) }}
 {{- end }}

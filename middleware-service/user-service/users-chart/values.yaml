@@ -1,6 +1,6 @@
 project: kicksware
 component: users
-nameOverride: user-service
+nameOverride: users-service
 fullnameOverride: user-service
 replicaCount: 1
 
@@ -9,22 +9,18 @@ image:
   pullPolicy: IfNotPresent
   tag: latest
 
-imageCredentials:
-  secretName: registry-auth-secret
-  registry: ci.kicksware.com:5050
-  username: root
-  token: R8QYV_Bqxii9qsPfoRT6
-
 service:
   type: ClusterIP
   port: 8080
 
 ingress:
   enabled: true
-  provider: traefik.containo.us/v1alpha1
   entrypoints:
     - web
     - websecure
+  tls:
+    enabled: true
+    certResolver: le
   routes:
     - host: api.kicksware.com
       paths:
@@ -37,9 +33,6 @@ ingress:
         - name: user-service
           port: 8080
           scheme: http
-  tls:
-    enabled: true
-    certResolver: le
 
 resources: {}
 
@@ -54,6 +47,11 @@ serviceAccount:
   create: true
   annotations: {}
   name: ""
+
+secrets:
+  dockerRegistry: registry-token
+  authKeys: auth-keys
+  grpcTLSKeys: grpc-tls
 
 config:
   environment: PROD

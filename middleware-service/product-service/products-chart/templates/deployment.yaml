@@ -10,6 +10,7 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
+      maxSurge: 1
       maxUnavailable: 0
 {{- end }}
   selector:
@@ -29,12 +30,33 @@ spec:
               containerPort: {{ .Values.service.port }}
           livenessProbe:
             httpGet:
-              path: /
+              path: /health/live
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path: /health/ready
               port: http
+          volumeMounts:
+            - name: config
+              mountPath: {{ .Values.config.configMountPath }}
+            - name: ssh-keys
+              mountPath: /dist/keys
+          envFrom:
+            - configMapRef:
+                name: {{ template "chart.fullname" . }}.env
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      imagePullSecrets:
+        - name: {{ .Values.secrets.dockerRegistry }}
       serviceAccountName: {{ include "chart.serviceAccountName" . }}
+      volumes:
+        - name: config
+          configMap:
+            name: {{ template "chart.fullname" . }}.config
+        - name: ssh-keys
+          projected:
+            sources:
+              - secret:
+                  name: {{ .Values.secrets.authKeys }}
+              - secret:
+                  name: {{ .Values.secrets.grpcTLSKeys }}

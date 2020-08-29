@@ -18,7 +18,6 @@ service:
 
 ingress:
   enabled: true
-  provider: traefik.containo.us/v1alpha1
   entrypoints:
     - web
     - websecure

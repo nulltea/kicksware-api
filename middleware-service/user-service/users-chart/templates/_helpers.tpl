@@ -71,13 +71,3 @@ Create the name of the service account to use
 {{- define "chart.configPath" }}
 {{- printf "../env/config.%s.yaml" (default .Values.configPath .Values.config.environment | lower) }}
 {{- end }}
-
-{{- define "chart.registrySecretName" -}}
-{{- printf "%s-%s" (include "chart.name" .) .Values.imageCredentials.secretName }}
-{{- end }}
-
-{{- define "imagePullSecret" }}
-{{- with .Values.imageCredentials }}
-{{- printf "{\"auths\":{\"%s\":{\"username\":\"%s\",\"password\":\"%s\",\"auth\":\"%s\"}}}" .registry .username .token (printf "%s:%s" .username .token | b64enc) | b64enc }}
-{{- end }}
-{{- end }}

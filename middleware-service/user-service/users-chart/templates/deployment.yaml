@@ -10,6 +10,7 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
+      maxSurge: 1
       maxUnavailable: 0
 {{- end }}
   selector:
@@ -23,7 +24,7 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: Always
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
@@ -39,14 +40,14 @@ spec:
             - name: config
               mountPath: {{ .Values.config.configMountPath }}
             - name: ssh-keys
-              mountPath: /dist/key
+              mountPath: /dist/keys
           envFrom:
             - configMapRef:
                 name: {{ template "chart.fullname" . }}.env
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       imagePullSecrets:
-        - name: {{ template "chart.registrySecretName" . }}
+        - name: {{ .Values.secrets.dockerRegistry }}
       serviceAccountName: {{ include "chart.serviceAccountName" . }}
       volumes:
         - name: config
@@ -56,6 +57,6 @@ spec:
           projected:
             sources:
               - secret:
-                  name: auth-keys
+                  name: {{ .Values.secrets.authKeys }}
               - secret:
-                  name: grpc-tls
+                  name: {{ .Values.secrets.grpcTLSKeys }}

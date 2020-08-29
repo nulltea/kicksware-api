@@ -1,11 +1,11 @@
 project: kicksware
 component: references
-nameOverride: ""
-fullnameOverride: ""
+nameOverride: references-service
+fullnameOverride: references-service
 
 replicaCount: 1
 image:
-  repository: references-service
+  repository: ci.kicksware.com:5050/root/kicksware-platform/references-service
   pullPolicy: IfNotPresent
   tag: ""
 
@@ -15,22 +15,21 @@ service:
 
 ingress:
   enabled: true
-  provider: traefik.containo.us/v1alpha1
   entrypoints:
     - web
     - websecure
+  tls:
+    enabled: true
+    certResolver: le
   routes:
     - host: api.kicksware.com
       paths:
         - /references
       middlewares: []
       services:
-        - name: user-service
+        - name: references-service
           port: 8080
           scheme: http
-  tls:
-    enabled: true
-    certResolver: le
 
 resources: {}
 
@@ -46,8 +45,15 @@ serviceAccount:
   annotations: {}
   name: ""
 
+secrets:
+  dockerRegistry: registry-token
+  authKeys: auth-keys
+  grpcTLSKeys: grpc-tls
+
 config:
-  enviroment: PROD
-  host: 0.0.0.0:8080
-  hostname: api.kicksware.com
-  configPath: /env/config.prod.yaml
+  environment: PROD
+  configMountPath: /dist/env
+
+environment:
+  name: PROD
+  configPath: /env/config.yaml

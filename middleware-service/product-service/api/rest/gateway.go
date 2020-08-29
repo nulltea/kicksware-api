@@ -12,14 +12,15 @@ func ProvideRoutes(rest *Handler) *chi.Mux {
 		middleware.Recoverer,
 		middleware.RequestID,
 		middleware.RealIP,
-		rest.Authenticator,
 	)
 	router.Mount("/products/sneakers", restRoutes(rest))
+	router.Mount("/health", healthRoutes(rest))
 	return router
 }
 
 func restRoutes(rest *Handler) (r *chi.Mux) {
 	r = chi.NewRouter()
+	r.Use(rest.Authenticator)
 	r.Get("/{sneakerId}", rest.GetOne)
 	r.Get("/query", rest.Get)
 	r.Get("/", rest.Get)
@@ -29,5 +30,12 @@ func restRoutes(rest *Handler) (r *chi.Mux) {
 	r.With(rest.Authorizer).Put("/{sneakerId}/images", rest.PutImages)
 	r.With(rest.Authorizer).Patch("/", rest.Patch)
 	r.With(rest.Authorizer).Delete("/{sneakerId}", rest.Delete)
+	return
+}
+
+func healthRoutes(rest *Handler) (r *chi.Mux)  {
+	r = chi.NewRouter()
+	r.Get("/live", rest.HealthZ)
+	r.Get("/ready", rest.ReadyZ)
 	return
 }

@@ -1,11 +1,11 @@
 project: kicksware
 component: search
-nameOverride: ""
+nameOverride: search-service
 fullnameOverride: ""
 
 replicaCount: 1
 image:
-  repository: search-service
+  repository: ci.kicksware.com:5050/root/kicksware-platform/search-service
   pullPolicy: IfNotPresent
   tag: ""
 
@@ -15,17 +15,19 @@ service:
 
 ingress:
   enabled: true
-  provider: traefik.containo.us/v1alpha1
   entrypoints:
     - web
     - websecure
+  tls:
+    enabled: true
+    certResolver: le
   routes:
     - host: api.kicksware.com
       paths:
         - /search
       middlewares: []
       services:
-        - name: user-service
+        - name: search-service
           port: 8080
           scheme: http
 
@@ -43,8 +45,15 @@ serviceAccount:
   annotations: {}
   name: ""
 
+secrets:
+  dockerRegistry: registry-token
+  authKeys: auth-keys
+  grpcTLSKeys: grpc-tls
+
 config:
-  enviroment: PROD
-  host: 0.0.0.0:8080
-  hostname: api.kicksware.com
-  configPath: /env/config.prod.yaml
+  environment: PROD
+  configMountPath: /dist/env
+
+environment:
+  name: PROD
+  configPath: /env/config.yaml
