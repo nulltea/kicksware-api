@@ -12,7 +12,7 @@ middleware:
 web-app:
 	docker-compose -f web-app-service/docker-compose.yml down;
 	docker-compose -f web-app-service/docker-compose.yml build;
-	# docker-compose -f middleware-service/docker-compose.yml push web-app-service;
+	docker-compose -f web-app-service/docker-compose.yml push web-app;
 	docker-compose -f web-app-service/docker-compose.yml up -d;
 
 mongo-backup:

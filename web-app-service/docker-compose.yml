@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
-    image: web-app
+    image: ${CI_REGISTRY_PREFIX}/web-app
     container_name: web-app
     env_file: ./env/.env
     restart: always
