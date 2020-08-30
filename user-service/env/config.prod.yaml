@@ -1,0 +1,49 @@
+commonConfig:
+  host: 0.0.0.0:8080
+  hostname: kicksware.com
+  usedDB: mongo
+  contentType: application/json
+  innerServiceFormat: http://%s:8080/%s/
+securityConfig:
+  tlsCertificate:
+    enableTLS: true
+    certFile: keys/server.crt
+    keyFile: keys/server.key
+authConfig:
+  issuerName: middleware/user-service
+  tokenExpirationDelta: 360
+  privateKeyPath: keys/private.key
+  publicKeyPath: keys/public.key.pub
+mailConfig:
+  server: smtp.zoho.eu:465
+  address: accounts@kicksware.com
+  password: Er2PQRQc
+  verifyEmailTemplate: template/verify.template.html
+  resetPasswordTemplate: template/reset.template.html
+  notificationTemplate: template/notification.template.html
+fallbackMailConfig:
+  server: smtp.gmail.com:465
+  address: users.kicksware@gmail.com
+  password: Er2PQRQc
+  verifyEmailTemplate: template/verify.template.html
+  resetPasswordTemplate: template/reset.template.html
+  notificationTemplate: template/notification.template.html
+mongoConfig:
+  URL: mongodb://root:greenJordans@mongodb:27017
+  database: sneakerResaleDB
+  collection: users
+  likesCollection: likes
+  remoteCollection: remotes
+  login: admin
+  password: admin
+  timeout: 30
+redisConfig:
+  URL: redis://redis:6379
+postgresConfig:
+  URL: postgres://postgres:1879@postgres:5432/sneakerResaleDB
+  database: sneakerResaleDB
+  collection: Users
+  likesCollection: Likes
+  login: postgres
+  password: 1879
+  timeout: 30

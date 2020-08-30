@@ -31,29 +31,6 @@ init-source-step:
 
 #---build stage---#
 
-build-styles-step:
-  stage: build
-  image: node:8-alpine
-  variables:
-    NODE_ENV: "development"
-  tags:
-    - webapp
-    - build
-  before_script:
-    - apk add --update bash
-    - apk add --update git && rm -rf /tmp/* /var/cache/apk/*
-    - npm install
-    - npm install -g lessc-each
-  script:
-    - mkdir web-app-service/Web/wwwroot/styles/css
-    - for dir in web-app-service/Web/wwwroot/styles/less/*;
-          do lessc-each web-app-service/Web/wwwroot/styles/less/$(basename ${dir}) web-app-service/Web/wwwroot/styles/css/$(basename ${dir});
-      done
-
-  artifacts:
-    paths:
-      - web-app-service/Web/wwwroot/styles/css
-    expire_in: 10 mins
 
 #----------------#
 
@@ -81,19 +58,8 @@ build-styles-step:
 
 #---deploy stage---#
 
-deploy-proxy-step:
-    stage: deploy
-    before_script:
-      - *common-before
-      - export DYNAMIC_ENV_VAR=PROD
-    tags:
-      - deploy
-      - proxy
-    script:
-      - echo setting up env $DYNAMIC_ENV_VAR
-      - make proxy
 
-deploy-middleware-step:
+deploy-api-step:
     stage: deploy
     before_script:
       - *common-before
@@ -107,19 +73,5 @@ deploy-middleware-step:
       - make middleware
     after_script:
       - make mongo-restore
-
-deploy-webapp-step:
-    stage: deploy
-    before_script:
-      - *common-before
-      - export DYNAMIC_ENV_VAR=PROD
-    tags:
-      - webapp
-      - deploy
-    script:
-      - echo setting up env $DYNAMIC_ENV_VAR
-      - make web-app
-    dependencies:
-      - build-styles-step
 
 #----------------#

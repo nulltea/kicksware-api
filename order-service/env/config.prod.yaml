@@ -1,0 +1,24 @@
+commonConfig:
+  host: 0.0.0.0:8080
+  hostname: api.kicksware.com
+  usedDB: mongo
+  contentType: application/json
+  innerServiceFormat: http://%s:8080/%s/
+authConfig:
+  publicKeyPath: keys/public.key.pub
+mongoConfig:
+  URL: mongodb://root:greenJordans@mongodb:27017
+  database: sneakerResaleDB
+  collection: orders
+  login: root
+  password: greenJordans
+  timeout: 30
+redisConfig:
+  URL: redis://redis:6379
+postgresConfig:
+  URL: postgres://postgres:1879@postgres:5432/sneakerResaleDB
+  database: sneakerResaleDB
+  collection: Orders
+  login: postgres
+  password: 1879
+  timeout: 30

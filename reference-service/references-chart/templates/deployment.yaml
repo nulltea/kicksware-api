@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "chart.fullname" . }}
+  labels:
+    {{- include "chart.labels" . | nindent 4 }}
+spec:
+{{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+{{- end }}
+  selector:
+    matchLabels:
+      {{- include "chart.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "chart.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: http
+          volumeMounts:
+            - name: config
+              mountPath: {{ .Values.config.configMountPath }}
+            - name: ssh-keys
+              mountPath: /keys
+          envFrom:
+            - configMapRef:
+                name: {{ template "chart.fullname" . }}.env
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      imagePullSecrets:
+        - name: {{ .Values.secrets.dockerRegistry }}
+      serviceAccountName: {{ include "chart.serviceAccountName" . }}
+      volumes:
+        - name: config
+          configMap:
+            name: {{ template "chart.fullname" . }}.config
+        - name: ssh-keys
+          projected:
+            sources:
+              - secret:
+                  name: {{ .Values.secrets.authKeys }}
+              - secret:
+                  name: {{ .Values.secrets.grpcTLSKeys }}

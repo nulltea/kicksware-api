@@ -1,26 +1,22 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, build with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Env files
 *.env
 
-**/.idea
-**/.vs
-**/bin
-**/obj
+.idea
+.vscode
 
-web-app-service/Web/obj
-web-app-service/Web/bin
-web-app-service/Core/obj
-web-app-service/Core/bin
-web-app-service/Infrastructure/obj
-web-app-service/Infrastructure/bin
-
-**/node_modules
-
-**/files/
-web-app-service/Web/wwwroot/files/
-web-app-service/Web/wwwroot/styles/css
-web-app-service/Web/wwwroot/images/heroes/
-web-app-service/Web/wwwroot/images/logos/
-middleware-service/user-service/keys/
-middleware-service/backup/mongo/
-middleware-service/key/
-middleware-service/user-service/key/
-*.cd
+keys
+cert
+backup/mongo/

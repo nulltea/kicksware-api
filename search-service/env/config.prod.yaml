@@ -1,0 +1,28 @@
+commonConfig:
+  host: 0.0.0.0:8080
+  hostname: kicksware.com
+  contentType: application/json
+  innerServiceFormat: api.kicksware.com:443
+securityConfig:
+  tlsCertificate:
+    enableTLS: false
+    certFile: keys/server.crt
+    keyFile: keys/server.key
+authConfig:
+  publicKeyPath: keys/public.key.pub
+  authEndpoint: https://api.kicksware.com/auth/guest
+elasticConfig:
+  URL: http://elasticsearch:9200
+  index: sneaker_reference
+  startupDelay: 100
+  sniffing: false
+searchConfig:
+  type: phrase_prefix
+  slop: 3
+  fields:
+    - ManufactureSku^5
+    - ModelName^4
+    - BrandName^2
+    - Nickname^2
+    - Description
+    - Color

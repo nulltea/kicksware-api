@@ -1,0 +1,62 @@
+project: kicksware
+component: users
+nameOverride: users-service
+fullnameOverride: user-service
+replicaCount: 1
+
+image:
+  repository: ci.kicksware.com:5050/root/kicksware-platform/users-service
+  pullPolicy: IfNotPresent
+  tag: latest
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: true
+  entrypoints:
+    - web
+    - websecure
+  tls:
+    enabled: true
+    certResolver: le
+  routes:
+    - host: api.kicksware.com
+      paths:
+        - /users
+        - /auth
+        - /mail
+        - /interact
+      middlewares: []
+      services:
+        - name: user-service
+          port: 8080
+          scheme: http
+
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 25
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+secrets:
+  dockerRegistry: registry-token
+  authKeys: auth-keys
+  grpcTLSKeys: grpc-tls
+
+config:
+  environment: PROD
+  configMountPath: /env
+
+environment:
+  name: PROD
+  configPath: /env/config.yaml
