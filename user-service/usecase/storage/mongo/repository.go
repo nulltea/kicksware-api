@@ -2,10 +2,15 @@ package mongo
 
 import (
 	"context"
+	"crypto/tls"
+	"crypto/x509"
+	"io/ioutil"
 	"time"
 
 	"github.com/pkg/errors"
+	"github.com/golang/glog"
 	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/util"
+	TLS "github.com/timoth-y/kicksware-platform/middleware-service/service-common/core/meta"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -30,7 +35,7 @@ func NewRepository(config env.DataStoreConfig) (repo.UserRepository, error) {
 	repo := &repository{
 		timeout:  time.Duration(config.Timeout) * time.Second,
 	}
-	client, err := newMongoClient(config.URL, config.Timeout)
+	client, err := newMongoClient(config
 	if err != nil {
 		return nil, errors.Wrap(err, "repository.NewRepository")
 	}
@@ -41,10 +46,13 @@ func NewRepository(config env.DataStoreConfig) (repo.UserRepository, error) {
 	return repo, nil
 }
 
-func newMongoClient(mongoURL string, mongoTimeout int) (*mongo.Client, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(mongoTimeout)*time.Second)
+func newMongoClient(config env.DataStoreConfig) (*mongo.Client, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(config.Timeout)*time.Second)
 	defer cancel()
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI(mongoURL))
+	client, err := mongo.Connect(ctx, options.Client().
+		ApplyURI(config.URL).
+		SetTLSConfig(newTLSConfig(config.TLS)),
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -53,6 +61,20 @@ func newMongoClient(mongoURL string, mongoTimeout int) (*mongo.Client, error) {
 		return nil, err
 	}
 	return client, nil
+}
+
+func newTLSConfig(tlsConfig *TLS.TLSCertificate) *tls.Config {
+	if !tlsConfig.EnableTLS {
+		return nil
+	}
+	certs := x509.NewCertPool()
+	pem, err := ioutil.ReadFile(tlsConfig.CertFile); if err != nil {
+		glog.Fatalln(err)
+	}
+	certs.AppendCertsFromPEM(pem)
+	return &tls.Config{
+		ClientCAs: certs,
+	}
 }
 
 func (r *repository) FetchOne(userID string) (*model.User, error) {

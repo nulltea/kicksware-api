@@ -2,6 +2,9 @@ package mongo
 
 import (
 	"context"
+	"crypto/tls"
+	"crypto/x509"
+	"io/ioutil"
 	"time"
 
 	"github.com/pkg/errors"
@@ -29,7 +32,7 @@ func NewMongoRepository(config env.DataStoreConfig) (repo.SneakerReferenceReposi
 	repo := &repository{
 		timeout:  time.Duration(config.Timeout) * time.Second,
 	}
-	client, err := newMongoClient(config.URL, config.Timeout)
+	client, err := newMongoClient(config)
 	if err != nil {
 		return nil, errors.Wrap(err, "repository.NewMongoRepository")
 	}
@@ -40,16 +43,31 @@ func NewMongoRepository(config env.DataStoreConfig) (repo.SneakerReferenceReposi
 	return repo, nil
 }
 
-func newMongoClient(mongoURL string, mongoTimeout int) (*mongo.Client, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(mongoTimeout)*time.Second)
+func newMongoClient(config env.DataStoreConfig) (*mongo.Client, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(config.Timeout)*time.Second)
 	defer cancel()
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI(mongoURL)); if err != nil {
-		return nil, err
-	}
+	client, err := mongo.Connect(ctx, options.Client().
+		ApplyURI(config.URL).
+		SetTLSConfig(newTLSConfig(config.TLS)),
+	)
 	err = client.Ping(ctx, readpref.Primary()); if err != nil {
 		return nil, err
 	}
 	return client, nil
+}
+
+func newTLSConfig(tlsConfig *TLS.TLSCertificate) *tls.Config {
+	if !tlsConfig.EnableTLS {
+		return nil
+	}
+	certs := x509.NewCertPool()
+	pem, err := ioutil.ReadFile(tlsConfig.CertFile); if err != nil {
+		glog.Fatalln(err)
+	}
+	certs.AppendCertsFromPEM(pem)
+	return &tls.Config{
+		ClientCAs: certs,
+	}
 }
 
 func (r *repository) FetchOne(code string, params *meta.RequestParams) (*model.SneakerReference, error) {

@@ -26,7 +26,8 @@ type CommonConfig struct {
 }
 
 type DataStoreConfig struct {
-	URL        string `yaml:"URL"`
+	URL              string `yaml:"URL"`
+	TLS              *meta.TLSCertificate `yaml:"tlsCertificate"`
 	Database   string `yaml:"database"`
 	Collection string `yaml:"collection"`
 	Login      string `yaml:"login"`

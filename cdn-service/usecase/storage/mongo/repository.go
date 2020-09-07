@@ -3,6 +3,8 @@ package mongo
 import (
 	"bytes"
 	"context"
+	"crypto/tls"
+	"crypto/x509"
 	"fmt"
 	"io/ioutil"
 	"time"
@@ -28,8 +30,7 @@ func NewRepository(config env.DataStoreConfig) (repo.ContentRepository, error) {
 	repo := &repository{
 		timeout: time.Duration(config.Timeout) * time.Second,
 	}
-	client, err := newMongoClient(config.URL, config.Timeout)
-	if err != nil {
+	client, err := newMongoClient(config); if err != nil {
 		glog.Errorln(err)
 		return nil, errors.Wrap(err, "repository.NewRepository")
 	}
@@ -39,20 +40,32 @@ func NewRepository(config env.DataStoreConfig) (repo.ContentRepository, error) {
 	return repo, nil
 }
 
-func newMongoClient(mongoURL string, mongoTimeout int) (*mongo.Client, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(mongoTimeout)*time.Second)
+func newMongoClient(config env.DataStoreConfig) (*mongo.Client, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(config.Timeout)*time.Second)
 	defer cancel()
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI(mongoURL))
-	if err != nil {
-		glog.Errorln(err)
-		return nil, err
-	}
-	err = client.Ping(ctx, readpref.Primary())
-	if err != nil {
+	client, err := mongo.Connect(ctx, options.Client().
+		ApplyURI(config.URL).
+		SetTLSConfig(newTLSConfig(config.TLS)),
+	)
+	err = client.Ping(ctx, readpref.Primary()); if err != nil {
 		glog.Errorln(err)
 		return nil, err
 	}
 	return client, nil
+}
+
+func newTLSConfig(tlsConfig *TLS.TLSCertificate) *tls.Config {
+	if !tlsConfig.EnableTLS {
+		return nil
+	}
+	certs := x509.NewCertPool()
+	pem, err := ioutil.ReadFile(tlsConfig.CertFile); if err != nil {
+		glog.Fatalln(err)
+	}
+	certs.AppendCertsFromPEM(pem)
+	return &tls.Config{
+		ClientCAs: certs,
+	}
 }
 
 

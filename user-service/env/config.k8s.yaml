@@ -30,8 +30,10 @@ fallbackMailConfig:
   notificationTemplate: template/notification.template.html
 mongoConfig:
   URL: mongodb://$MONGO_USER:$MONGO_PASSWORD@db.kicksware.com
-  tlsKey: certs/mongo/tls.key
-  tlsCert: certs/mongo/tls.key
+  TLS:
+    enableTLS: true
+    certFile: certs/mongo/tls.key
+    keyFile: certs/mongo/tls.key
   database: sneakerResaleDB
   collection: users
   likesCollection: likes

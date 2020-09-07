@@ -30,7 +30,7 @@ func NewRemoteRepository(config env.DataStoreConfig) (repo.RemoteRepository, err
 	repo := &remoteRepository{
 		timeout: time.Duration(config.Timeout) * time.Second,
 	}
-	client, err := newMongoClient(config.URL, config.Timeout)
+	client, err := newMongoClient(config
 	if err != nil {
 		return nil, errors.Wrap(err, "repository.NewRemoteRepository")
 	}
