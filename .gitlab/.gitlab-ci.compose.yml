@@ -1,8 +1,19 @@
 stages:
-    - deploy
+  - init
+  - deploy
 
 variables:
   SOURCE_DIR: /source/repos/$CI_PROJECT_NAME
+
+api.init.compose:
+  stage: init
+  tags:
+    - compose
+    - api
+  except:
+    kubernetes: active
+  script:
+    - cp -r /builds/root/* /source/repos/
 
 api.deploy.compose:
   image:

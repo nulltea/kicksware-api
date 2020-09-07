@@ -64,6 +64,8 @@ users.deploy.k8s:
     - *common_before
     - kubectl create secret generic mail-auth -n api
       --from-literal=MAIL_SERVER=$MAIL_SERVER --from-literal=MAIL_ADDRESS=$MAIL_ADDRESS --from-literal=MAIL_PASSWORD=$MAIL_PASSWORD --dry-run -o yaml | kubectl apply -f -
+    - envsubst < user-service/env/config.$ENV.yaml > config.yaml && kubectl create configmap users-service.config -n api
+      --from-file=config.yaml=config.yaml --dry-run -o yaml | kubectl apply -f -
   script:
     - helm upgrade --install -n api users-service user-service/users-chart
 
@@ -81,6 +83,8 @@ references.deploy.k8s:
       - "*.md"
   before_script:
     - *common_before
+    - envsubst < reference-service/env/config.$ENV.yaml > config.yaml && kubectl create configmap references-service.config -n api
+      --from-file=config.yaml=config.yaml --dry-run -o yaml | kubectl apply -f -
   script:
     - helm upgrade --install -n api references-service reference-service/references-chart
 
@@ -98,6 +102,8 @@ products.deploy.k8s:
       - "*.md"
   before_script:
     - *common_before
+    - envsubst < product-service/env/config.$ENV.yaml > config.yaml && kubectl create configmap products-service.config -n api
+      --from-file=config.yaml=config.yaml --dry-run -o yaml | kubectl apply -f -
   script:
     - helm upgrade --install -n api products-service product-service/products-chart
 
@@ -115,6 +121,8 @@ search.deploy.k8s:
       - "*.md"
   before_script:
     - *common_before
+    - envsubst < search-service/env/config.$ENV.yaml > config.yaml && kubectl create configmap search-service.config -n api
+      --from-file=config.yaml=config.yaml --dry-run -o yaml | kubectl apply -f -
   script:
     - helm upgrade --install -n api search-service search-service/search-chart
 
@@ -132,6 +140,8 @@ orders.deploy.k8s:
       - "*.md"
   before_script:
     - *common_before
+    - envsubst < order-service/env/config.$ENV.yaml > config.yaml && kubectl create configmap orders-service.config -n api
+      --from-file=config.yaml=config.yaml --dry-run -o yaml | kubectl apply -f -
   script: #TODO
     - echo "add orders-chart" # helm upgrade --install -n api orders-service order-service/orders-chart
 
@@ -149,5 +159,7 @@ cdn.deploy.k8s:
       - "*.md"
   before_script:
     - *common_before
+    - envsubst < cdn-service/env/config.$ENV.yaml > config.yaml && kubectl create configmap cdn-service.config -n api
+      --from-file=config.yaml=config.yaml --dry-run -o yaml | kubectl apply -f -
   script: #TODO
     - echo "add cdn-chart" # helm upgrade --install -n api cdn-service cdn-service/cdn-chart
