@@ -54,8 +54,8 @@ users.deploy.k8s:
     - k8s
     - api
   only:
-    changes:
-      - user-service/**/*
+#    changes:
+#      - user-service/**/*
     kubernetes: active
   except:
     changes:
@@ -75,8 +75,8 @@ references.deploy.k8s:
     - k8s
     - api
   only:
-    changes:
-      - reference-service/**/*
+#    changes:
+#      - reference-service/**/*
     kubernetes: active
   except:
     changes:
@@ -94,8 +94,8 @@ products.deploy.k8s:
     - k8s
     - api
   only:
-    changes:
-      - product-service/**/*
+#    changes:
+#      - product-service/**/*
     kubernetes: active
   except:
     changes:
@@ -113,8 +113,8 @@ search.deploy.k8s:
     - k8s
     - api
   only:
-    changes:
-      - search-service/**/*
+#    changes:
+#      - search-service/**/*
     kubernetes: active
   except:
     changes:
