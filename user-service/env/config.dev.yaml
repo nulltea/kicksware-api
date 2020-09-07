@@ -29,7 +29,11 @@ fallbackMailConfig:
   resetPasswordTemplate: template/reset.template.html
   notificationTemplate: template/notification.template.html
 mongoConfig:
-  URL: mongodb://localhost:27017
+  URL: mongodb://db.kicksware.com:80
+  TLS:
+    enableTLS: true
+    certFile: /source/certs/mongo/ca.pem
+    keyFile: /source/certs/mongo/mongo.pem
   database: sneakerResaleDB
   collection: users
   likesCollection: likes

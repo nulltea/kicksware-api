@@ -12,8 +12,8 @@ securityConfig:
 authConfig:
   issuerName: middleware/user-service
   tokenExpirationDelta: 360
-  privateKeyPath: keys/private.key
-  publicKeyPath: keys/public.key.pub
+  privateKeyPath: keys/auth/private.key
+  publicKeyPath: keys/auth/public.key
 mailConfig:
   server: $MAIL_SERVER
   address: $MAIL_ADDRESS
@@ -29,10 +29,10 @@ fallbackMailConfig:
   resetPasswordTemplate: template/reset.template.html
   notificationTemplate: template/notification.template.html
 mongoConfig:
-  URL: mongodb://$MONGO_USER:$MONGO_PASSWORD@db.kicksware.com
+  URL: mongodb://db.kicksware.com:443
   TLS:
     enableTLS: true
-    certFile: certs/mongo/tls.key
+    certFile: certs/mongo/ca.crt
     keyFile: certs/mongo/tls.key
   database: sneakerResaleDB
   collection: users

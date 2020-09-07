@@ -5,14 +5,14 @@ commonConfig:
   contentType: application/json
   innerServiceFormat: http://%s:8080/%s/
 authConfig:
-  publicKeyPath: keys/public.key.pub
+  publicKeyPath: keys/auth/public.key
 filesConfig:
   URL: /storage
 mongoConfig:
-  URL: mongodb://$MONGO_USER:$MONGO_PASSWORD@db.kicksware.com
+  URL: mongodb://db.kicksware.com:443
   TLS:
     enableTLS: true
-    certFile: certs/mongo/tls.key
+    certFile: certs/mongo/ca.crt
     keyFile: certs/mongo/tls.key
   database: sneakerResaleDB
   collection: orders

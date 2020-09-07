@@ -39,8 +39,14 @@ spec:
           volumeMounts:
             - name: config
               mountPath: {{ .Values.config.configMountPath }}
-            - name: ssh-keys
-              mountPath: /keys
+            {{- range .Values.secrets.moutns }}
+            - name: {{ .name }}
+              mountPath: {{ .mountPath }}
+            {{- end }}
+            {{- range .Values.volumes }}
+            - name: {{ .name }}
+              mountPath: {{ .mountPath }}
+            {{- end }}
           envFrom:
             - configMapRef:
                 name: {{ template "chart.fullname" . }}.env
@@ -53,10 +59,20 @@ spec:
         - name: config
           configMap:
             name: {{ template "chart.fullname" . }}.config
-        - name: ssh-keys
-          projected:
-            sources:
-              - secret:
-                  name: {{ .Values.secrets.authKeys }}
-              - secret:
-                  name: {{ .Values.secrets.grpcTLSKeys }}
+        {{- range .Values.secrets.moutns }}
+        - name: {{ .name }}
+          secret:
+            secretName: {{ .name }}
+        {{- end }}
+        {{- range .Values.volumes }}
+        - name: {{ .name }}
+          {{- with .host }}
+          hostPath:
+            path: {{ .pathBase }}{{ .path }}
+            type: {{ .type }}
+          {{- end }}
+          {{- with .persistent }}
+          persistentVolumeClaim:
+            claimName: {{ .claim }}
+        {{- end }}
+      {{- end }}

@@ -48,13 +48,18 @@ serviceAccount:
 
 secrets:
   dockerRegistry: registry-token
-  authKeys: auth-keys
-  grpcTLSKeys: grpc-tls
+  moutns:
+    - name: auth-keys
+      mountPath: /root/keys/auth
+    - name: grpc-tls
+      mountPath: /root/certs/grpc
+    - name: mongo-tls
+      mountPath: /root/certs/mongo
 
 config:
   environment: PROD
-  configMountPath: /env
+  configMountPath: /root/env
 
 environment:
   name: k8s
-  configPath: /env/config.yaml
+  configPath: /root/env/config.yaml

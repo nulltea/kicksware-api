@@ -9,7 +9,7 @@ securityConfig:
     certFile: certs/grpc/tls.crt
     keyFile: certs/grpc/tls.key
 authConfig:
-  publicKeyPath: keys/public.key.pub
+  publicKeyPath: keys/auth/public.key
   authEndpoint: https://api.kicksware.com/auth/guest
 elasticConfig:
   URL: https://search.kicksware.com:443

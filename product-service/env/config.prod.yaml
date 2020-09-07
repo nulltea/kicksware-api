@@ -10,12 +10,12 @@ securityConfig:
     certFile: certs/grpc/tls.crt
     keyFile: certs/grpc/tls.key
 authConfig:
-  publicKeyPath: keys/public.key.pub
+  publicKeyPath: keys/auth/public.key
 mongoConfig:
-  URL: mongodb://$MONGO_USER:$MONGO_PASSWORD@db.kicksware.com
+  URL: mongodb://db.kicksware.com:443
   TLS:
     enableTLS: true
-    certFile: certs/mongo/tls.key
+    certFile: certs/mongo/ca.crt
     keyFile: certs/mongo/tls.key
   database: sneakerResaleDB
   collection: products

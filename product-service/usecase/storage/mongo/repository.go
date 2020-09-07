@@ -49,7 +49,10 @@ func newMongoClient(config env.DataStoreConfig) (*mongo.Client, error) {
 	defer cancel()
 	client, err := mongo.Connect(ctx, options.Client().
 		ApplyURI(config.URL).
-		SetTLSConfig(newTLSConfig(config.TLS)),
+		SetTLSConfig(newTLSConfig(config.TLS)).
+		SetAuth(options.Credential{
+			Username: config.Login, Password: config.Password,
+		}),
 	)
 	if err != nil {
 		return nil, err
@@ -71,7 +74,7 @@ func newTLSConfig(tlsConfig *TLS.TLSCertificate) *tls.Config {
 	}
 	certs.AppendCertsFromPEM(pem)
 	return &tls.Config{
-		ClientCAs: certs,
+		RootCAs: certs,
 	}
 }
 
