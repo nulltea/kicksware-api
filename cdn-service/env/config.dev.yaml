@@ -11,7 +11,7 @@ filesConfig:
 mongoConfig:
   URL: mongodb://localhost:27017
   database: sneakerResaleDB
-  collection: orders
+  collection: fs
   timeout: 30
 redisConfig:
   URL: redis://localhost:6379

@@ -15,7 +15,7 @@ mongoConfig:
     certFile: certs/mongo/ca.crt
     keyFile: certs/mongo/tls.key
   database: sneakerResaleDB
-  collection: orders
+  collection: fs
   login: $MONGO_USER
   password: $MONGO_PASSWORD
   timeout: 30

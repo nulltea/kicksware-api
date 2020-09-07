@@ -145,8 +145,8 @@ orders.deploy.k8s:
     - *common_before
     - envsubst < order-service/env/config.$ENV.yaml > config.yaml && kubectl create configmap orders-service.config -n api
       --from-file=config.yaml=config.yaml --dry-run -o yaml | kubectl apply -f -
-  script: #TODO
-    - echo "add orders-chart" # helm upgrade --install -n api orders-service order-service/orders-chart
+  script:
+    - helm upgrade --install -n api orders-service order-service/orders-chart
 
 cdn.deploy.k8s:
   stage: deploy
@@ -164,5 +164,5 @@ cdn.deploy.k8s:
     - *common_before
     - envsubst < cdn-service/env/config.$ENV.yaml > config.yaml && kubectl create configmap cdn-service.config -n api
       --from-file=config.yaml=config.yaml --dry-run -o yaml | kubectl apply -f -
-  script: #TODO
-    - echo "add cdn-chart" # helm upgrade --install -n api cdn-service cdn-service/cdn-chart
+  script:
+    - helm upgrade --install -n api cdn-service cdn-service/cdn-chart

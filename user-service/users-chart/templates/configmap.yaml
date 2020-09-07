@@ -10,7 +10,6 @@ data:
       {{ .Files.Get (include "chart.configPath" .) | indent 6 }}
 {{- end }}
 ---
----
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -20,3 +19,4 @@ metadata:
 data:
   ENV: {{ .Values.environment.name }}
   CONFIG_PATH: {{ .Values.environment.configPath }}
+---

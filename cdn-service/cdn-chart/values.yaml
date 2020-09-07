@@ -1,12 +1,12 @@
 project: kicksware
-component: users
-nameOverride: users-service
-fullnameOverride: users-service
-replicaCount: 1
+component: cdn
+nameOverride: cdn-service
+fullnameOverride: cdn-service
 
+replicaCount: 1
 image:
   registry: registry.kicksware.com
-  repository: api/users-service
+  repository: api/cdn-service
   pullPolicy: Always
   tag: latest
 
@@ -23,15 +23,12 @@ ingress:
     enabled: true
     certResolver: le
   routes:
-    - host: api.kicksware.com
+    - host: cdn.kicksware.com
       paths:
-        - /users
-        - /auth
-        - /mail
-        - /interact
+        - /
       middlewares: []
       services:
-        - name: users-service
+        - name: cdn-service
           port: 8080
           scheme: http
 
@@ -62,9 +59,9 @@ secrets:
       mountPath: /root/certs/mongo
 
 config:
-  environment: k8s
+  environment: PROD
   configMountPath: /root/env
 
 environment:
   name: k8s
-  configPath: env/config.yaml
+  configPath: /root/env/config.yaml
