@@ -7,10 +7,6 @@ stages:
   - test
   - deploy
 
-variables:
-  DOCKER_HOST: tcp://docker:2375
-
-
 before_script: &common_before
   - kubectl create secret docker-registry registry-token -n api
     --docker-server=$CI_REGISTRY --docker-username=$CI_REGISTRY_USER --docker-password=$CI_JOB_TOKEN --dry-run -o yaml | kubectl apply -f -
@@ -28,6 +24,8 @@ api.build:
   tags:
     - k8s
     - api
+  variables:
+    DOCKER_HOST: tcp://localhost:2375
   before_script:
     - docker version
     - docker-compose version
