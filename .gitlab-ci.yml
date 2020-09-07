@@ -17,9 +17,9 @@ before_script: &common_before
 
 api.build:
   image:
-    name: docker/compose:1.25.5
+    name: docker/compose:1.25.0
   services:
-    - docker:19.03.8-dind
+    - docker:18.09-dind
   stage: build
   tags:
     - k8s
