@@ -1,7 +1,7 @@
 project: kicksware
 component: users
 nameOverride: users-service
-fullnameOverride: user-service
+fullnameOverride: users-service
 replicaCount: 1
 
 image:

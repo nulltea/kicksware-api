@@ -1,7 +1,7 @@
 project: kicksware
 component: search
 nameOverride: search-service
-fullnameOverride: ""
+fullnameOverride: search-service
 
 replicaCount: 1
 image:
