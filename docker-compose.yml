@@ -5,7 +5,7 @@ services:
       context: ./product-service
       dockerfile: ./docker/Dockerfile
       target: prod
-    image: ${CI_REGISTRY_PREFIX}/products-service
+    image: ${CI_REGISTRY_PREFIX}/api/products-service
     container_name: products
     env_file: ./product-service/env/.env.prod
     restart: always
@@ -23,19 +23,15 @@ services:
       - web
       - data
     volumes:
-      - /${SOURCE_DIR}/middleware-service/product-service/env:/env
+      - /${SOURCE_DIR}/product-service/env:/env
       - key-volume:/keys
-    links:
-      - mongodb
-    depends_on:
-      - mongodb
 
   users-service:
     build:
       context: ./user-service
       dockerfile: ./docker/Dockerfile
       target: prod
-    image: ${CI_REGISTRY_PREFIX}/users-service
+    image: ${CI_REGISTRY_PREFIX}/api/users-service
     container_name: users
     env_file: ./user-service/env/.env.prod
     restart: always
@@ -53,20 +49,16 @@ services:
           - user.backend
       data: {}
     volumes:
-      - /${SOURCE_DIR}/middleware-service/user-service/env:/env
-      - /${SOURCE_DIR}/middleware-service/user-service/template:/template
+      - /${SOURCE_DIR}/user-service/env:/env
+      - /${SOURCE_DIR}/user-service/template:/template
       - key-volume:/keys
-    links:
-      - mongodb
-    depends_on:
-      - mongodb
 
   references-service:
     build:
       context: ./reference-service
       dockerfile: ./docker/Dockerfile
       target: prod
-    image: ${CI_REGISTRY_PREFIX}/references-service
+    image: ${CI_REGISTRY_PREFIX}/api/references-service
     container_name: references
     env_file: ./reference-service/env/.env.prod
     restart: always
@@ -80,24 +72,19 @@ services:
       - traefik.http.routers.reference-router-grpc.service=reference-service-grpc
       - traefik.http.services.reference-service-grpc.loadbalancer.server.scheme=h2c
       - traefik.docker.network=web
-    # command: /bin/sh -c "dlv debug --headless --listen=:4000 --api-version=2 --accept-multiclient ."
     volumes:
-      - /${SOURCE_DIR}/middleware-service/reference-service/env:/env
+      - /${SOURCE_DIR}/reference-service/env:/env
       - key-volume:/keys
     networks:
       - web
       - data
-    links:
-      - mongodb
-    depends_on:
-      - mongodb
 
   search-service:
     build:
       context: ./search-service
       dockerfile: ./docker/Dockerfile
       target: prod
-    image: ${CI_REGISTRY_PREFIX}/search-service
+    image: ${CI_REGISTRY_PREFIX}/api/search-service
     container_name: search
     env_file: ./search-service/env/.env.prod
     restart: always
@@ -117,25 +104,18 @@ services:
       - elastic
       - data
     volumes:
-      - /${SOURCE_DIR}/middleware-service/search-service/env:/env
+      - /${SOURCE_DIR}/search-service/env:/env
       - key-volume:/keys
-    links:
-      - references-service
-      - products-service
-      - elasticsearch
-      - kibana
     depends_on:
       - references-service
       - products-service
-      - elasticsearch
-      - kibana
 
   orders-service:
     build:
       context: ./order-service
       dockerfile: ./docker/Dockerfile
       target: dev
-    image: ${CI_REGISTRY_PREFIX}/orders-service
+    image: ${CI_REGISTRY_PREFIX}/api/orders-service
     container_name: orders
     env_file: ./order-service/env/.env.prod
     restart: always
@@ -150,22 +130,18 @@ services:
       - traefik.http.services.order-service-grpc.loadbalancer.server.scheme=h2c
       - traefik.docker.network=web
     volumes:
-      - /${SOURCE_DIR}/middleware-service/order-service/env:/env
+      - /${SOURCE_DIR}/order-service/env:/env
       - key-volume:/keys
     networks:
       - web
       - data
-    links:
-      - mongodb
-    depends_on:
-      - mongodb
 
   cdn-service:
     build:
       context: ./cdn-service
       dockerfile: ./docker/Dockerfile
       target: dev
-    image: ${CI_REGISTRY_PREFIX}/cdn-service
+    image: ${CI_REGISTRY_PREFIX}/api/cdn-service
     container_name: cdn
     env_file: ./cdn-service/env/.env.prod
     restart: always
@@ -180,7 +156,7 @@ services:
       - traefik.http.services.cdn-service-grpc.loadbalancer.server.scheme=h2c
       - traefik.docker.network=web
     volumes:
-      - /${SOURCE_DIR}/middleware-service/cdn-service/env:/env
+      - /${SOURCE_DIR}/cdn-service/env:/env
       - key-volume:/keys
       - type: bind
         source: /source/storage
@@ -188,75 +164,6 @@ services:
     networks:
       - web
       - data
-    links:
-      - mongodb
-    depends_on:
-      - mongodb
-
-  mongodb:
-    image: mongo:3.6.17
-    container_name: mongo
-    restart: always
-    environment:
-      - MONGO_INITDB_DATABASE=${MONGO_DB}
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
-    ports:
-      - 27017:27017
-      - 27018:27017
-    networks:
-      - web
-      - data
-    volumes:
-      - type: bind
-        source: /source/backup/mongo
-        target: /backup
-    # logging:
-    #  driver: none
-
-  elasticsearch:
-    container_name: elasticsearch
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.1
-    restart: always
-    volumes:
-      - elasticsearch-data:/usr/share/elasticsearch/data
-    environment:
-      - xpack.monitoring.enabled=true
-      - xpack.watcher.enabled=false
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - discovery.type=single-node
-    labels:
-      - traefik.http.routers.elasticsearch.rule=Host(`ops.kicksware.com`) && PathPrefix(`/elastic`)
-      - traefik.http.routers.elasticsearch.tls=true
-      - traefik.http.routers.elasticsearch.tls.certresolver=le
-      - traefik.docker.network=web
-    networks:
-      - web
-      - elastic
-    ports:
-    - 9200:9200
-  # logging:
-  #   driver: none
-
-  kibana:
-    image: docker.elastic.co/kibana/kibana:7.6.1
-    container_name: kibana
-    depends_on:
-      - elasticsearch
-    environment:
-      - ELASTICSEARCH_URL=https://ops.kicksware.com/elastic
-    labels:
-      - traefik.http.routers.kibana.rule=Host(`ops.kicksware.com`) && PathPrefix(`/app/kibana`)
-      - traefik.http.routers.kibana.tls=true
-      - traefik.http.routers.kibana.tls.certresolver=le
-      - traefik.docker.network=web
-    ports:
-      - 5601:5601
-    networks:
-      - web
-      - elastic
-    logging:
-      driver: none
 
 networks:
   elastic:
@@ -273,4 +180,3 @@ volumes:
        o: bind
        type: none
        device: /source/keys
-  elasticsearch-data:

@@ -5,9 +5,9 @@ fullnameOverride: products-service
 
 replicaCount: 1
 image:
-  repository: ci.kicksware.com:5050/root/kicksware-platform/products-service
+  repository: ${CI_REGISTRY_PREFIX}/api/products-service
   pullPolicy: IfNotPresent
-  tag: ""
+  tag: latest
 
 service:
   type: ClusterIP

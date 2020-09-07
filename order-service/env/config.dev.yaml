@@ -14,7 +14,7 @@ mongoConfig:
 redisConfig:
   URL: redis://localhost:6379
 postgresConfig:
-  URL: postgres://postgres:1879@localhost:5432/sneakerResaleDB
+  URL: postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@localhost:5432/sneakerResaleDB
   database: sneakerResaleDB
   collection: Orders
   timeout: 30

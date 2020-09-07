@@ -12,18 +12,18 @@ securityConfig:
 authConfig:
   publicKeyPath: keys/public.key.pub
 mongoConfig:
-  URL: mongodb://root:greenJordans@mongodb:27017
+  URL: mongodb://$MONGO_USER:$MONGO_PASSWORD@db.kicksware.com
   database: sneakerResaleDB
   collection: references
-  login: admin
-  password: admin
+  login: $MONGO_USER
+  password: $MONGO_PASSWORD
   timeout: 30
 redisConfig:
   URL: redis://redis:6379
 postgresConfig:
-  URL: postgres://postgres:1879@postgres:5432/sneakerResaleDB
+  URL: postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@postgres:5432/sneakerResaleDB
   database: sneakerResaleDB
   collection: References
-  login: postgres
-  password: 1879
+  login: $POSTGRES_USER
+  password: $POSTGRES_PASSWORD
   timeout: 30

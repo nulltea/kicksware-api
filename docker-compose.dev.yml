@@ -5,7 +5,7 @@ services:
       context: ./product-service
       dockerfile: ./docker/Dockerfile
       target: dev
-    image: ci.kicksware.com:44321/root/products-service
+    image: ${CI_REGISTRY_PREFIX}/api/products-service
     container_name: products
     env_file: ./product-service/env/.env.prod
     restart: always
@@ -23,17 +23,13 @@ services:
     volumes:
       - ./product-service/env:/dist/env
       - key-volume:/key
-    links:
-      - mongodb
-    depends_on:
-      - mongodb
 
   users-service:
     build:
       context: ./user-service
       dockerfile: ./docker/Dockerfile
       target: dev
-    image: ci.kicksware.com:44321/root/users-service
+    image: ${CI_REGISTRY_PREFIX}/api/users-service
     container_name: users
     env_file: ./user-service/env/.env.prod
     restart: always
@@ -54,17 +50,13 @@ services:
       - ./user-service/template:/dist/template
       - key-volume:/dist/key
       - key-volume:/key
-    links:
-      - mongodb
-    depends_on:
-      - mongodb
 
   references-service:
     build:
       context: ./reference-service
       dockerfile: ./docker/Dockerfile
       target: dev
-    image: ci.kicksware.com:44321/root/references-service
+    image: ${CI_REGISTRY_PREFIX}/api/references-service
     container_name: references
     env_file: ./reference-service/env/.env.prod
     restart: always
@@ -83,17 +75,13 @@ services:
     networks:
       - web
       - data
-    links:
-      - mongodb
-    depends_on:
-      - mongodb
 
   search-service:
     build:
       context: ./search-service
       dockerfile: ./docker/Dockerfile
       target: dev
-    image: ci.kicksware.com:44321/root/search-service
+    image: ${CI_REGISTRY_PREFIX}/api/search-service
     container_name: search
     env_file: ./search-service/env/.env.prod
     restart: always
@@ -112,82 +100,9 @@ services:
     volumes:
       - ./search-service/env:/dist/env
       - key-volume:/key
-    links:
-      - references-service
-      - products-service
-      - elasticsearch
-      - kibana
     depends_on:
       - references-service
       - products-service
-      - elasticsearch
-      - kibana
-
-  mongodb:
-    image: mongo:3.6.17
-    container_name: mongo
-    restart: always
-    environment:
-      - MONGO_INITDB_DATABASE=sneakerResaleDB
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=greenJordans
-    ports:
-      - 27017:27017
-      - 27018:27017
-    networks:
-      - web
-      - data
-    volumes:
-      - type: bind
-        source: ./source/backup/mongo
-        target: /backup
-
-    # logging:
-    #  driver: none
-
-  elasticsearch:
-    container_name: elasticsearch
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.1
-    restart: always
-    volumes:
-      - elasticsearch-data:/usr/share/elasticsearch/data
-    environment:
-      - xpack.monitoring.enabled=true
-      - xpack.watcher.enabled=false
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - discovery.type=single-node
-    labels:
-      - traefik.http.routers.elasticsearch.rule=Host(`ops.kicksware.com`) && PathPrefix(`/elastic`)
-      - traefik.http.routers.elasticsearch.tls=true
-      - traefik.http.routers.elasticsearch.tls.certresolver=le
-      - traefik.docker.network=web
-    networks:
-      - web
-      - elastic
-    ports:
-    - 9200:9200
-  # logging:
-  #   driver: none
-
-  kibana:
-    image: docker.elastic.co/kibana/kibana:7.6.1
-    container_name: kibana
-    depends_on:
-      - elasticsearch
-    environment:
-      - ELASTICSEARCH_URL=https://ops.kicksware.com/elastic
-    labels:
-      - traefik.http.routers.kibana.rule=Host(`ops.kicksware.com`) && PathPrefix(`/app/kibana`)
-      - traefik.http.routers.kibana.tls=true
-      - traefik.http.routers.kibana.tls.certresolver=le
-      - traefik.docker.network=web
-    ports:
-      - 5601:5601
-    networks:
-      - web
-      - elastic
-    logging:
-      driver: none
 
 networks:
   elastic:
@@ -204,4 +119,3 @@ volumes:
       o: bind
       type: none
       device: /host_mnt/c/source/keys
-  elasticsearch-data:

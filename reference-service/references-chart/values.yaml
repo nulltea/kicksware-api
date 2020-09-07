@@ -5,9 +5,9 @@ fullnameOverride: references-service
 
 replicaCount: 1
 image:
-  repository: ci.kicksware.com:5050/root/kicksware-platform/references-service
+  repository: ${CI_REGISTRY_PREFIX}/api/references-service
   pullPolicy: IfNotPresent
-  tag: ""
+  tag: latest
 
 service:
   type: ClusterIP

@@ -15,15 +15,15 @@ mongoConfig:
   URL: mongodb://localhost:27017
   database: sneakerResaleDB
   collection: products
-  login: admin
-  password: admin
+  login: $MONGO_USER
+  password: $MONGO_PASSWORD
   timeout: 30
 redisConfig:
   URL: redis://localhost:6379
 postgresConfig:
-  URL: postgres://postgres:1879@localhost:5432/sneakerResaleDB
+  URL: postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@localhost:5432/sneakerResaleDB
   database: sneakerResaleDB
   collection: Products
-  login: postgres
-  password: 1879
+  login: $POSTGRES_USER
+  password: $POSTGRES_PASSWORD
   timeout: 30

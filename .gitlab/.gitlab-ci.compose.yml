@@ -1,0 +1,22 @@
+stages:
+    - deploy
+
+variables:
+  SOURCE_DIR: /source/repos/$CI_PROJECT_NAME
+
+api.deploy.compose:
+  image:
+    name: docker/compose:1.25.0
+  services:
+    - docker:stable-dind
+  stage: deploy
+  tags:
+    - compose
+    - api
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - apk add make
+  except:
+    kubernetes: active
+  script:
+    - make api

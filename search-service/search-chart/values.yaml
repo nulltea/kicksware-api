@@ -5,9 +5,9 @@ fullnameOverride: ""
 
 replicaCount: 1
 image:
-  repository: ci.kicksware.com:5050/root/kicksware-platform/search-service
+  repository: ${CI_REGISTRY_PREFIX}/api/search-service
   pullPolicy: IfNotPresent
-  tag: ""
+  tag: latest
 
 service:
   type: ClusterIP

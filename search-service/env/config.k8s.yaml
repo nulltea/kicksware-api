@@ -12,7 +12,7 @@ authConfig:
   publicKeyPath: keys/public.key.pub
   authEndpoint: https://api.kicksware.com/auth/guest
 elasticConfig:
-  URL: http://elasticsearch:9200
+  URL: https://search.kicksware.com:443
   index: sneaker_reference
   startupDelay: 100
   sniffing: false
