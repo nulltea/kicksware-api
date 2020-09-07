@@ -114,7 +114,7 @@ services:
     build:
       context: ./order-service
       dockerfile: ./docker/Dockerfile
-      target: dev
+      target: prod
     image: ${CI_REGISTRY_PREFIX}/api/orders-service
     container_name: orders
     env_file: ./order-service/env/.env.prod
@@ -140,7 +140,7 @@ services:
     build:
       context: ./cdn-service
       dockerfile: ./docker/Dockerfile
-      target: dev
+      target: prod
     image: ${CI_REGISTRY_PREFIX}/api/cdn-service
     container_name: cdn
     env_file: ./cdn-service/env/.env.prod

@@ -28,8 +28,6 @@ api.build:
     DOCKER_HOST: tcp://localhost:2375
   before_script:
     - docker version
-    - docker-compose version
-    - apk update && apk add libc6-compat && apk add ca-certificates
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker-compose build
@@ -44,9 +42,9 @@ api.test:
     - k8s
     - api
   before_script:
-    - echo "\e[32mTODO"
+    - echo -e "\e[32mTODO"
   script:
-    - echo -e "\e[33mYou should implement test... \e[31mI am serisous, dude - \e[5m\e[1mTESTS ARE IMPORTANT!"
+    - echo -e "\e[33mYou should implement test... \e[31mI am serisous, dude - \e[1mTESTS ARE IMPORTANT!"
 
 # deploy stage steps:
 
