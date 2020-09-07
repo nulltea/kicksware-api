@@ -8,6 +8,8 @@ authConfig:
   publicKeyPath: keys/public.key.pub
 mongoConfig:
   URL: mongodb://$MONGO_USER:$MONGO_PASSWORD@db.kicksware.com
+  tlsKey: certs/mongo/tls.key
+  tlsCert: certs/mongo/tls.key
   database: sneakerResaleDB
   collection: orders
   login: $MONGO_USER

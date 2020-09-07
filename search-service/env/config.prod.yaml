@@ -6,8 +6,8 @@ commonConfig:
 securityConfig:
   tlsCertificate:
     enableTLS: false
-    certFile: keys/server.crt
-    keyFile: keys/server.key
+    certFile: certs/grpc/tls.crt
+    keyFile: certs/grpc/tls.key
 authConfig:
   publicKeyPath: keys/public.key.pub
   authEndpoint: https://api.kicksware.com/auth/guest

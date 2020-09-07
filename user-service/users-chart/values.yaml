@@ -5,7 +5,8 @@ fullnameOverride: user-service
 replicaCount: 1
 
 image:
-  repository: ${CI_REGISTRY_PREFIX}/api/users-service
+  registry: registry.kicksware.com
+  repository: api/users-service
   pullPolicy: IfNotPresent
   tag: latest
 
@@ -33,6 +34,8 @@ ingress:
         - name: user-service
           port: 8080
           scheme: http
+
+volumes: {}
 
 resources: {}
 

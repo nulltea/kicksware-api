@@ -5,7 +5,8 @@ fullnameOverride: references-service
 
 replicaCount: 1
 image:
-  repository: ${CI_REGISTRY_PREFIX}/api/references-service
+  registry: registry.kicksware.com
+  repository: api/references-service
   pullPolicy: IfNotPresent
   tag: latest
 
@@ -30,6 +31,8 @@ ingress:
         - name: references-service
           port: 8080
           scheme: http
+
+volumes: {}
 
 resources: {}
 

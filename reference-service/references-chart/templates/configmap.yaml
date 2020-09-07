@@ -1,4 +1,4 @@
----
+{{- if .Values.config.configFile }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -7,11 +7,8 @@ metadata:
     {{- include "chart.labels" . | nindent 4 }}
 data:
   config.yaml: |-
-    {{- if .Values.config.configFile }}
-      {{ .Values.config.configFile | nindent 6}}
-    {{- else }}
       {{ .Files.Get (include "chart.configPath" .) | indent 6 }}
-    {{- end}}
+{{- end }}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -22,3 +19,4 @@ metadata:
 data:
   ENV: {{ .Values.environment.name }}
   CONFIG_PATH: {{ .Values.environment.configPath }}
+---

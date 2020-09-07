@@ -5,7 +5,8 @@ fullnameOverride: ""
 
 replicaCount: 1
 image:
-  repository: ${CI_REGISTRY_PREFIX}/api/search-service
+  registry: registry.kicksware.com
+  repository: api/search-service
   pullPolicy: IfNotPresent
   tag: latest
 
@@ -49,6 +50,7 @@ secrets:
   dockerRegistry: registry-token
   authKeys: auth-keys
   grpcTLSKeys: grpc-tls
+  mongo-tls
 
 config:
   environment: PROD
