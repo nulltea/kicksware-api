@@ -31,7 +31,7 @@ type SecurityConfig struct {
 
 type DataStoreConfig struct {
 	URL              string `yaml:"URL"`
-	TLS              *meta.TLSCertificate `yaml:"tlsCertificate"`
+	TLS              *meta.TLSCertificate `yaml:"TLS"`
 	Database   string `yaml:"database"`
 	Collection string `yaml:"collection"`
 	Login      string `yaml:"login"`

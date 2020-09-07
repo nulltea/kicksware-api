@@ -7,7 +7,7 @@ replicaCount: 1
 image:
   registry: registry.kicksware.com
   repository: api/references-service
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   tag: latest
 
 service:

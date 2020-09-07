@@ -1,6 +1,7 @@
 package startup
 
 import (
+	"github.com/golang/glog"
 	di "github.com/timoth-y/kicksware-platform/middleware-service/service-common/container"
 	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/core"
 
@@ -10,6 +11,7 @@ import (
 
 func InitializeServer() (srv core.Server) {
 	env.InitEnvironment()
+	glog.Warningln(env.ServiceConfigPath)
 	config, err := env.ReadServiceConfig(env.ServiceConfigPath); if err != nil {
 		return nil
 	}
