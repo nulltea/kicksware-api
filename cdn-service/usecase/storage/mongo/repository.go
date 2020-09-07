@@ -6,15 +6,16 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
-	"io/ioutil"
-	"time"
-
-	"github.com/golang/glog"
 	"github.com/pkg/errors"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/gridfs"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
+	"io/ioutil"
+	"time"
+
+	"github.com/golang/glog"
+	TLS "github.com/timoth-y/kicksware-platform/middleware-service/service-common/core/meta"
 
 	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/core/repo"
 	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/env"

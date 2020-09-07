@@ -4,15 +4,16 @@ import (
 	"context"
 	"crypto/tls"
 	"crypto/x509"
-	"io/ioutil"
-	"time"
-
 	"github.com/pkg/errors"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
+	"io/ioutil"
+	"time"
 
+	"github.com/golang/glog"
+	TLS "github.com/timoth-y/kicksware-platform/middleware-service/service-common/core/meta"
 	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/util"
 
 	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/core/meta"
@@ -33,8 +34,7 @@ func NewMongoRepository(config env.DataStoreConfig) (repo.SneakerProductReposito
 	repo := &repository{
 		timeout:  time.Duration(config.Timeout) * time.Second,
 	}
-	client, err := newMongoClient(config)
-	if err != nil {
+	client, err := newMongoClient(config); if err != nil {
 		return nil, errors.Wrap(err, "repository.NewMongoRepository")
 	}
 	repo.client = client

@@ -13,7 +13,7 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/rs/xid v1.2.1
 	github.com/thoas/go-funk v0.6.0
-	github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200807142226-a66a50c3b3ae
+	github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200820000304-37a2b909f72b
 	github.com/vmihailenco/msgpack v4.0.4+incompatible
 	go.mongodb.org/mongo-driver v1.3.4
 	google.golang.org/appengine v1.6.6 // indirect

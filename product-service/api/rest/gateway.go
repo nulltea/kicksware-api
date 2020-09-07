@@ -33,7 +33,7 @@ func restRoutes(rest *Handler) (r *chi.Mux) {
 	return
 }
 
-func healthRoutes(rest *Handler) (r *chi.Mux)  {
+func healthRoutes(rest *Handler) (r *chi.Mux) {
 	r = chi.NewRouter()
 	r.Get("/live", rest.HealthZ)
 	r.Get("/ready", rest.ReadyZ)

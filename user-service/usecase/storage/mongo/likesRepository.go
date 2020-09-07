@@ -24,8 +24,7 @@ func NewLikesRepository(config env.DataStoreConfig) (repo.LikesRepository, error
 	repo := &likesRepository{
 		timeout: time.Duration(config.Timeout) * time.Second,
 	}
-	client, err := newMongoClient(config
-	if err != nil {
+	client, err := newMongoClient(config); if err != nil {
 		return nil, errors.Wrap(err, "repository.NewLikesRepository")
 	}
 	repo.client = client
