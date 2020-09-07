@@ -32,7 +32,15 @@ ingress:
           port: 8080
           scheme: http
 
-volumes: {}
+volumes:
+  - name: cert
+    persistent:
+      claim: cdn-service.data-claim
+      storageClass: nfs
+      size: 3Gi
+      accessModes:
+        - ReadWriteOnce
+mountPath: /root/storage
 
 resources: {}
 

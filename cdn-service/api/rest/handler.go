@@ -27,6 +27,9 @@ type RestfulHandler interface {
 	Authenticator(next http.Handler) http.Handler
 	Authorizer(next http.Handler) http.Handler
 	CacheController(next http.Handler) http.Handler
+	// Health
+	HealthZ(http.ResponseWriter, *http.Request)
+	ReadyZ(http.ResponseWriter, *http.Request)
 }
 
 type handler struct {

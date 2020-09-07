@@ -17,6 +17,7 @@ func ProvideRoutes(rest RestfulHandler) *chi.Mux {
 		rest.CacheController,
 	)
 	router.Mount("/", restRoutes(rest))
+	router.Mount("/health", restRoutes(rest))
 	return router
 }
 
@@ -30,9 +31,17 @@ func restRoutes(rest RestfulHandler) (r *chi.Mux) {
 	return
 }
 
+func healthRoutes(rest RestfulHandler) (r *chi.Mux)  {
+	r = chi.NewRouter()
+	r.Get("/live", rest.HealthZ)
+	r.Get("/ready", rest.ReadyZ)
+	return
+}
+
 func endpointOf(operation string) string {
 	if len(operation) != 0 {
 		operation = "/" + operation
 	}
 	return fmt.Sprintf("%v/{collection}/{filename}", operation)
 }
+

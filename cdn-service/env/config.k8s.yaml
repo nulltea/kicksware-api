@@ -7,7 +7,7 @@ commonConfig:
 authConfig:
   publicKeyPath: keys/auth/public.key
 filesConfig:
-  URL: /storage
+  URL: storage
 mongoConfig:
   URL: mongodb://db.kicksware.com:443
   TLS:
