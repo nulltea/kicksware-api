@@ -14,7 +14,7 @@ var (
 	Environment = os.Getenv("ENV")
 	Host = os.Getenv("HOST")
 	HostName = os.Getenv("HOSTNAME")
-	ServiceConfigPath = ProjectDirectory + os.Getenv("CONFIG_PATH")
+	ServiceConfigPath = os.Getenv("CONFIG_PATH")
 )
 
 func InitEnvironment() {
@@ -30,5 +30,5 @@ func reassignVariables() {
 	Environment = os.Getenv("ENV")
 	Host = os.Getenv("HOST")
 	HostName = os.Getenv("HOSTNAME")
-	ServiceConfigPath = ProjectDirectory + os.Getenv("CONFIG_PATH")
+	ServiceConfigPath = os.Getenv("CONFIG_PATH")
 }

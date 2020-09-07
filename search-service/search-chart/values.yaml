@@ -56,5 +56,5 @@ config:
   configMountPath: /env
 
 environment:
-  name: PROD
+  name: k8s
   configPath: /env/config.yaml

@@ -57,9 +57,9 @@ secrets:
   grpcTLSKeys: grpc-tls
 
 config:
-  environment: PROD
+  environment: k8s
   configMountPath: /env
 
 environment:
-  name: PROD
+  name: k8s
   configPath: /env/config.yaml
