@@ -50,7 +50,6 @@ secrets:
   dockerRegistry: registry-token
   authKeys: auth-keys
   grpcTLSKeys: grpc-tls
-  mongo-tls
 
 config:
   environment: PROD

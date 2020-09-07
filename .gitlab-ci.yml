@@ -26,6 +26,7 @@ api.build:
     - api
   variables:
     DOCKER_HOST: tcp://localhost:2375
+  allow_failure: true
   before_script:
     - docker version
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
@@ -54,8 +55,8 @@ users.deploy.k8s:
     - k8s
     - api
   only:
-#    changes:
-#      - user-service/**/*
+    changes:
+      - user-service/**/*
     kubernetes: active
   except:
     changes:
@@ -75,8 +76,8 @@ references.deploy.k8s:
     - k8s
     - api
   only:
-#    changes:
-#      - reference-service/**/*
+    changes:
+      - reference-service/**/*
     kubernetes: active
   except:
     changes:
@@ -94,8 +95,8 @@ products.deploy.k8s:
     - k8s
     - api
   only:
-#    changes:
-#      - product-service/**/*
+    changes:
+      - product-service/**/*
     kubernetes: active
   except:
     changes:
@@ -113,8 +114,8 @@ search.deploy.k8s:
     - k8s
     - api
   only:
-#    changes:
-#      - search-service/**/*
+    changes:
+      - search-service/**/*
     kubernetes: active
   except:
     changes:
