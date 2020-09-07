@@ -24,8 +24,8 @@ api.build:
   tags:
     - k8s
     - api
-  #variables:
-  #  DOCKER_HOST: tcp://0.0.0.0:2375
+  variables:
+    DOCKER_HOST: tcp://localhost:2375
   before_script:
     - docker version
     - docker-compose version
