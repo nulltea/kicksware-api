@@ -5,6 +5,8 @@ import (
 	"log"
 
 	"gopkg.in/yaml.v2"
+
+	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/core/meta"
 )
 
 type ServiceConfig struct {
