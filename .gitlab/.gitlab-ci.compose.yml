@@ -1,12 +1,11 @@
 stages:
-  - init
   - deploy
 
 variables:
   SOURCE_DIR: /source/repos/$CI_PROJECT_NAME
 
 api.init.compose:
-  stage: init
+  stage: .pre
   tags:
     - compose
     - api
