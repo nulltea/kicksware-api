@@ -17,7 +17,7 @@ before_script: &common_before
 
 api.build:
   image:
-    name: docker/compose:1.25.0
+    name: docker/compose:1.25.5
   services:
     - docker:stable-dind
   stage: build
@@ -25,6 +25,9 @@ api.build:
     - k8s
     - api
   before_script:
+    - docker version
+    - docker-compose version
+    - apk update && apk add libc6-compat && apk add ca-certificates
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker-compose build
