@@ -17,15 +17,15 @@ before_script: &common_before
 
 api.build:
   image:
-    name: docker/compose:1.25.0
+    name: docker/compose:1.25.5
   services:
-    - docker:stable-dind
+    - docker:19.03.8-dind
   stage: build
   tags:
     - k8s
     - api
-  variables:
-    DOCKER_HOST: tcp://0.0.0.0:2375
+  #variables:
+  #  DOCKER_HOST: tcp://0.0.0.0:2375
   before_script:
     - docker version
     - docker-compose version
