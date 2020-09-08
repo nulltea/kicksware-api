@@ -188,6 +188,7 @@ users.check.k8s:
     - echo -e "\e[36mService live. Checking service readiness:\n"
     - curl "http://$API_ENDPOINT_URL/health/users/ready" -f -o /dev/null || exit 1 | echo -e "\e[91mService not ready! Triggering check job failure"
     - echo -e "\e[36mService ready. Check job succeeded!"
+  retry: 2
 
 references.check.k8s:
   image: curlimages/curl
@@ -202,6 +203,7 @@ references.check.k8s:
     - echo -e "\e[36mService live. Checking service readiness:\n"
     - curl "http://$API_ENDPOINT_URL/health/references/ready" -f -o /dev/null || exit 1 | echo -e "\e[91mService not ready! Triggering check job failure"
     - echo -e "\e[36mService ready. Check job succeeded!"
+  retry: 2
 
 products.check.k8s:
   image: curlimages/curl
@@ -216,6 +218,7 @@ products.check.k8s:
     - echo -e "\e[36mService live. Checking service readiness:\n"
     - curl "http://$API_ENDPOINT_URL/health/products/ready" -f -o /dev/null || exit 1 | echo -e "\e[91mService not ready! Triggering check job failure"
     - echo -e "\e[36mService ready. Check job succeeded!"
+  retry: 2
 
 search.check.k8s:
   image: curlimages/curl
@@ -230,6 +233,7 @@ search.check.k8s:
     - echo -e "\e[36mService live. Checking service readiness:\n"
     - curl "http://$API_ENDPOINT_URL/health/search/ready" -f -o /dev/null || exit 1 | echo -e "\e[91mService not ready! Triggering check job failure"
     - echo -e "\e[36mService ready. Check job succeeded!"
+  retry: 2
 
 orders.check.k8s:
   image: curlimages/curl
@@ -244,6 +248,7 @@ orders.check.k8s:
     - echo -e "\e[36mService live. Checking service readiness:\n"
     - curl "http://$API_ENDPOINT_URL/health/orders/ready" -f -o /dev/null || exit 1 | echo -e "\e[91mService not ready! Triggering check job failure"
     - echo -e "\e[36mService ready. Check job succeeded!"
+  retry: 2
 
 cdn.check.k8s:
   image: curlimages/curl
@@ -258,3 +263,4 @@ cdn.check.k8s:
     - echo -e "\e[36mService live. Checking service readiness:\n"
     - curl "http://$API_ENDPOINT_URL/health/ready" -f -o /dev/null || exit 1 | echo -e "\e[91mService not ready! Triggering check job failure"
     - echo -e "\e[36mService ready. Check job succeeded!"
+  retry: 2

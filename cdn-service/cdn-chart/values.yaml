@@ -40,7 +40,7 @@ volumes:
       size: 3Gi
       accessModes:
         - ReadWriteOnce
-mountPath: /root/storage
+    mountPath: /root/storage
 
 resources: {}
 
