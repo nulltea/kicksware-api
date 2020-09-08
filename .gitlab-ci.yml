@@ -261,6 +261,6 @@ cdn.check.k8s:
   script:
     - curl "http://$CDN_ENDPOINT_URL/health/live" -f -o /dev/null || exit 1 | echo -e "\e[91mService dead! Triggering check job failure"
     - echo -e "\e[36mService live. Checking service readiness:\n"
-    - curl "http://$API_ENDPOINT_URL/health/ready" -f -o /dev/null || exit 1 | echo -e "\e[91mService not ready! Triggering check job failure"
+    - curl "http://$CDN_ENDPOINT_URL/health/ready" -f -o /dev/null || exit 1 | echo -e "\e[91mService not ready! Triggering check job failure"
     - echo -e "\e[36mService ready. Check job succeeded!"
   retry: 2
