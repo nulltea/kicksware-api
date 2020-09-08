@@ -185,9 +185,9 @@ users.check.k8s:
     - echo Waiting half a minute for service to properly start or fail... && sleep 30s
   script:
     - curl "http://$API_ENDPOINT_URL/health/users/live" -f -o /dev/null || exit 1 | echo -e "\e[91mService dead! Triggering check job failure"
-    - echo -e "\e[92mService live. Checking service readiness:\n"
+    - echo -e "\e[36mService live. Checking service readiness:\n"
     - curl "http://$API_ENDPOINT_URL/health/users/ready" -f -o /dev/null || exit 1 | echo -e "\e[91mService not ready! Triggering check job failure"
-    - echo -e "\e[92mService ready. Check job succeeded!"
+    - echo -e "\e[36mService ready. Check job succeeded!"
 
 references.check.k8s:
   image: curlimages/curl
@@ -199,9 +199,9 @@ references.check.k8s:
     - echo Waiting half a minute for service to properly start or fail... && sleep 30s
   script:
     - curl "http://$API_ENDPOINT_URL/health/references/live" -f -o /dev/null || exit 1 | echo -e "\e[91mService dead! Triggering check job failure"
-    - echo -e "\e[92mService live. Checking service readiness:\n"
+    - echo -e "\e[36mService live. Checking service readiness:\n"
     - curl "http://$API_ENDPOINT_URL/health/references/ready" -f -o /dev/null || exit 1 | echo -e "\e[91mService not ready! Triggering check job failure"
-    - echo -e "\e[92mService ready. Check job succeeded!"
+    - echo -e "\e[36mService ready. Check job succeeded!"
 
 products.check.k8s:
   image: curlimages/curl
@@ -213,9 +213,9 @@ products.check.k8s:
     - echo Waiting half a minute for service to properly start or fail... && sleep 30s
   script:
     - curl "http://$API_ENDPOINT_URL/health/products/live" -f -o /dev/null || exit 1 | echo -e "\e[91mService dead! Triggering check job failure"
-    - echo -e "\e[92mService live. Checking service readiness:\n"
+    - echo -e "\e[36mService live. Checking service readiness:\n"
     - curl "http://$API_ENDPOINT_URL/health/products/ready" -f -o /dev/null || exit 1 | echo -e "\e[91mService not ready! Triggering check job failure"
-    - echo -e "\e[92mService ready. Check job succeeded!"
+    - echo -e "\e[36mService ready. Check job succeeded!"
 
 search.check.k8s:
   image: curlimages/curl
@@ -227,9 +227,9 @@ search.check.k8s:
     - echo Waiting half a minute for service to properly start or fail... && sleep 30s
   script:
     - curl "http://$API_ENDPOINT_URL/health/search/live" -f -o /dev/null || exit 1 | echo -e "\e[91mService dead! Triggering check job failure"
-    - echo -e "\e[92mService live. Checking service readiness:\n"
+    - echo -e "\e[36mService live. Checking service readiness:\n"
     - curl "http://$API_ENDPOINT_URL/health/search/ready" -f -o /dev/null || exit 1 | echo -e "\e[91mService not ready! Triggering check job failure"
-    - echo -e "\e[92mService ready. Check job succeeded!"
+    - echo -e "\e[36mService ready. Check job succeeded!"
 
 orders.check.k8s:
   image: curlimages/curl
@@ -241,9 +241,9 @@ orders.check.k8s:
     - echo Waiting half a minute for service to properly start or fail... && sleep 30s
   script:
     - curl "http://$API_ENDPOINT_URL/health/orders/live" -f -o /dev/null || exit 1 | echo -e "\e[91mService dead! Triggering check job failure"
-    - echo -e "\e[92mService live. Checking service readiness:\n"
+    - echo -e "\e[36mService live. Checking service readiness:\n"
     - curl "http://$API_ENDPOINT_URL/health/orders/ready" -f -o /dev/null || exit 1 | echo -e "\e[91mService not ready! Triggering check job failure"
-    - echo -e "\e[92mService ready. Check job succeeded!"
+    - echo -e "\e[36mService ready. Check job succeeded!"
 
 cdn.check.k8s:
   image: curlimages/curl
@@ -255,6 +255,6 @@ cdn.check.k8s:
     - echo Waiting half a minute for service to properly start or fail... && sleep 30s
   script:
     - curl "http://$CDN_ENDPOINT_URL/health/live" -f -o /dev/null || exit 1 | echo -e "\e[91mService dead! Triggering check job failure"
-    - echo -e "\e[92mService live. Checking service readiness:\n"
+    - echo -e "\e[36mService live. Checking service readiness:\n"
     - curl "http://$API_ENDPOINT_URL/health/ready" -f -o /dev/null || exit 1 | echo -e "\e[91mService not ready! Triggering check job failure"
-    - echo -e "\e[92mService ready. Check job succeeded!"
+    - echo -e "\e[36mService ready. Check job succeeded!"
