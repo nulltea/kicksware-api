@@ -39,6 +39,16 @@ ingress:
           - name: beta-service
             port: 8080
             scheme: http
+    - host: api.kicksware.com
+      paths:
+        - /health/beta
+      middlewares:
+        - name: health-stripprefix
+          namespace: gateway
+      services:
+        - name: beta-service
+          port: 8080
+          scheme: http
 
 volumes: {}
 

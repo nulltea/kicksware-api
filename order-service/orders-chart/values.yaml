@@ -31,6 +31,16 @@ ingress:
         - name: orders-service
           port: 8080
           scheme: http
+    - host: api.kicksware.com
+      paths:
+        - /health/orders
+      middlewares:
+        - name: health-stripprefix
+          namespace: gateway
+      services:
+        - name: orders-service
+          port: 8080
+          scheme: http
 
 volumes: {}
 

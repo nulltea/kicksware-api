@@ -31,6 +31,16 @@ ingress:
         - name: references-service
           port: 8080
           scheme: http
+    - host: api.kicksware.com
+      paths:
+        - /health/references
+      middlewares:
+        - name: health-stripprefix
+          namespace: gateway
+      services:
+        - name: references-service
+          port: 8080
+          scheme: http
 
 volumes: {}
 

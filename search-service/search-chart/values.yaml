@@ -31,6 +31,16 @@ ingress:
         - name: search-service
           port: 8080
           scheme: http
+    - host: api.kicksware.com
+      paths:
+        - /health/search
+      middlewares:
+        - name: health-stripprefix
+          namespace: gateway
+      services:
+        - name: search-service
+          port: 8080
+          scheme: http
 
 resources: {}
 

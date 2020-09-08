@@ -31,6 +31,16 @@ ingress:
         - name: products-service
           port: 8080
           scheme: http
+    - host: api.kicksware.com
+      paths:
+        - /health/products
+      middlewares:
+        - name: health-stripprefix
+          namespace: gateway
+      services:
+        - name: products-service
+          port: 8080
+          scheme: http
 
 resources: {}
 

@@ -6,6 +6,7 @@ stages:
   - build
   - test
   - deploy
+  - check
 
 before_script: &common_before
   - kubectl create secret docker-registry registry-token -n api
@@ -18,8 +19,7 @@ before_script: &common_before
 # build stage steps:
 
 api.build:
-  image:
-    name: docker/compose:1.25.0
+  image: docker/compose:1.25.0
   services:
     - docker:18.09-dind
   stage: build
@@ -29,6 +29,9 @@ api.build:
   variables:
     DOCKER_HOST: tcp://localhost:2375
   allow_failure: true
+  except:
+    changes:
+      - "*.md"
   before_script:
     - docker version
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
@@ -44,10 +47,13 @@ api.test:
   tags:
     - k8s
     - api
+  except:
+    changes:
+      - "*.md"
   before_script:
-    - echo -e "\e[32mTODO"
+    - printf "\e[32mTODO"
   script:
-    - echo -e "\e[33mYou should implement test... \e[31mI am serisous, dude - \e[1mTESTS ARE IMPORTANT!"
+    - echo -e "\e[33mYou should implement test... \e[91mI am serisous, dude - \e[1mTESTS ARE IMPORTANT!"
 
 # deploy stage steps:
 
@@ -57,8 +63,8 @@ users.deploy.k8s:
     - k8s
     - api
   only:
-#    changes:
-#      - user-service/**/*
+    changes:
+      - user-service/**/*
     kubernetes: active
   except:
     changes:
@@ -78,8 +84,8 @@ references.deploy.k8s:
     - k8s
     - api
   only:
-#    changes:
-#      - reference-service/**/*
+    changes:
+      - reference-service/**/*
     kubernetes: active
   except:
     changes:
@@ -97,8 +103,8 @@ products.deploy.k8s:
     - k8s
     - api
   only:
-#    changes:
-#      - product-service/**/*
+    changes:
+      - product-service/**/*
     kubernetes: active
   except:
     changes:
@@ -116,8 +122,8 @@ search.deploy.k8s:
     - k8s
     - api
   only:
-#    changes:
-#      - search-service/**/*
+    changes:
+      - search-service/**/*
     kubernetes: active
   except:
     changes:
@@ -166,3 +172,89 @@ cdn.deploy.k8s:
       --from-file=config.yaml=config.yaml --dry-run -o yaml | kubectl apply -f -
   script:
     - helm upgrade --install -n api cdn-service cdn-service/cdn-chart
+
+# check stage steps:
+
+users.check.k8s:
+  image: curlimages/curl
+  stage: check
+  tags:
+    - k8s
+    - api
+  before_script:
+    - echo Waiting half a minute for service to properly start or fail... && sleep 30s
+  script:
+    - curl "http://$API_ENDPOINT_URL/health/users/live" -f -o /dev/null || exit 1 | echo -e "\e[91mService dead! Triggering check job failure"
+    - echo -e "\e[92mService live. Checking service readiness:\n"
+    - curl "http://$API_ENDPOINT_URL/health/users/ready" -f -o /dev/null || exit 1 | echo -e "\e[91mService not ready! Triggering check job failure"
+    - echo -e "\e[92mService ready. Check job succeeded!"
+
+references.check.k8s:
+  image: curlimages/curl
+  stage: check
+  tags:
+    - k8s
+    - api
+  before_script:
+    - echo Waiting half a minute for service to properly start or fail... && sleep 30s
+  script:
+    - curl "http://$API_ENDPOINT_URL/health/references/live" -f -o /dev/null || exit 1 | echo -e "\e[91mService dead! Triggering check job failure"
+    - echo -e "\e[92mService live. Checking service readiness:\n"
+    - curl "http://$API_ENDPOINT_URL/health/references/ready" -f -o /dev/null || exit 1 | echo -e "\e[91mService not ready! Triggering check job failure"
+    - echo -e "\e[92mService ready. Check job succeeded!"
+
+products.check.k8s:
+  image: curlimages/curl
+  stage: check
+  tags:
+    - k8s
+    - api
+  before_script:
+    - echo Waiting half a minute for service to properly start or fail... && sleep 30s
+  script:
+    - curl "http://$API_ENDPOINT_URL/health/products/live" -f -o /dev/null || exit 1 | echo -e "\e[91mService dead! Triggering check job failure"
+    - echo -e "\e[92mService live. Checking service readiness:\n"
+    - curl "http://$API_ENDPOINT_URL/health/products/ready" -f -o /dev/null || exit 1 | echo -e "\e[91mService not ready! Triggering check job failure"
+    - echo -e "\e[92mService ready. Check job succeeded!"
+
+search.check.k8s:
+  image: curlimages/curl
+  stage: check
+  tags:
+    - k8s
+    - api
+  before_script:
+    - echo Waiting half a minute for service to properly start or fail... && sleep 30s
+  script:
+    - curl "http://$API_ENDPOINT_URL/health/search/live" -f -o /dev/null || exit 1 | echo -e "\e[91mService dead! Triggering check job failure"
+    - echo -e "\e[92mService live. Checking service readiness:\n"
+    - curl "http://$API_ENDPOINT_URL/health/search/ready" -f -o /dev/null || exit 1 | echo -e "\e[91mService not ready! Triggering check job failure"
+    - echo -e "\e[92mService ready. Check job succeeded!"
+
+orders.check.k8s:
+  image: curlimages/curl
+  stage: check
+  tags:
+    - k8s
+    - api
+  before_script:
+    - echo Waiting half a minute for service to properly start or fail... && sleep 30s
+  script:
+    - curl "http://$API_ENDPOINT_URL/health/orders/live" -f -o /dev/null || exit 1 | echo -e "\e[91mService dead! Triggering check job failure"
+    - echo -e "\e[92mService live. Checking service readiness:\n"
+    - curl "http://$API_ENDPOINT_URL/health/orders/ready" -f -o /dev/null || exit 1 | echo -e "\e[91mService not ready! Triggering check job failure"
+    - echo -e "\e[92mService ready. Check job succeeded!"
+
+cdn.check.k8s:
+  image: curlimages/curl
+  stage: check
+  tags:
+    - k8s
+    - api
+  before_script:
+    - echo Waiting half a minute for service to properly start or fail... && sleep 30s
+  script:
+    - curl "http://$CDN_ENDPOINT_URL/health/live" -f -o /dev/null || exit 1 | echo -e "\e[91mService dead! Triggering check job failure"
+    - echo -e "\e[92mService live. Checking service readiness:\n"
+    - curl "http://$API_ENDPOINT_URL/health/ready" -f -o /dev/null || exit 1 | echo -e "\e[91mService not ready! Triggering check job failure"
+    - echo -e "\e[92mService ready. Check job succeeded!"
