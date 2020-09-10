@@ -33,13 +33,13 @@ ingress:
           scheme: http
 
 volumes:
-  - name: cert
+  - name: storage
     persistent:
-      claim: cdn-service.data-claim
-      storageClass: nfs
-      size: 3Gi
+      claim: shared-storage
+      storageClass: glusterfs
+      size: 5Gi
       accessModes:
-        - ReadWriteOnce
+        - ReadWriteMany
     mountPath: /root/storage
 
 resources: {}

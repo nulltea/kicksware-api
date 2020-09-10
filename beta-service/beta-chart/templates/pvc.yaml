@@ -1,16 +1,19 @@
 {{- range .Values.volumes }}
   {{- with .persistent }}
+    {{- if .storageClass}}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .claim }}
 spec:
   storageClassName: {{ .storageClass }}
+  volumeName: {{ .volumeName }}
   accessModes:
   {{- toYaml .accessModes | nindent 4 }}
   resources:
     requests:
       storage: {{ .size }}
 ---
-{{- end }}
+    {{- end }}
   {{- end }}
+{{- end }}
