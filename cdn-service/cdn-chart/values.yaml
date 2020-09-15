@@ -37,7 +37,7 @@ volumes:
     persistent:
       claim: shared-storage
       storageClass: glusterfs
-      size: 5Gi
+      size: 1Gi
       accessModes:
         - ReadWriteMany
     mountPath: /root/storage
@@ -58,7 +58,7 @@ serviceAccount:
 
 secrets:
   dockerRegistry: registry-token
-  moutns:
+  mounts:
     - name: auth-keys
       mountPath: /root/keys/auth
     - name: grpc-tls

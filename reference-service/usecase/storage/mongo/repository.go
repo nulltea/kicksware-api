@@ -237,7 +237,7 @@ func (r *repository) buildQueryPipeline(matchQuery bson.M, param *meta.RequestPa
 	if param != nil {
 		if param.SortBy() != "" {
 			pipe = append(pipe, bson.D {
-				{"$sort", bson.M {param.SortBy(): param.SortDirectionNum() }},
+				{"$sort", bson.M {param.SortBy(): param.SortDirectionNum(), "added_date": -1 }},
 			})
 		}
 		if param.Offset() != 0 {

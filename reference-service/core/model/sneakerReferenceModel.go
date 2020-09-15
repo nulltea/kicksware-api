@@ -24,4 +24,5 @@ type SneakerReference struct {
 	StadiumUrl     string
 	Likes          int
 	Liked          bool
+	AddedDate      time.Time `bson:"added_date"`
 }

@@ -68,7 +68,7 @@ serviceAccount:
 
 secrets:
   dockerRegistry: registry-token
-  moutns:
+  mounts:
     - name: auth-keys
       mountPath: /root/keys/auth
     - name: grpc-tls
