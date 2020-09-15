@@ -18,6 +18,7 @@ type SneakerReference struct {
 	Materials      []string
 	Categories     []string
 	ReleaseDate    time.Time
+	ReleaseDateStr string `bson:"release_strdate"`
 	Price          float64
 	ImageLink      string
 	ImageLinks     []string
