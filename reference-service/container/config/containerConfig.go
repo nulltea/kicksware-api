@@ -1,10 +1,10 @@
 package config
 
 import (
-	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/container"
+	"github.com/timoth-y/kicksware-api/service-common/container"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/container/factory"
-	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/env"
+	"github.com/timoth-y/kicksware-api/reference-service/container/factory"
+	"github.com/timoth-y/kicksware-api/reference-service/env"
 )
 
 func ConfigureContainer(container container.ServiceContainer, config env.ServiceConfig) {

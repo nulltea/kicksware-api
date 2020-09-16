@@ -1,4 +1,4 @@
-module github.com/timoth-y/kicksware-platform/middleware-service/order-service
+module github.com/timoth-y/kicksware-api/order-service
 
 go 1.14
 
@@ -13,7 +13,7 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/rs/xid v1.2.1
 	github.com/thoas/go-funk v0.6.0
-	github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200820000304-37a2b909f72b
+	github.com/timoth-y/kicksware-api/service-common v0.0.0-20200820000304-37a2b909f72b
 	github.com/vmihailenco/msgpack v4.0.4+incompatible
 	go.mongodb.org/mongo-driver v1.3.4
 	google.golang.org/appengine v1.6.6 // indirect

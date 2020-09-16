@@ -41,6 +41,18 @@ ingress:
         - name: search-service
           port: 8080
           scheme: http
+    - host: api.kicksware.com
+      grpc: true
+      paths:
+        - /proto.SearchReferencesService
+        - /proto.SearchProductService
+      entrypoints:
+        - web
+        - websecure
+      services:
+        - name: search-service
+          port: 8080
+          scheme: h2c
 
 resources: {}
 

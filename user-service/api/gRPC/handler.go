@@ -11,12 +11,12 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/api/gRPC/proto"
-	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/meta"
-	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/model"
-	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/service"
-	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/env"
-	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/usecase/business"
+	"github.com/timoth-y/kicksware-api/user-service/api/gRPC/proto"
+	"github.com/timoth-y/kicksware-api/user-service/core/meta"
+	"github.com/timoth-y/kicksware-api/user-service/core/model"
+	"github.com/timoth-y/kicksware-api/user-service/core/service"
+	"github.com/timoth-y/kicksware-api/user-service/env"
+	"github.com/timoth-y/kicksware-api/user-service/usecase/business"
 )
 
 type Handler struct {

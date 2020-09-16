@@ -3,7 +3,7 @@ package gRPC
 import (
 	"context"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/api/gRPC/proto"
+	"github.com/timoth-y/kicksware-api/user-service/api/gRPC/proto"
 )
 
 func (h *Handler) SendEmailConfirmation(ctx context.Context, request *proto.MailRequest) (resp *proto.MailResponse, err error) {

@@ -3,8 +3,8 @@ package service
 import (
 	"io"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/core/meta"
-	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/core/model"
+	"github.com/timoth-y/kicksware-api/cdn-service/core/meta"
+	"github.com/timoth-y/kicksware-api/cdn-service/core/model"
 )
 
 type ContentService interface {

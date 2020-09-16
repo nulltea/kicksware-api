@@ -1,6 +1,6 @@
 package service
 
-import model "github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/model"
+import model "github.com/timoth-y/kicksware-api/reference-service/core/model"
 
 type SneakerReferenceSerializer interface {
 	Decode(input []byte) (*model.SneakerReference, error)

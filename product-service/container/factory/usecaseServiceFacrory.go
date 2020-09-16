@@ -1,10 +1,10 @@
 package factory
 
 import (
-	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/core/repo"
-	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/core/service"
-	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/env"
-	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/usecase/business"
+	"github.com/timoth-y/kicksware-api/product-service/core/repo"
+	"github.com/timoth-y/kicksware-api/product-service/core/service"
+	"github.com/timoth-y/kicksware-api/product-service/env"
+	"github.com/timoth-y/kicksware-api/product-service/usecase/business"
 )
 
 func ProvideDataService(repository repo.SneakerProductRepository, config env.ServiceConfig) service.SneakerProductService {

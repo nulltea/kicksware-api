@@ -1,4 +1,4 @@
-module github.com/timoth-y/kicksware-platform/middleware-service/search-service
+module github.com/timoth-y/kicksware-api/search-service
 
 go 1.14
 
@@ -14,10 +14,10 @@ require (
 	github.com/olivere/elastic/v7 v7.0.12
 	github.com/pkg/errors v0.9.1
 	github.com/thoas/go-funk v0.6.0
-	github.com/timoth-y/kicksware-platform/middleware-service/product-service v0.0.0-20200807133030-5f847defdf0b
-	github.com/timoth-y/kicksware-platform/middleware-service/reference-service v0.0.0-20200807133030-5f847defdf0b
-	github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200818142045-c68220681572
-	github.com/timoth-y/kicksware-platform/middleware-service/user-service v0.0.0-20200807131113-a8928eed241c
+	github.com/timoth-y/kicksware-api/product-service v0.0.0-20200807133030-5f847defdf0b
+	github.com/timoth-y/kicksware-api/reference-service v0.0.0-20200807133030-5f847defdf0b
+	github.com/timoth-y/kicksware-api/service-common v0.0.0-20200818142045-c68220681572
+	github.com/timoth-y/kicksware-api/user-service v0.0.0-20200807131113-a8928eed241c
 	github.com/vmihailenco/msgpack v3.3.3+incompatible
 	go.mongodb.org/mongo-driver v1.3.3
 	google.golang.org/grpc v1.31.0

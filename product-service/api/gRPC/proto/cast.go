@@ -4,8 +4,8 @@ import (
 	"github.com/golang/protobuf/ptypes/wrappers"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/core/meta"
-	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/core/model"
+	"github.com/timoth-y/kicksware-api/product-service/core/meta"
+	"github.com/timoth-y/kicksware-api/product-service/core/model"
 )
 
 func (m *SneakerProduct) ToNative() *model.SneakerProduct {

@@ -3,12 +3,12 @@ package gRPC
 import (
 	"context"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/model"
+	"github.com/timoth-y/kicksware-api/reference-service/core/model"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/api/gRPC/proto"
-	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/meta"
-	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/service"
-	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/env"
+	"github.com/timoth-y/kicksware-api/search-service/api/gRPC/proto"
+	"github.com/timoth-y/kicksware-api/search-service/core/meta"
+	"github.com/timoth-y/kicksware-api/search-service/core/service"
+	"github.com/timoth-y/kicksware-api/search-service/env"
 )
 
 //go:generate protoc --proto_path=../../../service-protos --go_out=plugins=grpc:proto/. reference.proto

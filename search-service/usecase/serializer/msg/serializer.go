@@ -1,10 +1,10 @@
 package msg
 
 import (
-	prod "github.com/timoth-y/kicksware-platform/middleware-service/product-service/core/model"
-	ref "github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/model"
+	prod "github.com/timoth-y/kicksware-api/product-service/core/model"
+	ref "github.com/timoth-y/kicksware-api/reference-service/core/model"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/service"
+	"github.com/timoth-y/kicksware-api/search-service/core/service"
 
 	"github.com/pkg/errors"
 	"github.com/vmihailenco/msgpack"

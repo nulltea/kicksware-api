@@ -3,7 +3,7 @@ api:
 	docker-compose down;
 	docker-compose up -d;
 cert:
-	cd key;
-	sh ./gen.sh;
+	cd keys;
+	sh gen.sh;
 	cd ../
 

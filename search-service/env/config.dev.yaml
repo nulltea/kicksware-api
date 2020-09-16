@@ -6,13 +6,13 @@ commonConfig:
 securityConfig:
   tlsCertificate:
     enableTLS: true
-    certFile: ../key/server.crt
-    keyFile: ../key/server.key
+    certFile: ../keys/server.crt
+    keyFile: ../keys/server.key
 authConfig:
-  publicKeyPath: ../key/public.key.pub
+  publicKeyPath: ../keys/public.key.pub
   authEndpoint: https://api.kicksware.com/auth/guest
 elasticConfig:
-  URL: http://localhost:9200
+  URL: https://search.kicksware.com:443
   index: sneaker_reference
   startupDelay: 60
   sniffing: false

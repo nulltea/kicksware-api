@@ -10,10 +10,10 @@ import (
 
 	"github.com/victorspringer/http-cache"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/core/meta"
-	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/core/model"
-	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/core/service"
-	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/env"
+	"github.com/timoth-y/kicksware-api/cdn-service/core/meta"
+	"github.com/timoth-y/kicksware-api/cdn-service/core/model"
+	"github.com/timoth-y/kicksware-api/cdn-service/core/service"
+	"github.com/timoth-y/kicksware-api/cdn-service/env"
 )
 
 type RestfulHandler interface {

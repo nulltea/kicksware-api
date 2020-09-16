@@ -1,10 +1,10 @@
 package factory
 
 import (
-	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/repo"
-	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/service"
-	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/env"
-	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/usecase/business"
+	"github.com/timoth-y/kicksware-api/user-service/core/repo"
+	"github.com/timoth-y/kicksware-api/user-service/core/service"
+	"github.com/timoth-y/kicksware-api/user-service/env"
+	"github.com/timoth-y/kicksware-api/user-service/usecase/business"
 )
 
 func ProvideDataService(repository repo.UserRepository, remoteRepository repo.RemoteRepository) service.UserService {

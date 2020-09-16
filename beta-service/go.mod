@@ -1,4 +1,4 @@
-module github.com/timoth-y/kicksware-platform/middleware-service/beta-service
+module github.com/timoth-y/kicksware-api/beta-service
 
 go 1.14
 
@@ -14,8 +14,8 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/rs/xid v1.2.1
 	github.com/thoas/go-funk v0.7.0
-	github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200820000304-37a2b909f72b
-	github.com/timoth-y/kicksware-platform/middleware-service/user-service v0.0.0-20200807131113-a8928eed241c
+	github.com/timoth-y/kicksware-api/service-common v0.0.0-20200820000304-37a2b909f72b
+	github.com/timoth-y/kicksware-api/user-service v0.0.0-20200807131113-a8928eed241c
 	github.com/vmihailenco/msgpack v4.0.4+incompatible
 	go.mongodb.org/mongo-driver v1.4.0
 	google.golang.org/grpc v1.30.0

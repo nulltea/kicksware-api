@@ -1,11 +1,11 @@
 package startup
 
 import (
-	di "github.com/timoth-y/kicksware-platform/middleware-service/service-common/container"
-	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/core"
+	di "github.com/timoth-y/kicksware-api/service-common/container"
+	"github.com/timoth-y/kicksware-api/service-common/core"
 
-	conf "github.com/timoth-y/kicksware-platform/middleware-service/product-service/container/config"
-	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/env"
+	conf "github.com/timoth-y/kicksware-api/product-service/container/config"
+	"github.com/timoth-y/kicksware-api/product-service/env"
 )
 
 func InitializeServer() (srv core.Server) {

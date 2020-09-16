@@ -9,7 +9,7 @@ import (
 
 	"github.com/fatih/structs"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/meta"
+	"github.com/timoth-y/kicksware-api/reference-service/core/meta"
 )
 
 func NewRequestParams(r *http.Request) *meta.RequestParams {

@@ -6,7 +6,7 @@ commonConfig:
   innerServiceFormat: http://%s:8080/%s/
 securityConfig:
   tlsCertificate:
-    enableTLS: true
+    enableTLS: false
     certFile: certs/grpc/tls.crt
     keyFile: certs/grpc/tls.key
 authConfig:

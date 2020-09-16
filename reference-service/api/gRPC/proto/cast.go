@@ -4,8 +4,8 @@ import (
 	"github.com/golang/protobuf/ptypes/wrappers"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/meta"
-	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/model"
+	"github.com/timoth-y/kicksware-api/reference-service/core/meta"
+	"github.com/timoth-y/kicksware-api/reference-service/core/model"
 )
 
 func (m *SneakerReference) ToNative() *model.SneakerReference {

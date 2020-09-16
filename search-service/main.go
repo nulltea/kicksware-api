@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/startup"
+	"github.com/timoth-y/kicksware-api/search-service/startup"
 )
 
 func main() {

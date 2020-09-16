@@ -7,15 +7,15 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/pkg/errors"
-	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/util"
+	"github.com/timoth-y/kicksware-api/service-common/util"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/core/meta"
-	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/core/model"
-	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/core/service"
-	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/env"
-	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/usecase/business"
-	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/usecase/serializer/json"
-	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/usecase/serializer/msg"
+	"github.com/timoth-y/kicksware-api/order-service/core/meta"
+	"github.com/timoth-y/kicksware-api/order-service/core/model"
+	"github.com/timoth-y/kicksware-api/order-service/core/service"
+	"github.com/timoth-y/kicksware-api/order-service/env"
+	"github.com/timoth-y/kicksware-api/order-service/usecase/business"
+	"github.com/timoth-y/kicksware-api/order-service/usecase/serializer/json"
+	"github.com/timoth-y/kicksware-api/order-service/usecase/serializer/msg"
 )
 
 type RestfulHandler interface {

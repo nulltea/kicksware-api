@@ -1,4 +1,4 @@
-module github.com/timoth-y/kicksware-platform/middleware-service/user-service
+module github.com/timoth-y/kicksware-api/user-service
 
 go 1.14
 
@@ -18,7 +18,7 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/rs/xid v1.2.1
 	github.com/thoas/go-funk v0.6.0
-	github.com/timoth-y/kicksware-platform/middleware-service/service-common v0.0.0-20200818142045-c68220681572
+	github.com/timoth-y/kicksware-api/service-common v0.0.0-20200818142045-c68220681572
 	github.com/vmihailenco/msgpack v3.3.3+incompatible
 	go.mongodb.org/mongo-driver v1.3.3
 	golang.org/x/crypto v0.0.0-20191011191535-87dc89f01550 // indirect

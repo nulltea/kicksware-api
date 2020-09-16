@@ -3,11 +3,11 @@ package factory
 import (
 	"log"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/core/repo"
-	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/env"
-	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/usecase/storage/mongo"
-	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/usecase/storage/postgres"
-	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/usecase/storage/redis"
+	"github.com/timoth-y/kicksware-api/product-service/core/repo"
+	"github.com/timoth-y/kicksware-api/product-service/env"
+	"github.com/timoth-y/kicksware-api/product-service/usecase/storage/mongo"
+	"github.com/timoth-y/kicksware-api/product-service/usecase/storage/postgres"
+	"github.com/timoth-y/kicksware-api/product-service/usecase/storage/redis"
 )
 
 func ProvideRepository(config env.ServiceConfig) repo.SneakerProductRepository {

@@ -1,8 +1,8 @@
 package msg
 
 import (
-	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/model"
-	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/service"
+	"github.com/timoth-y/kicksware-api/reference-service/core/model"
+	"github.com/timoth-y/kicksware-api/reference-service/core/service"
 
 	"github.com/pkg/errors"
 	"github.com/vmihailenco/msgpack"

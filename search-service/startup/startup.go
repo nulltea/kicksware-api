@@ -4,12 +4,12 @@ import (
 	"log"
 
 	"github.com/pkg/errors"
-	di "github.com/timoth-y/kicksware-platform/middleware-service/service-common/container"
-	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/core"
+	di "github.com/timoth-y/kicksware-api/service-common/container"
+	"github.com/timoth-y/kicksware-api/service-common/core"
 
-	conf "github.com/timoth-y/kicksware-platform/middleware-service/search-service/container/config"
-	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/service"
-	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/env"
+	conf "github.com/timoth-y/kicksware-api/search-service/container/config"
+	"github.com/timoth-y/kicksware-api/search-service/core/service"
+	"github.com/timoth-y/kicksware-api/search-service/env"
 )
 
 func InitializeServer() (srv core.Server, container di.ServiceContainer) {

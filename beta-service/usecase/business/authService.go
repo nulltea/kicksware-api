@@ -3,10 +3,10 @@ package business
 import (
 	"crypto/rsa"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/util"
+	"github.com/timoth-y/kicksware-api/service-common/util"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/core/service"
-	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/env"
+	"github.com/timoth-y/kicksware-api/beta-service/core/service"
+	"github.com/timoth-y/kicksware-api/beta-service/env"
 )
 
 type authService struct {

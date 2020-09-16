@@ -4,7 +4,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/core/model"
+	"github.com/timoth-y/kicksware-api/product-service/core/model"
 )
 
 type ProductSorter struct {

@@ -5,8 +5,8 @@ import (
 
 	"github.com/golang/protobuf/ptypes/empty"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/api/gRPC/proto"
-	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/meta"
+	"github.com/timoth-y/kicksware-api/user-service/api/gRPC/proto"
+	"github.com/timoth-y/kicksware-api/user-service/core/meta"
 )
 
 func (h *Handler) SignUp(ctx context.Context, user *proto.User) (resp *proto.AuthToken, err error) {

@@ -15,10 +15,10 @@ import (
 	"time"
 
 	"github.com/golang/glog"
-	TLS "github.com/timoth-y/kicksware-platform/middleware-service/service-common/core/meta"
+	TLS "github.com/timoth-y/kicksware-api/service-common/core/meta"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/core/repo"
-	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/env"
+	"github.com/timoth-y/kicksware-api/cdn-service/core/repo"
+	"github.com/timoth-y/kicksware-api/cdn-service/env"
 )
 
 type repository struct {

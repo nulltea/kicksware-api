@@ -13,14 +13,14 @@ import (
 	"time"
 
 	"github.com/golang/glog"
-	TLS "github.com/timoth-y/kicksware-platform/middleware-service/service-common/core/meta"
-	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/util"
+	TLS "github.com/timoth-y/kicksware-api/service-common/core/meta"
+	"github.com/timoth-y/kicksware-api/service-common/util"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/core/meta"
-	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/core/model"
-	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/core/repo"
-	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/env"
-	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/usecase/business"
+	"github.com/timoth-y/kicksware-api/order-service/core/meta"
+	"github.com/timoth-y/kicksware-api/order-service/core/model"
+	"github.com/timoth-y/kicksware-api/order-service/core/repo"
+	"github.com/timoth-y/kicksware-api/order-service/env"
+	"github.com/timoth-y/kicksware-api/order-service/usecase/business"
 )
 
 type repository struct {

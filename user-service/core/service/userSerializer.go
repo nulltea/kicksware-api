@@ -1,6 +1,6 @@
 package service
 
-import "github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/model"
+import "github.com/timoth-y/kicksware-api/user-service/core/model"
 
 type UserSerializer interface {
 	Decode(input []byte) (*model.User, error)

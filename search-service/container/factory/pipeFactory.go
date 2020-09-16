@@ -1,11 +1,11 @@
 package factory
 
 import (
-	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/pipe"
-	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/core/service"
-	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/env"
-	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/usecase/pipes/REST"
-	"github.com/timoth-y/kicksware-platform/middleware-service/search-service/usecase/pipes/gRPC"
+	"github.com/timoth-y/kicksware-api/search-service/core/pipe"
+	"github.com/timoth-y/kicksware-api/search-service/core/service"
+	"github.com/timoth-y/kicksware-api/search-service/env"
+	"github.com/timoth-y/kicksware-api/search-service/usecase/pipes/REST"
+	"github.com/timoth-y/kicksware-api/search-service/usecase/pipes/gRPC"
 )
 
 func ProvideReferenceRESTPipe(auth service.AuthService, config env.ServiceConfig) pipe.SneakerReferencePipe {

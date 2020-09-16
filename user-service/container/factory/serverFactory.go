@@ -2,11 +2,11 @@ package factory
 
 import (
 	"github.com/go-chi/chi"
-	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/core"
-	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/server"
+	"github.com/timoth-y/kicksware-api/service-common/core"
+	"github.com/timoth-y/kicksware-api/service-common/server"
 
-	grpc "github.com/timoth-y/kicksware-platform/middleware-service/user-service/api/gRPC"
-	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/env"
+	grpc "github.com/timoth-y/kicksware-api/user-service/api/gRPC"
+	"github.com/timoth-y/kicksware-api/user-service/env"
 )
 
 func ProvideServer(config env.ServiceConfig, router chi.Router, handler *grpc.Handler) core.Server {

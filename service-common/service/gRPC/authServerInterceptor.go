@@ -3,15 +3,15 @@ package gRPC
 import (
 	"context"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/model"
+	"github.com/timoth-y/kicksware-api/user-service/core/model"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/meta"
+	"github.com/timoth-y/kicksware-api/user-service/core/meta"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/service/jwt"
+	"github.com/timoth-y/kicksware-api/service-common/service/jwt"
 )
 
 const (

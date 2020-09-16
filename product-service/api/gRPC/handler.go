@@ -6,12 +6,12 @@ import (
 	"github.com/golang/glog"
 	"github.com/pkg/errors"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/api/gRPC/proto"
-	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/core/meta"
-	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/core/model"
-	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/core/service"
-	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/env"
-	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/usecase/business"
+	"github.com/timoth-y/kicksware-api/product-service/api/gRPC/proto"
+	"github.com/timoth-y/kicksware-api/product-service/core/meta"
+	"github.com/timoth-y/kicksware-api/product-service/core/model"
+	"github.com/timoth-y/kicksware-api/product-service/core/service"
+	"github.com/timoth-y/kicksware-api/product-service/env"
+	"github.com/timoth-y/kicksware-api/product-service/usecase/business"
 )
 
 //go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. common.proto

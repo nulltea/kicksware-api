@@ -1,8 +1,8 @@
 package business
 
 import (
-	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/repo"
-	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/service"
+	"github.com/timoth-y/kicksware-api/user-service/core/repo"
+	"github.com/timoth-y/kicksware-api/user-service/core/service"
 )
 
 type interactService struct {

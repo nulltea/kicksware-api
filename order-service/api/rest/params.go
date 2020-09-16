@@ -9,9 +9,9 @@ import (
 
 	"github.com/fatih/structs"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/core/meta"
-	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/core/model"
-	"github.com/timoth-y/kicksware-platform/middleware-service/order-service/usecase/business"
+	"github.com/timoth-y/kicksware-api/order-service/core/meta"
+	"github.com/timoth-y/kicksware-api/order-service/core/model"
+	"github.com/timoth-y/kicksware-api/order-service/usecase/business"
 )
 
 type params struct {

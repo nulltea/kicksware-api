@@ -1,4 +1,4 @@
-module github.com/timoth-y/kicksware-platform/middleware-service/service-common
+module github.com/timoth-y/kicksware-api/service-common
 
 go 1.14
 
@@ -10,7 +10,7 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/soheilhy/cmux v0.1.4
 	github.com/thoas/go-funk v0.6.0
-	github.com/timoth-y/kicksware-platform/middleware-service/user-service v0.0.0-20200807131113-a8928eed241c
+	github.com/timoth-y/kicksware-api/user-service v0.0.0-20200807131113-a8928eed241c
 	go.mongodb.org/mongo-driver v1.3.3
 	google.golang.org/grpc v1.30.0
 	google.golang.org/grpc/examples v0.0.0-20200731180010-8bec2f5d898f // indirect

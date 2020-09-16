@@ -1,8 +1,8 @@
 package repo
 
 import (
-	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/core/meta"
-	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/core/model"
+	"github.com/timoth-y/kicksware-api/beta-service/core/meta"
+	"github.com/timoth-y/kicksware-api/beta-service/core/model"
 )
 
 

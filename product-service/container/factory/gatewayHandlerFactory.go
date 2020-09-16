@@ -3,10 +3,10 @@ package factory
 import (
 	"github.com/go-chi/chi"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/api/gRPC"
-	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/api/rest"
-	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/core/service"
-	"github.com/timoth-y/kicksware-platform/middleware-service/product-service/env"
+	"github.com/timoth-y/kicksware-api/product-service/api/gRPC"
+	"github.com/timoth-y/kicksware-api/product-service/api/rest"
+	"github.com/timoth-y/kicksware-api/product-service/core/service"
+	"github.com/timoth-y/kicksware-api/product-service/env"
 )
 
 func ProvideRESTGatewayHandler(service service.SneakerProductService, auth service.AuthService, config env.ServiceConfig) *rest.Handler {

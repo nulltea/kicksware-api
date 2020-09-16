@@ -3,11 +3,11 @@ package grpc
 import (
 	"context"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/api/gRPC/proto"
-	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/core/meta"
-	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/core/model"
-	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/core/service"
-	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/env"
+	"github.com/timoth-y/kicksware-api/beta-service/api/gRPC/proto"
+	"github.com/timoth-y/kicksware-api/beta-service/core/meta"
+	"github.com/timoth-y/kicksware-api/beta-service/core/model"
+	"github.com/timoth-y/kicksware-api/beta-service/core/service"
+	"github.com/timoth-y/kicksware-api/beta-service/env"
 )
 
 //go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. common.proto

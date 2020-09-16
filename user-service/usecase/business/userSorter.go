@@ -4,7 +4,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/model"
+	"github.com/timoth-y/kicksware-api/user-service/core/model"
 )
 
 type UserSorter struct {

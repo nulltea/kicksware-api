@@ -35,9 +35,9 @@ ingress:
 volumes:
   - name: storage
     persistent:
-      claim: shared-storage
+      claim: storage
       storageClass: glusterfs
-      size: 1Gi
+      size: 25Gi
       accessModes:
         - ReadWriteMany
     mountPath: /root/storage

@@ -7,13 +7,13 @@ import (
 	_ "github.com/jackc/pgx/v4/stdlib"
 	"github.com/jmoiron/sqlx"
 	"github.com/pkg/errors"
-	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/util"
+	"github.com/timoth-y/kicksware-api/service-common/util"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/meta"
-	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/model"
-	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/core/repo"
-	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/env"
-	"github.com/timoth-y/kicksware-platform/middleware-service/reference-service/usecase/business"
+	"github.com/timoth-y/kicksware-api/reference-service/core/meta"
+	"github.com/timoth-y/kicksware-api/reference-service/core/model"
+	"github.com/timoth-y/kicksware-api/reference-service/core/repo"
+	"github.com/timoth-y/kicksware-api/reference-service/env"
+	"github.com/timoth-y/kicksware-api/reference-service/usecase/business"
 )
 
 type repository struct {

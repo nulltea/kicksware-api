@@ -13,15 +13,15 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/golang/glog"
 	"github.com/pkg/errors"
-	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/model"
+	"github.com/timoth-y/kicksware-api/user-service/core/model"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/reflection"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/core"
-	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/core/meta"
-	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/service/gRPC"
-	"github.com/timoth-y/kicksware-platform/middleware-service/service-common/service/jwt"
+	"github.com/timoth-y/kicksware-api/service-common/core"
+	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+	"github.com/timoth-y/kicksware-api/service-common/service/gRPC"
+	"github.com/timoth-y/kicksware-api/service-common/service/jwt"
 
 	"github.com/soheilhy/cmux"
 )

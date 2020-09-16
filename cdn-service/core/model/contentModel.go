@@ -3,7 +3,7 @@ package model
 import (
 	"io"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/cdn-service/core/meta"
+	"github.com/timoth-y/kicksware-api/cdn-service/core/meta"
 )
 
 type Content struct {

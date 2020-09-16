@@ -8,9 +8,9 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/model"
-	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/core/repo"
-	"github.com/timoth-y/kicksware-platform/middleware-service/user-service/env"
+	"github.com/timoth-y/kicksware-api/user-service/core/model"
+	"github.com/timoth-y/kicksware-api/user-service/core/repo"
+	"github.com/timoth-y/kicksware-api/user-service/env"
 )
 
 type remoteRepository struct {

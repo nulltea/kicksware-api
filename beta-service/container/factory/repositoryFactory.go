@@ -3,10 +3,10 @@ package factory
 import (
 	"log"
 
-	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/core/repo"
-	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/env"
-	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/usecase/storage/mongo"
-	"github.com/timoth-y/kicksware-platform/middleware-service/beta-service/usecase/storage/postgres"
+	"github.com/timoth-y/kicksware-api/beta-service/core/repo"
+	"github.com/timoth-y/kicksware-api/beta-service/env"
+	"github.com/timoth-y/kicksware-api/beta-service/usecase/storage/mongo"
+	"github.com/timoth-y/kicksware-api/beta-service/usecase/storage/postgres"
 )
 
 func ProvideRepository(config env.ServiceConfig) repo.BetaRepository {
