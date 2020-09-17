@@ -13,7 +13,7 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/golang/glog"
 	"github.com/pkg/errors"
-	// "github.com/timoth-y/kicksware-api/user-service/core/model"
+	"github.com/timoth-y/kicksware-api/user-service/core/model"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/reflection"
@@ -32,7 +32,7 @@ type instance struct {
 	REST *http.Server
 	GRPC *grpc.Server
 	TLS credentials.TransportCredentials
-	// Auth *gRPC.AuthServerInterceptor
+	Auth *gRPC.AuthServerInterceptor
 }
 
 func NewInstance(addr string) core.Server {
