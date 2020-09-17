@@ -1,4 +1,4 @@
-// package gRPC
+package gRPC
 //
 // import (
 // 	"context"
