@@ -22,7 +22,7 @@ type referencePipe struct {
 }
 
 func NewSneakerReferencePipe(config env.ServiceConfig) pipe.SneakerReferencePipe {
-	auth := gRPCSrv.NewAuthClientInterceptor(config.Common.InnerServiceFormat)
+	auth := gRPCSrv.NewAuthClientInterceptor(config.Common.InnerServiceFormat, config.Auth.TLSCertificate)
 	return &referencePipe{
 		client: newRemoteClient(config, auth),
 		auth: auth,
