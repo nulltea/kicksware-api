@@ -3,7 +3,7 @@ module github.com/timoth-y/kicksware-api/user-service
 go 1.14
 
 require (
-	github.com/Masterminds/squirrel v1.2.0
+	github.com/Masterminds/squirrel v1.4.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/fatih/structs v1.1.0
 	github.com/go-chi/chi v4.1.2+incompatible
@@ -18,7 +18,7 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/rs/xid v1.2.1
 	github.com/thoas/go-funk v0.7.0
-	github.com/timoth-y/kicksware-api/service-common v0.0.0-20200917003707-614a88b9cfc1
+	github.com/timoth-y/kicksware-api/service-common v0.0.0-20200917005139-98b85de071c8
 	github.com/vmihailenco/msgpack v3.3.3+incompatible
 	go.mongodb.org/mongo-driver v1.4.1
 	google.golang.org/grpc v1.32.0

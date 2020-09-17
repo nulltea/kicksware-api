@@ -35,6 +35,7 @@ github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
 github.com/Masterminds/squirrel v1.2.0 h1:K1NhbTO21BWG47IVR0OnIZuE0LZcXAYqywrC3Ko53KI=
 github.com/Masterminds/squirrel v1.2.0/go.mod h1:yaPeOnPG5ZRwL9oKdTsO/prlkPbXWZlRVMQ/gGlzIuA=
+github.com/Masterminds/squirrel v1.4.0/go.mod h1:yaPeOnPG5ZRwL9oKdTsO/prlkPbXWZlRVMQ/gGlzIuA=
 github.com/aws/aws-sdk-go v1.29.15/go.mod h1:1KvfttTE3SPKMpo8g2c6jL3ZKfXtFvKscTgahTma5Xg=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
 github.com/chzyer/logex v1.1.10/go.mod h1:+Ywpsq7O8HXn0nuIou7OrIPyXbp3wmkHB+jjWRnGsAI=
@@ -315,7 +316,10 @@ github.com/timoth-y/kicksware-api/service-common v0.0.0-20200818142045-c68220681
 github.com/timoth-y/kicksware-api/service-common v0.0.0-20200818142045-c68220681572/go.mod h1:uL5asZq+OROqIDAMY+7Xy8X/+MBTY1tOPkODURGUaxI=
 github.com/timoth-y/kicksware-api/service-common v0.0.0-20200917003707-614a88b9cfc1 h1:amhc/kQ6mxYQLhjlUs+F1bAUzmvJl/Q1e3yhy48HEGM=
 github.com/timoth-y/kicksware-api/service-common v0.0.0-20200917003707-614a88b9cfc1/go.mod h1:tCFTegF6f4p/b5lwMeKYUEsJFlgiPnEeev0KPEj0WTo=
+github.com/timoth-y/kicksware-api/service-common v0.0.0-20200917005139-98b85de071c8 h1:Xa09M7DapWFJDHuLwnnZCv0k6U8c5JCa1HUp9GMFjNE=
+github.com/timoth-y/kicksware-api/service-common v0.0.0-20200917005139-98b85de071c8/go.mod h1:9SnVqlhMyDs3PLKLQOhDQmXUeZ/ErA8RKwYPaOZKFbQ=
 github.com/timoth-y/kicksware-api/user-service v0.0.0-20200807131113-a8928eed241c/go.mod h1:asUKM9SLltlPE1SPVnvY+fT4/SeTP9K5kCwcuszWJQM=
+github.com/timoth-y/kicksware-api/user-service v0.0.0-20200917004439-e230029ec58b/go.mod h1:08/xwSHV+E4rUaUBBt9mIiQ5ae1M1OQS+zWmGxy6Ewc=
 github.com/timoth-y/kicksware-platform v0.0.0-20200807020027-413f102dbd89 h1:dRHlURZMKoQrTF/s0VPuM1KQnDYLwbZLUP1En+xXZ/E=
 github.com/timoth-y/kicksware-platform v0.0.0-20200807131113-a8928eed241c h1:7sVUt62O0HMkq5ObeDMbbR/qLzqJ6XAUBwMjMRfOfFA=
 github.com/timoth-y/kicksware-platform v0.0.0-20200807133030-5f847defdf0b h1:eLNRjZ66MvQqc0uL2EDy9J/i01fMjZficAPggih6Nmw=

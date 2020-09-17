@@ -41,6 +41,17 @@ ingress:
         - name: references-service
           port: 8080
           scheme: http
+    - host: api.kicksware.com
+      grpc: true
+      paths:
+        - /proto.ReferenceService
+      entrypoints:
+        - web
+        - websecure
+      services:
+        - name: references-service
+          port: 8080
+          scheme: h2c
 
 volumes: {}
 
