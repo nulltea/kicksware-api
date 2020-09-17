@@ -36,8 +36,8 @@ func newRemoteClient(config env.ServiceConfig, auth *gRPCSrv.AuthClientIntercept
 		),
 		grpc.WithUnaryInterceptor(auth.Unary()),
 	}
-	if config.Security.TLSCertificate.EnableTLS {
-		tls, err := gRPCSrv.LoadClientTLSCredentials(config.Security.TLSCertificate); if err != nil {
+	if config.Auth.TLSCertificate.EnableTLS {
+		tls, err := gRPCSrv.LoadClientTLSCredentials(config.Auth.TLSCertificate); if err != nil {
 			glog.Fatalln("cannot load TLS credentials: ", err)
 		}
 		opts = append(opts, grpc.WithTransportCredentials(tls))

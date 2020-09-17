@@ -17,7 +17,7 @@ require (
 	github.com/stretchr/testify v1.6.1 // indirect
 	github.com/thoas/go-funk v0.7.0
 	github.com/tidwall/pretty v1.0.2 // indirect
-	github.com/timoth-y/kicksware-api/user-service v0.0.0-20200917004439-e230029ec58b
+	github.com/timoth-y/kicksware-api/user-service v0.0.0-20200917011049-79140f0e7480
 	go.mongodb.org/mongo-driver v1.4.1
 	golang.org/x/net v0.0.0-20200904194848-62affa334b73 // indirect
 	golang.org/x/sys v0.0.0-20200916084744-dbad9cb7cb7a // indirect

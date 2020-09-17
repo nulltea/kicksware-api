@@ -7,8 +7,6 @@ commonConfig:
 securityConfig:
   tlsCertificate:
     enableTLS: false
-    certFile: certs/grpc/tls.crt
-    keyFile: certs/grpc/tls.key
 authConfig:
   publicKeyPath: keys/auth/public.key
 mongoConfig:
