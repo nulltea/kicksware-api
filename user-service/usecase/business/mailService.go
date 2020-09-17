@@ -8,6 +8,7 @@ import (
 	"net"
 	"net/smtp"
 
+	"github.com/golang/glog"
 	"github.com/pkg/errors"
 
 	"github.com/timoth-y/kicksware-api/user-service/core/service"
@@ -86,11 +87,26 @@ func (s *mailService) SendNotification(userID, notificationContent string) error
 }
 
 func (s *mailService) sendMail(subject string, msg string, to string) error {
-	client, err := mailClient(s.config); if err != nil {
+	if err := trySendMail(s.config, subject, msg, to); err != nil {
+		glog.Errorln(err)
+	} else {
+		return nil
+	}
+
+	if err := trySendMail(s.fallbackConfig, subject, msg, to);  err != nil {
+		glog.Errorln(err)
 		return err
 	}
 
-	if err := client.Mail(s.config.Address); err != nil {
+	return nil
+}
+
+func trySendMail(config env.MailConfig, subject string, msg string, to string) error {
+	client, err := mailClient(config); if err != nil {
+		return err
+	}
+
+	if err := client.Mail(config.Address); err != nil {
 		return err
 	}
 
@@ -102,7 +118,7 @@ func (s *mailService) sendMail(subject string, msg string, to string) error {
 		return err
 	}
 
-	body := formEmailRequestBody(subject, msg, s.config.Address, to)
+	body := formEmailRequestBody(subject, msg, config.Address, to)
 	_, err = w.Write(body); if err != nil {
 		return err
 	}
@@ -110,8 +126,6 @@ func (s *mailService) sendMail(subject string, msg string, to string) error {
 	err = w.Close(); if err != nil {
 		return err
 	}
-
-	client.Quit()
 	return nil
 }
 

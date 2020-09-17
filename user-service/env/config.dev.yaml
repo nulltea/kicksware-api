@@ -6,14 +6,14 @@ commonConfig:
   innerServiceFormat: http://%s:8080/%s/
 securityConfig:
   tlsCertificate:
-    enableTLS: true
+    enableTLS: false
     certFile: ../key/server.crt
     keyFile: ../key/server.key
 authConfig:
   issuerName: middleware/user-service
   tokenExpirationDelta: 18
   privateKeyPath: key/private.key
-  publicKeyPath: ../key/public.key.pub
+  publicKeyPath: ../keys/public.key.pub
 mailConfig:
   server: $MAIL_SERVER
   address: $MAIL_ADDRESS
