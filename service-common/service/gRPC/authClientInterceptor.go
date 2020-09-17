@@ -10,6 +10,8 @@ import (
 	"github.com/timoth-y/kicksware-api/user-service/core/meta"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
+
+	tlsMeta "github.com/timoth-y/kicksware-api/service-common/core/meta"
 )
 
 type AuthClientInterceptor struct {
@@ -18,16 +20,22 @@ type AuthClientInterceptor struct {
 	accessToken *meta.AuthToken
 }
 
-func NewAuthClientInterceptor(authEndpoint string) *AuthClientInterceptor {
+func NewAuthClientInterceptor(authEndpoint string, tls *tlsMeta.TLSCertificate) *AuthClientInterceptor {
 	return &AuthClientInterceptor{
 		endpoint: authEndpoint,
-		authClient: newAuthClient(authEndpoint),
+		authClient: newAuthClient(authEndpoint, tls),
 	}
 }
 
-func newAuthClient(serviceEndpoint string) proto.AuthServiceClient {
-	opts := []grpc.DialOption{
-		grpc.WithInsecure(),
+func newAuthClient(serviceEndpoint string, tlsCert *tlsMeta.TLSCertificate) proto.AuthServiceClient {
+	var opts []grpc.DialOption
+	if tlsCert != nil && tlsCert.EnableTLS{
+		tls, err := LoadClientTLSCredentials(tlsCert); if err != nil {
+			glog.Fatalln("cannot load TLS credentials: ", err)
+		}
+		opts = append(opts, grpc.WithTransportCredentials(tls))
+	} else {
+		opts = append(opts, grpc.WithInsecure())
 	}
 
 	conn, err := grpc.Dial(serviceEndpoint, opts...); if err != nil {
