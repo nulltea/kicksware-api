@@ -25,6 +25,8 @@ func restRoutes(rest *Handler) (r *chi.Mux) {
 	r.Get("/query", rest.Get)
 	r.Get("/", rest.Get)
 	r.Post("/query", rest.Get)
+	r.Get("/count", rest.Count)
+	r.Post("/count", rest.Count)
 	r.With(rest.Authorizer).Post("/", rest.Post)
 	r.With(rest.Authorizer).Put("/", rest.Put)
 	r.With(rest.Authorizer).Put("/{sneakerId}/images", rest.PutImages)

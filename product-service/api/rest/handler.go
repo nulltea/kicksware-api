@@ -7,6 +7,7 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/pkg/errors"
+	"github.com/timoth-y/kicksware-api/service-common/util"
 
 	"github.com/timoth-y/kicksware-api/product-service/core/meta"
 	"github.com/timoth-y/kicksware-api/product-service/core/model"
@@ -214,6 +215,38 @@ func (h *Handler) getRequestFiles(r *http.Request) (files map[string][]byte, err
 		}
 	}
 	return
+}
+
+func (h *Handler) Count(w http.ResponseWriter, r *http.Request) {
+	var count int
+	var err error
+	params := NewRequestParams(r)
+
+	if r.Method == http.MethodPost {
+		query, err := h.getRequestQuery(r)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		count, err = h.service.Count(query, params)
+	} else if r.Method == http.MethodGet {
+		query := r.URL.Query()
+		if query != nil && len(query) > 0 {
+			count, err = h.service.Count(util.ToQueryMap(query), params)
+		} else {
+			count, err = h.service.CountAll()
+		}
+	}
+
+	if err != nil {
+		if errors.Cause(err) == business.ErrProductNotFound {
+			h.setupResponse(w, 0, http.StatusOK)
+			return
+		}
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	h.setupResponse(w, count, http.StatusOK)
 }
 
 func (h *Handler) getRequestQueryBody(r *http.Request) (map[string]interface{}, error) {
