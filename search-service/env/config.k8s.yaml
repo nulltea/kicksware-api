@@ -2,7 +2,7 @@ commonConfig:
   host: 0.0.0.0:8080
   hostname: kicksware.com
   contentType: application/json
-  innerServiceFormat: api.kicksware.com:443
+  innerServiceFormat: rpc.kicksware.com:443
 securityConfig:
   tlsCertificate:
     enableTLS: false
