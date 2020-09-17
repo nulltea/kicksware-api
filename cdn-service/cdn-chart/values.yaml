@@ -36,6 +36,7 @@ volumes:
   - name: storage
     persistent:
       claim: storage
+      exists: true
       storageClass: glusterfs
       size: 25Gi
       accessModes:
