@@ -81,5 +81,6 @@ config:
   configMountPath: /root/env
 
 environment:
-  name: k8s
-  configPath: /root/env/config.yaml
+  ENV: k8s
+  CONFIG_PATH: env/config.yaml
+  GODEBUG: x509ignoreCN=0

@@ -17,6 +17,5 @@ metadata:
   labels:
   {{- include "chart.labels" . | nindent 4 }}
 data:
-  ENV: {{ .Values.environment.name }}
-  CONFIG_PATH: {{ .Values.environment.configPath }}
+  {{- toYaml .Values.environment | nindent 2 }}
 ---
