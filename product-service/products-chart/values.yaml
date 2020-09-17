@@ -41,7 +41,7 @@ ingress:
         - name: products-service
           port: 8080
           scheme: http
-    - host: api.kicksware.com
+    - host: rpc.kicksware.com
       grpc: true
       paths:
         - /proto.ProductService
