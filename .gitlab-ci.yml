@@ -32,6 +32,7 @@ api.build:
   except:
     changes:
       - "*.md"
+      - assets/**/*
   before_script:
     - docker version
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_TOKEN $CI_REGISTRY
@@ -50,6 +51,7 @@ api.test:
   except:
     changes:
       - "*.md"
+      - assets/**/*
   before_script:
     - printf "\e[32mTODO"
   script:
@@ -69,6 +71,7 @@ users.deploy.k8s:
   except:
     changes:
       - "*.md"
+      - assets/**/*
   before_script:
     - *common_before
     - kubectl create secret generic mail-auth -n api
@@ -90,6 +93,7 @@ references.deploy.k8s:
   except:
     changes:
       - "*.md"
+      - assets/**/*
   before_script:
     - *common_before
     - envsubst < reference-service/env/config.$ENV.yaml > config.yaml && kubectl create configmap references-service.config -n api
@@ -109,6 +113,7 @@ products.deploy.k8s:
   except:
     changes:
       - "*.md"
+      - assets/**/*
   before_script:
     - *common_before
     - envsubst < product-service/env/config.$ENV.yaml > config.yaml && kubectl create configmap products-service.config -n api
@@ -128,6 +133,7 @@ search.deploy.k8s:
   except:
     changes:
       - "*.md"
+      - assets/**/*
   before_script:
     - *common_before
     - envsubst < search-service/env/config.$ENV.yaml > config.yaml && kubectl create configmap search-service.config -n api
@@ -147,6 +153,7 @@ orders.deploy.k8s:
   except:
     changes:
       - "*.md"
+      - assets/**/*
   before_script:
     - *common_before
     - envsubst < order-service/env/config.$ENV.yaml > config.yaml && kubectl create configmap orders-service.config -n api
@@ -166,6 +173,7 @@ cdn.deploy.k8s:
   except:
     changes:
       - "*.md"
+      - assets/**/*
   before_script:
     - *common_before
     - envsubst < cdn-service/env/config.$ENV.yaml > config.yaml && kubectl create configmap cdn-service.config -n api
@@ -181,6 +189,10 @@ users.check.k8s:
   tags:
     - k8s
     - api
+  except:
+    changes:
+      - "*.md"
+      - assets/**/*
   before_script:
     - echo Waiting half a minute for service to properly start or fail... && sleep 30s
   script:
@@ -196,6 +208,10 @@ references.check.k8s:
   tags:
     - k8s
     - api
+  except:
+    changes:
+      - "*.md"
+      - assets/**/*
   before_script:
     - echo Waiting half a minute for service to properly start or fail... && sleep 30s
   script:
@@ -211,6 +227,10 @@ products.check.k8s:
   tags:
     - k8s
     - api
+  except:
+    changes:
+      - "*.md"
+      - assets/**/*
   before_script:
     - echo Waiting half a minute for service to properly start or fail... && sleep 30s
   script:
@@ -226,6 +246,10 @@ search.check.k8s:
   tags:
     - k8s
     - api
+  except:
+    changes:
+      - "*.md"
+      - assets/**/*
   before_script:
     - echo Waiting half a minute for service to properly start or fail... && sleep 30s
   script:
@@ -241,6 +265,10 @@ orders.check.k8s:
   tags:
     - k8s
     - api
+  except:
+    changes:
+      - "*.md"
+      - assets/**/*
   before_script:
     - echo Waiting half a minute for service to properly start or fail... && sleep 30s
   script:
@@ -256,6 +284,10 @@ cdn.check.k8s:
   tags:
     - k8s
     - api
+  except:
+    changes:
+      - "*.md"
+      - assets/**/*
   before_script:
     - echo Waiting half a minute for service to properly start or fail... && sleep 30s
   script:
