@@ -1,0 +1,1241 @@
+openapi: 3.0.0
+info:
+  title: Kicksware API
+  version: "1.0"
+servers:
+  - description: Kicksware API endpoint
+    url: https://api.kicksware.com
+  - description: Kicksware CDN Endpoint
+    url: https://cdn.kicksware.com
+tags:
+  - name: users
+    description: Users
+  - name: auth
+    description: Auth
+paths:
+  /users:
+    get:
+      tags:
+        - users
+      summary: Get all users
+      description: ""
+      operationId: users
+      parameters: []
+      deprecated: false
+      responses:
+        200:
+          description: list of all users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      tags:
+        - users
+      summary: Add new user
+      description: ""
+      operationId: add-new-user
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      deprecated: false
+      responses:
+        200:
+          description: added user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    put:
+      tags:
+        - users
+      summary: Update user
+      description: ""
+      operationId: update-user
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      deprecated: false
+      responses:
+        200:
+          description: updated user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /users/{userID}:
+    get:
+      tags:
+        - users
+      summary: Get user
+      description: ""
+      operationId: get-user
+      parameters:
+        - name: userID
+          in: path
+          description: br1bag6sm833ai0sj00g
+          required: true
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    delete:
+      tags:
+        - users
+      summary: Delete user
+      description: ""
+      operationId: delete-user
+      parameters:
+        - name: userID
+          in: path
+          description: ""
+          required: true
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: user deleted success
+  /users/query:
+    post:
+      tags:
+        - users
+      summary: Get queried users
+      description: ""
+      operationId: get-queried-users
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestQuery'
+      deprecated: false
+      responses:
+        200:
+          description: list of queried users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+  /auth/sign-up:
+    post:
+      tags:
+        - auth
+      summary: Sign Up
+      description: ""
+      operationId: sign-up
+      parameters: [ ]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      deprecated: false
+      security: [ ]
+      responses:
+        200:
+          description: token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthToken'
+  /auth/login:
+    post:
+      tags:
+        - auth
+      summary: Login
+      description: ""
+      operationId: login
+      parameters: [ ]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      deprecated: false
+      responses:
+        200:
+          description: token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthToken'
+      security: [ ]
+  /auth/remote:
+    post:
+      tags:
+        - auth
+      summary: Remote (OAuth 2.0)
+      description: ""
+      operationId: remote-oauth-20
+      parameters: [ ]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      deprecated: false
+      responses:
+        200:
+          description: token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthToken'
+      security: [ ]
+  /auth/guest:
+    get:
+      tags:
+        - auth
+      summary: Guest
+      description: ""
+      operationId: guest
+      parameters: [ ]
+      deprecated: false
+      responses:
+        200:
+          description: token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthToken'
+      security: [ ]
+  /auth/token-refresh:
+    get:
+      tags:
+        - auth
+      summary: Refresh token
+      description: ""
+      operationId: refresh-token
+      parameters:
+        - name: token
+          in: query
+          description: ""
+          required: false
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthToken'
+      security: [ ]
+  /auth/logout:
+    get:
+      tags:
+        - auth
+      summary: Logout
+      description: ""
+      operationId: logout
+      parameters:
+        - name: token
+          in: query
+          description: ""
+          required: false
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: Logged out
+  /mail/confirm:
+    get:
+      tags:
+        - mail
+      summary: Send confirm email
+      description: ""
+      operationId: send-confirm-email
+      parameters:
+        - name: userID
+          in: query
+          description: ""
+          required: false
+          schema:
+            type: string
+        - name: callbackURL
+          in: query
+          description: ""
+          required: false
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: Send success
+  /mail/password-reset:
+    get:
+      tags:
+        - mail
+      summary: Send reset password
+      description: ""
+      operationId: send-reset-password
+      parameters:
+        - name: userID
+          in: query
+          description: ""
+          required: false
+          schema:
+            type: string
+        - name: callbackURL
+          in: query
+          description: ""
+          required: false
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: Send success
+  /mail/notify:
+    get:
+      tags:
+        - mail
+      summary: Send notification
+      description: ""
+      operationId: send-notification
+      parameters:
+        - name: userID
+          in: query
+          description: ""
+          required: false
+          schema:
+            type: string
+        - name: content
+          in: query
+          description: ""
+          required: false
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: Send success
+  /interact/like/{entityID}:
+    get:
+      tags:
+        - interact
+      summary: Like
+      description: ""
+      operationId: like
+      parameters:
+        - name: entityID
+          in: path
+          description: ""
+          required: true
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: Like success
+  /interact/unlike/{entityID}:
+    get:
+      tags:
+        - interact
+      summary: Unlike
+      description: ""
+      operationId: unlike
+      parameters:
+        - name: entityID
+          in: path
+          description: ""
+          required: true
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: Unlike success
+  /references/sneakers:
+    get:
+      tags:
+        - references
+      summary: Get all sneakers
+      description: ""
+      operationId: get-all-sneakers
+      parameters: []
+      deprecated: false
+      responses:
+        200:
+          description: List of all sneakers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SneakerReference'
+    post:
+      tags:
+        - references
+      summary: Add sneaker reference
+      description: ""
+      operationId: add-sneaker-reference
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SneakerReference'
+      deprecated: false
+      responses:
+        200:
+          description: Added sneaker reference
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SneakerReference'
+    patch:
+      tags:
+        - references
+      summary: Update sneaker reference
+      description: ""
+      operationId: update-sneaker-reference
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SneakerReference'
+      deprecated: false
+      responses:
+        200:
+          description: Updated snaeker reference
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SneakerReference'
+  /references/sneakers/{referenceId}:
+    get:
+      tags:
+        - references
+      summary: Get specific sneakers
+      description: ""
+      operationId: get-specific-sneakers
+      parameters:
+        - name: referenceId
+          in: path
+          description: ""
+          required: true
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: One snaeker reference
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SneakerReference'
+  /references/sneakers/query:
+    post:
+      tags:
+        - references
+      summary: Get queried sneakers
+      description: ""
+      operationId: get-queried-sneakers
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestQuery'
+      deprecated: false
+      responses:
+        200:
+          description: List of all sneakers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SneakerReference'
+  /references/sneakers/multiply:
+    post:
+      tags:
+        - references
+      summary: Add multiply sneaker references
+      description: ""
+      operationId: add-multiply-sneaker-references
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/SneakerReference'
+      deprecated: false
+      responses:
+        200:
+          description: list of all sneakers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SneakerReference'
+  /references/sneakers/count:
+    get:
+      tags:
+        - references
+      summary: Count all sneakers
+      description: ""
+      operationId: count-all-sneakers
+      parameters: []
+      deprecated: false
+      responses:
+        200:
+          description: count of all sneakers
+          content:
+            text/plain:
+              schema:
+                type: number
+    post:
+      tags:
+        - references
+      summary: Count queried sneakers
+      description: ""
+      operationId: count-queried-sneakers
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestQuery'
+      deprecated: false
+      responses:
+        200:
+          description: count of queried sneakers
+          content:
+            text/plain:
+              schema:
+                type: number
+  /products/sneakers:
+    get:
+      tags:
+        - products
+      summary: Get all products
+      description: ""
+      operationId: get-all-products
+      parameters: []
+      deprecated: false
+      responses:
+        200:
+          description: List of all sneaker products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SneakerProduct'
+    post:
+      tags:
+        - products
+      summary: Add new product
+      description: ""
+      operationId: add-new-product
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SneakerProduct'
+      deprecated: false
+      responses:
+        200:
+          description: Added sneaker product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SneakerProduct'
+    patch:
+      tags:
+        - products
+      summary: Update product
+      description: ""
+      operationId: update-product
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SneakerProduct'
+      deprecated: false
+      responses:
+        200:
+          description: Updated sneaker product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SneakerProduct'
+  /products/sneakers/{sneakerId}:
+    get:
+      tags:
+        - products
+      summary: Get specific product
+      description: ""
+      operationId: get-specific-product
+      parameters:
+        - name: sneakerId
+          in: path
+          description: ""
+          required: true
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: Specific sneaker product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SneakerProduct'
+  /products/sneakers/query:
+    post:
+      tags:
+        - products
+      summary: Get queried products
+      description: ""
+      operationId: get-queried-products
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestQuery'
+      deprecated: false
+      responses:
+        200:
+          description: List of queried sneaker products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SneakerProduct'
+  /products/sneakers/{sneakerID}:
+    delete:
+      tags:
+        - products
+      summary: Delete product
+      description: ""
+      operationId: delete-product
+      parameters:
+        - name: sneakerID
+          in: path
+          description: ""
+          required: true
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: Delete success
+  /products/sneakers/{sneakerId}/images:
+    put:
+      tags:
+        - products
+      summary: Add product images
+      description: ""
+      operationId: add-product-images
+      parameters:
+        - name: sneakerId
+          in: path
+          description: ""
+          required: true
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: Add images success
+  /products/sneakers/count:
+    get:
+      tags:
+        - products
+      summary: Count all products
+      description: ""
+      operationId: count-all-products
+      parameters: []
+      deprecated: false
+      responses:
+        200:
+          description: count of all sneaker products
+          content:
+            text/plain:
+              schema:
+                type: number
+    post:
+      tags:
+        - products
+      summary: Count queried products
+      description: ""
+      operationId: count-queried-products
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SneakerProduct'
+      deprecated: false
+      responses:
+        200:
+          description: count of all sneaker products
+          content:
+            text/plain:
+              schema:
+                type: number
+  /search/reference:
+    get:
+      tags:
+        - search
+      summary: Search sneakers
+      description: ""
+      operationId: search-snekaers
+      parameters:
+        - name: query
+          in: query
+          description: ""
+          required: false
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: List of all sneakers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SneakerReference'
+    post:
+      tags:
+        - search
+      summary: Sync multiply records with Elasticsearch
+      description: ""
+      operationId: sync-queried-records-with-elasticsearch
+      parameters:
+        - name: referenceId
+          in: query
+          description: Multiply
+          required: true
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: Sync success
+  /search/reference/by/{field}:
+    get:
+      tags:
+        - search
+      summary: Search sneakers by property
+      description: ""
+      operationId: search-sneakers-by-property
+      parameters:
+        - name: field
+          in: path
+          description: ""
+          required: true
+          schema:
+            type: string
+        - name: query
+          in: query
+          description: ""
+          required: false
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: List of all sneakers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SneakerReference'
+  /search/reference/sku/{sku}:
+    get:
+      tags:
+        - search
+      summary: Search sneakers by SKU
+      description: ""
+      operationId: search-sneakers-by-sku
+      parameters:
+        - name: sku
+          in: path
+          description: ""
+          required: true
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: List of all sneakers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SneakerReference'
+  /search/reference/brand/{brand}:
+    get:
+      tags:
+        - search
+      summary: Search sneakers by brand
+      description: ""
+      operationId: search-sneakers-by-brand
+      parameters:
+        - name: brand
+          in: path
+          description: ""
+          required: true
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: List of all sneakers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SneakerReference'
+  /search/reference/model/{model}:
+    get:
+      tags:
+        - search
+      summary: Search sneakers by model
+      description: ""
+      operationId: search-sneakers-by-model
+      parameters:
+        - name: model
+          in: path
+          description: ""
+          required: true
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: List of all sneakers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SneakerReference'
+  /search/reference/{referenceId}:
+    post:
+      tags:
+        - search
+      summary: Sync one record with Elasticsearch
+      description: ""
+      operationId: sync-one-record-with-elasticsearch
+      parameters:
+        - name: referenceId
+          in: path
+          description: ""
+          required: true
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: List of all sneakers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SneakerReference'
+  /search/reference/all:
+    post:
+      tags:
+        - search
+      summary: Sync all records with Elasticsearch
+      description: ""
+      operationId: sync-all-records-with-elasticsearch
+      parameters: []
+      deprecated: false
+      responses:
+        200:
+          description: Sync success
+  /search/reference/query:
+    post:
+      tags:
+        - search
+      summary: Sync queried records with Elasticsearch
+      description: ""
+      operationId: sync-queried-records-with-elasticsearch-1
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestQuery'
+      deprecated: false
+      responses:
+        200:
+          description: Sync success
+  /orders:
+    get:
+      tags:
+        - orders
+      summary: Get all orders
+      description: ""
+      operationId: get-all-orders
+      parameters: []
+      deprecated: false
+      responses:
+        200:
+          description: List of all orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+    post:
+      tags:
+        - orders
+      summary: Add new order
+      description: ""
+      operationId: add-new-order
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      deprecated: false
+      responses:
+        200:
+          description: Added order
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+    patch:
+      tags:
+        - orders
+      summary: Update order
+      description: ""
+      operationId: update-order
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      deprecated: false
+      responses:
+        200:
+          description: Updated orders
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+  /orders/{orderID}:
+    get:
+      tags:
+        - orders
+      summary: Get specific order
+      description: ""
+      operationId: get-specific-order
+      parameters:
+        - name: orderID
+          in: path
+          description: ""
+          required: true
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: Specific order
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+  /orders/query:
+    post:
+      tags:
+        - orders
+      summary: Get queried orders
+      description: ""
+      operationId: get-queried-orders
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestQuery'
+      deprecated: false
+      responses:
+        200:
+          description: List of queried orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+  /orders/count:
+    get:
+      tags:
+        - orders
+      summary: Count all orders
+      description: ""
+      operationId: count-all-orders
+      parameters: []
+      deprecated: false
+      responses:
+        200:
+          description: count of all orders
+          content:
+            text/plain:
+              schema:
+                type: number
+    post:
+      tags:
+        - orders
+      summary: Count queried orders
+      description: ""
+      operationId: count-queried-orders
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestQuery'
+      deprecated: false
+      responses:
+        200:
+          description: count of queried orders
+          content:
+            text/plain:
+              schema:
+                type: number
+  /health/{serviceID}/live:
+    get:
+      tags:
+        - health
+      summary: Check liveness
+      description: ""
+      operationId: check-liveness
+      parameters:
+        - name: serviceID
+          in: path
+          description: ""
+          required: true
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: Live
+  /health/{serviceID}/ready:
+    get:
+      tags:
+        - health
+      summary: Check readiness
+      description: ""
+      operationId: check-readiness
+      parameters:
+        - name: serviceID
+          in: path
+          description: ""
+          required: true
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: Ready
+  /:
+    servers: &cdn
+      - description: Kicksware CDN Endpoint
+        url: https://cdn.kicksware.com
+    post:
+      tags:
+        - cdn
+      summary: Upload content
+      description: ""
+      operationId: upload-content
+      parameters: [ ]
+      requestBody:
+        content:
+          image/png:
+            schema:
+              type: string
+              format: binary
+      deprecated: false
+      responses:
+        200:
+          description: Success
+  /{collection}/{filename}:
+    servers: *cdn
+    get:
+      tags:
+        - cdn
+      summary: Provide original image
+      description: ''
+      operationId: provide-original-image
+      parameters:
+        - name: collection
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: string
+        - name: filename
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: Image in PNG format
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+  /crop/{collection}/{filename}:
+    servers: *cdn
+    get:
+      tags:
+        - cdn
+      summary: Provide cropped image
+      description: ""
+      operationId: provide-cropped-image
+      parameters:
+        - name: collection
+          in: path
+          description: ""
+          required: true
+          schema:
+            type: string
+        - name: filename
+          in: path
+          description: ""
+          required: true
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: Image in PNG format
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+  /resize/{collection}/{filename}:
+    servers: *cdn
+    get:
+      tags:
+        - cdn
+      summary: Provide resized image
+      description: ""
+      operationId: provide-resized-image
+      parameters:
+        - name: collection
+          in: path
+          description: ""
+          required: true
+          schema:
+            type: string
+        - name: filename
+          in: path
+          description: ""
+          required: true
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: Image in PNG format
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+  /thumbnail/{collection}/{filename}:
+    servers: *cdn
+    get:
+      tags:
+        - cdn
+      summary: Provide thumbnail
+      description: ""
+      operationId: provide-thumbnail
+      parameters:
+        - name: collection
+          in: path
+          description: ""
+          required: true
+          schema:
+            type: string
+        - name: filename
+          in: path
+          description: ""
+          required: true
+          schema:
+            type: string
+      deprecated: false
+      responses:
+        200:
+          description: Image in PNG format
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+
+components:
+  securitySchemes:
+    jwt:
+      type: apiKey
+      in: query
+      name: Authorization
+      x-bearer-format: bearer
+  schemas:
+    RequestQuery:
+      type: object
+    User:
+      type: object
+    AuthToken:
+      type: object
+    SneakerReference:
+      type: object
+    SneakerProduct:
+      type: object
+    Order:
+      type: object
+security:
+  - jwt: []
