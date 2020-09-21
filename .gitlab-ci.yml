@@ -189,10 +189,6 @@ users.check.k8s:
   tags:
     - k8s
     - api
-  except:
-    changes:
-      - "*.md"
-      - assets/**/*
   before_script:
     - echo Waiting half a minute for service to properly start or fail... && sleep 30s
   script:
@@ -208,10 +204,6 @@ references.check.k8s:
   tags:
     - k8s
     - api
-  except:
-    changes:
-      - "*.md"
-      - assets/**/*
   before_script:
     - echo Waiting half a minute for service to properly start or fail... && sleep 30s
   script:
@@ -227,10 +219,6 @@ products.check.k8s:
   tags:
     - k8s
     - api
-  except:
-    changes:
-      - "*.md"
-      - assets/**/*
   before_script:
     - echo Waiting half a minute for service to properly start or fail... && sleep 30s
   script:
@@ -246,10 +234,6 @@ search.check.k8s:
   tags:
     - k8s
     - api
-  except:
-    changes:
-      - "*.md"
-      - assets/**/*
   before_script:
     - echo Waiting half a minute for service to properly start or fail... && sleep 30s
   script:
@@ -265,10 +249,6 @@ orders.check.k8s:
   tags:
     - k8s
     - api
-  except:
-    changes:
-      - "*.md"
-      - assets/**/*
   before_script:
     - echo Waiting half a minute for service to properly start or fail... && sleep 30s
   script:
@@ -284,10 +264,6 @@ cdn.check.k8s:
   tags:
     - k8s
     - api
-  except:
-    changes:
-      - "*.md"
-      - assets/**/*
   before_script:
     - echo Waiting half a minute for service to properly start or fail... && sleep 30s
   script:
