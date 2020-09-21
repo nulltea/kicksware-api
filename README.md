@@ -27,7 +27,7 @@ Microservice architecture based sneaker resale web platform application
 [Website badge]: https://img.shields.io/website?label=Visit%20website&down_message=unavailable&up_color=teal&up_message=kicksware.com%20%7C%20online&url=https%3A%2F%2Fkicksware.com
 [golang badge]: https://img.shields.io/badge/Code-Golang-informational?style=flat&logo=go&logoColor=white&color=6AD7E5
 [commit activity badge]: https://img.shields.io/github/commit-activity/m/timoth-y/kicksware-api?label=Commit%20activity&color=teal
-[repo commit activity]: https://github.com/timoth-y/kicksware-api/commit-activity
+[repo commit activity]: https://github.com/timoth-y/kicksware-api/graphs/commit-activity
 [lines counter]: https://img.shields.io/tokei/lines/github/timoth-y/kicksware-api?color=teal&label=Lines%20count
 [license badge]: https://img.shields.io/badge/License-AGPL%20v3-blue.svg?color=teal
 [architecture badge]: https://img.shields.io/badge/Architecture-Microservices-informational?style=flat&logo=opslevel&logoColor=white&color=teal
