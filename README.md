@@ -35,7 +35,7 @@ All API's endpoints are divided into 10 base resources which mostly correspond t
 | search-service     | api.kicksware.com | /search                         |
 | orders-service     | api.kicksware.com | /orders                         |
 | cdn-service        | cdn.kicksware.com | /                               |
-| \*                 | \*.kicksware.com   | /health                        |
+| \*                 | \*.kicksware.com  | /health                         |
 
 RESTful API uses `api.kicksware.com` subdomain as it's base server URL.
 
@@ -65,6 +65,12 @@ gRPC API logical division is also based on source microservice entries as follow
 | orders-service     | rpc.kicksware.com | /proto.OrdersService                                                               |
 | cdn-service        | cdn.kicksware.com | /proto.CDNService                                                                  |
 
+## Authentication
+
+[JSON Web Token (JWT)][jwt auth] is used to authenticate and authorize all REST requests.
+
+For accessing gRPC based API both secure TLS connection and [token interceptors][grpc interceptor] are required.
+
 ## Architecture
 
 As was mentioned earlier Kicksware API design is based completely on _[**microservice architecture**][microservice article] pattern_.
@@ -79,17 +85,50 @@ As for this particular project main goal was to reverce enginier evaluating proc
 
 While microservice architecture divide entire system on small, independent services, it's important for code to stay organized and clean even in scale of one microservice.
 
-For this purpose Kicksware design adopts [uncle Bob's][uncle Bob] [Clean Architecture][clean architecture] - another greate architecture pattern that separates the design elements into ring levels and it's basic rule is that code dependencies can only come from the outer levels inward, so the further in you go, the higher level the software becomes. Simply put, the code on the inner layers can have no knowledge of the code on the outer layers.
+For this purpose Kicksware design adopts _[uncle Bob's][uncle Bob] [**Clean Architecture**][clean architecture]_ - another greate architecture pattern that separates the design elements into ring levels and it's basic rule is that code dependencies can only come from the outer levels inward, so the further in you go, the higher level the software becomes. Simply put, the code on the inner layers can have no knowledge of the code on the outer layers.
 
 You may have seen diagrams like the following, but this one, in particular, is Kicksware custom API microservice Clean Architecture representational chart:
 
 ![Clean architecture chart][clean architecture chart]
 
-## Authentication
+## Requirements
 
-[JSON Web Token (JWT)][jwt auth] is used to authenticate and authorize all REST requests.
+API microservice registry should be deployed after [Gateway][gateway repo] and [Tool Stack][tool-stack repo] projects. The reason for this is DB and Elasticsearch dependencies from [Tool Stack][tool-stack repo] project and Traefik Proxy from [Gateway][gateway repo] project to route outer traffic to services.
 
-For accessing gRPC based API both secure TLS connection and [token interceptors][grpc interceptor] are required.
+## Deployment
+
+Kicksware project can be deployed using following methods:
+
+1. **Docker Compose file**
+
+   This method require single dedicated server with installed both [`docker`][docker-compose] and [`docker-compose`][docker-compose] utilities.
+
+   Compose [configuration file][compose config] can be found in root of the project. This file already contains setting for reverse proxy routing and load balancing.
+
+   Gitlab CI deployment pipeline [configuration file][ci compose config] for compose method can be found in `.gitlab` directory.
+
+2. **Kubernetes Helm charts**
+
+   Deployment to Kubernetes cluster is the default and desired method.
+
+   For more flexible and easier deployment [Helm package manager][helm] is used. It provides a simple, yet elegant way to write pre-configured, reusable Kubernetes resources configuration using YAML and Go Templates (or Lua scripts). Helm packages are called `charts`.
+
+   Each microservice has it's own chart in the root of it's directory:
+
+   | Service            | Helm chart                                                       |
+   |--------------------|------------------------------------------------------------------|
+   | users-service      | [~/user-service/users-chart][users-service chart]                |
+   | references-service | [~/reference-service/references-chart][references-service chart] |
+   | products-service   | [~/product-service/products-chart][products-service chart]       |
+   | search-service     | [~/search-service/search-chart][search-service chart]            |
+   | orders-service     | [~/order-service/orders-chart][orders-service chart]             |
+   | cdn-service        | [~/cdn-service/cdn-chart][cdn-service chart]                     |
+
+   Helm chart configuration already contains configuration of [Traefik IngressRoute][ingress route] [Custom Resource Definition (CRD)][k8s crd] for reverse proxy routing and load balancing.
+
+   Gitlab CI deployment pipeline [configuration file][ci k8s config] for K8s method can be found in the root of the project.
+
+## Wrap Up
 
 ## License
 
@@ -126,5 +165,26 @@ Licensed under the [GNU AGPLv3][license file].
 [uncle Bob]: http://cleancoder.com/products
 [clean architecture]: https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 [clean architecture chart]: https://raw.githubusercontent.com/timoth-y/kicksware-api/master/assets/clean-archtecture.png
+
+[gateway repo]: https://github.com/timoth-y/kicksware-gateway
+[tool-stack repo]: https://github.com/timoth-y/kicksware-tool-stack
+
+[docker-desktop]: https://docs.docker.com/desktop/
+[docker-compose]: https://docs.docker.com/compose/
+[compose config]: https://github.com/timoth-y/kicksware-api/blob/master/docker-compose.yml
+[ci compose config]: https://github.com/timoth-y/kicksware-api/blob/master/.gitlab/.gitlab-ci.compose.yml
+[ci k8s config]: https://github.com/timoth-y/kicksware-api/blob/master/.gitlab-ci.yml
+[k8s crd]: https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/
+[ingress route]: https://docs.traefik.io/routing/providers/kubernetes-crd/
+
+[helm]: https://helm.sh/
+[users-service chart]: https://github.com/timoth-y/kicksware-api/tree/master/user-service/users-chart
+[references-service chart]: https://github.com/timoth-y/kicksware-api/tree/master/reference-service/references-chart
+[products-service chart]: https://github.com/timoth-y/kicksware-api/tree/master/product-service/products-chart
+[search-service chart]: https://github.com/timoth-y/kicksware-api/tree/master/search-service/search-chart
+[orders-service chart]: https://github.com/timoth-y/kicksware-api/tree/master/order-service/orders-chart
+[cdn-service chart]: https://github.com/timoth-y/kicksware-api/tree/master/cdn-service/cdn-chart
+
+
 
 [license file]: https://github.com/timoth-y/kicksware-platform/blob/master/LICENSE
