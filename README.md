@@ -50,7 +50,7 @@ The full API specification is available on [**Swagger**][swagger] and [**Readme.
 
 As it is cloud-native and microservice-based application, Kicksware also provides RPC API using [gRPC framework][grpc] and [Protocol Buffers][protobuf] language.
 
-Like many RPC systems, gRPC is based on the concept of defining a service in terms of functions (methods) that can be called remotely. This approach especially useful for distributed loose-coupled systems, as it provides a mechanism to write API specification ones as a set of `.proto` files and then generate API implementation on any language.
+Like many RPC systems, gRPC is based on the concept of defining a service in terms of functions (methods) that can be called remotely. This approach especially useful for distributed, loose-coupled systems, as it provides a mechanism to write API specification ones as a set of `.proto` files and then generate API implementation on any language.
 
 All `.proto` specification files are available [here][proto files].
 
@@ -109,7 +109,7 @@ Kicksware project can be deployed using following methods:
 
 2. **Kubernetes Helm charts**
 
-   Deployment to Kubernetes cluster is the default and desired method.
+   Deployment to Kubernetes cluster is the default and desired way.
 
    For more flexible and easier deployment [Helm package manager][helm] is used. It provides a simple, yet elegant way to write pre-configured, reusable Kubernetes resources configuration using YAML and Go Templates (or Lua scripts). Helm packages are called `charts`.
 
@@ -129,6 +129,14 @@ Kicksware project can be deployed using following methods:
    Gitlab CI deployment pipeline [configuration file][ci k8s config] for K8s method can be found in the root of the project.
 
 ## Wrap Up
+
+Kicksware API is the accumulation of Kickswares business logic in form of distributed, atomically granulated stateless web-services, where each responsible only for its entities, use cases, and API endpoints.
+
+It exposes access to the data and its functionality as a set of both RESTfull endpoints and gRPC remote procedures.
+
+There are two options for performing Kicksware API deployment. To ensure top performance with longer uptime and lesser lateness while having effective and automated control on scalability Kicksware utilizes Kubernetes cluster with minimum of 3 basic spec nodes and 2 more for potential cluster autoscaling.
+
+Alternative and in fact cheaper and easier way to achieve sufficient results that can be performed with just one VPS server and docker-compose utility. However, such temporary savings now may offset by the costs of vertical scaling in the future when demand rises.
 
 ## License
 
