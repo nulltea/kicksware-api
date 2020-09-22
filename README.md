@@ -67,6 +67,24 @@ gRPC API logical division is also based on source microservice entries as follow
 
 ## Architecture
 
+As was mentioned earlier Kicksware API design is based completely on _[**microservice architecture**][microservice article] pattern_.
+
+Like any other, this approach has its own pros and cons. The common right way to decide whether a specific architecture is suited for a specific system or not is by using what's calls [architecture trade-off analysis method (ATAM)][atam wiki]. Basically this method compares software architectures relative to quality attribute goals and helps expose architectural risks that potentially inhibit the achievement of an organization’s business goals.
+
+When evaluating a microservice architecture style, it is important to understand that this approach is generally harder to implement, maintain, and test and requires more staff, money, and resources, but as a trade-off microservices provides one the most effective method of Horizontal scaling. And as a bonus you'll get higher flexibility as each new web-service can be written on any language and using any technology as long as it has some kind of communication mechanism (API).
+
+As for this particular project main goal was to reverce enginier evaluating proccess and build the system that would be the best possible fit for approach of microservices.
+
+## Internal design
+
+While microservice architecture divide entire system on small, independent services, it's important for code to stay organized and clean even in scale of one microservice.
+
+For this purpose Kicksware design adopts [uncle Bob's][uncle Bob] [Clean Architecture][clean architecture] - another greate architecture pattern that separates the design elements into ring levels and it's basic rule is that code dependencies can only come from the outer levels inward, so the further in you go, the higher level the software becomes. Simply put, the code on the inner layers can have no knowledge of the code on the outer layers.
+
+You may have seen diagrams like the following, but this one, in particular, is Kicksware custom API microservice Clean Architecture representational chart:
+
+![Clean architecture chart][clean architecture chart]
+
 ## Authentication
 
 [JSON Web Token (JWT)][jwt auth] is used to authenticate and authorize all REST requests.
@@ -103,5 +121,10 @@ Licensed under the [GNU AGPLv3][license file].
 [grpc]: https://grpc.io
 [protobuf]: https://developers.google.com/protocol-buffers
 [proto files]: https://github.com/timoth-y/kicksware-api/tree/master/service-protos
+
+[atam wiki]: https://en.wikipedia.org/wiki/Architecture_tradeoff_analysis_method
+[uncle Bob]: http://cleancoder.com/products
+[clean architecture]: https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
+[clean architecture chart]: https://raw.githubusercontent.com/timoth-y/kicksware-api/master/assets/clean-archtecture.png
 
 [license file]: https://github.com/timoth-y/kicksware-platform/blob/master/LICENSE
