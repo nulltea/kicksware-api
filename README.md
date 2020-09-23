@@ -7,19 +7,19 @@
 </p>
 
 [![golang badge]](https://golang.org)&nbsp;
-[![lines][lines counter]](https://github.com/timoth-y/kicksware-api)&nbsp;
-[![github commit activity][commit activity badge]][repo commit activity]&nbsp;
+[![lines counter]](https://github.com/timoth-y/kicksware-api)&nbsp;
+[![commit activity badge]][repo commit activity]&nbsp;
 [![kubernetes badge]](https://kubernetes.io)&nbsp;
 [![architecture badge]][microservice article]&nbsp;
 [![license badge]](https://www.gnu.org/licenses/agpl-3.0)
 
 [![gitlab badge]](https://ci.kicksware.com/kicksware/kicksware-api)&nbsp;
 [![api pipeline]](https://ci.kicksware.com/kicksware/api/-/commits/master)&nbsp;
-[![maintainability][maintainability badge]][maintainability source]
+[![maintainability badge]][maintainability source]
 
 ## Overview
 
-**Kicksware API** provides both RESTful and gRPC interfaces to deliver access, control, and management of the Kicksware sneaker resale platform.
+_**Kicksware API**_ provides both RESTful and gRPC interfaces to deliver access, control, and management of the Kicksware sneaker resale platform.
 
 ## Endpoints
 
@@ -79,7 +79,7 @@ Like any other, this approach has its own pros and cons. The common right way to
 
 When evaluating a microservice architecture style, it is important to understand that this approach is generally harder to implement, maintain, and test and requires more staff, money, and resources, but as a trade-off microservices provides one the most effective method of Horizontal scaling. And as a bonus you'll get higher flexibility as each new web-service can be written on any language and using any technology as long as it has some kind of communication mechanism (API).
 
-As for this particular project main goal was to reverce enginier evaluating proccess and build the system that would be the best possible fit for approach of microservices.
+As for this particular project main goal was to reverce enginier evaluating proccess and build the system that would be the best possible fit for MSA.
 
 ## Internal design
 
@@ -130,7 +130,7 @@ Kicksware project can be deployed using following methods:
 
 ## Wrap Up
 
-Kicksware API is the accumulation of Kickswares business logic in form of distributed, atomically granulated stateless web-services, where each responsible only for its entities, use cases, and API endpoints.
+**Kicksware API** is the accumulation of Kickswares business logic in form of distributed, atomically granulated stateless web-services, where each responsible only for its entities, use cases, API endpoints.
 
 It exposes access to the data and its functionality as a set of both RESTfull endpoints and gRPC remote procedures.
 
@@ -142,7 +142,7 @@ Alternative and in fact cheaper and easier way to achieve sufficient results tha
 
 Licensed under the [GNU AGPLv3][license file].
 
-[kicksware-api logo]: https://ci.kicksware.com/kicksware/api/-/raw/master/assets/kicksware-api-logo.png
+[kicksware-api logo]: https://ci.kicksware.com/kicksware/api/-/raw/master/assets/repo-logo.png
 [kicksware url]: https://kicksware.com
 
 [Website badge]: https://img.shields.io/website?label=Visit%20website&down_message=unavailable&up_color=teal&up_message=kicksware.com%20%7C%20online&url=https%3A%2F%2Fkicksware.com
