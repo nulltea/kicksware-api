@@ -1,4 +1,4 @@
-# [![kicksware-api logo][]][Kicksware url]
+# [![repo logo][]][Kicksware url]
 
 <p align="center">
 	<a href="https://kicksware.com">
@@ -142,7 +142,7 @@ Alternative and in fact cheaper and easier way to achieve sufficient results tha
 
 Licensed under the [GNU AGPLv3][license file].
 
-[kicksware-api logo]: https://ci.kicksware.com/kicksware/api/-/raw/master/assets/repo-logo.png
+[repo logo]: https://ci.kicksware.com/kicksware/api/-/raw/master/assets/repo-logo.png
 [kicksware url]: https://kicksware.com
 
 [Website badge]: https://img.shields.io/website?label=Visit%20website&down_message=unavailable&up_color=teal&up_message=kicksware.com%20%7C%20online&url=https%3A%2F%2Fkicksware.com
@@ -193,6 +193,4 @@ Licensed under the [GNU AGPLv3][license file].
 [orders-service chart]: https://github.com/timoth-y/kicksware-api/tree/master/order-service/orders-chart
 [cdn-service chart]: https://github.com/timoth-y/kicksware-api/tree/master/cdn-service/cdn-chart
 
-
-
-[license file]: https://github.com/timoth-y/kicksware-platform/blob/master/LICENSE
+[license file]: https://github.com/timoth-y/kicksware-api/blob/master/LICENSE
