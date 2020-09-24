@@ -19,7 +19,7 @@
 
 ## Overview
 
-_**Kicksware API**_ provides both RESTful and gRPC interfaces to deliver access, control, and management of the Kicksware sneaker resale platform.
+_**Kicksware API**_ provides both RESTful and gRPC interfaces to deliver access, control, and management of the Kicksware sneaker resale platform while being designed as a microservice-based, cloud-native, composite solution that collectively represents a set of a lightweight, stateless web-services, each written in Golang.
 
 ## Endpoints
 
