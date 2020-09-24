@@ -18,7 +18,7 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/rs/xid v1.2.1
 	github.com/thoas/go-funk v0.7.0
-	github.com/timoth-y/kicksware-api/service-common v0.0.0-20200917005139-98b85de071c8
+	github.com/timoth-y/kicksware-api/service-common v0.0.0-20200924152503-fe1d537257be
 	github.com/vmihailenco/msgpack v3.3.3+incompatible
 	go.mongodb.org/mongo-driver v1.4.1
 	google.golang.org/grpc v1.32.0

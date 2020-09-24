@@ -39,6 +39,9 @@ service ProductService {
   rpc AddProducts(ProductInput) returns (ProductResponse) {}
   rpc EditProducts(ProductInput) returns (ProductResponse) {}
   rpc DeleteProducts(ProductFilter) returns (ProductResponse) {}
+  rpc UploadImages(UploadImageRequest) returns (ProductResponse) {}
+  rpc RequestAnalysis(ProductInput) returns (AnalysisResponse) {}
+  rpc RequestPrediction(PredictionRequest) returns (ProductResponse) {}
 }
 
 message ProductFilter {
@@ -57,4 +60,15 @@ message ProductResponse {
   int64 count = 2;
 }
 
+message UploadImageRequest{
+  string productID = 1;
+  map<string, bytes> images = 2;
+}
 
+message AnalysisResponse {
+  double score = 1;
+}
+
+message PredictionRequest {
+  map<string, bytes> images = 1;
+}

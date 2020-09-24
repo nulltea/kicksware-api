@@ -27,8 +27,8 @@ require (
 	github.com/rs/xid v1.2.1
 	github.com/shopspring/decimal v1.2.0 // indirect
 	github.com/thoas/go-funk v0.7.0
-	github.com/timoth-y/kicksware-api/service-common v0.0.0-20200917005139-98b85de071c8
-	github.com/timoth-y/kicksware-api/user-service v0.0.0-20200917004439-e230029ec58b
+	github.com/timoth-y/kicksware-api/service-common v0.0.0-20200924152503-fe1d537257be
+	github.com/timoth-y/kicksware-api/user-service v0.0.0-20200917011049-79140f0e7480
 	github.com/vmihailenco/msgpack v4.0.4+incompatible
 	go.mongodb.org/mongo-driver v1.4.1
 	golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a // indirect
