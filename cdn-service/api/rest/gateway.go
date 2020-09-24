@@ -27,7 +27,7 @@ func restRoutes(rest RestfulHandler) (r *chi.Mux) {
 	r.Get(endpointOf("crop"), rest.GetCropped)
 	r.Get(endpointOf("resize"), rest.GetResized)
 	r.Get(endpointOf("thumbnail"), rest.GetThumbnail)
-	r.Post(endpointOf("thumbnail"), rest.Post)
+	r.Post(endpointOf(""), rest.Post)
 	return
 }
 

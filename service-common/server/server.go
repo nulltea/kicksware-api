@@ -23,6 +23,8 @@ import (
 	"github.com/timoth-y/kicksware-api/service-common/service/gRPC"
 	"github.com/timoth-y/kicksware-api/service-common/service/jwt"
 
+	"go.elastic.co/apm/module/apmhttp"
+
 	"github.com/soheilhy/cmux"
 )
 
@@ -61,7 +63,7 @@ func (s *instance) SetupREST(router chi.Router) {
 	s.REST = &http.Server{
 		Addr: s.Address,
 	}
-	s.REST.Handler = router;
+	s.REST.Handler = apmhttp.Wrap(router);
 }
 
 func (s *instance) SetupGRPC(fn func(srv *grpc.Server)) {

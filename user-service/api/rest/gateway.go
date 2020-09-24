@@ -52,7 +52,7 @@ func mailRoutes(rest *Handler) (r *chi.Mux) {
 	r.Use(rest.Authorizer)
 	r.Get("/confirm", rest.SendEmailConfirmation)
 	r.Get("/password-reset", rest.SendResetPassword)
-	r.Get("/notify", rest.SendNotification)
+	r.With(rest.Authorizer).Get("/notify", rest.SendNotification)
 	return
 }
 

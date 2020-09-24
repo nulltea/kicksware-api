@@ -130,7 +130,7 @@ Kicksware project can be deployed using following methods:
 
 ## Wrap Up
 
-**Kicksware API** is the accumulation of Kickswares business logic in form of distributed, atomically granulated stateless web-services, where each responsible only for its entities, use cases, API endpoints.
+**Kicksware API** is the accumulation of Kicksware's business logic in form of distributed, atomically granulated stateless web-services, where each responsible only for its entities, use cases, API endpoints.
 
 It exposes access to the data and its functionality as a set of both RESTfull endpoints and gRPC remote procedures.
 
