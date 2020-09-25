@@ -147,7 +147,7 @@ func (m *RequestParams) ToNative() *meta.RequestParams {
 	if m.SortBy != nil {
 		n.SetSortBy(m.SortBy.Value)
 	}
-	if n.SetSortDirection != nil {
+	if n.SortDirection != nil {
 		n.SetSortDirection(m.SortDirection.Value)
 	}
 	return n
