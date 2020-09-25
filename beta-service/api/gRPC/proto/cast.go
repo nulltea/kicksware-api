@@ -42,8 +42,12 @@ func (m *RequestParams) ToNative() *meta.RequestParams {
 	n := &meta.RequestParams{}
 	n.SetLimit(int(m.Limit))
 	n.SetOffset(int(m.Offset))
-	n.SetSortBy(m.SortBy.Value)
-	n.SetSortDirection(m.SortDirection.Value)
+	if m.SortBy != nil {
+		n.SetSortBy(m.SortBy.Value)
+	}
+	if n.SetSortDirection != nil {
+		n.SetSortDirection(m.SortDirection.Value)
+	}
 	return n
 }
 

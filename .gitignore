@@ -11,12 +11,11 @@
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
-# Env files
-*.env
-
 .idea
 .vscode
 
 keys
 cert
 backup/mongo/
+
+**/env/config.yaml

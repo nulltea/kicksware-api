@@ -6,15 +6,15 @@ commonConfig:
   innerServiceFormat: http://%s:8080/%s/
 securityConfig:
   tlsCertificate:
-    enableTLS: true
-    certFile: ../key/server.crt
-    keyFile: ../key/server.key
+    enableTLS: false
 authConfig:
   publicKeyPath: ../key/public.key.pub
 mongoConfig:
-  URL: mongodb://localhost:27017
+  URL: mongodb://db.kicksware.com:443
   database: sneakerResaleDB
   collection: references
+  login: $MONGO_USER
+  password: $MONGO_PASSWORD
   timeout: 30
 redisConfig:
   URL: redis://localhost:6379
