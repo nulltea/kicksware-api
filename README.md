@@ -19,7 +19,7 @@
 
 ## Overview
 
-_**Kicksware API**_ provides both RESTful and gRPC interfaces to deliver access, control, and management of the Kicksware sneaker resale platform while being designed as a microservice-based, cloud-native, composite solution that collectively represents a set of a lightweight, stateless web-services, each written in Golang.
+_**Kicksware API**_ provides both RESTful and gRPC interfaces to grand access, control, and management of the Kicksware sneaker resale platform while it's designed as a microservice-based, cloud-native, composite solution that collectively represents a set of a lightweight, stateless web-services, each written in Golang.
 
 ## Table of contents
 
@@ -54,7 +54,7 @@ All API's endpoints are divided into 10 base resources which mostly correspond t
 RESTful API uses `api.kicksware.com` subdomain as it's base server URL.
 
 An exception is the Content Deliver Network (CDN) service,
-whitch as its's own subdomain `cdn.kicksware.com`.
+which as it's own subdomain `cdn.kicksware.com`.
 
 API is accessible from both `:443` port via HTTPS and `:80` via plain HTTP.
 
@@ -64,7 +64,7 @@ The full API specification is available on [**Swagger**][swagger] and [**Readme.
 
 As it is cloud-native and microservice-based application, Kicksware also provides RPC API using [gRPC framework][grpc] and [Protocol Buffers][protobuf] language.
 
-Like many RPC systems, gRPC is based on the concept of defining a service in terms of functions (methods) that can be called remotely. This approach especially useful for distributed, loose-coupled systems, as it provides a mechanism to write API specification ones as a set of `.proto` files and then generate API implementation on any language.
+Like many RPC systems, gRPC is based on the concept of defining a service in terms of functions (methods) that can be called remotely. This approach is especially useful for distributed, loose-coupled systems, as it provides a mechanism to write API specification ones as a set of `.proto` files from witch API implementation can be generated on any language.
 
 All `.proto` specification files are available [here][proto files].
 
@@ -83,23 +83,23 @@ gRPC API logical division is also based on source microservice entries as follow
 
 [JSON Web Token (JWT)][jwt auth] is used to authenticate and authorize all REST requests.
 
-For accessing gRPC based API both secure TLS connection and [token interceptors][grpc interceptor] are required.
+To access gRPC based API, both secure TLS connection and [token interceptors][grpc interceptor] are required.
 
 ## Architecture
 
-As was mentioned earlier Kicksware API design is based completely on _[**microservice architecture**][microservice article] pattern_.
+As it was mentioned earlier Kicksware API design is based completely on _[**microservice architecture**][microservice article] pattern_.
 
-Like any other, this approach has its own pros and cons. The common right way to decide whether a specific architecture is suited for a specific system or not is by using what's calls [architecture trade-off analysis method (ATAM)][atam wiki]. Basically this method compares software architectures relative to quality attribute goals and helps expose architectural risks that potentially inhibit the achievement of an organization’s business goals.
+Like any other, this approach has its own pros and cons. The common right way to decide whether a specific architecture is suits a specific system or not, is by using what's calls [architecture trade-off analysis method (ATAM)][atam wiki]. Basically, this method compares software architectures relative to quality attribute goals and helps expose architectural risks that potentially inhibit the achievement of an organization’s business goals.
 
-When evaluating a microservice architecture style, it is important to understand that this approach is generally harder to implement, maintain, and test and requires more staff, money, and resources, but as a trade-off microservices provides one the most effective method of Horizontal scaling. And as a bonus you'll get higher flexibility as each new web-service can be written on any language and using any technology as long as it has some kind of communication mechanism (API).
+When evaluating a microservice architecture style, it is important to understand that this approach is generally harder to implement, maintain, and test and requires more staff, money, and resources, but as a trade-off microservices provides one the most effective method of Horizontal scaling. And as a bonus you'll get higher flexibility as each new web-service can be written in any language and using any technology as long as it has some kind of communication mechanism (API).
 
-As for this particular project main goal was to reverce enginier evaluating proccess and build the system that would be the best possible fit for MSA.
+As for this particular project the main goal was to reverse engineer evaluating process and build the system that would fit MSA the best way possible.
 
 ## Internal design
 
-While microservice architecture divide entire system on small, independent services, it's important for code to stay organized and clean even in scale of one microservice.
+While microservice architecture divides the entire system into small, independent services, it's important for a code to stay organized and clean even in scale of one microservice.
 
-For this purpose Kicksware design adopts _[uncle Bob's][uncle Bob] [**Clean Architecture**][clean architecture]_ - another greate architecture pattern that separates the design elements into ring levels and it's basic rule is that code dependencies can only come from the outer levels inward, so the further in you go, the higher level the software becomes. Simply put, the code on the inner layers can have no knowledge of the code on the outer layers.
+For this purpose Kicksware design adopts _[uncle Bob's][uncle Bob] [**Clean Architecture**][clean architecture]_ - another grate architecture pattern that separates the design elements into ring levels and its basic rule is that code dependencies can only come from the outer levels inward, so the further in you go, the higher level the software becomes. Simply put, the code on the inner layers can have no knowledge of the code on the outer layers.
 
 You may have seen diagrams like the following, but this one, in particular, is Kicksware custom API microservice Clean Architecture representational chart:
 
@@ -111,13 +111,13 @@ API microservice registry should be deployed after [Gateway][gateway repo] and [
 
 ## Deployment
 
-Kicksware project can be deployed using following methods:
+Kicksware project can be deployed using the following methods:
 
 1. **Docker Compose file**
 
-   This method require single dedicated server with installed both [`docker`][docker-compose] and [`docker-compose`][docker-compose] utilities.
+   This method requires single dedicated server with both installed [`docker`][docker-compose] and [`docker-compose`][docker-compose] utilities.
 
-   Compose [configuration file][compose config] can be found in root of the project. This file already contains setting for reverse proxy routing and load balancing.
+   Compose [configuration file][compose config] can be found in the root of the project. This file already contains setting for reverse proxy routing and load balancing.
 
    Gitlab CI deployment pipeline [configuration file][ci compose config] for compose method can be found in `.gitlab` directory.
 
@@ -125,7 +125,7 @@ Kicksware project can be deployed using following methods:
 
    Deployment to Kubernetes cluster is the default and desired way.
 
-   For more flexible and easier deployment [Helm package manager][helm] is used. It provides a simple, yet elegant way to write pre-configured, reusable Kubernetes resources configuration using YAML and Go Templates (or Lua scripts). Helm packages are called `charts`.
+   For more flexible and easier deployment [Helm package manager][helm] is used. It provides a simple, yet elegant way to write pre-configured, reusable Kubernetes resource configuration using YAML and Go Templates (or Lua scripts). Helm packages are called `charts`.
 
    Each microservice has it's own chart in the root of it's directory:
 
@@ -144,13 +144,13 @@ Kicksware project can be deployed using following methods:
 
 ## Wrap Up
 
-**Kicksware API** is the accumulation of Kicksware's business logic in form of distributed, atomically granulated stateless web-services, where each responsible only for its entities, use cases, API endpoints.
+**Kicksware API** is the accumulation of Kicksware's business logic in the form of distributed, atomically granulated, stateless web-services, where each is responsible only for its entities, use cases, API endpoints.
 
 It exposes access to the data and its functionality as a set of both RESTfull endpoints and gRPC remote procedures.
 
-There are two options for performing Kicksware API deployment. To ensure top performance with longer uptime and lesser lateness while having effective and automated control on scalability Kicksware utilizes Kubernetes cluster with minimum of 3 basic spec nodes and 2 more for potential cluster autoscaling.
+There are two ways to perform Kicksware API deployment. To ensure top performance with longer uptime and lesser latency while having effective and automated control over scalability, Kicksware utilizes Kubernetes cluster with minimum of 3 basic spec nodes and 2 more for potential cluster autoscaling.
 
-Alternative and in fact cheaper and easier way to achieve sufficient results that can be performed with just one VPS server and docker-compose utility. However, such temporary savings now may offset by the costs of vertical scaling in the future when demand rises.
+An alternative and in fact, a cheaper and easier way to achieve sufficient results is for deployment to be performed with just one VPS server and docker-compose utility. However, such temporary savings now may be offset by the costs of vertical scaling when demand rises in the future.
 
 ## License
 
