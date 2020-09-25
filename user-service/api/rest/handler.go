@@ -147,6 +147,20 @@ func (h *Handler) Delete(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, nil, http.StatusOK)
 }
 
+func (h *Handler) GetTheme(w http.ResponseWriter, r *http.Request) {
+	code := chi.URLParam(r,"userID")
+	user, err := h.service.FetchOne(code)
+	if err != nil {
+		if errors.Cause(err) == business.ErrUserNotFound {
+			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
+			return
+		}
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	h.setupResponse(w, user.Settings.Theme, http.StatusOK)
+}
+
 func (h *Handler) setupResponse(w http.ResponseWriter, body interface{}, statusCode int) {
 	w.Header().Set("Content-Type", h.contentType)
 	w.WriteHeader(statusCode)

@@ -124,3 +124,15 @@ func (h* Handler) EditUsers(ctx context.Context, input *proto.UserInput) (*proto
 func (h Handler) DeleteUsers(ctx context.Context, filter *proto.UserFilter) (*proto.UserResponse, error) {
 	panic("implement me")
 }
+
+func (h *Handler) GetTheme(ctx context.Context, filter *proto.UserFilter) (*proto.UserTheme, error) {
+	if len(filter.UserID) == 0 {
+		return nil, nil
+	}
+	user, err := h.service.FetchOne(filter.UserID[0]); if err != nil {
+		return nil, err
+	}
+	return &proto.UserTheme{
+		Theme: user.Settings.Theme,
+	}, nil
+}

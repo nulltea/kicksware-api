@@ -62,6 +62,8 @@ service UserService {
   rpc AddUsers(UserInput) returns (UserResponse) {}
   rpc EditUsers(UserInput) returns (UserResponse) {}
   rpc DeleteUsers(UserFilter) returns (UserResponse) {}
+
+  rpc GetTheme(UserFilter) returns (UserTheme) {}
 }
 
 message UserFilter {
@@ -78,4 +80,8 @@ message UserInput {
 message UserResponse {
   repeated User users = 1;
   int64 count = 2;
+}
+
+message UserTheme {
+  string theme = 1;
 }
