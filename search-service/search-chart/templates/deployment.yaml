@@ -52,6 +52,12 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ template "chart.fullname" . }}.env
+          env:
+            - name: ELASTIC_APM_SECRET_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: apm-server-token
+                  key: token
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       imagePullSecrets:

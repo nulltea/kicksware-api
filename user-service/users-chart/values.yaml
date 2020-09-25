@@ -94,3 +94,5 @@ environment:
   ENV: k8s
   CONFIG_PATH: env/config.yaml
   GODEBUG: x509ignoreCN=0
+  ELASTIC_APM_SERVICE_NAME: apm-server
+  ELASTIC_APM_SERVER_URL: http://apm.kicksware.com:80
