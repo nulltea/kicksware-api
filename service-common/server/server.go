@@ -12,6 +12,10 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/golang/glog"
+	grpc_logrus "github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
+
+	grpc_recovery "github.com/grpc-ecosystem/go-grpc-middleware/recovery"
+	grpc_ctxtags "github.com/grpc-ecosystem/go-grpc-middleware/tags"
 	"github.com/pkg/errors"
 	"github.com/timoth-y/kicksware-api/user-service/core/model"
 	"google.golang.org/grpc"
@@ -23,6 +27,9 @@ import (
 	"github.com/timoth-y/kicksware-api/service-common/service/gRPC"
 	"github.com/timoth-y/kicksware-api/service-common/service/jwt"
 
+	"github.com/grpc-ecosystem/go-grpc-middleware"
+	"github.com/sirupsen/logrus"
+	"go.elastic.co/apm/module/apmgrpc"
 	"go.elastic.co/apm/module/apmhttp"
 
 	"github.com/soheilhy/cmux"
@@ -31,10 +38,12 @@ import (
 type instance struct {
 	Address string
 	Gateway cmux.CMux
-	REST *http.Server
-	GRPC *grpc.Server
-	TLS credentials.TransportCredentials
-	Auth *gRPC.AuthServerInterceptor
+	REST    *http.Server
+	GRPC    *grpc.Server
+	TLS     credentials.TransportCredentials
+	Auth    *gRPC.AuthServerInterceptor
+	Logger  *logrus.Logger
+	LogRPC  grpc.UnaryServerInterceptor
 }
 
 func NewInstance(addr string) core.Server {
@@ -59,6 +68,17 @@ func (s *instance) SetupAuth(pb *rsa.PublicKey, accessRoles map[string][]model.U
 	s.Auth = gRPC.NewAuthServerInterceptor(jwtManager, accessRoles)
 }
 
+func (s *instance) SetupLogger() {
+	s.Logger = &logrus.Logger{
+		Level: logrus.InfoLevel,
+	}
+	entry := logrus.NewEntry(s.Logger)
+
+	grpc_logrus.ReplaceGrpcLogger(entry)
+
+	s.LogRPC = grpc_logrus.UnaryServerInterceptor(entry)
+}
+
 func (s *instance) SetupREST(router chi.Router) {
 	s.REST = &http.Server{
 		Addr: s.Address,
@@ -74,7 +94,14 @@ func (s *instance) SetupGRPC(fn func(srv *grpc.Server)) {
 		options = append(options, grpc.Creds(s.TLS))
 	}; if s.Auth != nil {
 		options = append(options, grpc.UnaryInterceptor(s.Auth.Unary()), grpc.StreamInterceptor(s.Auth.Stream()))
+	}; if s.LogRPC != nil {
+		options = append(options, grpc.UnaryInterceptor(s.LogRPC))
 	}
+	options = append(options, grpc.UnaryInterceptor(grpc_middleware.ChainUnaryServer(
+		apmgrpc.NewUnaryServerInterceptor(),
+		grpc_ctxtags.UnaryServerInterceptor(),
+		grpc_recovery.UnaryServerInterceptor(),
+	)))
 
 	s.GRPC = grpc.NewServer(options...)
 

@@ -15,6 +15,7 @@ type Server interface {
 	SetupAuth(pb *rsa.PublicKey, accessRoles map[string][]model.UserRole) // Must be configured before REST & gRPC sub servers!
 	SetupREST(router chi.Router) // Setup REST sub server configuration
 	SetupGRPC(fn func(srv *grpc.Server)) // Setup gRPC sub server configuration
+	SetupLogger()
 	Start()
 	Shutdown()
 }
