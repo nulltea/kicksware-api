@@ -55,6 +55,8 @@ func (m *SneakerReference) FromNative(n *model.SneakerReference) *SneakerReferen
 	m.ImageLink = n.ImageLink
 	m.ImageLinks = n.ImageLinks
 	m.StadiumUrl = n.StadiumUrl
+	m.Liked = n.Liked
+	m.Likes = int64(n.Likes)
 	return m
 }
 

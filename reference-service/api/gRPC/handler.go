@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/pkg/errors"
+	"github.com/timoth-y/kicksware-api/service-common/util"
 
 	"github.com/timoth-y/kicksware-api/reference-service/api/gRPC/proto"
 	"github.com/timoth-y/kicksware-api/reference-service/core/meta"
@@ -35,6 +36,7 @@ func (h *Handler) GetReferences(ctx context.Context, filter *proto.ReferenceFilt
 	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
 		params = filter.RequestParams.ToNative()
 	}
+	setUserID(ctx, &params)
 
 	if len(filter.ReferenceID) == 0 && filter.RequestQuery == nil {
 		references, err = h.service.FetchAll(params)
@@ -68,6 +70,7 @@ func (h *Handler) CountReferences(ctx context.Context, filter *proto.ReferenceFi
 	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
 		params = filter.RequestParams.ToNative()
 	}
+	setUserID(ctx, &params)
 
 	if len(filter.ReferenceID) == 0 && filter.RequestQuery == nil {
 		count, err = h.service.CountAll()
@@ -117,4 +120,15 @@ func (h *Handler) EditReferences(ctx context.Context, input *proto.ReferenceInpu
 
 func (h *Handler) DeleteReferences(ctx context.Context, filter *proto.ReferenceFilter) (resp *proto.ReferenceResponse, err error) {
 	panic("implement me")
+}
+
+func setUserID(ctx context.Context, params **meta.RequestParams) string {
+	if id, ok := util.RetrieveUserID(ctx); ok {
+		if *params == nil {
+			*params = &meta.RequestParams{}
+		}
+		(*params).SetUserID(id)
+		return id
+	}
+	return ""
 }

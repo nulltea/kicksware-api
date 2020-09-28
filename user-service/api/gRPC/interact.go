@@ -3,7 +3,7 @@ package gRPC
 import (
 	"context"
 
-	"github.com/timoth-y/kicksware-api/service-common/service/gRPC"
+	"github.com/timoth-y/kicksware-api/service-common/util"
 
 	"github.com/timoth-y/kicksware-api/user-service/api/gRPC/proto"
 	"github.com/timoth-y/kicksware-api/user-service/usecase/business"
@@ -16,7 +16,7 @@ func (h *Handler) Like(ctx context.Context, request *proto.LikeRequest) (resp *p
 	err = h.interact.Like(userID, request.EntityID)
 	resp = &proto.LikeResponse{
 		Success: err == nil,
-		Error: getErrorMsg(err),
+		Error: util.GetErrorMsg(err),
 	}
 	return
 }
@@ -29,14 +29,14 @@ func (h *Handler) Unlike(ctx context.Context, request *proto.LikeRequest) (resp 
 
 	resp = &proto.LikeResponse{
 		Success: err == nil,
-		Error: getErrorMsg(err),
+		Error: util.GetErrorMsg(err),
 	}
 	return
 }
 
 func getLikeUserID(ctx context.Context, request *proto.LikeRequest) (string, bool) {
 	userID := request.UserID
-	if id, ok := gRPC.RetrieveUserID(ctx); ok {
+	if id, ok := util.RetrieveUserID(ctx); ok {
 		userID = id
 	}; if len(userID) == 0 {
 		return "", false

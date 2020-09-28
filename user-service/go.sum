@@ -352,6 +352,8 @@ github.com/timoth-y/kicksware-api/service-common v0.0.0-20200928032738-fdeb6f9e1
 github.com/timoth-y/kicksware-api/service-common v0.0.0-20200928032738-fdeb6f9e111b/go.mod h1:fSAG2QiKjFWLG88Zgiv5FL0/IyEFsAfC9ljY9EmBg48=
 github.com/timoth-y/kicksware-api/service-common v0.0.0-20200928193103-bd266b1f83b4 h1:S3i2G8ggh0Dzhk3zGujpcHG/93O91v9S2Uvlet7sK1Y=
 github.com/timoth-y/kicksware-api/service-common v0.0.0-20200928193103-bd266b1f83b4/go.mod h1:fSAG2QiKjFWLG88Zgiv5FL0/IyEFsAfC9ljY9EmBg48=
+github.com/timoth-y/kicksware-api/service-common v0.0.0-20200928212326-c0f29ca1ff42 h1:H+JDYe6GSv82S/cYaMIrhREsbdOkbZUhtHG8b6DcTKA=
+github.com/timoth-y/kicksware-api/service-common v0.0.0-20200928212326-c0f29ca1ff42/go.mod h1:fSAG2QiKjFWLG88Zgiv5FL0/IyEFsAfC9ljY9EmBg48=
 github.com/timoth-y/kicksware-api/user-service v0.0.0-20200807131113-a8928eed241c/go.mod h1:asUKM9SLltlPE1SPVnvY+fT4/SeTP9K5kCwcuszWJQM=
 github.com/timoth-y/kicksware-api/user-service v0.0.0-20200917004439-e230029ec58b/go.mod h1:08/xwSHV+E4rUaUBBt9mIiQ5ae1M1OQS+zWmGxy6Ewc=
 github.com/timoth-y/kicksware-api/user-service v0.0.0-20200917011049-79140f0e7480/go.mod h1:pxzC5k7IyMano4tmao5kV64iF6HTKRBtDVZtN1soA9I=

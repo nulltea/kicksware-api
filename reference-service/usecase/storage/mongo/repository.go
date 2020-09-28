@@ -234,6 +234,21 @@ func (r *repository) buildQueryPipeline(matchQuery bson.M, param *meta.RequestPa
 	pipe := mongo.Pipeline{}
 	pipe = append(pipe, bson.D{{"$match", matchQuery}})
 
+	pipe = append(pipe, bson.D{
+		{"$lookup", bson.M {
+			"from": "likes",
+			"localField": "uniqueid",
+			"foreignField": "entity_id",
+			"as": "like",
+		}},
+	})
+
+	pipe = append(pipe, bson.D {
+		{ "$addFields", bson.M {
+			"likes": bson.M{"$size": "$like"},
+		}},
+	})
+
 	if param != nil {
 		if param.SortBy() != "" {
 			pipe = append(pipe, bson.D {
@@ -252,63 +267,6 @@ func (r *repository) buildQueryPipeline(matchQuery bson.M, param *meta.RequestPa
 		}
 	}
 
-	pipe = append(pipe, bson.D {
-		{"$lookup", bson.M {
-			"from": "brands",
-			"localField": "brand",
-			"foreignField": "uniqueid",
-			"as": "brand",
-		}},
-	})
-	pipe = append(pipe, bson.D {{ "$unwind", bson.M{
-			"path": "$brand",
-			"preserveNullAndEmptyArrays": true,
-		}},
-	})
-
-	pipe = append(pipe, bson.D {
-		{"$lookup", bson.M {
-			"from": "models",
-			"localField": "model",
-			"foreignField": "uniqueid",
-			"as": "model",
-		}},
-	})
-	pipe = append(pipe, bson.D {{ "$unwind", bson.M{
-			"path": "$model",
-			"preserveNullAndEmptyArrays": true,
-		}},
-	})
-
-	pipe = append(pipe, bson.D{
-		{"$lookup", bson.M {
-			"from": "models",
-			"localField": "basemodel",
-			"foreignField": "uniqueid",
-			"as": "basemodel",
-		}},
-	})
-	pipe = append(pipe, bson.D{{ "$unwind", bson.M{
-			"path": "$basemodel",
-			"preserveNullAndEmptyArrays": true,
-		}},
-	})
-
-	pipe = append(pipe, bson.D{
-		{"$lookup", bson.M {
-			"from": "likes",
-			"localField": "uniqueid",
-			"foreignField": "entity_id",
-			"as": "like",
-		}},
-	})
-
-	pipe = append(pipe, bson.D {
-		{ "$addFields", bson.M {
-			"likes": bson.M{"$size": "$like"},
-		}},
-	})
-
 	if param != nil && len(param.UserID()) != 0 {
 		pipe = append(pipe, bson.D {
 			{ "$addFields", bson.M {
@@ -321,6 +279,48 @@ func (r *repository) buildQueryPipeline(matchQuery bson.M, param *meta.RequestPa
 		{ "$project", bson.M {
 			"like": 0,
 		}},
+	})
+
+	pipe = append(pipe, bson.D {
+		{"$lookup", bson.M {
+			"from": "brands",
+			"localField": "brand",
+			"foreignField": "uniqueid",
+			"as": "brand",
+		}},
+	})
+	pipe = append(pipe, bson.D {{ "$unwind", bson.M{
+		"path": "$brand",
+		"preserveNullAndEmptyArrays": true,
+	}},
+	})
+
+	pipe = append(pipe, bson.D {
+		{"$lookup", bson.M {
+			"from": "models",
+			"localField": "model",
+			"foreignField": "uniqueid",
+			"as": "model",
+		}},
+	})
+	pipe = append(pipe, bson.D {{ "$unwind", bson.M{
+		"path": "$model",
+		"preserveNullAndEmptyArrays": true,
+	}},
+	})
+
+	pipe = append(pipe, bson.D{
+		{"$lookup", bson.M {
+			"from": "models",
+			"localField": "basemodel",
+			"foreignField": "uniqueid",
+			"as": "basemodel",
+		}},
+	})
+	pipe = append(pipe, bson.D{{ "$unwind", bson.M{
+		"path": "$basemodel",
+		"preserveNullAndEmptyArrays": true,
+	}},
 	})
 
 	return pipe
