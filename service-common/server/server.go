@@ -36,14 +36,14 @@ import (
 )
 
 type instance struct {
-	Address string
-	Gateway cmux.CMux
-	REST    *http.Server
-	GRPC    *grpc.Server
-	TLS     credentials.TransportCredentials
-	Auth    *gRPC.AuthServerInterceptor
-	Logger  *logrus.Logger
-	LogRPC  grpc.UnaryServerInterceptor
+	Address  string
+	Gateway  cmux.CMux
+	REST     *http.Server
+	GRPC     *grpc.Server
+	TLS      credentials.TransportCredentials
+	Auth     *gRPC.AuthServerInterceptor
+	Logger   *logrus.Logger
+	LogEntry *logrus.Entry
 }
 
 func NewInstance(addr string) core.Server {
@@ -72,11 +72,8 @@ func (s *instance) SetupLogger() {
 	s.Logger = &logrus.Logger{
 		Level: logrus.InfoLevel,
 	}
-	entry := logrus.NewEntry(s.Logger)
-
-	grpc_logrus.ReplaceGrpcLogger(entry)
-
-	s.LogRPC = grpc_logrus.UnaryServerInterceptor(entry)
+	s.LogEntry = logrus.NewEntry(s.Logger)
+	grpc_logrus.ReplaceGrpcLogger(s.LogEntry)
 }
 
 func (s *instance) SetupREST(router chi.Router) {
@@ -87,21 +84,32 @@ func (s *instance) SetupREST(router chi.Router) {
 }
 
 func (s *instance) SetupGRPC(fn func(srv *grpc.Server)) {
+	unaryInterceptors := []grpc.UnaryServerInterceptor {
+		apmgrpc.NewUnaryServerInterceptor(),
+		grpc_ctxtags.UnaryServerInterceptor(),
+		grpc_recovery.UnaryServerInterceptor(),
+	}
+	streamInterceptors := []grpc.StreamServerInterceptor {
+		grpc_ctxtags.StreamServerInterceptor(),
+		grpc_recovery.StreamServerInterceptor(),
+	}
 	options := []grpc.ServerOption{
 		grpc.MaxSendMsgSize(25 * 1024 * 1024),
 		grpc.MaxRecvMsgSize(25 * 1024 * 1024),
 	}; if s.TLS != nil {
 		options = append(options, grpc.Creds(s.TLS))
 	}; if s.Auth != nil {
-		options = append(options, grpc.UnaryInterceptor(s.Auth.Unary()), grpc.StreamInterceptor(s.Auth.Stream()))
-	}; if s.LogRPC != nil {
-		options = append(options, grpc.UnaryInterceptor(s.LogRPC))
+		unaryInterceptors = append(unaryInterceptors, s.Auth.Unary())
+		streamInterceptors = append(streamInterceptors, s.Auth.Stream())
+	}; if s.LogEntry != nil {
+		unaryInterceptors = append(unaryInterceptors, grpc_logrus.UnaryServerInterceptor(s.LogEntry))
+		streamInterceptors = append(streamInterceptors, grpc_logrus.StreamServerInterceptor(s.LogEntry))
 	}
-	options = append(options, grpc.UnaryInterceptor(grpc_middleware.ChainUnaryServer(
-		apmgrpc.NewUnaryServerInterceptor(),
-		grpc_ctxtags.UnaryServerInterceptor(),
-		grpc_recovery.UnaryServerInterceptor(),
-	)))
+
+	options = append(options,
+		grpc.UnaryInterceptor(grpc_middleware.ChainUnaryServer(unaryInterceptors...)),
+		grpc.StreamInterceptor(grpc_middleware.ChainStreamServer(streamInterceptors...)),
+	)
 
 	s.GRPC = grpc.NewServer(options...)
 
