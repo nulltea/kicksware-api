@@ -2,6 +2,7 @@ package util
 
 import (
 	"bufio"
+	"context"
 	"crypto/rsa"
 	"crypto/x509"
 	"encoding/pem"
@@ -11,6 +12,7 @@ import (
 	"github.com/fatih/structs"
 	"github.com/thoas/go-funk"
 	"go.mongodb.org/mongo-driver/bson"
+	"google.golang.org/grpc/metadata"
 )
 
 func ToMap(v interface{}) map[string]interface{} {
@@ -91,4 +93,21 @@ func GetPublicKey(keyPath string) *rsa.PublicKey {
 	}
 
 	return publicKey
+}
+
+func RetrieveUserID(ctx context.Context) (string, bool) {
+	if md, ok := metadata.FromOutgoingContext(ctx); ok {
+		userIDs := md.Get("user_id")
+		if len(userIDs) != 0 {
+			return userIDs[0], true
+		}
+	}
+	return "", false
+}
+
+func GetErrorMsg(err error) string {
+	if err == nil {
+		return ""
+	}
+	return err.Error()
 }

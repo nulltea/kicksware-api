@@ -38,8 +38,8 @@ mongoConfig:
   collection: users
   likesCollection: likes
   remoteCollection: remotes
-  login: $MONGO_USER
-  password: $MONGO_PASSWORD
+  login: root
+  password: greenJordans
   timeout: 30
 redisConfig:
   URL: redis://localhost:6379

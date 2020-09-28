@@ -112,13 +112,3 @@ func (i *AuthServerInterceptor) zeroAccess(method string) bool {
 	}
 	return false
 }
-
-func RetrieveUserID(ctx context.Context) (string, bool) {
-	if md, ok := metadata.FromOutgoingContext(ctx); ok {
-		userIDs := md.Get("user_id")
-		if len(userIDs) != 0 {
-			return userIDs[0], true
-		}
-	}
-	return "", false
-}
