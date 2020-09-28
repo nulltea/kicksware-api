@@ -54,6 +54,7 @@ message YearMonth {
 
 message UserSettings {
   string theme = 1;
+  string layoutView = 2;
 }
 
 service UserService {

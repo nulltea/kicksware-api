@@ -27,7 +27,7 @@ func (m *User) ToNative() *model.User {
 		Role:         model.UserRole(m.Role),
 		RegisterDate: m.RegisterDate.AsTime(),
 		Provider:     model.UserProvider(m.Provider),
-		// ConnectedProviders: m.ConnectedProviders,
+		Settings:     m.Settings.ToNative(),
 	}
 }
 
@@ -46,9 +46,10 @@ func (m *User) FromNative(n *model.User) *User {
 	m.PaymentInfo = PaymentInfo{}.FromNative(n.PaymentInfo)
 	m.Liked = n.Liked
 	m.Confirmed = n.Confirmed
-	// model.UserRole(m.Role) = model.UserRole(m.Role)
+	m.Role = string(n.Role)
 	m.RegisterDate = timestamppb.New(n.RegisterDate)
-	// model.UserProvider(m.Provider) = model.UserProvider(m.Provider)
+	m.Settings = UserSettings{}.FromNative(n.Settings)
+	m.Provider = string(n.Provider)
 	return m
 }
 
@@ -112,6 +113,19 @@ func (m PaymentInfo) FromNative(n model.PaymentInfo) *PaymentInfo {
 	}
 	m.CVV          = n.CVV
 	m.BillingInfo  = AddressInfo{}.FromNative(n.BillingInfo)
+	return &m
+}
+
+func (m *UserSettings) ToNative() model.UserSettings {
+	return model.UserSettings{
+		Theme: m.Theme,
+		LayoutView: m.LayoutView,
+	}
+}
+
+func (m UserSettings) FromNative(n model.UserSettings) *UserSettings {
+	m.Theme = n.Theme
+	m.LayoutView = n.LayoutView
 	return &m
 }
 
