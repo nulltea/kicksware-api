@@ -2,8 +2,6 @@ package meta
 
 import (
 	"strings"
-
-	"github.com/timoth-y/kicksware-api/reference-service/core/model"
 )
 
 type RequestParams struct {
