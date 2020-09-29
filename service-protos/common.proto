@@ -12,4 +12,5 @@ message RequestParams {
   int32 Offset = 2;
   google.protobuf.StringValue SortBy = 3;
   google.protobuf.StringValue SortDirection = 4;
+  string userID = 5;
 }

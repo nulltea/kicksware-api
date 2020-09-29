@@ -13,6 +13,8 @@ import (
 	"github.com/thoas/go-funk"
 	"go.mongodb.org/mongo-driver/bson"
 	"google.golang.org/grpc/metadata"
+
+	"github.com/timoth-y/kicksware-api/service-common/core/meta"
 )
 
 func ToMap(v interface{}) map[string]interface{} {
@@ -110,4 +112,15 @@ func GetErrorMsg(err error) string {
 		return ""
 	}
 	return err.Error()
+}
+
+func setMetaDataUserID(ctx context.Context, params **meta.RequestParams) string {
+	if id, ok := RetrieveUserID(ctx); ok {
+		if *params == nil {
+			*params = &meta.RequestParams{}
+		}
+		(*params).SetUserID(id)
+		return id
+	}
+	return ""
 }
