@@ -7,20 +7,20 @@ import (
 	"github.com/timoth-y/kicksware-api/order-service/core/model"
 )
 
-type ReferenceSorter struct {
+type OrderSorter struct {
 	items []*model.Order
 	property string
 }
 
-func NewSorter(items []*model.Order, property string) (s *ReferenceSorter) {
-	s = &ReferenceSorter{}
+func NewSorter(items []*model.Order, property string) (s *OrderSorter) {
+	s = &OrderSorter{}
 	s.items = items
 	s.property = property
 	return s
 }
-func (s *ReferenceSorter) Len() int           { return len(s.items) }
-func (s *ReferenceSorter) Swap(i, j int)      { s.items[i], s.items[j] = s.items[j], s.items[i] }
-func (s *ReferenceSorter) Less(i, j int) bool {
+func (s *OrderSorter) Len() int           { return len(s.items) }
+func (s *OrderSorter) Swap(i, j int)      { s.items[i], s.items[j] = s.items[j], s.items[i] }
+func (s *OrderSorter) Less(i, j int) bool {
 	switch strings.ToLower(s.property) {
 	case "price":
 		return s.items[i].Price < s.items[j].Price
@@ -30,17 +30,17 @@ func (s *ReferenceSorter) Less(i, j int) bool {
 		return s.items[i].UniqueID < s.items[j].UniqueID
 	}
 }
-func (s *ReferenceSorter) Asc() []*model.Order {
+func (s *OrderSorter) Asc() []*model.Order {
 	sort.Sort(s)
 	return s.items
 }
 
-func (s *ReferenceSorter) Desc() []*model.Order {
+func (s *OrderSorter) Desc() []*model.Order {
 	sort.Sort(sort.Reverse(s))
 	return s.items
 }
 
-func (s *ReferenceSorter) Sort(desc bool) []*model.Order {
+func (s *OrderSorter) Sort(desc bool) []*model.Order {
 	if desc  {
 		return s.Desc()
 	}

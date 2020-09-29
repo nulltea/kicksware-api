@@ -1,7 +1,7 @@
 package pipe
 
 import (
-	model "github.com/timoth-y/kicksware-api/reference-service/core/model"
+	 "github.com/timoth-y/kicksware-api/reference-service/core/model"
 
 	"github.com/timoth-y/kicksware-api/service-common/core/meta"
 )

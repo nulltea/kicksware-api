@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package proto;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+import "common.proto";
+
+option go_package = "github.com/timoth-y/kicksware-api/order-service/api/gRPC/proto";
+option csharp_namespace = "Proto";
+
+message Order {
+  string uniqueID = 1;
+  string userID = 2;
+  string referenceID = 3;
+  string productID = 4;
+  float  price = 5;
+  string status = 6;
+  string sourceURL = 7;
+  google.protobuf.Timestamp AddedAt = 8;
+}
+
+service OrderService {
+  rpc GetOrders(OrderFilter) returns (OrderResponse) {}
+  rpc CountOrders(OrderFilter) returns (OrderResponse) {}
+  rpc AddOrder(OrderInput) returns (OrderResponse) {}
+  rpc EditOrder(OrderInput) returns (OrderResponse) {}
+  rpc DeleteOrder(OrderFilter) returns (OrderResponse) {}
+}
+
+message OrderFilter {
+  repeated string orderID = 1;
+  google.protobuf.Struct requestQuery = 2;
+  proto.RequestParams requestParams = 3;
+}
+
+message OrderInput {
+  string userID = 2;
+  string referenceID = 3;
+  string productID = 4;
+  Order order = 5;
+}
+
+message OrderResponse {
+  repeated Order orders = 1;
+  int64 count = 2;
+}

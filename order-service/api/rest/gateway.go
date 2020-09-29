@@ -5,7 +5,7 @@ import (
 	"github.com/go-chi/chi/middleware"
 )
 
-func ProvideRoutes(rest RestfulHandler) *chi.Mux {
+func ProvideRoutes(rest *Handler) *chi.Mux {
 	router := chi.NewRouter()
 	router.Use(
 		middleware.Logger,
@@ -18,10 +18,10 @@ func ProvideRoutes(rest RestfulHandler) *chi.Mux {
 	return router
 }
 
-func restRoutes(rest RestfulHandler) (r *chi.Mux) {
+func restRoutes(rest *Handler) (r *chi.Mux) {
 	r = chi.NewRouter()
-	r.Use(rest.Authorizer)
 	r.Use(rest.Authenticator)
+	r.Use(rest.Authorizer)
 	r.Get("/{orderID}", rest.GetOne)
 	r.Get("/", rest.Get)
 	r.Post("/query", rest.Get)
@@ -33,7 +33,7 @@ func restRoutes(rest RestfulHandler) (r *chi.Mux) {
 	return
 }
 
-func healthRoutes(rest RestfulHandler) (r *chi.Mux)  {
+func healthRoutes(rest *Handler) (r *chi.Mux)  {
 	r = chi.NewRouter()
 	r.Get("/live", rest.HealthZ)
 	r.Get("/ready", rest.ReadyZ)

@@ -16,7 +16,7 @@ import (
 	TLS "github.com/timoth-y/kicksware-api/service-common/core/meta"
 	"github.com/timoth-y/kicksware-api/service-common/util"
 
-	"github.com/timoth-y/kicksware-api/order-service/core/meta"
+	"github.com/timoth-y/kicksware-api/service-common/core/meta"
 	"github.com/timoth-y/kicksware-api/order-service/core/model"
 	"github.com/timoth-y/kicksware-api/order-service/core/repo"
 	"github.com/timoth-y/kicksware-api/order-service/env"
@@ -74,7 +74,7 @@ func newTLSConfig(tlsConfig *TLS.TLSCertificate) *tls.Config {
 	}
 }
 
-func (r *repository) FetchOne(code string, params meta.RequestParams) (*model.Order, error) {
+func (r *repository) FetchOne(code string, params *meta.RequestParams) (*model.Order, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 
@@ -97,7 +97,7 @@ func (r *repository) FetchOne(code string, params meta.RequestParams) (*model.Or
 	return orders[0], nil
 }
 
-func (r *repository) Fetch(codes []string, params meta.RequestParams) ([]*model.Order, error) {
+func (r *repository) Fetch(codes []string, params *meta.RequestParams) ([]*model.Order, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 
@@ -120,7 +120,7 @@ func (r *repository) Fetch(codes []string, params meta.RequestParams) ([]*model.
 	return orders, nil
 }
 
-func (r *repository) FetchAll(params meta.RequestParams) ([]*model.Order, error) {
+func (r *repository) FetchAll(params *meta.RequestParams) ([]*model.Order, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 
@@ -140,7 +140,7 @@ func (r *repository) FetchAll(params meta.RequestParams) ([]*model.Order, error)
 	return order, nil
 }
 
-func (r *repository) FetchQuery(query meta.RequestQuery, params meta.RequestParams) ([]*model.Order, error) {
+func (r *repository) FetchQuery(query meta.RequestQuery, params *meta.RequestParams) ([]*model.Order, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 
@@ -174,20 +174,6 @@ func (r *repository) StoreOne(order *model.Order) error {
 	return nil
 }
 
-func (r *repository) Store(orders []*model.Order) error {
-	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
-	defer cancel()
-	bulk := make([]interface{}, len(orders))
-	for i := range orders {
-		bulk[i] = orders[i]
-	}
-	_, err := r.collection.InsertMany(ctx, bulk)
-	if err != nil {
-		return errors.Wrap(err, "repository.Order.Store")
-	}
-	return nil
-}
-
 func (r *repository) Modify(order *model.Order) error {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
@@ -204,7 +190,17 @@ func (r *repository) Modify(order *model.Order) error {
 	return nil
 }
 
-func (r *repository) Count(query meta.RequestQuery, params meta.RequestParams) (int, error) {
+func (r *repository) Remove(code string) error {
+	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
+	defer cancel()
+	filter := bson.M{"unique_id": code}
+	if _, err := r.collection.DeleteOne(ctx, filter); err != nil {
+		return errors.Wrap(err, "repository.Order.Remove")
+	}
+	return nil
+}
+
+func (r *repository) Count(query meta.RequestQuery, params *meta.RequestParams) (int, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
 
@@ -230,7 +226,7 @@ func (r *repository) CountAll() (int, error) {
 }
 
 
-func (r *repository) buildQueryPipeline(matchQuery bson.M, param meta.RequestParams) mongo.Pipeline {
+func (r *repository) buildQueryPipeline(matchQuery bson.M, param *meta.RequestParams) mongo.Pipeline {
 	pipe := mongo.Pipeline{}
 	pipe = append(pipe, bson.D{{"$match", matchQuery}})
 

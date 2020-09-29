@@ -7,13 +7,15 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strings"
+	"time"
 
 	"github.com/pkg/errors"
 	"github.com/rs/xid"
 	"github.com/thoas/go-funk"
+	"github.com/timoth-y/kicksware-api/search-service/core/pipe"
 	"gopkg.in/dealancer/validate.v2"
 
-	"github.com/timoth-y/kicksware-api/order-service/core/meta"
+	"github.com/timoth-y/kicksware-api/service-common/core/meta"
 	"github.com/timoth-y/kicksware-api/order-service/core/model"
 	"github.com/timoth-y/kicksware-api/order-service/core/repo"
 	"github.com/timoth-y/kicksware-api/order-service/core/service"
@@ -28,28 +30,30 @@ var (
 type orderService struct {
 	repo repo.OrderRepository
 	serviceConfig env.CommonConfig
+	pipe pipe.SneakerReferencePipe
 }
 
-func NewOrderService(orderRepo repo.OrderRepository, serviceConfig env.CommonConfig) service.OrderService {
+func NewOrderService(orderRepo repo.OrderRepository, pipe pipe.SneakerReferencePipe, serviceConfig env.CommonConfig) service.OrderService {
 	return &orderService{
 		orderRepo,
 		serviceConfig,
+		pipe,
 	}
 }
 
-func (s *orderService) FetchOne(code string, params meta.RequestParams) (*model.Order, error) {
+func (s *orderService) FetchOne(code string, params *meta.RequestParams) (*model.Order, error) {
 	return s.repo.FetchOne(code, params)
 }
 
-func (s *orderService) Fetch(codes []string, params meta.RequestParams) ([]*model.Order, error) {
+func (s *orderService) Fetch(codes []string, params *meta.RequestParams) ([]*model.Order, error) {
 	return s.repo.Fetch(codes, params)
 }
 
-func (s *orderService) FetchAll(params meta.RequestParams) ([]*model.Order, error) {
+func (s *orderService) FetchAll(params *meta.RequestParams) ([]*model.Order, error) {
 	return s.repo.FetchAll(params)
 }
 
-func (s *orderService) FetchQuery(query meta.RequestQuery, params meta.RequestParams) (refs []*model.Order, err error) {
+func (s *orderService) FetchQuery(query meta.RequestQuery, params *meta.RequestParams) (refs []*model.Order, err error) {
 	foreignKeys, is := s.handleForeignSubquery(query)
 	refs, err = s.repo.FetchQuery(query, params)
 	if err == nil && is {
@@ -65,25 +69,35 @@ func (s *orderService) StoreOne(order *model.Order) error {
 		return errors.Wrap(ErrOrderNotValid, "service.repo.Store")
 	}
 	order.UniqueID = xid.New().String()
-	return s.repo.StoreOne(order)
-}
-
-func (s *orderService) Store(orders []*model.Order) error {
-	for _, order := range orders {
-		order.UniqueID = xid.New().String()
+	if ref, err := s.pipe.FetchOne(order.ReferenceID); err == nil {
+		order.Price = float32(ref.Price)
+		if url := ref.StadiumUrl; len(url) != 0 {
+			order.SourceURL = url
+		} else if url := ref.GoatUrl; len(url) != 0  {
+			order.SourceURL = url
+		} else {
+			order.SourceURL = fmt.Sprintf("http://kicksware.com/shop/references/%v", ref.UniqueId)
+		}
+		order.Price = float32(ref.Price)
 	}
-	return s.repo.Store(orders)
+	order.Status = model.Draft
+	order.AddedAt = time.Now()
+	return s.repo.StoreOne(order)
 }
 
 func (s *orderService) Modify(order *model.Order) error {
 	return s.repo.Modify(order)
 }
 
+func (s *orderService) Remove(code string) error {
+	return s.repo.Remove(code)
+}
+
 func (s *orderService) CountAll() (int, error) {
 	return s.repo.CountAll()
 }
 
-func (s *orderService) Count(query meta.RequestQuery, params meta.RequestParams) (int, error) {
+func (s *orderService) Count(query meta.RequestQuery, params *meta.RequestParams) (int, error) {
 	foreignKeys, is := s.handleForeignSubquery(query); if is {
 		refs, err := s.repo.FetchQuery(query, params)
 		if err == nil && is {
@@ -134,7 +148,7 @@ func (s *orderService) postOnForeignService(service string, query interface{}) (
 
 	keys = make([]string, 0)
 	for _, doc := range subs {
-		if key, ok := doc["ReferenceId"]; ok {
+		if key, ok := doc["OrderId"]; ok {
 			keys = append(keys, key.(string))
 		}
 	}

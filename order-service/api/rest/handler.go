@@ -9,7 +9,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/timoth-y/kicksware-api/service-common/util"
 
-	"github.com/timoth-y/kicksware-api/order-service/core/meta"
+	"github.com/timoth-y/kicksware-api/service-common/core/meta"
 	"github.com/timoth-y/kicksware-api/order-service/core/model"
 	"github.com/timoth-y/kicksware-api/order-service/core/service"
 	"github.com/timoth-y/kicksware-api/order-service/env"
@@ -18,38 +18,21 @@ import (
 	"github.com/timoth-y/kicksware-api/order-service/usecase/serializer/msg"
 )
 
-type RestfulHandler interface {
-	// Endpoint handlers:
-	GetOne(http.ResponseWriter, *http.Request)
-	Get(http.ResponseWriter, *http.Request)
-	PostOne(http.ResponseWriter, *http.Request)
-	Post(http.ResponseWriter, *http.Request)
-	Patch(http.ResponseWriter, *http.Request)
-	Count(http.ResponseWriter, *http.Request)
-	// Middleware:
-	Authenticator(next http.Handler) http.Handler
-	Authorizer(next http.Handler) http.Handler
-	UserSetter(next http.Handler) http.Handler
-	// Health
-	HealthZ(http.ResponseWriter, *http.Request)
-	ReadyZ(http.ResponseWriter, *http.Request)
-}
-
-type handler struct {
+type Handler struct {
 	service     service.OrderService
 	auth        service.AuthService
 	contentType string
 }
 
-func NewHandler(service service.OrderService, auth service.AuthService, config env.CommonConfig) RestfulHandler {
-	return &handler{
+func NewHandler(service service.OrderService, auth service.AuthService, config env.CommonConfig) *Handler {
+	return &Handler{
 		service,
 		auth,
 		config.ContentType,
 	}
 }
 
-func (h *handler) GetOne(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) GetOne(w http.ResponseWriter, r *http.Request) {
 	code := chi.URLParam(r,"orderID")
 	params := NewRequestParams(r)
 	order, err := h.service.FetchOne(code, params)
@@ -64,7 +47,7 @@ func (h *handler) GetOne(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, order, http.StatusOK)
 }
 
-func (h *handler) Get(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Get(w http.ResponseWriter, r *http.Request) {
 	var orders []*model.Order
 	var err error
 	params := NewRequestParams(r)
@@ -95,7 +78,7 @@ func (h *handler) Get(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, orders, http.StatusOK)
 }
 
-func (h *handler) PostOne(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) PostOne(w http.ResponseWriter, r *http.Request) {
 	order, err := h.getRequestBody(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -113,7 +96,7 @@ func (h *handler) PostOne(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, order, http.StatusOK)
 }
 
-func (h *handler) Post(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	order, err := h.getRequestBodies(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -132,7 +115,7 @@ func (h *handler) Post(w http.ResponseWriter, r *http.Request) {
 }
 
 
-func (h *handler) Patch(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Patch(w http.ResponseWriter, r *http.Request) {
 	order, err := h.getRequestBody(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -150,7 +133,7 @@ func (h *handler) Patch(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, nil, http.StatusOK)
 }
 
-func (h *handler) Count(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Count(w http.ResponseWriter, r *http.Request) {
 	var count int
 	var err error
 	params := NewRequestParams(r)
@@ -182,7 +165,7 @@ func (h *handler) Count(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, count, http.StatusOK)
 }
 
-func (h *handler) setupResponse(w http.ResponseWriter, body interface{}, statusCode int) {
+func (h *Handler) setupResponse(w http.ResponseWriter, body interface{}, statusCode int) {
 	w.Header().Set("Content-Type", h.contentType)
 	w.WriteHeader(statusCode)
 	if body != nil {
@@ -197,7 +180,7 @@ func (h *handler) setupResponse(w http.ResponseWriter, body interface{}, statusC
 	}
 }
 
-func (h *handler) getRequestQuery(r *http.Request) (meta.RequestQuery, error) {
+func (h *Handler) getRequestQuery(r *http.Request) (meta.RequestQuery, error) {
 	contentType := r.Header.Get("Content-Type")
 	requestBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -210,7 +193,7 @@ func (h *handler) getRequestQuery(r *http.Request) (meta.RequestQuery, error) {
 	return body, nil
 }
 
-func (h *handler) getRequestBody(r *http.Request) (*model.Order, error) {
+func (h *Handler) getRequestBody(r *http.Request) (*model.Order, error) {
 	contentType := r.Header.Get("Content-Type")
 	requestBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -224,7 +207,7 @@ func (h *handler) getRequestBody(r *http.Request) (*model.Order, error) {
 }
 
 
-func (h *handler) getRequestBodies(r *http.Request) ([]*model.Order, error) {
+func (h *Handler) getRequestBodies(r *http.Request) ([]*model.Order, error) {
 	contentType := r.Header.Get("Content-Type")
 	requestBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -237,7 +220,7 @@ func (h *handler) getRequestBodies(r *http.Request) ([]*model.Order, error) {
 	return bodies, nil
 }
 
-func (h *handler) serializer(contentType string) service.OrderSerializer {
+func (h *Handler) serializer(contentType string) service.OrderSerializer {
 	if contentType == "application/x-msgpack" {
 		return msg.NewSerializer()
 	}

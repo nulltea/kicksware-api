@@ -6,6 +6,10 @@ commonConfig:
   innerServiceFormat: http://%s:8080/%s/
 authConfig:
   publicKeyPath: keys/auth/public.key
+  authEndpoint: https://api.kicksware.com/auth/guest
+  tlsCertificate:
+    enableTLS: true
+    certFile: certs/grpc/tls.crt
 mongoConfig:
   URL: mongodb://db.kicksware.com:443
   TLS:
