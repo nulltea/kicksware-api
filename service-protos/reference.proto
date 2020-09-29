@@ -42,10 +42,13 @@ message SneakerReference {
   repeated string materials = 13;
   repeated string categories = 14;
   google.protobuf.Timestamp releaseDate = 15;
+  string releaseDateStr = 24;
+  google.protobuf.Timestamp AddedDate = 25;
   double price = 16;
   string imageLink = 17;
   repeated string imageLinks = 18;
   string stadiumUrl = 19;
+  string goatUrl = 23;
   int64 likes = 20;
   bool liked = 21;
 }

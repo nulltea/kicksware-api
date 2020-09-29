@@ -23,6 +23,7 @@ type SneakerReference struct {
 	ImageLink      string
 	ImageLinks     []string
 	StadiumUrl     string
+	GoatUrl        string `json:"GoatURL" bson:"goat_url"`
 	Likes          int
 	Liked          bool
 	AddedDate      time.Time `bson:"added_date"`

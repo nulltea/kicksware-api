@@ -25,10 +25,13 @@ func (m *SneakerReference) ToNative() *model.SneakerReference {
 		Materials:      m.Materials,
 		Categories:     m.Categories,
 		ReleaseDate:    m.ReleaseDate.AsTime(),
+		ReleaseDateStr: m.ReleaseDateStr,
+		AddedDate:      m.AddedDate.AsTime(),
 		Price:          m.Price,
 		ImageLink:      m.ImageLink,
 		ImageLinks:     m.ImageLinks,
 		StadiumUrl:     m.StadiumUrl,
+		GoatUrl:        m.GoatUrl,
 		Likes:          int(m.Likes),
 		Liked:          m.Liked,
 	}
@@ -51,10 +54,13 @@ func (m *SneakerReference) FromNative(n *model.SneakerReference) *SneakerReferen
 	m.Materials = n.Materials
 	m.Categories = n.Categories
 	m.ReleaseDate = timestamppb.New(n.ReleaseDate)
+	m.ReleaseDateStr = n.ReleaseDateStr
+	m.AddedDate = timestamppb.New(n.AddedDate)
 	m.Price = n.Price
 	m.ImageLink = n.ImageLink
 	m.ImageLinks = n.ImageLinks
 	m.StadiumUrl = n.StadiumUrl
+	m.GoatUrl = n.GoatUrl
 	m.Liked = n.Liked
 	m.Likes = int64(n.Likes)
 	return m
