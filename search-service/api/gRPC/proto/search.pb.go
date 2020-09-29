@@ -9,6 +9,9 @@ package proto
 import (
 	context "context"
 	proto "github.com/golang/protobuf/proto"
+	proto3 "github.com/timoth-y/kicksware-api/product-service/api/gRPC/proto"
+	proto2 "github.com/timoth-y/kicksware-api/reference-service/api/gRPC/proto"
+	proto1 "github.com/timoth-y/kicksware-api/service-common/api/proto"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -34,8 +37,8 @@ type SearchTag struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Tag           string         `protobuf:"bytes,1,opt,name=tag,proto3" json:"tag,omitempty"`
-	RequestParams *RequestParams `protobuf:"bytes,2,opt,name=requestParams,proto3" json:"requestParams,omitempty"`
+	Tag           string                `protobuf:"bytes,1,opt,name=tag,proto3" json:"tag,omitempty"`
+	RequestParams *proto1.RequestParams `protobuf:"bytes,2,opt,name=requestParams,proto3" json:"requestParams,omitempty"`
 }
 
 func (x *SearchTag) Reset() {
@@ -77,7 +80,7 @@ func (x *SearchTag) GetTag() string {
 	return ""
 }
 
-func (x *SearchTag) GetRequestParams() *RequestParams {
+func (x *SearchTag) GetRequestParams() *proto1.RequestParams {
 	if x != nil {
 		return x.RequestParams
 	}
@@ -89,9 +92,9 @@ type SearchFilter struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Field         string         `protobuf:"bytes,1,opt,name=field,proto3" json:"field,omitempty"`
-	Value         string         `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
-	RequestParams *RequestParams `protobuf:"bytes,6,opt,name=requestParams,proto3" json:"requestParams,omitempty"`
+	Field         string                `protobuf:"bytes,1,opt,name=field,proto3" json:"field,omitempty"`
+	Value         string                `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	RequestParams *proto1.RequestParams `protobuf:"bytes,6,opt,name=requestParams,proto3" json:"requestParams,omitempty"`
 }
 
 func (x *SearchFilter) Reset() {
@@ -140,7 +143,7 @@ func (x *SearchFilter) GetValue() string {
 	return ""
 }
 
-func (x *SearchFilter) GetRequestParams() *RequestParams {
+func (x *SearchFilter) GetRequestParams() *proto1.RequestParams {
 	if x != nil {
 		return x.RequestParams
 	}
@@ -204,8 +207,12 @@ var file_search_proto_rawDesc = []byte{
 	0x79, 0x6e, 0x63, 0x12, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x50, 0x72, 0x6f, 0x64,
 	0x75, 0x63, 0x74, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x1a, 0x16, 0x2e, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x22, 0x00, 0x42, 0x11, 0x5a, 0x07, 0x2e, 0x3b, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0xaa, 0x02,
-	0x05, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x22, 0x00, 0x42, 0x49, 0x5a, 0x3f, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
+	0x6d, 0x2f, 0x74, 0x69, 0x6d, 0x6f, 0x74, 0x68, 0x2d, 0x79, 0x2f, 0x6b, 0x69, 0x63, 0x6b, 0x73,
+	0x77, 0x61, 0x72, 0x65, 0x2d, 0x61, 0x70, 0x69, 0x2f, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x2d,
+	0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x67, 0x52, 0x50, 0x43,
+	0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0xaa, 0x02, 0x05, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -222,13 +229,13 @@ func file_search_proto_rawDescGZIP() []byte {
 
 var file_search_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_search_proto_goTypes = []interface{}{
-	(*SearchTag)(nil),         // 0: proto.SearchTag
-	(*SearchFilter)(nil),      // 1: proto.SearchFilter
-	(*RequestParams)(nil),     // 2: proto.RequestParams
-	(*ReferenceFilter)(nil),   // 3: proto.ReferenceFilter
-	(*ProductFilter)(nil),     // 4: proto.ProductFilter
-	(*ReferenceResponse)(nil), // 5: proto.ReferenceResponse
-	(*ProductResponse)(nil),   // 6: proto.ProductResponse
+	(*SearchTag)(nil),                // 0: proto.SearchTag
+	(*SearchFilter)(nil),             // 1: proto.SearchFilter
+	(*proto1.RequestParams)(nil),     // 2: proto.RequestParams
+	(*proto2.ReferenceFilter)(nil),   // 3: proto.ReferenceFilter
+	(*proto3.ProductFilter)(nil),     // 4: proto.ProductFilter
+	(*proto2.ReferenceResponse)(nil), // 5: proto.ReferenceResponse
+	(*proto3.ProductResponse)(nil),   // 6: proto.ProductResponse
 }
 var file_search_proto_depIdxs = []int32{
 	2,  // 0: proto.SearchTag.requestParams:type_name -> proto.RequestParams
@@ -263,9 +270,6 @@ func file_search_proto_init() {
 	if File_search_proto != nil {
 		return
 	}
-	file_common_proto_init()
-	file_reference_proto_init()
-	file_product_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_search_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SearchTag); i {
@@ -324,12 +328,12 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type SearchReferencesServiceClient interface {
-	Search(ctx context.Context, in *SearchTag, opts ...grpc.CallOption) (*ReferenceResponse, error)
-	SearchBy(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*ReferenceResponse, error)
-	SearchSKU(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*ReferenceResponse, error)
-	SearchBrand(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*ReferenceResponse, error)
-	SearchModel(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*ReferenceResponse, error)
-	Sync(ctx context.Context, in *ReferenceFilter, opts ...grpc.CallOption) (*ReferenceResponse, error)
+	Search(ctx context.Context, in *SearchTag, opts ...grpc.CallOption) (*proto2.ReferenceResponse, error)
+	SearchBy(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*proto2.ReferenceResponse, error)
+	SearchSKU(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*proto2.ReferenceResponse, error)
+	SearchBrand(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*proto2.ReferenceResponse, error)
+	SearchModel(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*proto2.ReferenceResponse, error)
+	Sync(ctx context.Context, in *proto2.ReferenceFilter, opts ...grpc.CallOption) (*proto2.ReferenceResponse, error)
 }
 
 type searchReferencesServiceClient struct {
@@ -340,8 +344,8 @@ func NewSearchReferencesServiceClient(cc grpc.ClientConnInterface) SearchReferen
 	return &searchReferencesServiceClient{cc}
 }
 
-func (c *searchReferencesServiceClient) Search(ctx context.Context, in *SearchTag, opts ...grpc.CallOption) (*ReferenceResponse, error) {
-	out := new(ReferenceResponse)
+func (c *searchReferencesServiceClient) Search(ctx context.Context, in *SearchTag, opts ...grpc.CallOption) (*proto2.ReferenceResponse, error) {
+	out := new(proto2.ReferenceResponse)
 	err := c.cc.Invoke(ctx, "/proto.SearchReferencesService/Search", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -349,8 +353,8 @@ func (c *searchReferencesServiceClient) Search(ctx context.Context, in *SearchTa
 	return out, nil
 }
 
-func (c *searchReferencesServiceClient) SearchBy(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*ReferenceResponse, error) {
-	out := new(ReferenceResponse)
+func (c *searchReferencesServiceClient) SearchBy(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*proto2.ReferenceResponse, error) {
+	out := new(proto2.ReferenceResponse)
 	err := c.cc.Invoke(ctx, "/proto.SearchReferencesService/SearchBy", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -358,8 +362,8 @@ func (c *searchReferencesServiceClient) SearchBy(ctx context.Context, in *Search
 	return out, nil
 }
 
-func (c *searchReferencesServiceClient) SearchSKU(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*ReferenceResponse, error) {
-	out := new(ReferenceResponse)
+func (c *searchReferencesServiceClient) SearchSKU(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*proto2.ReferenceResponse, error) {
+	out := new(proto2.ReferenceResponse)
 	err := c.cc.Invoke(ctx, "/proto.SearchReferencesService/SearchSKU", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -367,8 +371,8 @@ func (c *searchReferencesServiceClient) SearchSKU(ctx context.Context, in *Searc
 	return out, nil
 }
 
-func (c *searchReferencesServiceClient) SearchBrand(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*ReferenceResponse, error) {
-	out := new(ReferenceResponse)
+func (c *searchReferencesServiceClient) SearchBrand(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*proto2.ReferenceResponse, error) {
+	out := new(proto2.ReferenceResponse)
 	err := c.cc.Invoke(ctx, "/proto.SearchReferencesService/SearchBrand", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -376,8 +380,8 @@ func (c *searchReferencesServiceClient) SearchBrand(ctx context.Context, in *Sea
 	return out, nil
 }
 
-func (c *searchReferencesServiceClient) SearchModel(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*ReferenceResponse, error) {
-	out := new(ReferenceResponse)
+func (c *searchReferencesServiceClient) SearchModel(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*proto2.ReferenceResponse, error) {
+	out := new(proto2.ReferenceResponse)
 	err := c.cc.Invoke(ctx, "/proto.SearchReferencesService/SearchModel", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -385,8 +389,8 @@ func (c *searchReferencesServiceClient) SearchModel(ctx context.Context, in *Sea
 	return out, nil
 }
 
-func (c *searchReferencesServiceClient) Sync(ctx context.Context, in *ReferenceFilter, opts ...grpc.CallOption) (*ReferenceResponse, error) {
-	out := new(ReferenceResponse)
+func (c *searchReferencesServiceClient) Sync(ctx context.Context, in *proto2.ReferenceFilter, opts ...grpc.CallOption) (*proto2.ReferenceResponse, error) {
+	out := new(proto2.ReferenceResponse)
 	err := c.cc.Invoke(ctx, "/proto.SearchReferencesService/Sync", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -396,34 +400,34 @@ func (c *searchReferencesServiceClient) Sync(ctx context.Context, in *ReferenceF
 
 // SearchReferencesServiceServer is the server API for SearchReferencesService service.
 type SearchReferencesServiceServer interface {
-	Search(context.Context, *SearchTag) (*ReferenceResponse, error)
-	SearchBy(context.Context, *SearchFilter) (*ReferenceResponse, error)
-	SearchSKU(context.Context, *SearchFilter) (*ReferenceResponse, error)
-	SearchBrand(context.Context, *SearchFilter) (*ReferenceResponse, error)
-	SearchModel(context.Context, *SearchFilter) (*ReferenceResponse, error)
-	Sync(context.Context, *ReferenceFilter) (*ReferenceResponse, error)
+	Search(context.Context, *SearchTag) (*proto2.ReferenceResponse, error)
+	SearchBy(context.Context, *SearchFilter) (*proto2.ReferenceResponse, error)
+	SearchSKU(context.Context, *SearchFilter) (*proto2.ReferenceResponse, error)
+	SearchBrand(context.Context, *SearchFilter) (*proto2.ReferenceResponse, error)
+	SearchModel(context.Context, *SearchFilter) (*proto2.ReferenceResponse, error)
+	Sync(context.Context, *proto2.ReferenceFilter) (*proto2.ReferenceResponse, error)
 }
 
 // UnimplementedSearchReferencesServiceServer can be embedded to have forward compatible implementations.
 type UnimplementedSearchReferencesServiceServer struct {
 }
 
-func (*UnimplementedSearchReferencesServiceServer) Search(context.Context, *SearchTag) (*ReferenceResponse, error) {
+func (*UnimplementedSearchReferencesServiceServer) Search(context.Context, *SearchTag) (*proto2.ReferenceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
 }
-func (*UnimplementedSearchReferencesServiceServer) SearchBy(context.Context, *SearchFilter) (*ReferenceResponse, error) {
+func (*UnimplementedSearchReferencesServiceServer) SearchBy(context.Context, *SearchFilter) (*proto2.ReferenceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchBy not implemented")
 }
-func (*UnimplementedSearchReferencesServiceServer) SearchSKU(context.Context, *SearchFilter) (*ReferenceResponse, error) {
+func (*UnimplementedSearchReferencesServiceServer) SearchSKU(context.Context, *SearchFilter) (*proto2.ReferenceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchSKU not implemented")
 }
-func (*UnimplementedSearchReferencesServiceServer) SearchBrand(context.Context, *SearchFilter) (*ReferenceResponse, error) {
+func (*UnimplementedSearchReferencesServiceServer) SearchBrand(context.Context, *SearchFilter) (*proto2.ReferenceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchBrand not implemented")
 }
-func (*UnimplementedSearchReferencesServiceServer) SearchModel(context.Context, *SearchFilter) (*ReferenceResponse, error) {
+func (*UnimplementedSearchReferencesServiceServer) SearchModel(context.Context, *SearchFilter) (*proto2.ReferenceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchModel not implemented")
 }
-func (*UnimplementedSearchReferencesServiceServer) Sync(context.Context, *ReferenceFilter) (*ReferenceResponse, error) {
+func (*UnimplementedSearchReferencesServiceServer) Sync(context.Context, *proto2.ReferenceFilter) (*proto2.ReferenceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Sync not implemented")
 }
 
@@ -522,7 +526,7 @@ func _SearchReferencesService_SearchModel_Handler(srv interface{}, ctx context.C
 }
 
 func _SearchReferencesService_Sync_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReferenceFilter)
+	in := new(proto2.ReferenceFilter)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -534,7 +538,7 @@ func _SearchReferencesService_Sync_Handler(srv interface{}, ctx context.Context,
 		FullMethod: "/proto.SearchReferencesService/Sync",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SearchReferencesServiceServer).Sync(ctx, req.(*ReferenceFilter))
+		return srv.(SearchReferencesServiceServer).Sync(ctx, req.(*proto2.ReferenceFilter))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -576,9 +580,9 @@ var _SearchReferencesService_serviceDesc = grpc.ServiceDesc{
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type SearchProductServiceClient interface {
-	Search(ctx context.Context, in *SearchTag, opts ...grpc.CallOption) (*ProductResponse, error)
-	SearchBy(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*ProductResponse, error)
-	Sync(ctx context.Context, in *ProductFilter, opts ...grpc.CallOption) (*ProductResponse, error)
+	Search(ctx context.Context, in *SearchTag, opts ...grpc.CallOption) (*proto3.ProductResponse, error)
+	SearchBy(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*proto3.ProductResponse, error)
+	Sync(ctx context.Context, in *proto3.ProductFilter, opts ...grpc.CallOption) (*proto3.ProductResponse, error)
 }
 
 type searchProductServiceClient struct {
@@ -589,8 +593,8 @@ func NewSearchProductServiceClient(cc grpc.ClientConnInterface) SearchProductSer
 	return &searchProductServiceClient{cc}
 }
 
-func (c *searchProductServiceClient) Search(ctx context.Context, in *SearchTag, opts ...grpc.CallOption) (*ProductResponse, error) {
-	out := new(ProductResponse)
+func (c *searchProductServiceClient) Search(ctx context.Context, in *SearchTag, opts ...grpc.CallOption) (*proto3.ProductResponse, error) {
+	out := new(proto3.ProductResponse)
 	err := c.cc.Invoke(ctx, "/proto.SearchProductService/Search", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -598,8 +602,8 @@ func (c *searchProductServiceClient) Search(ctx context.Context, in *SearchTag, 
 	return out, nil
 }
 
-func (c *searchProductServiceClient) SearchBy(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*ProductResponse, error) {
-	out := new(ProductResponse)
+func (c *searchProductServiceClient) SearchBy(ctx context.Context, in *SearchFilter, opts ...grpc.CallOption) (*proto3.ProductResponse, error) {
+	out := new(proto3.ProductResponse)
 	err := c.cc.Invoke(ctx, "/proto.SearchProductService/SearchBy", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -607,8 +611,8 @@ func (c *searchProductServiceClient) SearchBy(ctx context.Context, in *SearchFil
 	return out, nil
 }
 
-func (c *searchProductServiceClient) Sync(ctx context.Context, in *ProductFilter, opts ...grpc.CallOption) (*ProductResponse, error) {
-	out := new(ProductResponse)
+func (c *searchProductServiceClient) Sync(ctx context.Context, in *proto3.ProductFilter, opts ...grpc.CallOption) (*proto3.ProductResponse, error) {
+	out := new(proto3.ProductResponse)
 	err := c.cc.Invoke(ctx, "/proto.SearchProductService/Sync", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -618,22 +622,22 @@ func (c *searchProductServiceClient) Sync(ctx context.Context, in *ProductFilter
 
 // SearchProductServiceServer is the server API for SearchProductService service.
 type SearchProductServiceServer interface {
-	Search(context.Context, *SearchTag) (*ProductResponse, error)
-	SearchBy(context.Context, *SearchFilter) (*ProductResponse, error)
-	Sync(context.Context, *ProductFilter) (*ProductResponse, error)
+	Search(context.Context, *SearchTag) (*proto3.ProductResponse, error)
+	SearchBy(context.Context, *SearchFilter) (*proto3.ProductResponse, error)
+	Sync(context.Context, *proto3.ProductFilter) (*proto3.ProductResponse, error)
 }
 
 // UnimplementedSearchProductServiceServer can be embedded to have forward compatible implementations.
 type UnimplementedSearchProductServiceServer struct {
 }
 
-func (*UnimplementedSearchProductServiceServer) Search(context.Context, *SearchTag) (*ProductResponse, error) {
+func (*UnimplementedSearchProductServiceServer) Search(context.Context, *SearchTag) (*proto3.ProductResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
 }
-func (*UnimplementedSearchProductServiceServer) SearchBy(context.Context, *SearchFilter) (*ProductResponse, error) {
+func (*UnimplementedSearchProductServiceServer) SearchBy(context.Context, *SearchFilter) (*proto3.ProductResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchBy not implemented")
 }
-func (*UnimplementedSearchProductServiceServer) Sync(context.Context, *ProductFilter) (*ProductResponse, error) {
+func (*UnimplementedSearchProductServiceServer) Sync(context.Context, *proto3.ProductFilter) (*proto3.ProductResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Sync not implemented")
 }
 
@@ -678,7 +682,7 @@ func _SearchProductService_SearchBy_Handler(srv interface{}, ctx context.Context
 }
 
 func _SearchProductService_Sync_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProductFilter)
+	in := new(proto3.ProductFilter)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -690,7 +694,7 @@ func _SearchProductService_Sync_Handler(srv interface{}, ctx context.Context, de
 		FullMethod: "/proto.SearchProductService/Sync",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SearchProductServiceServer).Sync(ctx, req.(*ProductFilter))
+		return srv.(SearchProductServiceServer).Sync(ctx, req.(*proto3.ProductFilter))
 	}
 	return interceptor(ctx, in, info, handler)
 }

@@ -10,8 +10,10 @@ import (
 	"github.com/timoth-y/kicksware-api/reference-service/core/model"
 	gRPCSrv "github.com/timoth-y/kicksware-api/service-common/service/gRPC"
 
-	"github.com/timoth-y/kicksware-api/search-service/api/gRPC/proto"
-	"github.com/timoth-y/kicksware-api/search-service/core/meta"
+	"github.com/timoth-y/kicksware-api/reference-service/api/gRPC/proto"
+	common "github.com/timoth-y/kicksware-api/service-common/api/proto"
+	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+
 	"github.com/timoth-y/kicksware-api/search-service/core/pipe"
 	"github.com/timoth-y/kicksware-api/search-service/env"
 )
@@ -93,7 +95,7 @@ func (p *referencePipe) FetchQuery(query meta.RequestQuery, params *meta.Request
 	}
 	filter := &proto.ReferenceFilter{
 		RequestQuery: str,
-		RequestParams: proto.RequestParams{}.FromNative(params),
+		RequestParams: common.RequestParams{}.FromNative(params),
 	}
 	resp, err := p.client.GetReferences(ctx, filter); if err != nil {
 		return nil, err

@@ -3,18 +3,16 @@ package gRPC
 import (
 	"context"
 
+	protoRef "github.com/timoth-y/kicksware-api/reference-service/api/gRPC/proto"
 	"github.com/timoth-y/kicksware-api/reference-service/core/model"
+	"github.com/timoth-y/kicksware-api/service-common/core/meta"
 
 	"github.com/timoth-y/kicksware-api/search-service/api/gRPC/proto"
-	"github.com/timoth-y/kicksware-api/search-service/core/meta"
 	"github.com/timoth-y/kicksware-api/search-service/core/service"
 	"github.com/timoth-y/kicksware-api/search-service/env"
 )
 
-//go:generate protoc --proto_path=../../../service-protos --go_out=plugins=grpc:proto/. reference.proto
-//go:generate protoc --proto_path=../../../service-protos --go_out=plugins=grpc:proto/. product.proto
-//go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. common.proto
-//go:generate protoc --proto_path=../../../service-protos --go_out=plugins=grpc:proto/. search.proto
+//go:generate protoc --proto_path=../../../service-protos --go_out=plugins=grpc,paths=source_relative:proto/. search.proto
 
 
 type Handler struct {
@@ -33,7 +31,7 @@ func NewHandler(search service.ReferenceSearchService, sync service.ReferenceSyn
 	}
 }
 
-func (h *Handler) Search(ctx context.Context, tag *proto.SearchTag) (resp *proto.ReferenceResponse, err error) {
+func (h *Handler) Search(ctx context.Context, tag *proto.SearchTag) (resp *protoRef.ReferenceResponse, err error) {
 	var params *meta.RequestParams; if tag != nil && tag.RequestParams != nil {
 		params = tag.RequestParams.ToNative()
 	}
@@ -41,14 +39,14 @@ func (h *Handler) Search(ctx context.Context, tag *proto.SearchTag) (resp *proto
 	refs, err :=  h.search.Search(tag.Tag, params); if err != nil {
 		return
 	}
-	resp = &proto.ReferenceResponse{
-		References: proto.NativeToReferences(refs),
+	resp = &protoRef.ReferenceResponse{
+		References: protoRef.NativeToReferences(refs),
 		Count: int64(len(refs)),
 	}
 	return
 }
 
-func (h *Handler) SearchBy(ctx context.Context, filter *proto.SearchFilter) (resp *proto.ReferenceResponse, err error) {
+func (h *Handler) SearchBy(ctx context.Context, filter *proto.SearchFilter) (resp *protoRef.ReferenceResponse, err error) {
 	var refs []*model.SneakerReference
 	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
 		params = filter.RequestParams.ToNative()
@@ -58,14 +56,14 @@ func (h *Handler) SearchBy(ctx context.Context, filter *proto.SearchFilter) (res
 		return
 	}
 
-	resp = &proto.ReferenceResponse{
-		References: proto.NativeToReferences(refs),
+	resp = &protoRef.ReferenceResponse{
+		References: protoRef.NativeToReferences(refs),
 		Count: int64(len(refs)),
 	}
 	return
 }
 
-func (h *Handler) SearchSKU(ctx context.Context, filter *proto.SearchFilter) (resp *proto.ReferenceResponse, err error) {
+func (h *Handler) SearchSKU(ctx context.Context, filter *proto.SearchFilter) (resp *protoRef.ReferenceResponse, err error) {
 	var refs []*model.SneakerReference
 	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
 		params = filter.RequestParams.ToNative()
@@ -75,14 +73,14 @@ func (h *Handler) SearchSKU(ctx context.Context, filter *proto.SearchFilter) (re
 		return
 	}
 
-	resp = &proto.ReferenceResponse{
-		References: proto.NativeToReferences(refs),
+	resp = &protoRef.ReferenceResponse{
+		References: protoRef.NativeToReferences(refs),
 		Count: int64(len(refs)),
 	}
 	return
 }
 
-func (h *Handler) SearchBrand(ctx context.Context, filter *proto.SearchFilter) (resp *proto.ReferenceResponse, err error) {
+func (h *Handler) SearchBrand(ctx context.Context, filter *proto.SearchFilter) (resp *protoRef.ReferenceResponse, err error) {
 	var refs []*model.SneakerReference
 	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
 		params = filter.RequestParams.ToNative()
@@ -92,14 +90,14 @@ func (h *Handler) SearchBrand(ctx context.Context, filter *proto.SearchFilter) (
 		return
 	}
 
-	resp = &proto.ReferenceResponse{
-		References: proto.NativeToReferences(refs),
+	resp = &protoRef.ReferenceResponse{
+		References: protoRef.NativeToReferences(refs),
 		Count: int64(len(refs)),
 	}
 	return
 }
 
-func (h *Handler) SearchModel(ctx context.Context, filter *proto.SearchFilter) (resp *proto.ReferenceResponse, err error) {
+func (h *Handler) SearchModel(ctx context.Context, filter *proto.SearchFilter) (resp *protoRef.ReferenceResponse, err error) {
 	var refs []*model.SneakerReference
 	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
 		params = filter.RequestParams.ToNative()
@@ -109,14 +107,14 @@ func (h *Handler) SearchModel(ctx context.Context, filter *proto.SearchFilter) (
 		return
 	}
 
-	resp = &proto.ReferenceResponse{
-		References: proto.NativeToReferences(refs),
+	resp = &protoRef.ReferenceResponse{
+		References: protoRef.NativeToReferences(refs),
 		Count: int64(len(refs)),
 	}
 	return
 }
 
-func (h *Handler) Sync(ctx context.Context, filter *proto.ReferenceFilter) (resp *proto.ReferenceResponse, err error) {
+func (h *Handler) Sync(ctx context.Context, filter *protoRef.ReferenceFilter) (resp *protoRef.ReferenceResponse, err error) {
 	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
 		params = filter.RequestParams.ToNative()
 	}
@@ -131,6 +129,6 @@ func (h *Handler) Sync(ctx context.Context, filter *proto.ReferenceFilter) (resp
 	} else {
 		err = h.sync.Sync(filter.ReferenceID, params)
 	}
-	resp = &proto.ReferenceResponse{}
+	resp = &protoRef.ReferenceResponse{}
 	return
 }
