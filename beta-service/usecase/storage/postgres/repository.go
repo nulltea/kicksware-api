@@ -9,11 +9,11 @@ import (
 	"github.com/pkg/errors"
 	"github.com/timoth-y/kicksware-api/service-common/util"
 
-	"github.com/timoth-y/kicksware-api/beta-service/core/meta"
-	"github.com/timoth-y/kicksware-api/beta-service/core/model"
-	"github.com/timoth-y/kicksware-api/beta-service/core/repo"
-	"github.com/timoth-y/kicksware-api/beta-service/env"
-	"github.com/timoth-y/kicksware-api/beta-service/usecase/business"
+	"go.kicksware.com/kicksware/api/beta-service/core/meta"
+	"go.kicksware.com/kicksware/api/beta-service/core/model"
+	"go.kicksware.com/kicksware/api/beta-service/core/repo"
+	"go.kicksware.com/kicksware/api/beta-service/env"
+	"go.kicksware.com/kicksware/api/beta-service/usecase/business"
 )
 
 type repository struct {

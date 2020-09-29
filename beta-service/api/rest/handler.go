@@ -8,13 +8,13 @@ import (
 	"github.com/pkg/errors"
 	"github.com/timoth-y/kicksware-api/service-common/util"
 
-	"github.com/timoth-y/kicksware-api/beta-service/core/meta"
-	"github.com/timoth-y/kicksware-api/beta-service/core/model"
-	"github.com/timoth-y/kicksware-api/beta-service/core/service"
-	"github.com/timoth-y/kicksware-api/beta-service/env"
-	"github.com/timoth-y/kicksware-api/beta-service/usecase/business"
-	"github.com/timoth-y/kicksware-api/beta-service/usecase/serializer/json"
-	"github.com/timoth-y/kicksware-api/beta-service/usecase/serializer/msg"
+	"go.kicksware.com/kicksware/api/beta-service/core/meta"
+	"go.kicksware.com/kicksware/api/beta-service/core/model"
+	"go.kicksware.com/kicksware/api/beta-service/core/service"
+	"go.kicksware.com/kicksware/api/beta-service/env"
+	"go.kicksware.com/kicksware/api/beta-service/usecase/business"
+	"go.kicksware.com/kicksware/api/beta-service/usecase/serializer/json"
+	"go.kicksware.com/kicksware/api/beta-service/usecase/serializer/msg"
 )
 
 type Handler struct {

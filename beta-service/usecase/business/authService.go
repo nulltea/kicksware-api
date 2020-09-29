@@ -5,8 +5,8 @@ import (
 
 	"github.com/timoth-y/kicksware-api/service-common/util"
 
-	"github.com/timoth-y/kicksware-api/beta-service/core/service"
-	"github.com/timoth-y/kicksware-api/beta-service/env"
+	"go.kicksware.com/kicksware/api/beta-service/core/service"
+	"go.kicksware.com/kicksware/api/beta-service/env"
 )
 
 type authService struct {
