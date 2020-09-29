@@ -6,16 +6,16 @@ import (
 	"github.com/pkg/errors"
 	"github.com/timoth-y/kicksware-api/service-common/util"
 
+	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+
 	"github.com/timoth-y/kicksware-api/reference-service/api/gRPC/proto"
-	"github.com/timoth-y/kicksware-api/reference-service/core/meta"
 	"github.com/timoth-y/kicksware-api/reference-service/core/model"
 	"github.com/timoth-y/kicksware-api/reference-service/core/service"
 	"github.com/timoth-y/kicksware-api/reference-service/env"
 	"github.com/timoth-y/kicksware-api/reference-service/usecase/business"
 )
 
-//go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. common.proto
-//go:generate protoc --proto_path=../../../service-protos --go_out=plugins=grpc:proto/. reference.proto
+//go:generate protoc --proto_path=../../../service-protos --go_out=plugins=grpc,paths=source_relative:proto/. reference.proto
 
 type Handler struct {
 	service     service.SneakerReferenceService

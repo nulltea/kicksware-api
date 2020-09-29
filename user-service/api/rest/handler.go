@@ -9,6 +9,8 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/pkg/errors"
 
+	common "github.com/timoth-y/kicksware-api/service-common/core/meta"
+
 	"github.com/timoth-y/kicksware-api/user-service/core/meta"
 	"github.com/timoth-y/kicksware-api/user-service/core/model"
 	"github.com/timoth-y/kicksware-api/user-service/core/service"
@@ -207,7 +209,7 @@ func (h *Handler) getRequestBody(r *http.Request) (*model.User, error) {
 	return body, nil
 }
 
-func (h *Handler) getRequestQuery(r *http.Request) (meta.RequestQuery, error) {
+func (h *Handler) getRequestQuery(r *http.Request) (common.RequestQuery, error) {
 	contentType := r.Header.Get("Content-Type")
 	requestBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {

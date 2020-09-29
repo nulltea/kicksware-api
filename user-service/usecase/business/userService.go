@@ -12,7 +12,8 @@ import (
 	"github.com/rs/xid"
 	"gopkg.in/dealancer/validate.v2"
 
-	"github.com/timoth-y/kicksware-api/user-service/core/meta"
+	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+
 	"github.com/timoth-y/kicksware-api/user-service/core/model"
 	"github.com/timoth-y/kicksware-api/user-service/core/repo"
 	"github.com/timoth-y/kicksware-api/user-service/core/service"

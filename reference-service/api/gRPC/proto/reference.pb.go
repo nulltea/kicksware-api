@@ -11,6 +11,7 @@ import (
 	proto "github.com/golang/protobuf/proto"
 	_struct "github.com/golang/protobuf/ptypes/struct"
 	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	proto1 "github.com/timoth-y/kicksware-api/service-common/api/proto"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -433,9 +434,9 @@ type ReferenceFilter struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ReferenceID   []string        `protobuf:"bytes,1,rep,name=referenceID,proto3" json:"referenceID,omitempty"`
-	RequestQuery  *_struct.Struct `protobuf:"bytes,2,opt,name=requestQuery,proto3" json:"requestQuery,omitempty"`
-	RequestParams *RequestParams  `protobuf:"bytes,3,opt,name=requestParams,proto3" json:"requestParams,omitempty"`
+	ReferenceID   []string              `protobuf:"bytes,1,rep,name=referenceID,proto3" json:"referenceID,omitempty"`
+	RequestQuery  *_struct.Struct       `protobuf:"bytes,2,opt,name=requestQuery,proto3" json:"requestQuery,omitempty"`
+	RequestParams *proto1.RequestParams `protobuf:"bytes,3,opt,name=requestParams,proto3" json:"requestParams,omitempty"`
 }
 
 func (x *ReferenceFilter) Reset() {
@@ -484,7 +485,7 @@ func (x *ReferenceFilter) GetRequestQuery() *_struct.Struct {
 	return nil
 }
 
-func (x *ReferenceFilter) GetRequestParams() *RequestParams {
+func (x *ReferenceFilter) GetRequestParams() *proto1.RequestParams {
 	if x != nil {
 		return x.RequestParams
 	}
@@ -496,8 +497,8 @@ type ReferenceInput struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	References    []*SneakerReference `protobuf:"bytes,1,rep,name=references,proto3" json:"references,omitempty"`
-	RequestParams *RequestParams      `protobuf:"bytes,2,opt,name=requestParams,proto3" json:"requestParams,omitempty"`
+	References    []*SneakerReference   `protobuf:"bytes,1,rep,name=references,proto3" json:"references,omitempty"`
+	RequestParams *proto1.RequestParams `protobuf:"bytes,2,opt,name=requestParams,proto3" json:"requestParams,omitempty"`
 }
 
 func (x *ReferenceInput) Reset() {
@@ -539,7 +540,7 @@ func (x *ReferenceInput) GetReferences() []*SneakerReference {
 	return nil
 }
 
-func (x *ReferenceInput) GetRequestParams() *RequestParams {
+func (x *ReferenceInput) GetRequestParams() *proto1.RequestParams {
 	if x != nil {
 		return x.RequestParams
 	}
@@ -731,8 +732,12 @@ var file_reference_proto_rawDesc = []byte{
 	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x46, 0x69,
 	0x6c, 0x74, 0x65, 0x72, 0x1a, 0x18, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x52, 0x65, 0x66,
 	0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00,
-	0x42, 0x11, 0x5a, 0x07, 0x2e, 0x3b, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0xaa, 0x02, 0x05, 0x50, 0x72,
-	0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x42, 0x4c, 0x5a, 0x42, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x74,
+	0x69, 0x6d, 0x6f, 0x74, 0x68, 0x2d, 0x79, 0x2f, 0x6b, 0x69, 0x63, 0x6b, 0x73, 0x77, 0x61, 0x72,
+	0x65, 0x2d, 0x61, 0x70, 0x69, 0x2f, 0x72, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x2d,
+	0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x67, 0x52, 0x50, 0x43,
+	0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0xaa, 0x02, 0x05, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -749,15 +754,15 @@ func file_reference_proto_rawDescGZIP() []byte {
 
 var file_reference_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_reference_proto_goTypes = []interface{}{
-	(*SneakerBrand)(nil),        // 0: proto.SneakerBrand
-	(*SneakerModel)(nil),        // 1: proto.SneakerModel
-	(*SneakerReference)(nil),    // 2: proto.SneakerReference
-	(*ReferenceFilter)(nil),     // 3: proto.ReferenceFilter
-	(*ReferenceInput)(nil),      // 4: proto.ReferenceInput
-	(*ReferenceResponse)(nil),   // 5: proto.ReferenceResponse
-	(*timestamp.Timestamp)(nil), // 6: google.protobuf.Timestamp
-	(*_struct.Struct)(nil),      // 7: google.protobuf.Struct
-	(*RequestParams)(nil),       // 8: proto.RequestParams
+	(*SneakerBrand)(nil),         // 0: proto.SneakerBrand
+	(*SneakerModel)(nil),         // 1: proto.SneakerModel
+	(*SneakerReference)(nil),     // 2: proto.SneakerReference
+	(*ReferenceFilter)(nil),      // 3: proto.ReferenceFilter
+	(*ReferenceInput)(nil),       // 4: proto.ReferenceInput
+	(*ReferenceResponse)(nil),    // 5: proto.ReferenceResponse
+	(*timestamp.Timestamp)(nil),  // 6: google.protobuf.Timestamp
+	(*_struct.Struct)(nil),       // 7: google.protobuf.Struct
+	(*proto1.RequestParams)(nil), // 8: proto.RequestParams
 }
 var file_reference_proto_depIdxs = []int32{
 	0,  // 0: proto.SneakerReference.brand:type_name -> proto.SneakerBrand
@@ -792,7 +797,6 @@ func file_reference_proto_init() {
 	if File_reference_proto != nil {
 		return
 	}
-	file_common_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_reference_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SneakerBrand); i {

@@ -6,7 +6,7 @@ import "common.proto";
 import "reference.proto";
 import "product.proto";
 
-option go_package = ".;proto";
+option go_package = "github.com/timoth-y/kicksware-api/search-service/api/gRPC/proto";
 option csharp_namespace = "Proto";
 
 message SearchTag {

@@ -9,7 +9,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/timoth-y/kicksware-api/service-common/util"
 
-	"github.com/timoth-y/kicksware-api/product-service/core/meta"
+	"github.com/timoth-y/kicksware-api/service-common/core/meta"
 	"github.com/timoth-y/kicksware-api/product-service/core/model"
 	"github.com/timoth-y/kicksware-api/product-service/core/service"
 	"github.com/timoth-y/kicksware-api/product-service/env"

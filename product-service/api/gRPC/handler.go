@@ -6,16 +6,16 @@ import (
 	"github.com/golang/glog"
 	"github.com/pkg/errors"
 
+	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+
 	"github.com/timoth-y/kicksware-api/product-service/api/gRPC/proto"
-	"github.com/timoth-y/kicksware-api/product-service/core/meta"
 	"github.com/timoth-y/kicksware-api/product-service/core/model"
 	"github.com/timoth-y/kicksware-api/product-service/core/service"
 	"github.com/timoth-y/kicksware-api/product-service/env"
 	"github.com/timoth-y/kicksware-api/product-service/usecase/business"
 )
 
-//go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. common.proto
-//go:generate protoc --proto_path=../../../service-protos --go_out=plugins=grpc:proto/. product.proto
+//go:generate protoc --proto_path=../../../service-protos --go_out=plugins=grpc,paths=source_relative:proto/. product.proto
 
 type Handler struct {
 	service     service.SneakerProductService
@@ -136,4 +136,16 @@ func (h *Handler) DeleteProducts(ctx context.Context, filter *proto.ProductFilte
 		Count: int64(count),
 	}
 	return
+}
+
+func (h *Handler) UploadImages(ctx context.Context, input *proto.UploadImageRequest) (*proto.ProductResponse, error) {
+	panic("implement me")
+}
+
+func (h *Handler) RequestAnalysis(ctx context.Context, input *proto.ProductInput) (*proto.AnalysisResponse, error) {
+	panic("implement me")
+}
+
+func (h *Handler) RequestPrediction(ctx context.Context, request *proto.PredictionRequest) (*proto.ProductResponse, error) {
+	panic("implement me")
 }

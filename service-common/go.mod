@@ -3,6 +3,7 @@ module github.com/timoth-y/kicksware-api/service-common
 go 1.14
 
 require (
+	github.com/Masterminds/squirrel v1.4.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/fatih/structs v1.1.0
 	github.com/go-chi/chi v4.1.2+incompatible
@@ -20,4 +21,5 @@ require (
 	go.elastic.co/apm/module/apmhttp v1.8.0
 	go.mongodb.org/mongo-driver v1.4.1
 	google.golang.org/grpc v1.32.0
+	google.golang.org/protobuf v1.25.0
 )

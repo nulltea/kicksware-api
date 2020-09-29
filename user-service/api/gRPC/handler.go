@@ -1,18 +1,18 @@
 package gRPC
 
-//go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. common.proto
-//go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. user.proto
-//go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. auth.proto
-//go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. mail.proto
-//go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. interact.proto
+//go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc,paths=source_relative:proto/. user.proto
+//go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc,paths=source_relative:proto/. auth.proto
+//go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc,paths=source_relative:proto/. mail.proto
+//go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc,paths=source_relative:proto/. interact.proto
 
 import (
 	"context"
 
 	"github.com/pkg/errors"
 
+	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+
 	"github.com/timoth-y/kicksware-api/user-service/api/gRPC/proto"
-	"github.com/timoth-y/kicksware-api/user-service/core/meta"
 	"github.com/timoth-y/kicksware-api/user-service/core/model"
 	"github.com/timoth-y/kicksware-api/user-service/core/service"
 	"github.com/timoth-y/kicksware-api/user-service/env"

@@ -4,19 +4,19 @@ import (
 	"context"
 	"crypto/tls"
 	"crypto/x509"
+	"io/ioutil"
+	"time"
+
 	"github.com/pkg/errors"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
-	"io/ioutil"
-	"time"
 
 	"github.com/golang/glog"
-	TLS "github.com/timoth-y/kicksware-api/service-common/core/meta"
+	"github.com/timoth-y/kicksware-api/service-common/core/meta"
 	"github.com/timoth-y/kicksware-api/service-common/util"
 
-	"github.com/timoth-y/kicksware-api/user-service/core/meta"
 	"github.com/timoth-y/kicksware-api/user-service/core/model"
 	"github.com/timoth-y/kicksware-api/user-service/core/repo"
 	"github.com/timoth-y/kicksware-api/user-service/env"
@@ -65,7 +65,7 @@ func newMongoClient(config env.DataStoreConfig) (*mongo.Client, error) {
 	return client, nil
 }
 
-func newTLSConfig(tlsConfig *TLS.TLSCertificate) *tls.Config {
+func newTLSConfig(tlsConfig *meta.TLSCertificate) *tls.Config {
 	if !tlsConfig.EnableTLS {
 		return nil
 	}

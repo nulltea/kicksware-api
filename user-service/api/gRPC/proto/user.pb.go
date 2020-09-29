@@ -11,6 +11,7 @@ import (
 	proto "github.com/golang/protobuf/proto"
 	_struct "github.com/golang/protobuf/ptypes/struct"
 	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	proto1 "github.com/timoth-y/kicksware-api/service-common/api/proto"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -495,9 +496,9 @@ type UserFilter struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	UserID        []string        `protobuf:"bytes,1,rep,name=userID,proto3" json:"userID,omitempty"`
-	RequestQuery  *_struct.Struct `protobuf:"bytes,2,opt,name=requestQuery,proto3" json:"requestQuery,omitempty"`
-	RequestParams *RequestParams  `protobuf:"bytes,3,opt,name=requestParams,proto3" json:"requestParams,omitempty"`
+	UserID        []string              `protobuf:"bytes,1,rep,name=userID,proto3" json:"userID,omitempty"`
+	RequestQuery  *_struct.Struct       `protobuf:"bytes,2,opt,name=requestQuery,proto3" json:"requestQuery,omitempty"`
+	RequestParams *proto1.RequestParams `protobuf:"bytes,3,opt,name=requestParams,proto3" json:"requestParams,omitempty"`
 }
 
 func (x *UserFilter) Reset() {
@@ -546,7 +547,7 @@ func (x *UserFilter) GetRequestQuery() *_struct.Struct {
 	return nil
 }
 
-func (x *UserFilter) GetRequestParams() *RequestParams {
+func (x *UserFilter) GetRequestParams() *proto1.RequestParams {
 	if x != nil {
 		return x.RequestParams
 	}
@@ -558,8 +559,8 @@ type UserInput struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Users         []*User        `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
-	RequestParams *RequestParams `protobuf:"bytes,2,opt,name=requestParams,proto3" json:"requestParams,omitempty"`
+	Users         []*User               `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
+	RequestParams *proto1.RequestParams `protobuf:"bytes,2,opt,name=requestParams,proto3" json:"requestParams,omitempty"`
 }
 
 func (x *UserInput) Reset() {
@@ -601,7 +602,7 @@ func (x *UserInput) GetUsers() []*User {
 	return nil
 }
 
-func (x *UserInput) GetRequestParams() *RequestParams {
+func (x *UserInput) GetRequestParams() *proto1.RequestParams {
 	if x != nil {
 		return x.RequestParams
 	}
@@ -839,8 +840,12 @@ var file_user_proto_rawDesc = []byte{
 	0x31, 0x0a, 0x08, 0x47, 0x65, 0x74, 0x54, 0x68, 0x65, 0x6d, 0x65, 0x12, 0x11, 0x2e, 0x70, 0x72,
 	0x6f, 0x74, 0x6f, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x1a, 0x10,
 	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x54, 0x68, 0x65, 0x6d, 0x65,
-	0x22, 0x00, 0x42, 0x11, 0x5a, 0x07, 0x2e, 0x3b, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0xaa, 0x02, 0x05,
-	0x50, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x22, 0x00, 0x42, 0x47, 0x5a, 0x3d, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
+	0x2f, 0x74, 0x69, 0x6d, 0x6f, 0x74, 0x68, 0x2d, 0x79, 0x2f, 0x6b, 0x69, 0x63, 0x6b, 0x73, 0x77,
+	0x61, 0x72, 0x65, 0x2d, 0x61, 0x70, 0x69, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x2d, 0x73, 0x65, 0x72,
+	0x76, 0x69, 0x63, 0x65, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x67, 0x52, 0x50, 0x43, 0x2f, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0xaa, 0x02, 0x05, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -857,19 +862,19 @@ func file_user_proto_rawDescGZIP() []byte {
 
 var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_user_proto_goTypes = []interface{}{
-	(*User)(nil),                // 0: proto.User
-	(*AddressInfo)(nil),         // 1: proto.AddressInfo
-	(*PaymentInfo)(nil),         // 2: proto.PaymentInfo
-	(*YearMonth)(nil),           // 3: proto.YearMonth
-	(*UserSettings)(nil),        // 4: proto.UserSettings
-	(*UserFilter)(nil),          // 5: proto.UserFilter
-	(*UserInput)(nil),           // 6: proto.UserInput
-	(*UserResponse)(nil),        // 7: proto.UserResponse
-	(*UserTheme)(nil),           // 8: proto.UserTheme
-	nil,                         // 9: proto.User.ConnectedProvidersEntry
-	(*timestamp.Timestamp)(nil), // 10: google.protobuf.Timestamp
-	(*_struct.Struct)(nil),      // 11: google.protobuf.Struct
-	(*RequestParams)(nil),       // 12: proto.RequestParams
+	(*User)(nil),                 // 0: proto.User
+	(*AddressInfo)(nil),          // 1: proto.AddressInfo
+	(*PaymentInfo)(nil),          // 2: proto.PaymentInfo
+	(*YearMonth)(nil),            // 3: proto.YearMonth
+	(*UserSettings)(nil),         // 4: proto.UserSettings
+	(*UserFilter)(nil),           // 5: proto.UserFilter
+	(*UserInput)(nil),            // 6: proto.UserInput
+	(*UserResponse)(nil),         // 7: proto.UserResponse
+	(*UserTheme)(nil),            // 8: proto.UserTheme
+	nil,                          // 9: proto.User.ConnectedProvidersEntry
+	(*timestamp.Timestamp)(nil),  // 10: google.protobuf.Timestamp
+	(*_struct.Struct)(nil),       // 11: google.protobuf.Struct
+	(*proto1.RequestParams)(nil), // 12: proto.RequestParams
 }
 var file_user_proto_depIdxs = []int32{
 	2,  // 0: proto.User.paymentInfo:type_name -> proto.PaymentInfo
@@ -907,7 +912,6 @@ func file_user_proto_init() {
 	if File_user_proto != nil {
 		return
 	}
-	file_common_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_user_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*User); i {

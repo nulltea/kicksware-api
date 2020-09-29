@@ -55,16 +55,3 @@ func (p *RequestParams) UserID() string {
 func (p *RequestParams) SetUserID(userID string) {
 	p.userID = userID
 }
-
-func (p *RequestParams) ApplyParams(users []*model.SneakerReference) []*model.SneakerReference {
-	if p.sortBy != "" {
-		// business.NewSorter(users, p.sortBy).Sort(p.sortDirection == "desc")
-	}
-	if p.offset != 0 {
-		users = users[p.offset:]
-	}
-	if p.limit != 0 && p.limit < len(users) {
-		users = users[:p.limit]
-	}
-	return users
-}

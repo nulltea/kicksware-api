@@ -9,10 +9,10 @@ import (
 )
 
 var (
-	ErrPasswordInvalid       = errors.New("github.com/timoth-y/kicksware-api/user-service/authService: invalid user password")
-	ErrNotConfirmed          = errors.New("github.com/timoth-y/kicksware-api/user-service/authService: user email not confirmed")
-	ErrInvalidRemoteID       = errors.New("github.com/timoth-y/kicksware-api/user-service/authService: invalid remote OAuth identifier")
-	ErrInvalidRemoteProvider = errors.New("github.com/timoth-y/kicksware-api/user-service/authService: invalid remote OAuth provider")
+	ErrPasswordInvalid       = errors.New("user-service/authService: invalid user password")
+	ErrNotConfirmed          = errors.New("user-service/authService: user email not confirmed")
+	ErrInvalidRemoteID       = errors.New("user-service/authService: invalid remote OAuth identifier")
+	ErrInvalidRemoteProvider = errors.New("user-service/authService: invalid remote OAuth provider")
 )
 
 type AuthService interface {

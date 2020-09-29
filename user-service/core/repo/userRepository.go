@@ -1,7 +1,8 @@
 package repo
 
 import (
-	"github.com/timoth-y/kicksware-api/user-service/core/meta"
+	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+
 	"github.com/timoth-y/kicksware-api/user-service/core/model"
 )
 

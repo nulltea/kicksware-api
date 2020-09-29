@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/timoth-y/kicksware-api/product-service/core/meta"
+	"github.com/timoth-y/kicksware-api/service-common/core/meta"
 	"github.com/timoth-y/kicksware-api/product-service/core/model"
 )
 
