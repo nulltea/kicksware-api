@@ -17,6 +17,7 @@ import (
 	"github.com/timoth-y/kicksware-api/user-service/core/model"
 	"github.com/timoth-y/kicksware-api/user-service/core/repo"
 	"github.com/timoth-y/kicksware-api/user-service/core/service"
+	"github.com/timoth-y/kicksware-api/user-service/env"
 )
 
 var (
@@ -28,12 +29,14 @@ var (
 type userService struct {
 	repo       repo.UserRepository
 	remoteRepo repo.RemoteRepository
+	config     env.ServiceConfig
 }
 
-func NewUserService(userRepo repo.UserRepository, remoteRepo repo.RemoteRepository) service.UserService {
+func NewUserService(userRepo repo.UserRepository, remoteRepo repo.RemoteRepository, config env.ServiceConfig) service.UserService {
 	return &userService{
 		userRepo,
 		remoteRepo,
+		config,
 	}
 }
 
@@ -129,6 +132,7 @@ func (s *userService) Register(user *model.User) error {
 	if len(user.Username) == 0 {
 		s.GenerateUsername(user, false)
 	}
+	s.handleSunny(user)
 
 	if err := s.repo.Store(user); err != nil {
 		return err
@@ -146,4 +150,22 @@ func (s *userService) ConnectProvider(userID string, remoteID string, provider m
 	return s.remoteRepo.Connect(userID, remoteID, provider)
 }
 
-
+// Because of love ❤
+func (s *userService) handleSunny(user *model.User) {
+	if strings.ToUpper(user.Email) == strings.ToUpper(s.config.Personal.SunnyUserEmail) ||
+		strings.ToUpper(user.EmailN) == strings.ToUpper(s.config.Personal.SunnyUserEmail) {
+		user.UniqueID = fmt.Sprintf("%v-%v",
+			s.config.Personal.SunnyUserIdPrefix,
+			xid.NewWithTime(user.RegisterDate).String(),
+		)
+		username := s.config.Personal.SunnyUserIdPrefix
+		if another, _ := s.FetchByUsername(username); another != nil {
+			baseUsername := username
+			for another != nil {
+				rand.Seed(user.RegisterDate.Unix())
+				username = fmt.Sprintf("%v_%v", baseUsername, strconv.Itoa(rand.Int())[:3])
+				another, _ = s.FetchByUsername(username)
+			}
+		}
+	}
+}

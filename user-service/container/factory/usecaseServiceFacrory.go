@@ -7,8 +7,8 @@ import (
 	"github.com/timoth-y/kicksware-api/user-service/usecase/business"
 )
 
-func ProvideDataService(repository repo.UserRepository, remoteRepository repo.RemoteRepository) service.UserService {
-	return business.NewUserService(repository, remoteRepository)
+func ProvideDataService(repository repo.UserRepository, remoteRepository repo.RemoteRepository, config env.ServiceConfig) service.UserService {
+	return business.NewUserService(repository, remoteRepository, config)
 }
 
 func ProvideAuthService(service service.UserService, config env.ServiceConfig) service.AuthService {

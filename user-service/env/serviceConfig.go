@@ -17,6 +17,7 @@ type ServiceConfig struct {
 	Mongo        DataStoreConfig `yaml:"mongoConfig"`
 	Postgres     DataStoreConfig `yaml:"postgresConfig"`
 	Redis        DataStoreConfig `yaml:"redisConfig"`
+	Personal     PersonalConfig  `yaml:"personalConfig"`
 }
 
 type CommonConfig struct {
@@ -57,6 +58,11 @@ type MailConfig struct {
 	VerifyEmailTemplate   string `yaml:"verifyEmailTemplate"`
 	ResetPasswordTemplate string `yaml:"resetPasswordTemplate"`
 	NotificationTemplate  string `yaml:"notificationTemplate"`
+}
+
+type PersonalConfig struct {
+	SunnyUserEmail    string `yaml:"sunnyUserEmail"`
+	SunnyUserIdPrefix string `yaml:"sunnyUserIdPrefix"`
 }
 
 func ReadServiceConfig(filename string) (sc ServiceConfig, err error) {

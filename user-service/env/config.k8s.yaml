@@ -49,3 +49,6 @@ postgresConfig:
   login: $POSTGRES_USER
   password: $POSTGRES_PASSWORD
   timeout: 30
+personalConfig:
+  sunnyUserEmail: $SUNNY_USER_EMAIL
+  sunnyUserIdPrefix: $SUNNY_USER_ID_PREFIX

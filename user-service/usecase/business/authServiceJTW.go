@@ -130,7 +130,7 @@ func (s *authService) PublicKey() *rsa.PublicKey {
 }
 
 func (s *authService) Logout(token string) error {
-	panic("implement me")
+	return nil
 }
 
 func (s *authService) parse(raw string) (token *jwt.Token, err error) {
