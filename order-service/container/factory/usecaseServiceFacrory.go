@@ -9,7 +9,7 @@ import (
 	"github.com/timoth-y/kicksware-api/order-service/usecase/business"
 )
 
-func ProvideDataService(repository repo.OrderRepository, pipe pipe.SneakerReferencePipe,  config env.ServiceConfig) service.OrderService {
+func ProvideDataService(repository repo.OrderRepository, pipe pipe.SneakerReferencePipe, config env.ServiceConfig) service.OrderService {
 	return business.NewOrderService(repository, pipe, config.Common)
 }
 

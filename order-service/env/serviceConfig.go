@@ -40,7 +40,9 @@ type DataStoreConfig struct {
 }
 
 type AuthConfig struct {
-	PublicKeyPath        string `yaml:"publicKeyPath"`
+	PublicKeyPath string `yaml:"publicKeyPath"`
+	AuthEndpoint string `yaml:"authEndpoint"`
+	TLSCertificate     *meta.TLSCertificate `yaml:"tlsCertificate"`
 }
 
 func ReadServiceConfig(filename string) (sc ServiceConfig, err error) {

@@ -22,17 +22,17 @@ require (
 	github.com/rs/xid v1.2.1
 	github.com/sirupsen/logrus v1.7.0 // indirect
 	github.com/thoas/go-funk v0.7.0
-	github.com/timoth-y/kicksware-api/product-service v0.0.0-20200929211653-875f33d15d48 // indirect
-	github.com/timoth-y/kicksware-api/reference-service v0.0.0-20200929211653-875f33d15d48 // indirect
-	github.com/timoth-y/kicksware-api/search-service v0.0.0-20200929211653-875f33d15d48
-	github.com/timoth-y/kicksware-api/service-common v0.0.0-20200929211653-875f33d15d48
-	github.com/timoth-y/kicksware-api/user-service v0.0.0-20200929211653-875f33d15d48
+	github.com/timoth-y/kicksware-api/product-service v0.0.0-20200930171024-73a72ebb95cd // indirect
+	github.com/timoth-y/kicksware-api/reference-service v0.0.0-20200930171016-d6a042e38502 // indirect
+	github.com/timoth-y/kicksware-api/search-service v0.0.0-20200930171024-73a72ebb95cd
+	github.com/timoth-y/kicksware-api/service-common v0.0.0-20200930171024-73a72ebb95cd
+	github.com/timoth-y/kicksware-api/user-service v0.0.0-20200930171024-73a72ebb95cd
 	github.com/vmihailenco/msgpack v4.0.4+incompatible
 	go.elastic.co/fastjson v1.1.0 // indirect
 	go.mongodb.org/mongo-driver v1.4.1
-	golang.org/x/net v0.0.0-20200927032502-5d4f70055728 // indirect
+	golang.org/x/net v0.0.0-20200930145003-4acb6c075d10 // indirect
 	golang.org/x/sys v0.0.0-20200929083018-4d22bbb62b3c // indirect
-	google.golang.org/genproto v0.0.0-20200929141702-51c3e5b607fe // indirect
+	google.golang.org/genproto v0.0.0-20200930140634-01fc692af84b // indirect
 	google.golang.org/grpc v1.32.0
 	google.golang.org/protobuf v1.25.0
 	gopkg.in/dealancer/validate.v2 v2.1.0

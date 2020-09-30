@@ -3,7 +3,7 @@ commonConfig:
   hostname: api.kicksware.com
   usedDB: mongo
   contentType: application/json
-  innerServiceFormat: http://%s:8080/%s/
+  innerServiceFormat: rpc.kicksware.com:443
 authConfig:
   publicKeyPath: keys/auth/public.key
 mongoConfig:
