@@ -4,6 +4,9 @@ commonConfig:
   usedDB: mongo
   contentType: application/json
   innerServiceFormat: rpc.kicksware.com:443
+securityConfig:
+  tlsCertificate:
+    enableTLS: false
 authConfig:
   publicKeyPath: keys/auth/public.key
   authEndpoint: https://api.kicksware.com/auth/guest
