@@ -70,7 +70,7 @@ func (s *orderService) StoreOne(order *model.Order) error {
 	}
 	order.UniqueID = xid.New().String()
 	if ref, err := s.pipe.FetchOne(order.ReferenceID); err == nil {
-		order.Price = float32(ref.Price)
+		order.Price = ref.Price
 		if url := ref.StadiumUrl; len(url) != 0 {
 			order.SourceURL = url
 		} else if url := ref.GoatUrl; len(url) != 0  {
@@ -78,7 +78,7 @@ func (s *orderService) StoreOne(order *model.Order) error {
 		} else {
 			order.SourceURL = fmt.Sprintf("http://kicksware.com/shop/references/%v", ref.UniqueId)
 		}
-		order.Price = float32(ref.Price)
+		order.Price = ref.Price
 	}
 	order.Status = model.Draft
 	order.AddedAt = time.Now()

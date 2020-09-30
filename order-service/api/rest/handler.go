@@ -10,6 +10,7 @@ import (
 	"github.com/timoth-y/kicksware-api/service-common/util"
 
 	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+
 	"github.com/timoth-y/kicksware-api/order-service/core/model"
 	"github.com/timoth-y/kicksware-api/order-service/core/service"
 	"github.com/timoth-y/kicksware-api/order-service/env"
@@ -97,12 +98,12 @@ func (h *Handler) PostOne(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
-	order, err := h.getRequestBodies(r)
+	order, err := h.getRequestBody(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	err = h.service.Store(order)
+	err = h.service.StoreOne(order)
 	if err != nil {
 		if errors.Cause(err) == business.ErrOrderNotValid {
 			http.Error(w, err.Error(), http.StatusBadRequest)

@@ -14,7 +14,7 @@ message Order {
   string userID = 2;
   string referenceID = 3;
   string productID = 4;
-  float  price = 5;
+  double price = 5;
   string status = 6;
   string sourceURL = 7;
   google.protobuf.Timestamp AddedAt = 8;

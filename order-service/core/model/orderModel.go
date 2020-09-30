@@ -7,7 +7,7 @@ type Order struct {
 	UserID      string      `json:"UserID" bson:"user_id"`
 	ReferenceID string      `json:"ReferenceID" bson:"reference_id"`
 	ProductID   string      `json:"ProductID" bson:"product_id"`
-	Price       float32     `json:"Price" bson:"price"`
+	Price       float64     `json:"Price" bson:"price"`
 	Status      OrderStatus `json:"Status" bson:"status"`
 	SourceURL   string      `json:"SourceURL" bson:"source_url"`
 	AddedAt     time.Time   `json:"AddedAt" bson:"added_at"`

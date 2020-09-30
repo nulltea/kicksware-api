@@ -8,4 +8,5 @@ var (
 	OnHold     OrderStatus = "on_hold"
 	Delivering OrderStatus = "delivering"
 	Complete   OrderStatus = "complete"
+	Archive    OrderStatus = "archive"
 )
