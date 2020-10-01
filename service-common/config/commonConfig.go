@@ -6,6 +6,7 @@ type CommonConfig struct {
 	Host               string `yaml:"host"`
 	HostName           string `yaml:"hostname"`
 	ContentType        string `yaml:"contentType"`
+	UsedDB             string `yaml:"usedDB"`
 	InnerServiceFormat string `yaml:"innerServiceFormat"`
 }
 
