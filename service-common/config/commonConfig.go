@@ -18,3 +18,13 @@ type AuthConfig struct {
 	AuthEndpoint   string               `yaml:"authEndpoint"`
 	TLSCertificate *meta.TLSCertificate `yaml:"tlsCertificate"`
 }
+
+type DataStoreConfig struct {
+	URL              string `yaml:"URL"`
+	TLS              *meta.TLSCertificate `yaml:"TLS"`
+	Database   string `yaml:"database"`
+	Collection string `yaml:"collection"`
+	Login      string `yaml:"login"`
+	Password   string `yaml:"password"`
+	Timeout    int    `yaml:"timeout"`
+}
