@@ -128,7 +128,7 @@ func GetErrorMsg(err error) string {
 func SetAuthParamsFromMetaData(ctx context.Context, params **meta.RequestParams) (ok bool) {
 	var userID, token string
 	userID, ok = RetrieveUserID(ctx)
-	token, ok = RetrieveUserID(ctx)
+	token, ok = RetrieveAuthToken(ctx)
 	if ok {
 		if *params == nil {
 			*params = &meta.RequestParams{}

@@ -53,7 +53,7 @@ func (c *communicator) PostMessage(endpoint string, query interface{}, response 
 	bytes, err := ioutil.ReadAll(resp.Body); if err != nil {
 		return err
 	}
-	err = json.Unmarshal(bytes, &response); if err != nil {
+	err = json.Unmarshal(bytes, response); if err != nil {
 		return err
 	}
 	return nil
