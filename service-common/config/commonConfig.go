@@ -9,6 +9,10 @@ type CommonConfig struct {
 	InnerServiceFormat string `yaml:"innerServiceFormat"`
 }
 
+type SecurityConfig struct {
+	TLSCertificate     *meta.TLSCertificate `yaml:"tlsCertificate"`
+}
+
 type AuthConfig struct {
 	PublicKeyPath  string               `yaml:"publicKeyPath"`
 	AuthEndpoint   string               `yaml:"authEndpoint"`
