@@ -15,6 +15,7 @@ import (
 	"google.golang.org/grpc/metadata"
 
 	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+	"github.com/timoth-y/kicksware-api/service-common/service/gRPC"
 )
 
 func ToMap(v interface{}) map[string]interface{} {
@@ -99,9 +100,19 @@ func GetPublicKey(keyPath string) *rsa.PublicKey {
 
 func RetrieveUserID(ctx context.Context) (string, bool) {
 	if md, ok := metadata.FromOutgoingContext(ctx); ok {
-		userIDs := md.Get("user_id")
+		userIDs := md.Get(gRPC.UserContextKey)
 		if len(userIDs) != 0 {
 			return userIDs[0], true
+		}
+	}
+	return "", false
+}
+
+func RetrieveAuthToken(ctx context.Context) (string, bool) {
+	if md, ok := metadata.FromOutgoingContext(ctx); ok {
+		tokens := md.Get(gRPC.AuthMetaKey)
+		if len(tokens) != 0 {
+			return tokens[0], true
 		}
 	}
 	return "", false
@@ -114,13 +125,17 @@ func GetErrorMsg(err error) string {
 	return err.Error()
 }
 
-func setMetaDataUserID(ctx context.Context, params **meta.RequestParams) string {
-	if id, ok := RetrieveUserID(ctx); ok {
+func SetAuthParamsFromMetaData(ctx context.Context, params **meta.RequestParams) (ok bool) {
+	var userID, token string
+	userID, ok = RetrieveUserID(ctx)
+	token, ok = RetrieveUserID(ctx)
+	if ok {
 		if *params == nil {
 			*params = &meta.RequestParams{}
 		}
-		(*params).SetUserID(id)
-		return id
+		(*params).SetToken(token)
+		(*params).SetUserID(userID)
+		return true
 	}
-	return ""
+	return false
 }

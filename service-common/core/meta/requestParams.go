@@ -10,6 +10,7 @@ type RequestParams struct {
 	sortBy string
 	sortDirection string
 	userID string
+	token string
 }
 
 func (p *RequestParams) Limit() int {
@@ -52,4 +53,12 @@ func (p *RequestParams) UserID() string {
 
 func (p *RequestParams) SetUserID(userID string) {
 	p.userID = userID
+}
+
+func (p *RequestParams) Token() string {
+	return p.token
+}
+
+func (p *RequestParams) SetToken(token string) {
+	p.token = token
 }

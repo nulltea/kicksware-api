@@ -15,8 +15,8 @@ type SecurityConfig struct {
 }
 
 type AuthConfig struct {
-	PublicKeyPath  string               `yaml:"publicKeyPath"`
-	AuthEndpoint   string               `yaml:"authEndpoint"`
+	PublicKeyPath string `yaml:"publicKeyPath"`
+	AuthEndpoint  string `yaml:"authEndpoint"`
 	TLSCertificate *meta.TLSCertificate `yaml:"tlsCertificate"`
 }
 
