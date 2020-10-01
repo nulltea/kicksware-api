@@ -11,7 +11,7 @@ import (
 
 	"github.com/timoth-y/kicksware-api/user-service/core/meta"
 
-	"github.com/timoth-y/kicksware-api/service-common/api/JWT"
+	"github.com/timoth-y/kicksware-api/service-common/api/jwt"
 )
 
 const (
@@ -20,11 +20,11 @@ const (
 )
 
 type AuthServerInterceptor struct {
-	jwtManager *JWT.TokenManager
+	jwtManager *jwt.TokenManager
 	accessRoles map[string][]model.UserRole
 }
 
-func NewAuthServerInterceptor(jwt *JWT.TokenManager, accessRoles map[string][]model.UserRole) *AuthServerInterceptor {
+func NewAuthServerInterceptor(jwt *jwt.TokenManager, accessRoles map[string][]model.UserRole) *AuthServerInterceptor {
 	return &AuthServerInterceptor{
 		jwtManager: jwt,
 		accessRoles: accessRoles,

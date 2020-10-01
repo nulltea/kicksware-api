@@ -1,4 +1,4 @@
-package REST
+package rest
 
 import (
 	"encoding/json"
@@ -31,7 +31,7 @@ type AuthMiddleware struct {
 }
 
 
-func NewAuthClientInterceptor(service core.AuthService) *AuthMiddleware {
+func NewAuthhMiddleware(service core.AuthService) *AuthMiddleware {
 	return &AuthMiddleware{
 		service,
 	}
