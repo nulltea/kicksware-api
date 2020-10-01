@@ -1,4 +1,4 @@
-package rest
+package REST
 
 import (
 	"net/http"
@@ -37,10 +37,13 @@ func NewRequestParams(r *http.Request) *meta.RequestParams {
 			setPrivateField(field, value)
 		}
 	}
+
 	if r.URL.User != nil {
 		p.SetUserID(r.URL.User.Username())
+		if token, ok := r.URL.User.Password(); ok {
+			p.SetToken(token)
+		}
 	}
-
 	return p
 }
 

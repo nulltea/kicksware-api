@@ -85,16 +85,38 @@ func (i *AuthClientInterceptor) requestAccessToken(ctx context.Context) (*meta.A
 		}
 	}
 
-	resp, err := i.authClient.Guest(ctx, &empty.Empty{}); if err != nil {
-		glog.Errorln(err)
-		return nil, err
+	if token, ok := tryRetrieveToken(ctx); ok {
+		return token, nil
 	}
-	return resp.ToNative(), nil
+
+	resp, err := i.authClient.Guest(ctx, &empty.Empty{}); if err == nil {
+		return resp.ToNative(), nil
+	}
+
+	glog.Errorln(err)
+	return nil, err
 }
 
 func (i *AuthClientInterceptor) attachToken(ctx context.Context) context.Context {
 	token, err := i.requestAccessToken(ctx); if err != nil {
 		return ctx
 	}
+	i.accessToken = token
 	return metadata.AppendToOutgoingContext(ctx, AuthMetaKey, token.Token)
+}
+
+func tryRetrieveToken(ctx context.Context) (*meta.AuthToken, bool) {
+	md, ok := metadata.FromIncomingContext(ctx); if !ok {
+		return nil, false
+	}
+
+	values, ok := md[AuthMetaKey]; if !ok || len(values) == 0 {
+		return nil, false
+	}
+
+	return &meta.AuthToken{
+		Token:   values[0],
+		Success: true,
+		Expires: nil,
+	}, true
 }

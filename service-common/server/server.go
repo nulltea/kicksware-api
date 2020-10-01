@@ -22,10 +22,10 @@ import (
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/reflection"
 
+	"github.com/timoth-y/kicksware-api/service-common/api/JWT"
+	"github.com/timoth-y/kicksware-api/service-common/api/gRPC"
 	"github.com/timoth-y/kicksware-api/service-common/core"
 	"github.com/timoth-y/kicksware-api/service-common/core/meta"
-	"github.com/timoth-y/kicksware-api/service-common/service/gRPC"
-	"github.com/timoth-y/kicksware-api/service-common/service/jwt"
 
 	"github.com/grpc-ecosystem/go-grpc-middleware"
 	"github.com/sirupsen/logrus"
@@ -62,10 +62,10 @@ func (s *instance) SetupEncryption(cert *meta.TLSCertificate) {
 }
 
 func (s *instance) SetupAuth(pb *rsa.PublicKey, accessRoles map[string][]model.UserRole) {
-	jwtManager := &jwt.TokenManager{
+	JWTManager := &JWT.TokenManager{
 		PublicKey: pb,
 	}
-	s.Auth = gRPC.NewAuthServerInterceptor(jwtManager, accessRoles)
+	s.Auth = gRPC.NewAuthServerInterceptor(JWTManager, accessRoles)
 }
 
 func (s *instance) SetupLogger() {
@@ -162,7 +162,7 @@ func (s *instance) Shutdown() {
 		defer cancel()
 		err := s.REST.Shutdown(ctx)
 		if err != nil {
-			errors.Wrap(err, "Failed to shutdown rest server gracefully")
+			errors.Wrap(err, "Failed to shutdown REST server gracefully")
 		}
 	}
 

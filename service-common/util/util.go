@@ -14,8 +14,8 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"google.golang.org/grpc/metadata"
 
+	"github.com/timoth-y/kicksware-api/service-common/api/gRPC"
 	"github.com/timoth-y/kicksware-api/service-common/core/meta"
-	"github.com/timoth-y/kicksware-api/service-common/service/gRPC"
 )
 
 func ToMap(v interface{}) map[string]interface{} {
