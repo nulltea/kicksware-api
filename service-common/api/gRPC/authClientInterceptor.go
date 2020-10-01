@@ -75,7 +75,7 @@ func (i *AuthClientInterceptor) Stream() grpc.StreamClientInterceptor {
 
 func (i *AuthClientInterceptor) requestAccessToken(ctx context.Context) (*meta.AuthToken, error) {
 	if i.accessToken != nil {
-		if i.accessToken.Expires.Nanosecond() <= time.Now().Nanosecond() {
+		if !i.accessToken.Expires.IsZero() && i.accessToken.Expires.Nanosecond() <= time.Now().Nanosecond() {
 			newToken, err := i.authClient.Refresh(ctx, proto.AuthToken{}.FromNative(i.accessToken)); if err == nil {
 				i.accessToken = newToken.ToNative()
 				return i.accessToken, nil
@@ -117,6 +117,6 @@ func tryRetrieveToken(ctx context.Context) (*meta.AuthToken, bool) {
 	return &meta.AuthToken{
 		Token:   values[0],
 		Success: true,
-		Expires: nil,
+		Expires: time.Time{},
 	}, true
 }
