@@ -1,4 +1,4 @@
-package business
+package rest
 
 import (
 	"crypto/rsa"
