@@ -2,7 +2,7 @@ commonConfig:
   host: localhost:8080
   hostname: kicksware.com
   contentType: application/json
-  apiEndpointFormat: https://api.kicksware.com/%s/
+  apiEndpointFormat: https://api.kicksware.com/%s
   rpcEndpointFormat: rpc.kicksware.com:443
 securityConfig:
   tlsCertificate:
