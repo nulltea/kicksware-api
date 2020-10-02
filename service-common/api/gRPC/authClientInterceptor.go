@@ -11,7 +11,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 
-	tlsMeta "github.com/timoth-y/kicksware-api/service-common/core/meta"
+	tlsMeta "go.kicksware.com/api/service-common/core/meta"
 )
 
 type AuthClientInterceptor struct {

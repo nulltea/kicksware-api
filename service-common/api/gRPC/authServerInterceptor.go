@@ -11,7 +11,7 @@ import (
 
 	"github.com/timoth-y/kicksware-api/user-service/core/meta"
 
-	"github.com/timoth-y/kicksware-api/service-common/api/jwt"
+	"go.kicksware.com/api/service-common/api/jwt"
 )
 
 const (

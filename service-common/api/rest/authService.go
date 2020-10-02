@@ -6,9 +6,9 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/timoth-y/kicksware-api/service-common/config"
-	"github.com/timoth-y/kicksware-api/service-common/core"
-	"github.com/timoth-y/kicksware-api/service-common/util"
+	"go.kicksware.com/api/service-common/config"
+	"go.kicksware.com/api/service-common/core"
+	"go.kicksware.com/api/service-common/util"
 )
 
 type authService struct {

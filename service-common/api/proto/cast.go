@@ -3,7 +3,7 @@ package proto
 import (
 	"github.com/golang/protobuf/ptypes/wrappers"
 
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+	"go.kicksware.com/api/service-common/core/meta"
 )
 
 func (m *RequestParams) ToNative() *meta.RequestParams {

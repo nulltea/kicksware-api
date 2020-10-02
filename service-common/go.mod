@@ -1,4 +1,4 @@
-module github.com/timoth-y/kicksware-api/service-common
+module go.kicksware.com/api/service-common
 
 go 1.14
 

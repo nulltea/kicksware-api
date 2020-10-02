@@ -11,7 +11,7 @@ import (
 	"github.com/dgrijalva/jwt-go/request"
 	"github.com/golang/glog"
 
-	"github.com/timoth-y/kicksware-api/service-common/core"
+	"go.kicksware.com/api/service-common/core"
 )
 
 var (

@@ -1,6 +1,6 @@
 package config
 
-import "github.com/timoth-y/kicksware-api/service-common/core/meta"
+import "go.kicksware.com/api/service-common/core/meta"
 
 type CommonConfig struct {
 	Host               string `yaml:"host"`
