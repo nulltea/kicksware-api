@@ -16,10 +16,10 @@ import (
 )
 
 type communicator struct {
-	client               http.Client
-	auth                 core.AuthService
-	contentType          string
-	innerServiceFormat   string
+	client         http.Client
+	auth           core.AuthService
+	contentType    string
+	endpointFormat string
 }
 
 func NewCommunicator(auth core.AuthService, config config.CommonConfig) core.InnerCommunicator {
@@ -27,13 +27,13 @@ func NewCommunicator(auth core.AuthService, config config.CommonConfig) core.Inn
 		http.Client{},
 		auth,
 		config.ContentType,
-		config.InnerServiceFormat,
+		config.ApiEndpointFormat,
 	}
 }
 
 
 func (c *communicator) PostMessage(endpoint string, query interface{}, response interface{}, params *meta.RequestParams) error {
-	url := fmt.Sprintf(c.innerServiceFormat, endpoint)
+	url := fmt.Sprintf(c.endpointFormat, endpoint)
 	body, err := json.Marshal(query); if err != nil {
 		return err
 	}
@@ -60,7 +60,7 @@ func (c *communicator) PostMessage(endpoint string, query interface{}, response 
 }
 
 func (c *communicator) GetMessage(endpoint string, response interface{}, params *meta.RequestParams) error {
-	url := fmt.Sprintf(c.innerServiceFormat, endpoint)
+	url := fmt.Sprintf(c.endpointFormat, endpoint)
 	req, err := http.NewRequest("GET", url, nil); if err != nil {
 		return err
 	}

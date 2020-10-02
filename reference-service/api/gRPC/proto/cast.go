@@ -20,6 +20,8 @@ func (m *SneakerReference) ToNative() *model.SneakerReference {
 		Color:          m.Color,
 		Gender:         m.Gender,
 		Nickname:       m.Nickname,
+		Designer:       m.Designer,
+		Technology:     m.Technology,
 		Materials:      m.Materials,
 		Categories:     m.Categories,
 		ReleaseDate:    m.ReleaseDate.AsTime(),
@@ -49,6 +51,8 @@ func (m *SneakerReference) FromNative(n *model.SneakerReference) *SneakerReferen
 	m.Color = n.Color
 	m.Gender = n.Gender
 	m.Nickname = n.Nickname
+	m.Designer = n.Designer
+	m.Technology = n.Technology
 	m.Materials = n.Materials
 	m.Categories = n.Categories
 	m.ReleaseDate = timestamppb.New(n.ReleaseDate)

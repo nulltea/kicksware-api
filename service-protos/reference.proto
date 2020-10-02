@@ -39,6 +39,8 @@ message SneakerReference {
   string color = 10;
   string gender = 11;
   string nickname = 12;
+  string designer = 26;
+  string technology = 27;
   repeated string materials = 13;
   repeated string categories = 14;
   google.protobuf.Timestamp releaseDate = 15;

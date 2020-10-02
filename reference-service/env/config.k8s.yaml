@@ -3,7 +3,7 @@ commonConfig:
   hostname: kicksware.com
   usedDB: mongo
   contentType: application/json
-  innerServiceFormat: http://%s:8080/%s/
+  innerServiceFormat: http://api.kicksware.com/%s/
 securityConfig:
   tlsCertificate:
     enableTLS: false

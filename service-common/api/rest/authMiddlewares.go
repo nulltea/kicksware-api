@@ -31,7 +31,7 @@ type AuthMiddleware struct {
 }
 
 
-func NewAuthhMiddleware(service core.AuthService) *AuthMiddleware {
+func NewAuthMiddleware(service core.AuthService) *AuthMiddleware {
 	return &AuthMiddleware{
 		service,
 	}

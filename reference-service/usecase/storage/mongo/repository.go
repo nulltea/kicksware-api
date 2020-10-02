@@ -4,22 +4,24 @@ import (
 	"context"
 	"crypto/tls"
 	"crypto/x509"
+	"io/ioutil"
+	"time"
+
 	"github.com/pkg/errors"
+	"github.com/timoth-y/kicksware-api/service-common/config"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
-	"io/ioutil"
-	"time"
 
 	"github.com/golang/glog"
 	TLS "github.com/timoth-y/kicksware-api/service-common/core/meta"
 	"github.com/timoth-y/kicksware-api/service-common/util"
 
 	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+
 	"github.com/timoth-y/kicksware-api/reference-service/core/model"
 	"github.com/timoth-y/kicksware-api/reference-service/core/repo"
-	"github.com/timoth-y/kicksware-api/reference-service/env"
 	"github.com/timoth-y/kicksware-api/reference-service/usecase/business"
 )
 
@@ -30,7 +32,7 @@ type repository struct {
 	timeout    time.Duration
 }
 
-func NewMongoRepository(config env.DataStoreConfig) (repo.SneakerReferenceRepository, error) {
+func NewMongoRepository(config config.DataStoreConfig) (repo.SneakerReferenceRepository, error) {
 	repo := &repository{
 		timeout:  time.Duration(config.Timeout) * time.Second,
 	}
@@ -44,7 +46,7 @@ func NewMongoRepository(config env.DataStoreConfig) (repo.SneakerReferenceReposi
 	return repo, nil
 }
 
-func newMongoClient(config env.DataStoreConfig) (*mongo.Client, error) {
+func newMongoClient(config config.DataStoreConfig) (*mongo.Client, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(config.Timeout)*time.Second)
 	defer cancel()
 	client, err := mongo.Connect(ctx, options.Client().

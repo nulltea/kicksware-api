@@ -4,6 +4,8 @@ import (
 	"context"
 
 	"github.com/pkg/errors"
+	"github.com/timoth-y/kicksware-api/service-common/config"
+	"github.com/timoth-y/kicksware-api/service-common/core"
 	"github.com/timoth-y/kicksware-api/service-common/util"
 
 	"github.com/timoth-y/kicksware-api/service-common/core/meta"
@@ -11,7 +13,6 @@ import (
 	"github.com/timoth-y/kicksware-api/reference-service/api/gRPC/proto"
 	"github.com/timoth-y/kicksware-api/reference-service/core/model"
 	"github.com/timoth-y/kicksware-api/reference-service/core/service"
-	"github.com/timoth-y/kicksware-api/reference-service/env"
 	"github.com/timoth-y/kicksware-api/reference-service/usecase/business"
 )
 
@@ -19,11 +20,11 @@ import (
 
 type Handler struct {
 	service     service.SneakerReferenceService
-	auth        service.AuthService
+	auth        core.AuthService
 	contentType string
 }
 
-func NewHandler(service service.SneakerReferenceService, auth service.AuthService, config env.CommonConfig) *Handler {
+func NewHandler(service service.SneakerReferenceService, auth core.AuthService, config config.CommonConfig) *Handler {
 	return &Handler{
 		service,
 		auth,
@@ -36,7 +37,7 @@ func (h *Handler) GetReferences(ctx context.Context, filter *proto.ReferenceFilt
 	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
 		params = filter.RequestParams.ToNative()
 	}
-	setUserID(ctx, &params)
+	util.SetAuthParamsFromMetaData(ctx, &params)
 
 	if len(filter.ReferenceID) == 0 && filter.RequestQuery == nil {
 		references, err = h.service.FetchAll(params)
@@ -70,7 +71,7 @@ func (h *Handler) CountReferences(ctx context.Context, filter *proto.ReferenceFi
 	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
 		params = filter.RequestParams.ToNative()
 	}
-	setUserID(ctx, &params)
+	util.SetAuthParamsFromMetaData(ctx, &params)
 
 	if len(filter.ReferenceID) == 0 && filter.RequestQuery == nil {
 		count, err = h.service.CountAll()
@@ -120,15 +121,4 @@ func (h *Handler) EditReferences(ctx context.Context, input *proto.ReferenceInpu
 
 func (h *Handler) DeleteReferences(ctx context.Context, filter *proto.ReferenceFilter) (resp *proto.ReferenceResponse, err error) {
 	panic("implement me")
-}
-
-func setUserID(ctx context.Context, params **meta.RequestParams) string {
-	if id, ok := util.RetrieveUserID(ctx); ok {
-		if *params == nil {
-			*params = &meta.RequestParams{}
-		}
-		(*params).SetUserID(id)
-		return id
-	}
-	return ""
 }

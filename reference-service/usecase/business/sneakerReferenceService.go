@@ -1,19 +1,16 @@
 package business
 
 import (
-	"bytes"
-	"encoding/json"
-	"fmt"
-	"io/ioutil"
-	"net/http"
 	"strings"
 
 	"github.com/pkg/errors"
 	"github.com/rs/xid"
-	"github.com/thoas/go-funk"
+	rest "github.com/timoth-y/kicksware-api/service-common/api/REST"
+	"github.com/timoth-y/kicksware-api/service-common/core"
 	"gopkg.in/dealancer/validate.v2"
 
 	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+
 	"github.com/timoth-y/kicksware-api/reference-service/core/model"
 	"github.com/timoth-y/kicksware-api/reference-service/core/repo"
 	"github.com/timoth-y/kicksware-api/reference-service/core/service"
@@ -23,17 +20,20 @@ import (
 var (
 	ErrReferenceNotFound = errors.New("sneaker reference Not Found")
 	ErrReferenceNotValid = errors.New("sneaker reference Not Valid")
+	uniqueIdFieldName = "uniqueid"
 )
 
 type referenceService struct {
 	repo repo.SneakerReferenceRepository
-	serviceConfig env.CommonConfig
+	serviceConfig env.ServiceConfig
+	communicator core.InnerCommunicator
 }
 
-func NewSneakerReferenceService(sneakerReferenceRepo repo.SneakerReferenceRepository, serviceConfig env.CommonConfig) service.SneakerReferenceService {
+func NewSneakerReferenceService(sneakerReferenceRepo repo.SneakerReferenceRepository, auth core.AuthService, config env.ServiceConfig) service.SneakerReferenceService {
 	return &referenceService {
 		sneakerReferenceRepo,
-		serviceConfig,
+		config,
+		rest.NewCommunicator(auth, config.Common),
 	}
 }
 
@@ -50,13 +50,8 @@ func (s *referenceService) FetchAll(params *meta.RequestParams) ([]*model.Sneake
 }
 
 func (s *referenceService) FetchQuery(query meta.RequestQuery, params *meta.RequestParams) (refs []*model.SneakerReference, err error) {
-	foreignKeys, is := s.handleForeignSubquery(query)
+	s.handleForeignSubquery(&query, params)
 	refs, err = s.repo.FetchQuery(query, params)
-	if err == nil && is {
-		refs = funk.Filter(refs, func(ref *model.SneakerReference) bool {
-			return funk.Contains(foreignKeys, ref.UniqueId)
-		}).([]*model.SneakerReference)
-	}
 	return
 }
 
@@ -84,59 +79,47 @@ func (s *referenceService) CountAll() (int, error) {
 }
 
 func (s *referenceService) Count(query meta.RequestQuery, params *meta.RequestParams) (int, error) {
-	foreignKeys, is := s.handleForeignSubquery(query); if is {
-		refs, err := s.repo.FetchQuery(query, params)
-		if err == nil && is {
-			refs = funk.Filter(refs, func(ref *model.SneakerReference) bool {
-				return funk.Contains(foreignKeys, ref.UniqueId)
-			}).([]*model.SneakerReference)
-		}
-		return len(refs), nil
-	}
+	s.handleForeignSubquery(&query, params)
 	return s.repo.Count(query, params)
 }
 
-func (s *referenceService) handleForeignSubquery(query map[string]interface{}) (foreignKeys []string, is bool) {
-	foreignKeys = make([]string, 0)
-	for key := range query {
+func (s *referenceService) handleForeignSubquery(query *meta.RequestQuery, params *meta.RequestParams) (ok bool) {
+	foreignKeys := make([]string, 0)
+	ok = false
+	_query := *query
+	for key := range _query {
 		if strings.Contains(key, "*/") {
-			is = true
-			res := strings.TrimLeft(key, "*/");
-			host := fmt.Sprintf("%s-service", strings.Split(res, "/")[0]);
-			service := fmt.Sprintf(s.serviceConfig.InnerServiceFormat, host, res)
-			if keys, err := s.postOnForeignService(service, query[key]); err == nil {
-				foreignKeys = append(foreignKeys, keys...)
+			endpoint := strings.TrimLeft(key, "*/");
+			subs := make([]*struct{
+				ReferenceID string `json:"ReferenceID"`
+			}, 0)
+			if err := s.communicator.PostMessage(endpoint, _query[key], &subs, params); err == nil {
+				for _, doc := range subs {
+					foreignKeys = append(foreignKeys, doc.ReferenceID)
+				}
+				ok = true
 			}
-			delete(query, key)
+			delete(_query, key)
 		}
 	}
+	appendInCondition(query, foreignKeys)
 	return
 }
 
-func (s *referenceService) postOnForeignService(service string, query interface{}) (keys []string, err error) {
-	body, err := json.Marshal(query); if err != nil {
-		return
+func appendInCondition(query *meta.RequestQuery, keys []string) {
+	in := meta.RequestQuery{ "$in": keys }
+	inQuery := meta.RequestQuery{
+		uniqueIdFieldName: in,
 	}
-	resp, err := http.Post(service, s.serviceConfig.ContentType, bytes.NewBuffer(body))
-	if err != nil {
-		return
-	}
-	defer resp.Body.Close()
-
-	bytes, err := ioutil.ReadAll(resp.Body); if err != nil {
-		return
-	}
-
-	subs := make([]map[string]interface{}, 0)
-	err = json.Unmarshal(bytes, &subs); if err != nil {
-		return
-	}
-
-	keys = make([]string, 0)
-	for _, doc := range subs {
-		if key, ok := doc["ReferenceId"]; ok {
-			keys = append(keys, key.(string))
+	_query := *query
+	if and, ok := _query["$and"]; ok {
+		and = append(and.([]interface{}), inQuery)
+		_query["$and"] = and
+	} else if len(_query) > 0 {
+		*query = meta.RequestQuery{
+			"$and": []interface{}{ inQuery, _query },
 		}
+	} else {
+		_query[uniqueIdFieldName] = in
 	}
-	return
 }

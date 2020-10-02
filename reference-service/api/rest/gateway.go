@@ -20,8 +20,8 @@ func ProvideRoutes(rest *Handler) *chi.Mux {
 
 func restRoutes(rest *Handler) (r *chi.Mux) {
 	r = chi.NewRouter()
-	r.Use(rest.Authenticator)
-	r.Use(rest.UserSetter)
+	r.Use(rest.auth.Authenticator)
+	r.Use(rest.auth.UserSetter)
 	r.Get("/{referenceId}", rest.GetOne)
 	r.Get("/", rest.Get)
 	r.Post("/query", rest.Get)

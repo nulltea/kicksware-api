@@ -11,8 +11,8 @@ func ConfigureContainer(container container.ServiceContainer, config env.Service
 	container.BindInstance(config).
 		BindSingleton(factory.ProvideRepository).
 
-		BindSingleton(factory.ProvideDataService).
 		BindSingleton(factory.ProvideAuthService).
+		BindSingleton(factory.ProvideDataService).
 
 		BindSingleton(factory.ProvideRESTGatewayHandler).
 		BindSingleton(factory.ProvideGRPCGatewayHandler).

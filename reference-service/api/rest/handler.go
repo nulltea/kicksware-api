@@ -7,13 +7,14 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/pkg/errors"
-	"github.com/timoth-y/kicksware-api/service-common/util"
-
+	"github.com/timoth-y/kicksware-api/service-common/api/REST"
+	"github.com/timoth-y/kicksware-api/service-common/config"
+	"github.com/timoth-y/kicksware-api/service-common/core"
 	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+	"github.com/timoth-y/kicksware-api/service-common/util"
 
 	"github.com/timoth-y/kicksware-api/reference-service/core/model"
 	"github.com/timoth-y/kicksware-api/reference-service/core/service"
-	"github.com/timoth-y/kicksware-api/reference-service/env"
 	"github.com/timoth-y/kicksware-api/reference-service/usecase/business"
 	"github.com/timoth-y/kicksware-api/reference-service/usecase/serializer/json"
 	"github.com/timoth-y/kicksware-api/reference-service/usecase/serializer/msg"
@@ -21,21 +22,21 @@ import (
 
 type Handler struct {
 	service     service.SneakerReferenceService
-	auth        service.AuthService
+	auth        *rest.AuthMiddleware
 	contentType string
 }
 
-func NewHandler(service service.SneakerReferenceService, auth service.AuthService, config env.CommonConfig) *Handler {
+func NewHandler(service service.SneakerReferenceService, auth core.AuthService, config config.CommonConfig) *Handler {
 	return &Handler{
 		service,
-		auth,
+		rest.NewAuthhMiddleware(auth),
 		config.ContentType,
 	}
 }
 
 func (h *Handler) GetOne(w http.ResponseWriter, r *http.Request) {
 	code := chi.URLParam(r,"referenceId")
-	params := NewRequestParams(r)
+	params := rest.NewRequestParams(r)
 	sneakerReference, err := h.service.FetchOne(code, params)
 	if err != nil {
 		if errors.Cause(err) == business.ErrReferenceNotFound {
@@ -51,7 +52,7 @@ func (h *Handler) GetOne(w http.ResponseWriter, r *http.Request) {
 func (h *Handler) Get(w http.ResponseWriter, r *http.Request) {
 	var sneakerReferences []*model.SneakerReference
 	var err error
-	params := NewRequestParams(r)
+	params := rest.NewRequestParams(r)
 
 	if r.Method == http.MethodPost {
 		query, err := h.getRequestQuery(r); if err != nil {
@@ -137,7 +138,7 @@ func (h *Handler) Patch(w http.ResponseWriter, r *http.Request) {
 func (h *Handler) Count(w http.ResponseWriter, r *http.Request) {
 	var count int
 	var err error
-	params := NewRequestParams(r)
+	params := rest.NewRequestParams(r)
 
 	if r.Method == http.MethodPost {
 		query, err := h.getRequestQuery(r)

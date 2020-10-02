@@ -9,6 +9,7 @@ securityConfig:
     enableTLS: false
 authConfig:
   publicKeyPath: ../key/public.key.pub
+  authEndpoint: https://user-service:8080/auth/guest
 mongoConfig:
   URL: mongodb://db.kicksware.com:443
   database: sneakerResaleDB

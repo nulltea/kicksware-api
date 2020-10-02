@@ -7,7 +7,8 @@ type CommonConfig struct {
 	HostName           string `yaml:"hostname"`
 	ContentType        string `yaml:"contentType"`
 	UsedDB             string `yaml:"usedDB"`
-	InnerServiceFormat string `yaml:"innerServiceFormat"`
+	ApiEndpointFormat  string `yaml:"apiEndpointFormat"`
+	RpcEndpointFormat  string `yaml:"rpcEndpointFormat"`
 }
 
 type SecurityConfig struct {

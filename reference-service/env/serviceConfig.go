@@ -1,46 +1,21 @@
 package env
 
 import (
-	"gopkg.in/yaml.v2"
 	"io/ioutil"
 
+	"gopkg.in/yaml.v2"
+
 	"github.com/golang/glog"
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+	"github.com/timoth-y/kicksware-api/service-common/config"
 )
 
 type ServiceConfig struct {
-	Common   CommonConfig    `yaml:"commonConfig"`
-	Security SecurityConfig  `yaml:"securityConfig"`
-	Auth     AuthConfig      `yaml:"authConfig"`
-	Mongo    DataStoreConfig `yaml:"mongoConfig"`
-	Postgres DataStoreConfig `yaml:"postgresConfig"`
-	Redis    DataStoreConfig `yaml:"redisConfig"`
-}
-
-type CommonConfig struct {
-	Host               string `yaml:"host"`
-	HostName           string `yaml:"hostname"`
-	UsedDB             string `yaml:"usedDB"`
-	ContentType        string `yaml:"contentType"`
-	InnerServiceFormat string `yaml:"innerServiceFormat"`
-}
-
-type SecurityConfig struct {
-	TLSCertificate     *meta.TLSCertificate `yaml:"tlsCertificate"`
-}
-
-type DataStoreConfig struct {
-	URL              string `yaml:"URL"`
-	TLS              *meta.TLSCertificate `yaml:"TLS"`
-	Database   string `yaml:"database"`
-	Collection string `yaml:"collection"`
-	Login      string `yaml:"login"`
-	Password   string `yaml:"password"`
-	Timeout    int    `yaml:"timeout"`
-}
-
-type AuthConfig struct {
-	PublicKeyPath        string `yaml:"publicKeyPath"`
+	Common   config.CommonConfig    `yaml:"commonConfig"`
+	Security config.SecurityConfig  `yaml:"securityConfig"`
+	Auth     config.AuthConfig      `yaml:"authConfig"`
+	Mongo    config.DataStoreConfig `yaml:"mongoConfig"`
+	Postgres config.DataStoreConfig `yaml:"postgresConfig"`
+	Redis    config.DataStoreConfig `yaml:"redisConfig"`
 }
 
 func ReadServiceConfig(filename string) (sc ServiceConfig, err error) {

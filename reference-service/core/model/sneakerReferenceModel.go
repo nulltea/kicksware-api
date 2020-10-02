@@ -15,6 +15,8 @@ type SneakerReference struct {
 	Color          string
 	Gender         string
 	Nickname       string
+	Designer       string
+	Technology     string
 	Materials      []string
 	Categories     []string
 	ReleaseDate    time.Time
