@@ -1,8 +1,8 @@
 package repo
 
 import (
-	"go.kicksware.com/kicksware/api/beta-service/core/meta"
-	"go.kicksware.com/kicksware/api/beta-service/core/model"
+	"go.kicksware.com/api/beta-service/core/meta"
+	"go.kicksware.com/api/beta-service/core/model"
 )
 
 

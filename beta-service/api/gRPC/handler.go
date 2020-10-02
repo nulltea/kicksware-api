@@ -3,11 +3,11 @@ package grpc
 import (
 	"context"
 
-	"go.kicksware.com/kicksware/api/beta-service/api/gRPC/proto"
-	"go.kicksware.com/kicksware/api/beta-service/core/meta"
-	"go.kicksware.com/kicksware/api/beta-service/core/model"
-	"go.kicksware.com/kicksware/api/beta-service/core/service"
-	"go.kicksware.com/kicksware/api/beta-service/env"
+	"go.kicksware.com/api/beta-service/api/gRPC/proto"
+	"go.kicksware.com/api/beta-service/core/meta"
+	"go.kicksware.com/api/beta-service/core/model"
+	"go.kicksware.com/api/beta-service/core/service"
+	"go.kicksware.com/api/beta-service/env"
 )
 
 //go:generate protoc --proto_path=../../../service-protos  --go_out=plugins=grpc:proto/. common.proto

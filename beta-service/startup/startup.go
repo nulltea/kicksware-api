@@ -4,8 +4,8 @@ import (
 	di "github.com/timoth-y/kicksware-api/service-common/container"
 	"github.com/timoth-y/kicksware-api/service-common/core"
 
-	conf "go.kicksware.com/kicksware/api/beta-service/container/config"
-	"go.kicksware.com/kicksware/api/beta-service/env"
+	conf "go.kicksware.com/api/beta-service/container/config"
+	"go.kicksware.com/api/beta-service/env"
 )
 
 func InitializeServer() (srv core.Server) {

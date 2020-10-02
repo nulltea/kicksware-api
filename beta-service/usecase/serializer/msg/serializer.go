@@ -1,8 +1,8 @@
 package msg
 
 import (
-	"go.kicksware.com/kicksware/api/beta-service/core/model"
-	"go.kicksware.com/kicksware/api/beta-service/core/service"
+	"go.kicksware.com/api/beta-service/core/model"
+	"go.kicksware.com/api/beta-service/core/service"
 
 	"github.com/pkg/errors"
 	"github.com/vmihailenco/msgpack"

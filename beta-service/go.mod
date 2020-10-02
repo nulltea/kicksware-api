@@ -1,4 +1,4 @@
-module go.kicksware.com/kicksware/api/beta-service
+module go.kicksware.com/api/beta-service
 
 go 1.14
 

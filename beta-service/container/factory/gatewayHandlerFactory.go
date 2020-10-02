@@ -3,10 +3,10 @@ package factory
 import (
 	"github.com/go-chi/chi"
 
-	grpc "go.kicksware.com/kicksware/api/beta-service/api/gRPC"
-	"go.kicksware.com/kicksware/api/beta-service/api/rest"
-	"go.kicksware.com/kicksware/api/beta-service/core/service"
-	"go.kicksware.com/kicksware/api/beta-service/env"
+	grpc "go.kicksware.com/api/beta-service/api/gRPC"
+	"go.kicksware.com/api/beta-service/api/rest"
+	"go.kicksware.com/api/beta-service/core/service"
+	"go.kicksware.com/api/beta-service/env"
 )
 
 func ProvideRESTGatewayHandler(service service.BetaService, auth service.AuthService, config env.ServiceConfig) *rest.Handler {

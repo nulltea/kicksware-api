@@ -3,7 +3,7 @@ package meta
 import (
 	"strings"
 
-	"go.kicksware.com/kicksware/api/beta-service/core/model"
+	"go.kicksware.com/api/beta-service/core/model"
 )
 
 type RequestParams struct {

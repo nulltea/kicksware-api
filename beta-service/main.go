@@ -1,6 +1,6 @@
 package main
 
-import "go.kicksware.com/kicksware/api/beta-service/startup"
+import "go.kicksware.com/api/beta-service/startup"
 
 func main() {
 	srv := startup.InitializeServer()
