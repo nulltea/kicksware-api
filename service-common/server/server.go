@@ -12,12 +12,11 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/golang/glog"
-	grpc_logrus "github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
+	grpcLog "github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
 
-	grpc_recovery "github.com/grpc-ecosystem/go-grpc-middleware/recovery"
-	grpc_ctxtags "github.com/grpc-ecosystem/go-grpc-middleware/tags"
+	grpcRecovery "github.com/grpc-ecosystem/go-grpc-middleware/recovery"
+	grpcTags "github.com/grpc-ecosystem/go-grpc-middleware/tags"
 	"github.com/pkg/errors"
-	"go.kicksware.com/api/user-service/core/model"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/reflection"
@@ -61,7 +60,7 @@ func (s *instance) SetupEncryption(cert *meta.TLSCertificate) {
 	}
 }
 
-func (s *instance) SetupAuth(pb *rsa.PublicKey, accessRoles map[string][]model.UserRole) {
+func (s *instance) SetupAuth(pb *rsa.PublicKey, accessRoles meta.AccessConfig) {
 	JWTManager := &jwt.TokenManager{
 		PublicKey: pb,
 	}
@@ -73,7 +72,7 @@ func (s *instance) SetupLogger() {
 		Level: logrus.InfoLevel,
 	}
 	s.LogEntry = logrus.NewEntry(s.Logger)
-	grpc_logrus.ReplaceGrpcLogger(s.LogEntry)
+	grpcLog.ReplaceGrpcLogger(s.LogEntry)
 }
 
 func (s *instance) SetupREST(router chi.Router) {
@@ -86,12 +85,12 @@ func (s *instance) SetupREST(router chi.Router) {
 func (s *instance) SetupGRPC(fn func(srv *grpc.Server)) {
 	unaryInterceptors := []grpc.UnaryServerInterceptor {
 		apmgrpc.NewUnaryServerInterceptor(),
-		grpc_ctxtags.UnaryServerInterceptor(),
-		grpc_recovery.UnaryServerInterceptor(),
+		grpcTags.UnaryServerInterceptor(),
+		grpcRecovery.UnaryServerInterceptor(),
 	}
 	streamInterceptors := []grpc.StreamServerInterceptor {
-		grpc_ctxtags.StreamServerInterceptor(),
-		grpc_recovery.StreamServerInterceptor(),
+		grpcTags.StreamServerInterceptor(),
+		grpcRecovery.StreamServerInterceptor(),
 	}
 	options := []grpc.ServerOption{
 		grpc.MaxSendMsgSize(25 * 1024 * 1024),
@@ -102,8 +101,8 @@ func (s *instance) SetupGRPC(fn func(srv *grpc.Server)) {
 		unaryInterceptors = append(unaryInterceptors, s.Auth.Unary())
 		streamInterceptors = append(streamInterceptors, s.Auth.Stream())
 	}; if s.LogEntry != nil {
-		unaryInterceptors = append(unaryInterceptors, grpc_logrus.UnaryServerInterceptor(s.LogEntry))
-		streamInterceptors = append(streamInterceptors, grpc_logrus.StreamServerInterceptor(s.LogEntry))
+		unaryInterceptors = append(unaryInterceptors, grpcLog.UnaryServerInterceptor(s.LogEntry))
+		streamInterceptors = append(streamInterceptors, grpcLog.StreamServerInterceptor(s.LogEntry))
 	}
 
 	options = append(options,
