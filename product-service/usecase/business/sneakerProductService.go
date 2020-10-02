@@ -1,41 +1,42 @@
 package business
 
 import (
-	"bytes"
-	"encoding/json"
 	"errors"
-	"fmt"
-	"io/ioutil"
-	"net/http"
 	"strings"
 	"time"
 
 	errs "github.com/pkg/errors"
 	"github.com/rs/xid"
-	"github.com/thoas/go-funk"
+	"go.kicksware.com/api/service-common/api/rest"
+	"go.kicksware.com/api/service-common/config"
+	"go.kicksware.com/api/service-common/core"
 	"gopkg.in/dealancer/validate.v2"
 
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
-	"github.com/timoth-y/kicksware-api/product-service/core/model"
-	"github.com/timoth-y/kicksware-api/product-service/core/repo"
-	"github.com/timoth-y/kicksware-api/product-service/core/service"
-	"github.com/timoth-y/kicksware-api/product-service/env"
+	"go.kicksware.com/api/service-common/core/meta"
+
+	"go.kicksware.com/api/product-service/core/model"
+	"go.kicksware.com/api/product-service/core/repo"
+	"go.kicksware.com/api/product-service/core/service"
 )
 
 var (
 	ErrProductNotFound = errors.New("sneaker product Not Found")
 	ErrProductInvalid  = errors.New("sneaker product Invalid")
+	uniqueIdFieldName = "uniqueid"
 )
 
 type productService struct {
 	repo repo.SneakerProductRepository
-	serviceConfig env.CommonConfig
+	serviceConfig config.CommonConfig
+	communicator core.InnerCommunicator
 }
 
-func NewSneakerProductService(sneakerProductRepo repo.SneakerProductRepository, serviceConfig env.CommonConfig) service.SneakerProductService {
+func NewSneakerProductService(sneakerProductRepo repo.SneakerProductRepository, auth core.AuthService, config config.CommonConfig) service.SneakerProductService {
 	return &productService{
 		sneakerProductRepo,
-		serviceConfig,
+		config,
+		rest.NewCommunicator(auth, config),
+
 	}
 }
 
@@ -52,13 +53,8 @@ func (s *productService) FetchAll(params *meta.RequestParams) ([]*model.SneakerP
 }
 
 func (s *productService) FetchQuery(query meta.RequestQuery, params *meta.RequestParams) (products[]*model.SneakerProduct, err error) {
-	foreignKeys, is := s.handleForeignSubquery(query)
+	s.handleForeignSubquery(&query, params)
 	products, err = s.repo.FetchQuery(query, params)
-	if err == nil && is {
-		products = funk.Filter(products, func(ref *model.SneakerProduct) bool {
-			return funk.Contains(foreignKeys, ref.UniqueId)
-		}).([]*model.SneakerProduct)
-	}
 	return
 }
 
@@ -91,61 +87,47 @@ func (s *productService) CountAll() (int, error) {
 }
 
 func (s *productService) Count(query meta.RequestQuery, params *meta.RequestParams) (int, error) {
-	foreignKeys, is := s.handleForeignSubquery(query); if is {
-		products, err := s.repo.FetchQuery(query, params)
-		if err == nil && is {
-			products = funk.Filter(products, func(ref *model.SneakerProduct) bool {
-				return funk.Contains(foreignKeys, ref.UniqueId)
-			}).([]*model.SneakerProduct)
-		}
-		return len(products), nil
-	}
+	s.handleForeignSubquery(&query, params)
 	return s.repo.Count(query, params)
 }
 
-func (s *productService) handleForeignSubquery(query map[string]interface{}) (foreignKeys []string, is bool) {
-	foreignKeys = make([]string, 0)
-	for key := range query {
+func (s *productService) handleForeignSubquery(query *meta.RequestQuery, params *meta.RequestParams) (ok bool) {
+	foreignKeys := make([]string, 0)
+	ok = false
+	_query := *query
+	for key := range _query {
 		if strings.Contains(key, "*/") {
-			is = true
-			res := strings.TrimLeft(key, "*/");
-			host := fmt.Sprintf("%s-service", strings.Split(res, "/")[0]);
-			service := fmt.Sprintf(s.serviceConfig.InnerServiceFormat, host, res)
-			if keys, err := s.postForeignService(service, query[key]); err == nil {
-				foreignKeys = append(foreignKeys, keys...)
+			endpoint := strings.TrimLeft(key, "*/");
+			subs := make([]*struct{
+				ReferenceID string `json:"ReferenceID"`
+			}, 0)
+			if err := s.communicator.PostMessage(endpoint, _query[key], &subs, params); err == nil {
+				for _, doc := range subs {
+					foreignKeys = append(foreignKeys, doc.ReferenceID)
+				}
+				ok = true
 			}
-			delete(query, key)
+			delete(_query, key)
 		}
 	}
+	appendInCondition(query, foreignKeys)
 	return
 }
 
-func (s *productService) postForeignService(service string, body interface{}) (keys []string, err error) {
-	query, err := json.Marshal(body); if err != nil {
-		return
+func appendInCondition(query *meta.RequestQuery, keys []string) {
+	in := meta.RequestQuery{ "$in": keys }
+	inQuery := meta.RequestQuery{
+		uniqueIdFieldName: in,
 	}
-	resp, err := http.Post(service, s.serviceConfig.ContentType, bytes.NewBuffer(query))
-	if err != nil {
-		return
-	}
-	defer resp.Body.Close()
-
-	bytes, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return
-	}
-
-	subs := make([]map[string]interface{}, 0)
-	err = json.Unmarshal(bytes, &subs)
-	if err != nil {
-		return
-	}
-
-	keys = make([]string, 0)
-	for _, doc := range subs {
-		if key, ok := doc["ReferenceId"]; ok {
-			keys = append(keys, key.(string))
+	_query := *query
+	if and, ok := _query["$and"]; ok {
+		and = append(and.([]interface{}), inQuery)
+		_query["$and"] = and
+	} else if len(_query) > 0 {
+		*query = meta.RequestQuery{
+			"$and": []interface{}{ inQuery, _query },
 		}
+	} else {
+		_query[uniqueIdFieldName] = in
 	}
-	return
 }

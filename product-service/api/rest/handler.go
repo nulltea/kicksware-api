@@ -7,27 +7,30 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/pkg/errors"
-	"github.com/timoth-y/kicksware-api/service-common/util"
+	"go.kicksware.com/api/service-common/api/rest"
+	"go.kicksware.com/api/service-common/config"
+	"go.kicksware.com/api/service-common/core"
+	"go.kicksware.com/api/service-common/util"
 
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
-	"github.com/timoth-y/kicksware-api/product-service/core/model"
-	"github.com/timoth-y/kicksware-api/product-service/core/service"
-	"github.com/timoth-y/kicksware-api/product-service/env"
-	"github.com/timoth-y/kicksware-api/product-service/usecase/business"
-	"github.com/timoth-y/kicksware-api/product-service/usecase/serializer/json"
-	"github.com/timoth-y/kicksware-api/product-service/usecase/serializer/msg"
+	"go.kicksware.com/api/service-common/core/meta"
+
+	"go.kicksware.com/api/product-service/core/model"
+	"go.kicksware.com/api/product-service/core/service"
+	"go.kicksware.com/api/product-service/usecase/business"
+	"go.kicksware.com/api/product-service/usecase/serializer/json"
+	"go.kicksware.com/api/product-service/usecase/serializer/msg"
 )
 
 type Handler struct {
 	service     service.SneakerProductService
-	auth        service.AuthService
+	auth        *rest.AuthMiddleware
 	contentType string
 }
 
-func NewHandler(service service.SneakerProductService, auth service.AuthService, config env.CommonConfig) *Handler {
+func NewHandler(service service.SneakerProductService, auth core.AuthService, config config.CommonConfig) *Handler {
 	return &Handler{
 		service,
-		auth,
+		rest.NewAuthMiddleware(auth),
 		config.ContentType,
 	}
 }
@@ -49,7 +52,7 @@ func (h *Handler) GetOne(w http.ResponseWriter, r *http.Request) {
 func (h *Handler) Get(w http.ResponseWriter, r *http.Request) {
 	var sneakerProducts []*model.SneakerProduct
 	var err error
-	params := NewRequestParams(r)
+	params := rest.NewRequestParams(r)
 
 	if r.Method == http.MethodPost {
 		query, err := h.getRequestQuery(r); if err != nil {
@@ -83,7 +86,7 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	params := NewRequestParams(r)
+	params := rest.NewRequestParams(r)
 	err = h.service.Store(sneakerProduct, params)
 	if err != nil {
 		if errors.Cause(err) == business.ErrProductInvalid {
@@ -220,7 +223,7 @@ func (h *Handler) getRequestFiles(r *http.Request) (files map[string][]byte, err
 func (h *Handler) Count(w http.ResponseWriter, r *http.Request) {
 	var count int
 	var err error
-	params := NewRequestParams(r)
+	params := rest.NewRequestParams(r)
 
 	if r.Method == http.MethodPost {
 		query, err := h.getRequestQuery(r)

@@ -4,23 +4,25 @@ import (
 	"context"
 	"crypto/tls"
 	"crypto/x509"
-	"github.com/pkg/errors"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
-	"go.mongodb.org/mongo-driver/mongo/readpref"
 	"io/ioutil"
 	"time"
 
-	"github.com/golang/glog"
-	TLS "github.com/timoth-y/kicksware-api/service-common/core/meta"
-	"github.com/timoth-y/kicksware-api/service-common/util"
+	"github.com/pkg/errors"
+	"go.kicksware.com/api/service-common/config"
+	"go.mongodb.org/mongo-driver/bson"
+	mongo "go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/mongo/readpref"
 
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
-	"github.com/timoth-y/kicksware-api/product-service/core/model"
-	"github.com/timoth-y/kicksware-api/product-service/core/repo"
-	"github.com/timoth-y/kicksware-api/product-service/env"
-	"github.com/timoth-y/kicksware-api/product-service/usecase/business"
+	"github.com/golang/glog"
+	TLS "go.kicksware.com/api/service-common/core/meta"
+	"go.kicksware.com/api/service-common/util"
+
+	"go.kicksware.com/api/service-common/core/meta"
+
+	"go.kicksware.com/api/product-service/core/model"
+	"go.kicksware.com/api/product-service/core/repo"
+	"go.kicksware.com/api/product-service/usecase/business"
 )
 
 type repository struct {
@@ -30,7 +32,7 @@ type repository struct {
 	timeout    time.Duration
 }
 
-func NewMongoRepository(config env.DataStoreConfig) (repo.SneakerProductRepository, error) {
+func NewMongoRepository(config config.DataStoreConfig) (repo.SneakerProductRepository, error) {
 	repo := &repository{
 		timeout:  time.Duration(config.Timeout) * time.Second,
 	}
@@ -44,7 +46,7 @@ func NewMongoRepository(config env.DataStoreConfig) (repo.SneakerProductReposito
 	return repo, nil
 }
 
-func newMongoClient(config env.DataStoreConfig) (*mongo.Client, error) {
+func newMongoClient(config config.DataStoreConfig) (*mongo.Client, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(config.Timeout)*time.Second)
 	defer cancel()
 	client, err := mongo.Connect(ctx, options.Client().

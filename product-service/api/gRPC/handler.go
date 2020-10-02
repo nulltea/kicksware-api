@@ -5,14 +5,15 @@ import (
 
 	"github.com/golang/glog"
 	"github.com/pkg/errors"
+	"go.kicksware.com/api/service-common/config"
+	"go.kicksware.com/api/service-common/util"
 
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+	"go.kicksware.com/api/service-common/core/meta"
 
-	"github.com/timoth-y/kicksware-api/product-service/api/gRPC/proto"
-	"github.com/timoth-y/kicksware-api/product-service/core/model"
-	"github.com/timoth-y/kicksware-api/product-service/core/service"
-	"github.com/timoth-y/kicksware-api/product-service/env"
-	"github.com/timoth-y/kicksware-api/product-service/usecase/business"
+	"go.kicksware.com/api/product-service/api/gRPC/proto"
+	"go.kicksware.com/api/product-service/core/model"
+	"go.kicksware.com/api/product-service/core/service"
+	"go.kicksware.com/api/product-service/usecase/business"
 )
 
 //go:generate protoc --proto_path=../../../service-protos --go_out=plugins=grpc,paths=source_relative:proto/. product.proto
@@ -23,7 +24,7 @@ type Handler struct {
 	contentType string
 }
 
-func NewHandler(service service.SneakerProductService, auth service.AuthService, config env.CommonConfig) *Handler {
+func NewHandler(service service.SneakerProductService, auth service.AuthService, config config.CommonConfig) *Handler {
 	return &Handler{
 		service,
 		auth,
@@ -36,6 +37,7 @@ func (h *Handler) GetProducts(ctx context.Context, filter *proto.ProductFilter) 
 	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
 		params = filter.RequestParams.ToNative()
 	}
+	util.SetAuthParamsFromMetaData(ctx, &params)
 
 	if len(filter.ProductID) == 0 && filter.RequestQuery == nil  {
 		products, err = h.service.FetchAll(params)
@@ -69,6 +71,7 @@ func (h *Handler) CountProducts(ctx context.Context, filter *proto.ProductFilter
 	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
 		params = filter.RequestParams.ToNative()
 	}
+	util.SetAuthParamsFromMetaData(ctx, &params)
 
 	if filter == nil {
 		count, err = h.service.CountAll()

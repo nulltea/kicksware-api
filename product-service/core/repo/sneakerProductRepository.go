@@ -1,8 +1,8 @@
 package repo
 
 import (
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
-	"github.com/timoth-y/kicksware-api/product-service/core/model"
+	"go.kicksware.com/api/service-common/core/meta"
+	"go.kicksware.com/api/product-service/core/model"
 )
 
 

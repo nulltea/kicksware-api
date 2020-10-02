@@ -3,7 +3,7 @@ package proto
 import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	"github.com/timoth-y/kicksware-api/product-service/core/model"
+	"go.kicksware.com/api/product-service/core/model"
 )
 
 func (m *SneakerProduct) ToNative() *model.SneakerProduct {

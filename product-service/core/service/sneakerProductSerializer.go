@@ -1,6 +1,6 @@
 package service
 
-import "github.com/timoth-y/kicksware-api/product-service/core/model"
+import "go.kicksware.com/api/product-service/core/model"
 
 type SneakerProductSerializer interface {
 	Decode(input []byte) (*model.SneakerProduct, error)

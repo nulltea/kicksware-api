@@ -6,7 +6,7 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/struct.proto";
 import "common.proto";
 
-option go_package = "github.com/timoth-y/kicksware-api/product-service/api/gRPC/proto";
+option go_package = "go.kicksware.com/api/product-service/api/gRPC/proto";
 option csharp_namespace = "Proto";
 
 message SneakerProduct {

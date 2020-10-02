@@ -3,10 +3,10 @@ package gRPC
 import (
 	"crypto/rsa"
 
-	"github.com/timoth-y/kicksware-api/user-service/core/model"
+	"go.kicksware.com/api/user-service/core/model"
 	"google.golang.org/grpc"
 
-	"github.com/timoth-y/kicksware-api/product-service/api/gRPC/proto"
+	"go.kicksware.com/api/product-service/api/gRPC/proto"
 )
 
 func ProvideRemoteSetup(handler *Handler) func(server *grpc.Server) {

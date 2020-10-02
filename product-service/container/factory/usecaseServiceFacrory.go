@@ -1,16 +1,19 @@
 package factory
 
 import (
-	"github.com/timoth-y/kicksware-api/product-service/core/repo"
-	"github.com/timoth-y/kicksware-api/product-service/core/service"
-	"github.com/timoth-y/kicksware-api/product-service/env"
-	"github.com/timoth-y/kicksware-api/product-service/usecase/business"
+	"go.kicksware.com/api/service-common/api/rest"
+	"go.kicksware.com/api/service-common/core"
+
+	"go.kicksware.com/api/product-service/core/repo"
+	"go.kicksware.com/api/product-service/core/service"
+	"go.kicksware.com/api/product-service/env"
+	"go.kicksware.com/api/product-service/usecase/business"
 )
 
-func ProvideDataService(repository repo.SneakerProductRepository, config env.ServiceConfig) service.SneakerProductService {
-	return business.NewSneakerProductService(repository, config.Common)
+func ProvideDataService(repository repo.SneakerProductRepository, auth core.AuthService, config env.ServiceConfig) service.SneakerProductService {
+	return business.NewSneakerProductService(repository, auth, config.Common)
 }
 
-func ProvideAuthService(config env.ServiceConfig) service.AuthService {
-	return business.NewAuthService(config.Auth)
+func ProvideAuthService(config env.ServiceConfig) core.AuthService {
+	return rest.NewAuthService(config.Auth)
 }

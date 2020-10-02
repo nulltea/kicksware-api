@@ -1,4 +1,4 @@
-module github.com/timoth-y/kicksware-api/product-service
+module go.kicksware.com/api/product-service
 
 go 1.14
 
@@ -19,9 +19,8 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/rs/xid v1.2.1
 	github.com/thoas/go-funk v0.7.0
-	github.com/timoth-y/kicksware-api/reference-service v0.0.0-20200929171545-f1c5b3670197 // indirect
-	github.com/timoth-y/kicksware-api/service-common v0.0.0-20200929203602-3efeca0681c1
-	github.com/timoth-y/kicksware-api/user-service v0.0.0-20200917011049-79140f0e7480
+	go.kicksware.com/api/service-common v0.0.0-20201002035510-8b1c54368e8a // indirect
+	go.kicksware.com/api/user-service v0.0.0-20201002041240-898528d3d7e9 // indirect
 	github.com/vmihailenco/msgpack v4.0.4+incompatible
 	go.mongodb.org/mongo-driver v1.4.1
 	google.golang.org/grpc v1.32.0

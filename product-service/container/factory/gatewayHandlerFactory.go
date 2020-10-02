@@ -2,14 +2,15 @@ package factory
 
 import (
 	"github.com/go-chi/chi"
+	"go.kicksware.com/api/service-common/core"
 
-	"github.com/timoth-y/kicksware-api/product-service/api/gRPC"
-	"github.com/timoth-y/kicksware-api/product-service/api/rest"
-	"github.com/timoth-y/kicksware-api/product-service/core/service"
-	"github.com/timoth-y/kicksware-api/product-service/env"
+	"go.kicksware.com/api/product-service/api/gRPC"
+	"go.kicksware.com/api/product-service/api/rest"
+	"go.kicksware.com/api/product-service/core/service"
+	"go.kicksware.com/api/product-service/env"
 )
 
-func ProvideRESTGatewayHandler(service service.SneakerProductService, auth service.AuthService, config env.ServiceConfig) *rest.Handler {
+func ProvideRESTGatewayHandler(service service.SneakerProductService, auth core.AuthService, config env.ServiceConfig) *rest.Handler {
 	return rest.NewHandler(service, auth, config.Common)
 }
 

@@ -7,12 +7,13 @@ import (
 	"github.com/go-redis/redis"
 	"github.com/pkg/errors"
 	"github.com/thoas/go-funk"
+	"go.kicksware.com/api/service-common/config"
 
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
-	"github.com/timoth-y/kicksware-api/product-service/core/model"
-	"github.com/timoth-y/kicksware-api/product-service/core/repo"
-	"github.com/timoth-y/kicksware-api/product-service/env"
-	"github.com/timoth-y/kicksware-api/product-service/usecase/business"
+	"go.kicksware.com/api/service-common/core/meta"
+
+	"go.kicksware.com/api/product-service/core/model"
+	"go.kicksware.com/api/product-service/core/repo"
+	"go.kicksware.com/api/product-service/usecase/business"
 )
 
 type repository struct {
@@ -32,7 +33,7 @@ func newRedisClient(redisURL string) (*redis.Client, error) {
 	return client, nil
 }
 
-func NewRedisRepository(config env.DataStoreConfig) (repo.SneakerProductRepository, error) {
+func NewRedisRepository(config config.DataStoreConfig) (repo.SneakerProductRepository, error) {
 	rep := &repository{}
 	client, err := newRedisClient(config.URL)
 	if err != nil {

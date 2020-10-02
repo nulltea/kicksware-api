@@ -20,18 +20,18 @@ func ProvideRoutes(rest *Handler) *chi.Mux {
 
 func restRoutes(rest *Handler) (r *chi.Mux) {
 	r = chi.NewRouter()
-	r.Use(rest.Authenticator)
+	r.Use(rest.auth.Authenticator)
 	r.Get("/{sneakerId}", rest.GetOne)
 	r.Get("/query", rest.Get)
 	r.Get("/", rest.Get)
 	r.Post("/query", rest.Get)
 	r.Get("/count", rest.Count)
 	r.Post("/count", rest.Count)
-	r.With(rest.Authorizer).Post("/", rest.Post)
-	r.With(rest.Authorizer).Put("/", rest.Put)
-	r.With(rest.Authorizer).Put("/{sneakerId}/images", rest.PutImages)
-	r.With(rest.Authorizer).Patch("/", rest.Patch)
-	r.With(rest.Authorizer).Delete("/{sneakerId}", rest.Delete)
+	r.With(rest.auth.Authorizer).Post("/", rest.Post)
+	r.With(rest.auth.Authorizer).Put("/", rest.Put)
+	r.With(rest.auth.Authorizer).Put("/{sneakerId}/images", rest.PutImages)
+	r.With(rest.auth.Authorizer).Patch("/", rest.Patch)
+	r.With(rest.auth.Authorizer).Delete("/{sneakerId}", rest.Delete)
 	return
 }
 
