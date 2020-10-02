@@ -3,8 +3,8 @@ package config
 import (
 	"github.com/timoth-y/kicksware-api/service-common/container"
 
-	"go.kicksware.com/api/beta-service/container/factory"
-	"go.kicksware.com/api/beta-service/env"
+	"go.kicksware.com/api/beta/container/factory"
+	"go.kicksware.com/api/beta/env"
 )
 
 func ConfigureContainer(container container.ServiceContainer, config env.ServiceConfig) {

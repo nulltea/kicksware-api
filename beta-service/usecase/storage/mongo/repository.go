@@ -16,11 +16,11 @@ import (
 	TLS "github.com/timoth-y/kicksware-api/service-common/core/meta"
 	"github.com/timoth-y/kicksware-api/service-common/util"
 
-	"go.kicksware.com/api/beta-service/core/meta"
-	"go.kicksware.com/api/beta-service/core/model"
-	"go.kicksware.com/api/beta-service/core/repo"
-	"go.kicksware.com/api/beta-service/env"
-	"go.kicksware.com/api/beta-service/usecase/business"
+	"go.kicksware.com/api/beta/core/meta"
+	"go.kicksware.com/api/beta/core/model"
+	"go.kicksware.com/api/beta/core/repo"
+	"go.kicksware.com/api/beta/env"
+	"go.kicksware.com/api/beta/usecase/business"
 )
 
 type repository struct {

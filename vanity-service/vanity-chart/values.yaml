@@ -39,4 +39,7 @@ config:
     /api:
       repo: https://ci.kicksware.com/kicksware/api
       vcs: git
+    /api/beta:
+      repo: https://ci.kicksware.com/kicksware/api/beta-service
+      vcs: git
 

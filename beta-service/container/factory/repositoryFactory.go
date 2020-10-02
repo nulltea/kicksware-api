@@ -3,10 +3,10 @@ package factory
 import (
 	"log"
 
-	"go.kicksware.com/api/beta-service/core/repo"
-	"go.kicksware.com/api/beta-service/env"
-	"go.kicksware.com/api/beta-service/usecase/storage/mongo"
-	"go.kicksware.com/api/beta-service/usecase/storage/postgres"
+	"go.kicksware.com/api/beta/core/repo"
+	"go.kicksware.com/api/beta/env"
+	"go.kicksware.com/api/beta/usecase/storage/mongo"
+	"go.kicksware.com/api/beta/usecase/storage/postgres"
 )
 
 func ProvideRepository(config env.ServiceConfig) repo.BetaRepository {

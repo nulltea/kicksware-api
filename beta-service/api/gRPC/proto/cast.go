@@ -3,8 +3,8 @@ package proto
 import (
 	"github.com/golang/protobuf/ptypes/wrappers"
 
-	"go.kicksware.com/api/beta-service/core/meta"
-	"go.kicksware.com/api/beta-service/core/model"
+	"go.kicksware.com/api/beta/core/meta"
+	"go.kicksware.com/api/beta/core/model"
 )
 
 func (m *Beta) ToNative() *model.Beta {

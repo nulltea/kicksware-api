@@ -5,9 +5,9 @@ import (
 	"github.com/timoth-y/kicksware-api/service-common/core"
 	"github.com/timoth-y/kicksware-api/service-common/server"
 
-	"go.kicksware.com/api/beta-service/api/gRPC"
+	"go.kicksware.com/api/beta/api/gRPC"
 
-	"go.kicksware.com/api/beta-service/env"
+	"go.kicksware.com/api/beta/env"
 )
 
 func ProvideServer(config env.ServiceConfig, router chi.Router, handler *grpc.Handler) core.Server {

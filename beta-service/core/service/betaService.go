@@ -1,8 +1,8 @@
 package service
 
 import (
-	"go.kicksware.com/api/beta-service/core/meta"
-	"go.kicksware.com/api/beta-service/core/model"
+	"go.kicksware.com/api/beta/core/meta"
+	"go.kicksware.com/api/beta/core/model"
 )
 
 type BetaService interface {

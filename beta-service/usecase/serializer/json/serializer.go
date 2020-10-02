@@ -5,8 +5,8 @@ import (
 
 	"github.com/pkg/errors"
 
-	"go.kicksware.com/api/beta-service/core/model"
-	"go.kicksware.com/api/beta-service/core/service"
+	"go.kicksware.com/api/beta/core/model"
+	"go.kicksware.com/api/beta/core/service"
 )
 
 type serializer struct{}
