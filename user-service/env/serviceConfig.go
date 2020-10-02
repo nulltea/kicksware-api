@@ -4,7 +4,7 @@ import (
 	"io/ioutil"
 
 	"github.com/golang/glog"
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+	"go.kicksware.com/api/service-common/core/meta"
 	"gopkg.in/yaml.v2"
 )
 

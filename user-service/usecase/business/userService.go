@@ -12,12 +12,12 @@ import (
 	"github.com/rs/xid"
 	"gopkg.in/dealancer/validate.v2"
 
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+	"go.kicksware.com/api/service-common/core/meta"
 
-	"github.com/timoth-y/kicksware-api/user-service/core/model"
-	"github.com/timoth-y/kicksware-api/user-service/core/repo"
-	"github.com/timoth-y/kicksware-api/user-service/core/service"
-	"github.com/timoth-y/kicksware-api/user-service/env"
+	"go.kicksware.com/api/user-service/core/model"
+	"go.kicksware.com/api/user-service/core/repo"
+	"go.kicksware.com/api/user-service/core/service"
+	"go.kicksware.com/api/user-service/env"
 )
 
 var (

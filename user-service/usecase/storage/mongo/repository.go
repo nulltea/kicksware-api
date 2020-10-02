@@ -14,13 +14,13 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 
 	"github.com/golang/glog"
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
-	"github.com/timoth-y/kicksware-api/service-common/util"
+	"go.kicksware.com/api/service-common/core/meta"
+	"go.kicksware.com/api/service-common/util"
 
-	"github.com/timoth-y/kicksware-api/user-service/core/model"
-	"github.com/timoth-y/kicksware-api/user-service/core/repo"
-	"github.com/timoth-y/kicksware-api/user-service/env"
-	"github.com/timoth-y/kicksware-api/user-service/usecase/business"
+	"go.kicksware.com/api/user-service/core/model"
+	"go.kicksware.com/api/user-service/core/repo"
+	"go.kicksware.com/api/user-service/env"
+	"go.kicksware.com/api/user-service/usecase/business"
 )
 
 type repository struct {

@@ -9,15 +9,15 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/pkg/errors"
 
-	common "github.com/timoth-y/kicksware-api/service-common/core/meta"
+	common "go.kicksware.com/api/service-common/core/meta"
 
-	"github.com/timoth-y/kicksware-api/user-service/core/meta"
-	"github.com/timoth-y/kicksware-api/user-service/core/model"
-	"github.com/timoth-y/kicksware-api/user-service/core/service"
-	"github.com/timoth-y/kicksware-api/user-service/env"
-	"github.com/timoth-y/kicksware-api/user-service/usecase/business"
-	"github.com/timoth-y/kicksware-api/user-service/usecase/serializer/json"
-	"github.com/timoth-y/kicksware-api/user-service/usecase/serializer/msg"
+	"go.kicksware.com/api/user-service/core/meta"
+	"go.kicksware.com/api/user-service/core/model"
+	"go.kicksware.com/api/user-service/core/service"
+	"go.kicksware.com/api/user-service/env"
+	"go.kicksware.com/api/user-service/usecase/business"
+	"go.kicksware.com/api/user-service/usecase/serializer/json"
+	"go.kicksware.com/api/user-service/usecase/serializer/msg"
 )
 
 type Handler struct {

@@ -3,8 +3,8 @@ package proto
 import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	"github.com/timoth-y/kicksware-api/user-service/core/meta"
-	"github.com/timoth-y/kicksware-api/user-service/core/model"
+	"go.kicksware.com/api/user-service/core/meta"
+	"go.kicksware.com/api/user-service/core/model"
 )
 
 func (m *User) ToNative() *model.User {

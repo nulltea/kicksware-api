@@ -1,10 +1,10 @@
 package config
 
 import (
-	"github.com/timoth-y/kicksware-api/service-common/container"
+	"go.kicksware.com/api/service-common/container"
 
-	"github.com/timoth-y/kicksware-api/user-service/container/factory"
-	"github.com/timoth-y/kicksware-api/user-service/env"
+	"go.kicksware.com/api/user-service/container/factory"
+	"go.kicksware.com/api/user-service/env"
 )
 
 func ConfigureContainer(container container.ServiceContainer, config env.ServiceConfig) {

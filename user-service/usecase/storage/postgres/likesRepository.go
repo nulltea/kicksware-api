@@ -6,11 +6,11 @@ import (
 	sqb "github.com/Masterminds/squirrel"
 	"github.com/jmoiron/sqlx"
 	"github.com/pkg/errors"
-	"github.com/timoth-y/kicksware-api/service-common/util"
+	"go.kicksware.com/api/service-common/util"
 
-	"github.com/timoth-y/kicksware-api/user-service/core/model"
-	"github.com/timoth-y/kicksware-api/user-service/core/repo"
-	"github.com/timoth-y/kicksware-api/user-service/env"
+	"go.kicksware.com/api/user-service/core/model"
+	"go.kicksware.com/api/user-service/core/repo"
+	"go.kicksware.com/api/user-service/env"
 )
 
 type likesRepository struct {

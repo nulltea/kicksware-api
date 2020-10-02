@@ -11,8 +11,8 @@ import (
 	"github.com/golang/glog"
 	"github.com/pkg/errors"
 
-	"github.com/timoth-y/kicksware-api/user-service/core/service"
-	"github.com/timoth-y/kicksware-api/user-service/env"
+	"go.kicksware.com/api/user-service/core/service"
+	"go.kicksware.com/api/user-service/env"
 )
 
 type mailService struct {

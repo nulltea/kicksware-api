@@ -8,12 +8,12 @@ import (
 	"github.com/pkg/errors"
 	"github.com/thoas/go-funk"
 
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+	"go.kicksware.com/api/service-common/core/meta"
 
-	"github.com/timoth-y/kicksware-api/user-service/core/model"
-	"github.com/timoth-y/kicksware-api/user-service/core/repo"
-	"github.com/timoth-y/kicksware-api/user-service/env"
-	"github.com/timoth-y/kicksware-api/user-service/usecase/business"
+	"go.kicksware.com/api/user-service/core/model"
+	"go.kicksware.com/api/user-service/core/repo"
+	"go.kicksware.com/api/user-service/env"
+	"go.kicksware.com/api/user-service/usecase/business"
 )
 
 type repository struct {

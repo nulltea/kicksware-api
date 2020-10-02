@@ -10,13 +10,13 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+	"go.kicksware.com/api/service-common/core/meta"
 
-	"github.com/timoth-y/kicksware-api/user-service/api/gRPC/proto"
-	"github.com/timoth-y/kicksware-api/user-service/core/model"
-	"github.com/timoth-y/kicksware-api/user-service/core/service"
-	"github.com/timoth-y/kicksware-api/user-service/env"
-	"github.com/timoth-y/kicksware-api/user-service/usecase/business"
+	"go.kicksware.com/api/user-service/api/gRPC/proto"
+	"go.kicksware.com/api/user-service/core/model"
+	"go.kicksware.com/api/user-service/core/service"
+	"go.kicksware.com/api/user-service/env"
+	"go.kicksware.com/api/user-service/usecase/business"
 )
 
 type Handler struct {

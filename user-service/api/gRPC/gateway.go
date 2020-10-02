@@ -5,8 +5,8 @@ import (
 
 	"google.golang.org/grpc"
 
-	"github.com/timoth-y/kicksware-api/user-service/api/gRPC/proto"
-	"github.com/timoth-y/kicksware-api/user-service/core/model"
+	"go.kicksware.com/api/user-service/api/gRPC/proto"
+	"go.kicksware.com/api/user-service/core/model"
 )
 
 func ProvideRemoteSetup(handler *Handler) func(server *grpc.Server) {

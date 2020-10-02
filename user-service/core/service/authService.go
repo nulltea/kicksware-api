@@ -4,8 +4,8 @@ import (
 	"crypto/rsa"
 	"errors"
 
-	"github.com/timoth-y/kicksware-api/user-service/core/meta"
-	"github.com/timoth-y/kicksware-api/user-service/core/model"
+	"go.kicksware.com/api/user-service/core/meta"
+	"go.kicksware.com/api/user-service/core/model"
 )
 
 var (

@@ -1,11 +1,11 @@
 package startup
 
 import (
-	di "github.com/timoth-y/kicksware-api/service-common/container"
-	"github.com/timoth-y/kicksware-api/service-common/core"
+	di "go.kicksware.com/api/service-common/container"
+	"go.kicksware.com/api/service-common/core"
 
-	conf "github.com/timoth-y/kicksware-api/user-service/container/config"
-	"github.com/timoth-y/kicksware-api/user-service/env"
+	conf "go.kicksware.com/api/user-service/container/config"
+	"go.kicksware.com/api/user-service/env"
 )
 
 func InitializeServer() (srv core.Server) {

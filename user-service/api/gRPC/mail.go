@@ -3,10 +3,10 @@ package gRPC
 import (
 	"context"
 
-	"github.com/timoth-y/kicksware-api/service-common/util"
+	"go.kicksware.com/api/service-common/util"
 
-	"github.com/timoth-y/kicksware-api/user-service/api/gRPC/proto"
-	"github.com/timoth-y/kicksware-api/user-service/usecase/business"
+	"go.kicksware.com/api/user-service/api/gRPC/proto"
+	"go.kicksware.com/api/user-service/usecase/business"
 )
 
 func (h *Handler) SendEmailConfirmation(ctx context.Context, request *proto.MailRequest) (resp *proto.MailResponse, err error) {

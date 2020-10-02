@@ -1,6 +1,6 @@
 package repo
 
-import "github.com/timoth-y/kicksware-api/user-service/core/model"
+import "go.kicksware.com/api/user-service/core/model"
 
 type RemoteRepository interface {
 	Connect(userID string, remoteID string, provider model.UserProvider) error
