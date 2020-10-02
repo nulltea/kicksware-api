@@ -7,14 +7,14 @@ import (
 	_ "github.com/jackc/pgx/v4/stdlib"
 	"github.com/jmoiron/sqlx"
 	"github.com/pkg/errors"
-	"github.com/timoth-y/kicksware-api/service-common/config"
-	"github.com/timoth-y/kicksware-api/service-common/util"
+	"go.kicksware.com/api/service-common/config"
+	"go.kicksware.com/api/service-common/util"
 
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+	"go.kicksware.com/api/service-common/core/meta"
 
-	"github.com/timoth-y/kicksware-api/reference-service/core/model"
-	"github.com/timoth-y/kicksware-api/reference-service/core/repo"
-	"github.com/timoth-y/kicksware-api/reference-service/usecase/business"
+	"go.kicksware.com/api/reference-service/core/model"
+	"go.kicksware.com/api/reference-service/core/repo"
+	"go.kicksware.com/api/reference-service/usecase/business"
 )
 
 type repository struct {

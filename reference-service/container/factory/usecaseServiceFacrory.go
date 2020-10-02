@@ -1,13 +1,13 @@
 package factory
 
 import (
-	rest "github.com/timoth-y/kicksware-api/service-common/api/REST"
-	"github.com/timoth-y/kicksware-api/service-common/core"
+	rest "go.kicksware.com/api/service-common/api/REST"
+	"go.kicksware.com/api/service-common/core"
 
-	"github.com/timoth-y/kicksware-api/reference-service/core/repo"
-	"github.com/timoth-y/kicksware-api/reference-service/core/service"
-	"github.com/timoth-y/kicksware-api/reference-service/env"
-	"github.com/timoth-y/kicksware-api/reference-service/usecase/business"
+	"go.kicksware.com/api/reference-service/core/repo"
+	"go.kicksware.com/api/reference-service/core/service"
+	"go.kicksware.com/api/reference-service/env"
+	"go.kicksware.com/api/reference-service/usecase/business"
 )
 
 func ProvideDataService(repository repo.SneakerReferenceRepository, auth core.AuthService, config env.ServiceConfig) service.SneakerReferenceService {

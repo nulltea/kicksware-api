@@ -7,17 +7,17 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/pkg/errors"
-	"github.com/timoth-y/kicksware-api/service-common/api/REST"
-	"github.com/timoth-y/kicksware-api/service-common/config"
-	"github.com/timoth-y/kicksware-api/service-common/core"
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
-	"github.com/timoth-y/kicksware-api/service-common/util"
+	"go.kicksware.com/api/service-common/api/REST"
+	"go.kicksware.com/api/service-common/config"
+	"go.kicksware.com/api/service-common/core"
+	"go.kicksware.com/api/service-common/core/meta"
+	"go.kicksware.com/api/service-common/util"
 
-	"github.com/timoth-y/kicksware-api/reference-service/core/model"
-	"github.com/timoth-y/kicksware-api/reference-service/core/service"
-	"github.com/timoth-y/kicksware-api/reference-service/usecase/business"
-	"github.com/timoth-y/kicksware-api/reference-service/usecase/serializer/json"
-	"github.com/timoth-y/kicksware-api/reference-service/usecase/serializer/msg"
+	"go.kicksware.com/api/reference-service/core/model"
+	"go.kicksware.com/api/reference-service/core/service"
+	"go.kicksware.com/api/reference-service/usecase/business"
+	"go.kicksware.com/api/reference-service/usecase/serializer/json"
+	"go.kicksware.com/api/reference-service/usecase/serializer/msg"
 )
 
 type Handler struct {
@@ -29,7 +29,7 @@ type Handler struct {
 func NewHandler(service service.SneakerReferenceService, auth core.AuthService, config config.CommonConfig) *Handler {
 	return &Handler{
 		service,
-		rest.NewAuthhMiddleware(auth),
+		rest.NewAuthMiddleware(auth),
 		config.ContentType,
 	}
 }

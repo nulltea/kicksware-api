@@ -4,16 +4,16 @@ import (
 	"context"
 
 	"github.com/pkg/errors"
-	"github.com/timoth-y/kicksware-api/service-common/config"
-	"github.com/timoth-y/kicksware-api/service-common/core"
-	"github.com/timoth-y/kicksware-api/service-common/util"
+	"go.kicksware.com/api/service-common/config"
+	"go.kicksware.com/api/service-common/core"
+	"go.kicksware.com/api/service-common/util"
 
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+	"go.kicksware.com/api/service-common/core/meta"
 
-	"github.com/timoth-y/kicksware-api/reference-service/api/gRPC/proto"
-	"github.com/timoth-y/kicksware-api/reference-service/core/model"
-	"github.com/timoth-y/kicksware-api/reference-service/core/service"
-	"github.com/timoth-y/kicksware-api/reference-service/usecase/business"
+	"go.kicksware.com/api/reference-service/api/gRPC/proto"
+	"go.kicksware.com/api/reference-service/core/model"
+	"go.kicksware.com/api/reference-service/core/service"
+	"go.kicksware.com/api/reference-service/usecase/business"
 )
 
 //go:generate protoc --proto_path=../../../service-protos --go_out=plugins=grpc,paths=source_relative:proto/. reference.proto

@@ -8,21 +8,21 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
-	"github.com/timoth-y/kicksware-api/service-common/config"
+	"go.kicksware.com/api/service-common/config"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 
 	"github.com/golang/glog"
-	TLS "github.com/timoth-y/kicksware-api/service-common/core/meta"
-	"github.com/timoth-y/kicksware-api/service-common/util"
+	TLS "go.kicksware.com/api/service-common/core/meta"
+	"go.kicksware.com/api/service-common/util"
 
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+	"go.kicksware.com/api/service-common/core/meta"
 
-	"github.com/timoth-y/kicksware-api/reference-service/core/model"
-	"github.com/timoth-y/kicksware-api/reference-service/core/repo"
-	"github.com/timoth-y/kicksware-api/reference-service/usecase/business"
+	"go.kicksware.com/api/reference-service/core/model"
+	"go.kicksware.com/api/reference-service/core/repo"
+	"go.kicksware.com/api/reference-service/usecase/business"
 )
 
 type repository struct {

@@ -6,7 +6,7 @@ import (
 	"gopkg.in/yaml.v2"
 
 	"github.com/golang/glog"
-	"github.com/timoth-y/kicksware-api/service-common/config"
+	"go.kicksware.com/api/service-common/config"
 )
 
 type ServiceConfig struct {

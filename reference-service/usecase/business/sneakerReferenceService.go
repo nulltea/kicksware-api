@@ -5,16 +5,16 @@ import (
 
 	"github.com/pkg/errors"
 	"github.com/rs/xid"
-	rest "github.com/timoth-y/kicksware-api/service-common/api/REST"
-	"github.com/timoth-y/kicksware-api/service-common/core"
+	rest "go.kicksware.com/api/service-common/api/REST"
+	"go.kicksware.com/api/service-common/core"
 	"gopkg.in/dealancer/validate.v2"
 
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+	"go.kicksware.com/api/service-common/core/meta"
 
-	"github.com/timoth-y/kicksware-api/reference-service/core/model"
-	"github.com/timoth-y/kicksware-api/reference-service/core/repo"
-	"github.com/timoth-y/kicksware-api/reference-service/core/service"
-	"github.com/timoth-y/kicksware-api/reference-service/env"
+	"go.kicksware.com/api/reference-service/core/model"
+	"go.kicksware.com/api/reference-service/core/repo"
+	"go.kicksware.com/api/reference-service/core/service"
+	"go.kicksware.com/api/reference-service/env"
 )
 
 var (

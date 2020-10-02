@@ -4,7 +4,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/timoth-y/kicksware-api/reference-service/core/model"
+	"go.kicksware.com/api/reference-service/core/model"
 )
 
 type ReferenceSorter struct {

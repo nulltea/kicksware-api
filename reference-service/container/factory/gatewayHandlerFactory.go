@@ -2,12 +2,12 @@ package factory
 
 import (
 	"github.com/go-chi/chi"
-	"github.com/timoth-y/kicksware-api/service-common/core"
+	"go.kicksware.com/api/service-common/core"
 
-	"github.com/timoth-y/kicksware-api/reference-service/api/gRPC"
-	"github.com/timoth-y/kicksware-api/reference-service/api/rest"
-	"github.com/timoth-y/kicksware-api/reference-service/core/service"
-	"github.com/timoth-y/kicksware-api/reference-service/env"
+	"go.kicksware.com/api/reference-service/api/gRPC"
+	"go.kicksware.com/api/reference-service/api/rest"
+	"go.kicksware.com/api/reference-service/core/service"
+	"go.kicksware.com/api/reference-service/env"
 )
 
 func ProvideRESTGatewayHandler(service service.SneakerReferenceService, auth core.AuthService, config env.ServiceConfig) *rest.Handler {
