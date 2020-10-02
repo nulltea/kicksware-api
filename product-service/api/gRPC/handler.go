@@ -5,7 +5,6 @@ import (
 
 	"github.com/golang/glog"
 	"github.com/pkg/errors"
-	"go.kicksware.com/api/service-common/config"
 	"go.kicksware.com/api/service-common/core"
 	"go.kicksware.com/api/service-common/util"
 
@@ -22,14 +21,12 @@ import (
 type Handler struct {
 	service     service.SneakerProductService
 	auth        core.AuthService
-	contentType string
 }
 
-func NewHandler(service service.SneakerProductService, auth core.AuthService, config config.CommonConfig) *Handler {
+func NewHandler(service service.SneakerProductService, auth core.AuthService) *Handler {
 	return &Handler{
 		service,
 		auth,
-		config.ContentType,
 	}
 }
 

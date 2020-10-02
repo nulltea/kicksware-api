@@ -10,6 +10,10 @@ import (
 	"github.com/victorspringer/http-cache/adapter/memory"
 )
 
+func (h *Handler) CacheController(next http.Handler) http.Handler {
+	return h.cache.Middleware(next)
+}
+
 func newCacheClient() *cache.Client {
 	memcached, err := memory.NewAdapter(
 		memory.AdapterWithAlgorithm(memory.MFU),
@@ -30,8 +34,4 @@ func newCacheClient() *cache.Client {
 		os.Exit(1)
 	}
 	return cacheClient
-}
-
-func (h *handler) CacheController(next http.Handler) http.Handler {
-	return h.cache.Middleware(next)
 }

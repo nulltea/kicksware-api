@@ -4,41 +4,18 @@ import (
 	"io/ioutil"
 	"log"
 
+	"go.kicksware.com/api/service-common/config"
 	"gopkg.in/yaml.v2"
 
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
 )
 
 type ServiceConfig struct {
-	Common CommonConfig    `yaml:"commonConfig"`
-	Auth   AuthConfig      `yaml:"authConfig"`
-	Files  DataStoreConfig `yaml:"filesConfig"`
-	Mongo  DataStoreConfig `yaml:"mongoConfig"`
-	Redis  DataStoreConfig `yaml:"redisConfig"`
-}
-
-type CommonConfig struct {
-	Host        string `yaml:"host"`
-	HostName    string `yaml:"hostname"`
-	UsedDB      string `yaml:"usedDB"`
-	ContentType string `yaml:"contentType"`
-	MaxSize     int
-	TailOnly    bool
-	ShowInfo    bool
-}
-
-type DataStoreConfig struct {
-	URL              string `yaml:"URL"`
-	TLS              *meta.TLSCertificate `yaml:"TLS"`
-	Database   string `yaml:"database"`
-	Collection string `yaml:"collection"`
-	Login      string `yaml:"login"`
-	Password   string `yaml:"password"`
-	Timeout    int    `yaml:"timeout"`
-}
-
-type AuthConfig struct {
-	PublicKeyPath string `yaml:"publicKeyPath"`
+	Common   config.CommonConfig    `yaml:"commonConfig"`
+	Security config.SecurityConfig  `yaml:"securityConfig"`
+	Auth     config.AuthConfig      `yaml:"authConfig"`
+	Files    config.DataStoreConfig `yaml:"filesConfig"`
+	Mongo    config.DataStoreConfig `yaml:"mongoConfig"`
+	Redis    config.DataStoreConfig `yaml:"redisConfig"`
 }
 
 func ReadServiceConfig(filename string) (sc ServiceConfig, err error) {

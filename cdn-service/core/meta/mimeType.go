@@ -10,4 +10,5 @@ var (
 	GIF MimeType = "image/gif"
 	SVG MimeType = "image/svg+xml"
 	PDF MimeType = "application/pdf"
+	JSON MimeType = "application/json"
 )

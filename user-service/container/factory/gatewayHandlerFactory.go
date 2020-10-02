@@ -20,14 +20,13 @@ func ProvideRESTGatewayHandler(service service.UserService, authService service.
 	)
 }
 
-func ProvideGRPCGatewayHandler(service service.UserService, authService service.AuthService, mailService service.MailService,
-	interactService service.InteractService, config env.ServiceConfig) *grpc.Handler {
+func ProvideGRPCGatewayHandler(service service.UserService, authService service.AuthService,
+mailService service.MailService, interactService service.InteractService) *grpc.Handler {
 	return grpc.NewHandler(
 		service,
 		authService,
 		mailService,
 		interactService,
-		config.Common,
 	)
 }
 

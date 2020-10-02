@@ -7,20 +7,20 @@ import (
 
 	"github.com/disintegration/imaging"
 	"github.com/golang/glog"
+	"go.kicksware.com/api/service-common/config"
 
-	"github.com/timoth-y/kicksware-api/cdn-service/core/meta"
-	"github.com/timoth-y/kicksware-api/cdn-service/core/model"
-	"github.com/timoth-y/kicksware-api/cdn-service/core/repo"
-	"github.com/timoth-y/kicksware-api/cdn-service/core/service"
-	"github.com/timoth-y/kicksware-api/cdn-service/env"
+	"go.kicksware.com/api/cdn-service/core/meta"
+	"go.kicksware.com/api/cdn-service/core/model"
+	"go.kicksware.com/api/cdn-service/core/repo"
+	"go.kicksware.com/api/cdn-service/core/service"
 )
 
 type contentService struct {
 	repo          repo.ContentRepository
-	serviceConfig env.CommonConfig
+	serviceConfig config.CommonConfig
 }
 
-func NewContentService(repo repo.ContentRepository, config env.CommonConfig) service.ContentService {
+func NewContentService(repo repo.ContentRepository, config config.CommonConfig) service.ContentService {
 	return &contentService{
 		repo,
 		config,

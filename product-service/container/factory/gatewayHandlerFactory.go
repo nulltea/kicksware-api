@@ -14,8 +14,8 @@ func ProvideRESTGatewayHandler(service service.SneakerProductService, auth core.
 	return rest.NewHandler(service, auth, config.Common)
 }
 
-func ProvideGRPCGatewayHandler(service service.SneakerProductService, auth core.AuthService, config env.ServiceConfig) *gRPC.Handler {
-	return gRPC.NewHandler(service, auth, config.Common)
+func ProvideGRPCGatewayHandler(service service.SneakerProductService, auth core.AuthService) *gRPC.Handler {
+	return gRPC.NewHandler(service, auth)
 }
 
 func ProvideEndpointRouter(handler *rest.Handler) chi.Router {

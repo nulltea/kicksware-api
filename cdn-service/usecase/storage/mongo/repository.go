@@ -6,19 +6,20 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
+	"io/ioutil"
+	"time"
+
 	"github.com/pkg/errors"
+	"go.kicksware.com/api/service-common/config"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/gridfs"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
-	"io/ioutil"
-	"time"
 
 	"github.com/golang/glog"
-	TLS "github.com/timoth-y/kicksware-api/service-common/core/meta"
+	"go.kicksware.com/api/service-common/core/meta"
 
-	"github.com/timoth-y/kicksware-api/cdn-service/core/repo"
-	"github.com/timoth-y/kicksware-api/cdn-service/env"
+	"go.kicksware.com/api/cdn-service/core/repo"
 )
 
 type repository struct {
@@ -27,7 +28,7 @@ type repository struct {
 	timeout time.Duration
 }
 
-func NewRepository(config env.DataStoreConfig) (repo.ContentRepository, error) {
+func NewRepository(config config.DataStoreConfig) (repo.ContentRepository, error) {
 	repo := &repository{
 		timeout: time.Duration(config.Timeout) * time.Second,
 	}
@@ -41,7 +42,7 @@ func NewRepository(config env.DataStoreConfig) (repo.ContentRepository, error) {
 	return repo, nil
 }
 
-func newMongoClient(config env.DataStoreConfig) (*mongo.Client, error) {
+func newMongoClient(config config.DataStoreConfig) (*mongo.Client, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(config.Timeout)*time.Second)
 	defer cancel()
 	client, err := mongo.Connect(ctx, options.Client().
@@ -58,7 +59,7 @@ func newMongoClient(config env.DataStoreConfig) (*mongo.Client, error) {
 	return client, nil
 }
 
-func newTLSConfig(tlsConfig *TLS.TLSCertificate) *tls.Config {
+func newTLSConfig(tlsConfig *meta.TLSCertificate) *tls.Config {
 	if !tlsConfig.EnableTLS {
 		return nil
 	}

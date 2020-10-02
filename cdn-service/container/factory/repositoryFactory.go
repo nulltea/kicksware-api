@@ -3,10 +3,10 @@ package factory
 import (
 	"github.com/golang/glog"
 
-	"github.com/timoth-y/kicksware-api/cdn-service/core/repo"
-	"github.com/timoth-y/kicksware-api/cdn-service/env"
-	"github.com/timoth-y/kicksware-api/cdn-service/usecase/storage/disk"
-	"github.com/timoth-y/kicksware-api/cdn-service/usecase/storage/mongo"
+	"go.kicksware.com/api/cdn-service/core/repo"
+	"go.kicksware.com/api/cdn-service/env"
+	"go.kicksware.com/api/cdn-service/usecase/storage/disk"
+	"go.kicksware.com/api/cdn-service/usecase/storage/mongo"
 )
 
 func ProvideRepository(config env.ServiceConfig) repo.ContentRepository {

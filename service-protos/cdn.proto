@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "go.kicksware.com/api/cdn-service/api/proto";
+option csharp_namespace = "Proto";
+
+message Content {
+  bytes data = 1;
+  string mimeType = 2;
+}
+
+service ContentService {
+  rpc Original(ContentRequest) returns (Content);
+  rpc Crop(ContentRequest) returns (Content);
+  rpc Resize(ContentRequest) returns (Content);
+  rpc Thumbnail(ContentRequest) returns (Content);
+  rpc Upload(stream ContentInput) returns (UploadResponse);
+  rpc StreamContent(ContentRequest) returns (stream Content);
+}
+
+message ContentRequest {
+  string filename = 1;
+  string collection = 2;
+  ImageOptions imageOptions = 3;
+}
+
+message ImageOptions {
+  int64 width = 1;
+  int64 height = 2;
+}
+
+message ContentInput {
+  bytes data = 1;
+  ContentRequest request = 2;
+}
+
+message UploadResponse {
+  bool success = 1;
+  string error = 2;
+}

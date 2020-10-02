@@ -14,8 +14,8 @@ func ProvideRESTGatewayHandler(service service.SneakerReferenceService, auth cor
 	return rest.NewHandler(service, auth, config.Common)
 }
 
-func ProvideGRPCGatewayHandler(service service.SneakerReferenceService, auth core.AuthService, config env.ServiceConfig) *gRPC.Handler {
-	return gRPC.NewHandler(service, auth, config.Common)
+func ProvideGRPCGatewayHandler(service service.SneakerReferenceService, auth core.AuthService) *gRPC.Handler {
+	return gRPC.NewHandler(service, auth)
 
 }
 

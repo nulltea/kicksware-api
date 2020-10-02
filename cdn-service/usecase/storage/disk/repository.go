@@ -6,16 +6,16 @@ import (
 	"os"
 
 	"github.com/golang/glog"
+	"go.kicksware.com/api/service-common/config"
 
-	"github.com/timoth-y/kicksware-api/cdn-service/core/repo"
-	"github.com/timoth-y/kicksware-api/cdn-service/env"
+	"go.kicksware.com/api/cdn-service/core/repo"
 )
 
 type repository struct {
 	storagePath string
 }
 
-func NewRepository(config env.DataStoreConfig) (repo.ContentRepository, error) {
+func NewRepository(config config.DataStoreConfig) (repo.ContentRepository, error) {
 	path := config.URL
 	if _, err := os.Stat(path); err != nil && !os.IsExist(err) {
 		glog.Fatalln(err)

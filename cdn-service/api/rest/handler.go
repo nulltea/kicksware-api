@@ -7,46 +7,31 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/golang/glog"
 	"github.com/pkg/errors"
+	"go.kicksware.com/api/service-common/api/rest"
+	"go.kicksware.com/api/service-common/core"
 
 	"github.com/victorspringer/http-cache"
 
-	"github.com/timoth-y/kicksware-api/cdn-service/core/meta"
-	"github.com/timoth-y/kicksware-api/cdn-service/core/model"
-	"github.com/timoth-y/kicksware-api/cdn-service/core/service"
-	"github.com/timoth-y/kicksware-api/cdn-service/env"
+	"go.kicksware.com/api/cdn-service/core/meta"
+	"go.kicksware.com/api/cdn-service/core/model"
+	"go.kicksware.com/api/cdn-service/core/service"
 )
 
-type RestfulHandler interface {
-	// Endpoint handlers:
-	Get(http.ResponseWriter, *http.Request)
-	GetCropped(http.ResponseWriter, *http.Request)
-	GetResized(http.ResponseWriter, *http.Request)
-	GetThumbnail(http.ResponseWriter, *http.Request)
-	Post(http.ResponseWriter, *http.Request)
-	// Middleware:
-	Authenticator(next http.Handler) http.Handler
-	Authorizer(next http.Handler) http.Handler
-	CacheController(next http.Handler) http.Handler
-	// Health
-	HealthZ(http.ResponseWriter, *http.Request)
-	ReadyZ(http.ResponseWriter, *http.Request)
-}
-
-type handler struct {
+type Handler struct {
 	service     service.ContentService
-	auth        service.AuthService
+	auth        *rest.AuthMiddleware
 	cache       *cache.Client
 }
 
-func NewHandler(service service.ContentService, auth service.AuthService, config env.CommonConfig) RestfulHandler {
-	return &handler{
+func NewHandler(service service.ContentService, auth core.AuthService) *Handler {
+	return &Handler{
 		service,
-		auth,
+		rest.NewAuthMiddleware(auth),
 		newCacheClient(),
 	}
 }
 
-func (h *handler) Get(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Get(w http.ResponseWriter, r *http.Request) {
 	query := meta.ContentQuery {
 		Filename:   chi.URLParam(r, "filename"),
 		Collection: chi.URLParam(r, "collection"),
@@ -68,7 +53,7 @@ func (h *handler) Get(w http.ResponseWriter, r *http.Request) {
 
 
 
-func (h *handler) GetCropped(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) GetCropped(w http.ResponseWriter, r *http.Request) {
 	query := meta.ContentQuery {
 		Filename:   chi.URLParam(r, "filename"),
 		Collection: chi.URLParam(r, "collection"),
@@ -93,7 +78,7 @@ func (h *handler) GetCropped(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, img, http.StatusOK)
 }
 
-func (h *handler) GetResized(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) GetResized(w http.ResponseWriter, r *http.Request) {
 	query := meta.ContentQuery {
 		Filename:   chi.URLParam(r, "filename"),
 		Collection: chi.URLParam(r, "collection"),
@@ -117,7 +102,7 @@ func (h *handler) GetResized(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, img, http.StatusOK)
 }
 
-func (h *handler) GetThumbnail(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) GetThumbnail(w http.ResponseWriter, r *http.Request) {
 	query := meta.ContentQuery {
 		Filename:   chi.URLParam(r, "filename"),
 		Collection: chi.URLParam(r, "collection"),
@@ -136,11 +121,11 @@ func (h *handler) GetThumbnail(w http.ResponseWriter, r *http.Request) {
 	h.setupResponse(w, img, http.StatusOK)
 }
 
-func (h *handler) Post(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	panic("not implemented")
 }
 
-func (h *handler) setupResponse(w http.ResponseWriter, content *model.Content, statusCode int) {
+func (h *Handler) setupResponse(w http.ResponseWriter, content *model.Content, statusCode int) {
 	w.Header().Set("Content-Length", strconv.Itoa(len(content.Data)))
 	w.Header().Set("Content-Type", string(content.MimeType))
 	w.WriteHeader(statusCode)

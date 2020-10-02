@@ -9,7 +9,7 @@ import (
 
 	"github.com/fatih/structs"
 
-	"github.com/timoth-y/kicksware-api/cdn-service/core/meta"
+	"go.kicksware.com/api/cdn-service/core/meta"
 )
 
 func ParseOptions(r *http.Request) meta.ImageOptions {
