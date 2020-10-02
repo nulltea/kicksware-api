@@ -3,7 +3,8 @@ commonConfig:
   hostname: api.kicksware.com
   usedDB: mongo
   contentType: application/json
-  innerServiceFormat: rpc.kicksware.com:443
+  apiEndpointFormat: https://api.kicksware.com/%s/
+  rpcEndpointFormat: rpc.kicksware.com:443
 securityConfig:
   tlsCertificate:
     enableTLS: false
@@ -14,13 +15,15 @@ authConfig:
     certFile: ../keys/server.crt
 mongoConfig:
   URL: mongodb://localhost:27017
-  database: sneakerResaleDB
-  collection: orders
-  timeout: 30
   TLS:
     enableTLS: true
     certFile: certs/mongo/ca.crt
     keyFile: certs/mongo/tls.key
+  database: sneakerResaleDB
+  collection: orders
+  login: $MONGO_USER
+  password: $MONGO_PASSWORD
+  timeout: 30
 redisConfig:
   URL: redis://localhost:6379
 postgresConfig:

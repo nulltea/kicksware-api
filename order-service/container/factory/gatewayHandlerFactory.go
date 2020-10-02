@@ -2,19 +2,20 @@ package factory
 
 import (
 	"github.com/go-chi/chi"
+	"go.kicksware.com/api/service-common/core"
 
-	"github.com/timoth-y/kicksware-api/order-service/api/gRPC"
-	"github.com/timoth-y/kicksware-api/order-service/api/rest"
-	"github.com/timoth-y/kicksware-api/order-service/core/service"
-	"github.com/timoth-y/kicksware-api/order-service/env"
+	"go.kicksware.com/api/order-service/api/gRPC"
+	"go.kicksware.com/api/order-service/api/rest"
+	"go.kicksware.com/api/order-service/core/service"
+	"go.kicksware.com/api/order-service/env"
 )
 
-func ProvideRESTGatewayHandler(service service.OrderService, auth service.AuthService, config env.ServiceConfig) *rest.Handler {
+func ProvideRESTGatewayHandler(service service.OrderService, auth core.AuthService, config env.ServiceConfig) *rest.Handler {
 	return rest.NewHandler(service, auth, config.Common)
 }
 
-func ProvideGRPCGatewayHandler(service service.OrderService, auth service.AuthService, config env.ServiceConfig) *gRPC.Handler {
-	return gRPC.NewHandler(service, auth, config.Common)
+func ProvideGRPCGatewayHandler(service service.OrderService, auth core.AuthService) *gRPC.Handler {
+	return gRPC.NewHandler(service, auth)
 }
 
 func ProvideEndpointRouter(handler *rest.Handler) chi.Router {

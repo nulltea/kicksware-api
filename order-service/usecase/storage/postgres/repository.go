@@ -7,13 +7,14 @@ import (
 	_ "github.com/jackc/pgx/v4/stdlib"
 	"github.com/jmoiron/sqlx"
 	"github.com/pkg/errors"
-	"github.com/timoth-y/kicksware-api/service-common/util"
+	"go.kicksware.com/api/service-common/config"
+	"go.kicksware.com/api/service-common/util"
 
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
-	"github.com/timoth-y/kicksware-api/order-service/core/model"
-	"github.com/timoth-y/kicksware-api/order-service/core/repo"
-	"github.com/timoth-y/kicksware-api/order-service/env"
-	"github.com/timoth-y/kicksware-api/order-service/usecase/business"
+	"go.kicksware.com/api/service-common/core/meta"
+
+	"go.kicksware.com/api/order-service/core/model"
+	"go.kicksware.com/api/order-service/core/repo"
+	"go.kicksware.com/api/order-service/usecase/business"
 )
 
 type repository struct {
@@ -21,7 +22,7 @@ type repository struct {
 	table string
 }
 
-func NewRepository(config env.DataStoreConfig) (repo.OrderRepository, error) {
+func NewRepository(config config.DataStoreConfig) (repo.OrderRepository, error) {
 	db, err := newPostgresClient(config.URL)
 	if err != nil {
 		return nil, errors.Wrap(err, "repository.NewRepository")

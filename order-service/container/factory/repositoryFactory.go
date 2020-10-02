@@ -3,10 +3,10 @@ package factory
 import (
 	"log"
 
-	"github.com/timoth-y/kicksware-api/order-service/core/repo"
-	"github.com/timoth-y/kicksware-api/order-service/env"
-	"github.com/timoth-y/kicksware-api/order-service/usecase/storage/mongo"
-	"github.com/timoth-y/kicksware-api/order-service/usecase/storage/postgres"
+	"go.kicksware.com/api/order-service/core/repo"
+	"go.kicksware.com/api/order-service/env"
+	"go.kicksware.com/api/order-service/usecase/storage/mongo"
+	"go.kicksware.com/api/order-service/usecase/storage/postgres"
 )
 
 func ProvideRepository(config env.ServiceConfig) repo.OrderRepository {

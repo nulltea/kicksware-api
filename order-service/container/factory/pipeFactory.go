@@ -3,24 +3,21 @@ package factory
 import (
 	"encoding/json"
 
-	"github.com/timoth-y/kicksware-api/search-service/core/pipe"
-	"github.com/timoth-y/kicksware-api/search-service/core/service"
-	searcnEnv "github.com/timoth-y/kicksware-api/search-service/env"
-	"github.com/timoth-y/kicksware-api/search-service/usecase/pipes/REST"
-	"github.com/timoth-y/kicksware-api/search-service/usecase/pipes/gRPC"
+	"go.kicksware.com/api/search-service/core/pipe"
+	searchEnv "go.kicksware.com/api/search-service/env"
+	"go.kicksware.com/api/search-service/usecase/pipes/REST"
+	"go.kicksware.com/api/search-service/usecase/pipes/gRPC"
+	"go.kicksware.com/api/service-common/core"
 
-	"github.com/timoth-y/kicksware-api/order-service/env"
+	"go.kicksware.com/api/order-service/env"
 )
 
-func ProvideReferenceRESTPipe(auth service.AuthService, config env.ServiceConfig) pipe.SneakerReferencePipe {
-	var searchConfig searcnEnv.ServiceConfig
-	castService(config, &searchConfig)
-	return REST.NewSneakerReferencePipe(auth, searchConfig.Common)
+func ProvideReferenceRESTPipe(auth core.AuthService, config env.ServiceConfig) pipe.SneakerReferencePipe {
+	return REST.NewSneakerReferencePipe(auth, config.Common)
 }
 
 func ProvideReferenceGRPCPipe(config env.ServiceConfig) pipe.SneakerReferencePipe {
-	var searchConfig searcnEnv.ServiceConfig
-	castService(config, &searchConfig)
+	var searchConfig searchEnv.ServiceConfig; castService(config, &searchConfig)
 	return gRPC.NewSneakerReferencePipe(searchConfig)
 }
 

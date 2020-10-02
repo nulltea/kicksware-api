@@ -132,7 +132,7 @@ func (h *Handler) Authorizer(next http.Handler) http.Handler {
 			return
 		}
 		if claims != nil && claims.Role != string(model.Guest) {
-			r.URL.User = url.User(claims.UniqueID)
+			r.URL.User = url.UserPassword(claims.UniqueID, token.Raw)
 		} else {
 			http.Error(w, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
 			fmt.Println()

@@ -4,23 +4,23 @@ import (
 	"context"
 	"crypto/tls"
 	"crypto/x509"
+	"io/ioutil"
+	"time"
+
 	"github.com/pkg/errors"
+	"go.kicksware.com/api/service-common/config"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
-	"io/ioutil"
-	"time"
 
 	"github.com/golang/glog"
-	TLS "github.com/timoth-y/kicksware-api/service-common/core/meta"
-	"github.com/timoth-y/kicksware-api/service-common/util"
+	"go.kicksware.com/api/service-common/core/meta"
+	"go.kicksware.com/api/service-common/util"
 
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
-	"github.com/timoth-y/kicksware-api/order-service/core/model"
-	"github.com/timoth-y/kicksware-api/order-service/core/repo"
-	"github.com/timoth-y/kicksware-api/order-service/env"
-	"github.com/timoth-y/kicksware-api/order-service/usecase/business"
+	"go.kicksware.com/api/order-service/core/model"
+	"go.kicksware.com/api/order-service/core/repo"
+	"go.kicksware.com/api/order-service/usecase/business"
 )
 
 type repository struct {
@@ -30,7 +30,7 @@ type repository struct {
 	timeout    time.Duration
 }
 
-func NewRepository(config env.DataStoreConfig) (repo.OrderRepository, error) {
+func NewRepository(config config.DataStoreConfig) (repo.OrderRepository, error) {
 	repo := &repository{
 		timeout:  time.Duration(config.Timeout) * time.Second,
 	}
@@ -44,7 +44,7 @@ func NewRepository(config env.DataStoreConfig) (repo.OrderRepository, error) {
 	return repo, nil
 }
 
-func newMongoClient(config env.DataStoreConfig) (*mongo.Client, error) {
+func newMongoClient(config config.DataStoreConfig) (*mongo.Client, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(config.Timeout)*time.Second)
 	defer cancel()
 	client, err := mongo.Connect(ctx, options.Client().
@@ -60,7 +60,7 @@ func newMongoClient(config env.DataStoreConfig) (*mongo.Client, error) {
 	return client, nil
 }
 
-func newTLSConfig(tlsConfig *TLS.TLSCertificate) *tls.Config {
+func newTLSConfig(tlsConfig *meta.TLSCertificate) *tls.Config {
 	if !tlsConfig.EnableTLS {
 		return nil
 	}

@@ -4,30 +4,28 @@ import (
 	"context"
 
 	"github.com/pkg/errors"
-	"github.com/timoth-y/kicksware-api/service-common/util"
+	"go.kicksware.com/api/service-common/core"
+	"go.kicksware.com/api/service-common/util"
 
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+	"go.kicksware.com/api/service-common/core/meta"
 
-	"github.com/timoth-y/kicksware-api/order-service/api/gRPC/proto"
-	"github.com/timoth-y/kicksware-api/order-service/core/model"
-	"github.com/timoth-y/kicksware-api/order-service/core/service"
-	"github.com/timoth-y/kicksware-api/order-service/env"
-	"github.com/timoth-y/kicksware-api/order-service/usecase/business"
+	"go.kicksware.com/api/order-service/api/gRPC/proto"
+	"go.kicksware.com/api/order-service/core/model"
+	"go.kicksware.com/api/order-service/core/service"
+	"go.kicksware.com/api/order-service/usecase/business"
 )
 
 //go:generate protoc --proto_path=../../../service-protos --go_out=plugins=grpc,paths=source_relative:proto/. orders.proto
 
 type Handler struct {
 	service     service.OrderService
-	auth        service.AuthService
-	contentType string
+	auth        core.AuthService
 }
 
-func NewHandler(service service.OrderService, auth service.AuthService, config env.CommonConfig) *Handler {
+func NewHandler(service service.OrderService, auth core.AuthService) *Handler {
 	return &Handler{
 		service,
 		auth,
-		config.ContentType,
 	}
 }
 
@@ -36,7 +34,7 @@ func (h *Handler) GetOrders(ctx context.Context, filter *proto.OrderFilter) (res
 	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
 		params = filter.RequestParams.ToNative()
 	}
-	setUserID(ctx, &params)
+	util.SetAuthParamsFromMetaData(ctx, &params)
 
 	if len(filter.OrderID) == 0 && filter.RequestQuery == nil {
 		orders, err = h.service.FetchAll(params)
@@ -70,7 +68,7 @@ func (h *Handler) CountOrders(ctx context.Context, filter *proto.OrderFilter) (r
 	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
 		params = filter.RequestParams.ToNative()
 	}
-	setUserID(ctx, &params)
+	util.SetAuthParamsFromMetaData(ctx, &params)
 
 	if len(filter.OrderID) == 0 && filter.RequestQuery == nil {
 		count, err = h.service.CountAll()
@@ -153,17 +151,6 @@ func (h *Handler) DeleteOrder(ctx context.Context, filter *proto.OrderFilter) (r
 		Orders: nil, Count: 1,
 	}
 	return
-}
-
-func setUserID(ctx context.Context, params **meta.RequestParams) string {
-	if id, ok := util.RetrieveUserID(ctx); ok {
-		if *params == nil {
-			*params = &meta.RequestParams{}
-		}
-		(*params).SetUserID(id)
-		return id
-	}
-	return ""
 }
 
 func getInputUserID(ctx context.Context, input *proto.OrderInput) (string, bool) {

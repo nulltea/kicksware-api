@@ -7,35 +7,37 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/pkg/errors"
-	"github.com/timoth-y/kicksware-api/service-common/util"
+	"go.kicksware.com/api/service-common/api/rest"
+	"go.kicksware.com/api/service-common/config"
+	"go.kicksware.com/api/service-common/core"
+	"go.kicksware.com/api/service-common/util"
 
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+	"go.kicksware.com/api/service-common/core/meta"
 
-	"github.com/timoth-y/kicksware-api/order-service/core/model"
-	"github.com/timoth-y/kicksware-api/order-service/core/service"
-	"github.com/timoth-y/kicksware-api/order-service/env"
-	"github.com/timoth-y/kicksware-api/order-service/usecase/business"
-	"github.com/timoth-y/kicksware-api/order-service/usecase/serializer/json"
-	"github.com/timoth-y/kicksware-api/order-service/usecase/serializer/msg"
+	"go.kicksware.com/api/order-service/core/model"
+	"go.kicksware.com/api/order-service/core/service"
+	"go.kicksware.com/api/order-service/usecase/business"
+	"go.kicksware.com/api/order-service/usecase/serializer/json"
+	"go.kicksware.com/api/order-service/usecase/serializer/msg"
 )
 
 type Handler struct {
 	service     service.OrderService
-	auth        service.AuthService
+	auth        *rest.AuthMiddleware
 	contentType string
 }
 
-func NewHandler(service service.OrderService, auth service.AuthService, config env.CommonConfig) *Handler {
+func NewHandler(service service.OrderService, auth core.AuthService, config config.CommonConfig) *Handler {
 	return &Handler{
 		service,
-		auth,
+		rest.NewAuthMiddleware(auth),
 		config.ContentType,
 	}
 }
 
 func (h *Handler) GetOne(w http.ResponseWriter, r *http.Request) {
 	code := chi.URLParam(r,"orderID")
-	params := NewRequestParams(r)
+	params := rest.NewRequestParams(r)
 	order, err := h.service.FetchOne(code, params)
 	if err != nil {
 		if errors.Cause(err) == business.ErrOrderNotFound {
@@ -51,7 +53,7 @@ func (h *Handler) GetOne(w http.ResponseWriter, r *http.Request) {
 func (h *Handler) Get(w http.ResponseWriter, r *http.Request) {
 	var orders []*model.Order
 	var err error
-	params := NewRequestParams(r)
+	params := rest.NewRequestParams(r)
 
 	if r.Method == http.MethodPost {
 		query, err := h.getRequestQuery(r); if err != nil {
@@ -137,7 +139,7 @@ func (h *Handler) Patch(w http.ResponseWriter, r *http.Request) {
 func (h *Handler) Count(w http.ResponseWriter, r *http.Request) {
 	var count int
 	var err error
-	params := NewRequestParams(r)
+	params := rest.NewRequestParams(r)
 
 	if r.Method == http.MethodPost {
 		query, err := h.getRequestQuery(r)

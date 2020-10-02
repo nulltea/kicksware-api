@@ -22,6 +22,7 @@ ingress:
   tls:
     enabled: true
     certResolver: le
+    secretName: grpc-tls
   routes:
     - host: api.kicksware.com
       paths:
@@ -41,6 +42,17 @@ ingress:
         - name: orders-service
           port: 8080
           scheme: http
+    - host: rpc.kicksware.com
+      grpc: true
+      paths:
+        - /proto.OrderService
+      entrypoints:
+        - web
+        - websecure
+      services:
+        - name: orders-service
+          port: 8080
+          scheme: h2c
 
 volumes: {}
 

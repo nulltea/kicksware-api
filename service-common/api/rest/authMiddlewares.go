@@ -72,7 +72,7 @@ func (m *AuthMiddleware) Authorizer(next http.Handler) http.Handler {
 			return
 		}
 		if claims != nil && claims.Role != GuestRole {
-			r.URL.User = url.User(claims.UniqueID)
+			r.URL.User = url.UserPassword(claims.UniqueID, token.Raw)
 		} else {
 			http.Error(w, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
 			fmt.Println()

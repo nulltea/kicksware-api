@@ -1,11 +1,11 @@
 package startup
 
 import (
-	di "github.com/timoth-y/kicksware-api/service-common/container"
-	"github.com/timoth-y/kicksware-api/service-common/core"
+	di "go.kicksware.com/api/service-common/container"
+	"go.kicksware.com/api/service-common/core"
 
-	conf "github.com/timoth-y/kicksware-api/order-service/container/config"
-	"github.com/timoth-y/kicksware-api/order-service/env"
+	conf "go.kicksware.com/api/order-service/container/config"
+	"go.kicksware.com/api/order-service/env"
 )
 
 func InitializeServer() (srv core.Server) {
@@ -18,4 +18,3 @@ func InitializeServer() (srv core.Server) {
 	container.Resolve(&srv)
 	return
 }
-

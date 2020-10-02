@@ -21,6 +21,7 @@ func ProvideRoutes(rest *Handler) *chi.Mux {
 func restRoutes(rest *Handler) (r *chi.Mux) {
 	r = chi.NewRouter()
 	r.Use(rest.auth.Authenticator)
+	r.Use(rest.auth.UserSetter)
 	r.Get("/", rest.Get)
 	r.Get("/by/{field}", rest.GetBy)
 	r.Get("/sku/{sku}", rest.GetSKU)

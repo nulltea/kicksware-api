@@ -1,6 +1,6 @@
 package service
 
-import model "github.com/timoth-y/kicksware-api/order-service/core/model"
+import model "go.kicksware.com/api/order-service/core/model"
 
 type OrderSerializer interface {
 	Decode(input []byte) (*model.Order, error)

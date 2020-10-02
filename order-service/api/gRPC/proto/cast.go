@@ -3,7 +3,7 @@ package proto
 import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	"github.com/timoth-y/kicksware-api/order-service/core/model"
+	"go.kicksware.com/api/order-service/core/model"
 )
 
 func (m *Order) ToNative() *model.Order {

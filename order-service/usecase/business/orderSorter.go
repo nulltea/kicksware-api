@@ -4,7 +4,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/timoth-y/kicksware-api/order-service/core/model"
+	"go.kicksware.com/api/order-service/core/model"
 )
 
 type OrderSorter struct {

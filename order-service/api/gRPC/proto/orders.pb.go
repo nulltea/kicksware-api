@@ -11,7 +11,7 @@ import (
 	proto "github.com/golang/protobuf/proto"
 	_struct "github.com/golang/protobuf/ptypes/struct"
 	timestamp "github.com/golang/protobuf/ptypes/timestamp"
-	proto1 "github.com/timoth-y/kicksware-api/service-common/api/proto"
+	proto1 "go.kicksware.com/api/service-common/api/proto"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

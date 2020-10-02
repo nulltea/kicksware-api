@@ -1,18 +1,20 @@
 package factory
 
 import (
-	"github.com/timoth-y/kicksware-api/search-service/core/pipe"
+	"go.kicksware.com/api/search-service/core/pipe"
+	"go.kicksware.com/api/service-common/api/rest"
+	"go.kicksware.com/api/service-common/core"
 
-	"github.com/timoth-y/kicksware-api/order-service/core/repo"
-	"github.com/timoth-y/kicksware-api/order-service/core/service"
-	"github.com/timoth-y/kicksware-api/order-service/env"
-	"github.com/timoth-y/kicksware-api/order-service/usecase/business"
+	"go.kicksware.com/api/order-service/core/repo"
+	"go.kicksware.com/api/order-service/core/service"
+	"go.kicksware.com/api/order-service/env"
+	"go.kicksware.com/api/order-service/usecase/business"
 )
 
-func ProvideDataService(repository repo.OrderRepository, pipe pipe.SneakerReferencePipe, config env.ServiceConfig) service.OrderService {
-	return business.NewOrderService(repository, pipe, config.Common)
+func ProvideDataService(repository repo.OrderRepository, pipe pipe.SneakerReferencePipe, auth core.AuthService, config env.ServiceConfig) service.OrderService {
+	return business.NewOrderService(repository, pipe, auth, config)
 }
 
-func ProvideAuthService(config env.ServiceConfig) service.AuthService {
-	return business.NewAuthService(config.Auth)
+func ProvideAuthService(config env.ServiceConfig) core.AuthService {
+	return rest.NewAuthService(config.Auth)
 }

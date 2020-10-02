@@ -3,7 +3,8 @@ commonConfig:
   hostname: api.kicksware.com
   usedDB: mongo
   contentType: application/json
-  innerServiceFormat: rpc.kicksware.com:443
+  apiEndpointFormat: https://api.kicksware.com/%s/
+  rpcEndpointFormat: rpc.kicksware.com:443
 securityConfig:
   tlsCertificate:
     enableTLS: false
