@@ -337,9 +337,8 @@ github.com/tidwall/pretty v1.0.2/go.mod h1:XNkn88O1ChpSDQmQeStsy+sBenx6DDtFZJxhV
 github.com/timoth-y/kicksware-api v0.0.0-20200929040256-27f313243e37 h1:FjIzNkjJRBaqPYJN18kppsX4Wx93Hwap1C5wPCauOAs=
 github.com/timoth-y/kicksware-api/reference-service v0.0.0-20200929170108-06ad01754ece h1:YBCNaugM2j6nIYYgbnsi0o5Hz8FPASxWDsHjG0pcUyw=
 github.com/timoth-y/kicksware-api/reference-service v0.0.0-20200929170108-06ad01754ece/go.mod h1:4sV2Cl5/KVC4/szlGhV7dZaeUlQTgpObOl2MEovvgjw=
-go.kicksware.com/api/service-common v0.0.0-20200917003707-614a88b9cfc1/go.mod h1:tCFTegF6f4p/b5lwMeKYUEsJFlgiPnEeev0KPEj0WTo=
-go.kicksware.com/api/service-common v0.0.0-20200917005139-98b85de071c8/go.mod h1:9SnVqlhMyDs3PLKLQOhDQmXUeZ/ErA8RKwYPaOZKFbQ=
-go.kicksware.com/api/service-common v0.0.0-20200928212326-c0f29ca1ff42/go.mod h1:fSAG2QiKjFWLG88Zgiv5FL0/IyEFsAfC9ljY9EmBg48=
+github.com/timoth-y/kicksware-api/service-common v0.0.0-20200917003707-614a88b9cfc1/go.mod h1:tCFTegF6f4p/b5lwMeKYUEsJFlgiPnEeev0KPEj0WTo=
+github.com/timoth-y/kicksware-api/service-common v0.0.0-20200917005139-98b85de071c8/go.mod h1:9SnVqlhMyDs3PLKLQOhDQmXUeZ/ErA8RKwYPaOZKFbQ=
 github.com/timoth-y/kicksware-api/user-service v0.0.0-20200917004439-e230029ec58b h1:cTF4A1cb8zG2XVEIRmd1lnNRpwerr1ORZ+ZEkgnvVfE=
 github.com/timoth-y/kicksware-api/user-service v0.0.0-20200917004439-e230029ec58b/go.mod h1:08/xwSHV+E4rUaUBBt9mIiQ5ae1M1OQS+zWmGxy6Ewc=
 github.com/timoth-y/kicksware-api/user-service v0.0.0-20200917011049-79140f0e7480 h1:9R6n/Wo/lxcK1EwiHapUJCEjxYp2QoWbsYZU6oAJAP0=
@@ -363,6 +362,12 @@ go.elastic.co/apm/module/apmhttp v1.8.0 h1:5AJPefWJzWDLX/47XIDfaloGiYWkkOQEULvlr
 go.elastic.co/apm/module/apmhttp v1.8.0/go.mod h1:9LPFlEON51/lRbnWDfqAWErihIiAFDUMfMV27YjoWQ8=
 go.elastic.co/fastjson v1.0.0 h1:ooXV/ABvf+tBul26jcVViPT3sBir0PvXgibYB1IQQzg=
 go.elastic.co/fastjson v1.0.0/go.mod h1:PmeUOMMtLHQr9ZS9J9owrAVg0FkaZDRZJEFTTGHtchs=
+go.kicksware.com/api/service-common v0.0.0-20200917003707-614a88b9cfc1/go.mod h1:tCFTegF6f4p/b5lwMeKYUEsJFlgiPnEeev0KPEj0WTo=
+go.kicksware.com/api/service-common v0.0.0-20200917005139-98b85de071c8/go.mod h1:9SnVqlhMyDs3PLKLQOhDQmXUeZ/ErA8RKwYPaOZKFbQ=
+go.kicksware.com/api/service-common v0.0.0-20200928212326-c0f29ca1ff42/go.mod h1:fSAG2QiKjFWLG88Zgiv5FL0/IyEFsAfC9ljY9EmBg48=
+go.kicksware.com/api/service-common v0.0.0-20201002034117-505bfe555177/go.mod h1:d6LgbqL2b3a9pa8430sJnVh1ActIPTeCeX0ucX9cU8E=
+go.kicksware.com/api/user-service v0.0.0-20201002035145-842d131c8dc2 h1:gZJuLOPAMgplDqJbgDSuNp8f+3oG9T0L/xjO6thRPYA=
+go.kicksware.com/api/user-service v0.0.0-20201002035145-842d131c8dc2/go.mod h1:UWaGS0jC62q53CQuqiokVob7O01eHtliR/HkQKb8eFs=
 go.mongodb.org/mongo-driver v1.4.1 h1:38NSAyDPagwnFpUA/D5SFgbugUYR3NzYRNa4Qk9UxKs=
 go.mongodb.org/mongo-driver v1.4.1/go.mod h1:llVBH2pkj9HywK0Dtdt6lDikOjFLbceHVu/Rc0iMKLs=
 go.opencensus.io v0.21.0/go.mod h1:mSImk1erAIZhrmZN+AvHh14ztQfjbGwt4TtuofqLduU=
