@@ -1,0 +1,11 @@
+This is service provides vanity imports for {{ .Values.project }} application project.
+After deployment you'll be able to import Golang packages using host:
+{{- range .Values.ingress.routes }} {{ $host := .host }}
+  {{- range .paths }}
+  - http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host }}{{ . }}
+  {{- end }}
+{{- end }}
+For more info contact project maintainers:
+{{- range .Chart.Maintainers }}
+  - {{ .Name }}
+{{- end }}
