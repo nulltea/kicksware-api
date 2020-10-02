@@ -8,13 +8,14 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/pkg/errors"
+	"go.kicksware.com/api/service-common/api/rest"
+	"go.kicksware.com/api/service-common/config"
 
 	common "go.kicksware.com/api/service-common/core/meta"
 
 	"go.kicksware.com/api/user-service/core/meta"
 	"go.kicksware.com/api/user-service/core/model"
 	"go.kicksware.com/api/user-service/core/service"
-	"go.kicksware.com/api/user-service/env"
 	"go.kicksware.com/api/user-service/usecase/business"
 	"go.kicksware.com/api/user-service/usecase/serializer/json"
 	"go.kicksware.com/api/user-service/usecase/serializer/msg"
@@ -29,7 +30,7 @@ type Handler struct {
 }
 
 func NewHandler(service service.UserService, auth service.AuthService, mail service.MailService,
-	interact service.InteractService, config env.CommonConfig) *Handler {
+	interact service.InteractService, config config.CommonConfig) *Handler {
 	return &Handler{
 		service,
 		auth,
@@ -56,7 +57,7 @@ func (h *Handler) GetOne(w http.ResponseWriter, r *http.Request) {
 func (h *Handler) Get(w http.ResponseWriter, r *http.Request) {
 	var users []*model.User
 	var err error
-	params := NewRequestParams(r)
+	params := rest.NewRequestParams(r)
 
 	if r.Method == http.MethodPost {
 		query, err := h.getRequestQuery(r)

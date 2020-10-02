@@ -6,7 +6,7 @@ import "user.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/timoth-y/kicksware-api/user-service/api/gRPC/proto";
+option go_package = "go.kicksware.com/api/user-service/api/gRPC/proto";
 option csharp_namespace = "Proto";
 
 message AuthToken {

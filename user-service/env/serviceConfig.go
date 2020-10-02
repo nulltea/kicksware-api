@@ -4,32 +4,21 @@ import (
 	"io/ioutil"
 
 	"github.com/golang/glog"
+	"go.kicksware.com/api/service-common/config"
 	"go.kicksware.com/api/service-common/core/meta"
 	"gopkg.in/yaml.v2"
 )
 
 type ServiceConfig struct {
-	Common       CommonConfig    `yaml:"commonConfig"`
-	Security     SecurityConfig  `yaml:"securityConfig"`
-	Auth         AuthConfig      `yaml:"authConfig"`
-	Mail         MailConfig      `yaml:"mailConfig"`
-	FallbackMail MailConfig      `yaml:"fallbackMailConfig"`
-	Mongo        DataStoreConfig `yaml:"mongoConfig"`
-	Postgres     DataStoreConfig `yaml:"postgresConfig"`
-	Redis        DataStoreConfig `yaml:"redisConfig"`
-	Personal     PersonalConfig  `yaml:"personalConfig"`
-}
-
-type CommonConfig struct {
-	Host               string               `yaml:"host"`
-	HostName           string               `yaml:"hostname"`
-	UsedDB             string               `yaml:"usedDB"`
-	ContentType        string               `yaml:"contentType"`
-	InnerServiceFormat string               `yaml:"innerServiceFormat"`
-}
-
-type SecurityConfig struct {
-	TLSCertificate     *meta.TLSCertificate `yaml:"tlsCertificate"`
+	Common       config.CommonConfig   `yaml:"commonConfig"`
+	Security     config.SecurityConfig `yaml:"securityConfig"`
+	Auth         AuthConfig            `yaml:"authConfig"`
+	Mail         MailConfig            `yaml:"mailConfig"`
+	FallbackMail MailConfig            `yaml:"fallbackMailConfig"`
+	Mongo        DataStoreConfig       `yaml:"mongoConfig"`
+	Postgres     DataStoreConfig       `yaml:"postgresConfig"`
+	Redis        DataStoreConfig       `yaml:"redisConfig"`
+	Personal     PersonalConfig        `yaml:"personalConfig"`
 }
 
 type DataStoreConfig struct {

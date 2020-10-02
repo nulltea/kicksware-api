@@ -9,13 +9,13 @@ import (
 	"context"
 
 	"github.com/pkg/errors"
+	"go.kicksware.com/api/service-common/config"
 
 	"go.kicksware.com/api/service-common/core/meta"
 
 	"go.kicksware.com/api/user-service/api/gRPC/proto"
 	"go.kicksware.com/api/user-service/core/model"
 	"go.kicksware.com/api/user-service/core/service"
-	"go.kicksware.com/api/user-service/env"
 	"go.kicksware.com/api/user-service/usecase/business"
 )
 
@@ -28,7 +28,7 @@ type Handler struct {
 }
 
 func NewHandler(service service.UserService, auth service.AuthService, mail service.MailService,
-	interact service.InteractService, config env.CommonConfig) *Handler {
+	interact service.InteractService, config config.CommonConfig) *Handler {
 	return &Handler{
 		service,
 		auth,

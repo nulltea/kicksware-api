@@ -19,7 +19,7 @@ require (
 	github.com/rs/xid v1.2.1
 	github.com/thoas/go-funk v0.7.0
 	github.com/vmihailenco/msgpack v4.0.4+incompatible
-	go.kicksware.com/api/service-common v0.0.0-20201002034117-505bfe555177 // indirect
+	go.kicksware.com/api/service-common v0.0.0-20201002035510-8b1c54368e8a
 	go.mongodb.org/mongo-driver v1.4.1
 	google.golang.org/grpc v1.32.0
 	google.golang.org/protobuf v1.25.0

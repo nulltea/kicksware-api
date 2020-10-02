@@ -29,7 +29,7 @@ require (
 	github.com/thoas/go-funk v0.7.0
 	github.com/timoth-y/kicksware-api/user-service v0.0.0-20200917011049-79140f0e7480
 	github.com/vmihailenco/msgpack v4.0.4+incompatible
-	go.kicksware.com/api/service-common v0.0.0-20201002034117-505bfe555177 // indirect
+	go.kicksware.com/api/service-common v0.0.0-20201002034117-505bfe555177
 	go.mongodb.org/mongo-driver v1.4.1
 	golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a // indirect
 	google.golang.org/grpc v1.32.0
