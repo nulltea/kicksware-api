@@ -4,7 +4,6 @@ go 1.14
 
 require (
 	github.com/Masterminds/squirrel v1.4.0
-	github.com/anjmao/go2proto v0.0.3 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/fatih/structs v1.1.0
 	github.com/go-chi/chi v4.1.2+incompatible
@@ -14,13 +13,11 @@ require (
 	github.com/jackc/pgx/v4 v4.8.1
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/joho/godotenv v1.3.0
-	github.com/onsi/ginkgo v1.12.0 // indirect
-	github.com/onsi/gomega v1.9.0 // indirect
 	github.com/pkg/errors v0.9.1
 	github.com/rs/xid v1.2.1
 	github.com/thoas/go-funk v0.7.0
-	go.kicksware.com/api/service-common v0.0.0-20201002035510-8b1c54368e8a // indirect
-	go.kicksware.com/api/user-service v0.0.0-20201002041240-898528d3d7e9 // indirect
+	go.kicksware.com/api/service-common v0.0.0-20201002035510-8b1c54368e8a
+	go.kicksware.com/api/user-service v0.0.0-20201002041240-898528d3d7e9
 	github.com/vmihailenco/msgpack v4.0.4+incompatible
 	go.mongodb.org/mongo-driver v1.4.1
 	google.golang.org/grpc v1.32.0

@@ -2,6 +2,7 @@ package repo
 
 import (
 	"go.kicksware.com/api/service-common/core/meta"
+
 	"go.kicksware.com/api/product-service/core/model"
 )
 

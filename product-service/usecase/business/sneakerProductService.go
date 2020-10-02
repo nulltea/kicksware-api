@@ -99,11 +99,11 @@ func (s *productService) handleForeignSubquery(query *meta.RequestQuery, params 
 		if strings.Contains(key, "*/") {
 			endpoint := strings.TrimLeft(key, "*/");
 			subs := make([]*struct{
-				ReferenceID string `json:"ReferenceID"`
+				ProductId string `json:"ProductId"`
 			}, 0)
 			if err := s.communicator.PostMessage(endpoint, _query[key], &subs, params); err == nil {
 				for _, doc := range subs {
-					foreignKeys = append(foreignKeys, doc.ReferenceID)
+					foreignKeys = append(foreignKeys, doc.ProductId)
 				}
 				ok = true
 			}
