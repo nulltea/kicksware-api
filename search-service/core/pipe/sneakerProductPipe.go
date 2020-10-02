@@ -1,6 +1,6 @@
 package pipe
 
-import "github.com/timoth-y/kicksware-api/product-service/core/model"
+import "go.kicksware.com/api/product-service/core/model"
 
 type SneakerProductPipe interface {
 	FetchOne(uniqueId string) (*model.SneakerProduct, error)

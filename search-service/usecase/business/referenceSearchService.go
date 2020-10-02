@@ -8,12 +8,13 @@ import (
 	"github.com/olivere/elastic/v7"
 	"github.com/pkg/errors"
 
-	"github.com/timoth-y/kicksware-api/reference-service/core/model"
+	"go.kicksware.com/api/reference-service/core/model"
 
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
-	"github.com/timoth-y/kicksware-api/search-service/core/service"
-	"github.com/timoth-y/kicksware-api/search-service/env"
-	"github.com/timoth-y/kicksware-api/search-service/usecase/serializer/json"
+	"go.kicksware.com/api/service-common/core/meta"
+
+	"go.kicksware.com/api/search-service/core/service"
+	"go.kicksware.com/api/search-service/env"
+	"go.kicksware.com/api/search-service/usecase/serializer/json"
 )
 
 var (

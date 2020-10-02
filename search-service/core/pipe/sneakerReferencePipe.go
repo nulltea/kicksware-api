@@ -1,9 +1,9 @@
 package pipe
 
 import (
-	 "github.com/timoth-y/kicksware-api/reference-service/core/model"
+	 "go.kicksware.com/api/reference-service/core/model"
 
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+	"go.kicksware.com/api/service-common/core/meta"
 )
 
 type SneakerReferencePipe interface {

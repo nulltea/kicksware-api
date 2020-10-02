@@ -1,8 +1,8 @@
 package service
 
 import (
-	ref "github.com/timoth-y/kicksware-api/reference-service/core/model"
-	prod "github.com/timoth-y/kicksware-api/product-service/core/model"
+	ref "go.kicksware.com/api/reference-service/core/model"
+	prod "go.kicksware.com/api/product-service/core/model"
 )
 
 type SneakerSearchSerializer interface {

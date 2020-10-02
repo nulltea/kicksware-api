@@ -1,6 +1,6 @@
 package service
 
-import "github.com/timoth-y/kicksware-api/service-common/core/meta"
+import "go.kicksware.com/api/service-common/core/meta"
 
 type ReferenceSyncService interface {
 	SyncOne(code string) error

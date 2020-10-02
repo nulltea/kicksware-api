@@ -7,15 +7,15 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/types/known/structpb"
 
-	"github.com/timoth-y/kicksware-api/reference-service/core/model"
-	gRPCSrv "github.com/timoth-y/kicksware-api/service-common/service/gRPC"
+	"go.kicksware.com/api/reference-service/core/model"
+	gRPCSrv "go.kicksware.com/api/service-common/api/gRPC"
 
-	"github.com/timoth-y/kicksware-api/reference-service/api/gRPC/proto"
-	common "github.com/timoth-y/kicksware-api/service-common/api/proto"
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+	"go.kicksware.com/api/reference-service/api/gRPC/proto"
+	common "go.kicksware.com/api/service-common/api/proto"
+	"go.kicksware.com/api/service-common/core/meta"
 
-	"github.com/timoth-y/kicksware-api/search-service/core/pipe"
-	"github.com/timoth-y/kicksware-api/search-service/env"
+	"go.kicksware.com/api/search-service/core/pipe"
+	"go.kicksware.com/api/search-service/env"
 )
 
 type referencePipe struct {
@@ -24,7 +24,7 @@ type referencePipe struct {
 }
 
 func NewSneakerReferencePipe(config env.ServiceConfig) pipe.SneakerReferencePipe {
-	auth := gRPCSrv.NewAuthClientInterceptor(config.Common.InnerServiceFormat, config.Auth.TLSCertificate)
+	auth := gRPCSrv.NewAuthClientInterceptor(config.Common.RpcEndpointFormat, config.Auth.TLSCertificate)
 	return &referencePipe{
 		client: newRemoteClient(config, auth),
 		auth: auth,
@@ -47,7 +47,7 @@ func newRemoteClient(config env.ServiceConfig, auth *gRPCSrv.AuthClientIntercept
 		opts = append(opts, grpc.WithInsecure())
 	}
 
-	conn, err := grpc.Dial(config.Common.InnerServiceFormat, opts...); if err != nil {
+	conn, err := grpc.Dial(config.Common.RpcEndpointFormat, opts...); if err != nil {
 		glog.Fatalf("fail to dial: %v", err)
 	}
 

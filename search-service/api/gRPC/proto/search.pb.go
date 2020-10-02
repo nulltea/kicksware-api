@@ -9,9 +9,9 @@ package proto
 import (
 	context "context"
 	proto "github.com/golang/protobuf/proto"
-	proto3 "github.com/timoth-y/kicksware-api/product-service/api/gRPC/proto"
-	proto2 "github.com/timoth-y/kicksware-api/reference-service/api/gRPC/proto"
-	proto1 "github.com/timoth-y/kicksware-api/service-common/api/proto"
+	proto3 "go.kicksware.com/api/product-service/api/gRPC/proto"
+	proto2 "go.kicksware.com/api/reference-service/api/gRPC/proto"
+	proto1 "go.kicksware.com/api/service-common/api/proto"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

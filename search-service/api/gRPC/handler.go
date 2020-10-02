@@ -3,31 +3,29 @@ package gRPC
 import (
 	"context"
 
-	protoRef "github.com/timoth-y/kicksware-api/reference-service/api/gRPC/proto"
-	"github.com/timoth-y/kicksware-api/reference-service/core/model"
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
+	protoRef "go.kicksware.com/api/reference-service/api/gRPC/proto"
+	"go.kicksware.com/api/reference-service/core/model"
+	"go.kicksware.com/api/service-common/core"
+	"go.kicksware.com/api/service-common/core/meta"
+	"go.kicksware.com/api/service-common/util"
 
-	"github.com/timoth-y/kicksware-api/search-service/api/gRPC/proto"
-	"github.com/timoth-y/kicksware-api/search-service/core/service"
-	"github.com/timoth-y/kicksware-api/search-service/env"
+	"go.kicksware.com/api/search-service/api/gRPC/proto"
+	"go.kicksware.com/api/search-service/core/service"
 )
 
 //go:generate protoc --proto_path=../../../service-protos --go_out=plugins=grpc,paths=source_relative:proto/. search.proto
 
-
 type Handler struct {
 	search      service.ReferenceSearchService
 	sync        service.ReferenceSyncService
-	auth        service.AuthService
-	contentType string
+	auth        core.AuthService
 }
 
-func NewHandler(search service.ReferenceSearchService, sync service.ReferenceSyncService, auth service.AuthService, config env.CommonConfig) *Handler {
+func NewHandler(search service.ReferenceSearchService, sync service.ReferenceSyncService, auth core.AuthService) *Handler {
 	return &Handler{
 		search,
 		sync,
 		auth,
-		config.ContentType,
 	}
 }
 
@@ -35,6 +33,7 @@ func (h *Handler) Search(ctx context.Context, tag *proto.SearchTag) (resp *proto
 	var params *meta.RequestParams; if tag != nil && tag.RequestParams != nil {
 		params = tag.RequestParams.ToNative()
 	}
+	util.SetAuthParamsFromMetaData(ctx, &params)
 
 	refs, err :=  h.search.Search(tag.Tag, params); if err != nil {
 		return
@@ -51,6 +50,7 @@ func (h *Handler) SearchBy(ctx context.Context, filter *proto.SearchFilter) (res
 	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
 		params = filter.RequestParams.ToNative()
 	}
+	util.SetAuthParamsFromMetaData(ctx, &params)
 
 	refs, err =  h.search.SearchBy(filter.Field, filter.Value, params); if err != nil {
 		return
@@ -68,6 +68,7 @@ func (h *Handler) SearchSKU(ctx context.Context, filter *proto.SearchFilter) (re
 	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
 		params = filter.RequestParams.ToNative()
 	}
+	util.SetAuthParamsFromMetaData(ctx, &params)
 
 	refs, err =  h.search.SearchSKU(filter.Value, params); if err != nil {
 		return
@@ -85,6 +86,7 @@ func (h *Handler) SearchBrand(ctx context.Context, filter *proto.SearchFilter) (
 	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
 		params = filter.RequestParams.ToNative()
 	}
+	util.SetAuthParamsFromMetaData(ctx, &params)
 
 	refs, err =  h.search.SearchBrand(filter.Value, params); if err != nil {
 		return
@@ -102,6 +104,7 @@ func (h *Handler) SearchModel(ctx context.Context, filter *proto.SearchFilter) (
 	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
 		params = filter.RequestParams.ToNative()
 	}
+	util.SetAuthParamsFromMetaData(ctx, &params)
 
 	refs, err =  h.search.SearchModel(filter.Value, params); if err != nil {
 		return
@@ -118,6 +121,7 @@ func (h *Handler) Sync(ctx context.Context, filter *protoRef.ReferenceFilter) (r
 	var params *meta.RequestParams; if filter != nil && filter.RequestParams != nil {
 		params = filter.RequestParams.ToNative()
 	}
+	util.SetAuthParamsFromMetaData(ctx, &params)
 
 	if len(filter.ReferenceID) == 0 && filter.RequestQuery == nil  {
 		err = h.sync.SyncAll(params)

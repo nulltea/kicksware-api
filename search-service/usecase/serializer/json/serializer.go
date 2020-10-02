@@ -5,10 +5,10 @@ import (
 
 	"github.com/pkg/errors"
 
-	prod "github.com/timoth-y/kicksware-api/product-service/core/model"
-	ref "github.com/timoth-y/kicksware-api/reference-service/core/model"
+	prod "go.kicksware.com/api/product-service/core/model"
+	ref "go.kicksware.com/api/reference-service/core/model"
 
-	"github.com/timoth-y/kicksware-api/search-service/core/service"
+	"go.kicksware.com/api/search-service/core/service"
 )
 
 type serializer struct{}

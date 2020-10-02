@@ -1,14 +1,15 @@
 package factory
 
 import (
-	"github.com/timoth-y/kicksware-api/search-service/core/pipe"
-	"github.com/timoth-y/kicksware-api/search-service/core/service"
-	"github.com/timoth-y/kicksware-api/search-service/env"
-	"github.com/timoth-y/kicksware-api/search-service/usecase/pipes/REST"
-	"github.com/timoth-y/kicksware-api/search-service/usecase/pipes/gRPC"
+	"go.kicksware.com/api/service-common/core"
+
+	"go.kicksware.com/api/search-service/core/pipe"
+	"go.kicksware.com/api/search-service/env"
+	"go.kicksware.com/api/search-service/usecase/pipes/REST"
+	"go.kicksware.com/api/search-service/usecase/pipes/gRPC"
 )
 
-func ProvideReferenceRESTPipe(auth service.AuthService, config env.ServiceConfig) pipe.SneakerReferencePipe {
+func ProvideReferenceRESTPipe(auth core.AuthService, config env.ServiceConfig) pipe.SneakerReferencePipe {
 	return REST.NewSneakerReferencePipe(auth, config.Common)
 }
 

@@ -3,10 +3,10 @@ package gRPC
 import (
 	"crypto/rsa"
 
-	"github.com/timoth-y/kicksware-api/user-service/core/model"
+	"go.kicksware.com/api/service-common/core/meta"
 	"google.golang.org/grpc"
 
-	"github.com/timoth-y/kicksware-api/search-service/api/gRPC/proto"
+	"go.kicksware.com/api/search-service/api/gRPC/proto"
 )
 
 func ProvideRemoteSetup(handler *Handler) func(server *grpc.Server) {
@@ -15,26 +15,22 @@ func ProvideRemoteSetup(handler *Handler) func(server *grpc.Server) {
 	}
 }
 
-func (h *Handler) ProvideAccessRoles() map[string][]model.UserRole {
-	roleMap := make(map[string][]model.UserRole)
+func (h *Handler) ProvideAccessRoles() meta.AccessConfig {
+	return meta.AccessConfig{
+		"/proto.SearchReferencesService/Search": meta.RegularAccess,
+		"/proto.SearchReferencesService/SearchBy": meta.RegularAccess,
+		"/proto.SearchReferencesService/SearchSKU": meta.RegularAccess,
+		"/proto.SearchReferencesService/SearchBrand": meta.RegularAccess,
+		"/proto.SearchReferencesService/SearchModel": meta.RegularAccess,
+		"/proto.SearchReferencesService/Sync": meta.AdminAccess,
 
-	regularAccess := []model.UserRole{ model.Guest, model.Regular, model.Admin }
-	adminAccess := []model.UserRole{ model.Admin }
-
-	roleMap["/proto.SearchReferencesService/Search"] = regularAccess
-	roleMap["/proto.SearchReferencesService/SearchBy"] = regularAccess
-	roleMap["/proto.SearchReferencesService/SearchSKU"] = regularAccess
-	roleMap["/proto.SearchReferencesService/SearchBrand"] = regularAccess
-	roleMap["/proto.SearchReferencesService/SearchModel"] = regularAccess
-	roleMap["/proto.SearchReferencesService/Sync"] = adminAccess
-
-	roleMap["/proto.SearchProductService/Search"] = regularAccess
-	roleMap["/proto.SearchProductService/SearchBy"] = regularAccess
-	roleMap["/proto.SearchProductService/Sync"] = adminAccess
-
-	return roleMap
+		"/proto.SearchProductService/Search": meta.RegularAccess,
+		"/proto.SearchProductService/SearchBy": meta.RegularAccess,
+		"/proto.SearchProductService/Sync": meta.AdminAccess,
+	}
 }
 
 func (h *Handler) ProvideAuthKey() *rsa.PublicKey {
 	return h.auth.PublicKey()
 }
+

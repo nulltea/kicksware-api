@@ -7,36 +7,39 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/pkg/errors"
+	"go.kicksware.com/api/service-common/api/rest"
+	"go.kicksware.com/api/service-common/config"
+	"go.kicksware.com/api/service-common/core"
 
-	"github.com/timoth-y/kicksware-api/reference-service/core/model"
+	"go.kicksware.com/api/reference-service/core/model"
 
-	"github.com/timoth-y/kicksware-api/service-common/core/meta"
-	"github.com/timoth-y/kicksware-api/search-service/core/service"
-	"github.com/timoth-y/kicksware-api/search-service/env"
-	"github.com/timoth-y/kicksware-api/search-service/usecase/business"
-	"github.com/timoth-y/kicksware-api/search-service/usecase/serializer/json"
-	"github.com/timoth-y/kicksware-api/search-service/usecase/serializer/msg"
+	"go.kicksware.com/api/service-common/core/meta"
+
+	"go.kicksware.com/api/search-service/core/service"
+	"go.kicksware.com/api/search-service/usecase/business"
+	"go.kicksware.com/api/search-service/usecase/serializer/json"
+	"go.kicksware.com/api/search-service/usecase/serializer/msg"
 )
 
 type Handler struct {
 	search      service.ReferenceSearchService
 	sync        service.ReferenceSyncService
-	auth        service.AuthService
+	auth        *rest.AuthMiddleware
 	contentType string
 }
 
-func NewHandler(search service.ReferenceSearchService, sync service.ReferenceSyncService, auth service.AuthService, config env.CommonConfig) *Handler {
+func NewHandler(search service.ReferenceSearchService, sync service.ReferenceSyncService, auth core.AuthService, config config.CommonConfig) *Handler {
 	return &Handler{
 		search,
 		sync,
-		auth,
+		rest.NewAuthMiddleware(auth),
 		config.ContentType,
 	}
 }
 
 func (h *Handler) Get(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()["query"][0]
-	params := NewRequestParams(r)
+	params := rest.NewRequestParams(r)
 
 	ref, err := h.search.Search(query, params)
 	if err != nil {
@@ -53,7 +56,7 @@ func (h *Handler) Get(w http.ResponseWriter, r *http.Request) {
 func (h *Handler) GetBy(w http.ResponseWriter, r *http.Request) {
 	field := chi.URLParam(r,"field")
 	query := r.URL.Query()["query"][0]
-	params := NewRequestParams(r)
+	params := rest.NewRequestParams(r)
 
 	refs, err := h.search.SearchBy(field, query, params)
 	if err != nil {
@@ -69,7 +72,7 @@ func (h *Handler) GetBy(w http.ResponseWriter, r *http.Request) {
 
 func (h *Handler) GetSKU(w http.ResponseWriter, r *http.Request) {
 	sku := chi.URLParam(r, "sku")
-	params := NewRequestParams(r)
+	params := rest.NewRequestParams(r)
 
 	refs, err := h.search.SearchSKU(sku, params)
 	if err != nil {
@@ -85,7 +88,7 @@ func (h *Handler) GetSKU(w http.ResponseWriter, r *http.Request) {
 
 func (h *Handler) GetBrand(w http.ResponseWriter, r *http.Request) {
 	brand := chi.URLParam(r, "brand")
-	params := NewRequestParams(r)
+	params := rest.NewRequestParams(r)
 
 	refs, err := h.search.SearchBrand(brand, params)
 	if err != nil {
@@ -101,7 +104,7 @@ func (h *Handler) GetBrand(w http.ResponseWriter, r *http.Request) {
 
 func (h *Handler) GetModel(w http.ResponseWriter, r *http.Request) {
 	model := chi.URLParam(r, "model")
-	params := NewRequestParams(r)
+	params := rest.NewRequestParams(r)
 
 	refs, err := h.search.SearchModel(model, params)
 	if err != nil {
@@ -130,7 +133,7 @@ func (h *Handler) PostOne(w http.ResponseWriter, r *http.Request) {
 
 func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	codes := r.URL.Query()["referenceId"]
-	params := NewRequestParams(r)
+	params := rest.NewRequestParams(r)
 	if err := h.sync.Sync(codes, params);  err != nil {
 		if errors.Cause(err) == business.ErrReferenceNotFound {
 			http.Error(w, err.Error(), http.StatusBadRequest)
@@ -143,7 +146,7 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) PostAll(w http.ResponseWriter, r *http.Request) {
-	params := NewRequestParams(r)
+	params := rest.NewRequestParams(r)
 	if err := h.sync.SyncAll(params);  err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -156,7 +159,7 @@ func (h *Handler) PostQuery(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	params := NewRequestParams(r)
+	params := rest.NewRequestParams(r)
 	if err := h.sync.SyncQuery(query, params);  err != nil {
 		if errors.Cause(err) == business.ErrReferenceNotFound {
 			http.Error(w, err.Error(), http.StatusBadRequest)

@@ -2,19 +2,20 @@ package factory
 
 import (
 	"github.com/go-chi/chi"
+	"go.kicksware.com/api/service-common/core"
 
-	"github.com/timoth-y/kicksware-api/search-service/api/REST"
-	"github.com/timoth-y/kicksware-api/search-service/api/gRPC"
-	"github.com/timoth-y/kicksware-api/search-service/core/service"
-	"github.com/timoth-y/kicksware-api/search-service/env"
+	"go.kicksware.com/api/search-service/api/REST"
+	"go.kicksware.com/api/search-service/api/gRPC"
+	"go.kicksware.com/api/search-service/core/service"
+	"go.kicksware.com/api/search-service/env"
 )
 
-func ProvideRESTGatewayHandler(search service.ReferenceSearchService, sync service.ReferenceSyncService, auth service.AuthService, config env.ServiceConfig) *rest.Handler {
+func ProvideRESTGatewayHandler(search service.ReferenceSearchService, sync service.ReferenceSyncService, auth core.AuthService, config env.ServiceConfig) *rest.Handler {
 	return rest.NewHandler(search, sync, auth, config.Common)
 }
 
-func ProvideGRPCGatewayHandler(search service.ReferenceSearchService, sync service.ReferenceSyncService, auth service.AuthService, config env.ServiceConfig) *gRPC.Handler {
-	return gRPC.NewHandler(search, sync, auth, config.Common)
+func ProvideGRPCGatewayHandler(search service.ReferenceSearchService, sync service.ReferenceSyncService, auth core.AuthService, config env.ServiceConfig) *gRPC.Handler {
+	return gRPC.NewHandler(search, sync, auth)
 }
 
 func ProvideEndpointRouter(handler *rest.Handler) chi.Router {

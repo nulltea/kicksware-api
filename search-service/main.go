@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/timoth-y/kicksware-api/search-service/startup"
+	"go.kicksware.com/api/search-service/startup"
 )
 
 func main() {

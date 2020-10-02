@@ -1,10 +1,13 @@
 package factory
 
 import (
-	"github.com/timoth-y/kicksware-api/search-service/core/pipe"
-	"github.com/timoth-y/kicksware-api/search-service/core/service"
-	"github.com/timoth-y/kicksware-api/search-service/env"
-	"github.com/timoth-y/kicksware-api/search-service/usecase/business"
+	"go.kicksware.com/api/service-common/api/rest"
+	"go.kicksware.com/api/service-common/core"
+
+	"go.kicksware.com/api/search-service/core/pipe"
+	"go.kicksware.com/api/search-service/core/service"
+	"go.kicksware.com/api/search-service/env"
+	"go.kicksware.com/api/search-service/usecase/business"
 )
 
 func ProvideReferenceSearchService(config env.ServiceConfig) service.ReferenceSearchService {
@@ -25,6 +28,6 @@ func ProvideProductSyncService(pipe pipe.SneakerProductPipe, config env.ServiceC
 	panic("ProvideProductSyncService: not implemented")
 }
 
-func ProvideAuthService(config env.ServiceConfig) service.AuthService {
-	return business.NewAuthService(config.Auth)
+func ProvideAuthService(config env.ServiceConfig) core.AuthService {
+	return rest.NewAuthService(config.Auth)
 }
