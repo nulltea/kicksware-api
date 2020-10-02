@@ -4,7 +4,7 @@ import (
 	"crypto/rsa"
 
 	"github.com/go-chi/chi"
-	"github.com/timoth-y/kicksware-api/user-service/core/model"
+	"go.kicksware.com/api/user-service/core/model"
 	"google.golang.org/grpc"
 
 	"go.kicksware.com/api/service-common/core/meta"

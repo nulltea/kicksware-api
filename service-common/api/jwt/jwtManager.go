@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/timoth-y/kicksware-api/user-service/core/meta"
+	"go.kicksware.com/api/user-service/core/meta"
 )
 
 type TokenManager struct {

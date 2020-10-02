@@ -3,13 +3,13 @@ package gRPC
 import (
 	"context"
 
-	"github.com/timoth-y/kicksware-api/user-service/core/model"
+	"go.kicksware.com/api/user-service/core/model"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 
-	"github.com/timoth-y/kicksware-api/user-service/core/meta"
+	"go.kicksware.com/api/user-service/core/meta"
 
 	"go.kicksware.com/api/service-common/api/jwt"
 )

@@ -16,7 +16,7 @@ require (
 	github.com/sirupsen/logrus v1.4.2
 	github.com/soheilhy/cmux v0.1.4
 	github.com/thoas/go-funk v0.7.0
-	github.com/timoth-y/kicksware-api/user-service v0.0.0-20200917011049-79140f0e7480
+	go.kicksware.com/api/user-service v0.0.0-20201002035145-842d131c8dc2
 	go.elastic.co/apm/module/apmgrpc v1.8.0
 	go.elastic.co/apm/module/apmhttp v1.8.0
 	go.mongodb.org/mongo-driver v1.4.1
