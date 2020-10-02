@@ -3,7 +3,7 @@ package gRPC
 import (
 	"crypto/rsa"
 
-	"go.kicksware.com/api/user-service/core/model"
+	"go.kicksware.com/api/service-common/core/meta"
 	"google.golang.org/grpc"
 
 	"go.kicksware.com/api/product-service/api/gRPC/proto"
@@ -15,20 +15,14 @@ func ProvideRemoteSetup(handler *Handler) func(server *grpc.Server) {
 	}
 }
 
-func (h *Handler) ProvideAccessRoles() map[string][]model.UserRole {
-	roleMap := make(map[string][]model.UserRole)
-
-	regularAccess := []model.UserRole{ model.Guest, model.Regular, model.Admin }
-	userAccess := []model.UserRole{ model.Regular, model.Admin }
-
-	roleMap["/proto.ProductService/GetProducts"] = regularAccess
-	roleMap["/proto.ProductService/CountProducts"] = regularAccess
-	roleMap["/proto.ProductService/AddProducts"] = userAccess
-	roleMap["/proto.ProductService/EditProducts"] = userAccess
-	roleMap["/proto.ProductService/DeleteProducts"] = userAccess
-
-
-	return roleMap
+func (h *Handler) ProvideAccessRoles() meta.AccessConfig {
+	return meta.AccessConfig{
+		"/proto.ProductService/GetProducts": meta.RegularAccess,
+		"/proto.ProductService/CountProducts": meta.RegularAccess,
+		"/proto.ProductService/AddProducts": meta.UserAccess,
+		"/proto.ProductService/EditProducts": meta.UserAccess,
+		"/proto.ProductService/DeleteProducts": meta.UserAccess,
+	}
 }
 
 func (h *Handler) ProvideAuthKey() *rsa.PublicKey {

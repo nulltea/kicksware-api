@@ -3,7 +3,7 @@ package gRPC
 import (
 	"crypto/rsa"
 
-	"github.com/timoth-y/kicksware-api/user-service/core/model"
+	"go.kicksware.com/api/service-common/core/meta"
 	"google.golang.org/grpc"
 
 	"go.kicksware.com/api/reference-service/api/gRPC/proto"
@@ -15,21 +15,14 @@ func ProvideRemoteSetup(handler *Handler) func(server *grpc.Server) {
 	}
 }
 
-func (h *Handler) ProvideAccessRoles() map[string][]model.UserRole {
-	roleMap := make(map[string][]model.UserRole)
-
-	regularAccess := []model.UserRole{ model.Guest, model.Regular, model.Admin }
-	userAccess := []model.UserRole{ model.Regular, model.Admin }
-	adminAccess := []model.UserRole{ model.Admin }
-
-	roleMap["/proto.ReferenceService/GetReferences"] = regularAccess
-	roleMap["/proto.ReferenceService/CountReferences"] = regularAccess
-	roleMap["/proto.ReferenceService/AddReferences"] = userAccess
-	roleMap["/proto.ReferenceService/EditReferences"] = adminAccess
-	roleMap["/proto.ReferenceService/DeleteReferences"] = adminAccess
-
-
-	return roleMap
+func (h *Handler) ProvideAccessRoles() meta.AccessConfig {
+	return meta.AccessConfig{
+		"/proto.ReferenceService/GetReferences": meta.RegularAccess,
+		"/proto.ReferenceService/CountReferences": meta.RegularAccess,
+		"/proto.ReferenceService/AddReferences": meta.AdminAccess,
+		"/proto.ReferenceService/EditReferences": meta.AdminAccess,
+		"/proto.ReferenceService/DeleteReferences": meta.AdminAccess,
+	}
 }
 
 func (h *Handler) ProvideAuthKey() *rsa.PublicKey {

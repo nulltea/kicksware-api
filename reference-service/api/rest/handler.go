@@ -7,7 +7,7 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/pkg/errors"
-	"go.kicksware.com/api/service-common/api/REST"
+	"go.kicksware.com/api/service-common/api/rest"
 	"go.kicksware.com/api/service-common/config"
 	"go.kicksware.com/api/service-common/core"
 	"go.kicksware.com/api/service-common/core/meta"

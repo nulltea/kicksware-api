@@ -3,10 +3,10 @@ package gRPC
 import (
 	"crypto/rsa"
 
+	"go.kicksware.com/api/service-common/core/meta"
 	"google.golang.org/grpc"
 
 	"go.kicksware.com/api/user-service/api/gRPC/proto"
-	"go.kicksware.com/api/user-service/core/model"
 )
 
 func ProvideRemoteSetup(handler *Handler) func(server *grpc.Server) {
@@ -18,36 +18,28 @@ func ProvideRemoteSetup(handler *Handler) func(server *grpc.Server) {
 	}
 }
 
-func (h *Handler) ProvideAccessRoles() map[string][]model.UserRole {
-	roleMap := make(map[string][]model.UserRole)
+func (h *Handler) ProvideAccessRoles() meta.AccessConfig {
+	return meta.AccessConfig {
+		"/proto.UserService/GetUsers": meta.RegularAccess,
+		"/proto.UserService/CountUsers": meta.RegularAccess,
+		"/proto.UserService/AddUsers": meta.RegularAccess,
+		"/proto.UserService/EditUsers": meta.UserAccess,
+		"/proto.UserService/DeleteUsers": meta.AdminAccess,
 
-	zeroAccess := []model.UserRole{}
-	guestAccess := []model.UserRole{ model.Guest }
-	regularAccess := []model.UserRole{ model.Guest, model.Regular, model.Admin }
-	userAccess := []model.UserRole{ model.Regular, model.Admin }
-	adminAccess := []model.UserRole{ model.Admin }
+		"/proto.AuthService/SignUp": meta.GuestAccess,
+		"/proto.AuthService/Login": meta.GuestAccess,
+		"/proto.AuthService/Guest": meta.ZeroAccess,
+		"/proto.AuthService/GenerateToken": meta.UserAccess,
+		"/proto.AuthService/Refresh": meta.RegularAccess,
+		"/proto.AuthService/Logout": meta.UserAccess,
 
-	roleMap["/proto.UserService/GetUsers"] = regularAccess
-	roleMap["/proto.UserService/CountUsers"] = regularAccess
-	roleMap["/proto.UserService/AddUsers"] = regularAccess
-	roleMap["/proto.UserService/EditUsers"] = userAccess
-	roleMap["/proto.UserService/DeleteUsers"] = adminAccess
+		"/proto.MailService/SendEmailConfirmation": meta.RegularAccess,
+		"/proto.MailService/SendResetPass,word": meta.RegularAccess,
+		"/proto.MailService/SendNotification": meta.AdminAccess,
 
-	roleMap["/proto.AuthService/SignUp"] = guestAccess
-	roleMap["/proto.AuthService/Login"] = zeroAccess
-	roleMap["/proto.AuthService/Guest"] = zeroAccess
-	roleMap["/proto.AuthService/GenerateToken"] = userAccess
-	roleMap["/proto.AuthService/Refresh"] = regularAccess
-	roleMap["/proto.AuthService/Logout"] = userAccess
-
-	roleMap["/proto.MailService/SendEmailConfirmation"] = regularAccess
-	roleMap["/proto.MailService/SendResetPassword"] = regularAccess
-	roleMap["/proto.MailService/SendNotification"] = adminAccess
-
-	roleMap["/proto.InteractService/Like"] = userAccess
-	roleMap["/proto.InteractService/Unlike"] = userAccess
-
-	return roleMap
+		"/proto.InteractService/Like": meta.UserAccess,
+		"/proto.InteractService/Unlike": meta.UserAccess,
+	}
 }
 
 func (h *Handler) ProvideAuthKey() *rsa.PublicKey {

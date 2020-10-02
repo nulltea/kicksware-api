@@ -1,7 +1,7 @@
 package factory
 
 import (
-	rest "go.kicksware.com/api/service-common/api/REST"
+	rest "go.kicksware.com/api/service-common/api/rest"
 	"go.kicksware.com/api/service-common/core"
 
 	"go.kicksware.com/api/reference-service/core/repo"

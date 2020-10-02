@@ -1,11 +1,12 @@
 package business
 
 import (
+	"path"
 	"strings"
 
 	"github.com/pkg/errors"
 	"github.com/rs/xid"
-	rest "go.kicksware.com/api/service-common/api/REST"
+	"go.kicksware.com/api/service-common/api/rest"
 	"go.kicksware.com/api/service-common/core"
 	"gopkg.in/dealancer/validate.v2"
 
@@ -89,7 +90,8 @@ func (s *referenceService) handleForeignSubquery(query *meta.RequestQuery, param
 	_query := *query
 	for key := range _query {
 		if strings.Contains(key, "*/") {
-			endpoint := strings.TrimLeft(key, "*/");
+			service := strings.TrimLeft(key, "*/");
+			endpoint := path.Join(service, "query")
 			subs := make([]*struct{
 				ReferenceID string `json:"ReferenceID"`
 			}, 0)
