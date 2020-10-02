@@ -110,7 +110,9 @@ func (s *productService) handleForeignSubquery(query *meta.RequestQuery, params 
 			delete(_query, key)
 		}
 	}
-	appendInCondition(query, foreignKeys)
+	if len(foreignKeys) > 0 {
+		appendInCondition(query, foreignKeys)
+	}
 	return
 }
 

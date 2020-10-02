@@ -22,6 +22,7 @@ ingress:
   tls:
     enabled: true
     certResolver: le
+    secretName: grpc-tls
   routes:
     - host: cdn.kicksware.com
       paths:
@@ -31,6 +32,17 @@ ingress:
         - name: cdn-service
           port: 8080
           scheme: http
+    - host: cdn.kicksware.com
+      grpc: true
+      paths:
+        - /proto.OrderService
+      entrypoints:
+        - web
+        - websecure
+      services:
+        - name: orders-service
+          port: 8080
+          scheme: h2c
 
 volumes:
   - name: storage

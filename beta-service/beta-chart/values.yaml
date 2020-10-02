@@ -22,6 +22,7 @@ ingress:
   tls:
     enabled: true
     certResolver: le
+    secretName: grpc-tls
   routes:
     - host: beta.kicksware.com
       paths:
