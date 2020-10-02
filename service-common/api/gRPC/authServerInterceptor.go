@@ -40,14 +40,17 @@ func (i *AuthServerInterceptor) Unary() grpc.UnaryServerInterceptor {
 		handler grpc.UnaryHandler,
 	) (interface{}, error) {
 		if !i.zeroAccess(info.FullMethod) {
-			claims, err := i.authenticate(ctx); if err != nil {
+			token, claims, err := i.authenticate(ctx); if err != nil {
 				return nil, err
 			}
 
 			err = i.authorize(claims, info.FullMethod); if err != nil {
 				return nil, err
 			}
-			ctx = metadata.AppendToOutgoingContext(ctx, UserContextKey, claims.UniqueID)
+			ctx = metadata.AppendToOutgoingContext(ctx,
+				UserContextKey, claims.UniqueID,
+				AuthMetaKey, token,
+			)
 		}
 		return handler(ctx, req)
 	}
@@ -62,34 +65,37 @@ func (i *AuthServerInterceptor) Stream() grpc.StreamServerInterceptor {
 		handler grpc.StreamHandler,
 	) error {
 		if !i.zeroAccess(info.FullMethod) {
-			claims, err := i.authenticate(stream.Context()); if err != nil {
+			token, claims, err := i.authenticate(stream.Context()); if err != nil {
 				return err
 			}
 
 			err = i.authorize(claims, info.FullMethod); if err != nil {
 				return err
 			}
-			stream.SetHeader(metadata.New(map[string]string{UserContextKey: claims.UniqueID}))
+			stream.SetHeader(metadata.New(map[string]string{
+				UserContextKey: claims.UniqueID,
+				AuthMetaKey: token,
+			}))
 		}
 		return handler(srv, stream)
 	}
 }
 
-func (i *AuthServerInterceptor) authenticate(ctx context.Context) (*meta.AuthClaims, error) {
+func (i *AuthServerInterceptor) authenticate(ctx context.Context) (string, *meta.AuthClaims, error) {
 	meta, ok := metadata.FromIncomingContext(ctx); if !ok {
-		return nil, status.Errorf(codes.Unauthenticated, "metadata is not provided")
+		return "", nil, status.Errorf(codes.Unauthenticated, "metadata is not provided")
 	}
 
 	values := meta[AuthMetaKey]; if len(values) == 0 {
-		return nil, status.Errorf(codes.Unauthenticated, "authorization token is not provided")
+		return "", nil, status.Errorf(codes.Unauthenticated, "authorization token is not provided")
 	}
 
 	accessToken := values[0]
 	claims, err := i.jwtManager.Verify(accessToken); if err != nil {
-		return nil, status.Errorf(codes.Unauthenticated, "access token is invalid: %w", err)
+		return accessToken, nil, status.Errorf(codes.Unauthenticated, "access token is invalid: %w", err)
 	}
 
-	return claims, nil
+	return accessToken, claims, nil
 }
 
 func (i *AuthServerInterceptor) authorize(claims *meta.AuthClaims, method string) error {
