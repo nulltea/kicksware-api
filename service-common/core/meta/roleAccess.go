@@ -2,6 +2,8 @@ package meta
 
 import "go.kicksware.com/api/user-service/core/model"
 
+type AccessConfig map[string][]model.UserRole
+
 var (
 	ZeroAccess = []model.UserRole{}
 	GuestAccess = []model.UserRole{ model.Guest }
