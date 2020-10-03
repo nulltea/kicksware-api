@@ -13,6 +13,8 @@ import (
 	"go.kicksware.com/api/user-service/core/repo"
 )
 
+var ErrEmailAlreadyExists = errors.New("This email address is already subscribed");
+
 type subscriptionRepository struct {
 	client     *mongo.Client
 	database   *mongo.Database
@@ -37,8 +39,10 @@ func NewSubscriptionsRepository(config config.DataStoreConfig) (repo.Subscriptio
 func (r *subscriptionRepository) Add(record model.MailSubscription) error {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
-	_, err := r.collection.InsertOne(ctx, record)
-	if err != nil {
+	if exists, _ := r.collection.CountDocuments(ctx, bson.M{"email": record.Email}); exists > 0 {
+		return errors.Wrap(ErrEmailAlreadyExists, "repository.subscription.Delete")
+	}
+	_, err := r.collection.InsertOne(ctx, record); if err != nil {
 		return errors.Wrap(err, "repository.subscription.Add")
 	}
 	return nil
