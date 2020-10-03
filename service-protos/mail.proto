@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package proto;
 
+import "common.proto";
+
 option go_package = "ggo.kicksware.com/api/user-service/api/gRPC/proto";
 option csharp_namespace = "Proto";
 
@@ -11,20 +13,15 @@ message MailRequest {
   string messageContent = 3;
 }
 
-message MailResponse {
-  bool success = 1;
-  string error = 2;
-}
-
 message SubscribeRequest {
   string userID = 1;
   string email = 2;
 }
 
 service MailService {
-  rpc SendEmailConfirmation(MailRequest) returns (MailResponse);
-  rpc SendResetPassword(MailRequest) returns (MailResponse);
-  rpc SendNotification(MailRequest) returns (MailResponse);
-  rpc Subscribe(SubscribeRequest) returns (MailResponse);
-  rpc Unsubscribe(SubscribeRequest) returns (MailResponse);
+  rpc SendEmailConfirmation(MailRequest) returns (CommonResponse);
+  rpc SendResetPassword(MailRequest) returns (CommonResponse);
+  rpc SendNotification(MailRequest) returns (CommonResponse);
+  rpc Subscribe(SubscribeRequest) returns (CommonResponse);
+  rpc Unsubscribe(SubscribeRequest) returns (CommonResponse);
 }

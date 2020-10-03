@@ -14,3 +14,9 @@ message RequestParams {
   google.protobuf.StringValue SortDirection = 4;
   string userID = 5;
 }
+
+message CommonResponse {
+  bool success = 1;
+  string message = 2;
+  string error = 3;
+}
