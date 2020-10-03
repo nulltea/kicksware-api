@@ -78,6 +78,10 @@ users.deploy.k8s:
       --from-literal=MAIL_SERVER=$MAIL_SERVER --from-literal=MAIL_ADDRESS=$MAIL_ADDRESS --from-literal=MAIL_PASSWORD=$MAIL_PASSWORD --dry-run -o yaml | kubectl apply -f -
     - envsubst < user-service/env/config.$ENV.yaml > config.yaml && kubectl create configmap users-service.config -n api
       --from-file=config.yaml=config.yaml --dry-run -o yaml | kubectl apply -f -
+    - kubectl create configmap mail-service.templates -n api
+      --from-file=template/verify.template.yaml
+      --from-file=template/notify.template.yaml
+      --from-file=template/reset.template.yaml --dry-run -o yaml | kubectl apply -f -
   script:
     - helm upgrade --install -n api users-service user-service/users-chart
 

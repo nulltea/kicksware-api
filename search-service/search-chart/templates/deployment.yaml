@@ -82,5 +82,9 @@ spec:
           {{- with .persistent }}
           persistentVolumeClaim:
             claimName: {{ .claim }}
-        {{- end }}
+          {{- end }}
+          {{ with .config }}
+          configMap:
+            name: {{ .name }}
+          {{- end }}
       {{- end }}

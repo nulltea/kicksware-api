@@ -18,9 +18,10 @@ func ProvideAuthService(service service.UserService, config env.ServiceConfig) s
 	)
 }
 
-func ProvideMailService(service service.UserService, config env.ServiceConfig) service.MailService {
+func ProvideMailService(service service.UserService, repo repo.SubscriptionRepository, config env.ServiceConfig) service.MailService {
 	return business.NewMailService(
 		service,
+		repo,
 		config.Mail,
 		config.FallbackMail,
 	)

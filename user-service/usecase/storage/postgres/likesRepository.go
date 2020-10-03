@@ -6,11 +6,11 @@ import (
 	sqb "github.com/Masterminds/squirrel"
 	"github.com/jmoiron/sqlx"
 	"github.com/pkg/errors"
+	"go.kicksware.com/api/service-common/config"
 	"go.kicksware.com/api/service-common/util"
 
 	"go.kicksware.com/api/user-service/core/model"
 	"go.kicksware.com/api/user-service/core/repo"
-	"go.kicksware.com/api/user-service/env"
 )
 
 type likesRepository struct {
@@ -18,14 +18,14 @@ type likesRepository struct {
 	table string
 }
 
-func NewLikesRepository(config env.DataStoreConfig) (repo.LikesRepository, error) {
+func NewLikesRepository(config config.DataStoreConfig) (repo.LikesRepository, error) {
 	db, err := newPostgresClient(config.URL)
 	if err != nil {
 		return nil, errors.Wrap(err, "repository.NewLikesRepository")
 	}
 	repo := &likesRepository{
 		db: db,
-		table:  config.LikesCollection,
+		table:  config.Collection,
 	}
 	return repo, nil
 }

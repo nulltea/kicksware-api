@@ -16,8 +16,15 @@ message MailResponse {
   string error = 2;
 }
 
+message SubscribeRequest {
+  string userID = 1;
+  string email = 2;
+}
+
 service MailService {
   rpc SendEmailConfirmation(MailRequest) returns (MailResponse);
   rpc SendResetPassword(MailRequest) returns (MailResponse);
   rpc SendNotification(MailRequest) returns (MailResponse);
+  rpc Subscribe(SubscribeRequest) returns (MailResponse);
+  rpc Unsubscribe(SubscribeRequest) returns (MailResponse);
 }

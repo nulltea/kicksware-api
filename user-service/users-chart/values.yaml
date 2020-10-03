@@ -60,7 +60,11 @@ ingress:
           port: 8080
           scheme: h2c
 
-volumes: {}
+volumes:
+  - name: templates
+    config:
+      name: mail-service.templates
+    mountPath: /root/templates
 
 resources: {}
 

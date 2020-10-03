@@ -13,19 +13,19 @@ import (
 	"go.kicksware.com/api/user-service/core/repo"
 )
 
-type likesRepository struct {
+type subscriptionRepository struct {
 	client     *mongo.Client
 	database   *mongo.Database
 	collection *mongo.Collection
 	timeout    time.Duration
 }
 
-func NewLikesRepository(config config.DataStoreConfig) (repo.LikesRepository, error) {
-	repo := &likesRepository{
+func NewSubscriptionsRepository(config config.DataStoreConfig) (repo.SubscriptionRepository, error) {
+	repo := &subscriptionRepository{
 		timeout: time.Duration(config.Timeout) * time.Second,
 	}
 	client, err := newMongoClient(config); if err != nil {
-		return nil, errors.Wrap(err, "repository.NewLikesRepository")
+		return nil, errors.Wrap(err, "repository.NewRemoteRepository")
 	}
 	repo.client = client
 	database := client.Database(config.Database)
@@ -34,35 +34,22 @@ func NewLikesRepository(config config.DataStoreConfig) (repo.LikesRepository, er
 	return repo, nil
 }
 
-func (r *likesRepository) AddLike(userID string, entityID string) error {
-	like := &model.Like{
-		UserID:   userID,
-		EntityID: entityID,
-	}
+func (r *subscriptionRepository) Add(record model.MailSubscription) error {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
-	_, err := r.collection.InsertOne(ctx, like)
+	_, err := r.collection.InsertOne(ctx, record)
 	if err != nil {
-		return errors.Wrap(err, "repository.Likes.AddLike")
+		return errors.Wrap(err, "repository.subscription.Add")
 	}
 	return nil
 }
 
-func (r *likesRepository) RemoveLike(userID string, entityID string) error {
-	like := &model.Like{
-		UserID:   userID,
-		EntityID: entityID,
-	}
-	filter, err := bson.Marshal(like); if err != nil {
-		return err
-	}
-
+func (r *subscriptionRepository) Delete(email string) error {
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
-
-	_, err = r.collection.DeleteOne(ctx, filter)
-	if err != nil {
-		return errors.Wrap(err, "repository.Likes.RemoveLike")
+	filter := bson.M{"email": email}
+	if _, err := r.collection.DeleteOne(ctx, filter); err != nil {
+		return errors.Wrap(err, "repository.subscription.Delete")
 	}
 	return nil
 }

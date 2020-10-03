@@ -27,7 +27,7 @@ fallbackMailConfig:
   verifyEmailTemplate: template/verify.template.html
   resetPasswordTemplate: template/reset.template.html
   notificationTemplate: template/notification.template.html
-mongoConfig:
+usersDBConfig:
   URL: mongodb://db.kicksware.com:443
   TLS:
     enableTLS: true
@@ -35,21 +35,42 @@ mongoConfig:
     keyFile: certs/mongo/tls.key
   database: sneakerResaleDB
   collection: users
-  likesCollection: likes
-  remoteCollection: remotes
   login: $MONGO_USER
   password: $MONGO_PASSWORD
   timeout: 30
-redisConfig:
-  URL: redis://redis:6379
-postgresConfig:
-  URL: postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@postgres:5432/sneakerResaleDB
+likesDBConfig:
+  URL: mongodb://db.kicksware.com:443
+  TLS:
+    enableTLS: true
+    certFile: certs/mongo/ca.crt
+    keyFile: certs/mongo/tls.key
   database: sneakerResaleDB
-  collection: Users
-  likesCollection: Likes
-  login: $POSTGRES_USER
-  password: $POSTGRES_PASSWORD
-  timeout: 30
+  collection: likes
+  login: $MONGO_USER
+  password: $MONGO_PASSWORD
+  timeout: 10
+remotesDBConfig:
+  URL: mongodb://db.kicksware.com:443
+  TLS:
+    enableTLS: true
+    certFile: certs/mongo/ca.crt
+    keyFile: certs/mongo/tls.key
+  database: sneakerResaleDB
+  collection: remotes
+  login: $MONGO_USER
+  password: $MONGO_PASSWORD
+  timeout: 15
+subscriptionsDBConfig:
+  URL: mongodb://db.kicksware.com:443
+  TLS:
+    enableTLS: true
+    certFile: certs/mongo/ca.crt
+    keyFile: certs/mongo/tls.key
+  database: sneakerResaleDB
+  collection: subscriptions
+  login: $MONGO_USER
+  password: $MONGO_PASSWORD
+  timeout: 15
 personalConfig:
   sunnyUserEmail: $SUNNY_USER_EMAIL
   sunnyUserIdPrefix: $SUNNY_USER_ID_PREFIX

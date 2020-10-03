@@ -8,8 +8,8 @@ commonConfig:
 securityConfig:
   tlsCertificate:
     enableTLS: false
-    certFile: ../key/server.crt
-    keyFile: ../key/server.key
+    certFile: ../keys/server.crt
+    keyFile: ../keys/server.key
 authConfig:
   issuerName: middleware/user-service
   tokenExpirationDelta: 18
@@ -29,26 +29,47 @@ fallbackMailConfig:
   verifyEmailTemplate: template/verify.template.html
   resetPasswordTemplate: template/reset.template.html
   notificationTemplate: template/notification.template.html
-mongoConfig:
-  URL: mongodb://db.kicksware.com:80
+usersDBConfig:
+  URL: mongodb://db.kicksware.com:443
   TLS:
     enableTLS: true
     certFile: /source/certs/mongo/ca.pem
     keyFile: /source/certs/mongo/mongo.pem
   database: sneakerResaleDB
   collection: users
-  likesCollection: likes
-  remoteCollection: remotes
   login: $MONGO_USER
   password: $MONGO_PASSWORD
   timeout: 30
-redisConfig:
-  URL: redis://localhost:6379
-postgresConfig:
-  URL: postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@localhost:5432/sneakerResaleDB
+likesDBConfig:
+  URL: mongodb://db.kicksware.com:443
+  TLS:
+    enableTLS: true
+    certFile: /source/certs/mongo/ca.pem
+    keyFile: /source/certs/mongo/mongo.pem
   database: sneakerResaleDB
-  collection: Users
-  likesCollection: Likes
-  login: $POSTGRES_USER
-  password: $POSTGRES_PASSWORD
-  timeout: 30
+  collection: likes
+  login: $MONGO_USER
+  password: $MONGO_PASSWORD
+  timeout: 10
+remotesDBConfig:
+  URL: mongodb://db.kicksware.com:443
+  TLS:
+    enableTLS: true
+    certFile: /source/certs/mongo/ca.pem
+    keyFile: /source/certs/mongo/mongo.pem
+  database: sneakerResaleDB
+  collection: remotes
+  login: $MONGO_USER
+  password: $MONGO_PASSWORD
+  timeout: 15
+subscriptionsDBConfig:
+  URL: mongodb://db.kicksware.com:443
+  TLS:
+    enableTLS: true
+    certFile: /source/certs/mongo/ca.pem
+    keyFile: /source/certs/mongo/mongo.pem
+  database: sneakerResaleDB
+  collection: subscriptions
+  login: $MONGO_USER
+  password: $MONGO_PASSWORD
+  timeout: 15

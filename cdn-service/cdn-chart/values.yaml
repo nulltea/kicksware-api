@@ -35,12 +35,12 @@ ingress:
     - host: cdn.kicksware.com
       grpc: true
       paths:
-        - /proto.OrderService
+        - /proto.ContentService
       entrypoints:
         - web
         - websecure
       services:
-        - name: orders-service
+        - name: cdn-service
           port: 8080
           scheme: h2c
 

@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
+	"go.kicksware.com/api/service-common/config"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -19,7 +20,6 @@ import (
 
 	"go.kicksware.com/api/user-service/core/model"
 	"go.kicksware.com/api/user-service/core/repo"
-	"go.kicksware.com/api/user-service/env"
 	"go.kicksware.com/api/user-service/usecase/business"
 )
 
@@ -31,7 +31,7 @@ type repository struct {
 	timeout    time.Duration
 }
 
-func NewRepository(config env.DataStoreConfig) (repo.UserRepository, error) {
+func NewRepository(config config.DataStoreConfig) (repo.UserRepository, error) {
 	repo := &repository{
 		timeout:  time.Duration(config.Timeout) * time.Second,
 	}
@@ -45,7 +45,7 @@ func NewRepository(config env.DataStoreConfig) (repo.UserRepository, error) {
 	return repo, nil
 }
 
-func newMongoClient(config env.DataStoreConfig) (*mongo.Client, error) {
+func newMongoClient(config config.DataStoreConfig) (*mongo.Client, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(config.Timeout)*time.Second)
 	defer cancel()
 	client, err := mongo.Connect(ctx, options.Client().

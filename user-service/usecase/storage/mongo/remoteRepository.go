@@ -5,12 +5,12 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
+	"go.kicksware.com/api/service-common/config"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 
 	"go.kicksware.com/api/user-service/core/model"
 	"go.kicksware.com/api/user-service/core/repo"
-	"go.kicksware.com/api/user-service/env"
 )
 
 type remoteRepository struct {
@@ -20,13 +20,7 @@ type remoteRepository struct {
 	timeout    time.Duration
 }
 
-type remote struct {
-	UserID   string             `bson:"user_id"`
-	RemoteID string             `bson:"remote_id"`
-	Provider model.UserProvider `bson:"provider"`
-}
-
-func NewRemoteRepository(config env.DataStoreConfig) (repo.RemoteRepository, error) {
+func NewRemoteRepository(config config.DataStoreConfig) (repo.RemoteRepository, error) {
 	repo := &remoteRepository{
 		timeout: time.Duration(config.Timeout) * time.Second,
 	}
@@ -36,15 +30,15 @@ func NewRemoteRepository(config env.DataStoreConfig) (repo.RemoteRepository, err
 	repo.client = client
 	database := client.Database(config.Database)
 	repo.database = database
-	repo.collection = database.Collection(config.RemoteCollection)
+	repo.collection = database.Collection(config.Collection)
 	return repo, nil
 }
 
 func (r *remoteRepository) Connect(userID string, remoteID string, provider model.UserProvider) error {
-	remote := &remote{
-		userID,
-		remoteID,
-		provider,
+	remote := &model.RemoteAuth{
+		UserID:   userID,
+		RemoteID: remoteID,
+		Provider: provider,
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
 	defer cancel()
@@ -59,10 +53,10 @@ func (r *remoteRepository) Sync(userID string, remotes map[model.UserProvider]st
 	bulk := make([]interface{}, 0)
 
 	for provider := range remotes {
-		bulk = append(bulk, &remote{
-			userID,
-			remotes[provider],
-			provider,
+		bulk = append(bulk, &model.RemoteAuth{
+			UserID:   userID,
+			RemoteID: remotes[provider],
+			Provider: provider,
 		})
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), r.timeout)
@@ -85,7 +79,7 @@ func (r *remoteRepository) Track(remoteID string, provider model.UserProvider) (
 	result := r.collection.FindOne(ctx, filter); if result == nil {
 		return "", mongo.ErrNoDocuments
 	}
-	var remote remote
+	var remote model.RemoteAuth
 	if err := result.Decode(remote); err != nil {
 		return "", err
 	}

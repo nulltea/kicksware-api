@@ -7,23 +7,28 @@ import (
 	"html/template"
 	"net"
 	"net/smtp"
+	"time"
 
 	"github.com/golang/glog"
 	"github.com/pkg/errors"
 
+	"go.kicksware.com/api/user-service/core/model"
+	"go.kicksware.com/api/user-service/core/repo"
 	"go.kicksware.com/api/user-service/core/service"
 	"go.kicksware.com/api/user-service/env"
 )
 
 type mailService struct {
 	userService    service.UserService
+	subsRepo       repo.SubscriptionRepository
 	config         env.MailConfig
 	fallbackConfig env.MailConfig
 }
 
-func NewMailService(userService service.UserService, config env.MailConfig, fallbackConfig env.MailConfig) service.MailService {
+func NewMailService(userService service.UserService, subsRepo repo.SubscriptionRepository, config env.MailConfig, fallbackConfig env.MailConfig) service.MailService {
 	return &mailService {
 		userService,
+		subsRepo,
 		config,
 		fallbackConfig,
 	}
@@ -86,6 +91,25 @@ func (s *mailService) SendNotification(userID, notificationContent string) error
 	panic("implement me")
 }
 
+func (s *mailService) Subscribe(email, userID string) error {
+	record := model.MailSubscription{
+		Email: email,
+		UserID: userID,
+		Joined: time.Now(),
+	}
+	if err := s.subsRepo.Add(record); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *mailService) Unsubscribe(email string) error {
+	if err := s.subsRepo.Delete(email); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (s *mailService) sendMail(subject string, msg string, to string) error {
 	if err := trySendMail(s.config, subject, msg, to); err != nil {
 		glog.Errorln(err)
@@ -128,6 +152,8 @@ func trySendMail(config env.MailConfig, subject string, msg string, to string) e
 	}
 	return nil
 }
+
+
 
 func useTemplate(path string, format interface{}) (string, error) {
 	var w bytes.Buffer

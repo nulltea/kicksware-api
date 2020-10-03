@@ -34,8 +34,10 @@ func (h *Handler) ProvideAccessRoles() meta.AccessConfig {
 		"/proto.AuthService/Logout": meta.UserAccess,
 
 		"/proto.MailService/SendEmailConfirmation": meta.RegularAccess,
-		"/proto.MailService/SendResetPass,word": meta.RegularAccess,
+		"/proto.MailService/SendResetPassword": meta.RegularAccess,
 		"/proto.MailService/SendNotification": meta.AdminAccess,
+		"/proto.MailService/Subscribe": meta.RegularAccess,
+		"/proto.MailService/Unsubscribe": meta.RegularAccess,
 
 		"/proto.InteractService/Like": meta.UserAccess,
 		"/proto.InteractService/Unlike": meta.UserAccess,
