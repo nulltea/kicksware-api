@@ -79,9 +79,9 @@ users.deploy.k8s:
     - envsubst < user-service/env/config.$ENV.yaml > config.yaml && kubectl create configmap users-service.config -n api
       --from-file=config.yaml=config.yaml --dry-run -o yaml | kubectl apply -f -
     - kubectl create configmap mail-service.templates -n api
-      --from-file=template/verify.template.yaml
-      --from-file=template/notify.template.yaml
-      --from-file=template/reset.template.yaml --dry-run -o yaml | kubectl apply -f -
+      --from-file=user-service/template/verify.template.yaml
+      --from-file=user-service/template/notify.template.yaml
+      --from-file=user-service/template/reset.template.yaml --dry-run -o yaml | kubectl apply -f -
   script:
     - helm upgrade --install -n api users-service user-service/users-chart
 
