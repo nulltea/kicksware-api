@@ -18,4 +18,3 @@ func InitializeServer() (srv core.Server) {
 	container.Resolve(&srv)
 	return
 }
-
