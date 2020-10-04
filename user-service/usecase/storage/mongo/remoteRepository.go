@@ -80,7 +80,7 @@ func (r *remoteRepository) Track(remoteID string, provider model.UserProvider) (
 		return "", mongo.ErrNoDocuments
 	}
 	var remote model.RemoteAuth
-	if err := result.Decode(remote); err != nil {
+	if err := result.Decode(&remote); err != nil {
 		return "", err
 	}
 	return remote.UserID, nil
