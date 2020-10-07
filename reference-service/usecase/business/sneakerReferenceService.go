@@ -104,7 +104,7 @@ func (s *referenceService) handleForeignSubquery(query *meta.RequestQuery, param
 			delete(_query, key)
 		}
 	}
-	if len(foreignKeys) > 0 {
+	if ok {
 		appendInCondition(query, foreignKeys)
 	}
 	return

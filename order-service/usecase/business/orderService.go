@@ -119,7 +119,7 @@ func (s *orderService) handleForeignSubquery(query *meta.RequestQuery, params *m
 			delete(_query, key)
 		}
 	}
-	if len(foreignKeys) > 0 {
+	if ok {
 		appendInCondition(query, foreignKeys)
 	}
 	return
