@@ -2,15 +2,21 @@ package business
 
 import (
 	"bufio"
+	"bytes"
+	"crypto/md5"
 	"crypto/rsa"
 	"crypto/x509"
 	"encoding/json"
 	"encoding/pem"
+	"errors"
 	"fmt"
+	"io"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
+	"github.com/golang/glog"
 	"github.com/rs/xid"
 
 	"go.kicksware.com/api/user-service/core/meta"
@@ -19,12 +25,15 @@ import (
 	"go.kicksware.com/api/user-service/env"
 )
 
+var ErrInvalidAccessKey = errors.New("access key is not valid! Guest token provision is impossible")
+
 type authService struct {
 	userService service.UserService
 	issuerName string
 	expirationDelta int
 	privateKey *rsa.PrivateKey
 	publicKey *rsa.PublicKey
+	accessChecksum []byte
 }
 
 func NewAuthServiceJWT(userService service.UserService, authConfig env.AuthConfig) service.AuthService {
@@ -34,6 +43,7 @@ func NewAuthServiceJWT(userService service.UserService, authConfig env.AuthConfi
 		authConfig.TokenExpirationDelta,
 		getPrivateKey(authConfig.PrivateKeyPath),
 		getPublicKey(authConfig.PublicKeyPath),
+		getAccessChecksum(authConfig.AccessKey),
 	}
 }
 
@@ -207,4 +217,20 @@ func GetClaims(token *jwt.Token) (*meta.AuthClaims, error) {
 		return nil, err
 	}
 	return claims, nil
+}
+
+func (s *authService) VerifyAccessKey(hash []byte) bool {
+	ok := bytes.Equal(s.accessChecksum, hash)
+	return ok
+}
+
+func getAccessChecksum(accessKey string) []byte {
+	input := strings.NewReader(accessKey)
+
+	hash := md5.New()
+	if _, err := io.Copy(hash, input); err != nil {
+		glog.Fatalln(err)
+	}
+
+	return hash.Sum(nil)
 }

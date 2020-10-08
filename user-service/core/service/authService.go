@@ -20,6 +20,7 @@ type AuthService interface {
 	Login(user *model.User) (*meta.AuthToken, error)
 	Remote(user *model.User) (*meta.AuthToken, error)
 	Guest() (*meta.AuthToken, error)
+	VerifyAccessKey(hash []byte) bool
 	GenerateToken(user *model.User) (*meta.AuthToken, error)
 	Refresh(token string) (*meta.AuthToken, error)
 	PublicKey() *rsa.PublicKey

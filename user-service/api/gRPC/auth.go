@@ -3,10 +3,12 @@ package gRPC
 import (
 	"context"
 
-	"github.com/golang/protobuf/ptypes/empty"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 
 	"go.kicksware.com/api/user-service/api/gRPC/proto"
 	"go.kicksware.com/api/user-service/core/meta"
+	"go.kicksware.com/api/user-service/usecase/business"
 )
 
 func (h *Handler) SignUp(ctx context.Context, user *proto.User) (resp *proto.AuthToken, err error) {
@@ -48,15 +50,20 @@ func (h *Handler) Remote(ctx context.Context, user *proto.User) (resp *proto.Aut
 	return
 }
 
-func (h *Handler) Guest(ctx context.Context, empty *empty.Empty) (resp *proto.AuthToken, err error) {
-	var token *meta.AuthToken;
-
-	token, err = h.auth.Guest(); if err != nil || token == nil {
-		return
+func (h *Handler) Guest(ctx context.Context, access *proto.AccessKey) (*proto.AuthToken, error) {
+	if !h.auth.VerifyAccessKey(access.Key) {
+		return nil,status.Errorf(codes.Internal,
+			"Error occurred while generating auth token: %v", business.ErrInvalidAccessKey.Error(),
+		)
 	}
 
-	resp = proto.AuthToken{}.FromNative(token)
-	return
+	token, err := h.auth.Guest(); if err != nil || token == nil {
+		return nil, status.Errorf(codes.Internal,
+			"Error occurred while generating auth token: %v", err,
+		)
+	}
+
+	return proto.AuthToken{}.FromNative(token), nil
 }
 
 func (h *Handler) GenerateToken(ctx context.Context, user *proto.User) (resp *proto.AuthToken, err error) {

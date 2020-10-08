@@ -26,6 +26,7 @@ type AuthConfig struct {
 	TokenExpirationDelta int    `yaml:"tokenExpirationDelta"`
 	PrivateKeyPath       string `yaml:"privateKeyPath"`
 	PublicKeyPath        string `yaml:"publicKeyPath"`
+	AccessKey            string `yaml:"accessKey"`
 }
 
 type MailConfig struct {

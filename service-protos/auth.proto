@@ -3,7 +3,6 @@ syntax = "proto3";
 package proto;
 
 import "user.proto";
-import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
 option go_package = "go.kicksware.com/api/user-service/api/gRPC/proto";
@@ -15,12 +14,17 @@ message AuthToken {
   google.protobuf.Timestamp expires = 3;
 }
 
+message AccessKey {
+  bytes key = 1;
+}
+
 service AuthService {
   rpc SignUp(User) returns (AuthToken);
   rpc Login(User) returns (AuthToken);
   rpc Remote(User) returns (AuthToken);
-  rpc Guest(google.protobuf.Empty) returns (AuthToken);
+  rpc Guest(AccessKey) returns (AuthToken);
   rpc GenerateToken(User) returns (AuthToken);
   rpc Refresh(AuthToken) returns (AuthToken);
   rpc Logout(AuthToken) returns (AuthToken);
 }
+

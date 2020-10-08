@@ -25,4 +25,3 @@ type User struct {
 	Provider           UserProvider            `json:"Provider" bson:"provider"`
 	ConnectedProviders map[UserProvider]string `json:"ConnectedProviders" bson:"-"`
 }
-

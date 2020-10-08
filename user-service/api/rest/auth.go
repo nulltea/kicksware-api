@@ -73,6 +73,11 @@ func (h *Handler) Remote(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) Guest(w http.ResponseWriter, r *http.Request) {
+	access := r.URL.Query().Get("access")
+	if !h.auth.VerifyAccessKey([]byte(access)) {
+		http.Error(w, business.ErrInvalidAccessKey.Error(), http.StatusUnauthorized)
+		return
+	}
 	token, err := h.auth.Guest(); if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
