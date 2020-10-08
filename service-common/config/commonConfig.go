@@ -19,6 +19,7 @@ type AuthConfig struct {
 	PublicKeyPath  string               `yaml:"publicKeyPath"`
 	AuthEndpoint   string               `yaml:"authEndpoint"`
 	TLSCertificate *meta.TLSCertificate `yaml:"tlsCertificate"`
+	AccessKey      string               `yaml:"accessKey"`
 }
 
 type DataStoreConfig struct {

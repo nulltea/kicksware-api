@@ -5,12 +5,12 @@ import (
 	"time"
 
 	"github.com/golang/glog"
-	"github.com/golang/protobuf/ptypes/empty"
 	"go.kicksware.com/api/user-service/api/gRPC/proto"
 	"go.kicksware.com/api/user-service/core/meta"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 
+	"go.kicksware.com/api/service-common/core"
 	tlsMeta "go.kicksware.com/api/service-common/core/meta"
 )
 
@@ -18,12 +18,14 @@ type AuthClientInterceptor struct {
 	endpoint string
 	authClient  proto.AuthServiceClient
 	accessToken *meta.AuthToken
+	authService core.AuthService
 }
 
-func NewAuthClientInterceptor(authEndpoint string, tls *tlsMeta.TLSCertificate) *AuthClientInterceptor {
+func NewAuthClientInterceptor(authEndpoint string, tls *tlsMeta.TLSCertificate, service core.AuthService) *AuthClientInterceptor {
 	return &AuthClientInterceptor{
 		endpoint: authEndpoint,
 		authClient: newAuthClient(authEndpoint, tls),
+		authService: service,
 	}
 }
 
@@ -89,7 +91,7 @@ func (i *AuthClientInterceptor) requestAccessToken(ctx context.Context) (*meta.A
 		return token, nil
 	}
 
-	resp, err := i.authClient.Guest(ctx, &empty.Empty{}); if err == nil {
+	resp, err := i.authClient.Guest(ctx, i.accessKey()); if err == nil {
 		return resp.ToNative(), nil
 	}
 
@@ -119,4 +121,10 @@ func tryRetrieveToken(ctx context.Context) (*meta.AuthToken, bool) {
 		Success: true,
 		Expires: time.Time{},
 	}, true
+}
+
+func (i *AuthClientInterceptor) accessKey() *proto.AccessKey {
+	return &proto.AccessKey{
+		Key: i.authService.AccessKey(),
+	}
 }
