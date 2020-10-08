@@ -14,7 +14,7 @@ require (
 	github.com/vmihailenco/msgpack v4.0.4+incompatible
 	go.kicksware.com/api/product-service v0.0.0-20201002154435-cbbfec3af935
 	go.kicksware.com/api/reference-service v0.0.0-20201002044512-92028e5daef4
-	go.kicksware.com/api/service-common v0.0.0-20201002174717-facc64f082f8
+	go.kicksware.com/api/service-common v0.0.0-20201008025901-1c2992bf0079
 	google.golang.org/grpc v1.32.0
 	google.golang.org/protobuf v1.25.0
 	gopkg.in/yaml.v2 v2.3.0

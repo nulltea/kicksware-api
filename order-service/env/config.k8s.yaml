@@ -14,6 +14,7 @@ authConfig:
   tlsCertificate:
     enableTLS: true
     certFile: certs/grpc/tls.crt
+  accessKey: $AUTH_ACCESS_KEY
 mongoConfig:
   URL: mongodb://db.kicksware.com:443
   TLS:

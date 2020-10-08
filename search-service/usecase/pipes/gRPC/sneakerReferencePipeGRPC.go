@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/golang/glog"
+	"go.kicksware.com/api/service-common/core"
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/types/known/structpb"
 
@@ -23,8 +24,8 @@ type referencePipe struct {
 	auth   *gRPCSrv.AuthClientInterceptor
 }
 
-func NewSneakerReferencePipe(config env.ServiceConfig) pipe.SneakerReferencePipe {
-	auth := gRPCSrv.NewAuthClientInterceptor(config.Common.RpcEndpointFormat, config.Auth.TLSCertificate)
+func NewSneakerReferencePipe(config env.ServiceConfig, service core.AuthService) pipe.SneakerReferencePipe {
+	auth := gRPCSrv.NewAuthClientInterceptor(config.Common.RpcEndpointFormat, config.Auth.TLSCertificate, service)
 	return &referencePipe{
 		client: newRemoteClient(config, auth),
 		auth: auth,

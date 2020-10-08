@@ -10,6 +10,7 @@ securityConfig:
     enableTLS: false
 authConfig:
   publicKeyPath: keys/auth/public.key
+  accessKey: $AUTH_ACCESS_KEY
 mongoConfig:
   URL: mongodb://db.kicksware.com:443
   TLS:

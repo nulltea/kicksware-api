@@ -12,6 +12,7 @@ securityConfig:
     keyFile: ../key/server.key
 authConfig:
   publicKeyPath: ../key/public.key.pub
+  accessKey: $AUTH_ACCESS_KEY
 mongoConfig:
   URL: mongodb://localhost:27017
   database: sneakerResaleDB

@@ -13,6 +13,7 @@ authConfig:
   tlsCertificate:
     enableTLS: true
     certFile: ../keys/server.crt
+  accessKey: $AUTH_ACCESS_KEY
 mongoConfig:
   URL: mongodb://localhost:27017
   TLS:

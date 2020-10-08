@@ -13,6 +13,7 @@ authConfig:
   tokenExpirationDelta: 360
   privateKeyPath: keys/auth/private.key
   publicKeyPath: keys/auth/public.key
+  accessKey: $AUTH_ACCESS_KEY
 mailConfig:
   server: $MAIL_SERVER
   address: $MAIL_ADDRESS

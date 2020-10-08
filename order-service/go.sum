@@ -408,10 +408,14 @@ go.kicksware.com/api/service-common v0.0.0-20201002034117-505bfe555177/go.mod h1
 go.kicksware.com/api/service-common v0.0.0-20201002035510-8b1c54368e8a/go.mod h1:u9jKz+UkcCXTJHJbgHx0QkbUhjQBNKdpqHUO0Gc4N/M=
 go.kicksware.com/api/service-common v0.0.0-20201002174717-facc64f082f8 h1:BMKFYY/ySIjDa5q/76q7vfGNhmS1Ea0UHtAzqkb3ZIM=
 go.kicksware.com/api/service-common v0.0.0-20201002174717-facc64f082f8/go.mod h1:u9jKz+UkcCXTJHJbgHx0QkbUhjQBNKdpqHUO0Gc4N/M=
+go.kicksware.com/api/service-common v0.0.0-20201003150158-9a7ca75dcdd6/go.mod h1:u9jKz+UkcCXTJHJbgHx0QkbUhjQBNKdpqHUO0Gc4N/M=
+go.kicksware.com/api/service-common v0.0.0-20201008025901-1c2992bf0079 h1:ul934B7QRJFGBqlzGHfgmocYnRFfUqVpgGJ3ys4aufY=
+go.kicksware.com/api/service-common v0.0.0-20201008025901-1c2992bf0079/go.mod h1:xtRv74drtBRsE9JLA4V0dYr3Y8KLLw4WlLHUxS8EBA4=
 go.kicksware.com/api/user-service v0.0.0-20201002035145-842d131c8dc2 h1:gZJuLOPAMgplDqJbgDSuNp8f+3oG9T0L/xjO6thRPYA=
 go.kicksware.com/api/user-service v0.0.0-20201002035145-842d131c8dc2/go.mod h1:UWaGS0jC62q53CQuqiokVob7O01eHtliR/HkQKb8eFs=
 go.kicksware.com/api/user-service v0.0.0-20201002041240-898528d3d7e9 h1:v/QvNu6DhDy5+DuTSfW6W915TLB/xp7ugS4Ok7CzbmA=
 go.kicksware.com/api/user-service v0.0.0-20201002041240-898528d3d7e9/go.mod h1:UWaGS0jC62q53CQuqiokVob7O01eHtliR/HkQKb8eFs=
+go.kicksware.com/api/user-service v0.0.0-20201008011940-2e4b60fb4b00/go.mod h1:gVNtfSrXO2S9ngaBIi9ugjbPTeN5cQ56Si3kRGvMY3s=
 go.mongodb.org/mongo-driver v1.4.1 h1:38NSAyDPagwnFpUA/D5SFgbugUYR3NzYRNa4Qk9UxKs=
 go.mongodb.org/mongo-driver v1.4.1/go.mod h1:llVBH2pkj9HywK0Dtdt6lDikOjFLbceHVu/Rc0iMKLs=
 go.opencensus.io v0.21.0/go.mod h1:mSImk1erAIZhrmZN+AvHh14ztQfjbGwt4TtuofqLduU=

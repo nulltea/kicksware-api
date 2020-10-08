@@ -14,6 +14,7 @@ authConfig:
   tlsCertificate:
     enableTLS: true
     certFile: /source/certs/grpc/tls.crt
+  accessKey: $AUTH_ACCESS_KEY
 filesConfig:
   URL: /source/storage
 mongoConfig:

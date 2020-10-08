@@ -12,6 +12,7 @@ securityConfig:
 authConfig:
   publicKeyPath: keys/auth/public.key
   authEndpoint: https://api.kicksware.com/auth/guest
+  accessKey: $AUTH_ACCESS_KEY
 elasticConfig:
   URL: http://elasticsearch:9200
   index: sneaker_reference

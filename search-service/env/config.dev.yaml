@@ -13,6 +13,7 @@ authConfig:
   tlsCertificate:
     enableTLS: true
     certFile: ../keys/server.crt
+  accessKey: $AUTH_ACCESS_KEY
 elasticConfig:
   URL: https://search.kicksware.com:443
   index: sneaker_reference
