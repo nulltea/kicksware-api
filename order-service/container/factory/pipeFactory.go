@@ -16,9 +16,9 @@ func ProvideReferenceRESTPipe(auth core.AuthService, config env.ServiceConfig) p
 	return REST.NewSneakerReferencePipe(auth, config.Common)
 }
 
-func ProvideReferenceGRPCPipe(config env.ServiceConfig) pipe.SneakerReferencePipe {
+func ProvideReferenceGRPCPipe(config env.ServiceConfig, service core.AuthService) pipe.SneakerReferencePipe {
 	var searchConfig searchEnv.ServiceConfig; castService(config, &searchConfig)
-	return gRPC.NewSneakerReferencePipe(searchConfig)
+	return gRPC.NewSneakerReferencePipe(searchConfig, service)
 }
 
 func ProvideProductRESTPipe(config env.ServiceConfig) pipe.SneakerProductPipe {
@@ -26,7 +26,7 @@ func ProvideProductRESTPipe(config env.ServiceConfig) pipe.SneakerProductPipe {
 	panic("ProvideProductRESTPipe: not implemented")
 }
 
-func ProvideProductGRPCPipe(config env.ServiceConfig) pipe.SneakerProductPipe {
+func ProvideProductGRPCPipe(config env.ServiceConfig, service core.AuthService) pipe.SneakerProductPipe {
 	// return pipes.NewSneakerProductPipe(config.Common)
 	panic("ProvideProductGRPCPipe: not implemented")
 }
