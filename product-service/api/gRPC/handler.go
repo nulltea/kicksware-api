@@ -7,6 +7,8 @@ import (
 	"github.com/pkg/errors"
 	"go.kicksware.com/api/service-common/core"
 	"go.kicksware.com/api/service-common/util"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 
 	"go.kicksware.com/api/service-common/core/meta"
 
@@ -140,7 +142,34 @@ func (h *Handler) DeleteProducts(ctx context.Context, filter *proto.ProductFilte
 }
 
 func (h *Handler) UploadImages(ctx context.Context, input *proto.UploadImageRequest) (*proto.ProductResponse, error) {
-	panic("implement me")
+	productID := input.ProductID; if len(input.ProductID) == 0 {
+		return nil, status.Error(codes.InvalidArgument, business.ErrProductNotFound.Error())
+	}
+
+	if len(input.Images) == 0 {
+		return nil, status.Error(codes.InvalidArgument, "images data must be sent with request")
+	}
+
+	product, err := h.service.FetchOne(productID); if err != nil {
+		return nil, status.Error(codes.InvalidArgument, business.ErrProductNotFound.Error())
+	}
+
+	if product.Images == nil || len(product.Images) == 0 {
+		product.Images = input.Images
+	} else {
+		for key, data := range input.Images {
+			product.Images[key] = data
+		}
+	}
+
+	err = h.service.Modify(product); if err != nil {
+		return nil, status.Errorf(codes.Internal,
+			"Internal error occurred while modifying product record: %q", err,
+		)
+	}
+	return &proto.ProductResponse{
+		Count: 1,
+	}, nil
 }
 
 func (h *Handler) RequestAnalysis(ctx context.Context, input *proto.ProductInput) (*proto.AnalysisResponse, error) {
