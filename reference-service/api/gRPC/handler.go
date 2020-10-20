@@ -50,7 +50,7 @@ func (h *Handler) GetReferences(ctx context.Context, filter *proto.ReferenceFilt
 		references, err = h.service.Fetch(filter.ReferenceID, params)
 	}
 
-	if errors.Cause(err) == business.ErrReferenceNotFound {
+	if errors.Cause(err) == business.ErrReferenceNotFound || len(references) == 0 {
 		return &proto.ReferenceResponse{
 			Count: 0,
 		}, nil

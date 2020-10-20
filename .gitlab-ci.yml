@@ -180,10 +180,10 @@ cdn.deploy.k8s:
       - assets/**/*
   before_script:
     - *common_before
-    - envsubst < cdn-service/env/config.$ENV.yaml > config.yaml && kubectl create configmap cdn-service.config -n api
+    - envsubst < cdn-service/env/config.$ENV.yaml > config.yaml && kubectl create configmap cdn-service.config -n webapp
       --from-file=config.yaml=config.yaml --dry-run -o yaml | kubectl apply -f -
   script:
-    - helm upgrade --install -n api cdn-service cdn-service/cdn-chart
+    - helm upgrade --install -n webapp cdn-service cdn-service/cdn-chart
 
 # check stage steps:
 
