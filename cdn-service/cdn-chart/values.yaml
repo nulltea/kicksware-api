@@ -47,9 +47,9 @@ ingress:
 volumes:
   - name: storage
     persistent:
-      claim: storage
+      claim: webapp-storage
       exists: true
-      storageClass: nfscd
+      storageClass: nfs
       size: 25Gi
       accessModes:
         - ReadWriteMany

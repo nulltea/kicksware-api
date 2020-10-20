@@ -56,14 +56,16 @@ ingress:
 
 volumes: {}
 
-resources: {}
+resources:
+  requests:
+    cpu: 50m
+    memory: 32Mi
 
 autoscaling:
   enabled: true
   minReplicas: 1
   maxReplicas: 10
   targetCPUUtilizationPercentage: 80
-  targetMemoryUtilizationPercentage: 80
 
 serviceAccount:
   create: true
