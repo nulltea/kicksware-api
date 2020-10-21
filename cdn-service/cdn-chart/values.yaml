@@ -47,9 +47,10 @@ ingress:
 volumes:
   - name: storage
     persistent:
-      claim: webapp-storage
+      claim: shared-storage-api
+      volumeName: shared-storage-api
       exists: true
-      storageClass: nfs
+      storageClass: glusterfs
       size: 25Gi
       accessModes:
         - ReadWriteMany
@@ -61,8 +62,7 @@ autoscaling:
   enabled: true
   minReplicas: 1
   maxReplicas: 10
-  targetCPUUtilizationPercentage: 80
-  targetMemoryUtilizationPercentage: 80
+  targetCPUUtilization: 25
 
 serviceAccount:
   create: true
