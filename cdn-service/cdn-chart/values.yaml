@@ -56,13 +56,16 @@ volumes:
         - ReadWriteMany
     mountPath: /root/storage
 
-resources: {}
+resources:
+  requests:
+    cpu: 50m
+    memory: 50Mi
 
 autoscaling:
   enabled: true
   minReplicas: 1
   maxReplicas: 10
-  targetCPUUtilization: 25
+  targetCPUUtilization: 50
 
 serviceAccount:
   create: true

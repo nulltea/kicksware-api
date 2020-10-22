@@ -27,6 +27,7 @@ spec:
   {{- if .Values.ingress.tls.enabled }}
   tls:
     certResolver: {{ .Values.ingress.tls.certResolver }}
+    secretName: {{ .Values.ingress.tls.secretName }}
   {{- end }}
 ---
   {{- if .Values.ingress.tls.enabled }}

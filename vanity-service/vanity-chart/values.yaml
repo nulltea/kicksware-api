@@ -23,6 +23,7 @@ ingress:
   tls:
     enabled: true
     certResolver: le
+    secretName: go-temp-tls
   routes:
     - host: go.kicksware.com
       paths:

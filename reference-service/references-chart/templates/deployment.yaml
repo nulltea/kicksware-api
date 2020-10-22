@@ -30,14 +30,11 @@ spec:
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
-          livenessProbe:
-            httpGet:
-              path: /health/live
-              port: http
           readinessProbe:
             httpGet:
               path: /health/ready
               port: http
+            periodSeconds: 60
           volumeMounts:
             - name: config
               mountPath: {{ .Values.config.configMountPath }}

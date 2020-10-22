@@ -59,13 +59,13 @@ volumes: {}
 resources:
   requests:
     cpu: 50m
-    memory: 32Mi
+    memory: 50Mi
 
 autoscaling:
   enabled: true
   minReplicas: 1
   maxReplicas: 10
-  targetCPUUtilizationPercentage: 80
+  targetCPUUtilization: 50
 
 serviceAccount:
   create: true
