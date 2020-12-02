@@ -153,6 +153,9 @@ There are two ways to perform Kicksware API deployment. To ensure top performanc
 
 An alternative and in fact, a cheaper and easier way to achieve sufficient results is for deployment to be performed with just one VPS server and docker-compose utility. However, such temporary savings now may be offset by the costs of vertical scaling when demand rises in the future.
 
+## More
+See [other Kicksware project repositories][kicksware-main-repo].
+
 ## License
 
 Licensed under the [GNU AGPL-3.0][license file].
@@ -207,5 +210,8 @@ Licensed under the [GNU AGPL-3.0][license file].
 [search-service chart]: https://github.com/timoth-y/kicksware-api/tree/master/search-service/search-chart
 [orders-service chart]: https://github.com/timoth-y/kicksware-api/tree/master/order-service/orders-chart
 [cdn-service chart]: https://github.com/timoth-y/kicksware-api/tree/master/cdn-service/cdn-chart
+
+
+[kicksware-main-repo]: https://github.com/timoth-y/kicksware-platform#components
 
 [license file]: https://github.com/timoth-y/kicksware-api/blob/master/LICENSE
