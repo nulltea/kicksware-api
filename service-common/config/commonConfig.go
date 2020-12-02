@@ -3,12 +3,18 @@ package config
 import "go.kicksware.com/api/service-common/core/meta"
 
 type CommonConfig struct {
-	Host              string `yaml:"host"`
-	HostName          string `yaml:"hostname"`
-	ContentType       string `yaml:"contentType"`
-	UsedDB            string `yaml:"usedDB"`
-	ApiEndpointFormat string `yaml:"apiEndpointFormat"`
-	RpcEndpointFormat string `yaml:"rpcEndpointFormat"`
+	Host              string           `yaml:"host"`
+	HostName          string           `yaml:"hostname"`
+	ContentType       string           `yaml:"contentType"`
+	UsedDB            string           `yaml:"usedDB"`
+	ApiEndpointFormat string           `yaml:"apiEndpointFormat"`
+	RpcEndpointFormat string           `yaml:"rpcEndpointFormat"`
+	AmqpConnection    ConnectionConfig `yaml:"amqpConnection"`
+}
+
+type ConnectionConfig struct {
+	Endpoint string               `yaml:"endpointFormat"`
+	TLS      *meta.TLSCertificate `yaml:"tlsCertificate"`
 }
 
 type SecurityConfig struct {

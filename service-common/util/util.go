@@ -4,12 +4,15 @@ import (
 	"bufio"
 	"context"
 	"crypto/rsa"
+	"crypto/tls"
 	"crypto/x509"
 	"encoding/pem"
+	"io/ioutil"
 	"net/url"
 	"os"
 
 	"github.com/fatih/structs"
+	"github.com/golang/glog"
 	"github.com/thoas/go-funk"
 	"go.mongodb.org/mongo-driver/bson"
 	"google.golang.org/grpc/metadata"
@@ -138,4 +141,18 @@ func SetAuthParamsFromMetaData(ctx context.Context, params **meta.RequestParams)
 		return true
 	}
 	return false
+}
+
+func NewTLSConfig(tlsConfig *meta.TLSCertificate) *tls.Config {
+	if !tlsConfig.EnableTLS {
+		return nil
+	}
+	certs := x509.NewCertPool()
+	pem, err := ioutil.ReadFile(tlsConfig.CertFile); if err != nil {
+		glog.Fatalln(err)
+	}
+	certs.AppendCertsFromPEM(pem)
+	return &tls.Config{
+		RootCAs: certs,
+	}
 }
