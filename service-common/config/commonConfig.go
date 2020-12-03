@@ -13,8 +13,8 @@ type CommonConfig struct {
 }
 
 type ConnectionConfig struct {
-	Endpoint string               `yaml:"endpointFormat"`
-	TLS      *meta.TLSCertificate `yaml:"tlsCertificate"`
+	URL string               `yaml:"URL"`
+	TLS *meta.TLSCertificate `yaml:"TLS"`
 }
 
 type SecurityConfig struct {

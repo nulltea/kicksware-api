@@ -1,7 +1,7 @@
 # [![repo logo][]][Kicksware url]
 
 <p align="center">
-	<a href="https://kicksware.com">
+	<a href="https://www.kicksware.com">
 		<img src="https://img.shields.io/website?label=Visit%20website&down_message=unavailable&up_color=teal&up_message=kicksware.com%20%7C%20online&url=https%3A%2F%2Fhealth.kicksware.com/ready">
 	</a>
 </p>
@@ -161,7 +161,7 @@ See [other Kicksware project repositories][kicksware-main-repo].
 Licensed under the [GNU AGPL-3.0][license file].
 
 [repo logo]: https://ci.kicksware.com/kicksware/api/-/raw/master/assets/repo-logo.png
-[kicksware url]: https://kicksware.com
+[kicksware url]: https://www.kicksware.com
 
 [Website badge]: https://img.shields.io/website?label=Visit%20website&down_message=unavailable&up_color=teal&up_message=kicksware.com%20%7C%20online&url=https%3A%2F%2Fkicksware.com
 [golang badge]: https://img.shields.io/badge/Code-Golang-informational?style=flat&logo=go&logoColor=white&color=6AD7E5

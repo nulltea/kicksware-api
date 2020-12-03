@@ -13,7 +13,7 @@ type EventBus struct {
 	Exchange string
 }
 
-func NewEventBus(config *config.ConnectionConfig, exchange string) *EventBus {
+func NewEventBus(config config.ConnectionConfig, exchange string) *EventBus {
 	conn, err := amqp.DialTLS(config.Endpoint, util.NewTLSConfig(config.TLS)); if err != nil {
 		glog.Fatal(err)
 	}

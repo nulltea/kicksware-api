@@ -6,7 +6,7 @@ import (
 	"github.com/streadway/amqp"
 )
 
-func (bus *EventBus) Publish(queue, routingKey string, msg interface{}) error {
+func (bus *EventBus) Publish(routingKey string, msg interface{}) error {
 	data, err := json.Marshal(msg); if err != nil {
 		return err
 	}
