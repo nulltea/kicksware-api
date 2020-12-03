@@ -1,0 +1,28 @@
+commonConfig:
+  host: localhost:8080
+  hostname: api.kicksware.com
+  contentType: application/json
+  apiEndpointFormat: https://api.kicksware.com/%s
+  rpcEndpointFormat: rpc.kicksware.com:443
+eventBusConfig:
+  endpoint: amqps://$RABBITMQ_USER:$RABBITMQ_PASSWORD@amqp.kicksware.com:443
+  TLS:
+    enableTLS: true
+    certFile: /source/certs/rabbitmq/ca.crt
+authConfig:
+  publicKeyPath: ../key/public.key.pub
+  tlsCertificate:
+    enableTLS: true
+    certFile: ../keys/server.crt
+  accessKey: $AUTH_ACCESS_KEY
+mongoConfig:
+  URL: mongodb://localhost:27017
+  TLS:
+    enableTLS: true
+    certFile: certs/mongo/ca.crt
+    keyFile: certs/mongo/tls.key
+  database: sneakerResaleDB
+  collection: rates
+  login: $MONGO_USER
+  password: $MONGO_PASSWORD
+  timeout: 30

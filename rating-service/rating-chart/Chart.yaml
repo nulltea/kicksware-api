@@ -1,0 +1,10 @@
+apiVersion: v2
+name: rating-chart
+description: Rating managing microservice
+type: application
+version: 0.1.0
+appVersion: 1.0.0
+sources:
+  - https://go.kicksware.com/api.git
+maintainers:
+  - name: Timothy Yalugin
