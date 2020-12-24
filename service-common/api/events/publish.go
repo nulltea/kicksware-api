@@ -1,18 +1,16 @@
 package events
 
 import (
-	"encoding/json"
-
 	"github.com/streadway/amqp"
 )
 
-func (bus *EventBus) Publish(routingKey string, msg interface{}) error {
-	data, err := json.Marshal(msg); if err != nil {
+func (b *Broker) Emmit(routingKey string, msg interface{}) error {
+	data, err := b.Serializer.Encode(msg); if err != nil {
 		return err
 	}
 
-	return bus.Channel.Publish(
-		bus.Exchange,
+	return b.Channel.Publish(
+		b.Exchange,
 		routingKey,
 		false,
 		false,

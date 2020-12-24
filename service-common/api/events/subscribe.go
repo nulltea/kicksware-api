@@ -5,13 +5,13 @@ import (
 	"github.com/streadway/amqp"
 )
 
-func (bus *EventBus) Subscribe(
+func (b *Broker) Consume(
 	queueName,
 	routingKey string,
 	handler func(d amqp.Delivery) bool,
 	concurrency int) error {
 
-	_, err := bus.Channel.QueueDeclare(
+	_, err := b.Channel.QueueDeclare(
 		queueName,
 		true,
 		false,
@@ -21,10 +21,10 @@ func (bus *EventBus) Subscribe(
 		return err
 	}
 
-	err = bus.Channel.QueueBind(
+	err = b.Channel.QueueBind(
 		queueName,
 		routingKey,
-		bus.Exchange,
+		b.Exchange,
 		false,
 		nil); if err != nil {
 		return err
@@ -32,12 +32,12 @@ func (bus *EventBus) Subscribe(
 
 	// prefetch 4x as many messages as we can handle at once
 	prefetchCount := concurrency * 4
-	err = bus.Channel.Qos(prefetchCount, 0, false)
+	err = b.Channel.Qos(prefetchCount, 0, false)
 	if err != nil {
 		return err
 	}
 
-	deliveries, err := bus.Channel.Consume(
+	deliveries, err := b.Channel.Consume(
 		queueName,
 		"",
 		false,

@@ -5,22 +5,26 @@ import (
 	"github.com/streadway/amqp"
 
 	"go.kicksware.com/api/service-common/config"
+	"go.kicksware.com/api/service-common/core"
 	"go.kicksware.com/api/service-common/util"
 )
 
-type EventBus struct {
+type Broker struct {
 	Channel *amqp.Channel
 	Exchange string
+	core.Serializer
 }
 
-func NewEventBus(config config.ConnectionConfig, exchange string) *EventBus {
-	conn, err := amqp.DialTLS(config.Endpoint, util.NewTLSConfig(config.TLS)); if err != nil {
+func NewEventsHandler(config config.ConnectionConfig, exchange string) *Broker {
+	conn, err := amqp.DialTLS(config.URL, util.NewTLSConfig(config.TLS)); if err != nil {
 		glog.Fatal(err)
 	}
+
 	ch, err := conn.Channel(); if err != nil {
 		glog.Fatal(err)
 	}
-	return &EventBus{
+
+	return &Broker{
 		Channel: ch,
 		Exchange: exchange,
 	}
