@@ -15,7 +15,7 @@ type Broker struct {
 	core.Serializer
 }
 
-func NewEventsHandler(config config.ConnectionConfig, exchange string) *Broker {
+func NewEventsBroker(config config.ConnectionConfig, exchange string, serializer core.Serializer) *Broker {
 	conn, err := amqp.DialTLS(config.URL, util.NewTLSConfig(config.TLS)); if err != nil {
 		glog.Fatal(err)
 	}
@@ -27,5 +27,6 @@ func NewEventsHandler(config config.ConnectionConfig, exchange string) *Broker {
 	return &Broker{
 		Channel: ch,
 		Exchange: exchange,
+		Serializer: serializer,
 	}
 }

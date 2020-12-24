@@ -39,6 +39,7 @@ type instance struct {
 	Gateway  cmux.CMux
 	REST     *http.Server
 	GRPC     *grpc.Server
+	AMQP     core.Handler
 	TLS      credentials.TransportCredentials
 	Auth     *gRPC.AuthServerInterceptor
 	Logger   *logrus.Logger
@@ -116,6 +117,10 @@ func (s *instance) SetupGRPC(fn func(srv *grpc.Server)) {
 	reflection.Register(s.GRPC)
 }
 
+func (s *instance) SetupAMQP(handler core.Handler) {
+	s.AMQP = handler
+}
+
 func (s *instance) Start() {
 	errs := make(chan error, 2)
 
@@ -140,6 +145,13 @@ func (s *instance) Start() {
 	if s.GRPC != nil {
 		go func() {
 			errs <- s.GRPC.Serve(grpcL)
+		}()
+	}
+
+	if s.AMQP != nil {
+		s.AMQP.Setup()
+		go func() {
+			errs <- s.AMQP.Serve()
 		}()
 	}
 
