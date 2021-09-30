@@ -1,0 +1,72 @@
+project: kicksware
+component: rating
+nameOverride: rating-service
+fullnameOverride: rating-service
+
+replicaCount: 1
+image:
+  registry: registry.kicksware.com
+  repository: api/rating-service
+  pullPolicy: Always
+  tag: latest
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: true
+  entrypoints:
+    - web
+    - websecure
+  tls:
+    enabled: true
+    certResolver: le
+  routes:
+    - host: api.kicksware.com
+      paths:
+        - /rating
+      middlewares: []
+      services:
+        - name: rates-service
+          port: 8080
+          scheme: http
+
+
+volumes: {}
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 50Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilization: 200
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+secrets:
+  dockerRegistry: registry-token
+  mounts:
+    - name: auth-keys
+      mountPath: /root/keys/auth
+    - name: grpc-tls
+      mountPath: /root/certs/grpc
+
+
+config:
+  environment: PROD
+  configMountPath: /root/env
+
+environment:
+  ENV: k8s
+  CONFIG_PATH: env/config.yaml
+  GODEBUG: x509ignoreCN=0
+  ELASTIC_APM_SERVICE_NAME: apm-server
+  ELASTIC_APM_SERVER_URL: http://apm.kicksware.com:80

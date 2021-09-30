@@ -4,7 +4,7 @@ package proto;
 
 import "google/protobuf/wrappers.proto";
 
-option go_package = "go.kicksware.com/api/service-common/api/proto";
+option go_package = "go.kicksware.com/api/shared/api/proto";
 option csharp_namespace = "Proto";
 
 message RequestParams {

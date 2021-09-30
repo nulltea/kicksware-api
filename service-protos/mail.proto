@@ -4,7 +4,7 @@ package proto;
 
 import "common.proto";
 
-option go_package = "ggo.kicksware.com/api/user-service/api/gRPC/proto";
+option go_package = "ggo.kicksware.com/api/services/users/api/gRPC/proto";
 option csharp_namespace = "Proto";
 
 message MailRequest {

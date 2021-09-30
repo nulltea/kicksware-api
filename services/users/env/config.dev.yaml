@@ -1,0 +1,76 @@
+commonConfig:
+  host: localhost:8080
+  hostname: kicksware.com
+  usedDB: mongo
+  contentType: application/json
+  apiEndpointFormat: https://api.kicksware.com/%s
+  rpcEndpointFormat: rpc.kicksware.com:443
+securityConfig:
+  tlsCertificate:
+    enableTLS: false
+    certFile: ../keys/server.crt
+    keyFile: ../keys/server.key
+authConfig:
+  issuerName: middleware/user-service
+  tokenExpirationDelta: 18
+  privateKeyPath: key/private.key
+  publicKeyPath: ../keys/public.key.pub
+  accessKey: $AUTH_ACCESS_KEY
+mailConfig:
+  server: $MAIL_SERVER
+  address: $MAIL_ADDRESS
+  password: $MAIL_PASSWORD
+  verifyEmailTemplate: template/verify.template.html
+  resetPasswordTemplate: template/reset.template.html
+  notificationTemplate: template/notification.template.html
+fallbackMailConfig:
+  server: $FALLBACK_MAIL_SERVER
+  address: $FALLBACK_MAIL_ADDRESS
+  password: $FALLBACK_MAIL_PASSWORD
+  verifyEmailTemplate: template/verify.template.html
+  resetPasswordTemplate: template/reset.template.html
+  notificationTemplate: template/notification.template.html
+usersDBConfig:
+  URL: mongodb://mongodb:27017
+  TLS:
+    enableTLS: true
+    certFile: /source/certs/mongo/ca.pem
+    keyFile: /source/certs/mongo/mongo.pem
+  database: sneakerResaleDB
+  collection: users
+  login: $MONGO_USER
+  password: $MONGO_PASSWORD
+  timeout: 30
+likesDBConfig:
+  URL: mongodb://mongodb:27017
+  TLS:
+    enableTLS: true
+    certFile: /source/certs/mongo/ca.pem
+    keyFile: /source/certs/mongo/mongo.pem
+  database: sneakerResaleDB
+  collection: likes
+  login: $MONGO_USER
+  password: $MONGO_PASSWORD
+  timeout: 10
+remotesDBConfig:
+  URL: mongodb://mongodb:27017
+  TLS:
+    enableTLS: true
+    certFile: /source/certs/mongo/ca.pem
+    keyFile: /source/certs/mongo/mongo.pem
+  database: sneakerResaleDB
+  collection: remotes
+  login: $MONGO_USER
+  password: $MONGO_PASSWORD
+  timeout: 15
+subscriptionsDBConfig:
+  URL: mongodb://mongodb:27017
+  TLS:
+    enableTLS: true
+    certFile: /source/certs/mongo/ca.pem
+    keyFile: /source/certs/mongo/mongo.pem
+  database: sneakerResaleDB
+  collection: subscriptions
+  login: $MONGO_USER
+  password: $MONGO_PASSWORD
+  timeout: 15

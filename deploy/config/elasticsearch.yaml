@@ -1,0 +1,7 @@
+replicas: 1
+
+volumeClaimTemplate:
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 5Gi

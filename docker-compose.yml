@@ -2,12 +2,12 @@ version: '3.7'
 services:
   products-service:
     build:
-      context: ./product-service
+      context: services/products
       dockerfile: ./docker/Dockerfile
       target: prod
     image: ${CI_REGISTRY_PREFIX}/api/products-service
     container_name: products
-    env_file: ./product-service/env/.env.prod
+    env_file: services/products/env/.env.prod
     restart: always
     labels:
       - traefik.http.routers.product-router-rest.rule=Host(`api.kicksware.com`) && PathPrefix(`/products`)
@@ -28,12 +28,12 @@ services:
 
   users-service:
     build:
-      context: ./user-service
+      context: services/users
       dockerfile: ./docker/Dockerfile
       target: prod
     image: ${CI_REGISTRY_PREFIX}/api/users-service
     container_name: users
-    env_file: ./user-service/env/.env.prod
+    env_file: services/users/env/.env.prod
     restart: always
     labels:
       - traefik.http.routers.user-router-rest.rule=Host(`api.kicksware.com`) && PathPrefix(`/users`) || PathPrefix(`/auth`) ||
@@ -55,12 +55,12 @@ services:
 
   references-service:
     build:
-      context: ./reference-service
+      context: services/references
       dockerfile: ./docker/Dockerfile
       target: prod
     image: ${CI_REGISTRY_PREFIX}/api/references-service
     container_name: references
-    env_file: ./reference-service/env/.env.prod
+    env_file: services/references/env/.env.prod
     restart: always
     labels:
       - traefik.http.routers.reference-router-rest.rule=Host(`api.kicksware.com`) && PathPrefix(`/references`)
@@ -81,12 +81,12 @@ services:
 
   search-service:
     build:
-      context: ./search-service
+      context: services/search
       dockerfile: ./docker/Dockerfile
       target: prod
     image: ${CI_REGISTRY_PREFIX}/api/search-service
     container_name: search
-    env_file: ./search-service/env/.env.prod
+    env_file: services/search/env/.env.prod
     restart: always
     labels:
       - traefik.http.routers.search-router-rest.rule=Host(`api.kicksware.com`) && PathPrefix(`/search`)
@@ -112,12 +112,12 @@ services:
 
   orders-service:
     build:
-      context: ./order-service
+      context: services/orders
       dockerfile: ./docker/Dockerfile
       target: prod
     image: ${CI_REGISTRY_PREFIX}/api/orders-service
     container_name: orders
-    env_file: ./order-service/env/.env.prod
+    env_file: services/orders/env/.env.prod
     restart: always
     labels:
       - traefik.http.routers.order-router-rest.rule=Host(`api.kicksware.com`) && PathPrefix(`/orders`)
@@ -138,12 +138,12 @@ services:
 
   cdn-service:
     build:
-      context: ./cdn-service
+      context: services/cdn
       dockerfile: ./docker/Dockerfile
       target: prod
     image: ${CI_REGISTRY_PREFIX}/api/cdn-service
     container_name: cdn
-    env_file: ./cdn-service/env/.env.prod
+    env_file: services/cdn/env/.env.prod
     restart: always
     labels:
       - traefik.http.routers.cdn-router-rest.rule=Host(`cdn.kicksware.com`)

@@ -1,0 +1,28 @@
+commonConfig:
+  host: localhost:8080
+  hostname: kicksware.com
+  usedDB: mongo
+  contentType: application/json
+  apiEndpointFormat: http://%s:8080/%s
+  rpcEndpointFormat: rpc.kicksware.com:443
+securityConfig:
+  tlsCertificate:
+    enableTLS: false
+authConfig:
+  publicKeyPath: ../key/public.key.pub
+  authEndpoint: https://user-service:8080/auth/guest
+  accessKey: $AUTH_ACCESS_KEY
+mongoConfig:
+  URL: mongodb://mongodb:27017
+  database: sneakerResaleDB
+  collection: references
+  login: $MONGO_USER
+  password: $MONGO_PASSWORD
+  timeout: 30
+redisConfig:
+  URL: redis://localhost:6379
+postgresConfig:
+  URL: postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@localhost:5432/sneakerResaleDB
+  database: sneakerResaleDB
+  collection: References
+  timeout: 30
