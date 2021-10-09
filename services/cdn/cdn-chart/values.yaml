@@ -8,7 +8,7 @@ image:
   registry: timothydockid
   repository: kicksware-cdn-service
   tag: latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 service:
   type: ClusterIP
@@ -47,8 +47,11 @@ ingress:
 volumes:
   - name: storage
     persistent:
-      claim: webapp-storage
-      exists: true
+      claim: content
+      size: 23Gi
+      storageClass: longhorn
+      accessModes:
+        - ReadWriteMany
     mountPath: /root/storage
 
 resources:
@@ -84,3 +87,4 @@ environment:
   GODEBUG: x509ignoreCN=0
   ELASTIC_APM_SERVICE_NAME: apm-server
   ELASTIC_APM_SERVER_URL: http://apm.kicksware.com:80
+

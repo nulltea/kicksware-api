@@ -14,11 +14,11 @@ COPY go.mod .
 COPY go.sum .
 RUN go mod download
 # Build the service
-RUN go build -o main .
+RUN go build -o main ./services/cdn
 # Move to /dist directory - place for resulting binaries
 WORKDIR /dist
 # Copy binary from build to main folder
-RUN cp /build/main ./services/cdn
+RUN cp /build/main .
 # Export necessary port
 EXPOSE 8080
 # Command to run service container when the container starts

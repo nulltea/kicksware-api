@@ -31,7 +31,7 @@ fallbackMailConfig:
   resetPasswordTemplate: template/reset.template.html
   notificationTemplate: template/notification.template.html
 usersDBConfig:
-  URL: mongodb://mongodb:27017
+  URL: mongodb://mongodb.infra:27017
   TLS:
     enableTLS: true
     certFile: /source/certs/mongo/ca.pem
@@ -42,7 +42,7 @@ usersDBConfig:
   password: $MONGO_PASSWORD
   timeout: 30
 likesDBConfig:
-  URL: mongodb://mongodb:27017
+  URL: mongodb://mongodb.infra:27017
   TLS:
     enableTLS: true
     certFile: /source/certs/mongo/ca.pem
@@ -53,7 +53,7 @@ likesDBConfig:
   password: $MONGO_PASSWORD
   timeout: 10
 remotesDBConfig:
-  URL: mongodb://mongodb:27017
+  URL: mongodb://mongodb.infra:27017
   TLS:
     enableTLS: true
     certFile: /source/certs/mongo/ca.pem
@@ -64,7 +64,7 @@ remotesDBConfig:
   password: $MONGO_PASSWORD
   timeout: 15
 subscriptionsDBConfig:
-  URL: mongodb://mongodb:27017
+  URL: mongodb://mongodb.infra:27017
   TLS:
     enableTLS: true
     certFile: /source/certs/mongo/ca.pem

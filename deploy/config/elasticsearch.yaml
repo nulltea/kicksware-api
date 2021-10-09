@@ -1,7 +1,13 @@
 replicas: 1
 
 volumeClaimTemplate:
-  storageClassName: local-path
+  storageClassName: longhorn
   resources:
     requests:
-      storage: 5Gi
+      storage: 10Gi
+
+esConfig:
+  elasticsearch.yml: |
+    cluster.name: timothy-elasticsearch
+    network.host: 0.0.0.0
+    ingest.geoip.downloader.enabled: false

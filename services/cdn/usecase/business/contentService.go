@@ -96,7 +96,7 @@ func (s *contentService) downloadImage(query meta.ContentQuery) (image.Image, me
 		return nil, "", err
 	}
 
-	img, mimeType, err := image.Decode(bytes.NewBuffer(file)    ); if err != nil {
+	img, mimeType, err := image.Decode(bytes.NewBuffer(file)); if err != nil {
 		glog.Error(err)
 		return nil, "", err
 	}

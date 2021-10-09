@@ -7,7 +7,9 @@ metadata:
   name: {{ .claim }}
 spec:
   storageClassName: {{ .storageClass }}
-  volumeName: {{ .volumeName }}
+  {{- with .volumeName }}
+  volumeName: {{ . }}
+  {{- end }}
   accessModes:
   {{- toYaml .accessModes | nindent 4 }}
   resources:

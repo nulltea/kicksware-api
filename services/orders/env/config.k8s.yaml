@@ -16,7 +16,7 @@ authConfig:
     certFile: certs/grpc/tls.crt
   accessKey: $AUTH_ACCESS_KEY
 mongoConfig:
-  URL: mongodb://mongodb:27017
+  URL: mongodb://mongodb.infra:27017
   TLS:
     enableTLS: false
     certFile: certs/mongo/ca.crt

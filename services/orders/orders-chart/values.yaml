@@ -37,7 +37,7 @@ ingress:
         - /health/orders
       middlewares:
         - name: health-stripprefix
-          namespace: gateway
+          namespace: infra
       services:
         - name: orders-service
           port: 8080

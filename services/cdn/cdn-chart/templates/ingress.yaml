@@ -49,7 +49,7 @@ spec:
         {{- end }}
       middlewares:
         - name: https-redirect
-          namespace: gateway
+          namespace: infra
         {{- with .middlewares }}
       {{- toYaml . | nindent 8 }}
     {{- end }}

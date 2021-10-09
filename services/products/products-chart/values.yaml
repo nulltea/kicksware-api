@@ -37,7 +37,7 @@ ingress:
         - /health/products
       middlewares:
         - name: health-stripprefix
-          namespace: gateway
+          namespace: infra
       services:
         - name: products-service
           port: 8080

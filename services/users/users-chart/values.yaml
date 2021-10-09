@@ -40,7 +40,7 @@ ingress:
         - /health/users
       middlewares:
         - name: health-stripprefix
-          namespace: gateway
+          namespace: infra
       services:
         - name: users-service
           port: 8080

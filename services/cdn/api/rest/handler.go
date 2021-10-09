@@ -1,6 +1,8 @@
 package rest
 
 import (
+	"encoding/hex"
+	"hash/fnv"
 	"net/http"
 	"strconv"
 
@@ -126,10 +128,21 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) setupResponse(w http.ResponseWriter, content *model.Content, statusCode int) {
-	w.Header().Set("Content-Length", strconv.Itoa(len(content.Data)))
-	w.Header().Set("Content-Type", string(content.MimeType))
-	w.WriteHeader(statusCode)
-	w.Write(content.Data)
+	if content != nil {
+		w.Header().Set("Accept-Ranges", "bytes")
+		w.Header().Set("ETag", generateETagFor(*content))
+		w.Header().Set("Cache-Control", "public, max-age=31536000")
+		w.Header().Set("Content-Length", strconv.Itoa(len(content.Data)))
+		w.Header().Set("Content-Type", string(content.MimeType))
+		w.WriteHeader(statusCode)
+		w.Write(content.Data)
+	}
 }
 
 
+func generateETagFor(content model.Content) string {
+	h := fnv.New32a()
+	h.Write(content.Data)
+
+	return hex.EncodeToString(h.Sum(nil))
+}
