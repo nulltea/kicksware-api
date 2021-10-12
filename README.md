@@ -7,15 +7,10 @@
 </p>
 
 [![golang badge]](https://golang.org)&nbsp;
-[![lines counter]](https://github.com/timoth-y/kicksware-api)&nbsp;
-[![commit activity badge]][repo commit activity]&nbsp;
 [![kubernetes badge]](https://kubernetes.io)&nbsp;
 [![architecture badge]][microservice article]&nbsp;
+[![maintainability badge]][maintainability source]&nbsp;
 [![license badge]](https://www.gnu.org/licenses/agpl-3.0)
-
-[![gitlab badge]](https://ci.kicksware.com/kicksware/kicksware-api)&nbsp;
-[![api pipeline]](https://ci.kicksware.com/kicksware/api/-/commits/master)&nbsp;
-[![maintainability badge]][maintainability source]
 
 ## Overview
 
